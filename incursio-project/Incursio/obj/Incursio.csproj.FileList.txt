@@ -6,3 +6,4 @@ bin\x86\Debug\Incursio.pdb
 obj\x86\Debug\Incursio.exe
 obj\x86\Debug\Incursio.pdb
 bin\x86\Debug\Content\utilityBarUnderlay.xnb
+bin\x86\Debug\Content\cursor.xnb

@@ -26,10 +26,12 @@ namespace Incursio
         Player humanPlayer;
 
         HeadsUpDisplay hud;
+        Cursor cursor;
 
         public Incursio()
         {
             graphics = new GraphicsDeviceManager(this);
+            hud = new HeadsUpDisplay();
             Content.RootDirectory = "Content";
 
             //set the window size to 1024x768
@@ -47,8 +49,6 @@ namespace Incursio
         {
             // TODO: Add your initialization logic here
 
-            hud = new HeadsUpDisplay();
-
             base.Initialize();
         }
 
@@ -60,6 +60,9 @@ namespace Incursio
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // create cursor
+            cursor = new Cursor(new Vector2(0, 0), Content.Load<Texture2D>(@"cursor"));
 
             // load the HUD texture 
             hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"));
@@ -88,6 +91,7 @@ namespace Incursio
                 this.Exit();
 
             // TODO: Add your update logic here
+            cursor.Update();
 
             base.Update(gameTime);
         }
@@ -104,8 +108,15 @@ namespace Incursio
 
             base.Draw(gameTime);
 
+            spriteBatch.Begin(SpriteBlendMode.AlphaBlend);
+
             //draw the HUD
             hud.drawHeadsUpDisplay(spriteBatch, Window.ClientBounds.Height);
+
+            //draw the cursor
+            cursor.Draw(spriteBatch);
+
+            spriteBatch.End();
         }
     }
 }
