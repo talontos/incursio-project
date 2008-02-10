@@ -62,6 +62,7 @@
     <Compile Include="Classes\BaseMapEntity.cs" />
     <Compile Include="Classes\CampStructure.cs" />
     <Compile Include="Classes\ControlPoint.cs" />
+    <Compile Include="Classes\Cursor.cs" />
     <Compile Include="Classes\GuardTowerStructure.cs" />
     <Compile Include="Classes\HeadsUpDisplay.cs" />
     <Compile Include="Classes\HeavyInfantryUnit.cs" />

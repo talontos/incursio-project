@@ -10,6 +10,15 @@
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\utilityBarUnderlay.xnb</Output>
       <Time>2008-02-09T21:32:50.34375-05:00</Time>
     </Item>
+    <Item>
+      <Source>Cursor.png</Source>
+      <Name>cursor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\cursor.xnb</Output>
+      <Time>2008-02-10T01:01:34-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
