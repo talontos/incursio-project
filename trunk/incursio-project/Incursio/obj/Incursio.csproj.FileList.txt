@@ -1,0 +1,7 @@
+obj\x86\Debug\ResolveAssemblyReference.cache
+obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+obj\x86\Debug\Incursio.obj.x86.Debug.Microsoft.Xna.Framework.RuntimeProfile.txt
+bin\x86\Debug\Incursio.exe
+bin\x86\Debug\Incursio.pdb
+obj\x86\Debug\Incursio.exe
+obj\x86\Debug\Incursio.pdb
