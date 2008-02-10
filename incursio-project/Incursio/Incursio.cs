@@ -22,10 +22,10 @@ namespace Incursio
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;                //draws our images
 
-        Texture2D utilityBar;                   //Texture2D containing the utility bar.
-
         Player computerPlayer;
         Player humanPlayer;
+
+        HeadsUpDisplay hud;
 
         public Incursio()
         {
@@ -47,6 +47,8 @@ namespace Incursio
         {
             // TODO: Add your initialization logic here
 
+            hud = new HeadsUpDisplay();
+
             base.Initialize();
         }
 
@@ -59,9 +61,8 @@ namespace Incursio
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // Load the images for the UI
-            utilityBar = Content.Load<Texture2D>(@"utilityBarUnderlay");        //utilty bar, this should only display when the player is
-                                                                            //in a scenario (look for gamestate)
+            // load the HUD texture 
+            hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"));
 
             // TODO: use this.Content to load your game content here
         }
@@ -97,20 +98,14 @@ namespace Incursio
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+            graphics.GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
 
-            // tell our graphics card that we are ready to draw
-            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Deferred, SaveStateMode.SaveState);
-
-            // draw our images
-            graphics.GraphicsDevice.Clear(Color.White);
-            spriteBatch.Draw(utilityBar, new Rectangle(0, Window.ClientBounds.Height - utilityBar.Height, utilityBar.Width, utilityBar.Height), Color.White);
-
-            spriteBatch.End();
+            //draw the HUD
+            hud.drawHeadsUpDisplay(spriteBatch, Window.ClientBounds.Height);
         }
     }
 }
