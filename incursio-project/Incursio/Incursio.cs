@@ -20,7 +20,9 @@ namespace Incursio
     public class Incursio : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        SpriteBatch spriteBatch;                //draws our images
+
+        Texture2D utilityBar;                   //Texture2D containing the utility bar.
 
         Player computerPlayer;
         Player humanPlayer;
@@ -52,6 +54,10 @@ namespace Incursio
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // Load the images for the UI
+            utilityBar = Content.Load<Texture2D>("Content/UtilityBarUnderlay");        //utilty bar, this should only display when the player is
+                                                                            //in a scenario (look for gamestate)
 
             // TODO: use this.Content to load your game content here
         }
@@ -92,6 +98,16 @@ namespace Incursio
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+
+            // tell our graphics card that we are ready to draw
+            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Deferred, SaveStateMode.SaveState);
+
+            // draw our images
+            spriteBatch.Draw(utilityBar, new Rectangle(0, Window.ClientBounds.Height - utilityBar.Height, utilityBar.Width, utilityBar.Height), Color.White);
+
+            spriteBatch.End();
+
+            graphics.GraphicsDevice.Clear(Color.White);
         }
     }
 }
