@@ -63,6 +63,7 @@
     <Compile Include="Classes\CampStructure.cs" />
     <Compile Include="Classes\ControlPoint.cs" />
     <Compile Include="Classes\GuardTowerStructure.cs" />
+    <Compile Include="Classes\HeadsUpDisplay.cs" />
     <Compile Include="Classes\HeavyInfantryUnit.cs" />
     <Compile Include="Classes\Hero.cs" />
     <Compile Include="Classes\LightInfantryUnit.cs" />

@@ -23,7 +23,7 @@ namespace Incursio.Classes
         }
 
         public Player(String playerName){
-            this = new Player();
+            // this = new Player();
             this.name = playerName;
         }
     }
