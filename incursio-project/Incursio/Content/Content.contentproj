@@ -31,11 +31,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UtilityBarUnderlay.png">
-      <Name>UtilityBarUnderlay</Name>
+    <Compile Include="UtilityBarUnderlay.png">
+      <Name>utilityBarUnderlay</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Content>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\v2.0\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

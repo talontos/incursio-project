@@ -5,3 +5,4 @@ bin\x86\Debug\Incursio.exe
 bin\x86\Debug\Incursio.pdb
 obj\x86\Debug\Incursio.exe
 obj\x86\Debug\Incursio.pdb
+bin\x86\Debug\Content\utilityBarUnderlay.xnb
