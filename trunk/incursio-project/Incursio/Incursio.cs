@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 
+using Incursio.Classes;
+using Incursio.Utils;
+
 namespace Incursio
 {
     /// <summary>
@@ -18,6 +21,9 @@ namespace Incursio
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        Player computerPlayer;
+        Player humanPlayer;
 
         public Incursio()
         {
