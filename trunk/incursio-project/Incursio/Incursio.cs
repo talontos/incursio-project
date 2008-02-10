@@ -31,6 +31,10 @@ namespace Incursio
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            //set the window size to 1024x768
+            this.graphics.PreferredBackBufferWidth = 1024;
+            this.graphics.PreferredBackBufferHeight = 768;
         }
 
         /// <summary>
@@ -56,7 +60,7 @@ namespace Incursio
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Load the images for the UI
-            utilityBar = Content.Load<Texture2D>("Content/UtilityBarUnderlay");        //utilty bar, this should only display when the player is
+            utilityBar = Content.Load<Texture2D>(@"utilityBarUnderlay");        //utilty bar, this should only display when the player is
                                                                             //in a scenario (look for gamestate)
 
             // TODO: use this.Content to load your game content here
@@ -103,11 +107,10 @@ namespace Incursio
             spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Deferred, SaveStateMode.SaveState);
 
             // draw our images
+            graphics.GraphicsDevice.Clear(Color.White);
             spriteBatch.Draw(utilityBar, new Rectangle(0, Window.ClientBounds.Height - utilityBar.Height, utilityBar.Width, utilityBar.Height), Color.White);
 
             spriteBatch.End();
-
-            graphics.GraphicsDevice.Clear(Color.White);
         }
     }
 }
