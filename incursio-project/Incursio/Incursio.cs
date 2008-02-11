@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Storage;
 
 using Incursio.Classes;
 using Incursio.Utils;
+using Incursio.Interface;
 
 namespace Incursio
 {
@@ -25,8 +26,11 @@ namespace Incursio
         Player computerPlayer;
         Player humanPlayer;
 
+        SpriteFont font;
+        Vector2 FontPos;
         HeadsUpDisplay hud;
         Cursor cursor;
+        GameMenuButton gameMenuButton;
 
         public Incursio()
         {
@@ -60,12 +64,18 @@ namespace Incursio
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            font = Content.Load<SpriteFont>("Courier New");
+
+            FontPos = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
 
             // create cursor
-            cursor = new Cursor(new Vector2(0, 0), Content.Load<Texture2D>(@"cursor"));
+            cursor = new Cursor(new Vector2(0, 0), Content.Load<Texture2D>(@"cursor"), Content.Load<Texture2D>(@"cursor_click"));
 
             // load the HUD texture 
             hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"));
+
+            // load the button
+            gameMenuButton = new GameMenuButton(new Vector2(465, 738), Content.Load<Texture2D>(@"gameMenuButton"), Content.Load<Texture2D>(@"gameMenuButtonPressed"));
 
             // TODO: use this.Content to load your game content here
         }
@@ -87,11 +97,11 @@ namespace Incursio
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
+            // this.Exit();
 
             // TODO: Add your update logic here
             cursor.Update();
+            gameMenuButton.Update(cursor);
 
             base.Update(gameTime);
         }
@@ -112,6 +122,12 @@ namespace Incursio
 
             //draw the HUD
             hud.drawHeadsUpDisplay(spriteBatch, Window.ClientBounds.Height);
+
+            //draw the button
+            gameMenuButton.Draw(spriteBatch);
+
+            //draw hello world
+            spriteBatch.DrawString(font, "hello world", FontPos, Color.DarkBlue, 0, font.MeasureString("hello world") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
             //draw the cursor
             cursor.Draw(spriteBatch);
