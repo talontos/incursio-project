@@ -19,6 +19,42 @@
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\cursor.xnb</Output>
       <Time>2008-02-10T01:01:34-05:00</Time>
     </Item>
+    <Item>
+      <Source>Courier New.spritefont</Source>
+      <Name>Courier New</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Courier New.xnb</Output>
+      <Time>2008-02-11T00:34:29.703125-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Cursor_Click.png</Source>
+      <Name>cursor_click</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\cursor_click.xnb</Output>
+      <Time>2008-02-11T14:45:31.515625-05:00</Time>
+    </Item>
+    <Item>
+      <Source>GameMenuButton.png</Source>
+      <Name>gameMenuButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\gameMenuButton.xnb</Output>
+      <Time>2008-02-11T16:52:52.171875-05:00</Time>
+    </Item>
+    <Item>
+      <Source>GameMenuButtonPressed.png</Source>
+      <Name>gameMenuButtonPressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\gameMenuButtonPressed.xnb</Output>
+      <Time>2008-02-11T17:23:58.875-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
