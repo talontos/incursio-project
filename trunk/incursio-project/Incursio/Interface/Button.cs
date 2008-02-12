@@ -16,10 +16,20 @@ namespace Incursio.Interface
         protected Texture2D passive;
         protected Texture2D pressed;
         protected bool isPressed;
+        protected bool isFocus;
 
         public Button()
         {
 
+        }
+
+        public Button(Vector2 position, Texture2D passive, Texture2D pressed)
+        {
+            this.position = position;
+            this.passive = passive;
+            this.pressed = pressed;
+            isPressed = false;
+            isFocus = false;
         }
 
         public void Draw(SpriteBatch batch)
@@ -34,17 +44,18 @@ namespace Incursio.Interface
             }
         }
 
-        public void Update(Cursor cursor)
+        public void Update(Cursor cursor, SpriteBatch spriteBatch)
         {
             if (cursor.getPos().X >= position.X && cursor.getPos().X <= position.X + passive.Width && cursor.getPos().Y >= position.Y && cursor.getPos().Y <= position.Y + passive.Height && cursor.getIsPressed())
             {
                 isPressed = true;
+                isFocus = true;
             }
             else
             {
                 if (isPressed == true)
                 {
-                    Action();
+                    Action(cursor, spriteBatch);
                 }
                 isPressed = false;
 
@@ -52,7 +63,7 @@ namespace Incursio.Interface
 
         }
 
-        public void Action()
+        public void Action(Cursor cursor, SpriteBatch spriteBatch)
         {
 
         }
