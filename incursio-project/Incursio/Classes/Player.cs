@@ -23,7 +23,7 @@ namespace Incursio.Classes
         }
 
         public Player(String playerName){
-            this = new Player();            //compiler error:  "Cannot assign to '<this>' because it is read-only
+            //this = new Player();            //compiler error:  "Cannot assign to '<this>' because it is read-only
             this.name = playerName;
         }
     }

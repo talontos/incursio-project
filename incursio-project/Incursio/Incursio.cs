@@ -126,8 +126,8 @@ namespace Incursio
             //draw the button
             gameMenuButton.Draw(spriteBatch);
 
-            //draw hello world
-            spriteBatch.DrawString(font, "hello world", FontPos, Color.DarkBlue, 0, font.MeasureString("hello world") / 2, 1.0f, SpriteEffects.None, 0.5f);
+            //this is how to draw simple text onto the screen
+            //spriteBatch.DrawString(font, "hello world", FontPos, Color.DarkBlue, 0, font.MeasureString("hello world") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
             //draw the cursor
             cursor.Draw(spriteBatch);
