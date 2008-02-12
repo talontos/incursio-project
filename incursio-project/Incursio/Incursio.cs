@@ -26,6 +26,7 @@ namespace Incursio
         Player computerPlayer;
         Player humanPlayer;
 
+        //interface
         SpriteFont font;
         Vector2 FontPos;
         HeadsUpDisplay hud;
@@ -74,10 +75,13 @@ namespace Incursio
             // load the HUD texture 
             hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"));
 
-            // load the button
-            gameMenuButton = new GameMenuButton(new Vector2(465, 738), Content.Load<Texture2D>(@"gameMenuButton"), Content.Load<Texture2D>(@"gameMenuButtonPressed"));
+            // load paused game menu components
+            gameMenuButton = new GameMenuButton(new Vector2(465, 738), Content.Load<Texture2D>(@"gameMenuButton"), Content.Load<Texture2D>(@"gameMenuButtonPressed"),
+                Content.Load<Texture2D>(@"resumeButton"), Content.Load<Texture2D>(@"resumeButtonPressed"), 
+                Content.Load<Texture2D>(@"exitGameButton"), Content.Load<Texture2D>(@"exitGameButtonPressed"),
+                Content.Load<Texture2D>(@"pauseMenu"));
 
-            // TODO: use this.Content to load your game content here
+            
         }
 
         /// <summary>
@@ -101,7 +105,7 @@ namespace Incursio
 
             // TODO: Add your update logic here
             cursor.Update();
-            gameMenuButton.Update(cursor);
+            gameMenuButton.Update(cursor, spriteBatch);
 
             base.Update(gameTime);
         }

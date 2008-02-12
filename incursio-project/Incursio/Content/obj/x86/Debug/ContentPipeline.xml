@@ -55,6 +55,51 @@
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\gameMenuButtonPressed.xnb</Output>
       <Time>2008-02-11T17:23:58.875-05:00</Time>
     </Item>
+    <Item>
+      <Source>PauseMenu.png</Source>
+      <Name>pauseMenu</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\pauseMenu.xnb</Output>
+      <Time>2008-02-12T13:32:58.171875-05:00</Time>
+    </Item>
+    <Item>
+      <Source>ResumeButton.png</Source>
+      <Name>resumeButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resumeButton.xnb</Output>
+      <Time>2008-02-12T13:04:20.296875-05:00</Time>
+    </Item>
+    <Item>
+      <Source>ResumeButtonPressed.png</Source>
+      <Name>resumeButtonPressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resumeButtonPressed.xnb</Output>
+      <Time>2008-02-12T13:06:45.671875-05:00</Time>
+    </Item>
+    <Item>
+      <Source>ExitGameButton.png</Source>
+      <Name>exitGameButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\exitGameButton.xnb</Output>
+      <Time>2008-02-12T13:09:12.09375-05:00</Time>
+    </Item>
+    <Item>
+      <Source>ExitGameButtonPressed.png</Source>
+      <Name>exitGameButtonPressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\exitGameButtonPressed.xnb</Output>
+      <Time>2008-02-12T13:11:17.578125-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

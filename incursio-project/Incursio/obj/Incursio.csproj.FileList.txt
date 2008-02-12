@@ -11,3 +11,8 @@ bin\x86\Debug\Content\Courier New.xnb
 bin\x86\Debug\Content\cursor_click.xnb
 bin\x86\Debug\Content\gameMenuButton.xnb
 bin\x86\Debug\Content\gameMenuButtonPressed.xnb
+bin\x86\Debug\Content\pauseMenu.xnb
+bin\x86\Debug\Content\resumeButton.xnb
+bin\x86\Debug\Content\resumeButtonPressed.xnb
+bin\x86\Debug\Content\exitGameButton.xnb
+bin\x86\Debug\Content\exitGameButtonPressed.xnb
