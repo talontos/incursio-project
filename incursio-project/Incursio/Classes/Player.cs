@@ -22,8 +22,11 @@ namespace Incursio.Classes
             this.hero = new Hero();
         }
 
-        public Player(String playerName){
-            //this = new Player();            //compiler error:  "Cannot assign to '<this>' because it is read-only
+        public Player(String playerName)
+        {
+            this.units = new List<Unit>();
+            this.structures = new List<Structure>();
+            this.hero = new Hero();
             this.name = playerName;
         }
     }
