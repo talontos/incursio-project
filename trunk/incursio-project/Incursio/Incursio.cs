@@ -23,8 +23,12 @@ namespace Incursio
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;                //draws our images
 
+        //players
         Player computerPlayer;
         Player humanPlayer;
+
+        //game information
+        int currentState = State.GameState.Initializing;
 
         //interface
         SpriteFont font;
@@ -104,6 +108,10 @@ namespace Incursio
             // this.Exit();
 
             // TODO: Add your update logic here
+
+            //Check game state!
+            this.checkState();
+
             cursor.Update();
             gameMenuButton.Update(cursor, spriteBatch);
 
@@ -137,6 +145,48 @@ namespace Incursio
             cursor.Draw(spriteBatch);
 
             spriteBatch.End();
+        }
+
+        /// <summary>
+        /// This function checks the currentState value agains the State.GameState enums
+        /// 
+        /// It will also perform the neccessary computations dependent upon the state
+        /// </summary>
+        private void checkState(){
+            switch(this.currentState){
+                case (State.GameState.Initializing): 
+                    //TODO: perform initializing actions
+                    break;
+
+                case (State.GameState.InPlay):
+                    //TODO: perform InPlay actions
+                    break;
+
+                case (State.GameState.Menu):
+                    //TODO: perform Menu actions
+                    break;
+
+                case (State.GameState.Credits):
+                    //TODO: perform Credits actions
+                    break;
+
+                case (State.GameState.Defeat):
+                    //TODO: perform Defeat actions
+                    break;
+
+                case (State.GameState.Victory):
+                    //TODO: perform Victory actions
+                    break;
+
+                case (State.GameState.PausedPlay):
+                    //TODO: perform PausedPlay actions
+                    break;
+
+                case (State.GameState.None): 
+                    break;
+
+                default:
+            }
         }
     }
 }
