@@ -28,7 +28,7 @@ namespace Incursio
         Player humanPlayer;
 
         //game information
-        int currentState = State.GameState.Initializing;
+        State.GameState currentState = State.GameState.Initializing;
 
         //interface
         SpriteFont font;
@@ -185,7 +185,7 @@ namespace Incursio
                 case (State.GameState.None): 
                     break;
 
-                default:
+                default: break;
             }
         }
     }
