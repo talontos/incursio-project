@@ -16,3 +16,5 @@ bin\x86\Debug\Content\resumeButton.xnb
 bin\x86\Debug\Content\resumeButtonPressed.xnb
 bin\x86\Debug\Content\exitGameButton.xnb
 bin\x86\Debug\Content\exitGameButtonPressed.xnb
+bin\x86\Debug\Content\newGameButton.xnb
+bin\x86\Debug\Content\newGamePressed.xnb
