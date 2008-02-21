@@ -15,6 +15,7 @@ namespace Incursio.Interface
         Button resumeButton;
         Button exitGameButton;
         Texture2D holderBox;
+        bool bringUpMenu;
 
         public GameMenuButton(Vector2 position, Texture2D passive, Texture2D pressed, 
             Texture2D rPassive, Texture2D rPressed,
@@ -25,9 +26,10 @@ namespace Incursio.Interface
             this.passive = passive;
             this.pressed = pressed;
 
-            this.resumeButton = new Button(new Vector2(470, 349), rPassive, rPressed);
-            this.exitGameButton = new Button(new Vector2(470, 384), ePassive, ePressed);
+            this.resumeButton = new Button(new Vector2(475, 349), rPassive, rPressed);
+            this.exitGameButton = new Button(new Vector2(475, 384), ePassive, ePressed);
             this.holderBox = holderBox;
+            this.bringUpMenu = false;
         }
 
         public void Action(Cursor cursor, SpriteBatch spriteBatch)
@@ -41,21 +43,45 @@ namespace Incursio.Interface
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (isPressed == false)
-            {
-                spriteBatch.Draw(passive, position, Color.White);
-            }
-            else if (isPressed == true)
-            {
-                spriteBatch.Draw(pressed, position, Color.White);
-            }
-
-            if (isFocus)
+            if (bringUpMenu)
             {
                 spriteBatch.Draw(holderBox, new Rectangle(465, 344, holderBox.Width, holderBox.Height), Color.White);
                 resumeButton.Draw(spriteBatch);
                 exitGameButton.Draw(spriteBatch);
             }
+            else
+            {
+                if (isPressed == false)
+                {
+                    spriteBatch.Draw(passive, position, Color.White);
+                }
+                else if (isPressed == true)
+                {
+                    spriteBatch.Draw(pressed, position, Color.White);
+                }
+            }
+        }
+
+        public Button getExitButton()
+        {
+            return exitGameButton;
+        }
+
+        public Button getResumeButton()
+        {
+            return resumeButton;
+        }
+
+        public void pullUpMenu(bool pullUp)
+        {
+            this.bringUpMenu = pullUp;
+            this.isFocus = pullUp;
+            if (!pullUp)
+            {
+                this.exitGameButton.setFocus(pullUp);
+                this.resumeButton.setFocus(pullUp);
+            }
+
         }
     }
 }

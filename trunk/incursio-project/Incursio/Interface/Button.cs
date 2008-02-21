@@ -34,7 +34,7 @@ namespace Incursio.Interface
 
         public void Draw(SpriteBatch batch)
         {
-            if (isPressed == false)
+            if (isPressed == false || isFocus == false)
             {
                 batch.Draw(passive, position, Color.White);
             }
@@ -53,12 +53,14 @@ namespace Incursio.Interface
             }
             else
             {
-                if (isPressed == true)
+                if (cursor.getPos().X < position.X || cursor.getPos().X > position.X + passive.Width || cursor.getPos().Y < position.Y || cursor.getPos().Y > position.Y + passive.Height && isPressed)
                 {
-                    Action(cursor, spriteBatch);
+                    isFocus = false;
                 }
-                isPressed = false;
-
+                else
+                {
+                    isPressed = false;
+                }
             }
 
         }
@@ -66,6 +68,22 @@ namespace Incursio.Interface
         public void Action(Cursor cursor, SpriteBatch spriteBatch)
         {
 
+        }
+
+        //getters and setters
+        public bool getPressed()
+        {
+            return isPressed;
+        }
+
+        public void setFocus(bool focus)
+        {
+            this.isFocus = focus;
+        }
+
+        public bool getFocus()
+        {
+            return isFocus;
         }
     }
 }
