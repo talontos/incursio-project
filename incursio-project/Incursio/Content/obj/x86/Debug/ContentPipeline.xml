@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\utilityBarUnderlay.xnb</Output>
-      <Time>2008-02-09T21:32:50.34375-05:00</Time>
+      <Time>2008-02-22T11:23:01.9135187-05:00</Time>
     </Item>
     <Item>
       <Source>Cursor.png</Source>
@@ -117,6 +117,33 @@
       <Options>None</Options>
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\newGamePressed.xnb</Output>
       <Time>2008-02-21T14:11:04.925-05:00</Time>
+    </Item>
+    <Item>
+      <Source>LightInfantryPortrait.png</Source>
+      <Name>lightInfantryPortrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\lightInfantryPortrait.xnb</Output>
+      <Time>2008-02-22T12:51:59.4135187-05:00</Time>
+    </Item>
+    <Item>
+      <Source>ArcherPortraint.png</Source>
+      <Name>archerPortrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\archerPortrait.xnb</Output>
+      <Time>2008-02-22T14:42:35.66325-05:00</Time>
+    </Item>
+    <Item>
+      <Source>InfantryUnit.png</Source>
+      <Name>infantryUnit</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantryUnit.xnb</Output>
+      <Time>2008-02-22T14:53:52.0695-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
