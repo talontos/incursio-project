@@ -8,6 +8,7 @@ namespace Incursio.Classes
     class Unit : BaseGameEntity
     {
         protected long damage = 0;
+        protected long armor = 0;
 
         public Unit() : base(){
 
@@ -28,6 +29,16 @@ namespace Incursio.Classes
 
         public void setDamage(long damage){
             this.damage = damage;
+        }
+
+        public long getArmor()
+        {
+            return this.armor;
+        }
+
+        public void setArmor(long armor)
+        {
+            this.armor = armor;
         }
     }
 }

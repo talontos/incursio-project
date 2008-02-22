@@ -51,5 +51,25 @@ namespace Incursio.Classes
         public void setSightRange(int sightRange){
             this.sightRange = sightRange;
         }
+
+        public Coordinate getLocation()
+        {
+            return this.location;
+        }
+
+        public void setLocation(Coordinate coords)
+        {
+            this.location = coords;
+        }
+
+        public Enum getState()
+        {
+            return this.currentState;
+        }
+
+        public void setState(Enum state)
+        {
+            this.currentState = state;
+        }
     }
 }

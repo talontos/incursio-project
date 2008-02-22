@@ -27,6 +27,10 @@ namespace Incursio
         Player computerPlayer;
         Player humanPlayer;
 
+        //unit initialization
+        Unit[] selectedUnits;
+        int numUnitsSelected;
+
         //game information
         State.GameState currentState = State.GameState.Initializing;
 
@@ -50,6 +54,9 @@ namespace Incursio
             kbState = new KeyboardState();
             keysPressed = new Keys[15];
             Content.RootDirectory = "Content";
+
+            selectedUnits = new Unit[12];
+            numUnitsSelected = 0;
 
             //set the window size to 1024x768
             this.graphics.PreferredBackBufferWidth = 1024;
@@ -85,7 +92,7 @@ namespace Incursio
             cursor = new Cursor(new Vector2(0, 0), Content.Load<Texture2D>(@"cursor"), Content.Load<Texture2D>(@"cursor_click"));
 
             // load the HUD texture 
-            hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"));
+            hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"), Content.Load<Texture2D>(@"lightInfantryPortrait"), Content.Load<Texture2D>(@"archerPortrait"));
 
             // load paused game menu components
             gameMenuButton = new Button(new Vector2(465, 738), Content.Load<Texture2D>(@"gameMenuButton"), Content.Load<Texture2D>(@"gameMenuButtonPressed"));
@@ -178,6 +185,37 @@ namespace Incursio
                         gameMenuButton.setFocus(false);
                         currentState = State.GameState.PausedPlay;
                     }
+
+                    for (int i = 0; i < keysPressed.Length; i++)    //scan through the keys being pressed down
+                    {
+                        if (keysPressed[i] == Keys.Right)          //if any are the "Escape" key, go back to playing the game
+                        {
+                            selectedUnits[0] = new LightInfantryUnit();
+                            selectedUnits[0].setDamage(12);
+                            selectedUnits[0].setHealth(150);
+                            selectedUnits[0].setArmor(5);
+                            selectedUnits[0].setPlayer(humanPlayer);
+                            selectedUnits[0].setState(State.UnitState.Idle);
+                            selectedUnits[0].setLocation(new Coordinate(200, 200));
+                            numUnitsSelected = 1;
+                        }
+                        else if (keysPressed[i] == Keys.Left)
+                        {
+                            selectedUnits[0] = new ArcherUnit();
+                            selectedUnits[0].setDamage(8);
+                            selectedUnits[0].setHealth(90);
+                            selectedUnits[0].setArmor(2);
+                            selectedUnits[0].setPlayer(humanPlayer);
+                            selectedUnits[0].setState(State.UnitState.Idle);
+                            selectedUnits[0].setLocation(new Coordinate(200, 200));
+                            numUnitsSelected = 1;
+                        }
+                    }
+
+
+
+                    
+
                     //TODO: perform InPlay actions
                     break;
 
@@ -263,7 +301,7 @@ namespace Incursio
                 case (State.GameState.InPlay):
 
                     //draw the HUD
-                    hud.drawHeadsUpDisplay(spriteBatch, Window.ClientBounds.Height);
+                    hud.draw(spriteBatch, Window.ClientBounds.Height, selectedUnits, font, numUnitsSelected);
 
                     //draw the button
                     gameMenuButton.Draw(spriteBatch);

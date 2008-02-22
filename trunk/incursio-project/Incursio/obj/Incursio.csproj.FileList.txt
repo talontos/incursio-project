@@ -18,3 +18,6 @@ bin\x86\Debug\Content\exitGameButton.xnb
 bin\x86\Debug\Content\exitGameButtonPressed.xnb
 bin\x86\Debug\Content\newGameButton.xnb
 bin\x86\Debug\Content\newGamePressed.xnb
+bin\x86\Debug\Content\lightInfantryPortrait.xnb
+bin\x86\Debug\Content\archerPortrait.xnb
+bin\x86\Debug\Content\infantryUnit.xnb
