@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Incursio.Classes
 {
-    class Structure : BaseGameEntity
+    public class Structure : BaseGameEntity
     {
         public Structure(){
 

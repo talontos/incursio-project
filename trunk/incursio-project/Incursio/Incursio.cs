@@ -20,6 +20,8 @@ namespace Incursio
     /// </summary>
     public class Incursio : Microsoft.Xna.Framework.Game
     {
+        private static Incursio instance;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;                //draws our images
 
@@ -27,7 +29,15 @@ namespace Incursio
         Player computerPlayer;
         Player humanPlayer;
 
+        //Object-map///////////////////
+        int nextKeyId;
+        List<BaseGameEntity> entityBank;
+        ///////////////////////////////
+
+        ObjectFactory factory;
+
         //unit initialization
+        //TODO: **move these to Player class**
         Unit[] selectedUnits;
         int numUnitsSelected;
 
@@ -47,13 +57,33 @@ namespace Incursio
         Button newGameButton;
         Button exitGameButton;
 
-        public Incursio()
-        {
+        public Incursio(){
+
+            Incursio.instance = this;
+
             graphics = new GraphicsDeviceManager(this);
             hud = new HeadsUpDisplay();
             kbState = new KeyboardState();
             keysPressed = new Keys[15];
             Content.RootDirectory = "Content";
+
+            factory = new ObjectFactory(this);
+
+            entityBank = new List<BaseGameEntity>();
+
+            //Just some testing here.  Add a breakpoint after the creations to check it out.
+            //TODO: DELETE THESE LINES
+            BaseGameEntity test0 = factory.create("Incursio.Classes.Hero");
+            BaseGameEntity test1 = factory.create("Incursio.Classes.ControlPoint");
+            BaseGameEntity test2 = factory.create("Incursio.Classes.HeavyInfantryUnit");
+            BaseGameEntity test3 = factory.create("Incursio.Classes.LightInfantryUnit");
+            BaseGameEntity test4 = factory.create("Incursio.Classes.GuardTowerStructure");
+            BaseGameEntity test5 = factory.create("Incursio.Classes.CampStructure");
+            BaseGameEntity test6 = factory.create("Incursio.Classes.ArcherUnit");
+
+            //TODO: instead have 1 Player[] ??
+            computerPlayer = new Player();
+            humanPlayer = new Player();
 
             selectedUnits = new Unit[12];
             numUnitsSelected = 0;
@@ -61,6 +91,10 @@ namespace Incursio
             //set the window size to 1024x768
             this.graphics.PreferredBackBufferWidth = 1024;
             this.graphics.PreferredBackBufferHeight = 768;
+        }
+
+        public static Incursio getInstance(){
+            return instance;
         }
 
         /// <summary>
@@ -351,6 +385,15 @@ namespace Incursio
 
                 default: break;
             }
+        }
+
+        public void addEntity(ref BaseGameEntity newEntity){
+            newEntity.setKeyId(this.nextKeyId);
+            this.entityBank.Insert(this.nextKeyId++, newEntity);
+        }
+
+        public BaseGameEntity getEntity(ref int keyId){
+            return entityBank[keyId];
         }
     }
 }

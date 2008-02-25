@@ -73,6 +73,7 @@
     <Compile Include="Interface\Cursor.cs" />
     <Compile Include="Interface\GameMenuButton.cs" />
     <Compile Include="Interface\HeadsUpDisplay.cs" />
+    <Compile Include="Utils\ObjectFactory.cs" />
     <Compile Include="Utils\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IncursioProgram.cs" />

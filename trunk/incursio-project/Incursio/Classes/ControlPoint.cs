@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Incursio.Classes
 {
-    class ControlPoint : Structure
+    public class ControlPoint : Structure
     {
         public ControlPoint() : base(){
             //TODO: set controlpoint values

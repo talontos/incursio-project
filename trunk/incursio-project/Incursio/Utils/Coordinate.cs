@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Incursio.Utils
 {
-    class Coordinate
+    public class Coordinate
     {
         public int x = 0;
         public int y = 0;

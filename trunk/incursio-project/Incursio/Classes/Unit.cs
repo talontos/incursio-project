@@ -5,7 +5,7 @@ using Incursio.Utils;
 
 namespace Incursio.Classes
 {
-    class Unit : BaseGameEntity
+    public class Unit : BaseGameEntity
     {
         protected long damage = 0;
         protected long armor = 0;

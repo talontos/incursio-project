@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Incursio.Classes
 {
-    class GuardTowerStructure : Structure
+  public class GuardTowerStructure : Structure
     {
         public GuardTowerStructure() : base(){
             this.type = "Guard Tower";

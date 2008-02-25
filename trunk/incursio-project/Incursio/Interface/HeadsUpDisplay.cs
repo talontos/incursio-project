@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Incursio.Classes
 {
-    class HeadsUpDisplay
+  public class HeadsUpDisplay
     {
 
         Texture2D utilityBar;                   //Texture2D containing the utility bar.

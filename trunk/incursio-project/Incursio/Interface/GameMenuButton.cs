@@ -10,7 +10,7 @@ using Incursio.Utils;
 
 namespace Incursio.Interface
 {
-    class GameMenuButton : Button
+  public class GameMenuButton : Button
     {
         Button resumeButton;
         Button exitGameButton;
