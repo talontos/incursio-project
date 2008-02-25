@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Incursio.Classes
 {
-    class CampStructure : Structure
+    public class CampStructure : Structure
     {
         public CampStructure() : base(){
             //TODO: Set camp properties

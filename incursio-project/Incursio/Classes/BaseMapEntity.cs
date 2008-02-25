@@ -6,7 +6,7 @@ using Incursio.Utils;
 
 namespace Incursio.Classes
 {
-    class BaseMapEntity
+  public class BaseMapEntity
     {
         public Coordinate location;
         public Boolean passable = true;

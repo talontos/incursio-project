@@ -10,7 +10,7 @@ using Incursio.Utils;
 
 namespace Incursio.Interface
 {
-    class Button
+  public class Button
     {
         protected Vector2 position;
         protected Texture2D passive;

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 
 using Incursio.Classes;
+using Microsoft.Xna.Framework;
 
 namespace Incursio.Classes
 {
-    class Player
+    public class Player
     {
         private String name = "";
         private List<Unit> units;
@@ -28,6 +29,12 @@ namespace Incursio.Classes
             this.structures = new List<Structure>();
             this.hero = new Hero();
             this.name = playerName;
+        }
+
+        public void update(GameTime gameTime){
+            //update player-specifics
+
+            //update units
         }
     }
 }

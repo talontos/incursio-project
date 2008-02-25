@@ -5,7 +5,7 @@ using System.Text;
 namespace Incursio.Classes
 {
     // the colon is the java equivalent of 'extends'
-    class Hero : Unit
+  public class Hero : Unit
     {
         private String name = "";
         private int level = 0;

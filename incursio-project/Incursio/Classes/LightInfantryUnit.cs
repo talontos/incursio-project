@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Incursio.Classes
 {
-    class LightInfantryUnit : Unit
+  public class LightInfantryUnit : Unit
     {
         public LightInfantryUnit() : base(){
             //TODO: set LightInfantry Values

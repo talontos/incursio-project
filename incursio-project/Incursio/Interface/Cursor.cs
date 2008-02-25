@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Incursio.Classes
 {
-    class Cursor
+  public class Cursor
     {
         private Vector2 pos;                        // position of the cursor
         private Texture2D passive;                  // texture of the mouse while idle
