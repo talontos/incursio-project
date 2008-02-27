@@ -9,30 +9,66 @@ namespace Incursio.Classes
 {
   public class HeadsUpDisplay
     {
-
-        Texture2D utilityBar;                   //Texture2D containing the utility bar.
+        //Texture2D containing the utility bar.
+        Texture2D utilityBar; 
         
         //portraits
         Texture2D lightInfantryPortrait;
         Texture2D archerPortrait;
+
+        //icons
+        Texture2D lightInfantryIcon;
+        Texture2D archerIcon;
+
+        //helper variables for determining selection
+        private int barX;
+        private int numUnits;
         
 
         /// <summary>
         /// loadHeadsUpDisplay loads the HUD content into the game.  from here it can be displayed on the screen.
         /// note:  the HUD will only be displayed when the gamestate is in scenario play.
         /// </summary>
-        public void loadHeadsUpDisplay(Texture2D bar, Texture2D lightInfantry, Texture2D archer)
+        public void loadHeadsUpDisplay(Texture2D bar, Texture2D lightInfantry, Texture2D archer, Texture2D infIcon, Texture2D archIcon)
         {
             // Load the images for the UI
             utilityBar = bar;
             lightInfantryPortrait = lightInfantry;
             archerPortrait = archer;
+            lightInfantryIcon = infIcon;
+            archerIcon = archIcon;
+            barX = 0;
+            numUnits = 0;
         }
 
-        public void update(Cursor cursor, Unit[] selectedUnits)
+        public Unit[] update(Cursor cursor, Unit[] selectedUnits, int numUnitsSelected)
         {
 
+            if (numUnitsSelected > 1)
+            {
+                if (cursor.getIsPressed() && cursor.getPos().X >= 383 && cursor.getPos().X <= 760 && cursor.getPos().Y >= 638 && cursor.getPos().Y <= 733)
+                {
+                    this.barX = (int)((cursor.getPos().X - 383) / 63);
+                    if (cursor.getPos().Y - 48 > 0)
+                    {
+                        this.barX = this.barX + 6;
+                    }
+
+                    Unit[] temp = new Unit[12];
+                    temp[0] = selectedUnits[this.barX];
+                    this.numUnits = 1;
+                    return temp;
+                }
+            }
+
+            this.numUnits = numUnitsSelected;
+            return selectedUnits;
         }
+
+      public int getNumUnits()
+      {
+          return this.numUnits;
+      }
 
         /// <summary>
         /// drawHeadsUpDisplay draws the HUD onto the screen.  Parameter SpriteBatch is used.
@@ -65,6 +101,37 @@ namespace Incursio.Classes
 
                 spriteBatch.DrawString(font, "Attack: " + selectedUnits[0].getDamage() + "   Armor: " + selectedUnits[0].getArmor(), new Vector2(572, height - 65), Color.White, 0, font.MeasureString("Attack: XXX   Armor: XXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
             }
+            else if (numUnitsSelected > 1)
+            {
+                for (int i = 0; i <= numUnitsSelected - 1; i++)
+                {
+
+                    if (i <= 5)
+                    {
+                        if (selectedUnits[i].getType().Equals("Light Infantry"))
+                        {
+                            spriteBatch.Draw(lightInfantryIcon, new Rectangle(383 + i * 60, height - 129, lightInfantryIcon.Width, lightInfantryIcon.Height), Color.White);
+                        }
+                        else if (selectedUnits[i].getType().Equals("Archer"))
+                        {
+                            spriteBatch.Draw(archerIcon, new Rectangle(383 + i * 60, height - 129, archerIcon.Width, archerIcon.Height), Color.White);
+                        }
+                    }
+                    else
+                    {
+                        if (selectedUnits[i].getType().Equals("Light Infantry"))
+                        {
+                            spriteBatch.Draw(lightInfantryIcon, new Rectangle(383 + i * 60 - 6*60, height - 84, lightInfantryIcon.Width, lightInfantryIcon.Height), Color.White);
+                        }
+                        else if (selectedUnits[i].getType().Equals("Archer"))
+                        {
+                            spriteBatch.Draw(archerIcon, new Rectangle(383 + i * 60 - 6*60, height - 84, archerIcon.Width, archerIcon.Height), Color.White);
+                        }
+                    }
+
+                }
+            }
+
         }
     }
 }

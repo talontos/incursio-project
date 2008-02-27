@@ -21,3 +21,5 @@ bin\x86\Debug\Content\newGamePressed.xnb
 bin\x86\Debug\Content\lightInfantryPortrait.xnb
 bin\x86\Debug\Content\archerPortrait.xnb
 bin\x86\Debug\Content\infantryUnit.xnb
+bin\x86\Debug\Content\infantryIcon.xnb
+bin\x86\Debug\Content\archerIcon.xnb
