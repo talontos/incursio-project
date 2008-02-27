@@ -126,7 +126,8 @@ namespace Incursio
             cursor = new Cursor(new Vector2(0, 0), Content.Load<Texture2D>(@"cursor"), Content.Load<Texture2D>(@"cursor_click"));
 
             // load the HUD texture 
-            hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"), Content.Load<Texture2D>(@"lightInfantryPortrait"), Content.Load<Texture2D>(@"archerPortrait"));
+            hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"), Content.Load<Texture2D>(@"lightInfantryPortrait"), 
+                Content.Load<Texture2D>(@"archerPortrait"), Content.Load<Texture2D>(@"infantryIcon"), Content.Load<Texture2D>(@"archerIcon"));
 
             // load paused game menu components
             gameMenuButton = new Button(new Vector2(465, 738), Content.Load<Texture2D>(@"gameMenuButton"), Content.Load<Texture2D>(@"gameMenuButtonPressed"));
@@ -211,6 +212,9 @@ namespace Incursio
                     break;
 
                 case (State.GameState.InPlay):
+
+                    selectedUnits = hud.update(cursor, selectedUnits, numUnitsSelected);
+                    numUnitsSelected = hud.getNumUnits();
                     
                     //listener for menu button
                     gameMenuButton.Update(cursor, spriteBatch);
@@ -220,9 +224,10 @@ namespace Incursio
                         currentState = State.GameState.PausedPlay;
                     }
 
+                    //this is just to see if the selected unit properites works.
                     for (int i = 0; i < keysPressed.Length; i++)    //scan through the keys being pressed down
                     {
-                        if (keysPressed[i] == Keys.Right)          //if any are the "Escape" key, go back to playing the game
+                        if (keysPressed[i] == Keys.Right)
                         {
                             selectedUnits[0] = new LightInfantryUnit();
                             selectedUnits[0].setDamage(12);
@@ -243,6 +248,32 @@ namespace Incursio
                             selectedUnits[0].setState(State.UnitState.Idle);
                             selectedUnits[0].setLocation(new Coordinate(200, 200));
                             numUnitsSelected = 1;
+                        }
+                        else if (keysPressed[i] == Keys.Up)
+                        {
+                            for (int j = 0; j < 6; j++)
+                            {
+                                selectedUnits[j] = new ArcherUnit();
+                                selectedUnits[j].setDamage(8);
+                                selectedUnits[j].setHealth(90);
+                                selectedUnits[j].setArmor(2);
+                                selectedUnits[j].setPlayer(humanPlayer);
+                                selectedUnits[j].setState(State.UnitState.Idle);
+                                selectedUnits[j].setLocation(new Coordinate(200, 200));
+                                numUnitsSelected = 12;
+                            }
+
+                            for (int j = 6; j < 12; j++)
+                            {
+                                selectedUnits[j] = new LightInfantryUnit();
+                                selectedUnits[j].setDamage(12);
+                                selectedUnits[j].setHealth(150);
+                                selectedUnits[j].setArmor(5);
+                                selectedUnits[j].setPlayer(humanPlayer);
+                                selectedUnits[j].setState(State.UnitState.Idle);
+                                selectedUnits[j].setLocation(new Coordinate(200, 200));
+                                numUnitsSelected = 12;
+                            }
                         }
                     }
 
