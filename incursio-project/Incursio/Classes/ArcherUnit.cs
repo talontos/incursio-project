@@ -8,7 +8,7 @@ namespace Incursio.Classes
     {
         public ArcherUnit() : base(){
             //TODO: Set Archer values
-            this.setType("Archer");
+            this.setType(State.EntityName.Archer);
         }
     }
 }

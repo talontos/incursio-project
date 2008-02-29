@@ -49,7 +49,7 @@ namespace Incursio.Classes
                 if (cursor.getIsPressed() && cursor.getPos().X >= 383 && cursor.getPos().X <= 760 && cursor.getPos().Y >= 638 && cursor.getPos().Y <= 733)
                 {
                     this.barX = (int)((cursor.getPos().X - 383) / 63);
-                    if (cursor.getPos().Y - 48 > 0)
+                    if (cursor.getPos().Y - 686 > 0)
                     {
                         this.barX = this.barX + 6;
                     }
@@ -57,6 +57,7 @@ namespace Incursio.Classes
                     Unit[] temp = new Unit[12];
                     temp[0] = selectedUnits[this.barX];
                     this.numUnits = 1;
+                    this.barX = 0;
                     return temp;
                 }
             }
@@ -95,7 +96,8 @@ namespace Incursio.Classes
             //unit attributes
             if (numUnitsSelected == 1)
             {
-                spriteBatch.DrawString(font, selectedUnits[0].getType(), new Vector2(572, height - 118), Color.White, 0, font.MeasureString(selectedUnits[0].getType()) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                //commented out selectedUnit[].getType returns enum not string
+                //spriteBatch.DrawString(font, selectedUnits[0].getType(), new Vector2(572, height - 118), Color.White, 0, font.MeasureString(selectedUnits[0].getType()) / 2, 1.0f, SpriteEffects.None, 0.5f);
 
                 spriteBatch.DrawString(font, "Health: " + selectedUnits[0].getHealth(), new Vector2(572, height - 90), Color.White, 0, font.MeasureString("Health: XXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
 

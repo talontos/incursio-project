@@ -163,6 +163,24 @@
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\archerIcon.xnb</Output>
       <Time>2008-02-23T11:15:30.428875-05:00</Time>
     </Item>
+    <Item>
+      <Source>grass.png</Source>
+      <Name>grass</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\grass.xnb</Output>
+      <Time>2008-02-28T14:55:34.625-05:00</Time>
+    </Item>
+    <Item>
+      <Source>barrel.png</Source>
+      <Name>barrel</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\barrel.xnb</Output>
+      <Time>2008-02-29T13:46:21.3872625-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

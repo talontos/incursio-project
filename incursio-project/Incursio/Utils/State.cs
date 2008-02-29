@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Incursio
 {
-    static class State
+    public static class State
     {
         public enum GameState{
             None,   //Defaut value; no state set
@@ -76,6 +76,26 @@ namespace Incursio
             Move_West,
 
             Move_Northwest,
+        }
+
+        public enum EntityName
+        {
+            LightInfantry,
+
+            HeavyInfantry,
+
+            Archer,
+
+            Hero,
+
+            GuardTower,
+
+            Camp,
+
+            ControlPoint,
+
+            //TODO: add more entity types
+
         }
     }
 }

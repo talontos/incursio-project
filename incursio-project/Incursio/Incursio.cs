@@ -41,6 +41,13 @@ namespace Incursio
         Unit[] selectedUnits;
         int numUnitsSelected;
 
+        //unit texture
+        Texture2D lightInfantryUnitTexture;
+
+        //map initialization
+        BaseMapEntity tex1;
+        MapBase map1;
+
         //game information
         State.GameState currentState = State.GameState.Initializing;
 
@@ -73,13 +80,16 @@ namespace Incursio
 
             //Just some testing here.  Add a breakpoint after the creations to check it out.
             //TODO: DELETE THESE LINES
-            BaseGameEntity test0 = factory.create("Incursio.Classes.Hero");
-            BaseGameEntity test1 = factory.create("Incursio.Classes.ControlPoint");
-            BaseGameEntity test2 = factory.create("Incursio.Classes.HeavyInfantryUnit");
-            BaseGameEntity test3 = factory.create("Incursio.Classes.LightInfantryUnit");
-            BaseGameEntity test4 = factory.create("Incursio.Classes.GuardTowerStructure");
-            BaseGameEntity test5 = factory.create("Incursio.Classes.CampStructure");
-            BaseGameEntity test6 = factory.create("Incursio.Classes.ArcherUnit");
+            //BaseGameEntity test0 = factory.create("Incursio.Classes.Hero");
+            //BaseGameEntity test1 = factory.create("Incursio.Classes.ControlPoint");
+            //BaseGameEntity test2 = factory.create("Incursio.Classes.HeavyInfantryUnit");
+            BaseGameEntity infUnit1 = factory.create("Incursio.Classes.LightInfantryUnit");
+            BaseGameEntity infUnit2 = factory.create("Incursio.Classes.LightInfantryUnit");
+            //BaseGameEntity test4 = factory.create("Incursio.Classes.GuardTowerStructure");
+            //BaseGameEntity test5 = factory.create("Incursio.Classes.CampStructure");
+            //BaseGameEntity test6 = factory.create("Incursio.Classes.ArcherUnit");
+            infUnit1.setLocation(new Coordinate(800, 500));
+            infUnit2.setLocation(new Coordinate(300, 200));
 
             //TODO: instead have 1 Player[] ??
             computerPlayer = new Player();
@@ -87,6 +97,9 @@ namespace Incursio
 
             selectedUnits = new Unit[12];
             numUnitsSelected = 0;
+
+            //TODO: test map, DELETE THESE LINES
+            map1 = new MapBase(2048, 1024, 1024, 768);
 
             //set the window size to 1024x768
             this.graphics.PreferredBackBufferWidth = 1024;
@@ -137,6 +150,26 @@ namespace Incursio
             //load the menu components
             newGameButton = new Button(new Vector2(400, 638), Content.Load<Texture2D>(@"newGameButton"), Content.Load<Texture2D>(@"newGamePressed"));
             exitGameButton = new Button(new Vector2(524, 638), Content.Load<Texture2D>(@"exitGameButton"), Content.Load<Texture2D>(@"exitGameButtonPressed"));
+
+            //load testmap texture
+            tex1 = new BaseMapEntity(Content.Load<Texture2D>(@"grass"));
+            for(int j = 0; j < 32; j++)
+            {
+                for(int i = 0; i < 64; i++)
+                {
+                    map1.addMapEntity(tex1, i, j);
+                }
+            }
+
+            tex1 = new BaseMapEntity(Content.Load<Texture2D>(@"barrel"));
+            map1.addMapEntity(tex1, 5, 6);
+            map1.addMapEntity(tex1, 16, 2);
+            map1.addMapEntity(tex1, 60, 21);
+            map1.addMapEntity(tex1, 2, 19);
+            map1.addMapEntity(tex1, 39, 60);
+
+            //load unit textures
+            lightInfantryUnitTexture = Content.Load<Texture2D>(@"infantryUnit");
 
             //once everything is loaded up, go to the main menu
             currentState = State.GameState.Menu;
@@ -215,6 +248,8 @@ namespace Incursio
 
                     selectedUnits = hud.update(cursor, selectedUnits, numUnitsSelected);
                     numUnitsSelected = hud.getNumUnits();
+
+                    map1.update(keysPressed, 1024, 768);
                     
                     //listener for menu button
                     gameMenuButton.Update(cursor, spriteBatch);
@@ -225,7 +260,7 @@ namespace Incursio
                     }
 
                     //this is just to see if the selected unit properites works.
-                    for (int i = 0; i < keysPressed.Length; i++)    //scan through the keys being pressed down
+                    /*for (int i = 0; i < keysPressed.Length; i++)    //scan through the keys being pressed down
                     {
                         if (keysPressed[i] == Keys.Right)
                         {
@@ -275,7 +310,7 @@ namespace Incursio
                                 numUnitsSelected = 12;
                             }
                         }
-                    }
+                    }*/
 
 
 
@@ -364,6 +399,11 @@ namespace Incursio
                     break;
 
                 case (State.GameState.InPlay):
+                    //draw the map
+                    map1.draw(spriteBatch, cursor);
+
+                    //draw units
+                    drawEntity();
 
                     //draw the HUD
                     hud.draw(spriteBatch, Window.ClientBounds.Height, selectedUnits, font, numUnitsSelected);
@@ -425,6 +465,27 @@ namespace Incursio
 
         public BaseGameEntity getEntity(ref int keyId){
             return entityBank[keyId];
+        }
+
+        public void drawEntity()
+        {
+            Coordinate onScreen;
+
+            entityBank.ForEach(delegate(BaseGameEntity e)
+            {
+                if (map1.isOnScreen(e.getLocation()))
+                {
+                    if (e.getType() == State.EntityName.LightInfantry)
+                    {
+                        onScreen = map1.positionOnScreen(e.getLocation());
+
+                        spriteBatch.Draw(this.lightInfantryUnitTexture,
+                            new Rectangle(onScreen.x, onScreen.y, this.lightInfantryUnitTexture.Width, this.lightInfantryUnitTexture.Height), 
+                            Color.White);
+                    }
+                }
+                
+            });
         }
     }
 }

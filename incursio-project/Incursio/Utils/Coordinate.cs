@@ -13,7 +13,7 @@ namespace Incursio.Utils
 
         public Coordinate(int x, int y){
             this.x = x;
-            this.y = x;
+            this.y = y;
         }
     }
 }

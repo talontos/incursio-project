@@ -13,7 +13,7 @@ namespace Incursio.Classes
 
         public Hero() : base(){
             //TODO: set hero properties
-            this.setType("Hero");
+            this.setType(State.EntityName.Hero);
         }
     }
 }

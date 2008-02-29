@@ -8,7 +8,7 @@ namespace Incursio.Classes
     {
         public HeavyInfantryUnit() : base(){
             //TODO: set values
-            this.setType("Heavy Infantry");
+            this.setType(State.EntityName.HeavyInfantry);
         }
     }
 }
