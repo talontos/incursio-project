@@ -8,7 +8,7 @@ namespace Incursio.Classes
     {
         public ControlPoint() : base(){
             //TODO: set controlpoint values
-            this.setType("Control Point");
+            this.setType(State.EntityName.ControlPoint);
         }
     }
 }

@@ -66,6 +66,7 @@
     <Compile Include="Classes\HeavyInfantryUnit.cs" />
     <Compile Include="Classes\Hero.cs" />
     <Compile Include="Classes\LightInfantryUnit.cs" />
+    <Compile Include="Classes\MapBase.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Structure.cs" />
     <Compile Include="Classes\Unit.cs" />

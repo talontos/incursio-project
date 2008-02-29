@@ -8,7 +8,7 @@ namespace Incursio.Classes
     {
         public CampStructure() : base(){
             //TODO: Set camp properties
-            this.setType("Camp");
+            this.setType(State.EntityName.Camp);
         }
     }
 }

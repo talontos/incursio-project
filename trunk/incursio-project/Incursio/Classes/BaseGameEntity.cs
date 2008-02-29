@@ -8,7 +8,8 @@ namespace Incursio.Classes
 {
     public class BaseGameEntity
     {
-        protected String type = "";    //unit type-name?
+        //protected String type = "";    //unit type-name?
+        protected State.EntityName entityType;
         protected long health = 0;
         protected int  sightRange = 0;
         protected Player owner;
@@ -26,12 +27,22 @@ namespace Incursio.Classes
 
         //Getters/Setters//
 
-        public String getType(){
+        /*public String getType(){
             return this.type;
+        }*/
+
+        /*public void setType(String type){
+            this.type = type;
+        }*/
+
+        public void setType(State.EntityName name)
+        {
+            this.entityType = name;
         }
 
-        public void setType(String type){
-            this.type = type;
+        public State.EntityName getType()
+        {
+            return this.entityType;
         }
 
         public long getHealth(){

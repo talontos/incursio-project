@@ -40,5 +40,7 @@ namespace Incursio.Classes
         {
             this.armor = armor;
         }
+
+
     }
 }
