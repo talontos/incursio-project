@@ -31,7 +31,7 @@ namespace Incursio.Utils
             // build new <classname>
             BaseGameEntity product = Activator.CreateInstance(classType) as BaseGameEntity;
 
-            incursio.addEntity(ref product);
+            this.incursio.addEntity(ref product);
             return product;
         }
 
