@@ -30,6 +30,8 @@ namespace Incursio
 
             Moving, //Moving from point A to B
 
+            Wandering,  //moving around to random places
+
             Guarding,   //Stays in place unless enemies come into visible range
 
             Attacking,  //Attacking...duh.      \
@@ -96,6 +98,11 @@ namespace Incursio
 
             //TODO: add more entity types
 
+        }
+
+        public enum PlayerId{
+            HUMAN,
+            COMPUTER,
         }
     }
 }

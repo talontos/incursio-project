@@ -21,6 +21,9 @@ namespace Incursio
     public class Incursio : Microsoft.Xna.Framework.Game
     {
         private static Incursio instance;
+        public static Random rand = new Random(DebugUtil.RandomNumberSeed);
+
+        public ObjectFactory factory;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;                //draws our images
@@ -34,7 +37,9 @@ namespace Incursio
         List<BaseGameEntity> entityBank;
         ///////////////////////////////
 
-        ObjectFactory factory;
+        //Textures-Map/////////////////
+        List<Texture2D> textureBank;
+        ///////////////////////////////
 
         //unit initialization
         //TODO: **move these to Player class**
@@ -77,23 +82,26 @@ namespace Incursio
             factory = new ObjectFactory(this);
 
             entityBank = new List<BaseGameEntity>();
+            textureBank = new List<Texture2D>();
+            
+            //testing unit creation/placement/moving
+            LightInfantryUnit infUnit1 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit");
+            LightInfantryUnit infUnit2 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit");
+            LightInfantryUnit infUnit3 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit");
+            infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
+            infUnit2.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
+            infUnit3.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
 
-            //Just some testing here.  Add a breakpoint after the creations to check it out.
-            //TODO: DELETE THESE LINES
-            //BaseGameEntity test0 = factory.create("Incursio.Classes.Hero");
-            //BaseGameEntity test1 = factory.create("Incursio.Classes.ControlPoint");
-            //BaseGameEntity test2 = factory.create("Incursio.Classes.HeavyInfantryUnit");
-            BaseGameEntity infUnit1 = factory.create("Incursio.Classes.LightInfantryUnit");
-            BaseGameEntity infUnit2 = factory.create("Incursio.Classes.LightInfantryUnit");
-            //BaseGameEntity test4 = factory.create("Incursio.Classes.GuardTowerStructure");
-            //BaseGameEntity test5 = factory.create("Incursio.Classes.CampStructure");
-            //BaseGameEntity test6 = factory.create("Incursio.Classes.ArcherUnit");
-            infUnit1.setLocation(new Coordinate(800, 500));
-            infUnit2.setLocation(new Coordinate(300, 200));
+            infUnit1.move(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
+            infUnit2.move(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
+            infUnit3.move(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
 
             //TODO: instead have 1 Player[] ??
             computerPlayer = new Player();
+            computerPlayer.id = State.PlayerId.COMPUTER;
+
             humanPlayer = new Player();
+            humanPlayer.id = State.PlayerId.HUMAN;
 
             selectedUnits = new Unit[12];
             numUnitsSelected = 0;
@@ -129,6 +137,8 @@ namespace Incursio
         /// </summary>
         protected override void LoadContent()
         {
+            //TODO: Load images into textureBank
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("Courier New");
@@ -201,9 +211,7 @@ namespace Incursio
             keysPressed = (Keys[])kbState.GetPressedKeys(); //get all the keys that are being pressed
 
             //Check game state!
-            this.checkState();
-
-
+            this.checkState(gameTime);
 
             base.Update(gameTime);
         }
@@ -238,7 +246,7 @@ namespace Incursio
         /// 
         /// It will also perform the neccessary computations dependent upon the state
         /// </summary>
-        private void checkState(){
+        private void checkState(GameTime gameTime){
             switch(this.currentState){
                 case (State.GameState.Initializing): 
                     //TODO: perform initializing actions
@@ -249,6 +257,21 @@ namespace Incursio
                     selectedUnits = hud.update(cursor, selectedUnits, numUnitsSelected);
                     numUnitsSelected = hud.getNumUnits();
 
+                    entityBank.ForEach(delegate(BaseGameEntity e)
+                    {
+                        e.Update(gameTime);
+                    });
+
+                    for(int i = 0; i < keysPressed.Length; i++){
+                        switch(keysPressed[i]){
+                            case Keys.Escape:
+                                currentState = State.GameState.PausedPlay; break;
+                            case Keys.Enter://just so we can have a breakpoint whenever we want...
+                                currentState = currentState; break;
+                            default: break;
+                        }
+                    }
+
                     map1.update(keysPressed, 1024, 768);
                     
                     //listener for menu button
@@ -257,64 +280,7 @@ namespace Incursio
                     {
                         gameMenuButton.setFocus(false);
                         currentState = State.GameState.PausedPlay;
-                    }
-
-                    //this is just to see if the selected unit properites works.
-                    /*for (int i = 0; i < keysPressed.Length; i++)    //scan through the keys being pressed down
-                    {
-                        if (keysPressed[i] == Keys.Right)
-                        {
-                            selectedUnits[0] = new LightInfantryUnit();
-                            selectedUnits[0].setDamage(12);
-                            selectedUnits[0].setHealth(150);
-                            selectedUnits[0].setArmor(5);
-                            selectedUnits[0].setPlayer(humanPlayer);
-                            selectedUnits[0].setState(State.UnitState.Idle);
-                            selectedUnits[0].setLocation(new Coordinate(200, 200));
-                            numUnitsSelected = 1;
-                        }
-                        else if (keysPressed[i] == Keys.Left)
-                        {
-                            selectedUnits[0] = new ArcherUnit();
-                            selectedUnits[0].setDamage(8);
-                            selectedUnits[0].setHealth(90);
-                            selectedUnits[0].setArmor(2);
-                            selectedUnits[0].setPlayer(humanPlayer);
-                            selectedUnits[0].setState(State.UnitState.Idle);
-                            selectedUnits[0].setLocation(new Coordinate(200, 200));
-                            numUnitsSelected = 1;
-                        }
-                        else if (keysPressed[i] == Keys.Up)
-                        {
-                            for (int j = 0; j < 6; j++)
-                            {
-                                selectedUnits[j] = new ArcherUnit();
-                                selectedUnits[j].setDamage(8);
-                                selectedUnits[j].setHealth(90);
-                                selectedUnits[j].setArmor(2);
-                                selectedUnits[j].setPlayer(humanPlayer);
-                                selectedUnits[j].setState(State.UnitState.Idle);
-                                selectedUnits[j].setLocation(new Coordinate(200, 200));
-                                numUnitsSelected = 12;
-                            }
-
-                            for (int j = 6; j < 12; j++)
-                            {
-                                selectedUnits[j] = new LightInfantryUnit();
-                                selectedUnits[j].setDamage(12);
-                                selectedUnits[j].setHealth(150);
-                                selectedUnits[j].setArmor(5);
-                                selectedUnits[j].setPlayer(humanPlayer);
-                                selectedUnits[j].setState(State.UnitState.Idle);
-                                selectedUnits[j].setLocation(new Coordinate(200, 200));
-                                numUnitsSelected = 12;
-                            }
-                        }
-                    }*/
-
-
-
-                    
+                    }                    
 
                     //TODO: perform InPlay actions
                     break;

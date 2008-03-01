@@ -3,25 +3,27 @@ using System.Collections.Generic;
 using System.Text;
 using Incursio.Utils;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Incursio.Classes
 {
     public class BaseGameEntity
     {
         //protected String type = "";    //unit type-name?
+        public Texture2D texture;
+
         protected State.EntityName entityType;
         protected long health = 0;
         protected int  sightRange = 0;
-        protected Player owner;
-        protected Enum currentState;
-        protected Coordinate location;
+        protected State.PlayerId owner;
+        protected Coordinate location = new Coordinate(0,0);
         protected int keyId = -1;
 
         public BaseGameEntity(){
             
         }
 
-        protected void Update(GameTime gameTime){
+        public virtual void Update(GameTime gameTime){
 
         }
 
@@ -53,11 +55,11 @@ namespace Incursio.Classes
             this.health = health;
         }
 
-        public Player getPlayer(){
+        public Enum getPlayer(){
             return this.owner;
         }
 
-        public void setPlayer(Player owner){
+        public void setPlayer(State.PlayerId owner){
             this.owner = owner;
         }
 
@@ -77,16 +79,6 @@ namespace Incursio.Classes
         public void setLocation(Coordinate coords)
         {
             this.location = coords;
-        }
-
-        public Enum getState()
-        {
-            return this.currentState;
-        }
-
-        public void setState(Enum state)
-        {
-            this.currentState = state;
         }
 
         public int getKeyId(){

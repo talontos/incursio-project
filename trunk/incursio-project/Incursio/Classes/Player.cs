@@ -5,29 +5,28 @@ using System.Text;
 using Incursio.Classes;
 using Microsoft.Xna.Framework;
 
+using Incursio.Utils;
+
 namespace Incursio.Classes
 {
     public class Player
     {
-        private String name = "";
-        private List<Unit> units;
-        private List<Structure> structures;
-        private Hero hero;
-        private long MONETARY_UNIT = 0;
-        private int ownedControlPoints = 0;
+        public String name = "";
+        public List<BaseGameEntity> selection;
+        public Hero hero;
+        public long MONETARY_UNIT = 0;
+        public int ownedControlPoints = 0;
+        public Enum id;
+
 
         public Player(){
             this.name = "Player";
-            this.units = new List<Unit>();
-            this.structures = new List<Structure>();
-            this.hero = new Hero();
+            Incursio.getInstance().factory.create(Hero.HERO_CLASS);
         }
 
         public Player(String playerName)
         {
-            this.units = new List<Unit>();
-            this.structures = new List<Structure>();
-            this.hero = new Hero();
+            Incursio.getInstance().factory.create(Hero.HERO_CLASS);
             this.name = playerName;
         }
 
