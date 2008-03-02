@@ -15,5 +15,10 @@ namespace Incursio.Classes
             this.sightRange = 5;
             this.setType(State.EntityName.LightInfantry);
         }
+
+      public override string getTextureName()
+      {
+          return @"infantryUnit";
+      }
     }
 }

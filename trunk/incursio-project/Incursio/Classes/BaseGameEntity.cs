@@ -10,32 +10,33 @@ namespace Incursio.Classes
     public class BaseGameEntity
     {
         //protected String type = "";    //unit type-name?
-        public Texture2D texture;
 
-        protected State.EntityName entityType;
-        protected long health = 0;
-        protected int  sightRange = 0;
-        protected State.PlayerId owner;
-        protected Coordinate location = new Coordinate(0,0);
-        protected int keyId = -1;
+        public State.EntityName entityType;
+        public long health = 100;
+        public int  sightRange = 0;
+        public State.PlayerId owner;
+        public Coordinate location = new Coordinate(0,0);
+        public int keyId = -1;
+        public bool visible = false;
 
         public BaseGameEntity(){
             
         }
 
         public virtual void Update(GameTime gameTime){
+            //TODO: draw unit here?
+            //TODO: check if i'm clicked?
+        }
+
+        public virtual void Render(){
 
         }
 
+        public virtual String getTextureName(){
+            return null;
+        }
+
         //Getters/Setters//
-
-        /*public String getType(){
-            return this.type;
-        }*/
-
-        /*public void setType(String type){
-            this.type = type;
-        }*/
 
         public void setType(State.EntityName name)
         {
@@ -55,7 +56,7 @@ namespace Incursio.Classes
             this.health = health;
         }
 
-        public Enum getPlayer(){
+        public State.PlayerId getPlayer(){
             return this.owner;
         }
 
