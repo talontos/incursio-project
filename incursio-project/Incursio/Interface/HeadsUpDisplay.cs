@@ -41,7 +41,7 @@ namespace Incursio.Classes
             numUnits = 0;
         }
 
-        public Unit[] update(Cursor cursor, Unit[] selectedUnits, int numUnitsSelected)
+        public List<Unit> update(Cursor cursor, List<Unit> selectedUnits, int numUnitsSelected)
         {
 
             if (numUnitsSelected > 1)
@@ -54,8 +54,8 @@ namespace Incursio.Classes
                         this.barX = this.barX + 6;
                     }
 
-                    Unit[] temp = new Unit[12];
-                    temp[0] = selectedUnits[this.barX];
+                    List<Unit> temp = new List<Unit>();
+                    temp.Add(selectedUnits[this.barX]);
                     this.numUnits = 1;
                     this.barX = 0;
                     return temp;
@@ -75,7 +75,7 @@ namespace Incursio.Classes
         /// drawHeadsUpDisplay draws the HUD onto the screen.  Parameter SpriteBatch is used.
         /// </summary>
         /// <param name="spriteBatch"></param>
-        public void draw(SpriteBatch spriteBatch, int height, Unit[] selectedUnits, SpriteFont font, int numUnitsSelected)
+        public void draw(SpriteBatch spriteBatch, int height, List<Unit> selectedUnits, SpriteFont font, int numUnitsSelected)
         {
             // draw our images
             spriteBatch.Draw(utilityBar, new Rectangle(0, height - utilityBar.Height, utilityBar.Width, utilityBar.Height), Color.White);

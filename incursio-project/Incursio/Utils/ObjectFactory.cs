@@ -35,5 +35,28 @@ namespace Incursio.Utils
             return product;
         }
 
+        /// <summary>
+        /// Creates an instance of the desired BaseGameEntity, inserts it in to the 
+        /// main program's entityBank, and returns it.
+        /// </summary>
+        /// <param name="classname">the FULLY QUALIFIED NAME of the class. 
+        /// <param name="owningPlayer">Enumerated PlayerID to be assigned as the owner</param>
+        /// <returns>The newly created instance</returns>
+        public BaseGameEntity create(String classname, State.PlayerId owningPlayer)
+        {
+            // parse classname
+            Type classType = Type.GetType(classname, false, true);
+
+            if (classType == null)
+                return null;
+
+            // build new <classname>
+            BaseGameEntity product = Activator.CreateInstance(classType) as BaseGameEntity;
+
+            product.setPlayer(owningPlayer);
+            this.incursio.addEntity(ref product);
+            return product;
+        }
+
     }
 }

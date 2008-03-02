@@ -6,7 +6,7 @@ namespace Incursio.Utils
 {
     class DebugUtil
     {
-        public static int UnitStopMoveRange = 100;
+        public static int UnitStopMoveRange = 75;
         public static int RandomNumberSeed = 100;
     }
 }

@@ -23,6 +23,10 @@ namespace Incursio.Classes
 
         public override void Update(GameTime gameTime)
         {
+            //check health for death...
+            if (health <= 0)
+                die();
+
             //check state and act accordingly
             switch(this.currentState){
 
@@ -34,6 +38,7 @@ namespace Incursio.Classes
                     if (Math.Sqrt((destination.x - location.x) ^ 2 + (destination.y - location.y) ^ 2) <= attackRange)
                     {
                         //attack!!!
+                        attackTarget();
                         break;
                     }
                     else recalculateLocation();
@@ -57,7 +62,8 @@ namespace Incursio.Classes
                 
                 ///////////////////////////////
                 case State.UnitState.Idle:
-                    this.currentState = State.UnitState.Wandering;
+                    //TODO: change; this is temporary
+                    //this.currentState = State.UnitState.Wandering;
                     break;
 
                 ///////////////////////////////
@@ -78,11 +84,17 @@ namespace Incursio.Classes
 
         /// <summary>
         /// Changes the unit's state and target so that
-        /// it will move toward that entity; essentially following it
+        /// it will move toward that entity; essentially following it.
+        /// 
+        /// If target entity is an enemy, the unit will move to attack it
         /// </summary>
         /// <param name="targetEntity">The entity to follow</param>
         public void move(BaseGameEntity targetEntity){
-            this.currentState = State.UnitState.Moving;
+            if (targetEntity.getPlayer() != owner)
+                this.currentState = State.UnitState.Attacking;
+            else
+                this.currentState = State.UnitState.Moving;
+
             this.target = targetEntity;
         }
 
@@ -128,9 +140,9 @@ namespace Incursio.Classes
             this.armor = armor;
         }
 
-        public long getCurrentState()
+        public State.UnitState getCurrentState()
         {
-            return this.armor;
+            return this.currentState;
         }
 
         public void setCurrentState(State.UnitState newState)
@@ -148,15 +160,11 @@ namespace Incursio.Classes
             }
 
             //TODO: condense this code so as not to declare so many variables...
-
-            double x1 = this.location.x;
-            double y1 = this.location.y;
-
             double x2 = this.destination.x;
             double y2 = this.destination.y;
 
             //Atan is in radians...convert to degrees
-            double theta = (180 * Math.Atan((y2 - y1) / (x2 - x1))) / Math.PI;
+            double theta = (180 * Math.Atan((y2 - location.y) / (x2 - location.x))) / Math.PI;
             if (Double.IsNaN(theta))
                 theta = 0;
 
@@ -165,11 +173,15 @@ namespace Incursio.Classes
             x2 = this.speed * Math.Cos(theta);
             y2 = this.speed * Math.Sin(theta);
 
-            //our final location
-            this.location.x = Convert.ToInt32(x1 + x2);
-            this.location.y = Convert.ToInt32(y1 + y2);
+            //colision detection time!
+            //if (x2,y2) is not passable, we can't go there...
+            //TODO: Colision detection
 
-            //if we're close to destination (+/- DebugUtil.UnitStopMoveRange), go idle
+            //our final location
+            this.location.x = Convert.ToInt32(location.x + x2);
+            this.location.y = Convert.ToInt32(location.y + y2);
+
+            //If destination is within our bound, go idle
             if ( location.x <= (destination.x + DebugUtil.UnitStopMoveRange) && location.y <= (destination.y + DebugUtil.UnitStopMoveRange) &&
                  location.x >= (destination.x - DebugUtil.UnitStopMoveRange) && location.y >= (destination.y - DebugUtil.UnitStopMoveRange))
                 this.currentState = State.UnitState.Idle;
@@ -177,6 +189,14 @@ namespace Incursio.Classes
 
         protected virtual void attackTarget(){
             //um..attack!
+        }
+
+        protected virtual void die(){
+            currentState = State.UnitState.Dead;
+            //TODO: How to handle death of entities?
+            //  It'd be a waste of memory to just leave them in the entityBank,
+            //    but then we'd have to reassign keyIds.
+            //  But do we need to remove them?
         }
 
 

@@ -38,6 +38,8 @@ namespace Incursio
                             //                   }-- Do we need two states?  Could just be 'InCombat'
             UnderAttack,    //Being attacked    /
 
+            Dead,
+
         }
 
         public enum HealthStates
