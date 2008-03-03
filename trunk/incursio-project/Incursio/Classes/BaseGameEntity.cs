@@ -12,6 +12,7 @@ namespace Incursio.Classes
         //protected String type = "";    //unit type-name?
 
         public State.EntityName entityType;
+        public long maxHealth = 100;
         public long health = 100;
         public int  sightRange = 0;
         public State.PlayerId owner;
@@ -54,6 +55,16 @@ namespace Incursio.Classes
 
         public void setHealth(int health){
             this.health = health;
+        }
+
+        public long getMaxHealth()
+        {
+            return this.maxHealth;
+        }
+
+        public void setMaxHealth(int newHealth)
+        {
+            this.maxHealth = newHealth;
         }
 
         public State.PlayerId getPlayer(){

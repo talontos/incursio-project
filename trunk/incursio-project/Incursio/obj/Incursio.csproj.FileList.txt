@@ -26,3 +26,4 @@ bin\x86\Debug\Content\archerIcon.xnb
 bin\x86\Debug\Content\grass.xnb
 bin\x86\Debug\Content\barrel.xnb
 bin\x86\Debug\Content\SelectedUnitOverlay.xnb
+bin\x86\Debug\Content\healthBar.xnb

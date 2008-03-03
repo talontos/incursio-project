@@ -13,6 +13,7 @@ namespace Incursio.Classes
         protected int speed = 0;
         protected int attackRange = 0;
         protected State.UnitState currentState = State.UnitState.Idle;
+        protected MapBase map;
 
         public Coordinate destination = null;
         public BaseGameEntity target = null;
@@ -79,7 +80,23 @@ namespace Incursio.Classes
         /// <param name="destination">coordinate to move toward</param>
         public void move(Coordinate destination){
             this.currentState = State.UnitState.Moving;
+
             this.destination = destination;
+        }
+
+        /// <summary>
+        /// Movement for maps larger than the present screen size
+        /// </summary>
+        /// <param name="destination"></param>
+        /// <param name="currentMap"></param>
+        public void move(Coordinate destination, MapBase currentMap)
+        {
+            this.currentState = State.UnitState.Moving;
+
+            //convert the destination from on screen coords to map coords
+            this.destination = new Coordinate(destination.x + (currentMap.getMinimumX() * currentMap.getTileWidth()), destination.y + (currentMap.getMinimumY() * currentMap.getTileHeight()));
+            this.map = currentMap;
+            //this.destination = destination;
         }
 
         /// <summary>
@@ -185,6 +202,13 @@ namespace Incursio.Classes
             if ( location.x <= (destination.x + DebugUtil.UnitStopMoveRange) && location.y <= (destination.y + DebugUtil.UnitStopMoveRange) &&
                  location.x >= (destination.x - DebugUtil.UnitStopMoveRange) && location.y >= (destination.y - DebugUtil.UnitStopMoveRange))
                 this.currentState = State.UnitState.Idle;
+
+            //If unit is now on the destination tile, go idle
+            //NOTE: both this conditional statement and the one above it are the same, want to use the simpler statement?
+            /*if (location.x / map.getTileWidth() == destination.x / map.getTileWidth() && location.y / map.getTileHeight() == destination.y / map.getTileHeight())
+            {
+                this.currentState = State.UnitState.Idle;
+            }*/
         }
 
         protected virtual void attackTarget(){

@@ -48,6 +48,7 @@ namespace Incursio
 
         //Overlay for selected units
         Texture2D selectedUnitOverlayTexture;
+        Texture2D healthRatioTexture;
 
         //unit texture
         Texture2D lightInfantryUnitTexture;
@@ -94,6 +95,7 @@ namespace Incursio
             infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             infUnit2.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             infUnit3.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
+            infUnit1.setHealth(80);
 
             /*
             infUnit1.move(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
@@ -190,6 +192,7 @@ namespace Incursio
 
             //load overlays
             selectedUnitOverlayTexture = Content.Load<Texture2D>(@"selectedUnitOverlay");
+            healthRatioTexture = Content.Load<Texture2D>(@"healthBar");
 
             //once everything is loaded up, go to the main menu
             currentState = State.GameState.Menu;
@@ -280,7 +283,7 @@ namespace Incursio
                         entityBank.ForEach(delegate(BaseGameEntity e)
                         {
                             if(e.visible){ //only check visible ones so we don't waste time
-                                Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, 50, 50);
+                                Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, map1.getTileWidth(), map1.getTileHeight());
                                 if(unit.Contains( new Point( Convert.ToInt32(point.X), Convert.ToInt32(point.Y)) ) ){
 
                                     //NOW, if unit is enemy, selected units attack!
@@ -310,7 +313,7 @@ namespace Incursio
                         if(!done && numUnitsSelected > 0){
                             selectedUnits.ForEach(delegate(Unit u)
                             {
-                                u.move( new Coordinate(Convert.ToInt32(point.X), Convert.ToInt32(point.Y)));
+                                u.move( new Coordinate(Convert.ToInt32(point.X), Convert.ToInt32(point.Y)), map1);
                             });
                         }
                     }
@@ -318,7 +321,11 @@ namespace Incursio
                     for(int i = 0; i < keysPressed.Length; i++){
                         switch(keysPressed[i]){
                             case Keys.Escape:
-                                currentState = State.GameState.PausedPlay; break;
+                                //this is tempory, as there is no other current way to unselect a unit
+                                selectedUnits.Clear();
+                                numUnitsSelected = 0;
+                                //currentState = State.GameState.PausedPlay; break;
+                                break;
                             case Keys.Enter://just so we can have a breakpoint whenever we want...
                                 currentState = currentState; break;
                             default: break;
@@ -486,9 +493,13 @@ namespace Incursio
             return entityBank[keyId];
         }
 
+        /// <summary>
+        /// drawEntity() goes through the entityBank and draws all entities that are presently on the screen
+        /// </summary>
         public void drawEntity()
         {
             Coordinate onScreen;
+            double healthRatio;
 
             //draw all visible units
             entityBank.ForEach(delegate(BaseGameEntity e)
@@ -502,8 +513,9 @@ namespace Incursio
                         onScreen = map1.positionOnScreen(e.getLocation());
 
                         spriteBatch.Draw(this.lightInfantryUnitTexture,
-                            new Rectangle(onScreen.x, onScreen.y, this.lightInfantryUnitTexture.Width, this.lightInfantryUnitTexture.Height),
-                            Color.White);
+                            new Rectangle(onScreen.x, onScreen.y, this.lightInfantryUnitTexture.Width, this.lightInfantryUnitTexture.Height), 
+                            new Color(250, 250, 250, 255));
+                        
                     }
                     else
                         e.visible = false;
@@ -517,11 +529,24 @@ namespace Incursio
                 if(map1.isOnScreen(u.getLocation())){
                     onScreen = map1.positionOnScreen(u.getLocation());
 
+
+                    healthRatio = (float)u.getHealth() / u.getMaxHealth();
+
                     spriteBatch.Draw(this.selectedUnitOverlayTexture,
                         new Rectangle(onScreen.x, onScreen.y, this.selectedUnitOverlayTexture.Width, this.selectedUnitOverlayTexture.Height),
                         Color.White);
+
+                    spriteBatch.Draw(this.healthRatioTexture,
+                        new Rectangle(onScreen.x + 21, onScreen.y + 4, (int)(this.healthRatioTexture.Width * healthRatio) , this.healthRatioTexture.Height),
+                        Color.White);
                 }
             });
+        }
+
+
+        public void selectEntity()
+        {
+            
         }
     }
 }
