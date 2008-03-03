@@ -153,5 +153,15 @@ namespace Incursio.Classes
         {
             return TILE_WIDTH;
         }
+
+        public int getMinimumX()
+        {
+            return minViewableX;
+        }
+
+        public int getMinimumY()
+        {
+            return minViewableY;
+        }
     }
 }
