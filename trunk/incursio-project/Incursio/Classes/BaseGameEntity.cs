@@ -39,65 +39,65 @@ namespace Incursio.Classes
 
         //Getters/Setters//
 
-        public void setType(State.EntityName name)
+        public virtual void setType(State.EntityName name)
         {
             this.entityType = name;
         }
 
-        public State.EntityName getType()
+        public virtual State.EntityName getType()
         {
             return this.entityType;
         }
 
-        public long getHealth(){
+        public virtual long getHealth(){
             return this.health;
         }
 
-        public void setHealth(int health){
+        public virtual void setHealth(int health){
             this.health = health;
         }
 
-        public long getMaxHealth()
+        public virtual long getMaxHealth()
         {
             return this.maxHealth;
         }
 
-        public void setMaxHealth(int newHealth)
+        public virtual void setMaxHealth(int newHealth)
         {
             this.maxHealth = newHealth;
         }
 
-        public State.PlayerId getPlayer(){
+        public virtual State.PlayerId getPlayer(){
             return this.owner;
         }
 
-        public void setPlayer(State.PlayerId owner){
+        public virtual void setPlayer(State.PlayerId owner){
             this.owner = owner;
         }
 
-        public long getSightRange(){
+        public virtual long getSightRange(){
             return this.sightRange;
         }
 
-        public void setSightRange(int sightRange){
+        public virtual void setSightRange(int sightRange){
             this.sightRange = sightRange;
         }
 
-        public Coordinate getLocation()
+        public virtual Coordinate getLocation()
         {
             return this.location;
         }
 
-        public void setLocation(Coordinate coords)
+        public virtual void setLocation(Coordinate coords)
         {
             this.location = coords;
         }
 
-        public int getKeyId(){
+        public virtual int getKeyId(){
             return this.keyId;
         }
 
-        public void setKeyId(int key){
+        public virtual void setKeyId(int key){
             this.keyId = key;
         }
     }
