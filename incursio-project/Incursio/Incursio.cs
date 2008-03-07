@@ -55,7 +55,7 @@ namespace Incursio
 
         //map initialization
         BaseMapEntity tex1;
-        MapBase map1;
+        public MapBase map1;
 
         //game information
         State.GameState currentState = State.GameState.Initializing;
@@ -87,12 +87,17 @@ namespace Incursio
 
             entityBank = new List<BaseGameEntity>();
             textureBank = new List<Texture2D>();
+
+            //NOTE: the map should be instantiated before units
+            //TODO: test map, DELETE THESE LINES
+            map1 = new MapBase(2048, 1024, 1024, 768);
             
             //testing unit creation/placement/moving///
             LightInfantryUnit infUnit1 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
             LightInfantryUnit infUnit2 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
             LightInfantryUnit infUnit3 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
-            infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
+            //infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
+            infUnit1.setLocation(new Coordinate(500, 500));
             infUnit2.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             infUnit3.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             infUnit1.setHealth(80);
@@ -114,9 +119,6 @@ namespace Incursio
             selectedUnits = new List<Unit>();
             selectedUnits.Add(infUnit1);
             numUnitsSelected = 1;
-
-            //TODO: test map, DELETE THESE LINES
-            map1 = new MapBase(2048, 1024, 1024, 768);
 
             //set the window size to 1024x768
             this.graphics.PreferredBackBufferWidth = 1024;
@@ -275,48 +277,51 @@ namespace Incursio
                         e.Update(gameTime);
                     });
 
-                    if(cursor.getIsPressed()){
-                        bool done = false;
+                    //LEFT BUTTON state has changed
+                    if(cursor.getMouseState().LeftButton != cursor.getPreviousState().LeftButton){
+                        if(cursor.getIsPressed()){
+                            bool done = false;
 
-                        //CLICKING ENTITY?
-                        Vector2 point = cursor.getPos();
-                        entityBank.ForEach(delegate(BaseGameEntity e)
-                        {
-                            if(e.visible){ //only check visible ones so we don't waste time
-                                Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, map1.getTileWidth(), map1.getTileHeight());
-                                if(unit.Contains( new Point( Convert.ToInt32(point.X), Convert.ToInt32(point.Y)) ) ){
-
-                                    //NOW, if unit is enemy, selected units attack!
-                                    if(e.getPlayer() == State.PlayerId.COMPUTER){
-                                        selectedUnits.ForEach(delegate(Unit u)
-                                        {
-                                            u.attack(e);
-                                        });
-                                    }
-
-                                    else if(selectedUnits.Contains(e as Unit)){
-                                        selectedUnits.Remove(e as Unit);
-                                        numUnitsSelected--;
-                                    }
-
-                                    else{
-                                        selectedUnits.Add(e as Unit);
-                                        numUnitsSelected++;
-                                    }
-
-                                    done = true;
-                                }
-                            }
-                        });
-
-                        //NOT ENTITY, DO I GIVE MOVE ORDER?
-                        if(!done && numUnitsSelected > 0){
-                            selectedUnits.ForEach(delegate(Unit u)
+                            //CLICKING ENTITY?
+                            Vector2 point = cursor.getPos();
+                            entityBank.ForEach(delegate(BaseGameEntity e)
                             {
-                                u.move( new Coordinate(Convert.ToInt32(point.X), Convert.ToInt32(point.Y)), map1);
+                                if(e.visible){ //only check visible ones so we don't waste time
+                                    Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, map1.getTileWidth(), map1.getTileHeight());
+                                    if(unit.Contains( new Point( Convert.ToInt32(point.X), Convert.ToInt32(point.Y)) ) ){
+
+                                        //NOW, if unit is enemy, selected units attack!
+                                        if(e.getPlayer() == State.PlayerId.COMPUTER){
+                                            selectedUnits.ForEach(delegate(Unit u)
+                                            {
+                                                u.attack(e);
+                                            });
+                                        }
+
+                                        else if(selectedUnits.Contains(e as Unit)){
+                                            selectedUnits.Remove(e as Unit);
+                                            numUnitsSelected--;
+                                        }
+
+                                        else{
+                                            selectedUnits.Add(e as Unit);
+                                            numUnitsSelected++;
+                                        }
+
+                                        done = true;
+                                    }
+                                }
                             });
+
+                            //NOT ENTITY, DO I GIVE MOVE ORDER?
+                            if(!done && numUnitsSelected > 0){
+                                selectedUnits.ForEach(delegate(Unit u)
+                                {
+                                    u.move( new Coordinate(Convert.ToInt32(point.X), Convert.ToInt32(point.Y)), map1);
+                                });
+                            }
                         }
-                    }
+                    }//end left button state change
 
                     for(int i = 0; i < keysPressed.Length; i++){
                         switch(keysPressed[i]){

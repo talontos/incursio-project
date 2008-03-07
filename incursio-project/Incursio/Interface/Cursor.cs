@@ -13,6 +13,7 @@ namespace Incursio.Classes
         private Texture2D passive;                  // texture of the mouse while idle
         private Texture2D pressed;                  // texture of the mouse if pressed
         private MouseState mouseState;
+        private MouseState previousState;
         private bool isPressed;                     // tells us whether the mouse is pressed or not
 
         public Cursor(Vector2 pos, Texture2D pass, Texture2D press)
@@ -25,6 +26,7 @@ namespace Incursio.Classes
 
         public void Update()
         {
+            previousState = mouseState; //remember previous state
             mouseState = Mouse.GetState();
             this.pos.X = mouseState.X;
             this.pos.Y = mouseState.Y;
@@ -64,6 +66,10 @@ namespace Incursio.Classes
         public bool getIsPressed()
         {
             return isPressed;
+        }
+
+        public MouseState getPreviousState(){
+            return previousState;
         }
     }
 }

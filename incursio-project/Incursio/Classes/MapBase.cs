@@ -17,6 +17,8 @@ namespace Incursio.Classes
         protected int height;
         protected BaseMapEntity[,] tileGrid;
 
+        protected bool[,] occupancyGrid;
+
         public const int TILE_WIDTH = 32;
         public const int TILE_HEIGHT = 32;
 
@@ -44,6 +46,7 @@ namespace Incursio.Classes
             this.width = width / TILE_WIDTH;
             this.height = height / TILE_HEIGHT;
             this.tileGrid = new BaseMapEntity[width, height];
+            this.occupancyGrid = new bool[width, height];
             this.minViewableX = 0;
             this.minViewableY = 0;
             this.maxViewableX = screenWidth / TILE_WIDTH;
@@ -106,6 +109,7 @@ namespace Incursio.Classes
             if (xPos >= 0 && xPos < this.width && yPos >= 0 && yPos < this.height)
             {
                 this.tileGrid[xPos, yPos] = entity;
+                this.occupancyGrid[xPos, yPos] = false;
             }
         }
 
@@ -142,6 +146,23 @@ namespace Incursio.Classes
             {
                 return null;
             }
+        }
+
+        public bool getCellOccupancy(int pixX, int pixY){
+            int x, y;
+            this.translatePixelToMapCell(pixX, pixY, out x, out y);
+            return this.occupancyGrid[x, y];
+        }
+        
+        public void setSingleCellOccupancy(int pixX, int pixY, bool occupied){
+            int x, y;
+            this.translatePixelToMapCell(pixX, pixY, out x, out y);
+            this.occupancyGrid[x, y] = occupied;
+        }
+
+        private void translatePixelToMapCell(int pixX, int pixY, out int indexX, out int indexY){
+            indexX = pixX / TILE_WIDTH;
+            indexY = pixY / TILE_HEIGHT;
         }
 
         public int getTileHeight()
