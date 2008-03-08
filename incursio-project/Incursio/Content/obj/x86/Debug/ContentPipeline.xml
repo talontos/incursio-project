@@ -143,7 +143,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantryUnit.xnb</Output>
-      <Time>2008-02-22T14:53:52.0695-05:00</Time>
+      <Time>2008-03-08T09:40:52.09025-05:00</Time>
     </Item>
     <Item>
       <Source>InfantryIcon.png</Source>
@@ -188,7 +188,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\SelectedUnitOverlay.xnb</Output>
-      <Time>2008-03-03T10:19:30.125-05:00</Time>
+      <Time>2008-03-08T09:40:52.074625-05:00</Time>
     </Item>
     <Item>
       <Source>HealthBar.png</Source>
