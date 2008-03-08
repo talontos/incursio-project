@@ -505,6 +505,10 @@ namespace Incursio
         {
             Coordinate onScreen;
             double healthRatio;
+            double healthBarTypicalWidth = 0.59375;             //these horrible numbers are ratios for the healthbar of the
+            double healthBarTypicalHeight = 0.03125;            //selecetedUnitOverlayTexture.  These account for changes in
+            double healthBarTypicalStartWidth = 0.25;           //overlay size, so that the healthbar will still display where
+            double healthBarTypicalStartHeight = 0.0625;        //it should.
 
             //draw all visible units
             entityBank.ForEach(delegate(BaseGameEntity e)
@@ -542,7 +546,7 @@ namespace Incursio
                         Color.White);
 
                     spriteBatch.Draw(this.healthRatioTexture,
-                        new Rectangle(onScreen.x + 21, onScreen.y + 4, (int)(this.healthRatioTexture.Width * healthRatio) , this.healthRatioTexture.Height),
+                        new Rectangle(onScreen.x + (int)(this.selectedUnitOverlayTexture.Width * healthBarTypicalStartWidth), onScreen.y + (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalStartHeight), (int)((this.selectedUnitOverlayTexture.Width * healthBarTypicalWidth) * healthRatio) , (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalHeight)),
                         Color.White);
                 }
             });
