@@ -19,6 +19,7 @@ namespace Incursio.Classes
         public Coordinate location = new Coordinate(0,0);
         public int keyId = -1;
         public bool visible = false;
+        public bool highlighted = false;
 
         public BaseGameEntity(){
             

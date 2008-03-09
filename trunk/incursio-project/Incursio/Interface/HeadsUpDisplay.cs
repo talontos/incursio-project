@@ -11,6 +11,9 @@ namespace Incursio.Classes
     {
         //Texture2D containing the utility bar.
         Texture2D utilityBar; 
+
+        //Texture2D containing the resource bar
+        Texture2D resourceBar;
         
         //portraits
         Texture2D lightInfantryPortrait;
@@ -29,7 +32,7 @@ namespace Incursio.Classes
         /// loadHeadsUpDisplay loads the HUD content into the game.  from here it can be displayed on the screen.
         /// note:  the HUD will only be displayed when the gamestate is in scenario play.
         /// </summary>
-        public void loadHeadsUpDisplay(Texture2D bar, Texture2D lightInfantry, Texture2D archer, Texture2D infIcon, Texture2D archIcon)
+        public void loadHeadsUpDisplay(Texture2D bar, Texture2D lightInfantry, Texture2D archer, Texture2D infIcon, Texture2D archIcon, Texture2D resourceBar)
         {
             // Load the images for the UI
             utilityBar = bar;
@@ -39,6 +42,7 @@ namespace Incursio.Classes
             archerIcon = archIcon;
             barX = 0;
             numUnits = 0;
+            this.resourceBar = resourceBar;
         }
 
         public List<Unit> update(Cursor cursor, List<Unit> selectedUnits, int numUnitsSelected)
@@ -46,7 +50,7 @@ namespace Incursio.Classes
 
             if (numUnitsSelected > 1)
             {
-                if (cursor.getIsPressed() && cursor.getPos().X >= 383 && cursor.getPos().X <= 760 && cursor.getPos().Y >= 638 && cursor.getPos().Y <= 733)
+                if (cursor.getIsLeftPressed() && cursor.getPos().X >= 383 && cursor.getPos().X <= 760 && cursor.getPos().Y >= 638 && cursor.getPos().Y <= 733)
                 {
                     this.barX = (int)((cursor.getPos().X - 383) / 63);
                     if (cursor.getPos().Y - 686 > 0)
@@ -77,17 +81,18 @@ namespace Incursio.Classes
         /// <param name="spriteBatch"></param>
         public void draw(SpriteBatch spriteBatch, int height, List<Unit> selectedUnits, SpriteFont font, int numUnitsSelected)
         {
-            // draw our images
+            // draw the bars
             spriteBatch.Draw(utilityBar, new Rectangle(0, height - utilityBar.Height, utilityBar.Width, utilityBar.Height), Color.White);
+            spriteBatch.Draw(resourceBar, new Rectangle(1024 - resourceBar.Width, 0, resourceBar.Width, resourceBar.Height), Color.White);
 
             //for the selected unit portrait
             if (numUnitsSelected != 0)
             {
-                if (selectedUnits[0].getType().Equals("Light Infantry"))
+                if (selectedUnits[0].getType() == State.EntityName.LightInfantry)
                 {
                     spriteBatch.Draw(lightInfantryPortrait, new Rectangle(241, height - 129, lightInfantryPortrait.Width, lightInfantryPortrait.Height), Color.White);
                 }
-                else if (selectedUnits[0].getType().Equals("Archer"))
+                else if (selectedUnits[0].getType() == State.EntityName.Archer)
                 {
                     spriteBatch.Draw(archerPortrait, new Rectangle(241, height - 129, archerPortrait.Width, archerPortrait.Height), Color.White);
                 }
