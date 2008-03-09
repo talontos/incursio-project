@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\utilityBarUnderlay.xnb</Output>
-      <Time>2008-02-22T11:23:01.9135187-05:00</Time>
+      <Time>2008-03-08T12:00:37.434-05:00</Time>
     </Item>
     <Item>
       <Source>Cursor.png</Source>
@@ -197,7 +197,16 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\healthBar.xnb</Output>
-      <Time>2008-03-03T10:35:54.828125-05:00</Time>
+      <Time>2008-03-09T12:11:22.543375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ResourceBarUnderlay.png</Source>
+      <Name>resourceBarUnderlay</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resourceBarUnderlay.xnb</Output>
+      <Time>2008-03-08T11:32:21.480875-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

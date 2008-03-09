@@ -46,7 +46,7 @@ namespace Incursio.Interface
 
         public void Update(Cursor cursor, SpriteBatch spriteBatch)
         {
-            if (cursor.getPos().X >= position.X && cursor.getPos().X <= position.X + passive.Width && cursor.getPos().Y >= position.Y && cursor.getPos().Y <= position.Y + passive.Height && cursor.getIsPressed())
+            if (cursor.getPos().X >= position.X && cursor.getPos().X <= position.X + passive.Width && cursor.getPos().Y >= position.Y && cursor.getPos().Y <= position.Y + passive.Height && cursor.getIsLeftPressed())
             {
                 isPressed = true;
                 isFocus = true;

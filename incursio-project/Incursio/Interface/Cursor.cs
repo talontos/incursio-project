@@ -14,14 +14,16 @@ namespace Incursio.Classes
         private Texture2D pressed;                  // texture of the mouse if pressed
         private MouseState mouseState;
         private MouseState previousState;
-        private bool isPressed;                     // tells us whether the mouse is pressed or not
+        private bool isLeftPressed;                     // tells us whether the mouse is pressed or not
+        private bool isRightPressed;
 
         public Cursor(Vector2 pos, Texture2D pass, Texture2D press)
         {
             this.pos = pos;
             this.passive = pass;
             this.pressed = press;
-            this.isPressed = false;
+            this.isLeftPressed = false;
+            this.isRightPressed = false;
         }
 
         public void Update()
@@ -31,23 +33,32 @@ namespace Incursio.Classes
             this.pos.X = mouseState.X;
             this.pos.Y = mouseState.Y;
 
-            if (mouseState.LeftButton == ButtonState.Pressed && this.isPressed == false)
+            if (mouseState.LeftButton == ButtonState.Pressed && this.isLeftPressed == false)
             {
-                this.isPressed = true;
+                this.isLeftPressed = true;
             }
-            else if (mouseState.LeftButton == ButtonState.Released && this.isPressed == true)
+            else if (mouseState.LeftButton == ButtonState.Released && this.isLeftPressed == true)
             {
-                this.isPressed = false;
+                this.isLeftPressed = false;
+            }
+
+            if (mouseState.RightButton == ButtonState.Pressed && this.isRightPressed == false)
+            {
+                this.isRightPressed = true;
+            }
+            else if (mouseState.RightButton == ButtonState.Released && this.isRightPressed == true)
+            {
+                this.isRightPressed = false;
             }
         }
 
         public void Draw(SpriteBatch batch)
         {
-            if (this.isPressed == false)
+            if (this.isLeftPressed == false && this.isRightPressed == false)
             {
                 batch.Draw(this.passive, this.pos, Color.White);
             }
-            else if(this.isPressed == true)
+            else if(this.isLeftPressed == true || this.isRightPressed == true)
             {
                 batch.Draw(this.pressed, this.pos, Color.White);
             }
@@ -63,9 +74,14 @@ namespace Incursio.Classes
             return mouseState;
         }
 
-        public bool getIsPressed()
+        public bool getIsLeftPressed()
         {
-            return isPressed;
+            return isLeftPressed;
+        }
+
+        public bool getIsRightPressed()
+        {
+            return isRightPressed;
         }
 
         public MouseState getPreviousState(){

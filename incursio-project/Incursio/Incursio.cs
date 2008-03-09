@@ -55,7 +55,7 @@ namespace Incursio
 
         //map initialization
         BaseMapEntity tex1;
-        public MapBase map1;
+        public MapBase currentMap;
 
         //game information
         State.GameState currentState = State.GameState.Initializing;
@@ -90,17 +90,21 @@ namespace Incursio
 
             //NOTE: the map should be instantiated before units
             //TODO: test map, DELETE THESE LINES
-            map1 = new MapBase(2048, 1024, 1024, 768);
+            currentMap = new MapBase(2048, 1024, 1024, 768);
             
             //testing unit creation/placement/moving///
             LightInfantryUnit infUnit1 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
             LightInfantryUnit infUnit2 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
-            LightInfantryUnit infUnit3 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
+            LightInfantryUnit infUnit3 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
             //infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
-            infUnit1.setLocation(new Coordinate(500, 500));
+            infUnit1.setLocation(new Coordinate(300, 300));
             infUnit2.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
-            infUnit3.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
+            infUnit3.setLocation(new Coordinate(500, 500)); //for ease of testing
+            //infUnit3.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
+            
             infUnit1.setHealth(80);
+            infUnit2.setHealth(80);
+            infUnit3.setHealth(50);
 
             /*
             infUnit1.move(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
@@ -161,7 +165,8 @@ namespace Incursio
 
             // load the HUD texture 
             hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"), Content.Load<Texture2D>(@"lightInfantryPortrait"), 
-                Content.Load<Texture2D>(@"archerPortrait"), Content.Load<Texture2D>(@"infantryIcon"), Content.Load<Texture2D>(@"archerIcon"));
+                Content.Load<Texture2D>(@"archerPortrait"), Content.Load<Texture2D>(@"infantryIcon"), Content.Load<Texture2D>(@"archerIcon"), 
+                Content.Load<Texture2D>(@"resourceBarUnderlay"));
 
             // load paused game menu components
             gameMenuButton = new Button(new Vector2(465, 738), Content.Load<Texture2D>(@"gameMenuButton"), Content.Load<Texture2D>(@"gameMenuButtonPressed"));
@@ -178,16 +183,16 @@ namespace Incursio
             {
                 for(int i = 0; i < 64; i++)
                 {
-                    map1.addMapEntity(tex1, i, j);
+                    currentMap.addMapEntity(tex1, i, j);
                 }
             }
 
             tex1 = new BaseMapEntity(Content.Load<Texture2D>(@"barrel"));
-            map1.addMapEntity(tex1, 5, 6);
-            map1.addMapEntity(tex1, 16, 2);
-            map1.addMapEntity(tex1, 60, 21);
-            map1.addMapEntity(tex1, 2, 19);
-            map1.addMapEntity(tex1, 39, 60);
+            currentMap.addMapEntity(tex1, 5, 6);
+            currentMap.addMapEntity(tex1, 16, 2);
+            currentMap.addMapEntity(tex1, 60, 21);
+            currentMap.addMapEntity(tex1, 2, 19);
+            currentMap.addMapEntity(tex1, 39, 60);
 
             //load unit textures
             lightInfantryUnitTexture = Content.Load<Texture2D>(@"infantryUnit");
@@ -276,10 +281,10 @@ namespace Incursio
                     {
                         e.Update(gameTime);
                     });
-
+                    
                     //LEFT BUTTON state has changed
                     if(cursor.getMouseState().LeftButton != cursor.getPreviousState().LeftButton){
-                        if(cursor.getIsPressed()){
+                        if(cursor.getIsLeftPressed()){
                             bool done = false;
 
                             //CLICKING ENTITY?
@@ -287,18 +292,10 @@ namespace Incursio
                             entityBank.ForEach(delegate(BaseGameEntity e)
                             {
                                 if(e.visible){ //only check visible ones so we don't waste time
-                                    Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, map1.getTileWidth(), map1.getTileHeight());
+                                    Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
                                     if(unit.Contains( new Point( Convert.ToInt32(point.X), Convert.ToInt32(point.Y)) ) ){
 
-                                        //NOW, if unit is enemy, selected units attack!
-                                        if(e.getPlayer() == State.PlayerId.COMPUTER){
-                                            selectedUnits.ForEach(delegate(Unit u)
-                                            {
-                                                u.attack(e);
-                                            });
-                                        }
-
-                                        else if(selectedUnits.Contains(e as Unit)){
+                                        if(selectedUnits.Contains(e as Unit)){
                                             selectedUnits.Remove(e as Unit);
                                             numUnitsSelected--;
                                         }
@@ -312,16 +309,50 @@ namespace Incursio
                                     }
                                 }
                             });
-
-                            //NOT ENTITY, DO I GIVE MOVE ORDER?
-                            if(!done && numUnitsSelected > 0){
-                                selectedUnits.ForEach(delegate(Unit u)
-                                {
-                                    u.move( new Coordinate(Convert.ToInt32(point.X), Convert.ToInt32(point.Y)), map1);
-                                });
-                            }
                         }
                     }//end left button state change
+
+                    //RIGHT BUTTON state has changed
+                    if (cursor.getMouseState().RightButton != cursor.getPreviousState().RightButton)
+                    {
+                        bool done = false;
+                        if (cursor.getIsRightPressed())
+                        {
+                            //clicking entity
+                            entityBank.ForEach(delegate(BaseGameEntity e)
+                            {
+                                if (e.visible)
+                                { //only check visible ones so we don't waste time
+                                    Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+                                    if (unit.Contains(new Point(Convert.ToInt32(cursor.getPos().X), Convert.ToInt32(cursor.getPos().Y))))
+                                    {
+                                        //NOW, if unit is enemy, selected units attack!
+                                        if (e.getPlayer() == State.PlayerId.COMPUTER)
+                                        {
+                                            selectedUnits.ForEach(delegate(Unit u)
+                                            {
+                                                u.attack(e);
+                                            });
+                                        }
+                                    }
+                                }
+                            });
+
+                            //NOT ENTITY, SO MOVE SELECTED UNITS
+                            if (!done && numUnitsSelected > 0)
+                            {
+                                selectedUnits.ForEach(delegate(Unit u)
+                                {
+                                    if (u.getPlayer() == State.PlayerId.HUMAN)
+                                    {
+                                        u.move(new Coordinate(Convert.ToInt32(cursor.getPos().X), Convert.ToInt32(cursor.getPos().Y)), currentMap);
+                                    }
+                                });
+                            }
+
+                            done = true;
+                        }
+                    }
 
                     for(int i = 0; i < keysPressed.Length; i++){
                         switch(keysPressed[i]){
@@ -337,7 +368,7 @@ namespace Incursio
                         }
                     }
 
-                    map1.update(keysPressed, 1024, 768);
+                    currentMap.update(keysPressed, 1024, 768);
                     
                     //listener for menu button
                     gameMenuButton.Update(cursor, spriteBatch);
@@ -431,7 +462,7 @@ namespace Incursio
 
                 case (State.GameState.InPlay):
                     //draw the map
-                    map1.draw(spriteBatch, cursor);
+                    currentMap.draw(spriteBatch, cursor);
 
                     //draw units
                     drawEntity();
@@ -513,17 +544,28 @@ namespace Incursio
             //draw all visible units
             entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (map1.isOnScreen(e.getLocation()))
+                if (currentMap.isOnScreen(e.getLocation()))
                 {
                     if (e.getType() == State.EntityName.LightInfantry)
                     {
                         e.visible = true;
 
-                        onScreen = map1.positionOnScreen(e.getLocation());
+                        onScreen = currentMap.positionOnScreen(e.getLocation());
+                        Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
 
-                        spriteBatch.Draw(this.lightInfantryUnitTexture,
-                            new Rectangle(onScreen.x, onScreen.y, this.lightInfantryUnitTexture.Width, this.lightInfantryUnitTexture.Height), 
-                            new Color(250, 250, 250, 255));
+                        //temporary conditional to see if units are really attacking
+                        if ((e as Unit).getCurrentState() == State.UnitState.Attacking)
+                        {
+                            spriteBatch.Draw(this.lightInfantryUnitTexture,
+                                new Rectangle(onScreen.x, onScreen.y, this.lightInfantryUnitTexture.Width, this.lightInfantryUnitTexture.Height),
+                                Color.Red);
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(this.lightInfantryUnitTexture,
+                                new Rectangle(onScreen.x, onScreen.y, this.lightInfantryUnitTexture.Width, this.lightInfantryUnitTexture.Height),
+                                Color.White);
+                        }
                         
                     }
                     else
@@ -535,8 +577,8 @@ namespace Incursio
             //show selection overlay on all visible selected units
             selectedUnits.ForEach(delegate(Unit u)
             {
-                if(map1.isOnScreen(u.getLocation())){
-                    onScreen = map1.positionOnScreen(u.getLocation());
+                if(currentMap.isOnScreen(u.getLocation())){
+                    onScreen = currentMap.positionOnScreen(u.getLocation());
 
 
                     healthRatio = (float)u.getHealth() / u.getMaxHealth();
@@ -545,9 +587,19 @@ namespace Incursio
                         new Rectangle(onScreen.x, onScreen.y, this.selectedUnitOverlayTexture.Width, this.selectedUnitOverlayTexture.Height),
                         Color.White);
 
-                    spriteBatch.Draw(this.healthRatioTexture,
-                        new Rectangle(onScreen.x + (int)(this.selectedUnitOverlayTexture.Width * healthBarTypicalStartWidth), onScreen.y + (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalStartHeight), (int)((this.selectedUnitOverlayTexture.Width * healthBarTypicalWidth) * healthRatio) , (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalHeight)),
-                        Color.White);
+                    if (u.getPlayer() == State.PlayerId.HUMAN)
+                    {
+                        spriteBatch.Draw(this.healthRatioTexture,
+                            new Rectangle(onScreen.x + (int)(this.selectedUnitOverlayTexture.Width * healthBarTypicalStartWidth), onScreen.y + (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalStartHeight), (int)((this.selectedUnitOverlayTexture.Width * healthBarTypicalWidth) * healthRatio), (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalHeight)),
+                            Color.Lime);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(this.healthRatioTexture,
+                            new Rectangle(onScreen.x + (int)(this.selectedUnitOverlayTexture.Width * healthBarTypicalStartWidth), onScreen.y + (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalStartHeight), (int)((this.selectedUnitOverlayTexture.Width * healthBarTypicalWidth) * healthRatio), (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalHeight)),
+                            Color.Red);
+                    }
+                   
                 }
             });
         }

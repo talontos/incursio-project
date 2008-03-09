@@ -141,9 +141,9 @@ namespace Incursio.Classes
         //Getters & Setters
         public override void setLocation(Coordinate coords)
         {
-            Incursio.getInstance().map1.setSingleCellOccupancy(location.x, location.y, false);
+            Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, false);
             base.setLocation(coords);
-            Incursio.getInstance().map1.setSingleCellOccupancy(location.x, location.y, true);
+            Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, true);
         }
 
         public long getDamage(){
@@ -204,21 +204,21 @@ namespace Incursio.Classes
             int ix = Convert.ToInt32(x2);
             int iy = Convert.ToInt32(y2);
 
-            if(Incursio.getInstance().map1.getCellOccupancy(ix, iy)){
+            if(Incursio.getInstance().currentMap.getCellOccupancy(ix, iy)){
                 //cell is occupied, we can't go there.
                 this.currentState = State.UnitState.Idle;
                 return;
             }
 
             //open up our previous occupancy
-            Incursio.getInstance().map1.setSingleCellOccupancy(this.location.x, this.location.y, false);
+            Incursio.getInstance().currentMap.setSingleCellOccupancy(this.location.x, this.location.y, false);
 
             //our final location
             this.location.x = location.x + ix;
             this.location.y = location.y + iy;
 
             //set our current occupancy
-            Incursio.getInstance().map1.setSingleCellOccupancy(this.location.x, this.location.y, true);
+            Incursio.getInstance().currentMap.setSingleCellOccupancy(this.location.x, this.location.y, true);
 
             //If destination is within our bound, go idle
             if ( location.x <= (destination.x + DebugUtil.UnitStopMoveRange) && location.y <= (destination.y + DebugUtil.UnitStopMoveRange) &&
