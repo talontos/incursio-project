@@ -14,6 +14,7 @@ namespace Incursio.Classes
         protected int attackRange = 0;
         protected State.UnitState currentState = State.UnitState.Idle;
         protected MapBase map;
+        protected bool isClose = false;
 
         public Coordinate destination = null;
         public BaseGameEntity target = null;
@@ -28,48 +29,100 @@ namespace Incursio.Classes
             if (health <= 0)
                 die();
 
-            //check state and act accordingly
-            switch(this.currentState){
+            //only perform actions when we are actively playing a map
+            if (Incursio.getInstance().currentState == State.GameState.InPlay)
+            {
+                //check state and act accordingly
+                switch (this.currentState)
+                {
 
-                ///////////////////////////////
-                case State.UnitState.Attacking:
-                    this.destination = this.target.getLocation();
+                    ///////////////////////////////
+                    case State.UnitState.Attacking:
+                        this.destination = this.target.getLocation();
 
-                    //if target is in range, attack.  otherwise move toward enemy
-                    if (Math.Sqrt((destination.x - location.x) ^ 2 + (destination.y - location.y) ^ 2) <= attackRange)
-                    {
-                        //attack!!!
-                        attackTarget();
+                        //if target is in range, attack.  otherwise move toward enemy
+                        if (Math.Sqrt((destination.x - location.x) ^ 2 + (destination.y - location.y) ^ 2) <= attackRange)
+                        {
+                            //attack!!!
+                            attackTarget();
+                            break;
+                        }
+                        else recalculateLocation();
                         break;
-                    }
-                    else recalculateLocation();
-                    break;
 
-                ///////////////////////////////
-                case State.UnitState.Moving:
+                    ///////////////////////////////
+                    case State.UnitState.Moving:
 
-                    if (this.destination == null)
-                        this.currentState = State.UnitState.Idle;
-                    else{
-                        recalculateLocation();
-                    }
+                        if (this.destination == null)
+                            this.currentState = State.UnitState.Idle;
+                        else
+                        {
+                            updateMovement();
+                            //recalculateLocation();
+                        }
 
-                    break;
+                        break;
 
-                ///////////////////////////////
-                case State.UnitState.Wandering:
-                    this.move(new Coordinate(Incursio.rand.Next(0, 1024), Incursio.rand.Next(0, 768)));
-                    break;
-                
-                ///////////////////////////////
-                case State.UnitState.Idle:
-                    //TODO: change; this is temporary
-                    //this.currentState = State.UnitState.Wandering;
-                    break;
+                    ///////////////////////////////
+                    case State.UnitState.Wandering:
+                        this.move(new Coordinate(Incursio.rand.Next(0, 1024), Incursio.rand.Next(0, 768)));
+                        break;
 
-                ///////////////////////////////
+                    ///////////////////////////////
+                    case State.UnitState.Idle:
+                        //TODO: change; this is temporary
+                        //this.currentState = State.UnitState.Wandering;
+                        break;
 
-                default: break;
+                    ///////////////////////////////
+
+                    default: break;
+                }
+            }
+        }
+
+        public void updateMovement()
+        {
+            float xMinimumThreshold = 0.05F;
+            float yMinimumThreshold = 0.05F;
+
+            //get the direction to the target
+            Vector2 direction = new Vector2(destination.x - location.x, destination.y - location.y);
+
+            if (direction.Length() < speed)
+            {
+                destination = location;
+            }
+            else
+            {
+                float xDirection = Vector2.Normalize(direction).X;
+                float yDirection = Vector2.Normalize(direction).Y;
+
+                if (xDirection > xMinimumThreshold)
+                {
+                    location.x += speed;
+                }
+                else if (xDirection < -xMinimumThreshold)
+                {
+                    location.x += -1 * speed;
+                }
+                else
+                {
+                    location.x = destination.x;
+                }
+
+                if (yDirection > yMinimumThreshold)
+                {
+                    location.y += speed;
+                }
+                else if (yDirection < -yMinimumThreshold)
+                {
+                    location.y += -1 * speed;
+                }
+                else
+                {
+                    location.y = destination.y;
+                }
             }
         }
 
@@ -221,9 +274,64 @@ namespace Incursio.Classes
             Incursio.getInstance().currentMap.setSingleCellOccupancy(this.location.x, this.location.y, true);
 
             //If destination is within our bound, go idle
-            if ( location.x <= (destination.x + DebugUtil.UnitStopMoveRange) && location.y <= (destination.y + DebugUtil.UnitStopMoveRange) &&
-                 location.x >= (destination.x - DebugUtil.UnitStopMoveRange) && location.y >= (destination.y - DebugUtil.UnitStopMoveRange))
-                this.currentState = State.UnitState.Idle;
+            if (location.x <= (destination.x + DebugUtil.UnitStopMoveRange) && location.y <= (destination.y + DebugUtil.UnitStopMoveRange) &&
+                 location.x >= (destination.x - DebugUtil.UnitStopMoveRange) && location.y >= (destination.y - DebugUtil.UnitStopMoveRange) &&
+                !isClose)
+            {
+                isClose = true;
+            }
+
+            if (isClose)
+            {
+                if (this.location.x == this.destination.x && this.location.y == this.destination.y)
+                {
+                    isClose = false;
+                    this.currentState = State.UnitState.Idle;
+                }
+                else
+                {
+                    if (this.location.x - this.destination.x <= this.speed)
+                    {
+                        this.location.x = this.destination.x;
+                    }
+                    else if (this.destination.x - this.location.x <= this.speed)
+                    {
+                        this.location.x = this.destination.x;
+                    }
+                    else
+                    {
+                        if (this.location.x - this.destination.x < 0)
+                        {
+                            this.location.x = location.x - this.speed;
+                        }
+                        else
+                        {
+                            this.location.x = location.x + this.speed;
+                        }
+                    }
+
+                    if (this.location.y - this.destination.y <= this.speed)
+                    {
+                        this.location.y = this.destination.y;
+                    }
+                    else if (this.destination.y - this.location.y <= this.speed)
+                    {
+                        this.location.y = this.destination.y;
+                    }
+                    else
+                    {
+                        if (this.location.y - this.destination.y < 0)
+                        {
+                            this.location.y = location.y - this.speed;
+                        }
+                        else
+                        {
+                            this.location.y = location.y + this.speed;
+                        }
+                    }
+                }  
+            }
+                
 
             //If unit is now on the destination tile, go idle
             //NOTE: both this conditional statement and the one above it are the same, want to use the simpler statement?

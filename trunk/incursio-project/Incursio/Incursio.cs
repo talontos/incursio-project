@@ -58,7 +58,7 @@ namespace Incursio
         public MapBase currentMap;
 
         //game information
-        State.GameState currentState = State.GameState.Initializing;
+        public State.GameState currentState = State.GameState.Initializing;
 
         //interface components
         SpriteFont font;
@@ -72,6 +72,9 @@ namespace Incursio
         Keys[] keysPressed;
         Button newGameButton;
         Button exitGameButton;
+        Texture2D clickDestination;
+        int clickDestinationFader = 0;
+        Coordinate cursorAtClick;
 
         public Incursio(){
 
@@ -162,6 +165,7 @@ namespace Incursio
 
             // create cursor
             cursor = new Cursor(new Vector2(0, 0), Content.Load<Texture2D>(@"cursor"), Content.Load<Texture2D>(@"cursor_click"));
+            clickDestination = Content.Load<Texture2D>(@"destinationClick");
 
             // load the HUD texture 
             hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"), Content.Load<Texture2D>(@"lightInfantryPortrait"), 
@@ -467,6 +471,12 @@ namespace Incursio
                     //draw units
                     drawEntity();
 
+                    if (cursor.getIsRightPressed())
+                    {
+                        cursorAtClick = new Coordinate((int)cursor.getPos().X, (int)cursor.getPos().Y);
+                        mouseClickDestination();
+                    }
+
                     //draw the HUD
                     hud.draw(spriteBatch, Window.ClientBounds.Height, selectedUnits, font, numUnitsSelected);
 
@@ -557,13 +567,13 @@ namespace Incursio
                         if ((e as Unit).getCurrentState() == State.UnitState.Attacking)
                         {
                             spriteBatch.Draw(this.lightInfantryUnitTexture,
-                                new Rectangle(onScreen.x, onScreen.y, this.lightInfantryUnitTexture.Width, this.lightInfantryUnitTexture.Height),
+                                new Rectangle(onScreen.x - (this.lightInfantryUnitTexture.Width / 2), onScreen.y - (int)(this.lightInfantryUnitTexture.Height * 0.80), this.lightInfantryUnitTexture.Width, this.lightInfantryUnitTexture.Height),
                                 Color.Red);
                         }
                         else
                         {
                             spriteBatch.Draw(this.lightInfantryUnitTexture,
-                                new Rectangle(onScreen.x, onScreen.y, this.lightInfantryUnitTexture.Width, this.lightInfantryUnitTexture.Height),
+                                new Rectangle(onScreen.x - (this.lightInfantryUnitTexture.Width / 2), onScreen.y - (int)(this.lightInfantryUnitTexture.Height * 0.80), this.lightInfantryUnitTexture.Width, this.lightInfantryUnitTexture.Height),
                                 Color.White);
                         }
                         
@@ -583,20 +593,30 @@ namespace Incursio
 
                     healthRatio = (float)u.getHealth() / u.getMaxHealth();
 
+                    int xOffSet = 0;
+                    int yOffSet = 0;
+
+                    //find out what the unit is, and configure the offset for each different type
+                    if (u.getType() == State.EntityName.LightInfantry)
+                    {
+                        xOffSet = (int)(this.lightInfantryUnitTexture.Width / 2);
+                        yOffSet = (int)(this.lightInfantryUnitTexture.Height * 0.80);
+                    }
+
                     spriteBatch.Draw(this.selectedUnitOverlayTexture,
-                        new Rectangle(onScreen.x, onScreen.y, this.selectedUnitOverlayTexture.Width, this.selectedUnitOverlayTexture.Height),
+                        new Rectangle(onScreen.x - xOffSet, onScreen.y - yOffSet, this.selectedUnitOverlayTexture.Width, this.selectedUnitOverlayTexture.Height),
                         Color.White);
 
                     if (u.getPlayer() == State.PlayerId.HUMAN)
                     {
                         spriteBatch.Draw(this.healthRatioTexture,
-                            new Rectangle(onScreen.x + (int)(this.selectedUnitOverlayTexture.Width * healthBarTypicalStartWidth), onScreen.y + (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalStartHeight), (int)((this.selectedUnitOverlayTexture.Width * healthBarTypicalWidth) * healthRatio), (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalHeight)),
+                            new Rectangle(onScreen.x - xOffSet + (int)(this.selectedUnitOverlayTexture.Width * healthBarTypicalStartWidth), onScreen.y - yOffSet + (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalStartHeight), (int)((this.selectedUnitOverlayTexture.Width * healthBarTypicalWidth) * healthRatio), (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalHeight)),
                             Color.Lime);
                     }
                     else
                     {
                         spriteBatch.Draw(this.healthRatioTexture,
-                            new Rectangle(onScreen.x + (int)(this.selectedUnitOverlayTexture.Width * healthBarTypicalStartWidth), onScreen.y + (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalStartHeight), (int)((this.selectedUnitOverlayTexture.Width * healthBarTypicalWidth) * healthRatio), (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalHeight)),
+                            new Rectangle(onScreen.x - xOffSet + (int)(this.selectedUnitOverlayTexture.Width * healthBarTypicalStartWidth), onScreen.y - yOffSet + (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalStartHeight), (int)((this.selectedUnitOverlayTexture.Width * healthBarTypicalWidth) * healthRatio), (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalHeight)),
                             Color.Red);
                     }
                    
@@ -608,6 +628,28 @@ namespace Incursio
         public void selectEntity()
         {
             
+        }
+
+        public void mouseClickDestination()
+        {
+            bool fadeOut = false;
+
+            if (!fadeOut)
+            {
+                spriteBatch.Draw(clickDestination, new Rectangle(cursorAtClick.x - (clickDestination.Width / 2), cursorAtClick.y - (int)(clickDestination.Height * 0.5626), clickDestination.Width, clickDestination.Height),
+                    new Color(255, 255, 255, (byte)(clickDestinationFader + 26)));
+
+                if (clickDestinationFader > 225)
+                {
+                    fadeOut = true;
+                }
+            }
+            else
+            {
+                spriteBatch.Draw(clickDestination, new Rectangle(cursorAtClick.x - (clickDestination.Width / 2), cursorAtClick.y - (int)(clickDestination.Height * 0.5626), clickDestination.Width, clickDestination.Height),
+                    new Color(255, 255, 255, (byte)(clickDestinationFader - 26)));
+            }
+
         }
     }
 }
