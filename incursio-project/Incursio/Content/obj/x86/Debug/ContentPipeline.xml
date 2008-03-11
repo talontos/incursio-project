@@ -208,6 +208,15 @@
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resourceBarUnderlay.xnb</Output>
       <Time>2008-03-08T11:32:21.480875-05:00</Time>
     </Item>
+    <Item>
+      <Source>DestinationClick.png</Source>
+      <Name>destinationClick</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\destinationClick.xnb</Output>
+      <Time>2008-03-11T11:45:13.668375-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
