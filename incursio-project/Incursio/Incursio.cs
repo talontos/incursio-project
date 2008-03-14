@@ -54,7 +54,6 @@ namespace Incursio
         Texture2D lightInfantryUnitTexture;
 
         //map initialization
-        BaseMapEntity tex1;
         public MapBase currentMap;
 
         //game information
@@ -94,6 +93,7 @@ namespace Incursio
             //NOTE: the map should be instantiated before units
             //TODO: test map, DELETE THESE LINES
             currentMap = new MapBase(4096, 3072, 1024, 768);
+
             
             //testing unit creation/placement/moving///
             LightInfantryUnit infUnit1 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
@@ -181,23 +181,8 @@ namespace Incursio
             newGameButton = new Button(new Vector2(400, 638), Content.Load<Texture2D>(@"newGameButton"), Content.Load<Texture2D>(@"newGamePressed"));
             exitGameButton = new Button(new Vector2(524, 638), Content.Load<Texture2D>(@"exitGameButton"), Content.Load<Texture2D>(@"exitGameButtonPressed"));
 
-            //load testmap texture
-            //tex1 = new BaseMapEntity(Content.Load<Texture2D>(@"map1"));
-            tex1 = new BaseMapEntity(Content.Load<Texture2D>(@"grass"));
-            for(int j = 0; j < 32; j++)
-            {
-                for(int i = 0; i < 64; i++)
-                {
-                    currentMap.addMapEntity(tex1, i, j);
-                }
-            }
-
-            tex1 = new BaseMapEntity(Content.Load<Texture2D>(@"barrel"));
-            currentMap.addMapEntity(tex1, 5, 6);
-            currentMap.addMapEntity(tex1, 16, 2);
-            currentMap.addMapEntity(tex1, 60, 21);
-            currentMap.addMapEntity(tex1, 2, 19);
-            currentMap.addMapEntity(tex1, 39, 60);
+            //load maps 
+            currentMap.setMapImage(Content.Load<Texture2D>(@"map1")); 
 
             //load unit textures
             lightInfantryUnitTexture = Content.Load<Texture2D>(@"infantryUnit");
