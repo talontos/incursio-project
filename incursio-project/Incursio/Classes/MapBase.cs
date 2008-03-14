@@ -109,7 +109,7 @@ namespace Incursio.Classes
             if (xPos >= 0 && xPos < this.width && yPos >= 0 && yPos < this.height)
             {
                 this.tileGrid[xPos, yPos] = entity;
-                this.occupancyGrid[xPos, yPos] = false;
+                this.occupancyGrid[xPos, yPos] = entity.passable;
             }
         }
 
@@ -148,6 +148,32 @@ namespace Incursio.Classes
             }
         }
 
+        /// <summary>
+        /// Compares two cells, using 2 pixel-coordinates.
+        /// If cells are the same, returns true (can move, duh).
+        /// If cells are different, returns true if cell containing
+        ///     (x2, y2) is passable, false otherwise
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <returns></returns>
+        public bool requestMove(int x1, int y1, int x2, int y2){
+            int a, b, c, d;
+            
+            this.translatePixelToMapCell(x1, y1, out a, out b);
+            this.translatePixelToMapCell(x2, y2, out c, out d);
+
+            if(a == c && b == d){
+                //same cell, is ok
+                return true;
+            }
+            else{
+                return this.occupancyGrid[c, d];
+            }
+        }
+
         public bool getCellOccupancy(int pixX, int pixY){
             int x, y;
             this.translatePixelToMapCell(pixX, pixY, out x, out y);
@@ -183,6 +209,15 @@ namespace Incursio.Classes
         public int getMinimumY()
         {
             return minViewableY;
+        }
+
+        public void printOccupancyGrid(){
+            for(int x = 0; x < this.occupancyGrid.GetLength(0); x++){
+                for(int y = 0; y < this.occupancyGrid.GetLength(1); y++){
+                    Console.Write(this.occupancyGrid[x, y]);
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
