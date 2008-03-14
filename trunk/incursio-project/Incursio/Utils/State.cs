@@ -59,27 +59,27 @@ namespace Incursio
             //...                       levels 1-X?
         }
 
-        public enum CameraStateS
+        public enum Direction
         {
                 //*Zooms?
 
             Still,      //Default, camera is not moving
 
-            Move_North,
+            North,
 
-            Move_Northeast,
+            Northeast,
 
-            Move_East,
+            East,
 
-            Move_Southeast,
+            Southeast,
 
-            Move_South,
+            South,
 
-            Move_Southwest,
+            Southwest,
 
-            Move_West,
+            West,
 
-            Move_Northwest,
+            Northwest,
         }
 
         public enum EntityName

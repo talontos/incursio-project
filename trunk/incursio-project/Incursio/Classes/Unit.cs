@@ -8,11 +8,12 @@ namespace Incursio.Classes
 {
     public class Unit : BaseGameEntity
     {
-        protected long damage = 0;
-        protected long armor = 0;
+        protected int damage = 0;
+        protected int armor = 0;
         protected int speed = 0;
         protected int attackRange = 0;
         protected State.UnitState currentState = State.UnitState.Idle;
+        protected State.Direction directionState = State.Direction.Still;
         protected MapBase map;
         protected bool isClose = false;
 
@@ -41,13 +42,7 @@ namespace Incursio.Classes
                         this.destination = this.target.getLocation();
 
                         //if target is in range, attack.  otherwise move toward enemy
-                        if (Math.Sqrt((destination.x - location.x) ^ 2 + (destination.y - location.y) ^ 2) <= attackRange)
-                        {
-                            //attack!!!
-                            attackTarget();
-                            break;
-                        }
-                        else updateMovement();
+                        attackTarget();
                         break;
 
                     ///////////////////////////////
@@ -223,7 +218,7 @@ namespace Incursio.Classes
             return this.damage;
         }
 
-        public void setDamage(long damage){
+        public void setDamage(int damage){
             this.damage = damage;
         }
 
@@ -232,7 +227,7 @@ namespace Incursio.Classes
             return this.armor;
         }
 
-        public void setArmor(long armor)
+        public void setArmor(int armor)
         {
             this.armor = armor;
         }
@@ -248,121 +243,16 @@ namespace Incursio.Classes
         }
 
         //Private helper functions//
-        private void recalculateLocation()
-        {
-            if (this.target != null)
-            {
-                //move SPEED units toward target's current location
-                this.destination = this.target.getLocation();
-            }
-
-            //TODO: condense this code so as not to declare so many variables...
-            double x2 = this.destination.x;
-            double y2 = this.destination.y;
-
-            //Atan is in radians...convert to degrees
-            double theta = (180 * Math.Atan((y2 - location.y) / (x2 - location.x))) / Math.PI;
-            if (Double.IsNaN(theta))
-                theta = 0;
-
-            //now we have the angle between our location and destination
-            //find destination
-            x2 = this.speed * Math.Cos(theta);
-            y2 = this.speed * Math.Sin(theta);
-
-            //colision detection time!
-            //if (x2,y2) is not passable, we can't go there...
-            //TODO: Colision detection
-
-            int ix = Convert.ToInt32(x2);
-            int iy = Convert.ToInt32(y2);
-
-            if(Incursio.getInstance().currentMap.getCellOccupancy(ix, iy)){
-                //cell is occupied, we can't go there.
-                this.currentState = State.UnitState.Idle;
-                return;
-            }
-
-            //open up our previous occupancy
-            Incursio.getInstance().currentMap.setSingleCellOccupancy(this.location.x, this.location.y, false);
-
-            //our final location
-            this.location.x = location.x + ix;
-            this.location.y = location.y + iy;
-
-            //set our current occupancy
-            Incursio.getInstance().currentMap.setSingleCellOccupancy(this.location.x, this.location.y, true);
-
-            //If destination is within our bound, go idle
-            if (location.x <= (destination.x + DebugUtil.UnitStopMoveRange) && location.y <= (destination.y + DebugUtil.UnitStopMoveRange) &&
-                 location.x >= (destination.x - DebugUtil.UnitStopMoveRange) && location.y >= (destination.y - DebugUtil.UnitStopMoveRange) &&
-                !isClose)
-            {
-                isClose = true;
-            }
-
-            if (isClose)
-            {
-                if (this.location.x == this.destination.x && this.location.y == this.destination.y)
-                {
-                    isClose = false;
-                    this.currentState = State.UnitState.Idle;
-                }
-                else
-                {
-                    if (this.location.x - this.destination.x <= this.speed)
-                    {
-                        this.location.x = this.destination.x;
-                    }
-                    else if (this.destination.x - this.location.x <= this.speed)
-                    {
-                        this.location.x = this.destination.x;
-                    }
-                    else
-                    {
-                        if (this.location.x - this.destination.x < 0)
-                        {
-                            this.location.x = location.x - this.speed;
-                        }
-                        else
-                        {
-                            this.location.x = location.x + this.speed;
-                        }
-                    }
-
-                    if (this.location.y - this.destination.y <= this.speed)
-                    {
-                        this.location.y = this.destination.y;
-                    }
-                    else if (this.destination.y - this.location.y <= this.speed)
-                    {
-                        this.location.y = this.destination.y;
-                    }
-                    else
-                    {
-                        if (this.location.y - this.destination.y < 0)
-                        {
-                            this.location.y = location.y - this.speed;
-                        }
-                        else
-                        {
-                            this.location.y = location.y + this.speed;
-                        }
-                    }
-                }  
-            }
-                
-
-            //If unit is now on the destination tile, go idle
-            //NOTE: both this conditional statement and the one above it are the same, want to use the simpler statement?
-            /*if (location.x / map.getTileWidth() == destination.x / map.getTileWidth() && location.y / map.getTileHeight() == destination.y / map.getTileHeight())
-            {
-                this.currentState = State.UnitState.Idle;
-            }*/
-        }
-
+        /// <summary>
+        /// If target is in range, attack it.  otherwise, move toward it.
+        /// </summary>
         protected virtual void attackTarget(){
-            //um..attack!
+            //if target is in attackRange, attack it.
+            if(Incursio.getInstance().currentMap.getCellDistance(location, target.location) <= attackRange){
+                //TODO: do some math randomizing damage?
+                target.takeDamage(this.damage);
+            }
+            else updateMovement();
         }
 
         protected virtual void die(){
@@ -373,6 +263,10 @@ namespace Incursio.Classes
             //  But do we need to remove them?
         }
 
-
+        protected virtual void updateDirectionTexture(){
+            switch(directionState){
+                //TODO: reload my texture depending on my directionState
+            }
+        }
     }
 }
