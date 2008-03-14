@@ -182,7 +182,7 @@ namespace Incursio
             exitGameButton = new Button(new Vector2(524, 638), Content.Load<Texture2D>(@"exitGameButton"), Content.Load<Texture2D>(@"exitGameButtonPressed"));
 
             //load maps 
-            currentMap.setMapImage(Content.Load<Texture2D>(@"map1")); 
+            
 
             //load unit textures
             lightInfantryUnitTexture = Content.Load<Texture2D>(@"infantryUnit");
