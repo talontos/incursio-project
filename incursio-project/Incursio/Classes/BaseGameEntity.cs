@@ -34,6 +34,11 @@ namespace Incursio.Classes
 
         }
 
+        public virtual void takeDamage(int damage){
+            //TODO: some math using my armor
+            this.health -= damage;
+        }
+
         public virtual String getTextureName(){
             return null;
         }

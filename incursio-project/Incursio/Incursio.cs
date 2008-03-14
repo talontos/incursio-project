@@ -264,6 +264,9 @@ namespace Incursio
 
                 case (State.GameState.InPlay):
 
+                    //Keypress memory
+                    bool shiftPressed = false;
+
                     selectedUnits = hud.update(cursor, selectedUnits, numUnitsSelected);
                     numUnitsSelected = hud.getNumUnits();
 
@@ -271,6 +274,24 @@ namespace Incursio
                     {
                         e.Update(gameTime);
                     });
+
+                    for (int i = 0; i < keysPressed.Length; i++)
+                    {
+                        switch (keysPressed[i])
+                        {
+                            case Keys.Escape: currentState = State.GameState.PausedPlay; break;
+
+                            case Keys.Enter://just so we can have a breakpoint whenever we want...
+                                //this.currentMap.printOccupancyGrid();
+                                break;
+
+                            case Keys.LeftShift:
+                            case Keys.RightShift:
+                                shiftPressed = true;
+                                break;
+                            default: break;
+                        }
+                    }
                     
                     //LEFT BUTTON state has changed
                     if(cursor.getMouseState().LeftButton != cursor.getPreviousState().LeftButton){
@@ -282,6 +303,7 @@ namespace Incursio
                             int selectionOffSetX = 0;
                             int selectionOffSetY = 0;
 
+                            //find who i'm clicking
                             entityBank.ForEach(delegate(BaseGameEntity e)
                             {
                                 if(e.visible){ //only check visible ones so we don't waste time
@@ -294,20 +316,46 @@ namespace Incursio
                                     Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, currentMap.getTileWidth(), currentMap.getTileHeight());
                                     if(unit.Contains( new Point( Convert.ToInt32(point.X), Convert.ToInt32(point.Y)) ) ){
 
-                                        if(selectedUnits.Contains(e as Unit)){
-                                            selectedUnits.Remove(e as Unit);
-                                            numUnitsSelected--;
-                                        }
-
-                                        else{
+                                        if(e.getPlayer() == State.PlayerId.COMPUTER){
+                                            selectedUnits = new List<Unit>();
                                             selectedUnits.Add(e as Unit);
-                                            numUnitsSelected++;
+                                            numUnitsSelected = 1;
                                         }
+                                        else{
+                                            if(numUnitsSelected == 1){
+                                                if (selectedUnits[0].getPlayer() == State.PlayerId.COMPUTER){
+                                                    selectedUnits = new List<Unit>();
+                                                    numUnitsSelected = 0;
+                                                }
+                                            }
+                                            bool newUnitIsSelected = selectedUnits.Contains(e as Unit);
+                                            if (shiftPressed){
+                                                //just add/remove new guy
+                                                if (newUnitIsSelected){
+                                                    selectedUnits.Remove(e as Unit);
+                                                    numUnitsSelected--;
+                                                }
+                                                else{
+                                                    selectedUnits.Add(e as Unit);
+                                                    numUnitsSelected++;
+                                                }
+                                            }
+                                            else{
+                                                //shift not pressed
 
+                                                selectedUnits = new List<Unit>();
+                                                selectedUnits.Add(e as Unit);
+                                                numUnitsSelected = 1;
+                                            }
+                                        }
                                         done = true;
                                     }
                                 }
                             });
+                            if(!done){   //not clicking a unit
+                                selectedUnits = new List<Unit>();
+                                numUnitsSelected = 0;
+                            }
                         }
                     }//end left button state change
 
@@ -350,21 +398,6 @@ namespace Incursio
                             }
 
                             done = true;
-                        }
-                    }
-
-                    for(int i = 0; i < keysPressed.Length; i++){
-                        switch(keysPressed[i]){
-                            case Keys.Escape:
-                                //this is tempory, as there is no other current way to unselect a unit
-                                selectedUnits.Clear();
-                                numUnitsSelected = 0;
-                                //currentState = State.GameState.PausedPlay; break;
-                                break;
-                            case Keys.Enter://just so we can have a breakpoint whenever we want...
-                                //this.currentMap.printOccupancyGrid();
-                                break;
-                            default: break;
                         }
                     }
 

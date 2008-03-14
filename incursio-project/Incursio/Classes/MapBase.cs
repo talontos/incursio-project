@@ -203,6 +203,19 @@ namespace Incursio.Classes
             this.occupancyGrid[x, y] = occupied;
         }
 
+        public int getCellDistance(Coordinate c1, Coordinate c2){
+            int a, b, c, d;
+
+            this.translatePixelToMapCell(c1.x, c1.y, out a, out b);
+            this.translatePixelToMapCell(c2.x, c2.y, out c, out d);
+
+            Vector2 v1 = new Vector2(a, b);
+            Vector2 v2 = new Vector2(c, d);
+
+            return Convert.ToInt32(Math.Abs(Vector2.Distance(v1, v2)));
+
+        }
+
         private void translatePixelToMapCell(int pixX, int pixY, out int indexX, out int indexY){
             indexX = pixX / TILE_WIDTH;
             indexY = pixY / TILE_HEIGHT;
