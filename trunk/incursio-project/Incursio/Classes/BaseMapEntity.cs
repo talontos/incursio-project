@@ -14,16 +14,10 @@ namespace Incursio.Classes
         public Coordinate location;
         public Boolean passable = true;
 
-        //graphic?
-        public Texture2D texture;
+
 
         public BaseMapEntity(){
 
-        }
-
-        public BaseMapEntity(Texture2D tex)
-        {
-            this.texture = tex;
         }
     }
 }

@@ -13,9 +13,9 @@ namespace Incursio.Classes
     public class MapBase
     {
         //member variables
+        protected Texture2D mapImage;
         protected int width;
         protected int height;
-        protected BaseMapEntity[,] tileGrid;
 
         protected bool[,] occupancyGrid;
 
@@ -45,13 +45,25 @@ namespace Incursio.Classes
         {
             this.width = width / TILE_WIDTH;
             this.height = height / TILE_HEIGHT;
-            this.tileGrid = new BaseMapEntity[width, height];
             this.occupancyGrid = new bool[width, height];
             this.minViewableX = 0;
             this.minViewableY = 0;
             this.maxViewableX = screenWidth / TILE_WIDTH;
             this.maxViewableY = screenHeight / TILE_HEIGHT;
             this.cameraMovePause = 0;
+        }
+
+        public MapBase(int width, int height, int screenWidth, int screenHeight, Texture2D image)
+        {
+            this.width = width / TILE_WIDTH;
+            this.height = height / TILE_HEIGHT;
+            this.occupancyGrid = new bool[width, height];
+            this.minViewableX = 0;
+            this.minViewableY = 0;
+            this.maxViewableX = screenWidth / TILE_WIDTH;
+            this.maxViewableY = screenHeight / TILE_HEIGHT;
+            this.cameraMovePause = 0;
+            this.mapImage = image;
 
         }
 
@@ -87,31 +99,36 @@ namespace Incursio.Classes
 
         public void draw(SpriteBatch spriteBatch, Cursor cursor)
         {
-            //ouch my performance :(
-            //is there a better way to do this?
-            int screenX = 0;
-            int screenY = 0;
+            int xStart = minViewableX * TILE_WIDTH;
+            int xEnd = maxViewableX * TILE_WIDTH;
+            int yStart = minViewableY * TILE_HEIGHT;
+            int yEnd = maxViewableY * TILE_HEIGHT;
 
-            for (int j = minViewableY; j < maxViewableY; j++)
+            if (xStart > (width - minViewableX) * TILE_WIDTH)
             {
-                screenX = 0;
-                for (int i = minViewableX; i < maxViewableX; i++)
-                {
-                    spriteBatch.Draw(tileGrid[i , j].texture, new Rectangle(screenX * TILE_WIDTH, screenY * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT), Color.White);
-                    screenX++;
-                }
-                screenY++;
+                xStart = (width * TILE_WIDTH - 1024) * TILE_WIDTH;
+                xEnd = width * TILE_WIDTH;
             }
+
+            if (yStart > (height - minViewableY) * TILE_HEIGHT)
+            {
+                yStart = (height * TILE_HEIGHT - 768) * TILE_HEIGHT;
+                yEnd = height * TILE_HEIGHT;
+            }
+
+            spriteBatch.Draw(mapImage, new Rectangle(0, 0, 1024, 768),
+                new Rectangle(xStart, yStart,
+                xEnd, yEnd), Color.White);   
         }
 
-        public void addMapEntity(BaseMapEntity entity, int xPos, int yPos)
+        /*public void addMapEntity(BaseMapEntity entity, int xPos, int yPos)
         {
             if (xPos >= 0 && xPos < this.width && yPos >= 0 && yPos < this.height)
             {
                 this.tileGrid[xPos, yPos] = entity;
                 this.occupancyGrid[xPos, yPos] = entity.passable;
             }
-        }
+        }*/
 
         /// <summary>
         /// helper method that determines if an entity at the parameter's coords is on the screen
@@ -209,6 +226,11 @@ namespace Incursio.Classes
         public int getMinimumY()
         {
             return minViewableY;
+        }
+
+        public void setMapImage(Texture2D image)
+        {
+            mapImage = image;
         }
 
         public void printOccupancyGrid(){
