@@ -241,10 +241,31 @@ namespace Incursio.Classes
             return minViewableY;
         }
 
-        public void setMapImage(Texture2D image)
+        public int getCellDistance(Coordinate c1, Coordinate c2)
         {
-            mapImage = image;
+            int a, b, c, d;
+
+            this.translatePixelToMapCell(c1.x, c1.y, out a, out b);
+            this.translatePixelToMapCell(c2.x, c2.y, out c, out d);
+
+            Vector2 v1 = new Vector2(a, b);
+            Vector2 v2 = new Vector2(c, d);
+
+            return Convert.ToInt32(Math.Abs(Vector2.Distance(v1, v2)));
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public void printOccupancyGrid(){
             for(int x = 0; x < this.occupancyGrid.GetLength(0); x++){
