@@ -47,7 +47,7 @@ namespace Incursio.Classes
                             attackTarget();
                             break;
                         }
-                        else recalculateLocation();
+                        else updateMovement();
                         break;
 
                     ///////////////////////////////
@@ -98,30 +98,48 @@ namespace Incursio.Classes
                 float xDirection = Vector2.Normalize(direction).X;
                 float yDirection = Vector2.Normalize(direction).Y;
 
+                int newX = location.x;
+                int newY = location.y;
+
                 if (xDirection > xMinimumThreshold)
                 {
-                    location.x += speed;
+                    newX += speed;
                 }
                 else if (xDirection < -xMinimumThreshold)
                 {
-                    location.x += -1 * speed;
+                    newX += -1 * speed;
                 }
                 else
                 {
-                    location.x = destination.x;
+                    newX = destination.x;
                 }
 
                 if (yDirection > yMinimumThreshold)
                 {
-                    location.y += speed;
+                    newY += speed;
                 }
                 else if (yDirection < -yMinimumThreshold)
                 {
-                    location.y += -1 * speed;
+                    newY += -1 * speed;
                 }
                 else
                 {
-                    location.y = destination.y;
+                    newY = destination.y;
+                }
+
+                if(!Incursio.getInstance().currentMap.requestMove(location.x, location.y, newX, newY)){
+                    //new point is occupied; we have to turn!
+                    this.currentState = State.UnitState.Idle;
+                }
+                else{
+                    //open up our old space
+                    Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, true);
+
+                    //move
+                    location = new Coordinate(newX, newY);
+
+                    //set occupancy
+                    Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, false);
                 }
             }
         }
@@ -194,8 +212,10 @@ namespace Incursio.Classes
         //Getters & Setters
         public override void setLocation(Coordinate coords)
         {
+            //empty our current location
             Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, false);
             base.setLocation(coords);
+            //occupy new location
             Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, true);
         }
 
