@@ -93,7 +93,7 @@ namespace Incursio
 
             //NOTE: the map should be instantiated before units
             //TODO: test map, DELETE THESE LINES
-            currentMap = new MapBase(2048, 1024, 1024, 768);
+            currentMap = new MapBase(4096, 3072, 1024, 768);
             
             //testing unit creation/placement/moving///
             LightInfantryUnit infUnit1 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
@@ -182,6 +182,7 @@ namespace Incursio
             exitGameButton = new Button(new Vector2(524, 638), Content.Load<Texture2D>(@"exitGameButton"), Content.Load<Texture2D>(@"exitGameButtonPressed"));
 
             //load testmap texture
+            //tex1 = new BaseMapEntity(Content.Load<Texture2D>(@"map1"));
             tex1 = new BaseMapEntity(Content.Load<Texture2D>(@"grass"));
             for(int j = 0; j < 32; j++)
             {
@@ -293,10 +294,19 @@ namespace Incursio
 
                             //CLICKING ENTITY?
                             Vector2 point = cursor.getPos();
+                            int selectionOffSetX = 0;
+                            int selectionOffSetY = 0;
+
                             entityBank.ForEach(delegate(BaseGameEntity e)
                             {
                                 if(e.visible){ //only check visible ones so we don't waste time
-                                    Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+                                    //adjust the selection rectangle to account for different unit sizes
+                                    if (e.getType() == State.EntityName.LightInfantry)
+                                    {
+                                        selectionOffSetX = this.lightInfantryUnitTexture.Width / 2;
+                                        selectionOffSetY = (int)(this.lightInfantryUnitTexture.Height * 0.80);
+                                    }
+                                    Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, currentMap.getTileWidth(), currentMap.getTileHeight());
                                     if(unit.Contains( new Point( Convert.ToInt32(point.X), Convert.ToInt32(point.Y)) ) ){
 
                                         if(selectedUnits.Contains(e as Unit)){
