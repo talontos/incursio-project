@@ -377,7 +377,8 @@ namespace Incursio
                                 //currentState = State.GameState.PausedPlay; break;
                                 break;
                             case Keys.Enter://just so we can have a breakpoint whenever we want...
-                                currentState = currentState; break;
+                                //this.currentMap.printOccupancyGrid();
+                                break;
                             default: break;
                         }
                     }
