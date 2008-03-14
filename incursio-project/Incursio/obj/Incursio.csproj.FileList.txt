@@ -29,3 +29,4 @@ bin\x86\Debug\Content\SelectedUnitOverlay.xnb
 bin\x86\Debug\Content\healthBar.xnb
 bin\x86\Debug\Content\resourceBarUnderlay.xnb
 bin\x86\Debug\Content\destinationClick.xnb
+bin\x86\Debug\Content\map1.xnb

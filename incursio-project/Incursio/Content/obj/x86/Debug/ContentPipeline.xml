@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\utilityBarUnderlay.xnb</Output>
-      <Time>2008-03-08T12:00:37.434-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\utilityBarUnderlay.xnb</Output>
+      <Time>2008-03-14T13:30:46.406357-04:00</Time>
     </Item>
     <Item>
       <Source>Cursor.png</Source>
@@ -16,17 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\cursor.xnb</Output>
-      <Time>2008-02-10T01:01:34-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Courier New.spritefont</Source>
-      <Name>Courier New</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Courier New.xnb</Output>
-      <Time>2008-02-11T00:34:29.703125-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\cursor.xnb</Output>
+      <Time>2008-02-24T20:18:06.7769945-05:00</Time>
     </Item>
     <Item>
       <Source>Cursor_Click.png</Source>
@@ -34,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\cursor_click.xnb</Output>
-      <Time>2008-02-11T14:45:31.515625-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\cursor_click.xnb</Output>
+      <Time>2008-02-24T20:18:06.791642-05:00</Time>
     </Item>
     <Item>
       <Source>GameMenuButton.png</Source>
@@ -43,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\gameMenuButton.xnb</Output>
-      <Time>2008-02-11T16:52:52.171875-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\gameMenuButton.xnb</Output>
+      <Time>2008-02-24T20:18:06.8023835-05:00</Time>
     </Item>
     <Item>
       <Source>GameMenuButtonPressed.png</Source>
@@ -52,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\gameMenuButtonPressed.xnb</Output>
-      <Time>2008-02-11T17:23:58.875-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\gameMenuButtonPressed.xnb</Output>
+      <Time>2008-02-24T20:18:06.787736-05:00</Time>
     </Item>
     <Item>
       <Source>PauseMenu.png</Source>
@@ -61,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\pauseMenu.xnb</Output>
-      <Time>2008-02-12T13:32:58.171875-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\pauseMenu.xnb</Output>
+      <Time>2008-02-24T20:18:06.7398875-05:00</Time>
     </Item>
     <Item>
       <Source>ResumeButton.png</Source>
@@ -70,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resumeButton.xnb</Output>
-      <Time>2008-02-12T13:04:20.296875-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resumeButton.xnb</Output>
+      <Time>2008-02-24T20:18:06.682274-05:00</Time>
     </Item>
     <Item>
       <Source>ResumeButtonPressed.png</Source>
@@ -79,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resumeButtonPressed.xnb</Output>
-      <Time>2008-02-12T13:06:45.671875-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resumeButtonPressed.xnb</Output>
+      <Time>2008-02-24T20:18:06.7945715-05:00</Time>
     </Item>
     <Item>
       <Source>ExitGameButton.png</Source>
@@ -88,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\exitGameButton.xnb</Output>
-      <Time>2008-02-12T13:09:12.09375-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\exitGameButton.xnb</Output>
+      <Time>2008-02-24T20:18:06.7359815-05:00</Time>
     </Item>
     <Item>
       <Source>ExitGameButtonPressed.png</Source>
@@ -97,8 +88,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\exitGameButtonPressed.xnb</Output>
-      <Time>2008-02-12T13:11:17.578125-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\exitGameButtonPressed.xnb</Output>
+      <Time>2008-02-24T20:18:06.7984775-05:00</Time>
     </Item>
     <Item>
       <Source>NewGameButton.png</Source>
@@ -106,8 +97,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\newGameButton.xnb</Output>
-      <Time>2008-02-21T14:09:26.64375-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\newGameButton.xnb</Output>
+      <Time>2008-02-24T20:18:06.7848065-05:00</Time>
     </Item>
     <Item>
       <Source>NewGamePressed.png</Source>
@@ -115,8 +106,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\newGamePressed.xnb</Output>
-      <Time>2008-02-21T14:11:04.925-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\newGamePressed.xnb</Output>
+      <Time>2008-02-24T20:18:06.774065-05:00</Time>
     </Item>
     <Item>
       <Source>LightInfantryPortrait.png</Source>
@@ -124,8 +115,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\lightInfantryPortrait.xnb</Output>
-      <Time>2008-02-22T12:51:59.4135187-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\lightInfantryPortrait.xnb</Output>
+      <Time>2008-02-24T20:18:06.7672295-05:00</Time>
     </Item>
     <Item>
       <Source>ArcherPortraint.png</Source>
@@ -133,8 +124,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\archerPortrait.xnb</Output>
-      <Time>2008-02-22T14:42:35.66325-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\archerPortrait.xnb</Output>
+      <Time>2008-02-24T20:18:06.7711355-05:00</Time>
     </Item>
     <Item>
       <Source>InfantryUnit.png</Source>
@@ -142,8 +133,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantryUnit.xnb</Output>
-      <Time>2008-03-08T09:40:52.09025-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantryUnit.xnb</Output>
+      <Time>2008-03-14T13:30:46.4678765-04:00</Time>
     </Item>
     <Item>
       <Source>InfantryIcon.png</Source>
@@ -151,8 +142,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantryIcon.xnb</Output>
-      <Time>2008-02-23T11:11:51.647625-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantryIcon.xnb</Output>
+      <Time>2008-03-14T13:30:46.418075-04:00</Time>
     </Item>
     <Item>
       <Source>ArcherIcon.png</Source>
@@ -160,8 +151,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\archerIcon.xnb</Output>
-      <Time>2008-02-23T11:15:30.428875-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\archerIcon.xnb</Output>
+      <Time>2008-03-14T13:30:46.4561585-04:00</Time>
     </Item>
     <Item>
       <Source>grass.png</Source>
@@ -169,8 +160,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\grass.xnb</Output>
-      <Time>2008-02-28T14:55:34.625-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\grass.xnb</Output>
+      <Time>2008-03-14T13:30:46.459088-04:00</Time>
     </Item>
     <Item>
       <Source>barrel.png</Source>
@@ -178,8 +169,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\barrel.xnb</Output>
-      <Time>2008-02-29T13:46:21.3872625-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\barrel.xnb</Output>
+      <Time>2008-03-14T13:30:46.390733-04:00</Time>
     </Item>
     <Item>
       <Source>SelectedUnitOverlay.PNG</Source>
@@ -187,8 +178,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\SelectedUnitOverlay.xnb</Output>
-      <Time>2008-03-08T09:40:52.074625-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\SelectedUnitOverlay.xnb</Output>
+      <Time>2008-03-14T13:30:46.3995215-04:00</Time>
     </Item>
     <Item>
       <Source>HealthBar.png</Source>
@@ -196,8 +187,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\healthBar.xnb</Output>
-      <Time>2008-03-09T12:11:22.543375-04:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\healthBar.xnb</Output>
+      <Time>2008-03-14T13:30:46.396592-04:00</Time>
     </Item>
     <Item>
       <Source>ResourceBarUnderlay.png</Source>
@@ -205,8 +196,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resourceBarUnderlay.xnb</Output>
-      <Time>2008-03-08T11:32:21.480875-05:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resourceBarUnderlay.xnb</Output>
+      <Time>2008-03-14T13:30:46.3936625-04:00</Time>
     </Item>
     <Item>
       <Source>DestinationClick.png</Source>
@@ -214,17 +205,35 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\destinationClick.xnb</Output>
-      <Time>2008-03-11T11:45:13.668375-04:00</Time>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\destinationClick.xnb</Output>
+      <Time>2008-03-14T13:30:46.464947-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Map1.png</Source>
+      <Name>map1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\map1.xnb</Output>
+      <Time>2008-03-14T13:30:46.4112395-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Courier New.spritefont</Source>
+      <Name>Courier New</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Courier New.xnb</Output>
+      <Time>2008-02-24T20:18:06.805313-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
-      <RootDirectory>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Andy\Desktop\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -244,8 +253,8 @@
         <Value>2007-11-28T13:07:44-05:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\2.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2008-02-07T23:19:16.421125-05:00</Value>
+        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\2.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2008-02-09T11:56:38.3393585-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
