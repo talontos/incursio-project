@@ -30,3 +30,11 @@ bin\x86\Debug\Content\healthBar.xnb
 bin\x86\Debug\Content\resourceBarUnderlay.xnb
 bin\x86\Debug\Content\destinationClick.xnb
 bin\x86\Debug\Content\map1.xnb
+bin\x86\Debug\Content\infantry_back.xnb
+bin\x86\Debug\Content\infantry_left.xnb
+bin\x86\Debug\Content\infantry_right.xnb
+bin\x86\Debug\Content\infantry_still.xnb
+bin\x86\Debug\Content\Archer_Back.xnb
+bin\x86\Debug\Content\Archer_left.xnb
+bin\x86\Debug\Content\Archer_right.xnb
+bin\x86\Debug\Content\Archer_Still.xnb
