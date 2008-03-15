@@ -50,8 +50,17 @@ namespace Incursio
         Texture2D selectedUnitOverlayTexture;
         Texture2D healthRatioTexture;
 
-        //unit texture
-        Texture2D lightInfantryUnitTexture;
+        //Unit Textures//////////////
+        Texture2D lightInfantryEast;
+        Texture2D lightInfantryWest;
+        Texture2D lightInfantrySouth;
+        Texture2D lightInfantryNorth;
+
+        Texture2D archerEast;
+        Texture2D archerWest;
+        Texture2D archerSouth;
+        Texture2D archerNorth;
+        /////////////////////////////
 
         //map initialization
         BaseMapEntity tex1;
@@ -99,16 +108,19 @@ namespace Incursio
             //testing unit creation/placement/moving///
             LightInfantryUnit infUnit1 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
             LightInfantryUnit infUnit2 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
+            ArcherUnit archUnit1 = (ArcherUnit)factory.create("Incursio.Classes.ArcherUnit", State.PlayerId.HUMAN);
             LightInfantryUnit infUnit3 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
             //infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             infUnit1.setLocation(new Coordinate(300, 300));
             infUnit2.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             infUnit3.setLocation(new Coordinate(500, 500)); //for ease of testing
+            archUnit1.setLocation(new Coordinate(800, 200));
             //infUnit3.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             
             infUnit1.setHealth(80);
             infUnit2.setHealth(80);
             infUnit3.setHealth(50);
+            archUnit1.setHealth(90);
 
             /*
             infUnit1.move(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
@@ -201,8 +213,16 @@ namespace Incursio
             currentMap.addMapEntity(tex1, 39, 60);
 
 
-            //load unit textures
-            lightInfantryUnitTexture = Content.Load<Texture2D>(@"infantryUnit");
+            //Load Unit Textures
+            lightInfantryEast = Content.Load<Texture2D>(@"infantry_right");
+            lightInfantryWest = Content.Load<Texture2D>(@"infantry_left");
+            lightInfantrySouth = Content.Load<Texture2D>(@"infantry_still");
+            lightInfantryNorth = Content.Load<Texture2D>(@"infantry_back");
+
+            archerEast = Content.Load<Texture2D>(@"archer_right");
+            archerWest = Content.Load<Texture2D>(@"archer_left");
+            archerSouth = Content.Load<Texture2D>(@"archer_Still");
+            archerNorth = Content.Load<Texture2D>(@"archer_Back");
 
             //load overlays
             selectedUnitOverlayTexture = Content.Load<Texture2D>(@"selectedUnitOverlay");
@@ -327,8 +347,8 @@ namespace Incursio
                                     //adjust the selection rectangle to account for different unit sizes
                                     if (e.getType() == State.EntityName.LightInfantry)
                                     {
-                                        selectionOffSetX = this.lightInfantryUnitTexture.Width / 2;
-                                        selectionOffSetY = (int)(this.lightInfantryUnitTexture.Height * 0.80);
+                                        selectionOffSetX = this.lightInfantrySouth.Width / 2;
+                                        selectionOffSetY = (int)(this.lightInfantrySouth.Height * 0.80);
                                     }
                                     Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, currentMap.getTileWidth(), currentMap.getTileHeight());
                                     if(unit.Contains( new Point( Convert.ToInt32(point.X), Convert.ToInt32(point.Y)) ) ){
@@ -605,28 +625,153 @@ namespace Incursio
                     if (e.getType() == State.EntityName.LightInfantry)
                     {
                         e.visible = true;
-
                         onScreen = currentMap.positionOnScreen(e.getLocation());
                         Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
 
-                        //temporary conditional to see if units are really attacking
-                        if ((e as Unit).getCurrentState() == State.UnitState.Attacking)
+                        //depending on the unit's state, draw their textures
+                        //idle
+                        if ((e as LightInfantryUnit).getCurrentState() == State.UnitState.Idle)
                         {
-                            spriteBatch.Draw(this.lightInfantryUnitTexture,
-                                new Rectangle(onScreen.x - (this.lightInfantryUnitTexture.Width / 2), onScreen.y - (int)(this.lightInfantryUnitTexture.Height * 0.80), this.lightInfantryUnitTexture.Width, this.lightInfantryUnitTexture.Height),
-                                Color.Red);
+                            //south or idle
+                            if ((e as LightInfantryUnit).getDirection() == State.Direction.Still || (e as LightInfantryUnit).getDirection() == State.Direction.South)
+                            {
+                                spriteBatch.Draw(this.lightInfantrySouth,
+                                    new Rectangle(onScreen.x - (this.lightInfantrySouth.Width / 2), onScreen.y - (int)(this.lightInfantrySouth.Height * 0.80),
+                                    this.lightInfantrySouth.Width, this.lightInfantrySouth.Height), Color.White);
+                            }
+                            //east
+                            else if ((e as LightInfantryUnit).getDirection() == State.Direction.East)
+                            {
+                                spriteBatch.Draw(this.lightInfantryEast,
+                                    new Rectangle(onScreen.x - (this.lightInfantryEast.Width / 2), onScreen.y - (int)(this.lightInfantryEast.Height * 0.80),
+                                    this.lightInfantryEast.Width, this.lightInfantryEast.Height), Color.White);
+                            }
+                            //west
+                            else if ((e as LightInfantryUnit).getDirection() == State.Direction.West)
+                            {
+                                spriteBatch.Draw(this.lightInfantryWest,
+                                    new Rectangle(onScreen.x - (this.lightInfantryWest.Width / 2), onScreen.y - (int)(this.lightInfantryWest.Height * 0.80),
+                                    this.lightInfantryWest.Width, this.lightInfantryWest.Height), Color.White);
+                            }
+                            //north
+                            else if ((e as LightInfantryUnit).getDirection() == State.Direction.North)
+                            {
+                                spriteBatch.Draw(this.lightInfantryNorth,
+                                    new Rectangle(onScreen.x - (this.lightInfantryNorth.Width / 2), onScreen.y - (int)(this.lightInfantryNorth.Height * 0.80),
+                                    this.lightInfantryNorth.Width, this.lightInfantryNorth.Height), Color.White);
+                            }
+
+                        }
+                        else if ((e as LightInfantryUnit).getCurrentState() == State.UnitState.Attacking)
+                        {
+                            //TODO:
+                            //Attacking Animation
+                        }
+                        else if ((e as LightInfantryUnit).getCurrentState() == State.UnitState.Dead)
+                        {
+                            //TODO:
+                            //Dead stuff
+                        }
+                        else if ((e as LightInfantryUnit).getCurrentState() == State.UnitState.Guarding)
+                        {
+                            //TODO:
+                            //Guarding Animation
+                        }
+                        else if ((e as LightInfantryUnit).getCurrentState() == State.UnitState.Moving)
+                        {
+                            //TODO:
+                            //Moving Animation
+                        }
+                        else if ((e as LightInfantryUnit).getCurrentState() == State.UnitState.UnderAttack)
+                        {
+                            //TODO:
+                            //Under Attack Animation
                         }
                         else
                         {
-                            spriteBatch.Draw(this.lightInfantryUnitTexture,
-                                new Rectangle(onScreen.x - (this.lightInfantryUnitTexture.Width / 2), onScreen.y - (int)(this.lightInfantryUnitTexture.Height * 0.80), this.lightInfantryUnitTexture.Width, this.lightInfantryUnitTexture.Height),
-                                Color.White);
+                            spriteBatch.Draw(this.lightInfantrySouth,
+                                    new Rectangle(onScreen.x - (this.lightInfantrySouth.Width / 2), onScreen.y - (int)(this.lightInfantrySouth.Height * 0.80),
+                                    this.lightInfantrySouth.Width, this.lightInfantrySouth.Height), Color.White);
+                        }
+                        
+                    }
+                    else if (e.getType() == State.EntityName.Archer)
+                    {
+                        e.visible = true;
+                        onScreen = currentMap.positionOnScreen(e.getLocation());
+                        Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+
+                        //depending on the unit's state, draw their textures
+                        //idle
+                        if ((e as ArcherUnit).getCurrentState() == State.UnitState.Idle)
+                        {
+                            //south or idle
+                            if ((e as ArcherUnit).getDirection() == State.Direction.Still || (e as ArcherUnit).getDirection() == State.Direction.South)
+                            {
+                                spriteBatch.Draw(this.archerSouth,
+                                    new Rectangle(onScreen.x - (this.archerSouth.Width / 2), onScreen.y - (int)(this.archerSouth.Height * 0.80),
+                                    this.archerSouth.Width, this.archerSouth.Height), Color.White);
+                            }
+                            //east
+                            else if ((e as ArcherUnit).getDirection() == State.Direction.East)
+                            {
+                                spriteBatch.Draw(this.archerEast,
+                                    new Rectangle(onScreen.x - (this.archerEast.Width / 2), onScreen.y - (int)(this.archerEast.Height * 0.80),
+                                    this.archerEast.Width, this.archerEast.Height), Color.White);
+                            }
+                            //west
+                            else if ((e as ArcherUnit).getDirection() == State.Direction.West)
+                            {
+                                spriteBatch.Draw(this.archerWest,
+                                    new Rectangle(onScreen.x - (this.archerWest.Width / 2), onScreen.y - (int)(this.archerWest.Height * 0.80),
+                                    this.archerWest.Width, this.archerWest.Height), Color.White);
+                            }
+                            //north
+                            else if ((e as ArcherUnit).getDirection() == State.Direction.North)
+                            {
+                                spriteBatch.Draw(this.archerNorth,
+                                    new Rectangle(onScreen.x - (this.archerNorth.Width / 2), onScreen.y - (int)(this.archerNorth.Height * 0.80),
+                                    this.archerNorth.Width, this.archerNorth.Height), Color.White);
+                            }
+
+                        }
+                        else if ((e as ArcherUnit).getCurrentState() == State.UnitState.Attacking)
+                        {
+                            //TODO:
+                            //Attacking Animation
+                        }
+                        else if ((e as ArcherUnit).getCurrentState() == State.UnitState.Dead)
+                        {
+                            //TODO:
+                            //Dead stuff
+                        }
+                        else if ((e as ArcherUnit).getCurrentState() == State.UnitState.Guarding)
+                        {
+                            //TODO:
+                            //Guarding Animation
+                        }
+                        else if ((e as ArcherUnit).getCurrentState() == State.UnitState.Moving)
+                        {
+                            //TODO:
+                            //Moving Animation
+                        }
+                        else if ((e as ArcherUnit).getCurrentState() == State.UnitState.UnderAttack)
+                        {
+                            //TODO:
+                            //Under Attack Animation
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(this.archerSouth,
+                                    new Rectangle(onScreen.x - (this.archerSouth.Width / 2), onScreen.y - (int)(this.archerSouth.Height * 0.80),
+                                    this.archerSouth.Width, this.archerSouth.Height), Color.White);
                         }
                         
                     }
                     else
                         e.visible = false;
                 }
+
                
             });
 
@@ -641,39 +786,44 @@ namespace Incursio
 
                     int xOffSet = 0;
                     int yOffSet = 0;
+                    int width = 0;
+                    int height = 0;
 
                     //find out what the unit is, and configure the offset for each different type
                     if (u.getType() == State.EntityName.LightInfantry)
                     {
-                        xOffSet = (int)(this.lightInfantryUnitTexture.Width / 2);
-                        yOffSet = (int)(this.lightInfantryUnitTexture.Height * 0.80);
+                        xOffSet = (int)(this.lightInfantrySouth.Width / 2) + 10;
+                        yOffSet = (int)(this.lightInfantrySouth.Height * 0.80) + 7;
+                        width = lightInfantrySouth.Width + 20;
+                        height = lightInfantrySouth.Height + 15;
+                    }
+                    else if (u.getType() == State.EntityName.Archer)
+                    {
+                        xOffSet = (int)(this.archerSouth.Width / 2) + 10;
+                        yOffSet = (int)(this.archerSouth.Height * 0.80) + 7;
+                        width = archerSouth.Width + 20;
+                        height = archerSouth.Height + 15;
                     }
 
                     spriteBatch.Draw(this.selectedUnitOverlayTexture,
-                        new Rectangle(onScreen.x - xOffSet, onScreen.y - yOffSet, this.selectedUnitOverlayTexture.Width, this.selectedUnitOverlayTexture.Height),
+                        new Rectangle(onScreen.x - xOffSet, onScreen.y - yOffSet, width, height),
                         Color.White);
 
                     if (u.getPlayer() == State.PlayerId.HUMAN)
                     {
                         spriteBatch.Draw(this.healthRatioTexture,
-                            new Rectangle(onScreen.x - xOffSet + (int)(this.selectedUnitOverlayTexture.Width * healthBarTypicalStartWidth), onScreen.y - yOffSet + (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalStartHeight), (int)((this.selectedUnitOverlayTexture.Width * healthBarTypicalWidth) * healthRatio), (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalHeight)),
+                            new Rectangle(onScreen.x - xOffSet + 3 + (int)(this.selectedUnitOverlayTexture.Width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
                             Color.Lime);
                     }
                     else
                     {
                         spriteBatch.Draw(this.healthRatioTexture,
-                            new Rectangle(onScreen.x - xOffSet + (int)(this.selectedUnitOverlayTexture.Width * healthBarTypicalStartWidth), onScreen.y - yOffSet + (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalStartHeight), (int)((this.selectedUnitOverlayTexture.Width * healthBarTypicalWidth) * healthRatio), (int)(this.selectedUnitOverlayTexture.Height * healthBarTypicalHeight)),
+                            new Rectangle(onScreen.x - xOffSet + 3 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
                             Color.Red);
                     }
                    
                 }
             });
-        }
-
-
-        public void selectEntity()
-        {
-            
         }
 
         public void mouseClickDestination()

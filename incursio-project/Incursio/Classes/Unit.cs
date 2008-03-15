@@ -87,6 +87,7 @@ namespace Incursio.Classes
             if (direction.Length() < speed)
             {
                 destination = location;
+                currentState = State.UnitState.Idle;
             }
             else
             {
@@ -99,10 +100,12 @@ namespace Incursio.Classes
                 if (xDirection > xMinimumThreshold)
                 {
                     newX += speed;
+                    this.directionState = State.Direction.East;
                 }
                 else if (xDirection < -xMinimumThreshold)
                 {
                     newX += -1 * speed;
+                    this.directionState = State.Direction.West;
                 }
                 else
                 {
@@ -112,10 +115,12 @@ namespace Incursio.Classes
                 if (yDirection > yMinimumThreshold)
                 {
                     newY += speed;
+                    this.directionState = State.Direction.South;
                 }
                 else if (yDirection < -yMinimumThreshold)
                 {
                     newY += -1 * speed;
+                    this.directionState = State.Direction.North;
                 }
                 else
                 {
@@ -235,6 +240,11 @@ namespace Incursio.Classes
         public State.UnitState getCurrentState()
         {
             return this.currentState;
+        }
+
+        public State.Direction getDirection()
+        {
+            return this.directionState;
         }
 
         public void setCurrentState(State.UnitState newState)
