@@ -9,9 +9,11 @@ namespace Incursio.Classes
         public ArcherUnit() : base(){
             //TODO: set Archer Values
             this.armor = 1;
-            this.damage = 1;
+            this.damage = 10;
             this.speed = 3;
-            this.sightRange = 10;
+            this.attackSpeed = 3;
+            this.sightRange = 150;
+            this.attackRange = 4;
             this.setType(State.EntityName.Archer);
         }
 

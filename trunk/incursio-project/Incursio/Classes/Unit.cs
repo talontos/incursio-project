@@ -11,6 +11,8 @@ namespace Incursio.Classes
         protected int damage = 0;
         protected int armor = 0;
         protected int speed = 0;
+        protected int attackSpeed = 0;
+        protected int updateAttackTimer = 0;
         protected int attackRange = 0;
         protected State.UnitState currentState = State.UnitState.Idle;
         protected State.Direction directionState = State.Direction.Still;
@@ -260,7 +262,16 @@ namespace Incursio.Classes
             //if target is in attackRange, attack it.
             if(Incursio.getInstance().currentMap.getCellDistance(location, target.location) <= attackRange){
                 //TODO: do some math randomizing damage?
-                target.takeDamage(this.damage);
+                int blah = Incursio.getInstance().currentMap.getCellDistance(location, target.location);
+                if (this.updateAttackTimer == this.attackSpeed * 60)
+                {
+                    target.takeDamage(this.damage);
+                    this.updateAttackTimer = 0;
+                }
+                else
+                {
+                    this.updateAttackTimer++;
+                }
             }
             else updateMovement();
         }
