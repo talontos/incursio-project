@@ -14,7 +14,7 @@ namespace Incursio.Classes
             this.speed = 3;
             this.sightRange = 20;
             this.attackSpeed = 2;
-            this.attackRange = 1;
+            this.attackRange = 3;
             this.setType(State.EntityName.LightInfantry);
         }
 

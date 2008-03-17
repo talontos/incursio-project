@@ -26,6 +26,11 @@ namespace Incursio.Classes
 
         }
 
+        public Unit(MapBase playedMap)
+        {
+            this.map = playedMap;
+        }
+
         public override void Update(GameTime gameTime)
         {
             //check health for death...
@@ -54,7 +59,15 @@ namespace Incursio.Classes
                             this.currentState = State.UnitState.Idle;
                         else
                         {
-                            updateMovement();
+                            if (target == null)
+                            {
+                                updateMovement();
+                            }
+                            else
+                            {
+                                destination = target.location;
+                            }
+                            
                             //recalculateLocation();
                         }
 
@@ -221,6 +234,27 @@ namespace Incursio.Classes
             Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, true);
         }
 
+        //since units can take damage and then give damage, we'll set up a function just for them
+        public virtual void takeDamage(int damage, BaseGameEntity attacker)
+        {
+            //TODO: some math using my armor
+            this.health -= damage;
+
+            if (this.health <= 0)
+            {
+                this.health = 0;
+                currentState = State.UnitState.Dead;
+            }
+            else
+            {
+                if (currentState != State.UnitState.Attacking)
+                {
+                    this.target = attacker;
+                    currentState = State.UnitState.Attacking;
+                }
+            }
+        }
+
         public long getDamage(){
             return this.damage;
         }
@@ -254,6 +288,11 @@ namespace Incursio.Classes
             this.currentState = newState;
         }
 
+        public void setMap(MapBase map)
+        {
+            this.map = map;
+        }
+
         //Private helper functions//
         /// <summary>
         /// If target is in range, attack it.  otherwise, move toward it.
@@ -262,10 +301,34 @@ namespace Incursio.Classes
             //if target is in attackRange, attack it.
             if(Incursio.getInstance().currentMap.getCellDistance(location, target.location) <= attackRange){
                 //TODO: do some math randomizing damage?
-                int blah = Incursio.getInstance().currentMap.getCellDistance(location, target.location);
-                if (this.updateAttackTimer == this.attackSpeed * 60)
+                if (this.updateAttackTimer == this.attackSpeed * 60)    //this is the unit's attack time (attack every 1.5 seconds for example)
                 {
-                    target.takeDamage(this.damage);
+                    //basically, if we are attacking something that can attack back
+                    if (target.getType() == State.EntityName.Archer || target.getType() == State.EntityName.LightInfantry || 
+                        target.getType() == State.EntityName.Hero   || target.getType() == State.EntityName.HeavyInfantry)
+                    {
+                        (target as Unit).takeDamage(this.damage, this);
+
+                        //if we just killed the unit
+                        if ((target as Unit).getCurrentState() == State.UnitState.Dead)
+                        {
+                            //TODO:
+                            //add AI for attacking more enemies!
+                            //but for now:
+                            target = null;
+                            currentState = State.UnitState.Idle;
+                        }
+                    }
+                    else if (target.getType() == State.EntityName.GuardTower)
+                    {
+                        //since guard towers are a little different, different notice
+                        (target as Structure).takeDamage(this.damage);
+                    }
+                    else
+                    {
+                        target.takeDamage(this.damage);
+                    }
+
                     this.updateAttackTimer = 0;
                 }
                 else
