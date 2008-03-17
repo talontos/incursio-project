@@ -45,7 +45,7 @@ namespace Incursio.Classes
             this.resourceBar = resourceBar;
         }
 
-        public List<Unit> update(Cursor cursor, List<Unit> selectedUnits, int numUnitsSelected)
+        public List<BaseGameEntity> update(Cursor cursor, List<BaseGameEntity> selectedUnits, int numUnitsSelected)
         {
 
             if (numUnitsSelected > 1)
@@ -58,7 +58,7 @@ namespace Incursio.Classes
                         this.barX = this.barX + 6;
                     }
 
-                    List<Unit> temp = new List<Unit>();
+                    List<BaseGameEntity> temp = new List<BaseGameEntity>();
                     temp.Add(selectedUnits[this.barX]);
                     this.numUnits = 1;
                     this.barX = 0;
@@ -79,7 +79,7 @@ namespace Incursio.Classes
         /// drawHeadsUpDisplay draws the HUD onto the screen.  Parameter SpriteBatch is used.
         /// </summary>
         /// <param name="spriteBatch"></param>
-        public void draw(SpriteBatch spriteBatch, int height, List<Unit> selectedUnits, SpriteFont font, int numUnitsSelected)
+        public void draw(SpriteBatch spriteBatch, int height, List<BaseGameEntity> selectedUnits, SpriteFont font, int numUnitsSelected)
         {
             // draw the bars
             spriteBatch.Draw(utilityBar, new Rectangle(0, height - utilityBar.Height, utilityBar.Width, utilityBar.Height), Color.White);
@@ -106,7 +106,9 @@ namespace Incursio.Classes
 
                 spriteBatch.DrawString(font, "Health: " + selectedUnits[0].getHealth(), new Vector2(572, height - 90), Color.White, 0, font.MeasureString("Health: XXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
-                spriteBatch.DrawString(font, "Attack: " + selectedUnits[0].getDamage() + "   Armor: " + selectedUnits[0].getArmor(), new Vector2(572, height - 65), Color.White, 0, font.MeasureString("Attack: XXX   Armor: XXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                if(selectedUnits[0].getType() == State.EntityName.Archer || selectedUnits[0].getType() == State.EntityName.HeavyInfantry ||
+                   selectedUnits[0].getType() == State.EntityName.Hero   || selectedUnits[0].getType() == State.EntityName.LightInfantry)
+                spriteBatch.DrawString(font, "Attack: " + (selectedUnits[0] as Unit).getDamage() + "   Armor: " + (selectedUnits[0] as Unit).getArmor(), new Vector2(572, height - 65), Color.White, 0, font.MeasureString("Attack: XXX   Armor: XXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
             }
             else if (numUnitsSelected > 1)
             {

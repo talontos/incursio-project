@@ -42,6 +42,17 @@ namespace Incursio
 
         }
 
+        public enum StructureState  //states of a building
+        {
+            Idle,
+            
+            BeingBuilt,
+
+            Building,
+
+            Destroyed,
+        }
+
         public enum HealthStates
         {
             Healthy,    //Full, or almost full, health       (green bar?)

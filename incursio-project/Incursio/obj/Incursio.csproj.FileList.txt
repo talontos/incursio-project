@@ -38,3 +38,4 @@ bin\x86\Debug\Content\Archer_Back.xnb
 bin\x86\Debug\Content\Archer_left.xnb
 bin\x86\Debug\Content\Archer_right.xnb
 bin\x86\Debug\Content\Archer_Still.xnb
+bin\x86\Debug\Content\CampFiller.xnb
