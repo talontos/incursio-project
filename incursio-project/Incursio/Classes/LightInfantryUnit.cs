@@ -10,9 +10,11 @@ namespace Incursio.Classes
         public LightInfantryUnit() : base(){
             //TODO: set LightInfantry Values
             this.armor = 1;
-            this.damage = 1;
+            this.damage = 25;
             this.speed = 3;
-            this.sightRange = 5;
+            this.sightRange = 20;
+            this.attackSpeed = 2;
+            this.attackRange = 1;
             this.setType(State.EntityName.LightInfantry);
         }
 

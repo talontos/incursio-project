@@ -60,6 +60,11 @@ namespace Incursio
         Texture2D archerWest;
         Texture2D archerSouth;
         Texture2D archerNorth;
+
+        Texture2D heroEast;
+        Texture2D heroWest;
+        Texture2D heroSouth;
+        Texture2D heroNorth;
         /////////////////////////////
 
         //map initialization
@@ -109,10 +114,12 @@ namespace Incursio
             LightInfantryUnit infUnit1 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
             LightInfantryUnit infUnit2 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
             ArcherUnit archUnit1 = (ArcherUnit)factory.create("Incursio.Classes.ArcherUnit", State.PlayerId.HUMAN);
+            ArcherUnit archUnit2 = (ArcherUnit)factory.create("Incursio.Classes.ArcherUnit", State.PlayerId.COMPUTER);
             LightInfantryUnit infUnit3 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
             //infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             infUnit1.setLocation(new Coordinate(300, 300));
             infUnit2.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
+            archUnit2.setLocation(new Coordinate(530, 510));
             infUnit3.setLocation(new Coordinate(500, 500)); //for ease of testing
             archUnit1.setLocation(new Coordinate(800, 200));
             //infUnit3.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
@@ -121,6 +128,7 @@ namespace Incursio
             infUnit2.setHealth(80);
             infUnit3.setHealth(50);
             archUnit1.setHealth(90);
+            archUnit2.setHealth(60);
 
             /*
             infUnit1.move(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
@@ -223,6 +231,12 @@ namespace Incursio
             archerWest = Content.Load<Texture2D>(@"archer_left");
             archerSouth = Content.Load<Texture2D>(@"archer_Still");
             archerNorth = Content.Load<Texture2D>(@"archer_Back");
+
+            //TODO: get hero textures
+            //heroEast = Content.Load<Texture2D>(@"");
+            //heroWest = Content.Load<Texture2D>(@"");
+            //heroSouth = Content.Load<Texture2D>(@"");
+            //heroNorth = Content.Load<Texture2D>(@"");
 
             //load overlays
             selectedUnitOverlayTexture = Content.Load<Texture2D>(@"selectedUnitOverlay");
@@ -345,7 +359,7 @@ namespace Incursio
                             {
                                 if(e.visible){ //only check visible ones so we don't waste time
                                     //adjust the selection rectangle to account for different unit sizes
-                                    if (e.getType() == State.EntityName.LightInfantry)
+                                    if (e.getType() == State.EntityName.LightInfantry || e.getType() == State.EntityName.Archer)
                                     {
                                         selectionOffSetX = this.lightInfantrySouth.Width / 2;
                                         selectionOffSetY = (int)(this.lightInfantrySouth.Height * 0.80);
@@ -358,7 +372,8 @@ namespace Incursio
                                             selectedUnits.Add(e as Unit);
                                             numUnitsSelected = 1;
                                         }
-                                        else{
+                                        //else{
+                                        if(true){
                                             if(numUnitsSelected == 1){
                                                 if (selectedUnits[0].getPlayer() == State.PlayerId.COMPUTER){
                                                     selectedUnits = new List<Unit>();
@@ -372,7 +387,7 @@ namespace Incursio
                                                     selectedUnits.Remove(e as Unit);
                                                     numUnitsSelected--;
                                                 }
-                                                else{
+                                                else if((e as Unit).getCurrentState() != State.UnitState.Dead){
                                                     selectedUnits.Add(e as Unit);
                                                     numUnitsSelected++;
                                                 }
@@ -402,12 +417,22 @@ namespace Incursio
                         bool done = false;
                         if (cursor.getIsRightPressed())
                         {
+                            int selectionOffSetX = 0;
+                            int selectionOffSetY = 0;
+
                             //clicking entity
                             entityBank.ForEach(delegate(BaseGameEntity e)
                             {
                                 if (e.visible)
                                 { //only check visible ones so we don't waste time
-                                    Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+                                    //adjust the selection rectangle to account for different unit sizes
+                                    if (e.getType() == State.EntityName.LightInfantry || e.getType() == State.EntityName.Archer)
+                                    {
+                                        //since the textures are the same size
+                                        selectionOffSetX = this.lightInfantrySouth.Width / 2;
+                                        selectionOffSetY = (int)(this.lightInfantrySouth.Height * 0.80);
+                                    }
+                                    Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, currentMap.getTileWidth(), currentMap.getTileHeight());
                                     if (unit.Contains(new Point(Convert.ToInt32(cursor.getPos().X), Convert.ToInt32(cursor.getPos().Y))))
                                     {
                                         //NOW, if unit is enemy, selected units attack!
@@ -415,7 +440,11 @@ namespace Incursio
                                         {
                                             selectedUnits.ForEach(delegate(Unit u)
                                             {
-                                                u.attack(e);
+                                                if (u.getPlayer() == State.PlayerId.HUMAN)
+                                                {
+                                                    u.attack(e);
+                                                    (e as Unit).attack(u);
+                                                }
                                             });
                                         }
                                     }
@@ -666,11 +695,17 @@ namespace Incursio
                         {
                             //TODO:
                             //Attacking Animation
+                            spriteBatch.Draw(this.lightInfantrySouth,
+                                    new Rectangle(onScreen.x - (this.lightInfantrySouth.Width / 2), onScreen.y - (int)(this.lightInfantrySouth.Height * 0.80),
+                                    this.lightInfantrySouth.Width, this.lightInfantrySouth.Height), Color.Red);
                         }
                         else if ((e as LightInfantryUnit).getCurrentState() == State.UnitState.Dead)
                         {
                             //TODO:
                             //Dead stuff
+                            spriteBatch.Draw(this.lightInfantrySouth,
+                                    new Rectangle(onScreen.x - (this.lightInfantrySouth.Width / 2), onScreen.y - (int)(this.lightInfantrySouth.Height * 0.80),
+                                    this.lightInfantrySouth.Width, this.lightInfantrySouth.Height), Color.Black);
                         }
                         else if ((e as LightInfantryUnit).getCurrentState() == State.UnitState.Guarding)
                         {
@@ -686,6 +721,9 @@ namespace Incursio
                         {
                             //TODO:
                             //Under Attack Animation
+                            spriteBatch.Draw(this.lightInfantrySouth,
+                                    new Rectangle(onScreen.x - (this.lightInfantrySouth.Width / 2), onScreen.y - (int)(this.lightInfantrySouth.Height * 0.80),
+                                    this.lightInfantrySouth.Width, this.lightInfantrySouth.Height), Color.Red);
                         }
                         else
                         {
@@ -739,11 +777,17 @@ namespace Incursio
                         {
                             //TODO:
                             //Attacking Animation
+                            spriteBatch.Draw(this.archerSouth,
+                                    new Rectangle(onScreen.x - (this.archerSouth.Width / 2), onScreen.y - (int)(this.archerSouth.Height * 0.80),
+                                    this.archerSouth.Width, this.archerSouth.Height), Color.Red);
                         }
                         else if ((e as ArcherUnit).getCurrentState() == State.UnitState.Dead)
                         {
                             //TODO:
                             //Dead stuff
+                            spriteBatch.Draw(this.archerSouth,
+                                    new Rectangle(onScreen.x - (this.archerSouth.Width / 2), onScreen.y - (int)(this.archerSouth.Height * 0.80),
+                                    this.archerSouth.Width, this.archerSouth.Height), Color.Black);
                         }
                         else if ((e as ArcherUnit).getCurrentState() == State.UnitState.Guarding)
                         {
@@ -768,6 +812,80 @@ namespace Incursio
                         }
                         
                     }
+                    //TODO: once we get hero textures, uncomment this block
+                    /*if (e.getType() == State.EntityName.Hero)
+                    {
+                        e.visible = true;
+                        onScreen = currentMap.positionOnScreen(e.getLocation());
+                        Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+
+                        //depending on the unit's state, draw their textures
+                        //idle
+                        if ((e as Hero).getCurrentState() == State.UnitState.Idle)
+                        {
+                            //south or idle
+                            if ((e as Hero).getDirection() == State.Direction.Still || (e as Hero).getDirection() == State.Direction.South)
+                            {
+                                spriteBatch.Draw(this.heroSouth,
+                                    new Rectangle(onScreen.x - (this.heroSouth.Width / 2), onScreen.y - (int)(this.heroSouth.Height * 0.80),
+                                    this.heroSouth.Width, this.heroSouth.Height), Color.White);
+                            }
+                            //east
+                            else if ((e as Hero).getDirection() == State.Direction.East)
+                            {
+                                spriteBatch.Draw(this.heroEast,
+                                    new Rectangle(onScreen.x - (this.heroEast.Width / 2), onScreen.y - (int)(this.heroEast.Height * 0.80),
+                                    this.heroEast.Width, this.heroEast.Height), Color.White);
+                            }
+                            //west
+                            else if ((e as Hero).getDirection() == State.Direction.West)
+                            {
+                                spriteBatch.Draw(this.heroWest,
+                                    new Rectangle(onScreen.x - (this.heroWest.Width / 2), onScreen.y - (int)(this.heroWest.Height * 0.80),
+                                    this.heroWest.Width, this.heroWest.Height), Color.White);
+                            }
+                            //north
+                            else if ((e as Hero).getDirection() == State.Direction.North)
+                            {
+                                spriteBatch.Draw(this.heroNorth,
+                                    new Rectangle(onScreen.x - (this.heroNorth.Width / 2), onScreen.y - (int)(this.heroNorth.Height * 0.80),
+                                    this.heroNorth.Width, this.heroNorth.Height), Color.White);
+                            }
+
+                        }
+                        else if ((e as Hero).getCurrentState() == State.UnitState.Attacking)
+                        {
+                            //TODO:
+                            //Attacking Animation
+                        }
+                        else if ((e as Hero).getCurrentState() == State.UnitState.Dead)
+                        {
+                            //TODO:
+                            //Dead stuff
+                            //with hero death, end the current map in defeat for player hero, victory if computer hero
+                        }
+                        else if ((e as Hero).getCurrentState() == State.UnitState.Guarding)
+                        {
+                            //TODO:
+                            //Guarding Animation
+                        }
+                        else if ((e as Hero).getCurrentState() == State.UnitState.Moving)
+                        {
+                            //TODO:
+                            //Moving Animation
+                        }
+                        else if ((e as Hero).getCurrentState() == State.UnitState.UnderAttack)
+                        {
+                            //TODO:
+                            //Under Attack Animation
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(this.heroSouth,
+                                    new Rectangle(onScreen.x - (this.heroSouth.Width / 2), onScreen.y - (int)(this.heroSouth.Height * 0.80),
+                                    this.heroSouth.Width, this.heroSouth.Height), Color.White);
+                        }
+                    }*/
                     else
                         e.visible = false;
                 }
