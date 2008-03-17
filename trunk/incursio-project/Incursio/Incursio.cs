@@ -128,7 +128,13 @@ namespace Incursio
             infUnit2.setHealth(80);
             infUnit3.setHealth(50);
             archUnit1.setHealth(90);
-            archUnit2.setHealth(60);
+            archUnit2.setHealth(90);
+
+            infUnit1.setMap(currentMap);
+            infUnit2.setMap(currentMap);
+            infUnit3.setMap(currentMap);
+            archUnit1.setMap(currentMap);
+            archUnit2.setMap(currentMap);
 
             /*
             infUnit1.move(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
@@ -440,11 +446,8 @@ namespace Incursio
                                         {
                                             selectedUnits.ForEach(delegate(Unit u)
                                             {
-                                                if (u.getPlayer() == State.PlayerId.HUMAN)
-                                                {
-                                                    u.attack(e);
-                                                    (e as Unit).attack(u);
-                                                }
+                                                //u.attack(e);
+                                                (e as Unit).attack(u);
                                             });
                                         }
                                     }
