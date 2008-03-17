@@ -43,7 +43,7 @@ namespace Incursio
 
         //unit initialization
         //TODO: **move these to Player class**
-        List<Unit> selectedUnits;
+        List<BaseGameEntity> selectedUnits;
         int numUnitsSelected;
 
         //Overlay for selected units
@@ -65,6 +65,11 @@ namespace Incursio
         Texture2D heroWest;
         Texture2D heroSouth;
         Texture2D heroNorth;
+        /////////////////////////////
+
+        //Structure Textures/////////
+        Texture2D campTexture;
+
         /////////////////////////////
 
         //map initialization
@@ -116,12 +121,14 @@ namespace Incursio
             ArcherUnit archUnit1 = (ArcherUnit)factory.create("Incursio.Classes.ArcherUnit", State.PlayerId.HUMAN);
             ArcherUnit archUnit2 = (ArcherUnit)factory.create("Incursio.Classes.ArcherUnit", State.PlayerId.COMPUTER);
             LightInfantryUnit infUnit3 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
+            CampStructure playerCamp = (CampStructure)factory.create("Incursio.Classes.CampStructure", State.PlayerId.HUMAN);
             //infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             infUnit1.setLocation(new Coordinate(300, 300));
             infUnit2.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             archUnit2.setLocation(new Coordinate(530, 510));
             infUnit3.setLocation(new Coordinate(500, 500)); //for ease of testing
             archUnit1.setLocation(new Coordinate(800, 200));
+            playerCamp.setLocation(new Coordinate(100, 400));
             //infUnit3.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             
             infUnit1.setHealth(80);
@@ -129,12 +136,14 @@ namespace Incursio
             infUnit3.setHealth(50);
             archUnit1.setHealth(90);
             archUnit2.setHealth(90);
+            playerCamp.setHealth(350);
 
             infUnit1.setMap(currentMap);
             infUnit2.setMap(currentMap);
             infUnit3.setMap(currentMap);
             archUnit1.setMap(currentMap);
             archUnit2.setMap(currentMap);
+            
 
             /*
             infUnit1.move(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
@@ -150,7 +159,7 @@ namespace Incursio
             humanPlayer = new Player();
             humanPlayer.id = State.PlayerId.HUMAN;
 
-            selectedUnits = new List<Unit>();
+            selectedUnits = new List<BaseGameEntity>();
             selectedUnits.Add(infUnit1);
             numUnitsSelected = 1;
 
@@ -243,6 +252,9 @@ namespace Incursio
             //heroWest = Content.Load<Texture2D>(@"");
             //heroSouth = Content.Load<Texture2D>(@"");
             //heroNorth = Content.Load<Texture2D>(@"");
+
+            //Load structure textures
+            campTexture = Content.Load<Texture2D>(@"CampFiller");
 
             //load overlays
             selectedUnitOverlayTexture = Content.Load<Texture2D>(@"selectedUnitOverlay");
@@ -338,6 +350,13 @@ namespace Incursio
                         {
                             case Keys.Escape: currentState = State.GameState.PausedPlay; break;
 
+                            case Keys.L:
+                                if (numUnitsSelected == 1 && selectedUnits[0].getType() == State.EntityName.Camp)
+                                {
+                                    (selectedUnits[0] as CampStructure).build(new LightInfantryUnit());
+                                }
+                                break;
+
                             case Keys.Enter://just so we can have a breakpoint whenever we want...
                                 //this.currentMap.printOccupancyGrid();
                                 break;
@@ -359,6 +378,8 @@ namespace Incursio
                             Vector2 point = cursor.getPos();
                             int selectionOffSetX = 0;
                             int selectionOffSetY = 0;
+                            int selectionWidth = 0;
+                            int selectionHeight = 0;
 
                             //find who i'm clicking
                             entityBank.ForEach(delegate(BaseGameEntity e)
@@ -369,39 +390,62 @@ namespace Incursio
                                     {
                                         selectionOffSetX = this.lightInfantrySouth.Width / 2;
                                         selectionOffSetY = (int)(this.lightInfantrySouth.Height * 0.80);
+                                        selectionWidth = this.lightInfantryEast.Width;
+                                        selectionHeight = this.lightInfantryEast.Height;
                                     }
-                                    Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, currentMap.getTileWidth(), currentMap.getTileHeight());
+                                    else if (e.getType() == State.EntityName.Camp)
+                                    {
+                                        selectionOffSetX = this.campTexture.Width / 2;
+                                        selectionOffSetY = (int)(this.campTexture.Height * 0.80);
+                                        selectionWidth = this.campTexture.Width;
+                                        selectionHeight = this.campTexture.Height;
+                                    }
+
+                                    //Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, currentMap.getTileWidth(), currentMap.getTileHeight());
+                                    Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, selectionWidth, selectionHeight);
                                     if(unit.Contains( new Point( Convert.ToInt32(point.X), Convert.ToInt32(point.Y)) ) ){
 
                                         if(e.getPlayer() == State.PlayerId.COMPUTER){
-                                            selectedUnits = new List<Unit>();
+                                            selectedUnits = new List<BaseGameEntity>();
                                             selectedUnits.Add(e as Unit);
                                             numUnitsSelected = 1;
                                         }
-                                        //else{
-                                        if(true){
-                                            if(numUnitsSelected == 1){
-                                                if (selectedUnits[0].getPlayer() == State.PlayerId.COMPUTER){
-                                                    selectedUnits = new List<Unit>();
+                                        else if (e.getType() == State.EntityName.Camp)
+                                        {
+                                            selectedUnits = new List<BaseGameEntity>();
+                                            selectedUnits.Add(e as Structure);
+                                            numUnitsSelected = 1;
+                                        }
+                                        else
+                                        {
+                                            if (numUnitsSelected == 1)
+                                            {
+                                                if (selectedUnits[0].getPlayer() == State.PlayerId.COMPUTER)
+                                                {
+                                                    selectedUnits = new List<BaseGameEntity>();
                                                     numUnitsSelected = 0;
                                                 }
                                             }
                                             bool newUnitIsSelected = selectedUnits.Contains(e as Unit);
-                                            if (shiftPressed){
+                                            if (shiftPressed)
+                                            {
                                                 //just add/remove new guy
-                                                if (newUnitIsSelected){
+                                                if (newUnitIsSelected)
+                                                {
                                                     selectedUnits.Remove(e as Unit);
                                                     numUnitsSelected--;
                                                 }
-                                                else if((e as Unit).getCurrentState() != State.UnitState.Dead){
+                                                else if ((e as Unit).getCurrentState() != State.UnitState.Dead)
+                                                {
                                                     selectedUnits.Add(e as Unit);
                                                     numUnitsSelected++;
                                                 }
                                             }
-                                            else{
+                                            else
+                                            {
                                                 //shift not pressed
 
-                                                selectedUnits = new List<Unit>();
+                                                selectedUnits = new List<BaseGameEntity>();
                                                 selectedUnits.Add(e as Unit);
                                                 numUnitsSelected = 1;
                                             }
@@ -411,7 +455,7 @@ namespace Incursio
                                 }
                             });
                             if(!done){   //not clicking a unit
-                                selectedUnits = new List<Unit>();
+                                selectedUnits = new List<BaseGameEntity>();
                                 numUnitsSelected = 0;
                             }
                         }
@@ -444,7 +488,7 @@ namespace Incursio
                                         //NOW, if unit is enemy, selected units attack!
                                         if (e.getPlayer() == State.PlayerId.COMPUTER)
                                         {
-                                            selectedUnits.ForEach(delegate(Unit u)
+                                            selectedUnits.ForEach(delegate(BaseGameEntity u)
                                             {
                                                 //u.attack(e);
                                                 (e as Unit).attack(u);
@@ -457,11 +501,12 @@ namespace Incursio
                             //NOT ENTITY, SO MOVE SELECTED UNITS
                             if (!done && numUnitsSelected > 0)
                             {
-                                selectedUnits.ForEach(delegate(Unit u)
+                                selectedUnits.ForEach(delegate(BaseGameEntity u)
                                 {
-                                    if (u.getPlayer() == State.PlayerId.HUMAN)
+                                    if (u.getPlayer() == State.PlayerId.HUMAN && 
+                                        u.getType() != State.EntityName.Camp && u.getType() != State.EntityName.GuardTower && u.getType() != State.EntityName.ControlPoint)
                                     {
-                                        u.move(new Coordinate(Convert.ToInt32(cursor.getPos().X), Convert.ToInt32(cursor.getPos().Y)), currentMap);
+                                        (u as Unit).move(new Coordinate(Convert.ToInt32(cursor.getPos().X), Convert.ToInt32(cursor.getPos().Y)), currentMap);
                                     }
                                 });
                             }
@@ -889,6 +934,34 @@ namespace Incursio
                                     this.heroSouth.Width, this.heroSouth.Height), Color.White);
                         }
                     }*/
+                    else if (e.getType() == State.EntityName.Camp)
+                    {
+                        e.visible = true;
+                        onScreen = currentMap.positionOnScreen(e.getLocation());
+                        Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+                        if ((e as CampStructure).getCurrentState() == State.StructureState.BeingBuilt)
+                        {
+                            //TODO: draw construction?
+                        }
+                        else if ((e as CampStructure).getCurrentState() == State.StructureState.Building)
+                        {
+                            //TODO: draw something special for when the structure is building something (fires flickering or w/e)
+                            spriteBatch.Draw(this.campTexture,
+                                new Rectangle(onScreen.x - (this.campTexture.Width / 2), onScreen.y - (int)(this.campTexture.Height * 0.80),
+                                    this.campTexture.Width, this.campTexture.Height), Color.White);
+                        }
+                        else if ((e as CampStructure).getCurrentState() == State.StructureState.Destroyed)
+                        {
+                            //TODO: building asploded
+                        }
+                        else if((e as CampStructure).getCurrentState() == State.StructureState.Idle)
+                        {
+                            spriteBatch.Draw(this.campTexture,
+                                new Rectangle(onScreen.x - (this.campTexture.Width / 2), onScreen.y - (int)(this.campTexture.Height * 0.80),
+                                    this.campTexture.Width, this.campTexture.Height), Color.White);
+                        }
+
+                    }
                     else
                         e.visible = false;
                 }
@@ -897,7 +970,7 @@ namespace Incursio
             });
 
             //show selection overlay on all visible selected units
-            selectedUnits.ForEach(delegate(Unit u)
+            selectedUnits.ForEach(delegate(BaseGameEntity u)
             {
                 if(currentMap.isOnScreen(u.getLocation())){
                     onScreen = currentMap.positionOnScreen(u.getLocation());

@@ -298,6 +298,15 @@
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Archer_Still.xnb</Output>
       <Time>2008-03-15T12:09:39.76125-04:00</Time>
     </Item>
+    <Item>
+      <Source>CampFiller.png</Source>
+      <Name>CampFiller</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\CampFiller.xnb</Output>
+      <Time>2008-03-17T11:49:00.495625-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
