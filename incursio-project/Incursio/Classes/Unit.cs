@@ -62,16 +62,12 @@ namespace Incursio.Classes
                             this.currentState = State.UnitState.Idle;
                         else
                         {
-                            if (target == null)
-                            {
-                                updateMovement();
-                            }
-                            else
+                            if (target != null)
                             {
                                 destination = target.location;
                             }
-                            
-                            //recalculateLocation();
+
+                            updateMovement();
                         }
 
                         break;
@@ -312,7 +308,7 @@ namespace Incursio.Classes
                 if (this.updateAttackTimer == this.attackSpeed * 60)    //this is the unit's attack time (attack every 1.5 seconds for example)
                 {
                     //basically, if we are attacking something that can attack back
-                    if (target.getType() == State.EntityName.Archer || target.getType() == State.EntityName.LightInfantry || 
+                    /*if (target.getType() == State.EntityName.Archer || target.getType() == State.EntityName.LightInfantry || 
                         target.getType() == State.EntityName.Hero   || target.getType() == State.EntityName.HeavyInfantry)
                     {
                         (target as Unit).takeDamage(this.damage, this);
@@ -335,7 +331,21 @@ namespace Incursio.Classes
                     else
                     {
                         target.takeDamage(this.damage);
+                    }*/
+
+                    target.takeDamage(this.damage, this);
+
+                    //if we just killed the thing
+                    if (target is Unit && (target as Unit).currentState == State.UnitState.Dead ||
+                       target is Structure && (target as Structure).getCurrentState() == State.StructureState.Destroyed)
+                    {
+                        //TODO:
+                        //add AI for attacking more enemies!
+                        //but for now:
+                        target = null;
+                        currentState = State.UnitState.Idle;
                     }
+
 
                     this.updateAttackTimer = 0;
                 }
