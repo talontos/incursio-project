@@ -45,8 +45,13 @@ namespace Incursio.Classes
                     case State.StructureState.Destroyed:
 
                         break;
-                    /////////////////////
 
+                    /////////////////////
+                    case State.StructureState.Attacking:
+                        attackTarget();
+                        break;
+
+                    /////////////////////
                     default: break;
                 }
             }
@@ -91,6 +96,11 @@ namespace Incursio.Classes
                 this.health = 0;
                 Incursio.getInstance().removeEntity(this.keyId);
             }
+        }
+
+        public virtual void attackTarget()
+        {
+            //really only used for guardtowers
         }
     }
 }
