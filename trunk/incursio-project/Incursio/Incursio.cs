@@ -73,6 +73,9 @@ namespace Incursio
         Texture2D campTexturePlayer;
         Texture2D campTextureComputer;
 
+        Texture2D guardTowerTexturePlayer;
+        Texture2D guardTowerTextureComputer;
+
         /////////////////////////////
 
         //map initialization
@@ -129,14 +132,18 @@ namespace Incursio
             CampStructure playerCamp = (CampStructure)factory.create("Incursio.Classes.CampStructure", State.PlayerId.HUMAN);
             CampStructure computerCamp = (CampStructure)factory.create("Incursio.Classes.CampStructure", State.PlayerId.COMPUTER);
 
+            GuardTowerStructure playerTower1 = (GuardTowerStructure)factory.create("Incursio.Classes.GuardTowerStructure", State.PlayerId.HUMAN);
+
             //infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             infUnit1.setLocation(new Coordinate(240, 380));
             infUnit2.setLocation(new Coordinate(200, 400));
-            archUnit2.setLocation(new Coordinate(820, 195));
+            //archUnit2.setLocation(new Coordinate(820, 195));
+            archUnit2.setLocation(new Coordinate(300, 200));
             infUnit3.setLocation(new Coordinate(800, 220)); //for ease of testing
             archUnit1.setLocation(new Coordinate(160, 395));
             playerCamp.setLocation(new Coordinate(100, 400));
             computerCamp.setLocation(new Coordinate(900, 200));
+            playerTower1.setLocation(new Coordinate(150, 340));
             //infUnit3.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             
             infUnit1.setHealth(80);
@@ -146,6 +153,7 @@ namespace Incursio
             archUnit2.setHealth(90);
             playerCamp.setHealth(350);
             computerCamp.setHealth(350);
+            playerTower1.setHealth(350);
 
             infUnit1.setMap(currentMap);
             infUnit2.setMap(currentMap);
@@ -154,6 +162,7 @@ namespace Incursio
             archUnit2.setMap(currentMap);
             playerCamp.setMap(currentMap);
             computerCamp.setMap(currentMap);
+            playerTower1.setMap(currentMap);
             
 
             /*
@@ -269,6 +278,9 @@ namespace Incursio
             //Load structure textures
             campTexturePlayer = Content.Load<Texture2D>(@"Fort_friendly");
             campTextureComputer = Content.Load<Texture2D>(@"Fort_hostile");
+
+            guardTowerTexturePlayer = Content.Load<Texture2D>(@"Tower_friendly");
+            guardTowerTextureComputer = Content.Load<Texture2D>(@"Tower_hostile");
 
             //load overlays
             selectedUnitOverlayTexture = Content.Load<Texture2D>(@"selectedUnitOverlay");
@@ -433,6 +445,13 @@ namespace Incursio
                                             selectionWidth = this.campTexturePlayer.Width;
                                             selectionHeight = this.campTexturePlayer.Height;
                                         }
+                                        else if (e.getType() == State.EntityName.GuardTower)
+                                        {
+                                            selectionOffSetX = this.guardTowerTextureComputer.Width / 2;
+                                            selectionOffSetY = (int)(this.guardTowerTextureComputer.Height * 0.80);
+                                            selectionWidth = this.guardTowerTextureComputer.Width;
+                                            selectionHeight = this.guardTowerTextureComputer.Height;
+                                        }
 
                                         //Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, currentMap.getTileWidth(), currentMap.getTileHeight());
                                         Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, selectionWidth, selectionHeight);
@@ -445,7 +464,7 @@ namespace Incursio
                                                 selectedUnits.Add(e as Unit);
                                                 numUnitsSelected = 1;
                                             }
-                                            else if (e.getType() == State.EntityName.Camp)
+                                            else if (e.getType() == State.EntityName.Camp || e.getType() == State.EntityName.GuardTower)
                                             {
                                                 selectedUnits = new List<BaseGameEntity>();
                                                 selectedUnits.Add(e as Structure);
@@ -505,10 +524,13 @@ namespace Incursio
                         {
                             int selectionOffSetX = 0;
                             int selectionOffSetY = 0;
+                            int selectionFillerX = 0;
+                            int selectionFillerY = 0;
 
                             //clicking entity
                             entityBank.ForEach(delegate(BaseGameEntity e)
                             {
+                                
                                 if (e.visible && (((e is Unit) && (e as Unit).getCurrentState() != State.UnitState.Dead && (e as Unit).getCurrentState() != State.UnitState.Buried) || ((e is Structure) && (e as Structure).getCurrentState() != State.StructureState.Destroyed)))
                                 { //only check visible ones so we don't waste time
                                     //adjust the selection rectangle to account for different unit sizes
@@ -517,13 +539,25 @@ namespace Incursio
                                         //since the textures are the same size
                                         selectionOffSetX = this.lightInfantrySouth.Width / 2;
                                         selectionOffSetY = (int)(this.lightInfantrySouth.Height * 0.80);
+                                        selectionFillerX = this.lightInfantrySouth.Width;
+                                        selectionFillerY = this.lightInfantrySouth.Height;
                                     }
                                     else if (e.getType() == State.EntityName.Camp)
                                     {
                                         selectionOffSetX = this.campTextureComputer.Width / 2;
                                         selectionOffSetY = (int)(this.campTextureComputer.Height * 0.80);
+                                        selectionFillerX = this.campTextureComputer.Width;
+                                        selectionFillerY = this.campTextureComputer.Height;
                                     }
-                                    Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, e.getLocation().x + selectionOffSetX, e.getLocation().y + selectionOffSetY);
+                                    else if (e.getType() == State.EntityName.GuardTower)
+                                    {
+                                        selectionOffSetX = this.guardTowerTextureComputer.Width / 2;
+                                        selectionOffSetY = (int)(this.guardTowerTextureComputer.Height * 0.80);
+                                        selectionFillerX = this.guardTowerTextureComputer.Width;
+                                        selectionFillerY = this.guardTowerTextureComputer.Height;
+                                    }
+
+                                    Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, selectionFillerX, selectionFillerY);
                                     if (unit.Contains(new Point(Convert.ToInt32(cursor.getPos().X), Convert.ToInt32(cursor.getPos().Y))))
                                     {
                                         //NOW, if unit is enemy, selected units attack!
@@ -532,7 +566,14 @@ namespace Incursio
                                             selectedUnits.ForEach(delegate(BaseGameEntity u)
                                             {
                                                 //e is the entity being clicked, and the target for all u
-                                                (u as Unit).attack(e);
+                                                if (u.getType() == State.EntityName.GuardTower)
+                                                {
+                                                    (u as GuardTowerStructure).attack(e);
+                                                }
+                                                else
+                                                {
+                                                    (u as Unit).attack(e);
+                                                }
                                             });
                                         }
                                         done = true;
@@ -1041,6 +1082,52 @@ namespace Incursio
                         }
 
                     }
+                    else if (e.getType() == State.EntityName.GuardTower)
+                    {
+                        e.visible = true;
+                        onScreen = currentMap.positionOnScreen(e.getLocation());
+                        Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+                        if ((e as GuardTowerStructure).getCurrentState() == State.StructureState.BeingBuilt)
+                        {
+                            //TODO: draw construction?
+                        }
+                        else if ((e as GuardTowerStructure).getCurrentState() == State.StructureState.Building)
+                        {
+                            //TODO: draw something special for when the structure is building something (fires flickering or w/e)
+                            if (e.getPlayer() == State.PlayerId.HUMAN)
+                            {
+                                spriteBatch.Draw(this.guardTowerTexturePlayer,
+                                    new Rectangle(onScreen.x - (this.guardTowerTexturePlayer.Width / 2), onScreen.y - (int)(this.guardTowerTexturePlayer.Height * 0.80),
+                                    this.guardTowerTexturePlayer.Width, this.guardTowerTexturePlayer.Height), Color.White);
+                            }
+                            else
+                            {
+                                spriteBatch.Draw(this.guardTowerTextureComputer,
+                                    new Rectangle(onScreen.x - (this.guardTowerTextureComputer.Width / 2), onScreen.y - (int)(this.guardTowerTextureComputer.Height * 0.80),
+                                    this.guardTowerTextureComputer.Width, this.guardTowerTextureComputer.Height), Color.White);
+                            }
+
+                        }
+                        else if ((e as GuardTowerStructure).getCurrentState() == State.StructureState.Destroyed)
+                        {
+                            //TODO: building asploded
+                        }
+                        else if ((e as GuardTowerStructure).getCurrentState() == State.StructureState.Idle || (e as GuardTowerStructure).getCurrentState() == State.StructureState.Attacking)
+                        {
+                            if (e.getPlayer() == State.PlayerId.HUMAN)
+                            {
+                                spriteBatch.Draw(this.guardTowerTexturePlayer,
+                                    new Rectangle(onScreen.x - (this.guardTowerTexturePlayer.Width / 2), onScreen.y - (int)(this.guardTowerTexturePlayer.Height * 0.80),
+                                    this.guardTowerTexturePlayer.Width, this.guardTowerTexturePlayer.Height), Color.White);
+                            }
+                            else
+                            {
+                                spriteBatch.Draw(this.guardTowerTextureComputer,
+                                    new Rectangle(onScreen.x - (this.guardTowerTextureComputer.Width / 2), onScreen.y - (int)(this.guardTowerTextureComputer.Height * 0.80),
+                                    this.guardTowerTextureComputer.Width, this.guardTowerTextureComputer.Height), Color.White);
+                            }
+                        }
+                    }
                     else
                         e.visible = false;
                 }
@@ -1083,6 +1170,13 @@ namespace Incursio
                         yOffSet = (int)(this.campTextureComputer.Height * 0.80) + 15;
                         width = campTextureComputer.Width + 50;
                         height = campTextureComputer.Height + 40;
+                    }
+                    else if (u.getType() == State.EntityName.GuardTower)
+                    {
+                        xOffSet = (int)(this.guardTowerTextureComputer.Width / 2) + 18;
+                        yOffSet = (int)(this.guardTowerTextureComputer.Height * 0.80) + 20;
+                        width = guardTowerTextureComputer.Width + 30;
+                        height = guardTowerTextureComputer.Height + 40;
                     }
 
                     spriteBatch.Draw(this.selectedUnitOverlayTexture,

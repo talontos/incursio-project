@@ -219,8 +219,18 @@ namespace Incursio.Classes
         /// <param name="targetEntity">Target entity</param>
         public virtual void attack(BaseGameEntity targetEntity)
         {
-            this.currentState = State.UnitState.Attacking;
-            this.target = targetEntity;
+            /*this.currentState = State.UnitState.Attacking;
+            this.target = targetEntity;*/
+            if (targetEntity is Unit && ((targetEntity as Unit).getCurrentState() != State.UnitState.Dead && (targetEntity as Unit).getCurrentState() != State.UnitState.Buried))
+            {
+                this.currentState = State.UnitState.Attacking;
+                this.target = targetEntity;
+            }
+            else if (targetEntity is Structure && (targetEntity as Structure).getCurrentState() != State.StructureState.Destroyed)
+            {
+                this.currentState = State.UnitState.Attacking;
+                this.target = targetEntity;
+            }
         }
 
         //Getters & Setters
@@ -305,8 +315,12 @@ namespace Incursio.Classes
             {
                 largeTargetBufferZone = (int)(64 / map.getTileWidth());
             }
+            else if (target.getType() == State.EntityName.GuardTower)
+            {
+                largeTargetBufferZone = (int)(64 / map.getTileWidth());
+            }
 
-            if(Incursio.getInstance().currentMap.getCellDistance(location, target.location) <= attackRange + largeTargetBufferZone){
+            if(Incursio.getInstance().currentMap.getCellDistance(location, target.location) < attackRange + largeTargetBufferZone){
                 //TODO: do some math randomizing damage?
                 if (this.updateAttackTimer == this.attackSpeed * 60)    //this is the unit's attack time (attack every 1.5 seconds for example)
                 {
@@ -339,7 +353,7 @@ namespace Incursio.Classes
                     target.takeDamage(this.damage, this);
 
                     //if we just killed the thing
-                    if (target is Unit && (target as Unit).currentState == State.UnitState.Dead ||
+                    if (target is Unit && (target as Unit).getCurrentState() == State.UnitState.Dead ||
                        target is Structure && (target as Structure).getCurrentState() == State.StructureState.Destroyed)
                     {
                         //TODO:

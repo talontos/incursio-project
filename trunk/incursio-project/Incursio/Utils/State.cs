@@ -53,6 +53,8 @@ namespace Incursio
             Building,
 
             Destroyed,
+
+            Attacking,  //for guard towers
         }
 
         public enum HealthStates
