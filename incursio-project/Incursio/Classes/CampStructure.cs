@@ -10,9 +10,9 @@ namespace Incursio.Classes
     public class CampStructure : Structure
     {
         //constants
-        const int LIGHT_INFANTRY_BUILD_TIME = 15;
-        const int HEAVY_INFANTRY_BUILD_TIME = 25;
-        const int ARCHER_BUILD_TIME = 15;
+        const int LIGHT_INFANTRY_BUILD_TIME = 5;
+        const int HEAVY_INFANTRY_BUILD_TIME = 10;
+        const int ARCHER_BUILD_TIME = 7;
         const int GUARD_TOWER_BUILD_TIME = 90;
         const int ITEM_UPGRADE_BUILD_TIME = 90;
 
@@ -88,6 +88,8 @@ namespace Incursio.Classes
                     timeBuilt = 0;
                     timeRequired = 0;
                     this.currentState = State.StructureState.Idle;
+
+                    this.buildProject = null;
                 }
                 else
                 {

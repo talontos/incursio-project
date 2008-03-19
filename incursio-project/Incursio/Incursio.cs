@@ -693,7 +693,8 @@ namespace Incursio
         {
             if (keyId >= 0 && keyId <= entityBank.Count)
             {
-                this.entityBank.RemoveAt(keyId);
+                (this.entityBank[keyId] as Unit).setCurrentState(State.UnitState.Buried);
+                //this.entityBank.RemoveAt(keyId);
             }
         }
 
@@ -712,7 +713,9 @@ namespace Incursio
             //draw all visible units
             entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (currentMap.isOnScreen(e.getLocation()))
+                if (e is Unit && (e as Unit).getCurrentState() == State.UnitState.Buried)
+                {}
+                else if (currentMap.isOnScreen(e.getLocation()))
                 {
                     if (e.getType() == State.EntityName.LightInfantry)
                     {

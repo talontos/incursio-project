@@ -40,6 +40,8 @@ namespace Incursio
 
             Dead,
 
+            Buried,
+
         }
 
         public enum StructureState  //states of a building
