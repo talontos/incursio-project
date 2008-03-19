@@ -34,7 +34,7 @@ namespace Incursio.Classes
 
         }
 
-        public virtual void takeDamage(int damage){
+        public virtual void takeDamage(int damage, BaseGameEntity attacker){
             //TODO: some math using my armor
             this.health -= damage;
             if (this.health < 0)
