@@ -36,10 +36,6 @@ namespace Incursio.Classes
 
         public override void Update(GameTime gameTime)
         {
-            //check health for death...
-            if (health <= 0)
-                die();
-
             //only perform actions when we are actively playing a map
             if (Incursio.getInstance().currentState == State.GameState.InPlay)
             {
