@@ -239,7 +239,7 @@ namespace Incursio.Classes
         }
 
         //since units can take damage and then give damage, we'll set up a function just for them
-        public virtual void takeDamage(int damage, BaseGameEntity attacker)
+        public override void takeDamage(int damage, BaseGameEntity attacker)
         {
             //TODO: some math using my armor
             this.health -= damage;
