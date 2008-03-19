@@ -17,6 +17,7 @@ namespace Incursio.Classes
         public int  sightRange = 0;
         public State.PlayerId owner;
         public Coordinate location = new Coordinate(0,0);
+        protected MapBase map;
         public int keyId = -1;
         public bool visible = false;
         public bool highlighted = false;

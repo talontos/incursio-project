@@ -46,16 +46,25 @@ namespace Incursio.Classes
         {
             this.width = width / TILE_WIDTH;
             this.height = height / TILE_HEIGHT;
-            this.tileGrid = new BaseMapEntity[width, height];
-            this.occupancyGrid = new bool[width, height];
+            this.tileGrid = new BaseMapEntity[this.width, this.height];
+            this.occupancyGrid = new bool[this.width, this.height];
             this.minViewableX = 0;
             this.minViewableY = 0;
             this.maxViewableX = screenWidth / TILE_WIDTH;
             this.maxViewableY = screenHeight / TILE_HEIGHT;
             this.cameraMovePause = 0;
+
+            //initialize occupancyGrid
+            for (int j = 0; j < this.height; j++)
+            {
+                for (int i = 0; i < this.width; i++)
+                {
+                    occupancyGrid[i, j] = true;
+                }
+            }
         }
 
-        public void update(Keys []keysPressed, int screenWidth, int screenHeight)
+        public void update(Keys[] keysPressed, int screenWidth, int screenHeight)
         {
 
             for (int i = 0; i < keysPressed.Length; i++)    //scan through the keys being pressed down

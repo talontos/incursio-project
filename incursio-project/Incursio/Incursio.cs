@@ -121,17 +121,22 @@ namespace Incursio
             //testing unit creation/placement/moving///
             LightInfantryUnit infUnit1 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
             LightInfantryUnit infUnit2 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
+            LightInfantryUnit infUnit3 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
+
             ArcherUnit archUnit1 = (ArcherUnit)factory.create("Incursio.Classes.ArcherUnit", State.PlayerId.HUMAN);
             ArcherUnit archUnit2 = (ArcherUnit)factory.create("Incursio.Classes.ArcherUnit", State.PlayerId.COMPUTER);
-            LightInfantryUnit infUnit3 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
+
             CampStructure playerCamp = (CampStructure)factory.create("Incursio.Classes.CampStructure", State.PlayerId.HUMAN);
+            CampStructure computerCamp = (CampStructure)factory.create("Incursio.Classes.CampStructure", State.PlayerId.COMPUTER);
+
             //infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
-            infUnit1.setLocation(new Coordinate(300, 300));
-            infUnit2.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
-            archUnit2.setLocation(new Coordinate(530, 510));
-            infUnit3.setLocation(new Coordinate(500, 500)); //for ease of testing
-            archUnit1.setLocation(new Coordinate(800, 200));
+            infUnit1.setLocation(new Coordinate(240, 380));
+            infUnit2.setLocation(new Coordinate(200, 400));
+            archUnit2.setLocation(new Coordinate(820, 195));
+            infUnit3.setLocation(new Coordinate(800, 220)); //for ease of testing
+            archUnit1.setLocation(new Coordinate(160, 395));
             playerCamp.setLocation(new Coordinate(100, 400));
+            computerCamp.setLocation(new Coordinate(900, 200));
             //infUnit3.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             
             infUnit1.setHealth(80);
@@ -140,12 +145,15 @@ namespace Incursio
             archUnit1.setHealth(90);
             archUnit2.setHealth(90);
             playerCamp.setHealth(350);
+            computerCamp.setHealth(350);
 
             infUnit1.setMap(currentMap);
             infUnit2.setMap(currentMap);
             infUnit3.setMap(currentMap);
             archUnit1.setMap(currentMap);
             archUnit2.setMap(currentMap);
+            playerCamp.setMap(currentMap);
+            computerCamp.setMap(currentMap);
             
 
             /*
@@ -363,6 +371,13 @@ namespace Incursio
                                 }
                                 break;
 
+                            case Keys.A:
+                                if (numUnitsSelected == 1 && selectedUnits[0].getType() == State.EntityName.Camp)
+                                {
+                                    (selectedUnits[0] as CampStructure).build(new ArcherUnit());
+                                }
+                                break;
+
                             case Keys.Enter://just so we can have a breakpoint whenever we want...
                                 //this.currentMap.printOccupancyGrid();
                                 break;
@@ -390,74 +405,89 @@ namespace Incursio
                             //find who i'm clicking
                             entityBank.ForEach(delegate(BaseGameEntity e)
                             {
-                                if(e.visible){ //only check visible ones so we don't waste time
-                                    //adjust the selection rectangle to account for different unit sizes
-                                    if (e.getType() == State.EntityName.LightInfantry || e.getType() == State.EntityName.Archer)
-                                    {
-                                        selectionOffSetX = this.lightInfantrySouth.Width / 2;
-                                        selectionOffSetY = (int)(this.lightInfantrySouth.Height * 0.80);
-                                        selectionWidth = this.lightInfantryEast.Width;
-                                        selectionHeight = this.lightInfantryEast.Height;
-                                    }
-                                    else if (e.getType() == State.EntityName.Camp)
-                                    {
-                                        selectionOffSetX = this.campTexturePlayer.Width / 2;
-                                        selectionOffSetY = (int)(this.campTexturePlayer.Height * 0.80);
-                                        selectionWidth = this.campTexturePlayer.Width;
-                                        selectionHeight = this.campTexturePlayer.Height;
-                                    }
+                                if ((e is Unit) && (e as Unit).getCurrentState() == State.UnitState.Buried)
+                                {
+                                    //do nothing
+                                }
+                                else if ((e is Structure) && (e as Structure).getCurrentState() == State.StructureState.Destroyed)
+                                {
+                                    //do nothing
+                                }
+                                else
+                                {
+                                    if (e.visible)
+                                    { //only check visible ones so we don't waste time
 
-                                    //Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, currentMap.getTileWidth(), currentMap.getTileHeight());
-                                    Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, selectionWidth, selectionHeight);
-                                    if(unit.Contains( new Point( Convert.ToInt32(point.X), Convert.ToInt32(point.Y)) ) ){
-
-                                        if(e.getPlayer() == State.PlayerId.COMPUTER){
-                                            selectedUnits = new List<BaseGameEntity>();
-                                            selectedUnits.Add(e as Unit);
-                                            numUnitsSelected = 1;
+                                        //adjust the selection rectangle to account for different unit sizes
+                                        if (e.getType() == State.EntityName.LightInfantry || e.getType() == State.EntityName.Archer)
+                                        {
+                                            selectionOffSetX = this.lightInfantrySouth.Width / 2;
+                                            selectionOffSetY = (int)(this.lightInfantrySouth.Height * 0.80);
+                                            selectionWidth = this.lightInfantryEast.Width;
+                                            selectionHeight = this.lightInfantryEast.Height;
                                         }
                                         else if (e.getType() == State.EntityName.Camp)
                                         {
-                                            selectedUnits = new List<BaseGameEntity>();
-                                            selectedUnits.Add(e as Structure);
-                                            numUnitsSelected = 1;
+                                            selectionOffSetX = this.campTexturePlayer.Width / 2;
+                                            selectionOffSetY = (int)(this.campTexturePlayer.Height * 0.80);
+                                            selectionWidth = this.campTexturePlayer.Width;
+                                            selectionHeight = this.campTexturePlayer.Height;
                                         }
-                                        else
-                                        {
-                                            if (numUnitsSelected == 1)
-                                            {
-                                                if (selectedUnits[0].getPlayer() == State.PlayerId.COMPUTER)
-                                                {
-                                                    selectedUnits = new List<BaseGameEntity>();
-                                                    numUnitsSelected = 0;
-                                                }
-                                            }
-                                            bool newUnitIsSelected = selectedUnits.Contains(e as Unit);
-                                            if (shiftPressed)
-                                            {
-                                                //just add/remove new guy
-                                                if (newUnitIsSelected)
-                                                {
-                                                    selectedUnits.Remove(e as Unit);
-                                                    numUnitsSelected--;
-                                                }
-                                                else if ((e as Unit).getCurrentState() != State.UnitState.Dead)
-                                                {
-                                                    selectedUnits.Add(e as Unit);
-                                                    numUnitsSelected++;
-                                                }
-                                            }
-                                            else
-                                            {
-                                                //shift not pressed
 
+                                        //Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, currentMap.getTileWidth(), currentMap.getTileHeight());
+                                        Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, selectionWidth, selectionHeight);
+                                        if (unit.Contains(new Point(Convert.ToInt32(point.X), Convert.ToInt32(point.Y))))
+                                        {
+
+                                            if (e.getPlayer() == State.PlayerId.COMPUTER && e is Unit)
+                                            {
                                                 selectedUnits = new List<BaseGameEntity>();
                                                 selectedUnits.Add(e as Unit);
                                                 numUnitsSelected = 1;
                                             }
+                                            else if (e.getType() == State.EntityName.Camp)
+                                            {
+                                                selectedUnits = new List<BaseGameEntity>();
+                                                selectedUnits.Add(e as Structure);
+                                                numUnitsSelected = 1;
+                                            }
+                                            else
+                                            {
+                                                if (numUnitsSelected == 1)
+                                                {
+                                                    if (selectedUnits[0].getPlayer() == State.PlayerId.COMPUTER)
+                                                    {
+                                                        selectedUnits = new List<BaseGameEntity>();
+                                                        numUnitsSelected = 0;
+                                                    }
+                                                }
+                                                bool newUnitIsSelected = selectedUnits.Contains(e as Unit);
+                                                if (shiftPressed)
+                                                {
+                                                    //just add/remove new guy
+                                                    if (newUnitIsSelected)
+                                                    {
+                                                        selectedUnits.Remove(e as Unit);
+                                                        numUnitsSelected--;
+                                                    }
+                                                    else if ((e as Unit).getCurrentState() != State.UnitState.Dead)
+                                                    {
+                                                        selectedUnits.Add(e as Unit);
+                                                        numUnitsSelected++;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    //shift not pressed
+
+                                                    selectedUnits = new List<BaseGameEntity>();
+                                                    selectedUnits.Add(e as Unit);
+                                                    numUnitsSelected = 1;
+                                                }
+                                            }
+                                            done = true;
                                         }
-                                        done = true;
-                                    }
+                                    } 
                                 }
                             });
                             if(!done){   //not clicking a unit
@@ -479,7 +509,7 @@ namespace Incursio
                             //clicking entity
                             entityBank.ForEach(delegate(BaseGameEntity e)
                             {
-                                if (e.visible)
+                                if (e.visible && (((e is Unit) && (e as Unit).getCurrentState() != State.UnitState.Dead && (e as Unit).getCurrentState() != State.UnitState.Buried) || ((e is Structure) && (e as Structure).getCurrentState() != State.StructureState.Destroyed)))
                                 { //only check visible ones so we don't waste time
                                     //adjust the selection rectangle to account for different unit sizes
                                     if (e.getType() == State.EntityName.LightInfantry || e.getType() == State.EntityName.Archer)
@@ -488,7 +518,12 @@ namespace Incursio
                                         selectionOffSetX = this.lightInfantrySouth.Width / 2;
                                         selectionOffSetY = (int)(this.lightInfantrySouth.Height * 0.80);
                                     }
-                                    Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, currentMap.getTileWidth(), currentMap.getTileHeight());
+                                    else if (e.getType() == State.EntityName.Camp)
+                                    {
+                                        selectionOffSetX = this.campTextureComputer.Width / 2;
+                                        selectionOffSetY = (int)(this.campTextureComputer.Height * 0.80);
+                                    }
+                                    Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, e.getLocation().x + selectionOffSetX, e.getLocation().y + selectionOffSetY);
                                     if (unit.Contains(new Point(Convert.ToInt32(cursor.getPos().X), Convert.ToInt32(cursor.getPos().Y))))
                                     {
                                         //NOW, if unit is enemy, selected units attack!
@@ -693,8 +728,15 @@ namespace Incursio
         {
             if (keyId >= 0 && keyId <= entityBank.Count)
             {
-                (this.entityBank[keyId] as Unit).setCurrentState(State.UnitState.Buried);
-                //this.entityBank.RemoveAt(keyId);
+                if (this.entityBank[keyId] is Unit)
+                {
+                    (this.entityBank[keyId] as Unit).setCurrentState(State.UnitState.Buried);
+                }
+                else if (this.entityBank[keyId] is Structure)
+                {
+                    (this.entityBank[keyId] as Structure).setCurrentState(State.StructureState.Destroyed);
+                }
+                
             }
         }
 
@@ -1035,6 +1077,13 @@ namespace Incursio
                         width = archerSouth.Width + 20;
                         height = archerSouth.Height + 15;
                     }
+                    else if (u.getType() == State.EntityName.Camp)
+                    {
+                        xOffSet = (int)(this.campTextureComputer.Width / 2) + 32;
+                        yOffSet = (int)(this.campTextureComputer.Height * 0.80) + 15;
+                        width = campTextureComputer.Width + 50;
+                        height = campTextureComputer.Height + 40;
+                    }
 
                     spriteBatch.Draw(this.selectedUnitOverlayTexture,
                         new Rectangle(onScreen.x - xOffSet, onScreen.y - yOffSet, width, height),
@@ -1043,13 +1092,13 @@ namespace Incursio
                     if (u.getPlayer() == State.PlayerId.HUMAN)
                     {
                         spriteBatch.Draw(this.healthRatioTexture,
-                            new Rectangle(onScreen.x - xOffSet + 3 + (int)(this.selectedUnitOverlayTexture.Width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
+                            new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
                             Color.Lime);
                     }
                     else
                     {
                         spriteBatch.Draw(this.healthRatioTexture,
-                            new Rectangle(onScreen.x - xOffSet + 3 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
+                            new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
                             Color.Red);
                     }
                    

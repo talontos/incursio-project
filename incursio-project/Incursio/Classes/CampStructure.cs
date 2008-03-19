@@ -28,6 +28,7 @@ namespace Incursio.Classes
             this.health = 350;
             this.sightRange = 500;
             this.setType(State.EntityName.Camp);
+            this.map = Incursio.getInstance().currentMap;
         }
 
         public override void build(BaseGameEntity toBeBuilt)
@@ -105,6 +106,22 @@ namespace Incursio.Classes
         public String getCurrentlyBuilding()
         {
             return currentlyBuildingThis;
+        }
+
+        public override void setLocation(Coordinate coords)
+        {
+                //hardcode blargh
+                int xStart = coords.x - 32;
+                int yStart = coords.y - (int)(64 * 0.80);
+                int xEnd = coords.x + 32;
+                int yEnd = coords.y + (int)(64 * 0.20);
+
+                map.setSingleCellOccupancy(xStart, yStart, false);
+                map.setSingleCellOccupancy(xStart, yEnd, false);
+                map.setSingleCellOccupancy(xEnd, yStart, false);
+                map.setSingleCellOccupancy(xEnd, yEnd, false);
+
+                base.setLocation(coords);
         }
     }
 }

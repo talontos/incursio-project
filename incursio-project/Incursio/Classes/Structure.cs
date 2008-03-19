@@ -76,5 +76,21 @@ namespace Incursio.Classes
         {
 
         }
+
+        public virtual void setMap(MapBase map)
+        {
+            this.map = map;
+        }
+
+        public override void takeDamage(int damage, BaseGameEntity attacker)
+        {
+            //TODO: some math using my armor
+            this.health -= damage;
+            if (this.health <= 0)
+            {
+                this.health = 0;
+                Incursio.getInstance().removeEntity(this.keyId);
+            }
+        }
     }
 }
