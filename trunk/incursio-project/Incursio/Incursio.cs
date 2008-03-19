@@ -496,10 +496,11 @@ namespace Incursio
                                         {
                                             selectedUnits.ForEach(delegate(BaseGameEntity u)
                                             {
-                                                //u.attack(e);
-                                                (e as Unit).attack(u);
+                                                //e is the entity being clicked, and the target for all u
+                                                (u as Unit).attack(e);
                                             });
                                         }
+                                        done = true;
                                     }
                                 }
                             });
