@@ -55,11 +55,13 @@ namespace Incursio
         Texture2D lightInfantryWest;
         Texture2D lightInfantrySouth;
         Texture2D lightInfantryNorth;
+        Texture2D lightInfantryDead;
 
         Texture2D archerEast;
         Texture2D archerWest;
         Texture2D archerSouth;
         Texture2D archerNorth;
+        Texture2D archerDead;
 
         Texture2D heroEast;
         Texture2D heroWest;
@@ -68,7 +70,8 @@ namespace Incursio
         /////////////////////////////
 
         //Structure Textures/////////
-        Texture2D campTexture;
+        Texture2D campTexturePlayer;
+        Texture2D campTextureComputer;
 
         /////////////////////////////
 
@@ -241,11 +244,13 @@ namespace Incursio
             lightInfantryWest = Content.Load<Texture2D>(@"infantry_left");
             lightInfantrySouth = Content.Load<Texture2D>(@"infantry_still");
             lightInfantryNorth = Content.Load<Texture2D>(@"infantry_back");
+            lightInfantryDead = Content.Load<Texture2D>(@"infantry_dead");
 
             archerEast = Content.Load<Texture2D>(@"archer_right");
             archerWest = Content.Load<Texture2D>(@"archer_left");
             archerSouth = Content.Load<Texture2D>(@"archer_Still");
             archerNorth = Content.Load<Texture2D>(@"archer_Back");
+            archerDead = Content.Load<Texture2D>(@"Archer_dead");
 
             //TODO: get hero textures
             //heroEast = Content.Load<Texture2D>(@"");
@@ -254,7 +259,8 @@ namespace Incursio
             //heroNorth = Content.Load<Texture2D>(@"");
 
             //Load structure textures
-            campTexture = Content.Load<Texture2D>(@"CampFiller");
+            campTexturePlayer = Content.Load<Texture2D>(@"Fort_friendly");
+            campTextureComputer = Content.Load<Texture2D>(@"Fort_hostile");
 
             //load overlays
             selectedUnitOverlayTexture = Content.Load<Texture2D>(@"selectedUnitOverlay");
@@ -395,10 +401,10 @@ namespace Incursio
                                     }
                                     else if (e.getType() == State.EntityName.Camp)
                                     {
-                                        selectionOffSetX = this.campTexture.Width / 2;
-                                        selectionOffSetY = (int)(this.campTexture.Height * 0.80);
-                                        selectionWidth = this.campTexture.Width;
-                                        selectionHeight = this.campTexture.Height;
+                                        selectionOffSetX = this.campTexturePlayer.Width / 2;
+                                        selectionOffSetY = (int)(this.campTexturePlayer.Height * 0.80);
+                                        selectionWidth = this.campTexturePlayer.Width;
+                                        selectionHeight = this.campTexturePlayer.Height;
                                     }
 
                                     //Rectangle unit = new Rectangle(e.getLocation().x - selectionOffSetX, e.getLocation().y - selectionOffSetY, currentMap.getTileWidth(), currentMap.getTileHeight());
@@ -682,6 +688,14 @@ namespace Incursio
             return entityBank[keyId];
         }
 
+        public void removeEntity(int keyId)
+        {
+            if (keyId >= 0 && keyId <= entityBank.Count)
+            {
+                this.entityBank.RemoveAt(keyId);
+            }
+        }
+
         /// <summary>
         /// drawEntity() goes through the entityBank and draws all entities that are presently on the screen
         /// </summary>
@@ -751,9 +765,9 @@ namespace Incursio
                         {
                             //TODO:
                             //Dead stuff
-                            spriteBatch.Draw(this.lightInfantrySouth,
-                                    new Rectangle(onScreen.x - (this.lightInfantrySouth.Width / 2), onScreen.y - (int)(this.lightInfantrySouth.Height * 0.80),
-                                    this.lightInfantrySouth.Width, this.lightInfantrySouth.Height), Color.Black);
+                            spriteBatch.Draw(this.lightInfantryDead,
+                                    new Rectangle(onScreen.x - (this.lightInfantryDead.Width / 2), onScreen.y - (int)(this.lightInfantryDead.Height * 0.80),
+                                    this.lightInfantryDead.Width, this.lightInfantryDead.Height), Color.White);
                         }
                         else if ((e as LightInfantryUnit).getCurrentState() == State.UnitState.Guarding)
                         {
@@ -833,9 +847,9 @@ namespace Incursio
                         {
                             //TODO:
                             //Dead stuff
-                            spriteBatch.Draw(this.archerSouth,
-                                    new Rectangle(onScreen.x - (this.archerSouth.Width / 2), onScreen.y - (int)(this.archerSouth.Height * 0.80),
-                                    this.archerSouth.Width, this.archerSouth.Height), Color.Black);
+                            spriteBatch.Draw(this.archerDead,
+                                    new Rectangle(onScreen.x - (this.archerDead.Width / 2), onScreen.y - (int)(this.archerDead.Height * 0.80),
+                                    this.archerDead.Width, this.archerDead.Height), Color.White);
                         }
                         else if ((e as ArcherUnit).getCurrentState() == State.UnitState.Guarding)
                         {
@@ -946,9 +960,19 @@ namespace Incursio
                         else if ((e as CampStructure).getCurrentState() == State.StructureState.Building)
                         {
                             //TODO: draw something special for when the structure is building something (fires flickering or w/e)
-                            spriteBatch.Draw(this.campTexture,
-                                new Rectangle(onScreen.x - (this.campTexture.Width / 2), onScreen.y - (int)(this.campTexture.Height * 0.80),
-                                    this.campTexture.Width, this.campTexture.Height), Color.White);
+                            if (e.getPlayer() == State.PlayerId.HUMAN)
+                            {
+                                spriteBatch.Draw(this.campTexturePlayer,
+                                    new Rectangle(onScreen.x - (this.campTexturePlayer.Width / 2), onScreen.y - (int)(this.campTexturePlayer.Height * 0.80),
+                                    this.campTexturePlayer.Width, this.campTexturePlayer.Height), Color.White);
+                            }
+                            else
+                            {
+                                spriteBatch.Draw(this.campTextureComputer,
+                                    new Rectangle(onScreen.x - (this.campTextureComputer.Width / 2), onScreen.y - (int)(this.campTextureComputer.Height * 0.80),
+                                    this.campTextureComputer.Width, this.campTextureComputer.Height), Color.White);
+                            }
+                            
                         }
                         else if ((e as CampStructure).getCurrentState() == State.StructureState.Destroyed)
                         {
@@ -956,9 +980,18 @@ namespace Incursio
                         }
                         else if((e as CampStructure).getCurrentState() == State.StructureState.Idle)
                         {
-                            spriteBatch.Draw(this.campTexture,
-                                new Rectangle(onScreen.x - (this.campTexture.Width / 2), onScreen.y - (int)(this.campTexture.Height * 0.80),
-                                    this.campTexture.Width, this.campTexture.Height), Color.White);
+                            if (e.getPlayer() == State.PlayerId.HUMAN)
+                            {
+                                spriteBatch.Draw(this.campTexturePlayer,
+                                    new Rectangle(onScreen.x - (this.campTexturePlayer.Width / 2), onScreen.y - (int)(this.campTexturePlayer.Height * 0.80),
+                                    this.campTexturePlayer.Width, this.campTexturePlayer.Height), Color.White);
+                            }
+                            else
+                            {
+                                spriteBatch.Draw(this.campTextureComputer,
+                                    new Rectangle(onScreen.x - (this.campTextureComputer.Width / 2), onScreen.y - (int)(this.campTextureComputer.Height * 0.80),
+                                    this.campTextureComputer.Width, this.campTextureComputer.Height), Color.White);
+                            }
                         }
 
                     }

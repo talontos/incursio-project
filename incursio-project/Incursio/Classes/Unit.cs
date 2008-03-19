@@ -8,12 +8,15 @@ namespace Incursio.Classes
 {
     public class Unit : BaseGameEntity
     {
+        protected const int TIME_DEAD_UNTIL_DESPAWN = 5;
+
         protected int damage = 0;
         protected int armor = 0;
         protected int speed = 0;
         protected int attackSpeed = 0;
         protected int updateAttackTimer = 0;
         protected int attackRange = 0;
+        protected int deadTimer = 0;
         protected State.UnitState currentState = State.UnitState.Idle;
         protected State.Direction directionState = State.Direction.Still;
         protected MapBase map;
@@ -82,6 +85,11 @@ namespace Incursio.Classes
                     case State.UnitState.Idle:
                         //TODO: change; this is temporary
                         //this.currentState = State.UnitState.Wandering;
+                        break;
+
+                    ///////////////////////////////
+                    case State.UnitState.Dead:
+                        die();
                         break;
 
                     ///////////////////////////////
@@ -345,6 +353,16 @@ namespace Incursio.Classes
             //  It'd be a waste of memory to just leave them in the entityBank,
             //    but then we'd have to reassign keyIds.
             //  But do we need to remove them?
+            if (deadTimer == TIME_DEAD_UNTIL_DESPAWN * 60)
+            {
+                map.setSingleCellOccupancy(this.location.x, this.location.y, true);
+                Incursio.getInstance().removeEntity(this.keyId);
+                deadTimer++;
+            }
+            else
+            {
+                deadTimer++;
+            }
         }
 
         protected virtual void updateDirectionTexture(){

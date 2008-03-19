@@ -39,3 +39,8 @@ bin\x86\Debug\Content\Archer_left.xnb
 bin\x86\Debug\Content\Archer_right.xnb
 bin\x86\Debug\Content\Archer_Still.xnb
 bin\x86\Debug\Content\CampFiller.xnb
+bin\x86\Debug\Content\Archer_dead.xnb
+bin\x86\Debug\Content\Fort_friendly.xnb
+bin\x86\Debug\Content\Fort_hostile.xnb
+bin\x86\Debug\Content\Fort_neutral.xnb
+bin\x86\Debug\Content\infantry_dead.xnb
