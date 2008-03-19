@@ -19,7 +19,6 @@ namespace Incursio.Classes
         protected int deadTimer = 0;
         protected State.UnitState currentState = State.UnitState.Idle;
         protected State.Direction directionState = State.Direction.Still;
-        protected MapBase map;
         protected bool isClose = false;
 
         public Coordinate destination = null;
@@ -299,7 +298,15 @@ namespace Incursio.Classes
         /// </summary>
         protected virtual void attackTarget(){
             //if target is in attackRange, attack it.
-            if(Incursio.getInstance().currentMap.getCellDistance(location, target.location) <= attackRange){
+
+            int largeTargetBufferZone = 0;
+
+            if (target.getType() == State.EntityName.Camp)
+            {
+                largeTargetBufferZone = (int)(64 / map.getTileWidth());
+            }
+
+            if(Incursio.getInstance().currentMap.getCellDistance(location, target.location) <= attackRange + largeTargetBufferZone){
                 //TODO: do some math randomizing damage?
                 if (this.updateAttackTimer == this.attackSpeed * 60)    //this is the unit's attack time (attack every 1.5 seconds for example)
                 {
@@ -339,6 +346,7 @@ namespace Incursio.Classes
                         //add AI for attacking more enemies!
                         //but for now:
                         target = null;
+                        destination = null;
                         currentState = State.UnitState.Idle;
                     }
 
