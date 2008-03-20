@@ -344,15 +344,6 @@
       <Time>2008-03-18T23:52:28.390625-04:00</Time>
     </Item>
     <Item>
-      <Source>Courier New.spritefont</Source>
-      <Name>Courier New</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Courier New.xnb</Output>
-      <Time>2008-02-11T00:34:29.703125-05:00</Time>
-    </Item>
-    <Item>
       <Source>Tower_friendly.png</Source>
       <Name>Tower_friendly</Name>
       <Importer>TextureImporter</Importer>
@@ -378,6 +369,42 @@
       <Options>None</Options>
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Tower_nuetral.xnb</Output>
       <Time>2008-03-19T16:23:40.078125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Courier New.spritefont</Source>
+      <Name>Courier New</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Courier New.xnb</Output>
+      <Time>2008-02-11T00:34:29.703125-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_hostile_damaged.png</Source>
+      <Name>Fort_hostile_damaged</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Fort_hostile_damaged.xnb</Output>
+      <Time>2008-03-20T00:09:46.875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_hostile_destroyed.png</Source>
+      <Name>Fort_hostile_destroyed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Fort_hostile_destroyed.xnb</Output>
+      <Time>2008-03-20T00:09:46.890625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_hostile_exploded.png</Source>
+      <Name>Fort_hostile_exploded</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Fort_hostile_exploded.xnb</Output>
+      <Time>2008-03-20T00:09:46.890625-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
