@@ -121,5 +121,14 @@ namespace Incursio
             HUMAN,
             COMPUTER,
         }
+
+        public enum Command{
+            NONE,
+            MOVE,
+            ATTACK,
+            STOP,
+            FOLLOW,
+            GUARD,
+        }
     }
 }

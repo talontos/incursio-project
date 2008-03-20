@@ -251,13 +251,14 @@ namespace Incursio
                 }
             }
 
+            /*
             tex1 = new BaseMapEntity(Content.Load<Texture2D>(@"barrel"));
             currentMap.addMapEntity(tex1, 5, 6);
             currentMap.addMapEntity(tex1, 16, 2);
             currentMap.addMapEntity(tex1, 60, 21);
             currentMap.addMapEntity(tex1, 2, 19);
             currentMap.addMapEntity(tex1, 39, 60);
-
+            */
 
             //Load Unit Textures
             lightInfantryEast = Content.Load<Texture2D>(@"infantry_right");

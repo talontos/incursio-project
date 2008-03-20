@@ -9,6 +9,10 @@ namespace Incursio.Utils
     {
         private Incursio incursio;
 
+        public ObjectFactory(){
+
+        }
+
         public ObjectFactory(Incursio main){
             this.incursio = main;
         }
