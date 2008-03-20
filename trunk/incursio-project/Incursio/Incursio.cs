@@ -72,6 +72,9 @@ namespace Incursio
         //Structure Textures/////////
         Texture2D campTexturePlayer;
         Texture2D campTextureComputer;
+        Texture2D campTextureComputerDamaged;
+        Texture2D campTextureComputerDestroyed;
+        Texture2D campTextureComputerExploded;
 
         Texture2D guardTowerTexturePlayer;
         Texture2D guardTowerTextureComputer;
@@ -278,6 +281,9 @@ namespace Incursio
             //Load structure textures
             campTexturePlayer = Content.Load<Texture2D>(@"Fort_friendly");
             campTextureComputer = Content.Load<Texture2D>(@"Fort_hostile");
+            campTextureComputerDamaged = Content.Load<Texture2D>(@"Fort_hostile_damaged");
+            campTextureComputerDestroyed = Content.Load<Texture2D>(@"Fort_hostile_destroyed");
+            campTextureComputerExploded = Content.Load<Texture2D>(@"Fort_hostile_exploded");
 
             guardTowerTexturePlayer = Content.Load<Texture2D>(@"Tower_friendly");
             guardTowerTextureComputer = Content.Load<Texture2D>(@"Tower_hostile");
@@ -1064,6 +1070,16 @@ namespace Incursio
                         else if ((e as CampStructure).getCurrentState() == State.StructureState.Destroyed)
                         {
                             //TODO: building asploded
+                            if (e.getPlayer() == State.PlayerId.HUMAN)
+                            {
+
+                            }
+                            else
+                            {
+                                spriteBatch.Draw(this.campTextureComputerExploded,
+                                    new Rectangle(onScreen.x - (this.campTextureComputerDestroyed.Width / 2), onScreen.y - (int)(this.campTextureComputerDestroyed.Height * 0.80),
+                                    this.campTextureComputerDestroyed.Width, this.campTextureComputerDestroyed.Height), Color.White);
+                            }
                         }
                         else if((e as CampStructure).getCurrentState() == State.StructureState.Idle)
                         {
@@ -1075,9 +1091,27 @@ namespace Incursio
                             }
                             else
                             {
-                                spriteBatch.Draw(this.campTextureComputer,
-                                    new Rectangle(onScreen.x - (this.campTextureComputer.Width / 2), onScreen.y - (int)(this.campTextureComputer.Height * 0.80),
-                                    this.campTextureComputer.Width, this.campTextureComputer.Height), Color.White);
+                                float ratio = (float)e.getHealth() / e.getMaxHealth();
+
+                                if (ratio >= 0.50)
+                                {
+                                    spriteBatch.Draw(this.campTextureComputer,
+                                        new Rectangle(onScreen.x - (this.campTextureComputer.Width / 2), onScreen.y - (int)(this.campTextureComputer.Height * 0.80),
+                                        this.campTextureComputer.Width, this.campTextureComputer.Height), Color.White);
+                                }
+                                else if (ratio < 0.50 && ratio >= 0.25)
+                                {
+                                    spriteBatch.Draw(this.campTextureComputerDamaged,
+                                        new Rectangle(onScreen.x - (this.campTextureComputer.Width / 2), onScreen.y - (int)(this.campTextureComputer.Height * 0.80),
+                                        this.campTextureComputer.Width, this.campTextureComputer.Height), Color.White);
+                                }
+                                else if (ratio < 0.25 && ratio >= 0.00)
+                                {
+                                    spriteBatch.Draw(this.campTextureComputerDestroyed,
+                                        new Rectangle(onScreen.x - (this.campTextureComputer.Width / 2), onScreen.y - (int)(this.campTextureComputer.Height * 0.80),
+                                        this.campTextureComputer.Width, this.campTextureComputer.Height), Color.White);
+                                }
+                                
                             }
                         }
 

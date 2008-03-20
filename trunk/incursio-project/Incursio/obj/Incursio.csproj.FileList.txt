@@ -47,3 +47,10 @@ bin\x86\Debug\Content\infantry_dead.xnb
 bin\x86\Debug\Content\Tower_friendly.xnb
 bin\x86\Debug\Content\Tower_hostile.xnb
 bin\x86\Debug\Content\Tower_nuetral.xnb
+bin\x86\Debug\Incursio.exe.manifest
+bin\x86\Debug\Incursio.application
+obj\x86\Debug\Incursio.exe.manifest
+obj\x86\Debug\Incursio.application
+bin\x86\Debug\Content\Fort_hostile_damaged.xnb
+bin\x86\Debug\Content\Fort_hostile_destroyed.xnb
+bin\x86\Debug\Content\Fort_hostile_exploded.xnb
