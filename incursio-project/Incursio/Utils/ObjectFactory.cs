@@ -31,6 +31,9 @@ namespace Incursio.Utils
             // build new <classname>
             BaseGameEntity product = Activator.CreateInstance(classType) as BaseGameEntity;
 
+            if (product is Unit)
+                (product as Unit).setMap(Incursio.getInstance().currentMap);
+
             this.incursio.addEntity(ref product);
             return product;
         }
@@ -54,6 +57,10 @@ namespace Incursio.Utils
             BaseGameEntity product = Activator.CreateInstance(classType) as BaseGameEntity;
 
             product.setPlayer(owningPlayer);
+
+            if (product is Unit)
+                (product as Unit).setMap(Incursio.getInstance().currentMap);
+
             this.incursio.addEntity(ref product);
             return product;
         }

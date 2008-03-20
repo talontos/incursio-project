@@ -79,6 +79,11 @@ namespace Incursio.Classes
                         break;
 
                     ///////////////////////////////
+                    case State.UnitState.Guarding:
+                        //look for enemies in range to attack
+                        break;
+
+                    ///////////////////////////////
                     case State.UnitState.Dead:
                         die();
                         break;
@@ -167,6 +172,7 @@ namespace Incursio.Classes
             this.currentState = State.UnitState.Moving;
 
             this.destination = destination;
+            this.target = null;
         }
 
         /// <summary>
@@ -180,6 +186,7 @@ namespace Incursio.Classes
 
             //convert the destination from on screen coords to map coords
             this.destination = new Coordinate(destination.x + (currentMap.getMinimumX() * currentMap.getTileWidth()), destination.y + (currentMap.getMinimumY() * currentMap.getTileHeight()));
+            this.target = null;
             this.map = currentMap;
             //this.destination = destination;
         }
@@ -383,8 +390,8 @@ namespace Incursio.Classes
             //  But do we need to remove them?
             if (deadTimer == TIME_DEAD_UNTIL_DESPAWN * 60)
             {
-                map.setSingleCellOccupancy(this.location.x, this.location.y, true);
-                Incursio.getInstance().removeEntity(this.keyId);
+                map.setSingleCellOccupancy(location.x, location.y, true);
+                Incursio.getInstance().removeEntity(keyId);
                 deadTimer++;
             }
             else
