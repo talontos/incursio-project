@@ -19,9 +19,9 @@ namespace Incursio.Classes
             this.setType(State.EntityName.Hero);
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
         {
-            base.Update(gameTime);
+            base.Update(gameTime, ref myRef);
         }
     }
 }

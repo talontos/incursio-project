@@ -11,7 +11,7 @@ using Incursio.Commands;
 
 namespace Incursio.Managers
 {
-    class EntityManager
+    public class EntityManager
     {
         private static EntityManager instance;
 
@@ -19,10 +19,13 @@ namespace Incursio.Managers
         private List<BaseGameEntity> selectedUnits;
         private ObjectFactory factory;
 
+        private int nextKeyId;
+
         private EntityManager(){
             entityBank = new List<BaseGameEntity>();
             selectedUnits = new List<BaseGameEntity>();
-            factory = new ObjectFactory();
+            factory = ObjectFactory.getInstance();
+            nextKeyId = 0;
         }
 
         public static EntityManager getInstance(){
@@ -33,11 +36,11 @@ namespace Incursio.Managers
 
         ////////////Functional Methods////////////
 
-        public void updateUnits(GameTime gameTime)
+        public void updateAllEntities(GameTime gameTime)
         {
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                e.Update(gameTime);
+                e.Update(gameTime, ref e);
             });
         }
 
@@ -64,7 +67,11 @@ namespace Incursio.Managers
 
         public BaseGameEntity createNewEntity(String entityType, State.PlayerId player){
             //TODO: implement this, duh!
-            return this.factory.create(entityType, player);
+            BaseGameEntity product = this.factory.create(entityType, player);
+            product.keyId = nextKeyId;
+            this.entityBank.Insert(nextKeyId++, product);
+
+            return product;
         }
 
         /// <summary>
@@ -73,11 +80,12 @@ namespace Incursio.Managers
         /// <param name="commandType">Enumerated command type identifying the command</param>
         /// <param name="args">A list of arguments dependent upon the command type</param>
         public void issueCommand(State.Command commandType, params Object[] args){
-            BaseCommand command;
+            BaseCommand command = null;
             switch (commandType)
             {
                 ////////////////////////
                 case State.Command.MOVE:
+                    //TODO: PATHING!!
                     command = new MoveCommand(args[0] as Coordinate);
                     break;
 
@@ -93,7 +101,7 @@ namespace Incursio.Managers
 
                 ////////////////////////
                 case State.Command.FOLLOW:
-                    command = new FollowCommand(args[0] as BaseGameEntity);
+                    command = new FollowCommand(args[0] as Unit);
                     break;
 
                 ////////////////////////
@@ -104,9 +112,12 @@ namespace Incursio.Managers
                 ////////////////////////
             }
 
+            if (command == null) return;
+
             this.selectedUnits.ForEach(delegate(BaseGameEntity e)
             {
-                //add command to e's command Queue
+                //add command
+                e.issueSingleOrder(command);
             });
         }
 

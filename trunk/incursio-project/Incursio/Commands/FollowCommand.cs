@@ -7,7 +7,7 @@ using Incursio.Commands;
 
 namespace Incursio.Commands
 {
-    class FollowCommand : BaseCommand
+    public class FollowCommand : BaseCommand
     {
         public BaseGameEntity followTarget;
 

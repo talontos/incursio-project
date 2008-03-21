@@ -33,7 +33,7 @@ namespace Incursio.Classes
             this.map = playedMap;
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
         {
             //only perform actions when we are actively playing a map
             if (Incursio.getInstance().currentState == State.GameState.InPlay)

@@ -5,6 +5,8 @@ using Incursio.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using Incursio.Commands;
+
 namespace Incursio.Classes
 {
     public class BaseGameEntity
@@ -22,13 +24,33 @@ namespace Incursio.Classes
         public bool visible = false;
         public bool highlighted = false;
 
+        protected List<BaseCommand> orders;
+
         public BaseGameEntity(){
-            
+            orders = new List<BaseCommand>();
         }
 
-        public virtual void Update(GameTime gameTime){
+        /// <summary>
+        /// General update function for updating entities
+        /// </summary>
+        /// <param name="gameTime">Game time passed from main loop</param>
+        /// <param name="myRef">Mostly a hack, used for executing commands.  It is a reference of 'this'</param>
+        public virtual void Update(GameTime gameTime, ref BaseGameEntity myRef){
             //TODO: draw unit here?
             //TODO: check if i'm clicked?
+
+            if (orders.Count > 0)
+                orders[0].execute(ref myRef);
+        }
+
+        public void issueSingleOrder(BaseCommand order){
+            this.orders = new List<BaseCommand>();
+            this.orders.Add(order);
+        }
+
+        public void issueOrderList(params BaseCommand[] commands){
+            this.orders = new List<BaseCommand>();
+            if(commands != null)this.orders.AddRange(commands);
         }
 
         public virtual void Render(){

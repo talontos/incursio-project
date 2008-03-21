@@ -8,7 +8,7 @@ using Incursio.Commands;
 
 namespace Incursio.Commands
 {
-    class StopCommand : BaseCommand
+    public class StopCommand : BaseCommand
     {
         public StopCommand(){
             this.type = State.Command.STOP;
@@ -18,6 +18,7 @@ namespace Incursio.Commands
         {
             //set subject to idle (?) state.
             //Also remove all other commands from subject
+            subject.issueOrderList();
         }
     }
 }

@@ -2,11 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using Incursio.Classes;
+using Incursio.Managers;
+using Incursio.Campaign;
+
 namespace Incursio.Managers
 {
-    class MapManager
+    public class MapManager
     {
         private static MapManager instance;
+
+        public MapBase currentMap;
 
         private MapManager(){
         
@@ -17,6 +23,21 @@ namespace Incursio.Managers
                 instance = new MapManager();
 
             return instance;
+        }
+
+        public MapBase setCurrentLevel(State.CampaignLevel level){
+            //TODO: Define Different levels
+            switch(level){
+                case State.CampaignLevel.ONE:   currentMap = new TestMap();  break;
+                case State.CampaignLevel.TWO:   currentMap = new TestMap();  break;
+                case State.CampaignLevel.THREE: currentMap = new TestMap();  break;
+            }
+
+            return this.currentMap;
+        }
+
+        public void initializeCurrentMap(){
+            currentMap.initializeMap();
         }
     }
 }
