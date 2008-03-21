@@ -3,16 +3,28 @@ using System.Collections.Generic;
 using System.Text;
 using Incursio.Classes;
 
+using Incursio.Managers;
+
 namespace Incursio.Utils
 {
     public class ObjectFactory
     {
         private Incursio incursio;
 
-        public ObjectFactory(){
+        private static ObjectFactory instance;
+
+        public static ObjectFactory getInstance(){
+            if (instance == null)
+                instance = new ObjectFactory(Incursio.getInstance());
+
+            return instance;
+        }
+
+        private ObjectFactory(){
 
         }
 
+        //TODO: REMOVE CONSTRUCTOR
         public ObjectFactory(Incursio main){
             this.incursio = main;
         }
@@ -63,8 +75,11 @@ namespace Incursio.Utils
             product.setPlayer(owningPlayer);
 
             if (product is Unit)
-                (product as Unit).setMap(Incursio.getInstance().currentMap);
+                (product as Unit).setMap(MapManager.getInstance().currentMap);
 
+            //TODO: remove Incursio's entityBank & functions
+            //The EntityManager will keep up with them
+            //This line is left in for now to keep the game working
             this.incursio.addEntity(ref product);
             return product;
         }

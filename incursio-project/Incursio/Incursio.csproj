@@ -17,7 +17,7 @@
     <ManifestCertificateThumbprint>781827EF804FBCC5CD34DC2C64F33D442F99833A</ManifestCertificateThumbprint>
     <ManifestKeyFile>Incursio_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <PublishUrl>c:\TEST\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -74,9 +74,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Campaign\TestMap.cs" />
     <Compile Include="Classes\ArcherUnit.cs" />
     <Compile Include="Classes\BaseGameEntity.cs" />
     <Compile Include="Classes\BaseMapEntity.cs" />
+    <Compile Include="Classes\CampaignMap.cs" />
     <Compile Include="Classes\CampStructure.cs" />
     <Compile Include="Classes\ControlPoint.cs" />
     <Compile Include="Classes\GuardTowerStructure.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Classes\Unit.cs" />
     <Compile Include="Commands\AttackCommand.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\BuildCommand.cs" />
     <Compile Include="Commands\FollowCommand.cs" />
     <Compile Include="Commands\GuardCommand.cs" />
     <Compile Include="Commands\MoveCommand.cs" />

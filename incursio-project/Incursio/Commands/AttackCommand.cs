@@ -8,7 +8,7 @@ using Incursio.Commands;
 
 namespace Incursio.Commands
 {
-    class AttackCommand : BaseCommand
+    public class AttackCommand : BaseCommand
     {
         public BaseGameEntity target;
         public FollowCommand followCommand;

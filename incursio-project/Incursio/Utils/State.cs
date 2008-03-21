@@ -130,5 +130,11 @@ namespace Incursio
             FOLLOW,
             GUARD,
         }
+
+        public enum CampaignLevel{
+            ONE,
+            TWO,
+            THREE,
+        }
     }
 }

@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Storage;
 using Incursio.Classes;
 using Incursio.Utils;
 using Incursio.Interface;
+using Incursio.Managers;
 
 namespace Incursio
 {
@@ -119,63 +120,10 @@ namespace Incursio
             entityBank = new List<BaseGameEntity>();
             textureBank = new List<Texture2D>();
 
-            //NOTE: the map should be instantiated before units
-            //TODO: test map, DELETE THESE LINES
-            currentMap = new MapBase(2048, 1024, 1024, 768);
+            currentMap = MapManager.getInstance().setCurrentLevel(State.CampaignLevel.ONE);
+            MapManager.getInstance().initializeCurrentMap();
 
-            
-            //testing unit creation/placement/moving///
-            LightInfantryUnit infUnit1 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
-            LightInfantryUnit infUnit2 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
-            LightInfantryUnit infUnit3 = (LightInfantryUnit) factory.create("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
-
-            ArcherUnit archUnit1 = (ArcherUnit)factory.create("Incursio.Classes.ArcherUnit", State.PlayerId.HUMAN);
-            ArcherUnit archUnit2 = (ArcherUnit)factory.create("Incursio.Classes.ArcherUnit", State.PlayerId.COMPUTER);
-
-            CampStructure playerCamp = (CampStructure)factory.create("Incursio.Classes.CampStructure", State.PlayerId.HUMAN);
-            CampStructure computerCamp = (CampStructure)factory.create("Incursio.Classes.CampStructure", State.PlayerId.COMPUTER);
-
-            GuardTowerStructure playerTower1 = (GuardTowerStructure)factory.create("Incursio.Classes.GuardTowerStructure", State.PlayerId.HUMAN);
-
-            //infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
-            infUnit1.setLocation(new Coordinate(240, 380));
-            infUnit2.setLocation(new Coordinate(200, 400));
-            //archUnit2.setLocation(new Coordinate(820, 195));
-            archUnit2.setLocation(new Coordinate(300, 200));
-            infUnit3.setLocation(new Coordinate(800, 220)); //for ease of testing
-            archUnit1.setLocation(new Coordinate(160, 395));
-            playerCamp.setLocation(new Coordinate(100, 400));
-            computerCamp.setLocation(new Coordinate(900, 200));
-            playerTower1.setLocation(new Coordinate(150, 340));
-            //infUnit3.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
-            
-            infUnit1.setHealth(80);
-            infUnit2.setHealth(80);
-            infUnit3.setHealth(50);
-            archUnit1.setHealth(90);
-            archUnit2.setHealth(90);
-            playerCamp.setHealth(350);
-            computerCamp.setHealth(350);
-            playerTower1.setHealth(350);
-
-            infUnit1.setMap(currentMap);
-            infUnit2.setMap(currentMap);
-            infUnit3.setMap(currentMap);
-            archUnit1.setMap(currentMap);
-            archUnit2.setMap(currentMap);
-            playerCamp.setMap(currentMap);
-            computerCamp.setMap(currentMap);
-            playerTower1.setMap(currentMap);
-            
-
-            /*
-            infUnit1.move(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
-            infUnit2.move(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
-            infUnit3.move(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
-             */
-            ///////////////////////////////////////////
-
-            //TODO: instead have 1 Player[] ??
+            //TODO: PLAYER MANAGER CLASS
             computerPlayer = new Player();
             computerPlayer.id = State.PlayerId.COMPUTER;
 
@@ -183,9 +131,7 @@ namespace Incursio
             humanPlayer.id = State.PlayerId.HUMAN;
 
             selectedUnits = new List<BaseGameEntity>();
-            selectedUnits.Add(infUnit1);
-            numUnitsSelected = 1;
-
+            
             //set the window size to 1024x768
             this.graphics.PreferredBackBufferWidth = 1024;
             this.graphics.PreferredBackBufferHeight = 768;
@@ -372,10 +318,12 @@ namespace Incursio
                     selectedUnits = hud.update(cursor, selectedUnits, numUnitsSelected);
                     numUnitsSelected = hud.getNumUnits();
 
-                    entityBank.ForEach(delegate(BaseGameEntity e)
+                    EntityManager.getInstance().updateAllEntities(gameTime);
+
+                    /*entityBank.ForEach(delegate(BaseGameEntity e)
                     {
-                        e.Update(gameTime);
-                    });
+                        e.Update(gameTime, ref e);
+                    });*/
 
                     for (int i = 0; i < keysPressed.Length; i++)
                     {

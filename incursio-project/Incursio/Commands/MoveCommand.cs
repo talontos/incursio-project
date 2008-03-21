@@ -8,7 +8,7 @@ using Incursio.Commands;
 
 namespace Incursio.Commands
 {
-    class MoveCommand : BaseCommand
+    public class MoveCommand : BaseCommand
     {
         public Coordinate destination;
 
@@ -19,7 +19,6 @@ namespace Incursio.Commands
         public override void execute(ref BaseGameEntity subject)
         {
             //move towards destination
-             
         }
     }
 }

@@ -7,7 +7,7 @@ using Incursio.Classes;
 
 namespace Incursio.Commands
 {
-    class GuardCommand : BaseCommand
+    public class GuardCommand : BaseCommand
     {
         public GuardCommand(){
             this.type = State.Command.GUARD;

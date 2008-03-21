@@ -20,7 +20,7 @@ namespace Incursio.Classes
 
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
         {
             if (Incursio.getInstance().currentState == State.GameState.InPlay)
             {

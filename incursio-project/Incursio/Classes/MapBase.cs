@@ -64,6 +64,32 @@ namespace Incursio.Classes
             }
         }
 
+        public virtual void setMapDimensions(int width, int height, int screenWidth, int screenHeight)
+        {
+            this.width = width / TILE_WIDTH;
+            this.height = height / TILE_HEIGHT;
+            this.tileGrid = new BaseMapEntity[this.width, this.height];
+            this.occupancyGrid = new bool[this.width, this.height];
+            this.minViewableX = 0;
+            this.minViewableY = 0;
+            this.maxViewableX = screenWidth / TILE_WIDTH;
+            this.maxViewableY = screenHeight / TILE_HEIGHT;
+            this.cameraMovePause = 0;
+
+            //initialize occupancyGrid
+            for (int j = 0; j < this.height; j++)
+            {
+                for (int i = 0; i < this.width; i++)
+                {
+                    occupancyGrid[i, j] = true;
+                }
+            }
+        }
+
+        public virtual void initializeMap(){
+
+        }
+
         public void update(Keys[] keysPressed, int screenWidth, int screenHeight)
         {
 
