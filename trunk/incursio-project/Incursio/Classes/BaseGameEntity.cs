@@ -39,8 +39,16 @@ namespace Incursio.Classes
             //TODO: draw unit here?
             //TODO: check if i'm clicked?
 
-            if (orders.Count > 0)
+            if (orders.Count > 0){
+                //check validity of next command
+                if (orders[0].finishedExecution)
+                    orders.RemoveAt(0);
+
+            }
+
+            if(orders.Count > 0){
                 orders[0].execute(ref myRef);
+            }
         }
 
         public void issueSingleOrder(BaseCommand order){
@@ -51,6 +59,14 @@ namespace Incursio.Classes
         public void issueOrderList(params BaseCommand[] commands){
             this.orders = new List<BaseCommand>();
             if(commands != null)this.orders.AddRange(commands);
+        }
+
+        public void issueAdditionalOrder(BaseCommand order){
+            this.orders.Add(order);
+        }
+
+        public void issueImmediateOrder(BaseCommand order){
+            this.orders.Insert(0, order);
         }
 
         public virtual void Render(){

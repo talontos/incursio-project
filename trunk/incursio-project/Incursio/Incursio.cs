@@ -43,7 +43,6 @@ namespace Incursio
         ///////////////////////////////
 
         //unit initialization
-        //TODO: **move these to Player class**
         List<BaseGameEntity> selectedUnits;
         int numUnitsSelected;
 
@@ -318,12 +317,10 @@ namespace Incursio
                     selectedUnits = hud.update(cursor, selectedUnits, numUnitsSelected);
                     numUnitsSelected = hud.getNumUnits();
 
-                    EntityManager.getInstance().updateAllEntities(gameTime);
+                    EntityManager.getInstance().updateUnitSelection(ref selectedUnits);
 
-                    /*entityBank.ForEach(delegate(BaseGameEntity e)
-                    {
-                        e.Update(gameTime, ref e);
-                    });*/
+                    //update entities
+                    EntityManager.getInstance().updateAllEntities(gameTime);
 
                     for (int i = 0; i < keysPressed.Length; i++)
                     {
@@ -331,22 +328,29 @@ namespace Incursio
                         {
                             case Keys.Escape: currentState = State.GameState.PausedPlay; break;
 
+                            //TODO: INSERT BUILD COMMANDS!
                             case Keys.L:
                                 if (numUnitsSelected == 1 && selectedUnits[0].getType() == State.EntityName.Camp)
                                 {
-                                    (selectedUnits[0] as CampStructure).build(new LightInfantryUnit());
+                                    EntityManager.getInstance().issueCommand(State.Command.BUILD, true, new LightInfantryUnit());
+                                    //(selectedUnits[0] as CampStructure).build(new LightInfantryUnit());
                                 }
                                 break;
 
                             case Keys.A:
                                 if (numUnitsSelected == 1 && selectedUnits[0].getType() == State.EntityName.Camp)
                                 {
-                                    (selectedUnits[0] as CampStructure).build(new ArcherUnit());
+                                    EntityManager.getInstance().issueCommand(State.Command.BUILD, true, new ArcherUnit());
+                                    //(selectedUnits[0] as CampStructure).build(new ArcherUnit());
                                 }
                                 break;
 
-                            case Keys.Enter://just so we can have a breakpoint whenever we want...
-                                //this.currentMap.printOccupancyGrid();
+                            case Keys.G:
+                                EntityManager.getInstance().issueCommand(State.Command.GUARD, false);
+                                break;
+
+                            case Keys.Enter:
+                                //just so we can have a breakpoint whenever we want...
                                 break;
 
                             case Keys.LeftShift:
@@ -416,13 +420,14 @@ namespace Incursio
                                             if (e.getPlayer() == State.PlayerId.COMPUTER && e is Unit)
                                             {
                                                 selectedUnits = new List<BaseGameEntity>();
-                                                selectedUnits.Add(e as Unit);
+                                                selectedUnits.Add(e);
                                                 numUnitsSelected = 1;
                                             }
-                                            else if (e.getType() == State.EntityName.Camp || e.getType() == State.EntityName.GuardTower)
+                                            //else if (e.getType() == State.EntityName.Camp || e.getType() == State.EntityName.GuardTower)
+                                            else if (e is Structure)
                                             {
                                                 selectedUnits = new List<BaseGameEntity>();
-                                                selectedUnits.Add(e as Structure);
+                                                selectedUnits.Add(e);
                                                 numUnitsSelected = 1;
                                             }
                                             else
@@ -518,7 +523,8 @@ namespace Incursio
                                         //NOW, if unit is enemy, selected units attack!
                                         if (e.getPlayer() == State.PlayerId.COMPUTER)
                                         {
-                                            selectedUnits.ForEach(delegate(BaseGameEntity u)
+                                            EntityManager.getInstance().issueCommand(State.Command.ATTACK, false, e);
+                                            /*selectedUnits.ForEach(delegate(BaseGameEntity u)
                                             {
                                                 //e is the entity being clicked, and the target for all u
                                                 if (u.getType() == State.EntityName.GuardTower)
@@ -529,7 +535,10 @@ namespace Incursio
                                                 {
                                                     (u as Unit).attack(e);
                                                 }
-                                            });
+                                            });*/
+                                        }
+                                        else{
+                                            EntityManager.getInstance().issueCommand(State.Command.FOLLOW, false, e);
                                         }
                                         done = true;
                                     }
@@ -537,23 +546,26 @@ namespace Incursio
                             });
 
                             //NOT ENTITY, SO MOVE SELECTED UNITS
+
                             if (!done && numUnitsSelected > 0)
                             {
-                                selectedUnits.ForEach(delegate(BaseGameEntity u)
+                                EntityManager.getInstance().issueCommand(State.Command.MOVE, false, new Coordinate(Convert.ToInt32(cursor.getPos().X), Convert.ToInt32(cursor.getPos().Y)));
+
+                                /*selectedUnits.ForEach(delegate(BaseGameEntity u)
                                 {
                                     if (u.getPlayer() == State.PlayerId.HUMAN && 
                                         u.getType() != State.EntityName.Camp && u.getType() != State.EntityName.GuardTower && u.getType() != State.EntityName.ControlPoint)
                                     {
                                         (u as Unit).move(new Coordinate(Convert.ToInt32(cursor.getPos().X), Convert.ToInt32(cursor.getPos().Y)), currentMap);
                                     }
-                                });
+                                });*/
                             }
 
                             done = true;
                         }
                     }
 
-                    currentMap.update(keysPressed, 1024, 768);
+                    MapManager.getInstance().currentMap.update(keysPressed, 1024, 768);
                     
                     //listener for menu button
                     gameMenuButton.Update(cursor, spriteBatch);

@@ -24,6 +24,9 @@ namespace Incursio.Classes
         {
             if (Incursio.getInstance().currentState == State.GameState.InPlay)
             {
+
+                base.Update(gameTime, ref myRef);
+
                 switch (this.currentState)
                 {
                     /////////////////////
@@ -75,6 +78,10 @@ namespace Incursio.Classes
         public virtual void buildTick()
         {
 
+        }
+
+        public Boolean isBuilding(){
+            return this.buildProject != null;
         }
 
         public virtual void beingBuiltTick()

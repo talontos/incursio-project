@@ -4,6 +4,9 @@ using System.Text;
 using Incursio.Utils;
 using Microsoft.Xna.Framework;
 
+using Incursio.Managers;
+using Incursio.Commands;
+
 namespace Incursio.Classes
 {
     public class Unit : BaseGameEntity
@@ -41,18 +44,22 @@ namespace Incursio.Classes
                 //check state and act accordingly
                 switch (this.currentState)
                 {
-
                     ///////////////////////////////
-                    case State.UnitState.Attacking:
-                        this.destination = this.target.getLocation();
-
-                        //if target is in range, attack.  otherwise move toward enemy
-                        attackTarget();
+                    case State.UnitState.Dead:
+                        die();
                         break;
 
                     ///////////////////////////////
-                    case State.UnitState.Moving:
+                    case State.UnitState.Attacking:
+                        /*this.destination = this.target.getLocation();
 
+                        //if target is in range, attack.  otherwise move toward enemy
+                        attackTarget();
+                        break;*/
+
+                    ///////////////////////////////
+                    case State.UnitState.Moving:
+                        /*
                         if (this.destination == null)
                             this.currentState = State.UnitState.Idle;
                         else
@@ -66,36 +73,34 @@ namespace Incursio.Classes
                         }
 
                         break;
-
+                        */
                     ///////////////////////////////
                     case State.UnitState.Wandering:
-                        this.move(new Coordinate(Incursio.rand.Next(0, 1024), Incursio.rand.Next(0, 768)));
-                        break;
+                        /*this.move(new Coordinate(Incursio.rand.Next(0, 1024), Incursio.rand.Next(0, 768)));
+                        break;*/
 
                     ///////////////////////////////
                     case State.UnitState.Idle:
                         //TODO: change; this is temporary
                         //this.currentState = State.UnitState.Wandering;
-                        break;
+                        //break;
 
                     ///////////////////////////////
                     case State.UnitState.Guarding:
                         //look for enemies in range to attack
-                        break;
-
-                    ///////////////////////////////
-                    case State.UnitState.Dead:
-                        die();
-                        break;
+                        //break;
 
                     ///////////////////////////////
 
                     default: break;
                 }
+
+                base.Update(gameTime, ref myRef);
+
             }
         }
 
-        public void updateMovement()
+        public bool updateMovement()
         {
             float xMinimumThreshold = 0.05F;
             float yMinimumThreshold = 0.05F;
@@ -106,7 +111,8 @@ namespace Incursio.Classes
             if (direction.Length() < speed)
             {
                 destination = location;
-                currentState = State.UnitState.Idle;
+                //currentState = State.UnitState.Idle;
+                return true;
             }
             else
             {
@@ -149,16 +155,23 @@ namespace Incursio.Classes
                 if(!Incursio.getInstance().currentMap.requestMove(location.x, location.y, newX, newY)){
                     //new point is occupied; we have to turn!
                     this.currentState = State.UnitState.Idle;
+
+                    //TODO: PATHING, insert move commands in my queue
+                    return true;
                 }
                 else{
                     //open up our old space
-                    Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, true);
+                    //Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, true);
+                    MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, true);
 
                     //move
                     location = new Coordinate(newX, newY);
 
                     //set occupancy
-                    Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, false);
+                    //Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, false);
+                    MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, false);
+
+                    return false;
                 }
             }
         }
@@ -263,11 +276,14 @@ namespace Incursio.Classes
             }
             else
             {
-                if (currentState != State.UnitState.Attacking)
+                //help, help, I'm being attacked!
+                //oh well, en garde!
+                this.orders.Insert(0, new AttackCommand(attacker));
+                /*if (currentState != State.UnitState.Attacking)
                 {
                     this.target = attacker;
                     currentState = State.UnitState.Attacking;
-                }
+                }*/
             }
         }
 
@@ -313,7 +329,7 @@ namespace Incursio.Classes
         /// <summary>
         /// If target is in range, attack it.  otherwise, move toward it.
         /// </summary>
-        protected virtual void attackTarget(){
+        public virtual bool attackTarget(){
             //if target is in attackRange, attack it.
 
             int largeTargetBufferZone = 0;
@@ -327,7 +343,7 @@ namespace Incursio.Classes
                 largeTargetBufferZone = (int)(64 / map.getTileWidth());
             }
 
-            if(Incursio.getInstance().currentMap.getCellDistance(location, target.location) < attackRange + largeTargetBufferZone){
+            if(MapManager.getInstance().currentMap.getCellDistance(location, target.location) < attackRange + largeTargetBufferZone){
                 //TODO: do some math randomizing damage?
                 if (this.updateAttackTimer == this.attackSpeed * 60)    //this is the unit's attack time (attack every 1.5 seconds for example)
                 {
@@ -378,12 +394,17 @@ namespace Incursio.Classes
                 {
                     this.updateAttackTimer++;
                 }
+
+                return true;
             }
-            else updateMovement();
+            else return false;// updateMovement();
         }
 
         protected virtual void die(){
             currentState = State.UnitState.Dead;
+            if (orders.Count != 0)
+                orders = new List<BaseCommand>();
+
             //TODO: How to handle death of entities?
             //  It'd be a waste of memory to just leave them in the entityBank,
             //    but then we'd have to reassign keyIds.
