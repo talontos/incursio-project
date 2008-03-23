@@ -19,6 +19,18 @@ namespace Incursio.Commands
         public override void execute(ref BaseGameEntity subject)
         {
             //move towards destination
+
+            if(subject is Unit){
+                //move unit
+                //do we have logic here, and actually move in Unit,
+                // or do we do all movement/state changing, etc here?
+                (subject as Unit).destination = this.destination;
+                this.finishedExecution = (subject as Unit).updateMovement();
+            }
+            else{
+                //not a unit, do nothing?
+                this.finishedExecution = true;
+            }
         }
     }
 }

@@ -101,6 +101,7 @@
     <Compile Include="Interface\GameMenuButton.cs" />
     <Compile Include="Interface\HeadsUpDisplay.cs" />
     <Compile Include="Managers\EntityManager.cs" />
+    <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Managers\MapManager.cs" />
     <Compile Include="Utils\DebugUtil.cs" />
     <Compile Include="Utils\ObjectFactory.cs" />

@@ -129,6 +129,7 @@ namespace Incursio
             STOP,
             FOLLOW,
             GUARD,
+            BUILD,
         }
 
         public enum CampaignLevel{

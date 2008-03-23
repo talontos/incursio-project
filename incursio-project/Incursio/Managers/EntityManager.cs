@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 
 using Incursio.Classes;
 using Incursio.Managers;
+using Incursio.Interface;
 using Incursio.Utils;
 using Incursio.Commands;
 
@@ -48,6 +49,11 @@ namespace Incursio.Managers
 
         }
 
+        //TODO: TEMPORARY!!!
+        public void updateUnitSelection(ref List<BaseGameEntity> list){
+            this.selectedUnits = list;
+        }
+
         public BaseGameEntity getEntity(int keyId){
             if(keyId <= this.entityBank.Count)
                 return this.entityBank[keyId];
@@ -79,7 +85,7 @@ namespace Incursio.Managers
         /// </summary>
         /// <param name="commandType">Enumerated command type identifying the command</param>
         /// <param name="args">A list of arguments dependent upon the command type</param>
-        public void issueCommand(State.Command commandType, params Object[] args){
+        public void issueCommand(State.Command commandType, bool append, params Object[] args){
             BaseCommand command = null;
             switch (commandType)
             {
@@ -101,12 +107,21 @@ namespace Incursio.Managers
 
                 ////////////////////////
                 case State.Command.FOLLOW:
-                    command = new FollowCommand(args[0] as Unit);
+                    if (args[0] is Unit)
+                        command = new FollowCommand(args[0] as Unit);
+                    else
+                        command = new MoveCommand((args[0] as BaseGameEntity).location);
+
                     break;
 
                 ////////////////////////
                 case State.Command.GUARD:
                     command = new GuardCommand();
+                    break;
+
+                ////////////////////////
+                case State.Command.BUILD:
+                    command = new BuildCommand(args[0] as BaseGameEntity);
                     break;
 
                 ////////////////////////
@@ -117,8 +132,27 @@ namespace Incursio.Managers
             this.selectedUnits.ForEach(delegate(BaseGameEntity e)
             {
                 //add command
-                e.issueSingleOrder(command);
+                if (append)
+                    e.issueAdditionalOrder(command);
+                else
+                    e.issueSingleOrder(command);
             });
+        }
+
+        public List<BaseGameEntity> getEntitiesInRange(ref BaseGameEntity hunter, int cellSightRange){
+            List<BaseGameEntity> enemies = new List<BaseGameEntity>();
+            State.PlayerId hOwner = hunter.owner;
+            Coordinate hLoc = hunter.location;
+
+            this.entityBank.ForEach(delegate(BaseGameEntity e){
+                if(e.owner != hOwner){
+                    if(MapManager.getInstance().currentMap.getCellDistance(hLoc, e.location) <= cellSightRange){
+                        enemies.Add(e);
+                    }
+                }
+            });
+
+            return enemies;
         }
 
         public void battleEntities(BaseGameEntity attacker, BaseGameEntity attackee){

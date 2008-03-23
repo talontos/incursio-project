@@ -10,16 +10,31 @@ namespace Incursio.Commands
     public class FollowCommand : BaseCommand
     {
         public BaseGameEntity followTarget;
+        public MoveCommand moveCommand;
 
         public FollowCommand(BaseGameEntity target){
             this.type = State.Command.FOLLOW;
             this.followTarget = target;
+            this.moveCommand = new MoveCommand(followTarget.getLocation());
+        }
+
+        private void updateMoveCommand(){
+            this.moveCommand.destination = this.followTarget.getLocation();
         }
 
         public override void execute(ref BaseGameEntity subject)
         {
-            //if target is not dead, move toward target
-            //otherwise, set finishedExecution = true
+
+            //if target is dead, set finishedExecution = true
+            //otherwise, move toward target
+            if (followTarget.getHealth() <= 0){
+                this.finishedExecution = true;
+            }
+            else{
+                this.updateMoveCommand();
+                moveCommand.execute(ref subject);
+            }
+
         }
     }
 }

@@ -5,6 +5,8 @@ using Incursio.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using Incursio.Managers;
+
 namespace Incursio.Classes
 {
     public class CampStructure : Structure
@@ -84,7 +86,7 @@ namespace Incursio.Classes
             {
                 if (buildProject.getType() != State.EntityName.GuardTower)
                 {
-                    Unit temp = (Incursio.getInstance().factory.create(currentBuildForObjectFactory, this.owner) as Unit);
+                    Unit temp = ( EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.owner) as Unit);
                     temp.setLocation(new Coordinate(this.location.x + newUnitPlacementX, this.location.y + newUnitPlacementY));
                     timeBuilt = 0;
                     timeRequired = 0;
