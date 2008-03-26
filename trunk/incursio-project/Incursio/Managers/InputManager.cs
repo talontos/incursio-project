@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 
 using Incursio.Classes;
+using Incursio.Utils;
 
 namespace Incursio.Managers
 {
@@ -18,6 +19,8 @@ namespace Incursio.Managers
 
         public KeyboardState keyStateCurrent;
         public KeyboardState keyStatePrev;
+
+        bool positioningTower = false;
 
         #endregion
 
@@ -55,8 +58,11 @@ namespace Incursio.Managers
                 EntityManager.getInstance().tryToBuild(new HeavyInfantryUnit());// HeavyInfantryUnit.CLASSNAME);
             }
 
-            if(this.keyPressed(Keys.T)){
+            if(this.keyPressed(Keys.T))
+            {
                 //try to build guard Tower
+                positioningTower = true;
+                TextureBank.InterfaceTextures.cursorEvent = TextureBank.EntityTextures.guardTowerTexturePlayer;
             }
 
             if(this.keyPressed(Keys.C)){
@@ -80,7 +86,16 @@ namespace Incursio.Managers
             //TODO: we need to translate this point to the viewable area on the map
 
             if(this.leftClick()){
-                EntityManager.getInstance().updateUnitSelection(point);
+                if (this.positioningTower)
+                {
+                    EntityManager.getInstance().tryToBuild(new GuardTowerStructure(), point);
+                    this.positioningTower = false;
+                    TextureBank.InterfaceTextures.cursorEvent = null;
+                }
+                else
+                {
+                    EntityManager.getInstance().updateUnitSelection(point);
+                }
             }
 
             if(this.rightClick()){

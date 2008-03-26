@@ -15,11 +15,13 @@ namespace Incursio.Classes
         public const int LIGHT_INFANTRY_BUILD_TIME = 5;
         public const int HEAVY_INFANTRY_BUILD_TIME = 10;
         public const int ARCHER_BUILD_TIME = 7;
-        public const int GUARD_TOWER_BUILD_TIME = 90;
+        public const int GUARD_TOWER_BUILD_TIME = 15;
         public const int ITEM_UPGRADE_BUILD_TIME = 90;
 
         int newUnitPlacementX = 10;
         int newUnitPlacementY = 120;    //little bit of hard coding, but can't really help it here 
+
+        Coordinate newStructureCoords;
 
         String currentlyBuildingThis = "IDLE"; //this is for the HUD to display what it's building
         String currentBuildForObjectFactory = "IDLE"; //and this is for the object factory
@@ -71,7 +73,7 @@ namespace Incursio.Classes
                 else if (toBeBuilt.getType() == State.EntityName.GuardTower)
                 {
                     currentlyBuildingThis = "Guard Tower";
-                    currentBuildForObjectFactory = "Incursio.Classes.GuardTower";
+                    currentBuildForObjectFactory = "Incursio.Classes.GuardTowerStructure";
                     this.timeBuilt = 0;
                     this.timeRequired = GUARD_TOWER_BUILD_TIME * 60;
                     this.buildProject = toBeBuilt;
@@ -97,7 +99,14 @@ namespace Incursio.Classes
                 }
                 else
                 {
-
+                    GuardTowerStructure temp = (EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.owner) as GuardTowerStructure);
+                    temp.setLocation(newStructureCoords);
+                    timeBuilt = 0;
+                    timeRequired = 0;
+                    this.currentState = State.StructureState.Idle;
+                    this.currentBuildForObjectFactory = "IDLE";
+                    this.currentlyBuildingThis = "IDLE";
+                    this.buildProject = null;
                 }
             }
             else
@@ -109,6 +118,11 @@ namespace Incursio.Classes
         public String getCurrentlyBuilding()
         {
             return currentlyBuildingThis;
+        }
+
+        public void setNewStructureCoords(Coordinate coords)
+        {
+            this.newStructureCoords = coords;
         }
 
         public override void setLocation(Coordinate coords)

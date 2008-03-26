@@ -70,6 +70,7 @@ namespace Incursio.Managers
             public static Texture2D headsUpDisplay;
             public static Texture2D cursor;
             public static Texture2D cursorPressed;
+            public static Texture2D cursorEvent;
             public static Texture2D resourceDisplay;
 
             public static Texture2D archerPortrait;
