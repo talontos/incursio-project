@@ -78,7 +78,7 @@
     <Compile Include="Classes\ArcherUnit.cs" />
     <Compile Include="Classes\BaseGameEntity.cs" />
     <Compile Include="Classes\BaseMapEntity.cs" />
-    <Compile Include="Classes\CampaignMap.cs" />
+    <Compile Include="Campaign\CampaignMap.cs" />
     <Compile Include="Classes\CampStructure.cs" />
     <Compile Include="Classes\ControlPoint.cs" />
     <Compile Include="Classes\GuardTowerStructure.cs" />
@@ -102,7 +102,11 @@
     <Compile Include="Interface\HeadsUpDisplay.cs" />
     <Compile Include="Managers\EntityManager.cs" />
     <Compile Include="Managers\FileManager.cs" />
+    <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\MapManager.cs" />
+    <Compile Include="Managers\PlayerManager.cs" />
+    <Compile Include="Managers\TextureBank.cs" />
+    <Compile Include="Managers\TextureManager.cs" />
     <Compile Include="Utils\DebugUtil.cs" />
     <Compile Include="Utils\ObjectFactory.cs" />
     <Compile Include="Utils\State.cs" />
@@ -112,6 +116,8 @@
     <Compile Include="Utils\Coordinate.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Configuration\defaultEntitySettings.xml" />
+    <Content Include="Configuration\textureDefinitions.xml" />
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
@@ -122,6 +128,7 @@
     </NestedContentProject>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Incursio_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

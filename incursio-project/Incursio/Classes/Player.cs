@@ -13,7 +13,7 @@ namespace Incursio.Classes
     {
         public String name = "";
         public List<BaseGameEntity> selection;
-        public Hero hero;
+        public int heroId;
         public long MONETARY_UNIT = 0;
         public int ownedControlPoints = 0;
         public Enum id;
@@ -21,19 +21,16 @@ namespace Incursio.Classes
 
         public Player(){
             this.name = "Player";
-            Incursio.getInstance().factory.create(Hero.HERO_CLASS);
         }
 
         public Player(String playerName)
         {
-            Incursio.getInstance().factory.create(Hero.HERO_CLASS);
             this.name = playerName;
         }
 
         public void update(GameTime gameTime){
             //update player-specifics
-
-            //update units
+            //money
         }
     }
 }

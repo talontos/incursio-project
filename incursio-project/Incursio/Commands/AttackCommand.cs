@@ -26,7 +26,6 @@ namespace Incursio.Commands
                 return;
             }
 
-
             if(this.target.getHealth() <= 0){
                 this.finishedExecution = true;
                 subject.issueAdditionalOrder(new GuardCommand());

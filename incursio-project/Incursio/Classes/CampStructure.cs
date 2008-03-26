@@ -125,5 +125,17 @@ namespace Incursio.Classes
 
                 base.setLocation(coords);
         }
+
+        public override void updateBounds()
+        {
+            Microsoft.Xna.Framework.Graphics.Texture2D myRef = TextureBank.EntityTextures.campTextureComputer;
+
+            this.boundingBox = new Microsoft.Xna.Framework.Rectangle(
+                location.x - myRef.Width / 2,
+                (int)(location.y - myRef.Height * 0.80),
+                myRef.Width,
+                myRef.Height
+            );
+        }
     }
 }
