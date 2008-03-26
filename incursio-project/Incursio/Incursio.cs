@@ -113,7 +113,7 @@ namespace Incursio
             FontPos = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
 
             // create cursor
-            cursor = new Cursor(new Vector2(0, 0), Content.Load<Texture2D>(@"cursor"), Content.Load<Texture2D>(@"cursor_click"));
+            cursor = new Cursor(new Vector2(0, 0));
             clickDestination = Content.Load<Texture2D>(@"destinationClick");
 
             // load the HUD texture 

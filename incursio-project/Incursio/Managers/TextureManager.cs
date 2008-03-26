@@ -71,6 +71,8 @@ namespace Incursio.Managers
             //Load Interface textures
             TextureBank.InterfaceTextures.headsUpDisplay = Content.Load<Texture2D>(@"utilityBarUnderlay");
             TextureBank.InterfaceTextures.resourceDisplay = Content.Load<Texture2D>(@"resourceBarUnderlay");
+            TextureBank.InterfaceTextures.cursor = Content.Load<Texture2D>(@"cursor");
+            TextureBank.InterfaceTextures.cursorPressed = Content.Load<Texture2D>(@"cursor_click");
             TextureBank.InterfaceTextures.lightInfantryPortrait = Content.Load<Texture2D>(@"lightInfantryPortrait");
             TextureBank.InterfaceTextures.lightInfantryIcon = Content.Load<Texture2D>(@"InfantryIcon");
             TextureBank.InterfaceTextures.archerPortrait = Content.Load<Texture2D>(@"archerPortrait");

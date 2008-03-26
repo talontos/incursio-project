@@ -26,8 +26,8 @@ namespace Incursio.Commands
             {
                 if (!(subject as Structure).isBuilding())
                 {
-                    (subject as CampStructure).build(toBeBuilt);
-                    this.finishedExecution = true;
+                        (subject as CampStructure).build(toBeBuilt);
+                        this.finishedExecution = true;
                 }
                 else
                 {

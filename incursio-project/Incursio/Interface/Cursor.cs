@@ -5,23 +5,30 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using Incursio.Managers;
+
 namespace Incursio.Interface
 {
   public class Cursor
     {
         private Vector2 pos;                        // position of the cursor
-        private Texture2D passive;                  // texture of the mouse while idle
-        private Texture2D pressed;                  // texture of the mouse if pressed
         private MouseState mouseState;
         private MouseState previousState;
         private bool isLeftPressed;                     // tells us whether the mouse is pressed or not
         private bool isRightPressed;
 
-        public Cursor(Vector2 pos, Texture2D pass, Texture2D press)
+        /*public Cursor(Vector2 pos, Texture2D pass, Texture2D press)
         {
             this.pos = pos;
             this.passive = pass;
             this.pressed = press;
+            this.isLeftPressed = false;
+            this.isRightPressed = false;
+        }*/
+
+        public Cursor(Vector2 pos)
+        {
+            this.pos = pos;
             this.isLeftPressed = false;
             this.isRightPressed = false;
         }
@@ -54,14 +61,22 @@ namespace Incursio.Interface
 
         public void Draw(SpriteBatch batch)
         {
-            if (this.isLeftPressed == false && this.isRightPressed == false)
+            if (TextureBank.InterfaceTextures.cursorEvent != null)
             {
-                batch.Draw(this.passive, this.pos, Color.White);
+                batch.Draw(TextureBank.InterfaceTextures.cursorEvent, this.pos, new Color(255, 255, 255, 125));
             }
-            else if(this.isLeftPressed == true || this.isRightPressed == true)
+            else
             {
-                batch.Draw(this.pressed, this.pos, Color.White);
+                if (this.isLeftPressed == false && this.isRightPressed == false)
+                {
+                    batch.Draw(TextureBank.InterfaceTextures.cursor, this.pos, Color.White);
+                }
+                else if (this.isLeftPressed == true || this.isRightPressed == true)
+                {
+                    batch.Draw(TextureBank.InterfaceTextures.cursorPressed, this.pos, Color.White);
+                }
             }
+
         }
 
         public Vector2 getPos()

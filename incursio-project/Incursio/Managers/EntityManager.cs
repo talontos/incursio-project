@@ -221,6 +221,15 @@ namespace Incursio.Managers
             }
         }
 
+        public void tryToBuild(BaseGameEntity toBuild, Vector2 point)
+        {
+            if (selectedUnits.Count > 0 && selectedUnits[0] is CampStructure)
+            {
+                (selectedUnits[0] as CampStructure).setNewStructureCoords(new Coordinate((int)point.X, (int)point.Y));
+                this.issueCommand(State.Command.BUILD, false, toBuild);
+            }
+        }
+
         public BaseGameEntity createNewEntity(String entityType, State.PlayerId player){
             BaseGameEntity product = this.factory.create(entityType, player);
             product.keyId = nextKeyId;

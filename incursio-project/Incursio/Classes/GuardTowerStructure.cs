@@ -19,6 +19,7 @@ namespace Incursio.Classes
 
         public GuardTowerStructure() : base(){
             this.maxHealth = 350;
+            this.health = maxHealth;
             this.sightRange = 500;
             this.setType(State.EntityName.GuardTower);
             this.map = Incursio.getInstance().currentMap;
