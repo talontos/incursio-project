@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
 using Incursio.Interface;
+using Incursio.Managers;
 
 namespace Incursio.Classes
 {
@@ -47,8 +48,10 @@ namespace Incursio.Classes
             this.resourceBar = resourceBar;
         }
 
-        public List<BaseGameEntity> update(Cursor cursor, List<BaseGameEntity> selectedUnits, int numUnitsSelected)
+        public List<BaseGameEntity> update(Cursor cursor)
         {
+            List<BaseGameEntity> selectedUnits = EntityManager.getInstance().getSelectedUnits();
+            int numUnitsSelected = selectedUnits.Count;
 
             if (numUnitsSelected > 1)
             {
@@ -81,8 +84,12 @@ namespace Incursio.Classes
         /// drawHeadsUpDisplay draws the HUD onto the screen.  Parameter SpriteBatch is used.
         /// </summary>
         /// <param name="spriteBatch"></param>
-        public void draw(SpriteBatch spriteBatch, int height, List<BaseGameEntity> selectedUnits, SpriteFont font, int numUnitsSelected)
+        public void draw(SpriteBatch spriteBatch, int height, SpriteFont font)
         {
+            //TODO: DON'T BOTHER PASSING IN UNITS; JUST GET THEM FROM MANAGER
+            List<BaseGameEntity> selectedUnits = EntityManager.getInstance().getSelectedUnits();
+            int numUnitsSelected = selectedUnits.Count;
+
             // draw the bars
             spriteBatch.Draw(utilityBar, new Rectangle(0, height - utilityBar.Height, utilityBar.Width, utilityBar.Height), Color.White);
             spriteBatch.Draw(resourceBar, new Rectangle(1024 - resourceBar.Width, 0, resourceBar.Width, resourceBar.Height), Color.White);

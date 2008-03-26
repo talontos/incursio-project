@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Content>
+	<Hero>
+		<heroEast file=""/>
+		<heroWest file=""/>
+		<heroSouth file=""/>
+		<heroNorth file=""/>
+
+		<!--TODO: Add animation & color overlay textures-->
+	</Hero>
+
+	<LightInfantryUnit>
+		<lightInfantryEast file=""/>
+		<lightInfantryWest file=""/>
+		<lightInfantrySouth file=""/>
+		<lightInfantryNorth file=""/>
+		<lightInfantryDead file=""/>
+
+		<!--TODO: Add animation & color overlay textures-->
+	</LightInfantryUnit>
+	
+	<HeavyInfantryUnit>
+		<heavyInfantryEast file=""/>
+		<heavyInfantryWest file=""/>
+		<heavyInfantrySouth file=""/>
+		<heavyInfantryNorth file=""/>
+		<heavyInfantryDead file=""/>
+
+		<!--TODO: Add animation & color overlay textures-->
+	</HeavyInfantryUnit>
+
+	<ArcherUnit>
+		<archerEast file=""/>
+		<archerWest file=""/>
+		<archerSouth file=""/>
+		<archerNorth file=""/>
+		<archerDead file=""/>
+		
+		<!--TODO: Add animation & color overlay textures-->
+	</ArcherUnit>
+
+	<CampStructure>
+		<!-- How about we make general entity textures, with colored overlays for ownership? -->
+		<campTexture file=""/>
+		<campTextureDamaged file=""/>
+		<campTextureDestroyed file=""/>
+		<campTextureExploded file=""/>
+
+		<campTexture_COLOR_Overlay file=""/>
+		<!--...-->
+	</CampStructure>
+
+	<GuardTowerStructure>
+		<guardTowerTexture file=""/>
+
+		<guardTower_COLOR_Overlay file=""/>
+		<!--...-->
+	</GuardTowerStructure>
+	
+</Content>

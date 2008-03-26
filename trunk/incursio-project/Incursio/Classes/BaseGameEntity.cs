@@ -24,6 +24,10 @@ namespace Incursio.Classes
         public bool visible = false;
         public bool highlighted = false;
 
+        public Rectangle boundingBox;
+
+        public int pointValue = 0;
+
         protected List<BaseCommand> orders;
 
         public BaseGameEntity(){
@@ -51,26 +55,45 @@ namespace Incursio.Classes
             }
         }
 
+        /// <summary>
+        /// Empties the entity's command list, and inserts 'order'
+        /// so that it is its only order
+        /// </summary>
+        /// <param name="order">The new command</param>
         public void issueSingleOrder(BaseCommand order){
             this.orders = new List<BaseCommand>();
             this.orders.Add(order);
         }
 
+        /// <summary>
+        /// Replaces the entity's command list with another list
+        /// of commands
+        /// </summary>
+        /// <param name="commands">The new commands</param>
         public void issueOrderList(params BaseCommand[] commands){
             this.orders = new List<BaseCommand>();
             if(commands != null)this.orders.AddRange(commands);
         }
 
+        /// <summary>
+        /// Adds a new command to the end of the entity's command list
+        /// </summary>
+        /// <param name="order">The new command</param>
         public void issueAdditionalOrder(BaseCommand order){
             this.orders.Add(order);
         }
 
+        /// <summary>
+        /// Adds a new command to the beginning of the entity's command list
+        /// </summary>
+        /// <param name="order">The new important command</param>
         public void issueImmediateOrder(BaseCommand order){
             this.orders.Insert(0, order);
         }
 
-        public virtual void Render(){
-
+        public virtual Texture2D getCurrentTexture(){
+            //check state & return appropriate texture from TextureBank.EntityTextures
+            return null;
         }
 
         public virtual void takeDamage(int damage, BaseGameEntity attacker){
@@ -86,8 +109,15 @@ namespace Incursio.Classes
             return null;
         }
 
-        //Getters/Setters//
+        public virtual bool isDead(){
+            return health <= 0;
+        }
 
+        public virtual void updateBounds(){
+
+        }
+
+        #region Getters/Setters
         public virtual void setType(State.EntityName name)
         {
             this.entityType = name;
@@ -149,5 +179,6 @@ namespace Incursio.Classes
         public virtual void setKeyId(int key){
             this.keyId = key;
         }
+        #endregion
     }
 }

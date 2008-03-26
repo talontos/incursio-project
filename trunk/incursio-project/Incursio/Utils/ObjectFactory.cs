@@ -50,7 +50,6 @@ namespace Incursio.Utils
             if (product is Unit)
                 (product as Unit).setMap(Incursio.getInstance().currentMap);
 
-            this.incursio.addEntity(ref product);
             return product;
         }
 
@@ -80,7 +79,6 @@ namespace Incursio.Utils
             //TODO: remove Incursio's entityBank & functions
             //The EntityManager will keep up with them
             //This line is left in for now to keep the game working
-            this.incursio.addEntity(ref product);
             return product;
         }
 

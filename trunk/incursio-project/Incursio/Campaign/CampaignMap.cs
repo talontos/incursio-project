@@ -20,11 +20,27 @@ namespace Incursio.Campaign
         /// This function should be overridden by separate levels to check
         /// win conditions.
         /// </summary>
-        /// <returns>TODO: Some result representing the condition;
-        /// ***OR*** void, and we'll just act on the conditions here</returns>
-        public virtual Object inspectWinConditions(){
+        /// <returns>Game state</returns>
+        public override State.GameState inspectWinConditions(){
+            EntityManager eMan = EntityManager.getInstance();
 
-            return null;
+            if (eMan.getLivePlayerEntities(State.PlayerId.HUMAN).Count == 0         //No live entities
+                //|| eMan.getLivePlayerHeros(State.PlayerId.HUMAN).Count == 0         //No live heros
+               )
+            {
+                return State.GameState.Defeat;
+            }
+
+            if (   eMan.getLivePlayerEntities(State.PlayerId.COMPUTER).Count == 0      //No live entities
+                //|| eMan.getLivePlayerHeros(State.PlayerId.COMPUTER).Count == 0         //No live heros
+               )
+            {
+                return State.GameState.Victory;
+            }
+
+            //...
+
+            return State.GameState.None;
         }
 
     }

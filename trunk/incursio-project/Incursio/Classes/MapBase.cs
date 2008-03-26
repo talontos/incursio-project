@@ -88,6 +88,10 @@ namespace Incursio.Classes
             }
         }
 
+        public virtual State.GameState inspectWinConditions(){
+            return State.GameState.None;
+        }
+
         public virtual void initializeMap(){
 
         }

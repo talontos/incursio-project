@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Incursio.Utils;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 using Incursio.Managers;
 using Incursio.Commands;
@@ -27,6 +28,13 @@ namespace Incursio.Classes
         public Coordinate destination = null;
         public BaseGameEntity target = null;
 
+        //TEXTURES
+        public List<Texture2D> textureAnim_N;
+        public List<Texture2D> textureAnim_S;
+        public List<Texture2D> textureAnim_E;
+        public List<Texture2D> textureAnim_W;
+        public int textureIndex;
+
         public Unit() : base(){
 
         }
@@ -38,68 +46,20 @@ namespace Incursio.Classes
 
         public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
         {
+            this.updateBounds();
+
             //only perform actions when we are actively playing a map
             if (Incursio.getInstance().currentState == State.GameState.InPlay)
             {
-                //check state and act accordingly
-                switch (this.currentState)
-                {
-                    ///////////////////////////////
-                    case State.UnitState.Dead:
+                if(this.currentState == State.UnitState.Dead)
                         die();
-                        break;
 
-                    ///////////////////////////////
-                    case State.UnitState.Attacking:
-                        /*this.destination = this.target.getLocation();
-
-                        //if target is in range, attack.  otherwise move toward enemy
-                        attackTarget();
-                        break;*/
-
-                    ///////////////////////////////
-                    case State.UnitState.Moving:
-                        /*
-                        if (this.destination == null)
-                            this.currentState = State.UnitState.Idle;
-                        else
-                        {
-                            if (target != null)
-                            {
-                                destination = target.location;
-                            }
-
-                            updateMovement();
-                        }
-
-                        break;
-                        */
-                    ///////////////////////////////
-                    case State.UnitState.Wandering:
-                        /*this.move(new Coordinate(Incursio.rand.Next(0, 1024), Incursio.rand.Next(0, 768)));
-                        break;*/
-
-                    ///////////////////////////////
-                    case State.UnitState.Idle:
-                        //TODO: change; this is temporary
-                        //this.currentState = State.UnitState.Wandering;
-                        //break;
-
-                    ///////////////////////////////
-                    case State.UnitState.Guarding:
-                        //look for enemies in range to attack
-                        //break;
-
-                    ///////////////////////////////
-
-                    default: break;
-                }
-
+                //base update will execute commands
                 base.Update(gameTime, ref myRef);
-
             }
         }
 
+        //TODO: We need to somehow take into account the game time to allow for smoother movement
         public bool updateMovement()
         {
             float xMinimumThreshold = 0.05F;
@@ -161,14 +121,12 @@ namespace Incursio.Classes
                 }
                 else{
                     //open up our old space
-                    //Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, true);
                     MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, true);
 
                     //move
                     location = new Coordinate(newX, newY);
 
                     //set occupancy
-                    //Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, false);
                     MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, false);
 
                     return false;
@@ -279,11 +237,6 @@ namespace Incursio.Classes
                 //help, help, I'm being attacked!
                 //oh well, en garde!
                 this.orders.Insert(0, new AttackCommand(attacker));
-                /*if (currentState != State.UnitState.Attacking)
-                {
-                    this.target = attacker;
-                    currentState = State.UnitState.Attacking;
-                }*/
             }
         }
 
@@ -400,6 +353,11 @@ namespace Incursio.Classes
             else return false;// updateMovement();
         }
 
+        public override bool isDead()
+        {
+            return currentState == State.UnitState.Dead || currentState == State.UnitState.Buried;
+        }
+
         protected virtual void die(){
             currentState = State.UnitState.Dead;
             if (orders.Count != 0)
@@ -412,13 +370,32 @@ namespace Incursio.Classes
             if (deadTimer == TIME_DEAD_UNTIL_DESPAWN * 60)
             {
                 map.setSingleCellOccupancy(location.x, location.y, true);
-                Incursio.getInstance().removeEntity(keyId);
+                EntityManager.getInstance().removeEntity(keyId);
                 deadTimer++;
             }
             else
             {
                 deadTimer++;
             }
+        }
+
+        public override Texture2D getCurrentTexture()
+        {
+            switch(this.directionState){
+                case State.Direction.North:
+                    return textureAnim_N[textureIndex];
+
+                case State.Direction.South:
+                    return textureAnim_S[textureIndex];
+
+                case State.Direction.East:
+                    return textureAnim_E[textureIndex];
+
+                case State.Direction.West:
+                    return textureAnim_W[textureIndex];
+            }
+
+            return null;
         }
 
         protected virtual void updateDirectionTexture(){

@@ -5,6 +5,7 @@ using System.Text;
 using Incursio.Classes;
 using Incursio.Managers;
 using Incursio.Campaign;
+using Microsoft.Xna.Framework;
 
 namespace Incursio.Managers
 {
@@ -38,6 +39,13 @@ namespace Incursio.Managers
 
         public void initializeCurrentMap(){
             currentMap.initializeMap();
+        }
+
+        public void UpdateCampaign(GameTime gameTime){
+            State.GameState winState = currentMap.inspectWinConditions();
+
+            if (winState != State.GameState.None)
+                Incursio.getInstance().currentState = winState;
         }
     }
 }

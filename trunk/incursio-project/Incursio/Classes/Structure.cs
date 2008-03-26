@@ -4,6 +4,7 @@ using System.Text;
 using Incursio.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Incursio.Managers;
 
 namespace Incursio.Classes
 {
@@ -22,6 +23,8 @@ namespace Incursio.Classes
 
         public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
         {
+            this.updateBounds();
+
             if (Incursio.getInstance().currentState == State.GameState.InPlay)
             {
 
@@ -101,13 +104,18 @@ namespace Incursio.Classes
             if (this.health <= 0)
             {
                 this.health = 0;
-                Incursio.getInstance().removeEntity(this.keyId);
+                EntityManager.getInstance().removeEntity(this.keyId);
             }
         }
 
         public virtual void attackTarget()
         {
             //really only used for guardtowers
+        }
+
+        public override bool isDead()
+        {
+            return currentState == State.StructureState.Destroyed;
         }
     }
 }
