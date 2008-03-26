@@ -117,9 +117,10 @@ namespace Incursio
             clickDestination = Content.Load<Texture2D>(@"destinationClick");
 
             // load the HUD texture 
-            hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"), Content.Load<Texture2D>(@"lightInfantryPortrait"), 
+            /*hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"), Content.Load<Texture2D>(@"lightInfantryPortrait"), 
                 Content.Load<Texture2D>(@"archerPortrait"), Content.Load<Texture2D>(@"infantryIcon"), Content.Load<Texture2D>(@"archerIcon"), 
-                Content.Load<Texture2D>(@"resourceBarUnderlay"));
+                Content.Load<Texture2D>(@"resourceBarUnderlay"));*/
+            hud.loadHeadsUpDisplay();
 
             // load paused game menu components
             gameMenuButton = new Button(new Vector2(465, 738), Content.Load<Texture2D>(@"gameMenuButton"), Content.Load<Texture2D>(@"gameMenuButtonPressed"));

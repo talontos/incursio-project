@@ -20,7 +20,7 @@ namespace Incursio.Commands
         {
             //move towards destination
 
-            if(subject is Unit){
+            if(subject is Unit && subject.getPlayer() == State.PlayerId.HUMAN){ //U DUN WAN 2 MOV DA UNIT IF DA UNIT DUN BELON 2 U
                 //move unit
                 //do we have logic here, and actually move in Unit,
                 // or do we do all movement/state changing, etc here?

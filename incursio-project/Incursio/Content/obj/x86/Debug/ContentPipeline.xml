@@ -406,6 +406,24 @@
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Fort_hostile_exploded.xnb</Output>
       <Time>2008-03-20T00:09:46.890625-04:00</Time>
     </Item>
+    <Item>
+      <Source>BasePortrait.png</Source>
+      <Name>BasePortrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\BasePortrait.xnb</Output>
+      <Time>2008-03-26T11:34:02.847-04:00</Time>
+    </Item>
+    <Item>
+      <Source>TowerPortrait.png</Source>
+      <Name>TowerPortrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\TowerPortrait.xnb</Output>
+      <Time>2008-03-26T11:34:26.19075-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

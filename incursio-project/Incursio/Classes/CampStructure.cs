@@ -12,11 +12,11 @@ namespace Incursio.Classes
     public class CampStructure : Structure
     {
         //constants
-        const int LIGHT_INFANTRY_BUILD_TIME = 5;
-        const int HEAVY_INFANTRY_BUILD_TIME = 10;
-        const int ARCHER_BUILD_TIME = 7;
-        const int GUARD_TOWER_BUILD_TIME = 90;
-        const int ITEM_UPGRADE_BUILD_TIME = 90;
+        public const int LIGHT_INFANTRY_BUILD_TIME = 5;
+        public const int HEAVY_INFANTRY_BUILD_TIME = 10;
+        public const int ARCHER_BUILD_TIME = 7;
+        public const int GUARD_TOWER_BUILD_TIME = 90;
+        public const int ITEM_UPGRADE_BUILD_TIME = 90;
 
         int newUnitPlacementX = 10;
         int newUnitPlacementY = 120;    //little bit of hard coding, but can't really help it here 
@@ -91,7 +91,8 @@ namespace Incursio.Classes
                     timeBuilt = 0;
                     timeRequired = 0;
                     this.currentState = State.StructureState.Idle;
-
+                    this.currentBuildForObjectFactory = "IDLE";
+                    this.currentlyBuildingThis = "IDLE";
                     this.buildProject = null;
                 }
                 else
@@ -137,5 +138,16 @@ namespace Incursio.Classes
                 myRef.Height
             );
         }
+
+        public double getPercentDone()
+        {
+            if (this.isBuilding())
+            {
+                return (float)timeBuilt / timeRequired;
+            }
+            else return -1.0;
+            
+        }
+
     }
 }

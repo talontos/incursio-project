@@ -55,3 +55,5 @@ bin\x86\Debug\Content\Fort_hostile_damaged.xnb
 bin\x86\Debug\Content\Fort_hostile_destroyed.xnb
 bin\x86\Debug\Content\Fort_hostile_exploded.xnb
 bin\x86\Debug\Incursio.exe.config
+bin\x86\Debug\Content\BasePortrait.xnb
+bin\x86\Debug\Content\TowerPortrait.xnb

@@ -68,6 +68,16 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.guardTowerTexturePlayer = Content.Load<Texture2D>(@"Tower_friendly");
             TextureBank.EntityTextures.guardTowerTextureComputer = Content.Load<Texture2D>(@"Tower_hostile");
 
+            //Load Interface textures
+            TextureBank.InterfaceTextures.headsUpDisplay = Content.Load<Texture2D>(@"utilityBarUnderlay");
+            TextureBank.InterfaceTextures.resourceDisplay = Content.Load<Texture2D>(@"resourceBarUnderlay");
+            TextureBank.InterfaceTextures.lightInfantryPortrait = Content.Load<Texture2D>(@"lightInfantryPortrait");
+            TextureBank.InterfaceTextures.lightInfantryIcon = Content.Load<Texture2D>(@"InfantryIcon");
+            TextureBank.InterfaceTextures.archerPortrait = Content.Load<Texture2D>(@"archerPortrait");
+            TextureBank.InterfaceTextures.archerIcon = Content.Load<Texture2D>(@"archerIcon");
+            TextureBank.InterfaceTextures.basePortrait = Content.Load<Texture2D>(@"BasePortrait");
+            TextureBank.InterfaceTextures.guardTowerPortrait = Content.Load<Texture2D>(@"TowerPortrait");
+
         }
 
 

@@ -44,6 +44,7 @@ namespace Incursio.Managers
 
             public static Texture2D guardTowerTexturePlayer;
             public static Texture2D guardTowerTextureComputer;
+            /////////////////////////////
 
         }
 
@@ -61,6 +62,23 @@ namespace Incursio.Managers
             //...
 
             //...
+        }
+
+        public static class InterfaceTextures
+        {
+            //Interface Textures/////////
+            public static Texture2D headsUpDisplay;
+            public static Texture2D cursor;
+            public static Texture2D cursorPressed;
+            public static Texture2D resourceDisplay;
+
+            public static Texture2D archerPortrait;
+            public static Texture2D archerIcon;
+            public static Texture2D lightInfantryPortrait;
+            public static Texture2D lightInfantryIcon;
+            public static Texture2D basePortrait;
+            public static Texture2D guardTowerPortrait;
+            /////////////////////////////
         }
     }
 }
