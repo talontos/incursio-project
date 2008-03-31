@@ -25,7 +25,7 @@ namespace Incursio.Classes
         protected State.Direction directionState = State.Direction.Still;
         protected bool isClose = false;
 
-        public Coordinate destination = null;
+        private Coordinate destination = null;
         public BaseGameEntity target = null;
 
         //TEXTURES
@@ -36,12 +36,8 @@ namespace Incursio.Classes
         public int textureIndex;
 
         public Unit() : base(){
-
-        }
-
-        public Unit(MapBase playedMap)
-        {
-            this.map = playedMap;
+            canAttack = true;
+            canMove = true;
         }
 
         public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
@@ -51,16 +47,22 @@ namespace Incursio.Classes
             //only perform actions when we are actively playing a map
             if (Incursio.getInstance().currentState == State.GameState.InPlay)
             {
-                if(this.currentState == State.UnitState.Dead)
-                        die();
+                if(this.currentState == State.UnitState.Dead){
+                    die();
+                    return;
+                }
 
                 //base update will execute commands
                 base.Update(gameTime, ref myRef);
+
+                //in case I go idle; look for bad guys
+                if (orders.Count == 0)
+                    EntityManager.getInstance().issueCommand_SingleEntity(State.Command.GUARD, false, this);
             }
         }
 
         //TODO: We need to somehow take into account the game time to allow for smoother movement
-        public bool updateMovement()
+        public override bool updateMovement()
         {
             float xMinimumThreshold = 0.05F;
             float yMinimumThreshold = 0.05F;
@@ -236,7 +238,16 @@ namespace Incursio.Classes
             {
                 //help, help, I'm being attacked!
                 //oh well, en garde!
-                this.orders.Insert(0, new AttackCommand(attacker));
+
+                //We should only do this if they aren't already attacking - that way they won't 
+                //constantly switch targets in a big battle
+                if(currentState != State.UnitState.Attacking){
+                    this.orders.Insert(0, new AttackCommand(attacker));
+                    PlayerManager.getInstance().notifyPlayer(
+                        this.owner,
+                        new GameEvent(State.EventType.UNDER_ATTACK, /*SOUND,*/ "Unit under attack", this.location)
+                    );
+                }
             }
         }
 
@@ -282,7 +293,7 @@ namespace Incursio.Classes
         /// <summary>
         /// If target is in range, attack it.  otherwise, move toward it.
         /// </summary>
-        public virtual bool attackTarget(){
+        public override bool attackTarget(){
             //if target is in attackRange, attack it.
 
             int largeTargetBufferZone = 0;
@@ -402,6 +413,16 @@ namespace Incursio.Classes
             switch(directionState){
                 //TODO: reload my texture depending on my directionState
             }
+        }
+
+        public override void setTarget(BaseGameEntity target)
+        {
+            this.target = target;
+        }
+
+        public override void setDestination(Coordinate dest)
+        {
+            this.destination = dest;
         }
     }
 }

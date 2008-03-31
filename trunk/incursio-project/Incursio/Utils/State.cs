@@ -55,6 +55,8 @@ namespace Incursio
             Destroyed,
 
             Attacking,  //for guard towers
+
+            Guarding,
         }
 
         public enum HealthStates
@@ -126,6 +128,7 @@ namespace Incursio
             NONE,
             MOVE,
             ATTACK,
+            ATTACK_MOVE,
             STOP,
             FOLLOW,
             GUARD,
@@ -136,6 +139,11 @@ namespace Incursio
             ONE,
             TWO,
             THREE,
+        }
+
+        public enum EventType{
+            UNDER_ATTACK,
+            CREATION_COMPLETE,
         }
     }
 }

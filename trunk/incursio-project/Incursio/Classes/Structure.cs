@@ -108,11 +108,6 @@ namespace Incursio.Classes
             }
         }
 
-        public virtual void attackTarget()
-        {
-            //really only used for guardtowers
-        }
-
         public override bool isDead()
         {
             return currentState == State.StructureState.Destroyed;

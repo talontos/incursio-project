@@ -74,7 +74,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Campaign\RandomMap.cs" />
     <Compile Include="Campaign\TestMap.cs" />
+    <Compile Include="Classes\BaseAI.cs" />
+    <Compile Include="Classes\AIPlayer.cs" />
     <Compile Include="Classes\ArcherUnit.cs" />
     <Compile Include="Classes\BaseGameEntity.cs" />
     <Compile Include="Classes\BaseMapEntity.cs" />
@@ -92,6 +95,7 @@
     <Compile Include="Commands\AttackCommand.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\BuildCommand.cs" />
+    <Compile Include="Commands\AttackMoveCommand.cs" />
     <Compile Include="Commands\FollowCommand.cs" />
     <Compile Include="Commands\GuardCommand.cs" />
     <Compile Include="Commands\MoveCommand.cs" />
@@ -108,6 +112,7 @@
     <Compile Include="Managers\TextureBank.cs" />
     <Compile Include="Managers\TextureManager.cs" />
     <Compile Include="Utils\DebugUtil.cs" />
+    <Compile Include="Utils\GameEvent.cs" />
     <Compile Include="Utils\ObjectFactory.cs" />
     <Compile Include="Utils\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

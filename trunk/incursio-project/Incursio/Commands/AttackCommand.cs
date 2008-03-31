@@ -21,7 +21,7 @@ namespace Incursio.Commands
 
         public override void execute(ref BaseGameEntity subject)
         {
-            if( !(subject is Unit || subject is GuardTowerStructure) ){
+            if( !subject.canAttack ){
                 this.finishedExecution = true;
                 return;
             }
@@ -34,14 +34,14 @@ namespace Incursio.Commands
                 //if subject is in attack range of target, set attack state & notify manager
                 bool result = false;
 
-                if(subject is Unit){
-                    (subject as Unit).target = this.target;
-                    result = (subject as Unit).attackTarget();
-                }
-                else{
+                //if(subject is Unit){
+                    subject.setTarget(target);
+                    result = subject.attackTarget();
+                //}
+                //else{
                     //TODO: REFACTOR CLASS FOR GUARD TOWER
                     //result = (subject as GuardTowerStructure).attackTarget();
-                }
+                //}
 
                 if(!result){
                     //subject is not in attack range, move toward target:

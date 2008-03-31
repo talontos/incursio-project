@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Incursio.Classes;
+using Microsoft.Xna.Framework;
+using Incursio.Utils;
 
 namespace Incursio.Managers
 {
@@ -9,6 +11,8 @@ namespace Incursio.Managers
     {
         public Player computerPlayer;
         public Player humanPlayer;
+
+        private List<Player> players;
 
         private static PlayerManager instance;
 
@@ -21,12 +25,36 @@ namespace Incursio.Managers
             return instance;
         }
 
+        public void updatePlayers(GameTime gameTime){
+
+            players.ForEach(delegate(Player p)
+            {
+                p.update(gameTime);
+            });
+
+        }
+
         public void initializePlayerManager(){
-            this.computerPlayer = new Player();
+            //TODO: remove separate players; use list
+            this.computerPlayer = new AIPlayer();
             this.computerPlayer.id = State.PlayerId.COMPUTER;
 
             this.humanPlayer = new Player();
             this.humanPlayer.id = State.PlayerId.HUMAN;
+
+            this.players = new List<Player>();
+            players.Add(computerPlayer);
+            players.Add(humanPlayer);
+        }
+
+        public void notifyPlayer(State.PlayerId player, GameEvent e){
+            //get player
+            players.ForEach(delegate(Player p)
+            {
+                if(p.id == player){
+                    p.events.Add(e);
+                }
+            });
         }
 
 

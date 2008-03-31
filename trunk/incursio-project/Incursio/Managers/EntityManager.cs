@@ -149,11 +149,11 @@ namespace Incursio.Managers
                         //NOW, if unit is enemy, selected units attack!
                         if (e.getPlayer() == State.PlayerId.COMPUTER)
                         {
-                            EntityManager.getInstance().issueCommand(State.Command.ATTACK, false, e);
+                            EntityManager.getInstance().issueCommand(State.Command.ATTACK, false, null, e);
                         }
                         else
                         {
-                            EntityManager.getInstance().issueCommand(State.Command.FOLLOW, false, e);
+                            EntityManager.getInstance().issueCommand(State.Command.FOLLOW, false, null, e);
                         }
                         done = true;
                     }
@@ -164,16 +164,14 @@ namespace Incursio.Managers
 
             if (!done && selectedUnits.Count > 0)
             {
-                EntityManager.getInstance().issueCommand(State.Command.MOVE, false, new Coordinate(Convert.ToInt32(point.X), Convert.ToInt32(point.Y)));
+                if (InputManager.getInstance().alting())
+                    EntityManager.getInstance().issueCommand(State.Command.ATTACK_MOVE, false, null, new Coordinate(Convert.ToInt32(point.X), Convert.ToInt32(point.Y)));
+                else
+                    EntityManager.getInstance().issueCommand(State.Command.MOVE, false, null, new Coordinate(Convert.ToInt32(point.X), Convert.ToInt32(point.Y)));
             }
 
             done = true;
         
-        }
-
-        //TODO: TEMPORARY!!!
-        public void updateUnitSelection(ref List<BaseGameEntity> list){
-            this.selectedUnits = list;
         }
 
         public BaseGameEntity getEntity(int keyId){
@@ -203,6 +201,16 @@ namespace Incursio.Managers
             return playerEntities;
         }
 
+        public List<BaseGameEntity> getLivePlayerUnits(State.PlayerId player){
+            List<BaseGameEntity> playerUnits = new List<BaseGameEntity>();
+            this.entityBank.ForEach(delegate(BaseGameEntity e)
+            {
+                if (e.getPlayer() == player && !e.isDead() && e is Unit)
+                    playerUnits.Add(e);
+            });
+            return playerUnits;
+        }
+
         public List<Hero> getLivePlayerHeros(State.PlayerId player){
             List<Hero> playerHeros = new List<Hero>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
@@ -216,7 +224,7 @@ namespace Incursio.Managers
 
         public void tryToBuild(BaseGameEntity toBuild /*String entityType*/){
             if(selectedUnits.Count > 0 && selectedUnits[0] is CampStructure){
-                this.issueCommand(State.Command.BUILD, false, toBuild);
+                this.issueCommand(State.Command.BUILD, true, null, toBuild);
                 //this.createNewEntity(entityType, (selectedUnits[0] as CampStructure).owner);
             }
         }
@@ -226,7 +234,7 @@ namespace Incursio.Managers
             if (selectedUnits.Count > 0 && selectedUnits[0] is CampStructure)
             {
                 (selectedUnits[0] as CampStructure).setNewStructureCoords(new Coordinate((int)point.X, (int)point.Y));
-                this.issueCommand(State.Command.BUILD, false, toBuild);
+                this.issueCommand(State.Command.BUILD, false, null, toBuild);
             }
         }
 
@@ -239,11 +247,18 @@ namespace Incursio.Managers
         }
 
         /// <summary>
-        /// Issues a command to all selected units
+        /// Issues a command to units in entitiesToCommand.
+        /// If entitiesToCommand is null, selectedUnis will be used in its stead
         /// </summary>
         /// <param name="commandType">Enumerated command type identifying the command</param>
+        /// <param name="append">Boolean value denoting if the command should override all current commands, or
+        ///     if it should be appended to any current command lists
+        /// </param>
+        /// <param name="entitiesToCommand">The entities to be issued the command.  If 'null' is provided,
+        ///     selectedUnits will be used instead.
+        /// </param>
         /// <param name="args">A list of arguments dependent upon the command type</param>
-        public void issueCommand(State.Command commandType, bool append, params Object[] args){
+        public void issueCommand(State.Command commandType, bool append, List<BaseGameEntity> entitiesToCommand, params Object[] args){
 
             BaseCommand command = null;
             switch (commandType)
@@ -252,6 +267,12 @@ namespace Incursio.Managers
                 case State.Command.MOVE:
                     //TODO: PATHING!!
                     command = new MoveCommand(args[0] as Coordinate);
+                    break;
+
+                ////////////////////////
+                case State.Command.ATTACK_MOVE:
+                    //TODO: PATHING!!
+                    command = new AttackMoveCommand(args[0] as Coordinate);
                     break;
 
                 ////////////////////////
@@ -289,8 +310,10 @@ namespace Incursio.Managers
 
             if (command == null) return;
 
+            if (entitiesToCommand == null)
+                entitiesToCommand = selectedUnits;
 
-            this.selectedUnits.ForEach(delegate(BaseGameEntity e)
+            entitiesToCommand.ForEach(delegate(BaseGameEntity e)
             {
                 //add command
                 if (append)
@@ -300,13 +323,20 @@ namespace Incursio.Managers
             });
         }
 
+        public void issueCommand_SingleEntity(State.Command commandType, bool append, BaseGameEntity entityToCommand, params Object[] args){
+            List<BaseGameEntity> list = new List<BaseGameEntity>(1);
+            list.Add(entityToCommand);
+
+            this.issueCommand(commandType, append, list, args);
+        }
+
         public List<BaseGameEntity> getEntitiesInRange(ref BaseGameEntity hunter, int cellSightRange){
             List<BaseGameEntity> enemies = new List<BaseGameEntity>();
             State.PlayerId hOwner = hunter.owner;
             Coordinate hLoc = hunter.location;
 
             this.entityBank.ForEach(delegate(BaseGameEntity e){
-                if(e.owner != hOwner){
+                if(e.owner != hOwner && !e.isDead()){
                     if(MapManager.getInstance().currentMap.getCellDistance(hLoc, e.location) <= cellSightRange){
                         enemies.Add(e);
                     }

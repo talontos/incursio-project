@@ -20,10 +20,12 @@ namespace Incursio.Classes
         public GuardTowerStructure() : base(){
             this.maxHealth = 350;
             this.health = maxHealth;
-            this.sightRange = 500;
+            this.sightRange = 10;
             this.setType(State.EntityName.GuardTower);
             this.map = Incursio.getInstance().currentMap;
             this.currentState = State.StructureState.Idle;
+
+            canAttack = true;
         }
 
       public override void build(BaseGameEntity toBeBuilt)
@@ -51,7 +53,7 @@ namespace Incursio.Classes
           }
       }
 
-      public override void attackTarget()
+      public override bool attackTarget()
       {
           //if target is in attackRange, attack it!
           if (map.getCellDistance(location, target.location) < attackRange)
@@ -76,7 +78,13 @@ namespace Incursio.Classes
               {
                   this.updateAttackTimer++;
               }
+
+              //within range
+              return true;
           }
+
+          //outside range
+          return false;
       }
 
       public override void setLocation(Coordinate coords)
@@ -105,6 +113,19 @@ namespace Incursio.Classes
               myRef.Width,
               myRef.Height
           );
+      }
+
+      public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
+      {
+          if (orders.Count == 0)
+              EntityManager.getInstance().issueCommand_SingleEntity(State.Command.GUARD, false, this);
+
+          base.Update(gameTime, ref myRef);
+      }
+
+      public override void setTarget(BaseGameEntity target)
+      {
+          this.target = target;
       }
     }
 }

@@ -71,20 +71,18 @@ namespace Incursio.Managers
 
             //unit commands
             if(this.keyPressed(Keys.S)){
-                EntityManager.getInstance().issueCommand(State.Command.STOP, false);
+                EntityManager.getInstance().issueCommand(State.Command.STOP, false, null);
             }
 
             if(this.keyPressed(Keys.G)){
-                EntityManager.getInstance().issueCommand(State.Command.GUARD, false);
+                EntityManager.getInstance().issueCommand(State.Command.GUARD, false, null);
             }
             #endregion
 
             #region MOUSE COMMANDS
 
-            Vector2 point = new Vector2(mouseStateCurrent.X, mouseStateCurrent.Y);
-
-            //TODO: we need to translate this point to the viewable area on the map
-
+            Vector2 point = MapManager.getInstance().currentMap.translateClickToMapLocation(mouseStateCurrent.X, mouseStateCurrent.Y);
+            
             if(this.leftClick()){
                 if (this.positioningTower)
                 {
@@ -115,6 +113,10 @@ namespace Incursio.Managers
 
         public bool shifting(){
             return (keyStateCurrent.IsKeyDown(Keys.LeftShift) || keyStateCurrent.IsKeyDown(Keys.RightShift));
+        }
+
+        public bool alting(){
+            return (keyStateCurrent.IsKeyDown(Keys.LeftAlt) || keyStateCurrent.IsKeyDown(Keys.RightAlt));
         }
 
         public bool rightClick(){

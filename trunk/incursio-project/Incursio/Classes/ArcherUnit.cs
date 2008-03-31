@@ -15,7 +15,7 @@ namespace Incursio.Classes
             this.damage = 10;
             this.speed = 3;
             this.attackSpeed = 3;
-            this.sightRange = 150;
+            this.sightRange = 12;
             this.attackRange = 10;
             this.setType(State.EntityName.Archer);
 

@@ -12,7 +12,6 @@ namespace Incursio.Campaign
     {
         public override void initializeMap()
         {
-            //TODO: CHANGE!
             //This map right now will represent our test environment
 
             EntityManager entityManager = EntityManager.getInstance();
@@ -37,7 +36,7 @@ namespace Incursio.Campaign
             infUnit1.setLocation(new Coordinate(240, 380));
             infUnit2.setLocation(new Coordinate(200, 400));
             //archUnit2.setLocation(new Coordinate(820, 195));
-            archUnit2.setLocation(new Coordinate(300, 200));
+            archUnit2.setLocation(new Coordinate(700, 200));
             infUnit3.setLocation(new Coordinate(800, 220)); //for ease of testing
             archUnit1.setLocation(new Coordinate(160, 395));
             playerCamp.setLocation(new Coordinate(100, 400));

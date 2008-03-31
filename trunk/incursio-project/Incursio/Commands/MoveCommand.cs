@@ -20,12 +20,10 @@ namespace Incursio.Commands
         {
             //move towards destination
 
-            if(subject is Unit && subject.getPlayer() == State.PlayerId.HUMAN){ //U DUN WAN 2 MOV DA UNIT IF DA UNIT DUN BELON 2 U
+            if(subject.canMove || subject.isConstructor){
                 //move unit
-                //do we have logic here, and actually move in Unit,
-                // or do we do all movement/state changing, etc here?
-                (subject as Unit).destination = this.destination;
-                this.finishedExecution = (subject as Unit).updateMovement();
+                subject.setDestination(this.destination);
+                this.finishedExecution = subject.updateMovement();
             }
             else{
                 //not a unit, do nothing?

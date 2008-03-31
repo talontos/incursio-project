@@ -30,7 +30,7 @@ namespace Incursio.Managers
             //TODO: Define Different levels
             switch(level){
                 case State.CampaignLevel.ONE:   currentMap = new TestMap();  break;
-                case State.CampaignLevel.TWO:   currentMap = new TestMap();  break;
+                case State.CampaignLevel.TWO:   currentMap = new RandomMap();  break;
                 case State.CampaignLevel.THREE: currentMap = new TestMap();  break;
             }
 
