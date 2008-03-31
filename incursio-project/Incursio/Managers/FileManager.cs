@@ -19,6 +19,10 @@ namespace Incursio.Managers
             return instance;
         }
 
+        public void loadEntityConfiguration(){
+
+        }
+
         public void saveCurrentGame(String fileName){
 
         }

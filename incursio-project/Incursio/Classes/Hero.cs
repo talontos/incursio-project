@@ -16,6 +16,7 @@ namespace Incursio.Classes
 
         public Hero() : base(){
             //TODO: set hero properties
+            this.sightRange = 15;
             this.setType(State.EntityName.Hero);
         }
 

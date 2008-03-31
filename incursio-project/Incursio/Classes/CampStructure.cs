@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using Incursio.Managers;
+using Incursio.Commands;
 
 namespace Incursio.Classes
 {
@@ -21,6 +22,7 @@ namespace Incursio.Classes
         int newUnitPlacementX = 10;
         int newUnitPlacementY = 120;    //little bit of hard coding, but can't really help it here 
 
+        Coordinate destination;
         Coordinate newStructureCoords;
 
         String currentlyBuildingThis = "IDLE"; //this is for the HUD to display what it's building
@@ -33,6 +35,10 @@ namespace Incursio.Classes
             this.sightRange = 500;
             this.setType(State.EntityName.Camp);
             this.map = Incursio.getInstance().currentMap;
+
+            setDefaultDestination();
+
+            this.isConstructor = true;
         }
 
         public override void build(BaseGameEntity toBeBuilt)
@@ -89,7 +95,8 @@ namespace Incursio.Classes
                 if (buildProject.getType() != State.EntityName.GuardTower)
                 {
                     Unit temp = ( EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.owner) as Unit);
-                    temp.setLocation(new Coordinate(this.location.x + newUnitPlacementX, this.location.y + newUnitPlacementY));
+                    temp.setLocation(this.location);
+                    temp.issueSingleOrder(new MoveCommand(this.destination));
                     timeBuilt = 0;
                     timeRequired = 0;
                     this.currentState = State.StructureState.Idle;
@@ -120,6 +127,11 @@ namespace Incursio.Classes
             return currentlyBuildingThis;
         }
 
+        public override void setDestination(Coordinate dest)
+        {
+            this.destination = dest;
+        }
+
         public void setNewStructureCoords(Coordinate coords)
         {
             this.newStructureCoords = coords;
@@ -127,18 +139,20 @@ namespace Incursio.Classes
 
         public override void setLocation(Coordinate coords)
         {
-                //hardcode blargh
-                int xStart = coords.x - 32;
-                int yStart = coords.y - (int)(64 * 0.80);
-                int xEnd = coords.x + 32;
-                int yEnd = coords.y + (int)(64 * 0.20);
+            //hardcode blargh
+            int xStart = coords.x - 32;
+            int yStart = coords.y - (int)(64 * 0.80);
+            int xEnd = coords.x + 32;
+            int yEnd = coords.y + (int)(64 * 0.20);
 
-                map.setSingleCellOccupancy(xStart, yStart, false);
-                map.setSingleCellOccupancy(xStart, yEnd, false);
-                map.setSingleCellOccupancy(xEnd, yStart, false);
-                map.setSingleCellOccupancy(xEnd, yEnd, false);
+            map.setSingleCellOccupancy(xStart, yStart, false);
+            map.setSingleCellOccupancy(xStart, yEnd, false);
+            map.setSingleCellOccupancy(xEnd, yStart, false);
+            map.setSingleCellOccupancy(xEnd, yEnd, false);
 
-                base.setLocation(coords);
+            base.setLocation(coords);
+
+            setDefaultDestination();
         }
 
         public override void updateBounds()
@@ -161,6 +175,21 @@ namespace Incursio.Classes
             }
             else return -1.0;
             
+        }
+
+        private void setDefaultDestination(){
+            this.destination = new Coordinate(this.location.x + newUnitPlacementX, this.location.y + newUnitPlacementY);
+        }
+
+        /// <summary> 
+        /// For camps, we don't want to lose our queue.
+        /// If we are issued a 'single' order (which by default empties order queue),
+        /// we want to execute this order immediately and then continue our build queue.
+        /// </summary>
+        /// <param name="order">Order to be issued</param>
+        public override void issueSingleOrder(BaseCommand order)
+        {
+            base.issueImmediateOrder(order);
         }
 
     }

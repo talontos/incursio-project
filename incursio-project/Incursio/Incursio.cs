@@ -24,7 +24,8 @@ namespace Incursio
     public class Incursio : Microsoft.Xna.Framework.Game
     {
         private static Incursio instance;
-        public static Random rand = new Random(DebugUtil.RandomNumberSeed);
+        //UNCOMMENT THE RANDOM-NUMBER-SEED FOR DEBUGGING RANDOM BEHAVIOR
+        public static Random rand = new Random(/*DebugUtil.RandomNumberSeed*/);
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;                //draws our images
@@ -71,7 +72,7 @@ namespace Incursio
             keysPressed = new Keys[15];
             Content.RootDirectory = "Content";
 
-            currentMap = MapManager.getInstance().setCurrentLevel(State.CampaignLevel.ONE);
+            currentMap = MapManager.getInstance().setCurrentLevel(State.CampaignLevel.TWO);
             MapManager.getInstance().initializeCurrentMap();
 
             playerManager = PlayerManager.getInstance();
@@ -222,6 +223,8 @@ namespace Incursio
                     InputManager.getInstance().Update(gameTime);
 
                     MapManager.getInstance().currentMap.update(keysPressed, 1024, 768);
+
+                    PlayerManager.getInstance().updatePlayers(gameTime);
                     
                     //listener for menu button
                     gameMenuButton.Update(cursor, spriteBatch);

@@ -11,24 +11,25 @@ namespace Incursio.Classes
 {
     public class Player
     {
-        public String name = "";
-        public List<BaseGameEntity> selection;
+        public String name = "Player";
         public int heroId;
         public long MONETARY_UNIT = 0;
         public int ownedControlPoints = 0;
-        public Enum id;
+        public State.PlayerId id;
+
+        public List<GameEvent> events;
 
 
         public Player(){
-            this.name = "Player";
+            events = new List<GameEvent>();
         }
 
-        public Player(String playerName)
+        public Player(String playerName) : base()
         {
             this.name = playerName;
         }
 
-        public void update(GameTime gameTime){
+        public virtual void update(GameTime gameTime){
             //update player-specifics
             //money
         }

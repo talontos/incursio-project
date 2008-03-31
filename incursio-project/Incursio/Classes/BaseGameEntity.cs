@@ -23,6 +23,9 @@ namespace Incursio.Classes
         public int keyId = -1;
         public bool visible = false;
         public bool highlighted = false;
+        public bool canAttack = false;
+        public bool canMove = false;
+        public bool isConstructor = false;
 
         public Rectangle boundingBox;
 
@@ -43,6 +46,9 @@ namespace Incursio.Classes
             //TODO: draw unit here?
             //TODO: check if i'm clicked?
 
+            if (this.isDead())
+                return;
+
             if (orders.Count > 0){
                 //check validity of next command
                 if (orders[0].finishedExecution)
@@ -50,8 +56,12 @@ namespace Incursio.Classes
 
             }
 
+            //if I still have orders...
             if(orders.Count > 0){
                 orders[0].execute(ref myRef);
+
+                //check type for player notification
+
             }
         }
 
@@ -60,7 +70,8 @@ namespace Incursio.Classes
         /// so that it is its only order
         /// </summary>
         /// <param name="order">The new command</param>
-        public void issueSingleOrder(BaseCommand order){
+        public virtual void issueSingleOrder(BaseCommand order)
+        {
             this.orders = new List<BaseCommand>();
             this.orders.Add(order);
         }
@@ -70,7 +81,8 @@ namespace Incursio.Classes
         /// of commands
         /// </summary>
         /// <param name="commands">The new commands</param>
-        public void issueOrderList(params BaseCommand[] commands){
+        public virtual void issueOrderList(params BaseCommand[] commands)
+        {
             this.orders = new List<BaseCommand>();
             if(commands != null)this.orders.AddRange(commands);
         }
@@ -79,7 +91,7 @@ namespace Incursio.Classes
         /// Adds a new command to the end of the entity's command list
         /// </summary>
         /// <param name="order">The new command</param>
-        public void issueAdditionalOrder(BaseCommand order){
+        public virtual void issueAdditionalOrder(BaseCommand order){
             this.orders.Add(order);
         }
 
@@ -87,7 +99,8 @@ namespace Incursio.Classes
         /// Adds a new command to the beginning of the entity's command list
         /// </summary>
         /// <param name="order">The new important command</param>
-        public void issueImmediateOrder(BaseCommand order){
+        public virtual void issueImmediateOrder(BaseCommand order)
+        {
             this.orders.Insert(0, order);
         }
 
@@ -115,6 +128,18 @@ namespace Incursio.Classes
 
         public virtual void updateBounds(){
 
+        }
+
+        public virtual bool attackTarget(){
+            return false;
+        }
+
+        /// <summary>
+        /// Virtual function for moving
+        /// </summary>
+        /// <returns>True when destination is reached.  By default returns true.</returns>
+        public virtual bool updateMovement(){
+            return true;
         }
 
         #region Getters/Setters
@@ -179,6 +204,18 @@ namespace Incursio.Classes
         public virtual void setKeyId(int key){
             this.keyId = key;
         }
+        #endregion
+
+        #region SPECIAL GET-SET
+        
+        public virtual void setTarget(BaseGameEntity target){
+        
+        }
+        
+        public virtual void setDestination(Coordinate dest){
+
+        }
+
         #endregion
     }
 }

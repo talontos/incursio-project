@@ -246,6 +246,17 @@ namespace Incursio.Classes
             indexY = pixY / TILE_HEIGHT;
         }
 
+        public Vector2 translateClickToMapLocation(Vector2 click){
+            click.X += minViewableX * TILE_WIDTH;
+            click.Y += minViewableY * TILE_HEIGHT;
+
+            return click;
+        }
+
+        public Vector2 translateClickToMapLocation(int x, int y){
+            return new Vector2(x + minViewableX * TILE_WIDTH, y + minViewableY * TILE_HEIGHT);
+        }
+
         public int getTileHeight()
         {
             return TILE_HEIGHT;
@@ -264,15 +275,6 @@ namespace Incursio.Classes
         public int getMinimumY()
         {
             return minViewableY;
-        }
-
-        public void printOccupancyGrid(){
-            for(int x = 0; x < this.occupancyGrid.GetLength(0); x++){
-                for(int y = 0; y < this.occupancyGrid.GetLength(1); y++){
-                    Console.Write(this.occupancyGrid[x, y]);
-                }
-                Console.WriteLine();
-            }
         }
     }
 }

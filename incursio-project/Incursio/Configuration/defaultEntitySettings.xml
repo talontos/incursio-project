@@ -2,15 +2,15 @@
 <settings>
 	<BaseGameEntity>
 		<Unit>
-			<Hero pointValue="200" maxHealth="100" damage="" sightRange="" attackRange="" buildTime="" />
-			<LightInfantryUnit pointValue="10" maxHealth="100" damage="" sightRange="" attackRange="" buildTime="" />
-			<HeavyInfantryUnit pointValue="20" maxHealth="100" damage="" sightRange="" attackRange="" buildTime="" />
-			<ArcherUnit pointValue="15" maxHealth="100" damage="" sightRange="" attackRange="" buildTime="" />
+			<Hero pointValue="200" maxHealth="100" damage="25" sightRange="10" attackRange="1" buildTime="" />
+			<LightInfantryUnit pointValue="10" maxHealth="100" damage="15" sightRange="5" attackRange="1" buildTime="" />
+			<HeavyInfantryUnit pointValue="20" maxHealth="100" damage="20" sightRange="5" attackRange="1" buildTime="" />
+			<ArcherUnit pointValue="15" maxHealth="100" damage="10" sightRange="15" attackRange="10" buildTime="" />
 		</Unit>
 		
 		<Structure>
 			<ControlPoint pointValue="50" maxHealth="100" />
-			<GuardTower pointValue="30" maxHealth="200" damage="" sightRange="" attackRange="" buildTime="" />
+			<GuardTower pointValue="30" maxHealth="200" damage="20" sightRange="" attackRange="" buildTime="" />
 			<Camp pointValue="100" maxHealth="350" buildTime="" />
 		</Structure>
 	</BaseGameEntity>

@@ -15,5 +15,9 @@ namespace Incursio.Utils
             this.x = x;
             this.y = y;
         }
+
+        public Microsoft.Xna.Framework.Point toPoint(){
+            return new Microsoft.Xna.Framework.Point(x,y);
+        }
     }
 }
