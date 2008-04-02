@@ -79,6 +79,18 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.archerIcon = Content.Load<Texture2D>(@"archerIcon");
             TextureBank.InterfaceTextures.basePortrait = Content.Load<Texture2D>(@"BasePortrait");
             TextureBank.InterfaceTextures.guardTowerPortrait = Content.Load<Texture2D>(@"TowerPortrait");
+            TextureBank.InterfaceTextures.guardTowerIcon = Content.Load<Texture2D>(@"TowerIcon");
+
+            TextureBank.InterfaceTextures.gameMenuButton = Content.Load<Texture2D>(@"gameMenuButton");
+            TextureBank.InterfaceTextures.gameMenuButtonPressed = Content.Load<Texture2D>(@"gameMenuButtonPressed");
+            TextureBank.InterfaceTextures.resumeGameButton = Content.Load<Texture2D>(@"resumeButton");
+            TextureBank.InterfaceTextures.resumeGameButtonPressed = Content.Load<Texture2D>(@"resumeButtonPressed");
+            TextureBank.InterfaceTextures.exitGameToMenuButton = Content.Load<Texture2D>(@"exitGameButton");
+            TextureBank.InterfaceTextures.exitGameToMenuButtonPressed = Content.Load<Texture2D>(@"exitGameButtonPressed");
+            TextureBank.InterfaceTextures.newGameButton = Content.Load<Texture2D>(@"newGameButton");
+            TextureBank.InterfaceTextures.newGameButtonPressed = Content.Load<Texture2D>(@"newGamePressed");
+            TextureBank.InterfaceTextures.exitGameButton = Content.Load<Texture2D>(@"exitGameButton");
+            TextureBank.InterfaceTextures.exitGameButtonPressed = Content.Load<Texture2D>(@"exitGameButtonPressed");
 
         }
 

@@ -12,19 +12,9 @@ namespace Incursio.Classes
 {
   public class HeadsUpDisplay
     {
-        /*//Texture2D containing the utility bar.
-        Texture2D utilityBar; 
-
-        //Texture2D containing the resource bar
-        Texture2D resourceBar;
-        
-        //portraits
-        Texture2D lightInfantryPortrait;
-        Texture2D archerPortrait;
-
-        //icons
-        Texture2D lightInfantryIcon;
-        Texture2D archerIcon;*/
+        Button lightInfantryButton;
+        Button archerButton;
+        Button towerButton;
 
         //helper variables for determining selection
         private int barX;
@@ -52,6 +42,9 @@ namespace Incursio.Classes
         {
             barX = 0;
             numUnits = 0;
+            lightInfantryButton = new Button(new Vector2(775, 605), TextureBank.InterfaceTextures.lightInfantryIcon, TextureBank.InterfaceTextures.lightInfantryIcon);
+            archerButton = new Button(new Vector2(850, 605), TextureBank.InterfaceTextures.archerIcon, TextureBank.InterfaceTextures.archerIcon);
+            towerButton = new Button(new Vector2(925, 605), TextureBank.InterfaceTextures.guardTowerIcon, TextureBank.InterfaceTextures.guardTowerIcon);
         }
 
         public List<BaseGameEntity> update(Cursor cursor)
@@ -59,6 +52,50 @@ namespace Incursio.Classes
             List<BaseGameEntity> selectedUnits = EntityManager.getInstance().getSelectedUnits();
             int numUnitsSelected = selectedUnits.Count;
 
+            //To see what to Update
+            if (numUnitsSelected > 0)
+            {
+
+                if (selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].getPlayer() == State.PlayerId.HUMAN)
+                {
+                    lightInfantryButton.Update(cursor);
+                    archerButton.Update(cursor);
+                    towerButton.Update(cursor);
+
+                    //See if any buttons are being pressed
+                    if (!lightInfantryButton.getPressed() && lightInfantryButton.getFocus())
+                    {
+                        lightInfantryButton.setFocus(false);
+                        EntityManager.getInstance().tryToBuild(new LightInfantryUnit());
+                    }
+                    else if (!archerButton.getPressed() && archerButton.getFocus())
+                    {
+                        archerButton.setFocus(false);
+                        EntityManager.getInstance().tryToBuild(new ArcherUnit());
+                    }
+                    else if (!towerButton.getPressed() && towerButton.getFocus())
+                    {
+                        towerButton.setFocus(false);
+                        InputManager.getInstance().positioningTower = true;
+                        TextureBank.InterfaceTextures.cursorEvent = TextureBank.EntityTextures.guardTowerTexturePlayer;
+                    }
+                }
+            }
+
+            //For a cursor press that is within the bounds of the HUD
+            if (cursor.getMouseState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && this.isCursorWithin((int)cursor.getPos().X, (int)cursor.getPos().Y))
+            {
+
+                if (numUnitsSelected > 0)
+                {
+                    if (selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].getPlayer() == State.PlayerId.HUMAN)
+                    {
+
+                    }
+                }
+            }
+
+            //For changes in Unit Selection (TO BE COMPLETED)
             if (numUnitsSelected > 1)
             {
                 if (cursor.getIsLeftPressed() && cursor.getPos().X >= 383 && cursor.getPos().X <= 760 && cursor.getPos().Y >= 638 && cursor.getPos().Y <= 733)
@@ -84,6 +121,27 @@ namespace Incursio.Classes
       public int getNumUnits()
       {
           return this.numUnits;
+      }
+
+      /// <summary>
+      /// isCursorWithin determines if the cursor is presently in the bounds of the HUD, this will clarify mouse commands to their desired purpose
+      /// </summary>
+      /// <param name="cursor"></param>
+      /// <returns></returns>
+      public bool isCursorWithin(int x, int y)
+      {
+          //three rectangles since the texture is not quite rectangular
+          Rectangle boundingBox1 = new Rectangle(0, 768 - TextureBank.InterfaceTextures.headsUpDisplay.Height, (int)(TextureBank.InterfaceTextures.headsUpDisplay.Width * 0.236), TextureBank.InterfaceTextures.headsUpDisplay.Height);
+          Rectangle boundingBox2 = new Rectangle((int)(TextureBank.InterfaceTextures.headsUpDisplay.Width * 0.236), 768 - (int)(TextureBank.InterfaceTextures.headsUpDisplay.Height * 0.789), (int)(TextureBank.InterfaceTextures.headsUpDisplay.Width * 0.7412), (int)(TextureBank.InterfaceTextures.headsUpDisplay.Height * 0.789));
+          Rectangle boundingBox3 = new Rectangle((int)(TextureBank.InterfaceTextures.headsUpDisplay.Width * 0.7412), 768 - TextureBank.InterfaceTextures.headsUpDisplay.Height, (int)(TextureBank.InterfaceTextures.headsUpDisplay.Width * 0.258), TextureBank.InterfaceTextures.headsUpDisplay.Height);
+
+          if (boundingBox1.Contains(x, y) ||
+              boundingBox2.Contains(x, y) ||
+              boundingBox3.Contains(x, y))
+          {
+              return true;
+          }
+          return false;
       }
 
         /// <summary>
@@ -203,6 +261,22 @@ namespace Incursio.Classes
                         }
                     }
 
+                }
+            }
+
+
+            //UNIT / STRUCTURE COMMANDS
+            if (numUnitsSelected > 0)
+            {
+                if (selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].getPlayer() == State.PlayerId.HUMAN)
+                {
+                    //Go through the available commands for the camp
+                    lightInfantryButton.Draw(spriteBatch);
+                    archerButton.Draw(spriteBatch);
+                    towerButton.Draw(spriteBatch);
+                    //spriteBatch.Draw(TextureBank.InterfaceTextures.lightInfantryIcon, new Rectangle(775, height - 163, 75, 48), Color.White);
+                    //spriteBatch.Draw(TextureBank.InterfaceTextures.archerIcon, new Rectangle(850, height - 163, 75, 48), Color.White);
+                    //spriteBatch.Draw(TextureBank.InterfaceTextures.guardTowerIcon, new Rectangle(925, height - 163, 75, 48), Color.White);
                 }
             }
 

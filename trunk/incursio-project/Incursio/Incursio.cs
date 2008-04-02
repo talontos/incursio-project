@@ -49,7 +49,7 @@ namespace Incursio
         //interface components
         SpriteFont font;
         Vector2 FontPos;
-        HeadsUpDisplay hud;
+        public HeadsUpDisplay hud;
         Cursor cursor;
         Button gameMenuButton;
         Button resumeGameButton;
@@ -117,20 +117,6 @@ namespace Incursio
             cursor = new Cursor(new Vector2(0, 0));
             clickDestination = Content.Load<Texture2D>(@"destinationClick");
 
-            // load the HUD texture 
-            /*hud.loadHeadsUpDisplay(Content.Load<Texture2D>(@"utilityBarUnderlay"), Content.Load<Texture2D>(@"lightInfantryPortrait"), 
-                Content.Load<Texture2D>(@"archerPortrait"), Content.Load<Texture2D>(@"infantryIcon"), Content.Load<Texture2D>(@"archerIcon"), 
-                Content.Load<Texture2D>(@"resourceBarUnderlay"));*/
-            hud.loadHeadsUpDisplay();
-
-            // load paused game menu components
-            gameMenuButton = new Button(new Vector2(465, 738), Content.Load<Texture2D>(@"gameMenuButton"), Content.Load<Texture2D>(@"gameMenuButtonPressed"));
-            resumeGameButton = new Button(new Vector2(475, 349), Content.Load<Texture2D>(@"resumeButton"), Content.Load<Texture2D>(@"resumeButtonPressed"));
-            exitGameToMenuButton = new Button(new Vector2(475, 384), Content.Load<Texture2D>(@"exitGameButton"), Content.Load<Texture2D>(@"exitGameButtonPressed"));
-
-            //load the menu components
-            newGameButton = new Button(new Vector2(400, 638), Content.Load<Texture2D>(@"newGameButton"), Content.Load<Texture2D>(@"newGamePressed"));
-            exitGameButton = new Button(new Vector2(524, 638), Content.Load<Texture2D>(@"exitGameButton"), Content.Load<Texture2D>(@"exitGameButtonPressed"));
 
             //load maps 
             //load testmap texture
@@ -144,6 +130,18 @@ namespace Incursio
             }
 
             this.textureManager = TextureManager.initializeTextureManager(Content);
+
+            // load the HUD
+            hud.loadHeadsUpDisplay();
+
+            // load paused game menu components
+            gameMenuButton = new Button(new Vector2(465, 738), TextureBank.InterfaceTextures.gameMenuButton, TextureBank.InterfaceTextures.gameMenuButtonPressed);
+            resumeGameButton = new Button(new Vector2(475, 349), TextureBank.InterfaceTextures.resumeGameButton, TextureBank.InterfaceTextures.resumeGameButtonPressed);
+            exitGameToMenuButton = new Button(new Vector2(475, 384), TextureBank.InterfaceTextures.exitGameToMenuButton, TextureBank.InterfaceTextures.exitGameToMenuButtonPressed);
+
+            //load the menu components
+            newGameButton = new Button(new Vector2(400, 638), TextureBank.InterfaceTextures.newGameButton, TextureBank.InterfaceTextures.newGameButtonPressed);
+            exitGameButton = new Button(new Vector2(524, 638), TextureBank.InterfaceTextures.exitGameButton, TextureBank.InterfaceTextures.exitGameButtonPressed);
 
             //once everything is loaded up, go to the main menu
             currentState = State.GameState.Menu;
@@ -227,7 +225,7 @@ namespace Incursio
                     PlayerManager.getInstance().updatePlayers(gameTime);
                     
                     //listener for menu button
-                    gameMenuButton.Update(cursor, spriteBatch);
+                    gameMenuButton.Update(cursor);
                     if (!gameMenuButton.getPressed() && gameMenuButton.getFocus()) //if the menu button is pressed, pause the game
                     {
                         gameMenuButton.setFocus(false);
@@ -242,8 +240,8 @@ namespace Incursio
                 case (State.GameState.Menu):
 
                     //listener for menu button
-                    newGameButton.Update(cursor, spriteBatch);
-                    exitGameButton.Update(cursor, spriteBatch);
+                    newGameButton.Update(cursor);
+                    exitGameButton.Update(cursor);
 
                     if (!newGameButton.getPressed() && newGameButton.getFocus())
                     {
@@ -276,8 +274,8 @@ namespace Incursio
 
                     InputManager.getInstance().Update(gameTime);
 
-                    exitGameToMenuButton.Update(cursor, spriteBatch);
-                    resumeGameButton.Update(cursor, spriteBatch);
+                    exitGameToMenuButton.Update(cursor);
+                    resumeGameButton.Update(cursor);
 
                     if (!resumeGameButton.getPressed() && resumeGameButton.getFocus())
                     {
@@ -665,7 +663,9 @@ namespace Incursio
                             //TODO: building asploded
                             if (e.getPlayer() == State.PlayerId.HUMAN)
                             {
-
+                                spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputerExploded,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTextureComputerDestroyed.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTextureComputerDestroyed.Height * 0.80),
+                                    TextureBank.EntityTextures.campTextureComputerDestroyed.Width, TextureBank.EntityTextures.campTextureComputerDestroyed.Height), Color.White);
                             }
                             else
                             {

@@ -73,12 +73,26 @@ namespace Incursio.Managers
             public static Texture2D cursorEvent;
             public static Texture2D resourceDisplay;
 
+            public static Texture2D gameMenuButton;
+            public static Texture2D gameMenuButtonPressed;
+            public static Texture2D resumeGameButton;
+            public static Texture2D resumeGameButtonPressed;
+            public static Texture2D exitGameToMenuButton;
+            public static Texture2D exitGameToMenuButtonPressed;
+            public static Texture2D newGameButton;
+            public static Texture2D newGameButtonPressed;
+            public static Texture2D exitGameButton;
+            public static Texture2D exitGameButtonPressed;
+
+
+
             public static Texture2D archerPortrait;
             public static Texture2D archerIcon;
             public static Texture2D lightInfantryPortrait;
             public static Texture2D lightInfantryIcon;
             public static Texture2D basePortrait;
             public static Texture2D guardTowerPortrait;
+            public static Texture2D guardTowerIcon;
             /////////////////////////////
         }
     }
