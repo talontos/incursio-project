@@ -44,7 +44,7 @@ namespace Incursio.Interface
             }
         }
 
-        public void Update(Cursor cursor, SpriteBatch spriteBatch)
+        public void Update(Cursor cursor)
         {
             if (cursor.getPos().X >= position.X && cursor.getPos().X <= position.X + passive.Width && cursor.getPos().Y >= position.Y && cursor.getPos().Y <= position.Y + passive.Height && cursor.getIsLeftPressed())
             {

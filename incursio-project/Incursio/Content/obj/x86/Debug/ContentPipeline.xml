@@ -424,6 +424,15 @@
       <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\TowerPortrait.xnb</Output>
       <Time>2008-03-26T11:34:26.19075-04:00</Time>
     </Item>
+    <Item>
+      <Source>TowerIcon.png</Source>
+      <Name>TowerIcon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Henry\My Documents\School\CSCE 552\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\TowerIcon.xnb</Output>
+      <Time>2008-04-02T09:40:26.828125-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

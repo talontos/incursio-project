@@ -20,7 +20,7 @@ namespace Incursio.Managers
         public KeyboardState keyStateCurrent;
         public KeyboardState keyStatePrev;
 
-        bool positioningTower = false;
+        public bool positioningTower = false;
 
         #endregion
 
@@ -84,7 +84,12 @@ namespace Incursio.Managers
             Vector2 point = MapManager.getInstance().currentMap.translateClickToMapLocation(mouseStateCurrent.X, mouseStateCurrent.Y);
             
             if(this.leftClick()){
-                if (this.positioningTower)
+                //If the cursor is clicking within the HUD
+                if (Incursio.getInstance().hud.isCursorWithin((int)mouseStateCurrent.X, (int)mouseStateCurrent.Y))
+                {
+
+                }
+                else if (this.positioningTower)
                 {
                     EntityManager.getInstance().tryToBuild(new GuardTowerStructure(), point);
                     this.positioningTower = false;
@@ -97,7 +102,11 @@ namespace Incursio.Managers
             }
 
             if(this.rightClick()){
-                EntityManager.getInstance().updateUnitOrders(point);
+                //If the cursor is not clicking within the HUD
+                if (!Incursio.getInstance().hud.isCursorWithin((int)mouseStateCurrent.X, (int)mouseStateCurrent.Y))
+                {
+                    EntityManager.getInstance().updateUnitOrders(point);
+                }  
             }
 
             #endregion
