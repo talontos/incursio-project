@@ -56,6 +56,10 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="irrKlang.NET, Version=1.0.4.0, Culture=neutral, PublicKeyToken=a854741bd80517c7">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\irrKlang\irrKlang-1.0.4\bin\dotnet\irrKlang.NET.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=6d5c3888ef60e27d, processorArchitecture=x86">
       <Private>False</Private>
       <SpecificVersion>True</SpecificVersion>
@@ -109,6 +113,7 @@
     <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\MapManager.cs" />
     <Compile Include="Managers\PlayerManager.cs" />
+    <Compile Include="Managers\SoundManager.cs" />
     <Compile Include="Managers\TextureBank.cs" />
     <Compile Include="Managers\TextureManager.cs" />
     <Compile Include="Utils\DebugUtil.cs" />

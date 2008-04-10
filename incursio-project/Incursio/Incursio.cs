@@ -31,6 +31,7 @@ namespace Incursio
         SpriteBatch spriteBatch;                //draws our images
         TextureManager textureManager;
         PlayerManager playerManager;
+        SoundManager soundManager;              //does sound stuff
 
         //Game Time keeping
         float frameTime;
@@ -76,6 +77,8 @@ namespace Incursio
             MapManager.getInstance().initializeCurrentMap();
 
             playerManager = PlayerManager.getInstance();
+
+            soundManager = SoundManager.getInstance();
             
             //set the window size to 1024x768
             this.graphics.PreferredBackBufferWidth = 1024;
@@ -223,6 +226,8 @@ namespace Incursio
                     MapManager.getInstance().currentMap.update(keysPressed, 1024, 768);
 
                     PlayerManager.getInstance().updatePlayers(gameTime);
+
+                    //SoundManager.getInstance().updateSounds();
                     
                     //listener for menu button
                     gameMenuButton.Update(cursor);
