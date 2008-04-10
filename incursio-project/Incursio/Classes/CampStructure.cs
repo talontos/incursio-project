@@ -21,6 +21,7 @@ namespace Incursio.Classes
 
         int newUnitPlacementX = 10;
         int newUnitPlacementY = 120;    //little bit of hard coding, but can't really help it here 
+        int income = 8;
 
         Coordinate destination;
         Coordinate newStructureCoords;
@@ -86,6 +87,27 @@ namespace Incursio.Classes
                     this.currentState = State.StructureState.Building;
                 }
             } 
+        }
+
+        public override void updateResourceTick()
+        {
+            //give the owner money
+            if (timeForResource >= RESOURCE_TICK * 60)
+            {
+                timeForResource = 0;
+                if (this.owner == State.PlayerId.HUMAN)
+                {
+                    PlayerManager.getInstance().humanPlayer.MONETARY_UNIT = PlayerManager.getInstance().humanPlayer.MONETARY_UNIT + income;
+                }
+                else
+                {
+                    PlayerManager.getInstance().computerPlayer.MONETARY_UNIT = PlayerManager.getInstance().computerPlayer.MONETARY_UNIT + income;
+                }
+            }
+            else
+            {
+                timeForResource++;
+            }
         }
 
         public override void buildTick()

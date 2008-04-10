@@ -58,3 +58,8 @@ bin\x86\Debug\Incursio.exe.config
 bin\x86\Debug\Content\BasePortrait.xnb
 bin\x86\Debug\Content\TowerPortrait.xnb
 bin\x86\Debug\Content\TowerIcon.xnb
+bin\x86\Debug\Content\Fort_Friendly_Building.xnb
+bin\x86\Debug\Content\ControlPointEnemy.xnb
+bin\x86\Debug\Content\ControlPointFriendly.xnb
+bin\x86\Debug\Content\ControlPointIcon.xnb
+bin\x86\Debug\Content\MoneyIcon.xnb
