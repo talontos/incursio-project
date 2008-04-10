@@ -63,6 +63,10 @@ namespace Incursio
         int clickDestinationFader = 0;
         Coordinate cursorAtClick;
 
+        //for game animation
+        int frameTimer = 0;
+        const int FRAME_LENGTH = 8;
+
         public Incursio(){
 
             Incursio.instance = this;
@@ -73,7 +77,7 @@ namespace Incursio
             keysPressed = new Keys[15];
             Content.RootDirectory = "Content";
 
-            currentMap = MapManager.getInstance().setCurrentLevel(State.CampaignLevel.TWO);
+            currentMap = MapManager.getInstance().setCurrentLevel(State.CampaignLevel.ONE);
             MapManager.getInstance().initializeCurrentMap();
 
             playerManager = PlayerManager.getInstance();
@@ -168,6 +172,13 @@ namespace Incursio
         {
             frameTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            if (frameTimer > FRAME_LENGTH)
+            {
+                frameTimer = 0;
+            }
+            else
+                frameTimer++;
+
             cursor.Update();    //update the cursor
             kbState = Keyboard.GetState();  //get the present state of the keyboard
             keysPressed = (Keys[])kbState.GetPressedKeys(); //get all the keys that are being pressed
@@ -185,8 +196,6 @@ namespace Incursio
         protected override void Draw(GameTime gameTime)
         {
             graphics.GraphicsDevice.Clear(Color.White);
-
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
 
@@ -468,6 +477,44 @@ namespace Incursio
                         {
                             //TODO:
                             //Moving Animation
+                            if ((e as LightInfantryUnit).getDirection() == State.Direction.West)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryMovingWest,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantryWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryWest.Height * 0.80),
+                                    TextureBank.EntityTextures.lightInfantryWest.Width, TextureBank.EntityTextures.lightInfantryWest.Height),
+                                    new Rectangle(e.currentFrameX, e.currentFrameY, 20, 30), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX < TextureBank.EntityTextures.lightInfantryMovingWest.Width - 20)
+                                    {
+                                        e.currentFrameX = e.currentFrameX + 20;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = 0;
+                                    }
+                                }
+                            }
+                            else if ((e as LightInfantryUnit).getDirection() == State.Direction.East)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryMovingEast,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantryEast.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryEast.Height * 0.80),
+                                    TextureBank.EntityTextures.lightInfantryEast.Width, TextureBank.EntityTextures.lightInfantryEast.Height),
+                                    new Rectangle(e.currentFrameX, e.currentFrameY, 20, 30), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX < TextureBank.EntityTextures.lightInfantryMovingEast.Width - 20)
+                                    {
+                                        e.currentFrameX = e.currentFrameX + 20;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = 0;
+                                    }
+                                }
+                            }
                         }
                         else if ((e as LightInfantryUnit).getCurrentState() == State.UnitState.UnderAttack)
                         {
@@ -550,6 +597,45 @@ namespace Incursio
                         {
                             //TODO:
                             //Moving Animation
+                            if ((e as ArcherUnit).getDirection() == State.Direction.West)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.archerMovingWest,
+                                                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerWest.Height * 0.80),
+                                                                    TextureBank.EntityTextures.archerWest.Width, TextureBank.EntityTextures.archerWest.Height),
+                                                                    new Rectangle(e.currentFrameX, e.currentFrameY, 20, 30), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX < TextureBank.EntityTextures.archerMovingWest.Width - 20)
+                                    {
+                                        e.currentFrameX = e.currentFrameX + 20;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = 0;
+                                    }
+                                }
+                            }
+                            else if ((e as ArcherUnit).getDirection() == State.Direction.East)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.archerMovingEast,
+                                                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerWest.Height * 0.80),
+                                                                    TextureBank.EntityTextures.archerWest.Width, TextureBank.EntityTextures.archerWest.Height),
+                                                                    new Rectangle(e.currentFrameX, e.currentFrameY, 20, 30), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX < TextureBank.EntityTextures.archerMovingEast.Width - 20)
+                                    {
+                                        e.currentFrameX = e.currentFrameX + 20;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = 0;
+                                    }
+                                }
+                            }
+                            
                         }
                         else if ((e as ArcherUnit).getCurrentState() == State.UnitState.UnderAttack)
                         {
@@ -652,9 +738,22 @@ namespace Incursio
                             //TODO: draw something special for when the structure is building something (fires flickering or w/e)
                             if (e.getPlayer() == State.PlayerId.HUMAN)
                             {
-                                spriteBatch.Draw(TextureBank.EntityTextures.campTexturePlayer,
+                                spriteBatch.Draw(TextureBank.EntityTextures.campTexturePlayerBuilding,
                                     new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTexturePlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTexturePlayer.Height * 0.80),
-                                    TextureBank.EntityTextures.campTexturePlayer.Width, TextureBank.EntityTextures.campTexturePlayer.Height), Color.White);
+                                    TextureBank.EntityTextures.campTexturePlayer.Width, TextureBank.EntityTextures.campTexturePlayer.Height),
+                                    new Rectangle(e.currentFrameX, e.currentFrameY, 64, 64), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX < TextureBank.EntityTextures.campTexturePlayerBuilding.Width - 64)
+                                    {
+                                        e.currentFrameX = e.currentFrameX + 64;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = 0;
+                                    }
+                                }
                             }
                             else
                             {
