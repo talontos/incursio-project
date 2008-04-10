@@ -67,6 +67,8 @@ namespace Incursio.Classes
                     }
                 }
             }
+
+            base.Update(gameTime, ref myRef);
         }
 
         public override void updateResourceTick()
@@ -92,16 +94,16 @@ namespace Incursio.Classes
 
         public override void updateBounds()
         {
-            /*
-            Microsoft.Xna.Framework.Graphics.Texture2D myRef = TextureBank.EntityTextures.archerSouth;
+            
+            Microsoft.Xna.Framework.Graphics.Texture2D myRef = TextureBank.EntityTextures.controlPointPlayer;
 
             this.boundingBox = new Microsoft.Xna.Framework.Rectangle(
                 location.x - myRef.Width / 2,
-                location.y - myRef.Height * 0.80,
+                (int)(location.y - myRef.Height * 0.80),
                 myRef.Width,
                 myRef.Height
             );
-            */
+            
         }
     }
 }
