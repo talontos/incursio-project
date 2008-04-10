@@ -60,6 +60,7 @@ namespace Incursio.Managers
 
             //Load structure textures
             TextureBank.EntityTextures.campTexturePlayer = Content.Load<Texture2D>(@"Fort_friendly");
+            TextureBank.EntityTextures.campTexturePlayerBuilding = Content.Load<Texture2D>(@"Fort_Friendly_Building");
             TextureBank.EntityTextures.campTextureComputer = Content.Load<Texture2D>(@"Fort_hostile");
             TextureBank.EntityTextures.campTextureComputerDamaged = Content.Load<Texture2D>(@"Fort_hostile_damaged");
             TextureBank.EntityTextures.campTextureComputerDestroyed = Content.Load<Texture2D>(@"Fort_hostile_destroyed");
@@ -68,9 +69,13 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.guardTowerTexturePlayer = Content.Load<Texture2D>(@"Tower_friendly");
             TextureBank.EntityTextures.guardTowerTextureComputer = Content.Load<Texture2D>(@"Tower_hostile");
 
+            TextureBank.EntityTextures.controlPointPlayer = Content.Load<Texture2D>(@"ControlPointFriendly");
+            TextureBank.EntityTextures.controlPointComputer = Content.Load<Texture2D>(@"ControlPointEnemy");
+
             //Load Interface textures
             TextureBank.InterfaceTextures.headsUpDisplay = Content.Load<Texture2D>(@"utilityBarUnderlay");
             TextureBank.InterfaceTextures.resourceDisplay = Content.Load<Texture2D>(@"resourceBarUnderlay");
+            TextureBank.InterfaceTextures.moneyIcon = Content.Load<Texture2D>(@"moneyIcon");
             TextureBank.InterfaceTextures.cursor = Content.Load<Texture2D>(@"cursor");
             TextureBank.InterfaceTextures.cursorPressed = Content.Load<Texture2D>(@"cursor_click");
             TextureBank.InterfaceTextures.lightInfantryPortrait = Content.Load<Texture2D>(@"lightInfantryPortrait");
@@ -80,6 +85,7 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.basePortrait = Content.Load<Texture2D>(@"BasePortrait");
             TextureBank.InterfaceTextures.guardTowerPortrait = Content.Load<Texture2D>(@"TowerPortrait");
             TextureBank.InterfaceTextures.guardTowerIcon = Content.Load<Texture2D>(@"TowerIcon");
+            TextureBank.InterfaceTextures.controlPointIcon = Content.Load<Texture2D>(@"ControlPointIcon");
 
             TextureBank.InterfaceTextures.gameMenuButton = Content.Load<Texture2D>(@"gameMenuButton");
             TextureBank.InterfaceTextures.gameMenuButtonPressed = Content.Load<Texture2D>(@"gameMenuButtonPressed");

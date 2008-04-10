@@ -29,10 +29,12 @@ namespace Incursio.Campaign
             CampStructure computerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", State.PlayerId.COMPUTER);
             computerCamp.setLocation( new Coordinate(Incursio.rand.Next(mapWidth / 2, mapWidth), Incursio.rand.Next(mapHeight - 100)));
 
+
             //place random units around the map
             int numLight = Incursio.rand.Next(10);
             int numArch = Incursio.rand.Next(10);
             int numTower = Incursio.rand.Next(10);
+            int numPoints = Incursio.rand.Next(10);
             
             //lights
             for(int i = 0; i < numLight; i++){
@@ -59,6 +61,16 @@ namespace Incursio.Campaign
 
                 GuardTowerStructure playerTowerc = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
                 playerTowerc.setLocation(new Coordinate(Incursio.rand.Next(50, mapWidth - 50), Incursio.rand.Next(50, mapHeight - 50)));
+            }
+
+            //control points
+            for (int i = 0; i < numPoints; i++)
+            {
+                ControlPoint playerPoint = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.HUMAN);
+                playerPoint.setLocation(new Coordinate(Incursio.rand.Next(50, mapWidth - 50), Incursio.rand.Next(50, mapHeight - 100)));
+
+                ControlPoint computerPoint = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
+                computerPoint.setLocation(new Coordinate(Incursio.rand.Next(50, mapWidth - 50), Incursio.rand.Next(50, mapHeight - 100)));
             }
         }
     }

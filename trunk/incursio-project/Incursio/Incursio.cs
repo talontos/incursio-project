@@ -393,6 +393,7 @@ namespace Incursio
             //draw all visible units
             EntityManager.getInstance().getAllEntities().ForEach(delegate(BaseGameEntity e)
             {
+
                 if (e is Unit && (e as Unit).getCurrentState() == State.UnitState.Buried)
                 {}
                 else if (currentMap.isOnScreen(e.getLocation()))
@@ -755,6 +756,44 @@ namespace Incursio
                             }
                         }
                     }
+                    else if (e.getType() == State.EntityName.ControlPoint)
+                    {
+                        e.visible = true;
+                        onScreen = currentMap.positionOnScreen(e.getLocation());
+                        Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+                        if ((e as ControlPoint).getCurrentState() == State.StructureState.Building)
+                        {
+                            //TODO: draw something special for when the structure is building something (fires flickering or w/e)
+                            if (e.getPlayer() == State.PlayerId.HUMAN)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.controlPointPlayer,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.controlPointPlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.controlPointPlayer.Height * 0.80),
+                                    TextureBank.EntityTextures.controlPointPlayer.Width, TextureBank.EntityTextures.controlPointPlayer.Height), Color.White);
+                            }
+                            else
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.controlPointComputer,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.controlPointComputer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.controlPointComputer.Height * 0.80),
+                                    TextureBank.EntityTextures.controlPointComputer.Width, TextureBank.EntityTextures.controlPointComputer.Height), Color.White);
+                            }
+
+                        }
+                        else if ((e as ControlPoint).getCurrentState() == State.StructureState.Idle || (e as ControlPoint).getCurrentState() == State.StructureState.Attacking)
+                        {
+                            if (e.getPlayer() == State.PlayerId.HUMAN)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.controlPointPlayer,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.controlPointPlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.controlPointPlayer.Height * 0.80),
+                                    TextureBank.EntityTextures.controlPointPlayer.Width, TextureBank.EntityTextures.controlPointPlayer.Height), Color.White);
+                            }
+                            else
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.controlPointComputer,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.controlPointComputer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.controlPointComputer.Height * 0.80),
+                                    TextureBank.EntityTextures.controlPointComputer.Width, TextureBank.EntityTextures.controlPointComputer.Height), Color.White);
+                            }
+                        }
+                    }
                     else
                         e.visible = false;
                 }
@@ -804,6 +843,13 @@ namespace Incursio
                         yOffSet = (int)(TextureBank.EntityTextures.guardTowerTextureComputer.Height * 0.80) + 20;
                         width = TextureBank.EntityTextures.guardTowerTextureComputer.Width + 30;
                         height = TextureBank.EntityTextures.guardTowerTextureComputer.Height + 40;
+                    }
+                    else if (u.getType() == State.EntityName.ControlPoint)
+                    {
+                        xOffSet = (int)(TextureBank.EntityTextures.controlPointComputer.Width / 2) + 18;
+                        yOffSet = (int)(TextureBank.EntityTextures.controlPointComputer.Height * 0.80) + 20;
+                        width = TextureBank.EntityTextures.controlPointComputer.Width + 30;
+                        height = TextureBank.EntityTextures.controlPointComputer.Height + 40;
                     }
 
                     spriteBatch.Draw(TextureBank.EntityTextures.selectedUnitOverlayTexture,

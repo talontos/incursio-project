@@ -1,4 +1,4 @@
-using System;
+//using System;
 using System.Collections.Generic;
 using System.Text;
 using Incursio.Utils;
@@ -10,9 +10,12 @@ namespace Incursio.Classes
 {
     public class Structure : BaseGameEntity
     {
+        public const int RESOURCE_TICK = 4;
+
         //for building things
         protected int timeBuilt = 0;
         protected int timeRequired = 0;
+        protected int timeForResource = 0;
         protected BaseGameEntity buildProject;
 
         protected State.StructureState currentState;
@@ -60,6 +63,8 @@ namespace Incursio.Classes
                     /////////////////////
                     default: break;
                 }
+
+                updateResourceTick();
             }
         }
 
@@ -83,7 +88,7 @@ namespace Incursio.Classes
 
         }
 
-        public Boolean isBuilding(){
+        public bool isBuilding(){
             return this.buildProject != null;
         }
 
@@ -111,6 +116,11 @@ namespace Incursio.Classes
         public override bool isDead()
         {
             return currentState == State.StructureState.Destroyed;
+        }
+
+        public virtual void updateResourceTick()
+        {
+
         }
     }
 }

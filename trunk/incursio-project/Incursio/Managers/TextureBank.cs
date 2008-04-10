@@ -37,6 +37,7 @@ namespace Incursio.Managers
 
             //Structure Textures/////////
             public static Texture2D campTexturePlayer;
+            public static Texture2D campTexturePlayerBuilding;
             public static Texture2D campTextureComputer;
             public static Texture2D campTextureComputerDamaged;
             public static Texture2D campTextureComputerDestroyed;
@@ -44,6 +45,9 @@ namespace Incursio.Managers
 
             public static Texture2D guardTowerTexturePlayer;
             public static Texture2D guardTowerTextureComputer;
+
+            public static Texture2D controlPointPlayer;
+            public static Texture2D controlPointComputer;
             /////////////////////////////
 
         }
@@ -72,6 +76,7 @@ namespace Incursio.Managers
             public static Texture2D cursorPressed;
             public static Texture2D cursorEvent;
             public static Texture2D resourceDisplay;
+            public static Texture2D moneyIcon;
 
             public static Texture2D gameMenuButton;
             public static Texture2D gameMenuButtonPressed;
@@ -93,6 +98,7 @@ namespace Incursio.Managers
             public static Texture2D basePortrait;
             public static Texture2D guardTowerPortrait;
             public static Texture2D guardTowerIcon;
+            public static Texture2D controlPointIcon;
             /////////////////////////////
         }
     }
