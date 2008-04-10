@@ -73,7 +73,7 @@ namespace Incursio.Classes
             if (direction.Length() < speed)
             {
                 destination = location;
-                //currentState = State.UnitState.Idle;
+                currentState = State.UnitState.Idle;
                 return true;
             }
             else

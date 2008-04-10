@@ -26,6 +26,8 @@ namespace Incursio.Classes
         public bool canAttack = false;
         public bool canMove = false;
         public bool isConstructor = false;
+        public int currentFrameX = 0;       //for animation
+        public int currentFrameY = 0;       //for animation
 
         public Rectangle boundingBox;
 

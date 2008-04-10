@@ -22,12 +22,16 @@ namespace Incursio.Managers
             public static Texture2D lightInfantrySouth;
             public static Texture2D lightInfantryNorth;
             public static Texture2D lightInfantryDead;
+            public static Texture2D lightInfantryMovingWest;
+            public static Texture2D lightInfantryMovingEast;
 
             public static Texture2D archerEast;
             public static Texture2D archerWest;
             public static Texture2D archerSouth;
             public static Texture2D archerNorth;
             public static Texture2D archerDead;
+            public static Texture2D archerMovingWest;
+            public static Texture2D archerMovingEast;
 
             public static Texture2D heroEast;
             public static Texture2D heroWest;

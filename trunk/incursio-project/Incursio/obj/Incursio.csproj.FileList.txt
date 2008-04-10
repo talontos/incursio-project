@@ -64,3 +64,7 @@ bin\x86\Debug\Content\ControlPointFriendly.xnb
 bin\x86\Debug\Content\ControlPointIcon.xnb
 bin\x86\Debug\Content\MoneyIcon.xnb
 bin\x86\Debug\Content\Arial.xnb
+bin\x86\Debug\Content\Infantry_Moving_Left.xnb
+bin\x86\Debug\Content\Infantry_Moving_Right.xnb
+bin\x86\Debug\Content\Archer_Moving_Left.xnb
+bin\x86\Debug\Content\Archer_Moving_Right.xnb

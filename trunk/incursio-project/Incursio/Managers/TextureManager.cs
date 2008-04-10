@@ -45,12 +45,16 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.lightInfantrySouth = Content.Load<Texture2D>(@"infantry_still");
             TextureBank.EntityTextures.lightInfantryNorth = Content.Load<Texture2D>(@"infantry_back");
             TextureBank.EntityTextures.lightInfantryDead = Content.Load<Texture2D>(@"infantry_dead");
+            TextureBank.EntityTextures.lightInfantryMovingWest = Content.Load<Texture2D>(@"Infantry_Moving_left");
+            TextureBank.EntityTextures.lightInfantryMovingEast = Content.Load<Texture2D>(@"Infantry_Moving_right");
 
             TextureBank.EntityTextures.archerEast = Content.Load<Texture2D>(@"archer_right");
             TextureBank.EntityTextures.archerWest = Content.Load<Texture2D>(@"archer_left");
             TextureBank.EntityTextures.archerSouth = Content.Load<Texture2D>(@"archer_Still");
             TextureBank.EntityTextures.archerNorth = Content.Load<Texture2D>(@"archer_Back");
             TextureBank.EntityTextures.archerDead = Content.Load<Texture2D>(@"Archer_dead");
+            TextureBank.EntityTextures.archerMovingWest = Content.Load<Texture2D>(@"Archer_Moving_Left");
+            TextureBank.EntityTextures.archerMovingEast = Content.Load<Texture2D>(@"Archer_Moving_Right");
 
             //TODO: get hero textures
             //TextureBank.EntityTextures.heroEast = Content.Load<Texture2D>(@"");

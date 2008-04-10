@@ -23,6 +23,7 @@ namespace Incursio.Commands
             if(subject.canMove || subject.isConstructor){
                 //move unit
                 subject.setDestination(this.destination);
+                (subject as Unit).setCurrentState(State.UnitState.Moving);
                 this.finishedExecution = subject.updateMovement();
             }
             else{

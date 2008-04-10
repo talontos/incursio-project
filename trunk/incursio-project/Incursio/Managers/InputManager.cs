@@ -77,6 +77,13 @@ namespace Incursio.Managers
             if(this.keyPressed(Keys.G)){
                 EntityManager.getInstance().issueCommand(State.Command.GUARD, false, null);
             }
+
+            if (this.keyPressed(Keys.Enter))
+            {
+
+            }
+
+
             #endregion
 
             #region MOUSE COMMANDS

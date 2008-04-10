@@ -431,7 +431,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Fort_Friendly_Building.xnb</Output>
-      <Time>2008-04-08T18:16:08.46875-04:00</Time>
+      <Time>2008-04-10T16:12:25.765625-04:00</Time>
     </Item>
     <Item>
       <Source>ControlPointEnemy.png</Source>
@@ -486,6 +486,42 @@
       <Options>None</Options>
       <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Arial.xnb</Output>
       <Time>2008-04-10T15:10:40.34375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Infantry_Moving_Left.png</Source>
+      <Name>Infantry_Moving_Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Infantry_Moving_Left.xnb</Output>
+      <Time>2008-04-10T16:26:37.3125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Infantry_Moving_Right.png</Source>
+      <Name>Infantry_Moving_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Infantry_Moving_Right.xnb</Output>
+      <Time>2008-04-10T17:11:58.671875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_Moving_Left.png</Source>
+      <Name>Archer_Moving_Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Archer_Moving_Left.xnb</Output>
+      <Time>2008-04-10T17:22:01.6875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_Moving_Right.png</Source>
+      <Name>Archer_Moving_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Archer_Moving_Right.xnb</Output>
+      <Time>2008-04-10T17:21:14.140625-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
