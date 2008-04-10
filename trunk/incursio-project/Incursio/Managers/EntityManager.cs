@@ -277,7 +277,12 @@ namespace Incursio.Managers
 
                 ////////////////////////
                 case State.Command.ATTACK:
-                    command = new AttackCommand(args[0] as BaseGameEntity);
+                    if (args[0] is ControlPoint)
+                    {
+
+                    }
+                    else
+                        command = new AttackCommand(args[0] as BaseGameEntity);
                     break;
 
                 ////////////////////////
@@ -336,7 +341,7 @@ namespace Incursio.Managers
             Coordinate hLoc = hunter.location;
 
             this.entityBank.ForEach(delegate(BaseGameEntity e){
-                if(e.owner != hOwner && !e.isDead()){
+                if(e.owner != hOwner && !e.isDead() && e.getType() != State.EntityName.ControlPoint){
                     if(MapManager.getInstance().currentMap.getCellDistance(hLoc, e.location) <= cellSightRange){
                         enemies.Add(e);
                     }

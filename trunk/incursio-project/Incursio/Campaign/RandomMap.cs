@@ -34,7 +34,7 @@ namespace Incursio.Campaign
             int numLight = Incursio.rand.Next(10);
             int numArch = Incursio.rand.Next(10);
             int numTower = Incursio.rand.Next(10);
-            int numPoints = Incursio.rand.Next(10);
+            int numPoints = Incursio.rand.Next(5);
             
             //lights
             for(int i = 0; i < numLight; i++){

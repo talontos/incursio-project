@@ -14,9 +14,9 @@ namespace Incursio.Commands
         public FollowCommand followCommand;
 
         public AttackCommand(BaseGameEntity target){
-            this.type = State.Command.ATTACK;
-            this.target = target;
-            this.followCommand = new FollowCommand(target);
+                this.type = State.Command.ATTACK;
+                this.target = target;
+                this.followCommand = new FollowCommand(target);
         }
 
         public override void execute(ref BaseGameEntity subject)
@@ -26,7 +26,7 @@ namespace Incursio.Commands
                 return;
             }
 
-            if(this.target.getHealth() <= 0){
+            if(this.target.getHealth() <= 0 && target.getType() != State.EntityName.ControlPoint){
                 this.finishedExecution = true;
                 subject.issueAdditionalOrder(new GuardCommand());
             }

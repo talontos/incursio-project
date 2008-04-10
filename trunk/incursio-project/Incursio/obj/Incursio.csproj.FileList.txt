@@ -63,3 +63,4 @@ bin\x86\Debug\Content\ControlPointEnemy.xnb
 bin\x86\Debug\Content\ControlPointFriendly.xnb
 bin\x86\Debug\Content\ControlPointIcon.xnb
 bin\x86\Debug\Content\MoneyIcon.xnb
+bin\x86\Debug\Content\Arial.xnb

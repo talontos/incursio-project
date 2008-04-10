@@ -211,6 +211,10 @@ namespace Incursio.Classes
                 {
                     spriteBatch.DrawString(font, "Guard Tower", new Vector2(572, height - 118), Color.White, 0, font.MeasureString("Guard Tower") / 2, 1.0f, SpriteEffects.None, 0.5f);
                 }
+                else if (selectedUnits[0].getType() == State.EntityName.ControlPoint)
+                {
+                    spriteBatch.DrawString(font, "Control Point", new Vector2(572, height - 118), Color.White, 0, font.MeasureString("Control Point") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                }
 
                 //stats!
                 spriteBatch.DrawString(font, "Health: " + selectedUnits[0].getHealth(), new Vector2(572, height - 90), Color.White, 0, font.MeasureString("Health: XXX") / 2, 1.0f, SpriteEffects.None, 0.5f);

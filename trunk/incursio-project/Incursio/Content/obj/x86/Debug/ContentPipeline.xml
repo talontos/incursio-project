@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\utilityBarUnderlay.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\utilityBarUnderlay.xnb</Output>
       <Time>2008-04-08T17:37:49.34375-04:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\cursor.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\cursor.xnb</Output>
       <Time>2008-04-08T17:37:49.4375-04:00</Time>
     </Item>
     <Item>
@@ -25,7 +25,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\cursor_click.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\cursor_click.xnb</Output>
       <Time>2008-04-08T17:37:49.46875-04:00</Time>
     </Item>
     <Item>
@@ -34,7 +34,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\gameMenuButton.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\gameMenuButton.xnb</Output>
       <Time>2008-04-08T17:37:49.546875-04:00</Time>
     </Item>
     <Item>
@@ -43,7 +43,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\gameMenuButtonPressed.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\gameMenuButtonPressed.xnb</Output>
       <Time>2008-04-08T17:37:49.453125-04:00</Time>
     </Item>
     <Item>
@@ -52,7 +52,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\pauseMenu.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\pauseMenu.xnb</Output>
       <Time>2008-04-08T17:37:49.375-04:00</Time>
     </Item>
     <Item>
@@ -61,7 +61,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resumeButton.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\resumeButton.xnb</Output>
       <Time>2008-04-08T17:37:49.203125-04:00</Time>
     </Item>
     <Item>
@@ -70,7 +70,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resumeButtonPressed.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\resumeButtonPressed.xnb</Output>
       <Time>2008-04-08T17:37:49.453125-04:00</Time>
     </Item>
     <Item>
@@ -79,7 +79,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\exitGameButton.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\exitGameButton.xnb</Output>
       <Time>2008-04-08T17:37:49.359375-04:00</Time>
     </Item>
     <Item>
@@ -88,7 +88,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\exitGameButtonPressed.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\exitGameButtonPressed.xnb</Output>
       <Time>2008-04-08T17:37:49.46875-04:00</Time>
     </Item>
     <Item>
@@ -97,7 +97,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\newGameButton.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\newGameButton.xnb</Output>
       <Time>2008-04-08T17:37:49.265625-04:00</Time>
     </Item>
     <Item>
@@ -106,7 +106,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\newGamePressed.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\newGamePressed.xnb</Output>
       <Time>2008-04-08T17:37:49.265625-04:00</Time>
     </Item>
     <Item>
@@ -115,7 +115,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\lightInfantryPortrait.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\lightInfantryPortrait.xnb</Output>
       <Time>2008-04-08T17:37:49.421875-04:00</Time>
     </Item>
     <Item>
@@ -124,7 +124,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\archerPortrait.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\archerPortrait.xnb</Output>
       <Time>2008-04-08T17:37:49.25-04:00</Time>
     </Item>
     <Item>
@@ -133,7 +133,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantryUnit.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\infantryUnit.xnb</Output>
       <Time>2008-04-08T17:37:49.546875-04:00</Time>
     </Item>
     <Item>
@@ -142,7 +142,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantryIcon.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\infantryIcon.xnb</Output>
       <Time>2008-04-08T17:37:49.375-04:00</Time>
     </Item>
     <Item>
@@ -151,7 +151,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\archerIcon.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\archerIcon.xnb</Output>
       <Time>2008-04-08T17:37:49.421875-04:00</Time>
     </Item>
     <Item>
@@ -160,7 +160,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\grass.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\grass.xnb</Output>
       <Time>2008-04-08T17:37:49.453125-04:00</Time>
     </Item>
     <Item>
@@ -169,7 +169,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\barrel.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\barrel.xnb</Output>
       <Time>2008-04-08T17:37:49.25-04:00</Time>
     </Item>
     <Item>
@@ -178,7 +178,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\SelectedUnitOverlay.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\SelectedUnitOverlay.xnb</Output>
       <Time>2008-04-08T17:37:49.296875-04:00</Time>
     </Item>
     <Item>
@@ -187,7 +187,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\healthBar.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\healthBar.xnb</Output>
       <Time>2008-04-08T17:37:49.328125-04:00</Time>
     </Item>
     <Item>
@@ -196,7 +196,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\resourceBarUnderlay.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\resourceBarUnderlay.xnb</Output>
       <Time>2008-04-08T17:37:49.28125-04:00</Time>
     </Item>
     <Item>
@@ -205,7 +205,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\destinationClick.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\destinationClick.xnb</Output>
       <Time>2008-04-08T17:37:49.515625-04:00</Time>
     </Item>
     <Item>
@@ -214,7 +214,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\map1.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\map1.xnb</Output>
       <Time>2008-04-08T17:37:49.34375-04:00</Time>
     </Item>
     <Item>
@@ -223,7 +223,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantry_back.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\infantry_back.xnb</Output>
       <Time>2008-04-08T17:37:49.421875-04:00</Time>
     </Item>
     <Item>
@@ -232,7 +232,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantry_left.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\infantry_left.xnb</Output>
       <Time>2008-04-08T17:37:49.375-04:00</Time>
     </Item>
     <Item>
@@ -241,7 +241,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantry_right.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\infantry_right.xnb</Output>
       <Time>2008-04-08T17:37:49.546875-04:00</Time>
     </Item>
     <Item>
@@ -250,7 +250,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantry_still.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\infantry_still.xnb</Output>
       <Time>2008-04-08T17:37:49.359375-04:00</Time>
     </Item>
     <Item>
@@ -259,7 +259,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Archer_Back.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Archer_Back.xnb</Output>
       <Time>2008-04-08T17:37:49.46875-04:00</Time>
     </Item>
     <Item>
@@ -268,7 +268,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Archer_left.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Archer_left.xnb</Output>
       <Time>2008-04-08T17:37:49.265625-04:00</Time>
     </Item>
     <Item>
@@ -277,7 +277,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Archer_right.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Archer_right.xnb</Output>
       <Time>2008-04-08T17:37:49.359375-04:00</Time>
     </Item>
     <Item>
@@ -286,7 +286,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Archer_Still.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Archer_Still.xnb</Output>
       <Time>2008-04-08T17:37:49.421875-04:00</Time>
     </Item>
     <Item>
@@ -295,7 +295,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\CampFiller.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\CampFiller.xnb</Output>
       <Time>2008-04-08T17:37:49.453125-04:00</Time>
     </Item>
     <Item>
@@ -304,7 +304,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Archer_dead.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Archer_dead.xnb</Output>
       <Time>2008-04-08T17:37:49.28125-04:00</Time>
     </Item>
     <Item>
@@ -313,7 +313,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Fort_friendly.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Fort_friendly.xnb</Output>
       <Time>2008-04-08T17:37:49.25-04:00</Time>
     </Item>
     <Item>
@@ -322,7 +322,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Fort_hostile.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Fort_hostile.xnb</Output>
       <Time>2008-04-08T17:37:49.359375-04:00</Time>
     </Item>
     <Item>
@@ -331,7 +331,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Fort_neutral.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Fort_neutral.xnb</Output>
       <Time>2008-04-08T17:37:49.25-04:00</Time>
     </Item>
     <Item>
@@ -340,7 +340,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\infantry_dead.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\infantry_dead.xnb</Output>
       <Time>2008-04-08T17:37:49.40625-04:00</Time>
     </Item>
     <Item>
@@ -349,7 +349,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Tower_friendly.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Tower_friendly.xnb</Output>
       <Time>2008-04-08T17:37:49.234375-04:00</Time>
     </Item>
     <Item>
@@ -358,7 +358,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Tower_hostile.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Tower_hostile.xnb</Output>
       <Time>2008-04-08T17:37:49.296875-04:00</Time>
     </Item>
     <Item>
@@ -367,7 +367,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Tower_nuetral.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Tower_nuetral.xnb</Output>
       <Time>2008-04-08T17:37:49.5625-04:00</Time>
     </Item>
     <Item>
@@ -376,7 +376,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Fort_hostile_damaged.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Fort_hostile_damaged.xnb</Output>
       <Time>2008-04-08T17:37:49.234375-04:00</Time>
     </Item>
     <Item>
@@ -385,7 +385,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Fort_hostile_destroyed.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Fort_hostile_destroyed.xnb</Output>
       <Time>2008-04-08T17:37:49.28125-04:00</Time>
     </Item>
     <Item>
@@ -394,7 +394,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Fort_hostile_exploded.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Fort_hostile_exploded.xnb</Output>
       <Time>2008-04-08T17:37:49.484375-04:00</Time>
     </Item>
     <Item>
@@ -403,7 +403,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\BasePortrait.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\BasePortrait.xnb</Output>
       <Time>2008-04-08T17:37:49.234375-04:00</Time>
     </Item>
     <Item>
@@ -412,7 +412,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\TowerPortrait.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\TowerPortrait.xnb</Output>
       <Time>2008-04-08T17:37:49.5-04:00</Time>
     </Item>
     <Item>
@@ -421,17 +421,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\TowerIcon.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\TowerIcon.xnb</Output>
       <Time>2008-04-08T17:37:49.265625-04:00</Time>
-    </Item>
-    <Item>
-      <Source>Courier New.spritefont</Source>
-      <Name>Courier New</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Courier New.xnb</Output>
-      <Time>2008-04-08T17:37:49.5625-04:00</Time>
     </Item>
     <Item>
       <Source>Fort_Friendly_Building.png</Source>
@@ -439,7 +430,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\Fort_Friendly_Building.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Fort_Friendly_Building.xnb</Output>
       <Time>2008-04-08T18:16:08.46875-04:00</Time>
     </Item>
     <Item>
@@ -448,7 +439,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\ControlPointEnemy.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\ControlPointEnemy.xnb</Output>
       <Time>2008-04-09T12:14:00.484375-04:00</Time>
     </Item>
     <Item>
@@ -457,7 +448,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\ControlPointFriendly.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\ControlPointFriendly.xnb</Output>
       <Time>2008-04-09T12:13:25.734375-04:00</Time>
     </Item>
     <Item>
@@ -466,7 +457,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\ControlPointIcon.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\ControlPointIcon.xnb</Output>
       <Time>2008-04-09T12:14:27.75-04:00</Time>
     </Item>
     <Item>
@@ -475,17 +466,35 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\MoneyIcon.xnb</Output>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\MoneyIcon.xnb</Output>
       <Time>2008-04-09T13:48:14.25-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Courier New.spritefont</Source>
+      <Name>Courier New</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Courier New.xnb</Output>
+      <Time>2008-04-08T17:37:49.5625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Arial.spritefont</Source>
+      <Name>Arial</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Arial.xnb</Output>
+      <Time>2008-04-10T15:10:40.34375-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
-      <RootDirectory>D:\Incursio\incursio-project\Incursio\Content\</RootDirectory>
-      <LoggerRootDirectory>D:\Incursio\incursio-project\Incursio\</LoggerRootDirectory>
-      <IntermediateDirectory>D:\Incursio\incursio-project\Incursio\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>D:\Incursio\incursio-project\Incursio\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>D:\INCURSIO\incursio-project\Incursio\Content\</RootDirectory>
+      <LoggerRootDirectory>D:\INCURSIO\incursio-project\Incursio\</LoggerRootDirectory>
+      <IntermediateDirectory>D:\INCURSIO\incursio-project\Incursio\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
