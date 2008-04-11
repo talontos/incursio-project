@@ -32,6 +32,7 @@ namespace Incursio.Campaign
 
             //place random units around the map
             int numLight = Incursio.rand.Next(10);
+            int numHeavy = Incursio.rand.Next(10);
             int numArch = Incursio.rand.Next(10);
             int numTower = Incursio.rand.Next(10);
             int numPoints = Incursio.rand.Next(5);
@@ -41,6 +42,15 @@ namespace Incursio.Campaign
                 LightInfantryUnit infUnitp = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
                 infUnitp.setLocation(new Coordinate(Incursio.rand.Next(mapWidth), Incursio.rand.Next(mapHeight)));
                 LightInfantryUnit infUnitc = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
+                infUnitc.setLocation(new Coordinate(Incursio.rand.Next(mapWidth), Incursio.rand.Next(mapHeight)));
+            }
+
+            //heavys
+            for (int i = 0; i < numHeavy; i++)
+            {
+                HeavyInfantryUnit infUnitp = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", State.PlayerId.HUMAN);
+                infUnitp.setLocation(new Coordinate(Incursio.rand.Next(mapWidth), Incursio.rand.Next(mapHeight)));
+                HeavyInfantryUnit infUnitc = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", State.PlayerId.COMPUTER);
                 infUnitc.setLocation(new Coordinate(Incursio.rand.Next(mapWidth), Incursio.rand.Next(mapHeight)));
             }
 

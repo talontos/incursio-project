@@ -19,6 +19,12 @@ namespace Incursio.Classes
         public const int GUARD_TOWER_BUILD_TIME = 15;
         public const int ITEM_UPGRADE_BUILD_TIME = 90;
 
+        public const int COST_LIGHT_INFANTRY = 45;
+        public const int COST_HEAVY_INFANTRY = 90;
+        public const int COST_ARCHER = 60;
+        public const int COST_GUARD_TOWER = 200;
+        public const int COST_UPGRADE = 200;
+
         int newUnitPlacementX = 10;
         int newUnitPlacementY = 120;    //little bit of hard coding, but can't really help it here 
         int income = 8;
@@ -50,41 +56,87 @@ namespace Incursio.Classes
             }
             else
             {
+                Player owningPlayer;
+                if (this.owner == State.PlayerId.HUMAN)
+                    owningPlayer = PlayerManager.getInstance().humanPlayer;
+                else
+                    owningPlayer = PlayerManager.getInstance().computerPlayer;
+
                 if (toBeBuilt.getType() == State.EntityName.LightInfantry)
                 {
-                    currentlyBuildingThis = "Light Infantry";
-                    currentBuildForObjectFactory = "Incursio.Classes.LightInfantryUnit";
-                    this.timeBuilt = 0;
-                    this.timeRequired = LIGHT_INFANTRY_BUILD_TIME * 60;
-                    this.buildProject = toBeBuilt;
-                    this.currentState = State.StructureState.Building;
+                    //if we have enough resources, build it
+                    if (owningPlayer.MONETARY_UNIT >= COST_LIGHT_INFANTRY)
+                    {
+                        currentlyBuildingThis = "Light Infantry";
+                        currentBuildForObjectFactory = "Incursio.Classes.LightInfantryUnit";
+                        this.timeBuilt = 0;
+                        this.timeRequired = LIGHT_INFANTRY_BUILD_TIME * 60;
+                        this.buildProject = toBeBuilt;
+                        this.currentState = State.StructureState.Building;
+                        owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_LIGHT_INFANTRY;
+                    }
+                    else
+                    {
+                        //send message to player
+                    }
+                    
                 }
                 else if (toBeBuilt.getType() == State.EntityName.Archer)
                 {
-                    currentlyBuildingThis = "Archer";
-                    currentBuildForObjectFactory = "Incursio.Classes.ArcherUnit";
-                    this.timeBuilt = 0;
-                    this.timeRequired = ARCHER_BUILD_TIME * 60;
-                    this.buildProject = toBeBuilt;
-                    this.currentState = State.StructureState.Building;
+                    //if we have enough resources, build it
+                    if (owningPlayer.MONETARY_UNIT >= COST_ARCHER)
+                    {
+                        currentlyBuildingThis = "Archer";
+                        currentBuildForObjectFactory = "Incursio.Classes.ArcherUnit";
+                        this.timeBuilt = 0;
+                        this.timeRequired = ARCHER_BUILD_TIME * 60;
+                        this.buildProject = toBeBuilt;
+                        this.currentState = State.StructureState.Building;
+                        owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_ARCHER;
+                    }
+                    else
+                    {
+                        //send message to player
+                    }
+                    
                 }
                 else if (toBeBuilt.getType() == State.EntityName.HeavyInfantry)
                 {
-                    currentlyBuildingThis = "Heavy Infantry";
-                    currentBuildForObjectFactory = "Incursio.Classes.HeavyInfantryUnit";
-                    this.timeBuilt = 0;
-                    this.timeRequired = HEAVY_INFANTRY_BUILD_TIME * 60;
-                    this.buildProject = toBeBuilt;
-                    this.currentState = State.StructureState.Building;
+                    //if we have enough resources, build it
+                    if (owningPlayer.MONETARY_UNIT >= COST_HEAVY_INFANTRY)
+                    {
+                        currentlyBuildingThis = "Heavy Infantry";
+                        currentBuildForObjectFactory = "Incursio.Classes.HeavyInfantryUnit";
+                        this.timeBuilt = 0;
+                        this.timeRequired = HEAVY_INFANTRY_BUILD_TIME * 60;
+                        this.buildProject = toBeBuilt;
+                        this.currentState = State.StructureState.Building;
+                        owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_HEAVY_INFANTRY;
+                    }
+                    else
+                    {
+                        //send message to player
+                    }
+  
                 }
                 else if (toBeBuilt.getType() == State.EntityName.GuardTower)
                 {
-                    currentlyBuildingThis = "Guard Tower";
-                    currentBuildForObjectFactory = "Incursio.Classes.GuardTowerStructure";
-                    this.timeBuilt = 0;
-                    this.timeRequired = GUARD_TOWER_BUILD_TIME * 60;
-                    this.buildProject = toBeBuilt;
-                    this.currentState = State.StructureState.Building;
+                    //if we have enough resources, build it
+                    if (owningPlayer.MONETARY_UNIT >= COST_GUARD_TOWER)
+                    {
+                        currentlyBuildingThis = "Guard Tower";
+                        currentBuildForObjectFactory = "Incursio.Classes.GuardTowerStructure";
+                        this.timeBuilt = 0;
+                        this.timeRequired = GUARD_TOWER_BUILD_TIME * 60;
+                        this.buildProject = toBeBuilt;
+                        this.currentState = State.StructureState.Building;
+                        owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_GUARD_TOWER;
+                    }
+                    else
+                    {
+                        //send message to player
+                    }
+                    
                 }
             } 
         }

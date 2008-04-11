@@ -48,6 +48,11 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.lightInfantryMovingWest = Content.Load<Texture2D>(@"Infantry_Moving_left");
             TextureBank.EntityTextures.lightInfantryMovingEast = Content.Load<Texture2D>(@"Infantry_Moving_right");
 
+            TextureBank.EntityTextures.heavyInfantryEast = Content.Load<Texture2D>(@"HeavyInfantryEast");
+            TextureBank.EntityTextures.heavyInfantryWest = Content.Load<Texture2D>(@"HeavyInfantryWest");
+            TextureBank.EntityTextures.heavyInfantryNorth = Content.Load<Texture2D>(@"HeavyInfantryNorth");
+            TextureBank.EntityTextures.heavyInfantrySouth = Content.Load<Texture2D>(@"HeavyInfantrySouth");
+
             TextureBank.EntityTextures.archerEast = Content.Load<Texture2D>(@"archer_right");
             TextureBank.EntityTextures.archerWest = Content.Load<Texture2D>(@"archer_left");
             TextureBank.EntityTextures.archerSouth = Content.Load<Texture2D>(@"archer_Still");
@@ -89,7 +94,9 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.basePortrait = Content.Load<Texture2D>(@"BasePortrait");
             TextureBank.InterfaceTextures.guardTowerPortrait = Content.Load<Texture2D>(@"TowerPortrait");
             TextureBank.InterfaceTextures.guardTowerIcon = Content.Load<Texture2D>(@"TowerIcon");
-            TextureBank.InterfaceTextures.controlPointIcon = Content.Load<Texture2D>(@"ControlPointIcon");
+            TextureBank.InterfaceTextures.controlPointPortrait = Content.Load<Texture2D>(@"ControlPointIcon");
+            TextureBank.InterfaceTextures.heavyInfantryIcon = Content.Load<Texture2D>(@"HeavyInfantryIcon");
+            TextureBank.InterfaceTextures.heavyInfantryPortrait = Content.Load<Texture2D>(@"HeavyInfantryPortrait");
 
             TextureBank.InterfaceTextures.gameMenuButton = Content.Load<Texture2D>(@"gameMenuButton");
             TextureBank.InterfaceTextures.gameMenuButtonPressed = Content.Load<Texture2D>(@"gameMenuButtonPressed");

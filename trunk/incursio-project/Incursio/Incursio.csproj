@@ -113,7 +113,7 @@
     <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\MapManager.cs" />
     <Compile Include="Managers\PlayerManager.cs" />
-    <Compile Include="Managers\SoundManager.cs" />
+    <None Include="Managers\SoundManager.cs" />
     <Compile Include="Managers\TextureBank.cs" />
     <Compile Include="Managers\TextureManager.cs" />
     <Compile Include="Utils\DebugUtil.cs" />

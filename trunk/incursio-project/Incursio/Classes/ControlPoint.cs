@@ -20,7 +20,7 @@ namespace Incursio.Classes
 
         int income = 12;    //monatary amount
         int timeSpentCapping = 0;
-        Hero capturingHero;
+        HeavyInfantryUnit capturingHero;
         long heroStartingHealth;
         bool capping = false;
 
@@ -33,7 +33,7 @@ namespace Incursio.Classes
             this.isConstructor = true;
         }
 
-        public void startCap(Hero capturingHero)
+        public void startCap(HeavyInfantryUnit capturingHero)
         {
             this.capturingHero = capturingHero;
             heroStartingHealth = capturingHero.health;
@@ -104,6 +104,17 @@ namespace Incursio.Classes
                 myRef.Height
             );
             
+        }
+
+        public double getPercentageDone()
+        {
+            int timeTotal = TIME_TO_CAPTURE * 60;
+            return (float)timeSpentCapping / timeTotal;
+        }
+
+        public bool isCapping()
+        {
+            return capping;
         }
     }
 }

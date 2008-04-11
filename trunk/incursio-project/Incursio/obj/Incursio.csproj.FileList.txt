@@ -68,3 +68,9 @@ bin\x86\Debug\Content\Infantry_Moving_Left.xnb
 bin\x86\Debug\Content\Infantry_Moving_Right.xnb
 bin\x86\Debug\Content\Archer_Moving_Left.xnb
 bin\x86\Debug\Content\Archer_Moving_Right.xnb
+bin\x86\Debug\Content\HeavyInfantryEast.xnb
+bin\x86\Debug\Content\HeavyInfantryNorth.xnb
+bin\x86\Debug\Content\HeavyInfantrySouth.xnb
+bin\x86\Debug\Content\HeavyInfantryWest.xnb
+bin\x86\Debug\Content\HeavyInfantryIcon.xnb
+bin\x86\Debug\Content\HeavyInfantryPortrait.xnb

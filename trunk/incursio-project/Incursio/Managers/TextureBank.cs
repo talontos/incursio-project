@@ -25,6 +25,11 @@ namespace Incursio.Managers
             public static Texture2D lightInfantryMovingWest;
             public static Texture2D lightInfantryMovingEast;
 
+            public static Texture2D heavyInfantryEast;
+            public static Texture2D heavyInfantryWest;
+            public static Texture2D heavyInfantrySouth;
+            public static Texture2D heavyInfantryNorth;
+
             public static Texture2D archerEast;
             public static Texture2D archerWest;
             public static Texture2D archerSouth;
@@ -99,10 +104,12 @@ namespace Incursio.Managers
             public static Texture2D archerIcon;
             public static Texture2D lightInfantryPortrait;
             public static Texture2D lightInfantryIcon;
+            public static Texture2D heavyInfantryPortrait;
+            public static Texture2D heavyInfantryIcon;
             public static Texture2D basePortrait;
             public static Texture2D guardTowerPortrait;
             public static Texture2D guardTowerIcon;
-            public static Texture2D controlPointIcon;
+            public static Texture2D controlPointPortrait;
             /////////////////////////////
         }
     }

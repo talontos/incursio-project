@@ -146,8 +146,21 @@ namespace Incursio.Managers
                     Rectangle unit = e.boundingBox;
                     if (unit.Contains(new Point(Convert.ToInt32(point.X), Convert.ToInt32(point.Y))))
                     {
+                        //if it's a control point, initialize a cap
+                        if(e.getPlayer() == State.PlayerId.COMPUTER && e.getType() == State.EntityName.ControlPoint)
+                        {
+                            //if there is a HERO among the selected units, start the cap
+                            selectedUnits.ForEach(delegate (BaseGameEntity u){
+                                if (u is HeavyInfantryUnit)
+                                {
+                                    (e as ControlPoint).startCap((u as HeavyInfantryUnit));
+                                }
+
+                                EntityManager.getInstance().issueCommand(State.Command.MOVE, false, null, e.getLocation());
+                            });
+                        }
                         //NOW, if unit is enemy, selected units attack!
-                        if (e.getPlayer() == State.PlayerId.COMPUTER)
+                        else if (e.getPlayer() == State.PlayerId.COMPUTER)
                         {
                             EntityManager.getInstance().issueCommand(State.Command.ATTACK, false, null, e);
                         }
