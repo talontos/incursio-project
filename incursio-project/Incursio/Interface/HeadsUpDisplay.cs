@@ -15,6 +15,7 @@ namespace Incursio.Classes
         Button lightInfantryButton;
         Button archerButton;
         Button towerButton;
+        Button heavyInfantryButton;
 
         //helper variables for determining selection
         private int barX;
@@ -44,7 +45,8 @@ namespace Incursio.Classes
             numUnits = 0;
             lightInfantryButton = new Button(new Vector2(775, 605), TextureBank.InterfaceTextures.lightInfantryIcon, TextureBank.InterfaceTextures.lightInfantryIcon);
             archerButton = new Button(new Vector2(850, 605), TextureBank.InterfaceTextures.archerIcon, TextureBank.InterfaceTextures.archerIcon);
-            towerButton = new Button(new Vector2(925, 605), TextureBank.InterfaceTextures.guardTowerIcon, TextureBank.InterfaceTextures.guardTowerIcon);
+            towerButton = new Button(new Vector2(775, 650), TextureBank.InterfaceTextures.guardTowerIcon, TextureBank.InterfaceTextures.guardTowerIcon);
+            heavyInfantryButton = new Button(new Vector2(925, 605), TextureBank.InterfaceTextures.heavyInfantryIcon, TextureBank.InterfaceTextures.heavyInfantryIcon);
         }
 
         public List<BaseGameEntity> update(Cursor cursor)
@@ -61,12 +63,18 @@ namespace Incursio.Classes
                     lightInfantryButton.Update(cursor);
                     archerButton.Update(cursor);
                     towerButton.Update(cursor);
+                    heavyInfantryButton.Update(cursor);
 
                     //See if any buttons are being pressed
                     if (!lightInfantryButton.getPressed() && lightInfantryButton.getFocus())
                     {
                         lightInfantryButton.setFocus(false);
                         EntityManager.getInstance().tryToBuild(new LightInfantryUnit());
+                    }
+                    else if (!heavyInfantryButton.getPressed() && heavyInfantryButton.getFocus())
+                    {
+                        heavyInfantryButton.setFocus(false);
+                        EntityManager.getInstance().tryToBuild(new HeavyInfantryUnit());
                     }
                     else if (!archerButton.getPressed() && archerButton.getFocus())
                     {
@@ -177,6 +185,14 @@ namespace Incursio.Classes
                 {
                     spriteBatch.Draw(TextureBank.InterfaceTextures.guardTowerPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.guardTowerPortrait.Width, TextureBank.InterfaceTextures.guardTowerPortrait.Height), Color.White);
                 }
+                else if (selectedUnits[0].getType() == State.EntityName.HeavyInfantry)
+                {
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.heavyInfantryPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.heavyInfantryPortrait.Width, TextureBank.InterfaceTextures.heavyInfantryPortrait.Height), Color.White);
+                }
+                else if (selectedUnits[0].getType() == State.EntityName.ControlPoint)
+                {
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.controlPointPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.controlPointPortrait.Width, TextureBank.InterfaceTextures.controlPointPortrait.Height), Color.White);
+                }
             }
 
             //unit attributes
@@ -236,6 +252,17 @@ namespace Incursio.Classes
                     }
                     
                 }
+
+                if (selectedUnits[0].getType() == State.EntityName.ControlPoint && (selectedUnits[0] as ControlPoint).isCapping())
+                {
+                    
+                    double capRatio = (selectedUnits[0] as ControlPoint).getPercentageDone();
+
+                    //lets the player know what we're capping, and the progress
+                    spriteBatch.DrawString(font, "Capturing: ", new Vector2(572, height - 65), Color.White, 0, font.MeasureString("Capturing: ") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(462, height - 50, TextureBank.EntityTextures.healthRatioTexture.Width * 5, TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Black);
+                    spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(462, height - 50, (int)(TextureBank.EntityTextures.healthRatioTexture.Width * 5 * capRatio), TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Lime);
+                }
             }
             else if (numUnitsSelected > 1)
             {
@@ -278,6 +305,7 @@ namespace Incursio.Classes
                     lightInfantryButton.Draw(spriteBatch);
                     archerButton.Draw(spriteBatch);
                     towerButton.Draw(spriteBatch);
+                    heavyInfantryButton.Draw(spriteBatch);
                     //spriteBatch.Draw(TextureBank.InterfaceTextures.lightInfantryIcon, new Rectangle(775, height - 163, 75, 48), Color.White);
                     //spriteBatch.Draw(TextureBank.InterfaceTextures.archerIcon, new Rectangle(850, height - 163, 75, 48), Color.White);
                     //spriteBatch.Draw(TextureBank.InterfaceTextures.guardTowerIcon, new Rectangle(925, height - 163, 75, 48), Color.White);
