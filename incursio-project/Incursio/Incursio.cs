@@ -31,6 +31,7 @@ namespace Incursio
         SpriteBatch spriteBatch;                //draws our images
         TextureManager textureManager;
         PlayerManager playerManager;
+        MessageManager messageManager;
         //SoundManager soundManager;              //does sound stuff
 
         //Game Time keeping
@@ -81,6 +82,7 @@ namespace Incursio
             MapManager.getInstance().initializeCurrentMap();
 
             playerManager = PlayerManager.getInstance();
+            messageManager = MessageManager.getInstance();
 
             //soundManager = SoundManager.getInstance();
             
@@ -117,6 +119,8 @@ namespace Incursio
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("Courier New");
+
+            MessageManager.getInstance().setFont(Content.Load<SpriteFont>("Arial"));
 
             FontPos = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
 
@@ -236,6 +240,8 @@ namespace Incursio
 
                     PlayerManager.getInstance().updatePlayers(gameTime);
 
+                    MessageManager.getInstance().update();
+
                     //SoundManager.getInstance().updateSounds();
                     
                     //listener for menu button
@@ -343,6 +349,9 @@ namespace Incursio
 
                     //draw the button
                     gameMenuButton.Draw(spriteBatch);
+
+                    //display any messages that need to be shown
+                    messageManager.displayMessages(spriteBatch);
 
                     break;
 

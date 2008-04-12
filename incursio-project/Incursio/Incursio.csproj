@@ -112,6 +112,7 @@
     <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\MapManager.cs" />
+    <Compile Include="Managers\MessageManager.cs" />
     <Compile Include="Managers\PlayerManager.cs" />
     <None Include="Managers\SoundManager.cs" />
     <Compile Include="Managers\TextureBank.cs" />

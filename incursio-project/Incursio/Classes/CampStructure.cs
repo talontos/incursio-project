@@ -78,6 +78,7 @@ namespace Incursio.Classes
                     else
                     {
                         //send message to player
+                        MessageManager.getInstance().addMessage("Not enough resources");
                     }
                     
                 }
@@ -97,6 +98,7 @@ namespace Incursio.Classes
                     else
                     {
                         //send message to player
+                        MessageManager.getInstance().addMessage("Not enough resources");
                     }
                     
                 }
@@ -116,6 +118,7 @@ namespace Incursio.Classes
                     else
                     {
                         //send message to player
+                        MessageManager.getInstance().addMessage("Not enough resources");
                     }
   
                 }
@@ -135,6 +138,7 @@ namespace Incursio.Classes
                     else
                     {
                         //send message to player
+                        MessageManager.getInstance().addMessage("Not enough resources");
                     }
                     
                 }
