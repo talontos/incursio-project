@@ -4,6 +4,7 @@ using System.Text;
 
 using Incursio.Utils;
 using Incursio.Classes;
+using Microsoft.Xna.Framework;
 
 namespace Incursio.Commands
 {
@@ -18,7 +19,7 @@ namespace Incursio.Commands
         }
 
         //NOTE: for building, subject will be a structure; probably a camp
-        public override void execute(ref global::Incursio.Classes.BaseGameEntity subject)
+        public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
             //TODO: EXPAND ON THIS
             //Right now, camps are only building entities

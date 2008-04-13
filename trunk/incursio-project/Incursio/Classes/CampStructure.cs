@@ -48,6 +48,12 @@ namespace Incursio.Classes
             this.isConstructor = true;
         }
 
+        public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
+        {
+            this.updateOccupancy(true);
+            base.Update(gameTime, ref myRef);
+        }
+
         public override void build(BaseGameEntity toBeBuilt)
         {
             if (buildProject != null)
@@ -78,7 +84,14 @@ namespace Incursio.Classes
                     else
                     {
                         //send message to player
-                        MessageManager.getInstance().addMessage("Not enough resources");
+                        owningPlayer.dispatchEvent(
+                            new GameEvent(
+                                State.EventType.NOT_ENOUGH_RESOURCES,
+                                "Not Enough Resources",
+                                this.location
+                            )
+                        );
+                        //MessageManager.getInstance().addMessage("Not enough resources");
                     }
                     
                 }
@@ -98,7 +111,14 @@ namespace Incursio.Classes
                     else
                     {
                         //send message to player
-                        MessageManager.getInstance().addMessage("Not enough resources");
+                        owningPlayer.dispatchEvent(
+                            new GameEvent(
+                                State.EventType.NOT_ENOUGH_RESOURCES,
+                                "Not Enough Resources",
+                                this.location
+                            )
+                        );
+                        //MessageManager.getInstance().addMessage("Not enough resources");
                     }
                     
                 }
@@ -118,7 +138,14 @@ namespace Incursio.Classes
                     else
                     {
                         //send message to player
-                        MessageManager.getInstance().addMessage("Not enough resources");
+                        owningPlayer.dispatchEvent(
+                            new GameEvent(
+                                State.EventType.NOT_ENOUGH_RESOURCES,
+                                "Not Enough Resources",
+                                this.location
+                            )
+                        );
+                        //MessageManager.getInstance().addMessage("Not enough resources");
                     }
   
                 }
@@ -138,7 +165,14 @@ namespace Incursio.Classes
                     else
                     {
                         //send message to player
-                        MessageManager.getInstance().addMessage("Not enough resources");
+                        owningPlayer.dispatchEvent(
+                            new GameEvent(
+                                State.EventType.NOT_ENOUGH_RESOURCES,
+                                "Not Enough Resources",
+                                this.location
+                            )
+                        );
+                        //MessageManager.getInstance().addMessage("Not enough resources");
                     }
                     
                 }
@@ -181,6 +215,15 @@ namespace Incursio.Classes
                     this.currentBuildForObjectFactory = "IDLE";
                     this.currentlyBuildingThis = "IDLE";
                     this.buildProject = null;
+
+                    PlayerManager.getInstance().notifyPlayer(
+                        this.owner,
+                        new GameEvent(State.EventType.CREATION_COMPLETE,
+                        /*SOUND,*/
+                            "Construction Complete",
+                            this.location
+                        )
+                    );
                 }
                 else
                 {
@@ -192,6 +235,15 @@ namespace Incursio.Classes
                     this.currentBuildForObjectFactory = "IDLE";
                     this.currentlyBuildingThis = "IDLE";
                     this.buildProject = null;
+                    
+                    PlayerManager.getInstance().notifyPlayer(
+                        this.owner,
+                        new GameEvent(State.EventType.CREATION_COMPLETE, 
+                            /*SOUND,*/ 
+                            "Construction Complete", 
+                            this.location
+                        )
+                    );
                 }
             }
             else
@@ -215,20 +267,30 @@ namespace Incursio.Classes
             this.newStructureCoords = coords;
         }
 
+        public override void updateOccupancy(bool occupied)
+        {
+            //hardcode blagh
+            int xStart = location.x - 32;
+            int yStart = location.y - (int)(32 * 0.80);
+            int xEnd = location.x;// +32;
+            int yEnd = location.y + (int)(32 * 0.20);
+
+            if (xStart < 0 || xEnd < 0 || yStart < 0 || yEnd < 0)
+                return;
+
+            map.setSingleCellOccupancy(xStart, yStart, 0);
+            map.setSingleCellOccupancy(xStart, yEnd, 0);
+            map.setSingleCellOccupancy(xEnd, yStart, 0);
+            map.setSingleCellOccupancy(xEnd, yEnd, 0);
+        }
+
         public override void setLocation(Coordinate coords)
         {
-            //hardcode blargh
-            int xStart = coords.x - 32;
-            int yStart = coords.y - (int)(64 * 0.80);
-            int xEnd = coords.x + 32;
-            int yEnd = coords.y + (int)(64 * 0.20);
-
-            map.setSingleCellOccupancy(xStart, yStart, false);
-            map.setSingleCellOccupancy(xStart, yEnd, false);
-            map.setSingleCellOccupancy(xEnd, yStart, false);
-            map.setSingleCellOccupancy(xEnd, yEnd, false);
+            updateOccupancy(false);
 
             base.setLocation(coords);
+
+            updateOccupancy(true);
 
             setDefaultDestination();
         }

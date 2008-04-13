@@ -57,6 +57,29 @@ namespace Incursio.Managers
             });
         }
 
+        public void updateUnitSelection(Rectangle area){
+
+            //IF NO UNITS ARE IN THE SELECTED AREA,
+            //  WE SHOULD PROBABLY KEEP OUR CURRENT SELECTION
+            List<BaseGameEntity> unitsInArea = new List<BaseGameEntity>();
+
+            entityBank.ForEach(delegate(BaseGameEntity e)
+            {
+                if( area.Contains(e.getLocation().toPoint()) ){
+                    if(e.getPlayer() == State.PlayerId.HUMAN){
+                        unitsInArea.Add(e);
+                    }
+                }
+            });
+
+            if(unitsInArea.Count != 0){
+                if (InputManager.getInstance().shifting())   //append
+                    this.selectedUnits.AddRange(unitsInArea);
+                else
+                    this.selectedUnits = unitsInArea;
+            }
+        }
+
         public void updateUnitSelection(Vector2 point){
             //CLICKING ENTITY?
             bool done = false;
@@ -235,6 +258,18 @@ namespace Incursio.Managers
             return playerHeros;
         }
 
+        public List<Structure> getLivePlayerStructures(State.PlayerId player)
+        {
+            List<Structure> playerStructs = new List<Structure>();
+            this.entityBank.ForEach(delegate(BaseGameEntity e)
+            {
+                if (e.getPlayer() == player && !e.isDead() && e is Structure)
+                    playerStructs.Add(e as Structure);
+            });
+
+            return playerStructs;
+        }
+
         public void tryToBuild(BaseGameEntity toBuild /*String entityType*/){
             if(selectedUnits.Count > 0 && selectedUnits[0] is CampStructure){
                 this.issueCommand(State.Command.BUILD, true, null, toBuild);
@@ -274,70 +309,73 @@ namespace Incursio.Managers
         public void issueCommand(State.Command commandType, bool append, List<BaseGameEntity> entitiesToCommand, params Object[] args){
 
             BaseCommand command = null;
-            switch (commandType)
-            {
-                ////////////////////////
-                case State.Command.MOVE:
-                    //TODO: PATHING!!
-                    command = new MoveCommand(args[0] as Coordinate);
-                    break;
-
-                ////////////////////////
-                case State.Command.ATTACK_MOVE:
-                    //TODO: PATHING!!
-                    command = new AttackMoveCommand(args[0] as Coordinate);
-                    break;
-
-                ////////////////////////
-                case State.Command.ATTACK:
-                    if (args[0] is ControlPoint)
-                    {
-
-                    }
-                    else
-                        command = new AttackCommand(args[0] as BaseGameEntity);
-                    break;
-
-                ////////////////////////
-                case State.Command.STOP:
-                    command = new StopCommand();
-                    break;
-
-                ////////////////////////
-                case State.Command.FOLLOW:
-                    if (args[0] is Unit)
-                        command = new FollowCommand(args[0] as Unit);
-                    else
-                        command = new MoveCommand((args[0] as BaseGameEntity).location);
-
-                    break;
-
-                ////////////////////////
-                case State.Command.GUARD:
-                    command = new GuardCommand();
-                    break;
-
-                ////////////////////////
-                case State.Command.BUILD:
-                    //TODO: We probably shouldn't be passing unit objects through all this
-                    command = new BuildCommand(args[0] as BaseGameEntity);
-                    break;
-
-                ////////////////////////
-            }
-
-            if (command == null) return;
-
+            
             if (entitiesToCommand == null)
                 entitiesToCommand = selectedUnits;
 
             entitiesToCommand.ForEach(delegate(BaseGameEntity e)
             {
-                //add command
-                if (append)
-                    e.issueAdditionalOrder(command);
-                else
-                    e.issueSingleOrder(command);
+                switch (commandType)
+                {
+                    ////////////////////////
+                    case State.Command.MOVE:
+                        //TODO: PATHING!!
+                        command = new MoveCommand(args[0] as Coordinate);
+                        break;
+
+                    ////////////////////////
+                    case State.Command.ATTACK_MOVE:
+                        //TODO: PATHING!!
+                        command = new AttackMoveCommand(args[0] as Coordinate);
+                        break;
+
+                    ////////////////////////
+                    case State.Command.ATTACK:
+                        if (args[0] is ControlPoint)
+                        {
+
+                        }
+                        else
+                            command = new AttackCommand(args[0] as BaseGameEntity);
+                        break;
+
+                    ////////////////////////
+                    case State.Command.STOP:
+                        command = new StopCommand();
+                        break;
+
+                    ////////////////////////
+                    case State.Command.FOLLOW:
+                        if (args[0] is Unit)
+                            command = new FollowCommand(args[0] as Unit);
+                        else
+                            command = new MoveCommand((args[0] as BaseGameEntity).location);
+
+                        break;
+
+                    ////////////////////////
+                    case State.Command.GUARD:
+                        command = new GuardCommand();
+                        break;
+
+                    ////////////////////////
+                    case State.Command.BUILD:
+                        //TODO: We probably shouldn't be passing unit objects through all this
+                        command = new BuildCommand(args[0] as BaseGameEntity);
+                        break;
+
+                    ////////////////////////
+                }
+
+                //add command if not null
+                if (command != null){
+                    if (append){
+                        e.issueAdditionalOrder(command);
+                    }
+                    else{
+                        e.issueSingleOrder(command);
+                    }
+                }
             });
         }
 

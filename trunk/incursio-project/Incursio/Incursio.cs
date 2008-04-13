@@ -115,6 +115,7 @@ namespace Incursio
         protected override void LoadContent()
         {
             //TODO: Load images into textureBank
+            this.textureManager = TextureManager.initializeTextureManager(Content);
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -128,19 +129,8 @@ namespace Incursio
             cursor = new Cursor(new Vector2(0, 0));
             clickDestination = Content.Load<Texture2D>(@"destinationClick");
 
-
-            //load maps 
-            //load testmap texture
-            tex1 = new BaseMapEntity(Content.Load<Texture2D>(@"grass"));
-            for (int j = 0; j < 32; j++)
-            {
-                for (int i = 0; i < 64; i++)
-                {
-                    currentMap.addMapEntity(tex1, i, j);
-                }
-            }
-
-            this.textureManager = TextureManager.initializeTextureManager(Content);
+            //initialize the current map
+            MapManager.getInstance().initializeCurrentMap();
 
             // load the HUD
             hud.loadHeadsUpDisplay();
@@ -343,6 +333,9 @@ namespace Incursio
                         cursorAtClick = new Coordinate((int)cursor.getPos().X, (int)cursor.getPos().Y);
                         mouseClickDestination();
                     }
+
+                    //draw selection rectangle
+                    InputManager.getInstance().drawSelectionRectangle(ref spriteBatch);
 
                     //draw the HUD
                     hud.draw(spriteBatch, Window.ClientBounds.Height, font);
@@ -603,6 +596,24 @@ namespace Incursio
                         {
                             //TODO:
                             //Moving Animation
+                            if( (e as HeavyInfantryUnit).getDirection() == State.Direction.East){
+                                spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryMovingEast,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryEast.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryEast.Height * 0.80),
+                                    TextureBank.EntityTextures.heavyInfantryEast.Width, TextureBank.EntityTextures.heavyInfantryEast.Height),
+                                    new Rectangle(e.currentFrameX, e.currentFrameY, 25, 38), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX < TextureBank.EntityTextures.heavyInfantryMovingEast.Width - 25)
+                                    {
+                                        e.currentFrameX = e.currentFrameX + 25;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = 0;
+                                    }
+                                }
+                            }
                         }
                         else if ((e as HeavyInfantryUnit).getCurrentState() == State.UnitState.UnderAttack)
                         {

@@ -19,5 +19,9 @@ namespace Incursio.Utils
         public Microsoft.Xna.Framework.Point toPoint(){
             return new Microsoft.Xna.Framework.Point(x,y);
         }
+
+        public Microsoft.Xna.Framework.Vector2 toVector2(){
+            return new Microsoft.Xna.Framework.Vector2(x, y);
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using Incursio.Classes;
+using Microsoft.Xna.Framework;
 
 namespace Incursio.Commands
 {
@@ -13,7 +14,8 @@ namespace Incursio.Commands
         
         public BaseCommand(){}
 
-        public virtual void execute(ref BaseGameEntity subject){
+        public virtual void execute(GameTime gameTime, ref BaseGameEntity subject)
+        {
 
         }
     }

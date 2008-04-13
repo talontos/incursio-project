@@ -10,14 +10,22 @@ namespace Incursio.Campaign
 {
     public class TestMap : CampaignMap
     {
+        public TestMap()
+            : base()
+        {
+            this.level = State.CampaignLevel.ONE;
+            //this.setMapDimensions(2048, 1024, 1024, 768);
+            this.setMapDimensions(2048, 2048, 1024, 768);
+        }
+
         public override void initializeMap()
         {
             //This map right now will represent our test environment
 
             EntityManager entityManager = EntityManager.getInstance();
 
-            this.level = State.CampaignLevel.ONE;
-            this.setMapDimensions(2048, 1024, 1024, 768);
+
+            base.initializeMap();
 
             //testing unit creation/placement/moving///
             LightInfantryUnit infUnit1 = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
@@ -37,7 +45,7 @@ namespace Incursio.Campaign
             ControlPoint point1 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
 
             //infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
-            infUnit1.setLocation(new Coordinate(240, 380));
+            infUnit1.setLocation(new Coordinate(16,16));
             infUnit2.setLocation(new Coordinate(200, 400));
             heavyUnit1.setLocation(new Coordinate(220, 440));
             //archUnit2.setLocation(new Coordinate(820, 195));

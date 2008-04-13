@@ -11,9 +11,10 @@ namespace Incursio.Campaign
     public class CampaignMap : MapBase
     {
         public State.CampaignLevel level;
-        
-        public override void initializeMap(/*PASS A FILE IN DEFINING MAP??*/){
 
+        public override void initializeMap(/*PASS A FILE IN DEFINING MAP??*/)
+        {
+            base.initializeMap();
         }
 
         /// <summary>

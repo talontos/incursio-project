@@ -10,17 +10,21 @@ namespace Incursio.Campaign
 {
     public class RandomMap : CampaignMap
     {
+        int mapWidth = 2048;
+        int mapHeight = 1024;
+
+        public RandomMap() : base(){
+            this.level = State.CampaignLevel.ONE;
+
+            this.setMapDimensions(mapWidth, mapHeight, 1024, 768);
+        }
+
         public override void initializeMap()
         {
+            base.initializeMap();
             //This map right now will represent our test environment
 
             EntityManager entityManager = EntityManager.getInstance();
-
-            this.level = State.CampaignLevel.ONE;
-
-            int mapWidth = 2048;
-            int mapHeight = 1024;
-            this.setMapDimensions(mapWidth, mapHeight, 1024, 768);
 
             //create camps in random locations
             CampStructure playerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", State.PlayerId.HUMAN);

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using Incursio.Commands;
+using Incursio.Managers;
 
 namespace Incursio.Classes
 {
@@ -61,7 +62,7 @@ namespace Incursio.Classes
 
             //if I still have orders...
             if(orders.Count > 0){
-                orders[0].execute(ref myRef);
+                orders[0].execute(gameTime, ref myRef);
 
                 //check type for player notification
 
@@ -137,12 +138,25 @@ namespace Incursio.Classes
             return false;
         }
 
+        public virtual void killedTarget(){
+
+        }
+
         /// <summary>
         /// Virtual function for moving
         /// </summary>
         /// <returns>True when destination is reached.  By default returns true.</returns>
-        public virtual bool updateMovement(){
+        public virtual bool updateMovement(float ElapsedTime){
             return true;
+        }
+
+        /// <summary>
+        /// Sets the location of this entity in the current map as occupied (true) or unocupied (false)
+        /// </summary>
+        /// <param name="occupied"></param>
+        public virtual void updateOccupancy(bool occupied){
+            MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y,
+                (occupied ? (byte)0 : (byte)1));
         }
 
         #region Getters/Setters
@@ -197,7 +211,9 @@ namespace Incursio.Classes
 
         public virtual void setLocation(Coordinate coords)
         {
+            this.updateOccupancy(false);
             this.location = coords;
+            this.updateOccupancy(true);
         }
 
         public virtual int getKeyId(){

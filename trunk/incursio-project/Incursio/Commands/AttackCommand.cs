@@ -5,6 +5,7 @@ using System.Text;
 using Incursio.Classes;
 using Incursio.Utils;
 using Incursio.Commands;
+using Microsoft.Xna.Framework;
 
 namespace Incursio.Commands
 {
@@ -19,7 +20,7 @@ namespace Incursio.Commands
                 this.followCommand = new FollowCommand(target);
         }
 
-        public override void execute(ref BaseGameEntity subject)
+        public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
             if( !subject.canAttack ){
                 this.finishedExecution = true;
@@ -45,7 +46,7 @@ namespace Incursio.Commands
 
                 if(!result){
                     //subject is not in attack range, move toward target:
-                    followCommand.execute(ref subject);
+                    followCommand.execute(gameTime, ref subject);
                 }
             }
         }

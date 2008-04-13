@@ -20,6 +20,14 @@ namespace Incursio.Managers
         public KeyboardState keyStateCurrent;
         public KeyboardState keyStatePrev;
 
+        public Vector2 mouseDragStart = new Vector2(-1,-1);
+        public Vector2 mouseDragEnd = new Vector2(-1, -1);
+        public Vector2 mouseDragStart_shifted = new Vector2(-1, -1);
+        public Vector2 mouseDragEnd_shifted = new Vector2(-1, -1);
+
+        //public int dragDetectCounter = 0;
+        public bool dragging = false;
+
         public bool positioningTower = false;
 
         #endregion
@@ -89,6 +97,42 @@ namespace Incursio.Managers
             #region MOUSE COMMANDS
 
             Vector2 point = MapManager.getInstance().currentMap.translateClickToMapLocation(mouseStateCurrent.X, mouseStateCurrent.Y);
+            Vector2 prevPoint = MapManager.getInstance().currentMap.translateClickToMapLocation(mouseStatePrev.X, mouseStatePrev.Y);
+
+            dragging = this.leftDragStart() || dragging;
+
+            if(dragging){
+                //listen for mouseUp
+                if(mouseStateCurrent.LeftButton == ButtonState.Released){
+
+                    //end drag event
+
+                    if (mouseDragStart.X >= 0 && mouseDragEnd.X >= 0)
+                    {
+                        //finished drag-selecting; select all units in rectangle
+                        EntityManager.getInstance().updateUnitSelection(getSelectionRectangle());
+
+                        mouseDragStart = new Vector2(-1, -1);
+                        mouseDragEnd = new Vector2(-1, -1);
+                        mouseDragStart_shifted = new Vector2(-1, -1);
+                        mouseDragEnd_shifted = new Vector2(-1, -1);
+                        
+                    }
+
+                    dragging = false;
+                    //dragDetectCounter = 0;
+                }
+                else{
+                    //keep track of positions
+                    if (mouseDragStart.X < 0){
+                        mouseDragStart_shifted = prevPoint;
+                        mouseDragStart = new Vector2(mouseStatePrev.X, mouseStatePrev.Y);
+                    }
+
+                    mouseDragEnd_shifted = prevPoint;
+                    mouseDragEnd = new Vector2(mouseStateCurrent.X, mouseStateCurrent.Y);
+                }
+            }
             
             if(this.leftClick()){
                 //If the cursor is clicking within the HUD
@@ -143,6 +187,50 @@ namespace Incursio.Managers
         public bool leftClick(){
             return (mouseStateCurrent.LeftButton == ButtonState.Pressed
                  && mouseStatePrev.LeftButton == ButtonState.Released);
+        }
+
+        public bool leftDragEnd(){
+            return (mouseStateCurrent.LeftButton == ButtonState.Released
+                && mouseStatePrev.LeftButton == ButtonState.Pressed) ;
+        }
+
+        public bool leftDragStart(){
+            return (mouseStateCurrent.LeftButton == ButtonState.Pressed
+                && mouseStatePrev.LeftButton == ButtonState.Pressed
+                &&
+                (mouseStateCurrent.X != mouseStatePrev.X
+                || mouseStateCurrent.Y != mouseStatePrev.Y)) ;
+        }
+
+        public Rectangle getSelectionRectangle()
+        {
+            //TODO: translate to current viewpoint!!!!
+            return new Rectangle(
+                Math.Min((int)mouseDragStart_shifted.X, (int)mouseDragEnd_shifted.X),
+                Math.Min((int)mouseDragStart_shifted.Y, (int)mouseDragEnd_shifted.Y),
+                Math.Abs((int)mouseDragStart_shifted.X - (int)mouseDragEnd_shifted.X),
+                Math.Abs((int)mouseDragStart_shifted.Y - (int)mouseDragEnd_shifted.Y)
+             );
+        }
+
+        public Rectangle getVisibleSelectionRectangle()
+        {
+            return new Rectangle(
+                Math.Min((int)mouseDragStart.X, (int)mouseDragEnd.X),
+                Math.Min((int)mouseDragStart.Y, (int)mouseDragEnd.Y),
+                Math.Abs((int)mouseDragStart.X - (int)mouseDragEnd.X),
+                Math.Abs((int)mouseDragStart.Y - (int)mouseDragEnd.Y)
+             );
+        }
+
+        public void drawSelectionRectangle(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch){
+            if (mouseDragStart.X < 0 || mouseDragEnd.X < 0)
+                return;
+
+            spriteBatch.Draw(TextureBank.InterfaceTextures.exitGameToMenuButton, 
+                    getVisibleSelectionRectangle(), 
+                    Microsoft.Xna.Framework.Graphics.Color.Blue
+            );
         }
     }
 }

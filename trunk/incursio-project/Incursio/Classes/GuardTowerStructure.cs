@@ -95,10 +95,10 @@ namespace Incursio.Classes
           int xEnd = coords.x + 16;
           int yEnd = coords.y + (int)(96 * 0.20);
 
-          map.setSingleCellOccupancy(xStart, yStart, false);
-          map.setSingleCellOccupancy(xStart, yEnd, false);
-          map.setSingleCellOccupancy(xEnd, yStart, false);
-          map.setSingleCellOccupancy(xEnd, yEnd, false);
+          map.setSingleCellOccupancy(xStart, yStart, 0);
+          map.setSingleCellOccupancy(xStart, yEnd, 0);
+          map.setSingleCellOccupancy(xEnd, yStart, 0);
+          map.setSingleCellOccupancy(xEnd, yEnd, 0);
 
           base.setLocation(coords);
       }

@@ -6,6 +6,8 @@ using Incursio.Classes;
 using Incursio.Managers;
 using Incursio.Campaign;
 using Microsoft.Xna.Framework;
+using Incursio.Utils.PathFinding;
+using Incursio.Classes.PathFinding;
 
 namespace Incursio.Managers
 {
@@ -13,7 +15,12 @@ namespace Incursio.Managers
     {
         private static MapManager instance;
 
+        public static int TILE_WIDTH = 32;
+        public static int TILE_HEIGHT = 32;
+
         public MapBase currentMap;
+
+        public PathFinder pathFinder;
 
         private MapManager(){
         
@@ -29,10 +36,21 @@ namespace Incursio.Managers
         public MapBase setCurrentLevel(State.CampaignLevel level){
             //TODO: Define Different levels
             switch(level){
-                case State.CampaignLevel.ONE:   currentMap = new TestMap();  break;
-                case State.CampaignLevel.TWO:   currentMap = new RandomMap();  break;
-                case State.CampaignLevel.THREE: currentMap = new TestMap();  break;
+                case State.CampaignLevel.ONE:   
+                    currentMap = new Map1();  
+                    break;
+
+                case State.CampaignLevel.TWO:   
+                    currentMap = new RandomMap();  
+                    break;
+
+                case State.CampaignLevel.THREE: 
+                    currentMap = new TestMap();  
+                    break;
             }
+
+            this.pathFinder = new PathFinder(currentMap.occupancyGrid);
+            MovableObject.Initalize(currentMap.width, currentMap.TILE_WIDTH);
 
             return this.currentMap;
         }

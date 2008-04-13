@@ -36,11 +36,12 @@ namespace Incursio.Managers
 
         public void initializePlayerManager(){
             //TODO: remove separate players; use list
-            this.computerPlayer = new AIPlayer();
+            this.computerPlayer = new AIPlayer(new SimpleAI());
             this.computerPlayer.id = State.PlayerId.COMPUTER;
 
             this.humanPlayer = new Player();
             this.humanPlayer.id = State.PlayerId.HUMAN;
+            this.humanPlayer.MONETARY_UNIT = 1000;
 
             this.players = new List<Player>();
             players.Add(computerPlayer);
@@ -52,7 +53,7 @@ namespace Incursio.Managers
             players.ForEach(delegate(Player p)
             {
                 if(p.id == player){
-                    p.events.Add(e);
+                    p.dispatchEvent(e);
                 }
             });
         }
