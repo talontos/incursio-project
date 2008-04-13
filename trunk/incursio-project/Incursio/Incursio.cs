@@ -581,6 +581,21 @@ namespace Incursio
                         {
                             //TODO:
                             //Attacking Animation
+                            spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryAttackingEast,
+                                    new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
+                                    new Rectangle(e.currentFrameX, e.currentFrameY, 45, 38), Color.White);
+
+                            if (frameTimer >= FRAME_LENGTH)
+                            {
+                                if (e.currentFrameX < TextureBank.EntityTextures.heavyInfantryAttackingEast.Width - 45)
+                                {
+                                    e.currentFrameX = e.currentFrameX + 45;
+                                }
+                                else
+                                {
+                                    e.currentFrameX = 0;
+                                }
+                            }
                         }
                         else if ((e as HeavyInfantryUnit).getCurrentState() == State.UnitState.Dead)
                         {
