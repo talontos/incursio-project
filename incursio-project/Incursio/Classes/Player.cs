@@ -18,7 +18,7 @@ namespace Incursio.Classes
         public int ownedControlPoints = 0;
         public State.PlayerId id;
 
-        protected List<GameEvent> events;
+        public List<GameEvent> events;
 
 
         public Player(){
@@ -44,6 +44,10 @@ namespace Incursio.Classes
 
         public virtual void dispatchEvent(GameEvent e){
             this.events.Add(e);
+        }
+
+        public List<GameEvent> getEvents(){
+            return this.events;
         }
     }
 }

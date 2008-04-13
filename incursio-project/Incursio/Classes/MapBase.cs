@@ -326,6 +326,8 @@ namespace Incursio.Classes
                 }
             }
 
+            this.translateMapCellToPixel(point.x, point.y, out point.x, out point.y);
+
             return point;
         }
 
