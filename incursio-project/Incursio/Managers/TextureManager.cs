@@ -53,6 +53,7 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.heavyInfantryNorth = Content.Load<Texture2D>(@"HeavyInfantryNorth");
             TextureBank.EntityTextures.heavyInfantrySouth = Content.Load<Texture2D>(@"HeavyInfantrySouth");
             TextureBank.EntityTextures.heavyInfantryMovingEast = Content.Load<Texture2D>(@"HeavyInfantry_Moving_Right");
+            TextureBank.EntityTextures.heavyInfantryAttackingEast = Content.Load<Texture2D>(@"HeavyInfantry_Attacking_East");
 
             TextureBank.EntityTextures.archerEast = Content.Load<Texture2D>(@"archer_right");
             TextureBank.EntityTextures.archerWest = Content.Load<Texture2D>(@"archer_left");
