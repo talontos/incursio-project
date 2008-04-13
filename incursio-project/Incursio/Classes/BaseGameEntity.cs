@@ -159,6 +159,14 @@ namespace Incursio.Classes
                 (occupied ? (byte)0 : (byte)1));
         }
 
+        public virtual void setIdle(){
+
+        }
+
+        public virtual void setAttacking(){
+
+        }
+
         #region Getters/Setters
         public virtual void setType(State.EntityName name)
         {

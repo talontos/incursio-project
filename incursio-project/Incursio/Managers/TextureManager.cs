@@ -117,6 +117,8 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.exitGameButton = Content.Load<Texture2D>(@"exitGameButton");
             TextureBank.InterfaceTextures.exitGameButtonPressed = Content.Load<Texture2D>(@"exitGameButtonPressed");
 
+            TextureBank.InterfaceTextures.selectionRectangle = Content.Load<Texture2D>(@"DragSelection");
+
             //Load terrain textures
             TextureBank.MapTiles.grass = Content.Load<Texture2D>(@"grass");
         }

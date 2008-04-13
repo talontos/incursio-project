@@ -62,12 +62,17 @@ namespace Incursio.Managers
             //IF NO UNITS ARE IN THE SELECTED AREA,
             //  WE SHOULD PROBABLY KEEP OUR CURRENT SELECTION
             List<BaseGameEntity> unitsInArea = new List<BaseGameEntity>();
+            bool selectingStructures = true;
 
             entityBank.ForEach(delegate(BaseGameEntity e)
             {
                 if( area.Contains(e.getLocation().toPoint()) ){
                     if(e.getPlayer() == State.PlayerId.HUMAN){
-                        unitsInArea.Add(e);
+                        if( !(e is Structure) )
+                            selectingStructures = false;
+
+                        if( selectingStructures || !(e is Structure) )
+                            unitsInArea.Add(e);
                     }
                 }
             });
@@ -162,7 +167,7 @@ namespace Incursio.Managers
             entityBank.ForEach(delegate(BaseGameEntity e)
             {
 
-                if (e.visible && (((e is Unit) && (e as Unit).getCurrentState() != State.UnitState.Dead && (e as Unit).getCurrentState() != State.UnitState.Buried) || ((e is Structure) && (e as Structure).getCurrentState() != State.StructureState.Destroyed)))
+                if (e.visible && !e.isDead() ) //(((e is Unit) && (e as Unit).getCurrentState() != State.UnitState.Dead && (e as Unit).getCurrentState() != State.UnitState.Buried) || ((e is Structure) && (e as Structure).getCurrentState() != State.StructureState.Destroyed)))
                 { //only check visible ones so we don't waste time
 
                     //get selection rectangle for e

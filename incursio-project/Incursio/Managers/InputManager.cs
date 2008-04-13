@@ -227,7 +227,7 @@ namespace Incursio.Managers
             if (mouseDragStart.X < 0 || mouseDragEnd.X < 0)
                 return;
 
-            spriteBatch.Draw(TextureBank.InterfaceTextures.exitGameToMenuButton, 
+            spriteBatch.Draw(TextureBank.InterfaceTextures.selectionRectangle, 
                     getVisibleSelectionRectangle(), 
                     Microsoft.Xna.Framework.Graphics.Color.Blue
             );

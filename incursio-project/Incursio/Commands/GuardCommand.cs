@@ -17,6 +17,10 @@ namespace Incursio.Commands
 
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
+            return;
+
+            //TODO: REIMPLEMENT
+
             //look for enemy units within subject's sightRange
             List<BaseGameEntity> enemiesInRange = EntityManager.getInstance().getEntitiesInRange(ref subject, subject.sightRange);
 

@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Incursio.Utils.PathFinding;
 using Incursio.Utils;
+using Incursio.Managers;
 
 namespace Incursio.Classes.PathFinding
 {
@@ -285,8 +286,21 @@ namespace Incursio.Classes.PathFinding
                             //Trought not used here, this provide moving direction (in radions)
                             direction = (float)Math.Atan2(newY - positionCurrent.Y, newX - positionCurrent.X);
 
-                            positionCurrent.X = newX;
-                            positionCurrent.Y = newY;
+                            Point curCell = new Point( (int)positionCurrent.X, (int)positionCurrent.Y);
+                            Point newCell = new Point( (int)newX, (int)newY);
+
+                            //TODO: CHECK FOR NON-STATIC OBJECTS IN THE WAY
+                            if( MapManager.getInstance().currentMap.getCellOccupancy( (int)newCell.X, (int)newCell.Y) == (byte)0 
+                                && curCell != newCell)
+                            {
+                                //new space is occupied; wait for it to be free?
+
+                            }
+                            else{
+
+                                positionCurrent.X = newX;
+                                positionCurrent.Y = newY;
+                            }
                         }
                         else
                         {

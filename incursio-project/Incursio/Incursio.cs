@@ -68,7 +68,12 @@ namespace Incursio
         int frameTimer = 0;
         const int FRAME_LENGTH = 8;
 
+        //analyze FPS
+        string frameString;
+
         public Incursio(){
+
+            //this.IsFixedTimeStep = false;
 
             Incursio.instance = this;
 
@@ -79,7 +84,7 @@ namespace Incursio
             Content.RootDirectory = "Content";
 
             currentMap = MapManager.getInstance().setCurrentLevel(State.CampaignLevel.THREE);
-            MapManager.getInstance().initializeCurrentMap();
+            //MapManager.getInstance().initializeCurrentMap();
 
             playerManager = PlayerManager.getInstance();
             messageManager = MessageManager.getInstance();
@@ -181,6 +186,9 @@ namespace Incursio
             this.checkState(gameTime);
 
             base.Update(gameTime);
+
+            frameString = frameTime + " FPS";
+            Console.Out.Write(frameString);
         }
 
         /// <summary>

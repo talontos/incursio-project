@@ -355,8 +355,10 @@ namespace Incursio.Classes
                     target.takeDamage(this.damage, this);
 
                     //if we just killed the thing
-                    if (target is Unit && (target as Unit).getCurrentState() == State.UnitState.Dead ||
-                       target is Structure && (target as Structure).getCurrentState() == State.StructureState.Destroyed)
+
+                    //if (target is Unit && (target as Unit).getCurrentState() == State.UnitState.Dead ||
+                    //   target is Structure && (target as Structure).getCurrentState() == State.StructureState.Destroyed)
+                    if(target.isDead())
                     {
                         //TODO:
                         //add AI for attacking more enemies!
@@ -443,6 +445,16 @@ namespace Incursio.Classes
         public override void setDestination(Coordinate dest)
         {
             this.destination = dest;
+        }
+
+        public override void setAttacking()
+        {
+            this.currentState = State.UnitState.Attacking;
+        }
+
+        public override void setIdle()
+        {
+            this.currentState = State.UnitState.Idle;
         }
     }
 }
