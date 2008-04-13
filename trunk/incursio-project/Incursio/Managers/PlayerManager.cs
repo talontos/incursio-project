@@ -36,7 +36,7 @@ namespace Incursio.Managers
 
         public void initializePlayerManager(){
             //TODO: remove separate players; use list
-            this.computerPlayer = new AIPlayer(new SimpleAI());
+            this.computerPlayer = new AIPlayer(new BaseAI());
             this.computerPlayer.id = State.PlayerId.COMPUTER;
 
             this.humanPlayer = new Player();

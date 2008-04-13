@@ -69,8 +69,7 @@ namespace Incursio.Commands
                         start = null;
                         
                         //SET DESTINATION TO SOMETHING CLOSER
-                        
-                        this.destination.x += 1;
+                        //this.destination.x += 1;
 
                         return;
                         ///////OR//////

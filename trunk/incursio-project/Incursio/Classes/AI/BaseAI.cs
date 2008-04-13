@@ -26,7 +26,7 @@ namespace Incursio.Classes
         /// <param name="gameTime"></param>
         /// <param name="player"></param>
         public virtual void Update(Microsoft.Xna.Framework.GameTime gameTime, AIPlayer player){
-            /*
+            
             player.events.ForEach(delegate(GameEvent e)
             {
                 if(e.type == State.EventType.UNDER_ATTACK){
@@ -35,7 +35,9 @@ namespace Incursio.Classes
                     manager.issueCommand(State.Command.MOVE, false, manager.getLivePlayerUnits(player.id), e.location);
                 }
             });
-            */
+
+            player.events = new List<GameEvent>();
+            
         }
     }
 }
