@@ -30,7 +30,11 @@ namespace Incursio.Managers
             public static Texture2D heavyInfantrySouth;
             public static Texture2D heavyInfantryNorth;
             public static Texture2D heavyInfantryMovingEast;
+            public static Texture2D heavyInfantryMovingWest;
+            public static Texture2D heavyInfantryMovingSouth;
+            public static Texture2D heavyInfantryMovingNorth;
             public static Texture2D heavyInfantryAttackingEast;
+            public static Texture2D heavyInfantryAttackingWest;
 
             public static Texture2D archerEast;
             public static Texture2D archerWest;

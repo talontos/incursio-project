@@ -95,12 +95,12 @@ namespace Incursio.Classes
                 //int newX = location.x;
                 //int newY = location.y;
 
-                if (xDirection > xMinimumThreshold)
+                if (xDirection > xMinimumThreshold && (xDirection / yDirection) >= 1)
                 {
                     //newX += speed;
                     this.directionState = State.Direction.East;
                 }
-                else if (xDirection < -xMinimumThreshold)
+                else if (xDirection < -xMinimumThreshold && (xDirection / yDirection) <= -1)
                 {
                     //newX += -1 * speed;
                     this.directionState = State.Direction.West;
@@ -110,12 +110,12 @@ namespace Incursio.Classes
                     //newX = destination.x;
                 }
 
-                if (yDirection > yMinimumThreshold)
+                if (yDirection > yMinimumThreshold && ((Math.Abs(xDirection)) / yDirection) < 1)
                 {
                     //newY += speed;
                     this.directionState = State.Direction.South;
                 }
-                else if (yDirection < -yMinimumThreshold)
+                else if (yDirection < -yMinimumThreshold && (xDirection / yDirection) < 1)
                 {
                     //newY += -1 * speed;
                     this.directionState = State.Direction.North;
