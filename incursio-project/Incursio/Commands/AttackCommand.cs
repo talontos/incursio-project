@@ -35,10 +35,11 @@ namespace Incursio.Commands
                 //if subject is in attack range of target, set attack state & notify manager
                 bool result = false;
 
-                //if(subject is Unit){
+                if(subject is Unit){
                     subject.setTarget(target);
                     result = subject.attackTarget();
-                //}
+                    (subject as Unit).setCurrentState(State.UnitState.Attacking);
+                }
                 //else{
                     //TODO: REFACTOR CLASS FOR GUARD TOWER
                     //result = (subject as GuardTowerStructure).attackTarget();

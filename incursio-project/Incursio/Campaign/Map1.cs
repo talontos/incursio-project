@@ -13,7 +13,7 @@ namespace Incursio.Campaign
         public Map1()
             : base()
         {
-            this.level = State.CampaignLevel.ONE;
+            this.level = State.CampaignLevel.THREE;
             //this.setMapDimensions(2048, 1024, 1024, 768);
             this.setMapDimensions(2048, 2048, 1024, 768);
         }
@@ -32,8 +32,14 @@ namespace Incursio.Campaign
             CampStructure playerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", State.PlayerId.HUMAN);
             CampStructure computerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", State.PlayerId.COMPUTER);
 
+            LightInfantryUnit infUnit = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
+            HeavyInfantryUnit heavyUnit = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", State.PlayerId.HUMAN);
+
             ControlPoint cp1 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
 
+
+            infUnit.setLocation(new Coordinate(700, 100));
+            heavyUnit.setLocation(new Coordinate(300, 100));
             playerCamp.setLocation(new Coordinate(100, 400));
             computerCamp.setLocation(new Coordinate(1700, 1700));
 

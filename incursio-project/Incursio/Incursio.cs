@@ -78,7 +78,7 @@ namespace Incursio
             keysPressed = new Keys[15];
             Content.RootDirectory = "Content";
 
-            currentMap = MapManager.getInstance().setCurrentLevel(State.CampaignLevel.ONE);
+            currentMap = MapManager.getInstance().setCurrentLevel(State.CampaignLevel.THREE);
             MapManager.getInstance().initializeCurrentMap();
 
             playerManager = PlayerManager.getInstance();
