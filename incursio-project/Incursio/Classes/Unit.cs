@@ -7,16 +7,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Incursio.Managers;
 using Incursio.Commands;
+using Incursio.Classes.PathFinding;
 
 namespace Incursio.Classes
 {
-    public class Unit : BaseGameEntity
+    public class Unit : MovableObject
     {
         protected const int TIME_DEAD_UNTIL_DESPAWN = 5;
 
         protected int damage = 0;
         protected int armor = 0;
-        protected int speed = 0;
+        //protected int speed = 0;
         protected int attackSpeed = 0;
         protected int updateAttackTimer = 0;
         protected int attackRange = 0;
@@ -62,58 +63,68 @@ namespace Incursio.Classes
         }
 
         //TODO: We need to somehow take into account the game time to allow for smoother movement
-        public override bool updateMovement()
+        public override bool updateMovement(float ElapsedTime)
         {
+
+            this.updateOccupancy(false);
+
+            //move
+            bool retVal = base.updateMovement(ElapsedTime);
+
+            this.updateOccupancy(true);
+
+            //MOVED TO BOTTOM
+            //return retVal;
+            
+            
             float xMinimumThreshold = 0.05F;
             float yMinimumThreshold = 0.05F;
 
             //get the direction to the target
             Vector2 direction = new Vector2(destination.x - location.x, destination.y - location.y);
 
-            if (direction.Length() < speed)
+            if (retVal) //movement finished
             {
-                destination = location;
                 currentState = State.UnitState.Idle;
-                return true;
             }
             else
             {
                 float xDirection = Vector2.Normalize(direction).X;
                 float yDirection = Vector2.Normalize(direction).Y;
 
-                int newX = location.x;
-                int newY = location.y;
+                //int newX = location.x;
+                //int newY = location.y;
 
                 if (xDirection > xMinimumThreshold)
                 {
-                    newX += speed;
+                    //newX += speed;
                     this.directionState = State.Direction.East;
                 }
                 else if (xDirection < -xMinimumThreshold)
                 {
-                    newX += -1 * speed;
+                    //newX += -1 * speed;
                     this.directionState = State.Direction.West;
                 }
                 else
                 {
-                    newX = destination.x;
+                    //newX = destination.x;
                 }
 
                 if (yDirection > yMinimumThreshold)
                 {
-                    newY += speed;
+                    //newY += speed;
                     this.directionState = State.Direction.South;
                 }
                 else if (yDirection < -yMinimumThreshold)
                 {
-                    newY += -1 * speed;
+                    //newY += -1 * speed;
                     this.directionState = State.Direction.North;
                 }
                 else
                 {
-                    newY = destination.y;
+                    //newY = destination.y;
                 }
-
+                /*
                 if(!Incursio.getInstance().currentMap.requestMove(location.x, location.y, newX, newY)){
                     //new point is occupied; we have to turn!
                     this.currentState = State.UnitState.Idle;
@@ -123,17 +134,21 @@ namespace Incursio.Classes
                 }
                 else{
                     //open up our old space
-                    MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, true);
+                    MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, 1);
 
                     //move
                     location = new Coordinate(newX, newY);
 
                     //set occupancy
-                    MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, false);
+                    MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, 0);
 
                     return false;
                 }
+                */
             }
+
+            return retVal;
+            
         }
 
         /// <summary>
@@ -217,10 +232,10 @@ namespace Incursio.Classes
         public override void setLocation(Coordinate coords)
         {
             //empty our current location
-            Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, false);
+            Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, 0);
             base.setLocation(coords);
             //occupy new location
-            Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, true);
+            Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, 1);
         }
 
         //since units can take damage and then give damage, we'll set up a function just for them
@@ -346,6 +361,11 @@ namespace Incursio.Classes
                         //TODO:
                         //add AI for attacking more enemies!
                         //but for now:
+
+                        //NOTE: killedTarget needs to be performed BEFORE
+                        //  target is set to null so that we know WHAT we killed
+                        this.killedTarget();
+
                         target = null;
                         destination = null;
                         currentState = State.UnitState.Idle;
@@ -380,7 +400,7 @@ namespace Incursio.Classes
             //  But do we need to remove them?
             if (deadTimer == TIME_DEAD_UNTIL_DESPAWN * 60)
             {
-                map.setSingleCellOccupancy(location.x, location.y, true);
+                map.setSingleCellOccupancy(location.x, location.y, 1);
                 EntityManager.getInstance().removeEntity(keyId);
                 deadTimer++;
             }

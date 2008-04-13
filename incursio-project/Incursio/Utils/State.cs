@@ -101,6 +101,8 @@ namespace Incursio
 
         public enum EntityName
         {
+            NONE,
+
             LightInfantry,
 
             HeavyInfantry,
@@ -144,6 +146,8 @@ namespace Incursio
         public enum EventType{
             UNDER_ATTACK,
             CREATION_COMPLETE,
+            CANT_MOVE_THERE,
+            NOT_ENOUGH_RESOURCES,
         }
     }
 }

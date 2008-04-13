@@ -4,6 +4,7 @@ using System.Text;
 
 using Incursio.Classes;
 using Incursio.Commands;
+using Microsoft.Xna.Framework;
 
 namespace Incursio.Commands
 {
@@ -22,7 +23,7 @@ namespace Incursio.Commands
             this.moveCommand.destination = this.followTarget.getLocation();
         }
 
-        public override void execute(ref BaseGameEntity subject)
+        public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
 
             //if target is dead, set finishedExecution = true
@@ -32,7 +33,7 @@ namespace Incursio.Commands
             }
             else{
                 this.updateMoveCommand();
-                moveCommand.execute(ref subject);
+                moveCommand.execute(gameTime, ref subject);
             }
 
         }

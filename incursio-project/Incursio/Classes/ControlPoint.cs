@@ -30,7 +30,8 @@ namespace Incursio.Classes
             this.setType(State.EntityName.ControlPoint);
             this.map = Incursio.getInstance().currentMap;
 
-            this.isConstructor = true;
+            //TEMP - mitch
+            //this.isConstructor = true;
         }
 
         public void startCap(HeavyInfantryUnit capturingHero)

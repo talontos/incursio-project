@@ -15,7 +15,7 @@ namespace Incursio.Classes
           //TODO: set LightInfantry Values
           this.armor = 1;
           this.damage = 25;
-          this.speed = 3;
+          this.moveSpeed = 150.0f;
           this.sightRange = 10;
           this.attackSpeed = 2;
           this.attackRange = 1;

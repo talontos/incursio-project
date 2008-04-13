@@ -29,6 +29,7 @@ namespace Incursio.Managers
             public static Texture2D heavyInfantryWest;
             public static Texture2D heavyInfantrySouth;
             public static Texture2D heavyInfantryNorth;
+            public static Texture2D heavyInfantryMovingEast;
 
             public static Texture2D archerEast;
             public static Texture2D archerWest;
@@ -62,7 +63,7 @@ namespace Incursio.Managers
         }
 
         public static class MapTiles{
-            public static Texture2D grass1;
+            public static Texture2D grass;
             //...
 
             public static Texture2D shore1;
@@ -87,6 +88,19 @@ namespace Incursio.Managers
             public static Texture2D resourceDisplay;
             public static Texture2D moneyIcon;
 
+            public static Texture2D gameMenuButton_pressed;
+            public static Texture2D gameMenuButton_not_pressed;
+            public static Texture2D resumeGameButton_pressed;
+            public static Texture2D resumeGameButton_not_pressed;
+            public static Texture2D exitGameToMenuButton_pressed;
+            public static Texture2D exitGameToMenuButton_not_pressed;
+            public static Texture2D newGameButton_pressed;
+            public static Texture2D newGameButton_not_pressed;
+            public static Texture2D exitGameButton_pressed;
+            public static Texture2D exitGameButton_not_pressed;
+            /////////////////////////////
+
+            //Portraits/Icons////////////
             public static Texture2D gameMenuButton;
             public static Texture2D gameMenuButtonPressed;
             public static Texture2D resumeGameButton;
@@ -97,8 +111,6 @@ namespace Incursio.Managers
             public static Texture2D newGameButtonPressed;
             public static Texture2D exitGameButton;
             public static Texture2D exitGameButtonPressed;
-
-
 
             public static Texture2D archerPortrait;
             public static Texture2D archerIcon;

@@ -88,7 +88,7 @@ namespace Incursio.Classes
 
         }
 
-        public bool isBuilding(){
+        public virtual bool isBuilding(){
             return this.buildProject != null;
         }
 

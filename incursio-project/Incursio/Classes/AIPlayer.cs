@@ -22,14 +22,19 @@ namespace Incursio.Classes
         /// Constructs an AI-Controlled player using the given AI object
         /// </summary>
         /// <param name="ai">The *instantiated* AI to be used</param>
-        public AIPlayer(BaseAI ai){
-            intelligence = ai;
+        public AIPlayer(BaseAI AI) : base(){
+            intelligence = AI;
+        }
+
+        public override void dispatchEvent(global::Incursio.Utils.GameEvent e)
+        {
+            this.events.Add(e);
         }
 
         public override void update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            //base will update general player-stats
-            base.update(gameTime);
+            //base currently only processes messages, which we no longer need to do here
+            //base.update(gameTime);
 
             //this update will perform AI actions for this player
             intelligence.Update(gameTime, this);

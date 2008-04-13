@@ -5,6 +5,7 @@ using System.Text;
 using Incursio.Commands;
 using Incursio.Managers;
 using Incursio.Classes;
+using Microsoft.Xna.Framework;
 
 namespace Incursio.Commands
 {
@@ -14,7 +15,7 @@ namespace Incursio.Commands
             this.type = State.Command.GUARD;
         }
 
-        public override void execute(ref BaseGameEntity subject)
+        public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
             //look for enemy units within subject's sightRange
             List<BaseGameEntity> enemiesInRange = EntityManager.getInstance().getEntitiesInRange(ref subject, subject.sightRange);

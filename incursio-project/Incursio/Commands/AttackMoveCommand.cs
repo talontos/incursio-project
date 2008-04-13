@@ -5,6 +5,7 @@ using System.Text;
 using Incursio.Classes;
 using Incursio.Utils;
 using Incursio.Commands;
+using Microsoft.Xna.Framework;
 
 namespace Incursio.Commands
 {
@@ -22,10 +23,10 @@ namespace Incursio.Commands
             guard = new GuardCommand();
         }
 
-        public override void execute(ref BaseGameEntity subject)
+        public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
-            move.execute(ref subject);
-            guard.execute(ref subject);
+            move.execute(gameTime, ref subject);
+            guard.execute(gameTime, ref subject);
 
             this.finishedExecution = move.finishedExecution || guard.finishedExecution;
         }

@@ -9,21 +9,25 @@ using Microsoft.Xna.Framework.Input;
 using Incursio.Interface;
 
 using Incursio.Utils;
+using Incursio.Managers;
 
 namespace Incursio.Classes
 {
     public class MapBase
     {
+        public static bool DRAW_OCCUPANCY_GRID = true;
         //member variables
-        protected int width;
-        protected int height;
+
+        //width/height, in cells
+        public int width;
+        public int height;
+
         protected BaseMapEntity[,] tileGrid;
 
+        public byte[,] occupancyGrid;
 
-        protected bool[,] occupancyGrid;
-
-        public const int TILE_WIDTH = 32;
-        public const int TILE_HEIGHT = 32;
+        public int TILE_WIDTH  = MapManager.TILE_WIDTH;
+        public int TILE_HEIGHT = MapManager.TILE_HEIGHT;
 
         protected int minViewableX;
         protected int maxViewableX;
@@ -42,6 +46,8 @@ namespace Incursio.Classes
             this.maxViewableX = 0;
             this.maxViewableY = 0;
             this.cameraMovePause = 0;
+
+            this.occupancyGrid = new byte[0, 0];
         }
 
         public MapBase(int width, int height, int screenWidth, int screenHeight)
@@ -49,7 +55,7 @@ namespace Incursio.Classes
             this.width = width / TILE_WIDTH;
             this.height = height / TILE_HEIGHT;
             this.tileGrid = new BaseMapEntity[this.width, this.height];
-            this.occupancyGrid = new bool[this.width, this.height];
+            this.occupancyGrid = new byte[this.width, this.height];
             this.minViewableX = 0;
             this.minViewableY = 0;
             this.maxViewableX = screenWidth / TILE_WIDTH;
@@ -57,11 +63,11 @@ namespace Incursio.Classes
             this.cameraMovePause = 0;
 
             //initialize occupancyGrid
-            for (int j = 0; j < this.height; j++)
+            for (int x = 0; x < this.height; x++)
             {
-                for (int i = 0; i < this.width; i++)
+                for (int y = 0; y < this.width; y++)
                 {
-                    occupancyGrid[i, j] = true;
+                    occupancyGrid[x, y] = 1;
                 }
             }
         }
@@ -71,7 +77,7 @@ namespace Incursio.Classes
             this.width = width / TILE_WIDTH;
             this.height = height / TILE_HEIGHT;
             this.tileGrid = new BaseMapEntity[this.width, this.height];
-            this.occupancyGrid = new bool[this.width, this.height];
+            this.occupancyGrid = new byte[this.width, this.height];
             this.minViewableX = 0;
             this.minViewableY = 0;
             this.maxViewableX = screenWidth / TILE_WIDTH;
@@ -83,7 +89,7 @@ namespace Incursio.Classes
             {
                 for (int i = 0; i < this.width; i++)
                 {
-                    occupancyGrid[i, j] = true;
+                    occupancyGrid[i, j] = 1;
                 }
             }
         }
@@ -93,7 +99,7 @@ namespace Incursio.Classes
         }
 
         public virtual void initializeMap(){
-
+            this.loadTerrain();
         }
 
         public void update(Keys[] keysPressed, int screenWidth, int screenHeight)
@@ -133,12 +139,21 @@ namespace Incursio.Classes
             int screenX = 0;
             int screenY = 0;
 
+            Color mask = Color.White;
+
             for (int j = minViewableY; j < maxViewableY; j++)
             {
                 screenX = 0;
                 for (int i = minViewableX; i < maxViewableX; i++)
                 {
-                    spriteBatch.Draw(tileGrid[i, j].texture, new Rectangle(screenX * TILE_WIDTH, screenY * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT), Color.White);
+                    if(DRAW_OCCUPANCY_GRID){
+                        if (this.occupancyGrid[i, j] == (byte)0)
+                            mask = Color.CornflowerBlue;
+                        else
+                            mask = Color.White;
+                    }
+
+                    spriteBatch.Draw(tileGrid[i, j].texture, new Rectangle(screenX * TILE_WIDTH, screenY * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT), mask);
                     screenX++;
                 }
                 screenY++;
@@ -151,7 +166,7 @@ namespace Incursio.Classes
             if (xPos >= 0 && xPos < this.width && yPos >= 0 && yPos < this.height)
             {
                 this.tileGrid[xPos, yPos] = entity;
-                this.occupancyGrid[xPos, yPos] = entity.passable;
+                this.occupancyGrid[xPos, yPos] = entity.passable ? (byte)1 : (byte)0;
             }
         }
 
@@ -212,17 +227,17 @@ namespace Incursio.Classes
                 return true;
             }
             else{
-                return this.occupancyGrid[c, d];
+                return this.occupancyGrid[c, d] == 1;
             }
         }
 
-        public bool getCellOccupancy(int pixX, int pixY){
+        public byte getCellOccupancy(int pixX, int pixY){
             int x, y;
             this.translatePixelToMapCell(pixX, pixY, out x, out y);
             return this.occupancyGrid[x, y];
         }
         
-        public void setSingleCellOccupancy(int pixX, int pixY, bool occupied){
+        public void setSingleCellOccupancy(int pixX, int pixY, byte occupied){
             int x, y;
             this.translatePixelToMapCell(pixX, pixY, out x, out y);
             this.occupancyGrid[x, y] = occupied;
@@ -241,6 +256,11 @@ namespace Incursio.Classes
 
         }
 
+        private void translateMapCellToPixel(int indexX, int indexY, out int pixX, out int pixY){
+            pixX = indexX * TILE_WIDTH;
+            pixY = indexY * TILE_HEIGHT;
+        }
+
         private void translatePixelToMapCell(int pixX, int pixY, out int indexX, out int indexY){
             indexX = pixX / TILE_WIDTH;
             indexY = pixY / TILE_HEIGHT;
@@ -255,6 +275,58 @@ namespace Incursio.Classes
 
         public Vector2 translateClickToMapLocation(int x, int y){
             return new Vector2(x + minViewableX * TILE_WIDTH, y + minViewableY * TILE_HEIGHT);
+        }
+
+        public Point translateClickToMapLocation_point(int x, int y){
+            return new Point(x + minViewableX * TILE_WIDTH, y + minViewableY * TILE_HEIGHT);
+        }
+
+        public Coordinate getClosestPassableLocation(Coordinate origin, Coordinate point){
+            //translate pixel points
+            this.translatePixelToMapCell(point.x, point.y, out point.x, out point.y);
+            this.translatePixelToMapCell(origin.x, origin.y, out origin.x, out origin.y);
+
+            if(this.getCellOccupancy(point.x, point.y) == (byte)1){
+                //passable
+                this.translateMapCellToPixel(point.x, point.y, out point.x, out point.y);
+            }
+            else{
+                //NOT passable, find closest location to 'origin'
+                int distX = origin.x - point.x;
+                int distY = origin.y - point.y;
+                byte curPass = (byte)0;
+
+                if(distX < distY){
+                    //point is closer with respect to X
+                    while(curPass == (byte)0){
+                        if (distX < 0)
+                            point.x -= 1;
+                        else
+                            point.x += 1;
+
+                        if (point.x < 0 || point.x > this.width)
+                            return null;
+
+                        curPass = this.getCellOccupancy(point.x, point.y);
+                    }
+                }
+                else{
+                    while (curPass == (byte)0)
+                    {
+                        if (distY < 0)
+                            point.y -= 1;
+                        else
+                            point.y += 1;
+
+                        if (point.y < 0 || point.y > this.height)
+                            return null;
+
+                        curPass = this.getCellOccupancy(point.x, point.y);
+                    }
+                }
+            }
+
+            return point;
         }
 
         public int getTileHeight()
@@ -276,5 +348,18 @@ namespace Incursio.Classes
         {
             return minViewableY;
         }
+
+        public virtual void loadTerrain(){
+            //for now, do this
+            BaseMapEntity tex1 = new BaseMapEntity(TextureBank.MapTiles.grass);
+            for (int j = 0; j < this.height; j++)
+            {
+                for (int i = 0; i < this.width; i++)
+                {
+                    this.addMapEntity(tex1, i, j);
+                }
+            }
+        }
     }
+
 }

@@ -6,6 +6,7 @@ using Incursio.Classes;
 using Microsoft.Xna.Framework;
 
 using Incursio.Utils;
+using Incursio.Managers;
 
 namespace Incursio.Classes
 {
@@ -17,7 +18,7 @@ namespace Incursio.Classes
         public int ownedControlPoints = 0;
         public State.PlayerId id;
 
-        public List<GameEvent> events;
+        protected List<GameEvent> events;
 
 
         public Player(){
@@ -30,8 +31,19 @@ namespace Incursio.Classes
         }
 
         public virtual void update(GameTime gameTime){
-            //update player-specifics
-            //money
+
+            //Messages
+            this.events.ForEach(delegate(GameEvent e){
+                //TODO: PROCESS MESSAGES
+                //TODO: PLAY SOUNDS
+                MessageManager.getInstance().addMessage(e.stringMessage);
+            });
+            this.events = new List<GameEvent>();
+            
+        }
+
+        public virtual void dispatchEvent(GameEvent e){
+            this.events.Add(e);
         }
     }
 }

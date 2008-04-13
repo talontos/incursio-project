@@ -13,13 +13,18 @@ namespace Incursio.Classes
             //TODO: set Archer Values
             this.armor = 1;
             this.damage = 10;
-            this.speed = 3;
+            this.moveSpeed = 200.0f;
             this.attackSpeed = 3;
             this.sightRange = 12;
             this.attackRange = 10;
             this.setType(State.EntityName.Archer);
 
         }
+
+      public override void Update(Microsoft.Xna.Framework.GameTime gameTime, ref BaseGameEntity myRef)
+      {
+          base.Update(gameTime, ref myRef);
+      }
 
       public override string getTextureName()
       {

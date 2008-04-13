@@ -52,6 +52,7 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.heavyInfantryWest = Content.Load<Texture2D>(@"HeavyInfantryWest");
             TextureBank.EntityTextures.heavyInfantryNorth = Content.Load<Texture2D>(@"HeavyInfantryNorth");
             TextureBank.EntityTextures.heavyInfantrySouth = Content.Load<Texture2D>(@"HeavyInfantrySouth");
+            TextureBank.EntityTextures.heavyInfantryMovingEast = Content.Load<Texture2D>(@"HeavyInfantry_Moving_Right");
 
             TextureBank.EntityTextures.archerEast = Content.Load<Texture2D>(@"archer_right");
             TextureBank.EntityTextures.archerWest = Content.Load<Texture2D>(@"archer_left");
@@ -98,6 +99,8 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.heavyInfantryIcon = Content.Load<Texture2D>(@"HeavyInfantryIcon");
             TextureBank.InterfaceTextures.heavyInfantryPortrait = Content.Load<Texture2D>(@"HeavyInfantryPortrait");
 
+            // load paused game menu components
+
             TextureBank.InterfaceTextures.gameMenuButton = Content.Load<Texture2D>(@"gameMenuButton");
             TextureBank.InterfaceTextures.gameMenuButtonPressed = Content.Load<Texture2D>(@"gameMenuButtonPressed");
             TextureBank.InterfaceTextures.resumeGameButton = Content.Load<Texture2D>(@"resumeButton");
@@ -109,6 +112,8 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.exitGameButton = Content.Load<Texture2D>(@"exitGameButton");
             TextureBank.InterfaceTextures.exitGameButtonPressed = Content.Load<Texture2D>(@"exitGameButtonPressed");
 
+            //Load terrain textures
+            TextureBank.MapTiles.grass = Content.Load<Texture2D>(@"grass");
         }
 
 
