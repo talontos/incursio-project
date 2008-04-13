@@ -186,6 +186,7 @@ namespace Incursio.Managers
                         else if (e.getPlayer() == State.PlayerId.COMPUTER)
                         {
                             EntityManager.getInstance().issueCommand(State.Command.ATTACK, false, null, e);
+                            
                         }
                         else
                         {
@@ -337,6 +338,7 @@ namespace Incursio.Managers
                         }
                         else
                             command = new AttackCommand(args[0] as BaseGameEntity);
+                            (e as Unit).setCurrentState(State.UnitState.Attacking);
                         break;
 
                     ////////////////////////
