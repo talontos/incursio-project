@@ -629,6 +629,63 @@ namespace Incursio
                                     }
                                 }
                             }
+                            else if ((e as HeavyInfantryUnit).getDirection() == State.Direction.West)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryMovingWest,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryWest.Height * 0.80),
+                                    TextureBank.EntityTextures.heavyInfantryWest.Width, TextureBank.EntityTextures.heavyInfantryWest.Height),
+                                    new Rectangle(e.currentFrameX, e.currentFrameY, 25, 38), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX > 0)
+                                    {
+                                        e.currentFrameX = e.currentFrameX - 25;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = TextureBank.EntityTextures.heavyInfantryMovingWest.Width - TextureBank.EntityTextures.heavyInfantryWest.Width;
+                                    }
+                                }
+                            }
+                            else if ((e as HeavyInfantryUnit).getDirection() == State.Direction.South)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryMovingSouth,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantrySouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantrySouth.Height * 0.80),
+                                    TextureBank.EntityTextures.heavyInfantrySouth.Width, TextureBank.EntityTextures.heavyInfantrySouth.Height),
+                                    new Rectangle(e.currentFrameX, e.currentFrameY, 25, 38), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX < TextureBank.EntityTextures.heavyInfantryMovingSouth.Width - 50)
+                                    {
+                                        e.currentFrameX = e.currentFrameX + 25;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = 0;
+                                    }
+                                }
+                            }
+                            else if ((e as HeavyInfantryUnit).getDirection() == State.Direction.North)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryMovingNorth,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryNorth.Height * 0.80),
+                                    TextureBank.EntityTextures.heavyInfantryNorth.Width, TextureBank.EntityTextures.heavyInfantryNorth.Height),
+                                    new Rectangle(e.currentFrameX, e.currentFrameY, 25, 38), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX < TextureBank.EntityTextures.heavyInfantryMovingNorth.Width - 50)
+                                    {
+                                        e.currentFrameX = e.currentFrameX + 25;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = 0;
+                                    }
+                                }
+                            }
                         }
                         else if ((e as HeavyInfantryUnit).getCurrentState() == State.UnitState.UnderAttack)
                         {

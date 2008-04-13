@@ -485,7 +485,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Arial.xnb</Output>
-      <Time>2008-04-10T15:10:40.34375-04:00</Time>
+      <Time>2008-04-13T12:44:55.484375-04:00</Time>
     </Item>
     <Item>
       <Source>Infantry_Moving_Left.png</Source>
@@ -576,6 +576,69 @@
       <Options>None</Options>
       <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeavyInfantryPortrait.xnb</Output>
       <Time>2008-04-11T13:13:16.140625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Moving_Right.png</Source>
+      <Name>HeavyInfantry_Moving_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeavyInfantry_Moving_Right.xnb</Output>
+      <Time>2008-04-13T12:44:55.5-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Attacking_East.png</Source>
+      <Name>HeavyInfantry_Attacking_East</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeavyInfantry_Attacking_East.xnb</Output>
+      <Time>2008-04-13T12:59:15.546875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>DragSelection.png</Source>
+      <Name>DragSelection</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\DragSelection.xnb</Output>
+      <Time>2008-04-13T12:44:55.5-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Attacking_West.png</Source>
+      <Name>HeavyInfantry_Attacking_West</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeavyInfantry_Attacking_West.xnb</Output>
+      <Time>2008-04-13T12:59:56.078125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Moving_Left.png</Source>
+      <Name>HeavyInfantry_Moving_Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeavyInfantry_Moving_Left.xnb</Output>
+      <Time>2008-04-13T13:00:23.515625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Moving_Down.png</Source>
+      <Name>HeavyInfantry_Moving_Down</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeavyInfantry_Moving_Down.xnb</Output>
+      <Time>2008-04-13T13:51:25.140625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Moving_Up.png</Source>
+      <Name>HeavyInfantry_Moving_Up</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeavyInfantry_Moving_Up.xnb</Output>
+      <Time>2008-04-13T14:17:52.265625-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
