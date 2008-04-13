@@ -93,6 +93,8 @@ namespace Incursio.Managers
             public static Texture2D resourceDisplay;
             public static Texture2D moneyIcon;
 
+            public static Texture2D selectionRectangle;
+
             public static Texture2D gameMenuButton_pressed;
             public static Texture2D gameMenuButton_not_pressed;
             public static Texture2D resumeGameButton_pressed;

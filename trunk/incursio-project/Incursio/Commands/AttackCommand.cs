@@ -29,6 +29,7 @@ namespace Incursio.Commands
 
             if(this.target.getHealth() <= 0 && target.getType() != State.EntityName.ControlPoint){
                 this.finishedExecution = true;
+                subject.setIdle();
                 subject.issueAdditionalOrder(new GuardCommand());
             }
             else{
@@ -38,7 +39,7 @@ namespace Incursio.Commands
                 if(subject is Unit){
                     subject.setTarget(target);
                     result = subject.attackTarget();
-                    (subject as Unit).setCurrentState(State.UnitState.Attacking);
+                    subject.setAttacking();
                 }
                 //else{
                     //TODO: REFACTOR CLASS FOR GUARD TOWER

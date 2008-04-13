@@ -71,7 +71,7 @@ namespace Incursio.Commands
                         //SET DESTINATION TO SOMETHING CLOSER
                         //this.destination.x += 1;
 
-                        return;
+                        //return;
                         ///////OR//////
                         //issue CANT_MOVE_THERE GameEvent and don't worry about it
                     }

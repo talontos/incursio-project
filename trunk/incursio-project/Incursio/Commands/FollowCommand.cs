@@ -20,7 +20,8 @@ namespace Incursio.Commands
         }
 
         private void updateMoveCommand(){
-            this.moveCommand.destination = this.followTarget.getLocation();
+            //this.moveCommand.destination = this.followTarget.getLocation();
+            this.moveCommand = new MoveCommand(followTarget.getLocation());
         }
 
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
@@ -28,11 +29,13 @@ namespace Incursio.Commands
 
             //if target is dead, set finishedExecution = true
             //otherwise, move toward target
-            if (followTarget.getHealth() <= 0){
+            if (followTarget.isDead()){
                 this.finishedExecution = true;
             }
             else{
-                this.updateMoveCommand();
+                if(this.followTarget.location != this.moveCommand.destination)
+                    this.updateMoveCommand();
+
                 moveCommand.execute(gameTime, ref subject);
             }
 
