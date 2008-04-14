@@ -62,16 +62,17 @@ namespace Incursio.Managers
             //IF NO UNITS ARE IN THE SELECTED AREA,
             //  WE SHOULD PROBABLY KEEP OUR CURRENT SELECTION
             List<BaseGameEntity> unitsInArea = new List<BaseGameEntity>();
-            bool selectingStructures = true;
+            //bool selectingStructures = true;
 
             entityBank.ForEach(delegate(BaseGameEntity e)
             {
                 if( area.Contains(e.getLocation().toPoint()) ){
                     if(e.getPlayer() == State.PlayerId.HUMAN && !e.isDead()){
-                        if( !(e is Structure) )
-                            selectingStructures = false;
+                        //if( !(e is Structure) )
+                        //    selectingStructures = false;
 
-                        if( selectingStructures || !(e is Structure) )
+                        //if( selectingStructures || !(e is Structure) )
+                        if( !(e is Structure) )
                             unitsInArea.Add(e);
                     }
                 }
@@ -397,10 +398,13 @@ namespace Incursio.Managers
             List<int> ids = MapManager.getInstance().currentMap.getEntitiesInRange(hunter.location, cellSightRange);
             List<BaseGameEntity> enemies = new List<BaseGameEntity>();
             State.PlayerId hOwner = hunter.owner;
+            BaseGameEntity e;
 
             ids.ForEach(delegate(int key)
             {
-                enemies.Add(this.getEntity(key));
+                e = this.getEntity(key);
+                if (e.owner != hOwner)
+                    enemies.Add(e);
             });
 
             return enemies;

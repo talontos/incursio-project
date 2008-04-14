@@ -36,6 +36,8 @@ namespace Incursio.Campaign
             HeavyInfantryUnit heavyUnit = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", State.PlayerId.HUMAN);
 
             ControlPoint cp1 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
+            ControlPoint cp2 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
+            ControlPoint cp3 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
 
 
             infUnit.setLocation(new Coordinate(700, 100));
@@ -44,6 +46,8 @@ namespace Incursio.Campaign
             computerCamp.setLocation(new Coordinate(1700, 1700));
 
             cp1.setLocation(new Coordinate(1000,1000));
+            cp2.setLocation(new Coordinate(300, 1700));
+            cp3.setLocation(new Coordinate(1700, 300));
 
             playerCamp.setHealth(350);
             computerCamp.setHealth(350);

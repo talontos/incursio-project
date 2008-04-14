@@ -287,8 +287,8 @@ namespace Incursio.Classes
         }
 
         private void translateMapCellToPixel(int indexX, int indexY, out int pixX, out int pixY){
-            pixX = indexX * TILE_WIDTH;
-            pixY = indexY * TILE_HEIGHT;
+            pixX = (indexX * TILE_WIDTH + (TILE_WIDTH / 2));
+            pixY = (indexY * TILE_HEIGHT + (TILE_HEIGHT / 2));
         }
 
         private void translatePixelToMapCell(int pixX, int pixY, out int indexX, out int indexY){
@@ -449,11 +449,13 @@ namespace Incursio.Classes
             //TODO: Should we look in a square, or circle-ish shape?????
             //Currently square
             List<int> entities = new List<int>();
+            Point cellLocation = new Point();
+            translatePixelToMapCell(location.x, location.y, out cellLocation.X, out cellLocation.Y);
 
-            int xStart = Math.Max(0, location.x - sightRange);
-            int xEnd = Math.Min(location.x + sightRange, this.width);
-            int yStart = Math.Max(0, location.y - sightRange);
-            int yEnd = Math.Min(location.y + sightRange, this.height);
+            int xStart = Math.Max(0, cellLocation.X - sightRange);
+            int xEnd = Math.Min(cellLocation.X + sightRange, this.width);
+            int yStart = Math.Max(0, cellLocation.Y - sightRange);
+            int yEnd = Math.Min(cellLocation.Y + sightRange, this.height);
 
             for(int y = yStart; y <= yEnd; y++){
                 for(int x = xStart; x <= xEnd; x++){
