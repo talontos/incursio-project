@@ -24,7 +24,7 @@ namespace Incursio.Classes
         protected int deadTimer = 0;
         public bool playedDeath = false;
         protected State.UnitState currentState = State.UnitState.Idle;
-        protected State.Direction directionState = State.Direction.Still;
+        protected State.Direction directionState = State.Direction.South;
         protected bool isClose = false;
 
         private Coordinate destination = null;
@@ -253,6 +253,8 @@ namespace Incursio.Classes
             {
                 this.health = 0;
                 currentState = State.UnitState.Dead;
+                this.currentFrameXAttackDeath = 0;
+                this.currentFrameYAttackDeath = 0;
             }
             else
             {
@@ -264,6 +266,16 @@ namespace Incursio.Classes
                 if(currentState != State.UnitState.Attacking){
                     this.issueImmediateOrder(new AttackCommand(attacker));
                     this.setAttacking();
+
+                    if (attacker.getLocation().x < this.location.x)
+                    {
+                        this.directionState = State.Direction.West;
+                    }
+                    else if (attacker.getLocation().x > this.location.x)
+                    {
+                        this.directionState = State.Direction.East;
+                    }
+
                     PlayerManager.getInstance().notifyPlayer(
                         this.owner,
                         new GameEvent(State.EventType.UNDER_ATTACK, /*SOUND,*/ "Unit under attack", this.location)
@@ -357,6 +369,15 @@ namespace Incursio.Classes
                     {
                         target.takeDamage(this.damage);
                     }*/
+
+                    if (target.getLocation().x > this.location.x)
+                    {
+                        this.directionState = State.Direction.East;
+                    }
+                    else if (target.getLocation().x < this.location.x)
+                    {
+                        this.directionState = State.Direction.West;
+                    }
 
                     target.takeDamage(this.damage, this);
 

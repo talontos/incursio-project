@@ -602,7 +602,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\DragSelection.xnb</Output>
-      <Time>2008-04-13T12:44:55.5-04:00</Time>
+      <Time>2008-04-13T23:40:31.546875-04:00</Time>
     </Item>
     <Item>
       <Source>HeavyInfantry_Attacking_West.png</Source>
@@ -611,7 +611,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeavyInfantry_Attacking_West.xnb</Output>
-      <Time>2008-04-13T12:59:56.078125-04:00</Time>
+      <Time>2008-04-14T00:05:54.546875-04:00</Time>
     </Item>
     <Item>
       <Source>HeavyInfantry_Moving_Left.png</Source>
@@ -639,6 +639,33 @@
       <Options>None</Options>
       <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeavyInfantry_Moving_Up.xnb</Output>
       <Time>2008-04-13T14:17:52.265625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>GrassTile1.png</Source>
+      <Name>GrassTile1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\GrassTile1.xnb</Output>
+      <Time>2008-04-13T23:40:31.546875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Death.png</Source>
+      <Name>HeavyInfantry_Death</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeavyInfantry_Death.xnb</Output>
+      <Time>2008-04-13T23:40:31.53125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Death_Left.png</Source>
+      <Name>HeavyInfantry_Death_Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeavyInfantry_Death_Left.xnb</Output>
+      <Time>2008-04-13T23:54:14.796875-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -32,6 +32,7 @@ namespace Incursio.Classes
         public int currentFrameY = 0;       //for animation
         public int currentFrameXAttackDeath = 0;
         public int currentFrameYAttackDeath = 0;
+        public int attackFramePause = 0;
 
         public Rectangle boundingBox;
 
