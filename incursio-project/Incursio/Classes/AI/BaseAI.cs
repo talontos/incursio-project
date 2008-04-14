@@ -29,11 +29,11 @@ namespace Incursio.Classes
             
             player.events.ForEach(delegate(GameEvent e)
             {
-                if(e.type == State.EventType.UNDER_ATTACK){
+                /*if(e.type == State.EventType.UNDER_ATTACK){
                     //send troops to help?
                     EntityManager manager = EntityManager.getInstance();
                     manager.issueCommand(State.Command.MOVE, false, manager.getLivePlayerUnits(player.id), e.location);
-                }
+                }*/
             });
 
             player.events = new List<GameEvent>();
