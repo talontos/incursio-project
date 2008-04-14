@@ -452,10 +452,48 @@ namespace Incursio.Classes
             Point cellLocation = new Point();
             translatePixelToMapCell(location.x, location.y, out cellLocation.X, out cellLocation.Y);
 
-            int xStart = Math.Max(0, cellLocation.X - sightRange);
-            int xEnd = Math.Min(cellLocation.X + sightRange, this.width);
-            int yStart = Math.Max(0, cellLocation.Y - sightRange);
-            int yEnd = Math.Min(cellLocation.Y + sightRange, this.height);
+            int xStart = 0;
+            int yStart = 0;
+            int xEnd = 0;
+            int yEnd = 0;
+
+            if (cellLocation.X - sightRange < 0)
+            {
+                yStart = 0;
+            }
+            else
+            {
+                xStart = Math.Max(0, cellLocation.X - sightRange);
+            }
+
+            if (cellLocation.X + sightRange >= Incursio.getInstance().currentMap.width)
+            {
+                xStart = Incursio.getInstance().currentMap.width - 1;
+            }
+            else
+            {
+                xEnd = Math.Min(cellLocation.X + sightRange, this.width);
+            }
+
+            if (cellLocation.Y - sightRange < 0)
+            {
+                yStart = 0;
+            }
+            else
+            {
+                yStart = Math.Max(0, cellLocation.Y - sightRange);
+            }
+
+            if (cellLocation.Y + sightRange >= Incursio.getInstance().currentMap.height)
+            {
+                yEnd = Incursio.getInstance().currentMap.height - 1;
+            }
+            else
+            {
+                yEnd = Math.Min(cellLocation.Y + sightRange, this.height);
+            }
+            
+            
 
             for(int y = yStart; y <= yEnd; y++){
                 for(int x = xStart; x <= xEnd; x++){

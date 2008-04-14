@@ -106,6 +106,8 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.controlPointPortrait = Content.Load<Texture2D>(@"ControlPointIcon");
             TextureBank.InterfaceTextures.heavyInfantryIcon = Content.Load<Texture2D>(@"HeavyInfantryIcon");
             TextureBank.InterfaceTextures.heavyInfantryPortrait = Content.Load<Texture2D>(@"HeavyInfantryPortrait");
+            TextureBank.InterfaceTextures.heroIcon = Content.Load<Texture2D>(@"HeroIcon");
+            TextureBank.InterfaceTextures.heroPortrait = Content.Load<Texture2D>(@"HeroPortrait");
 
             // load paused game menu components
 

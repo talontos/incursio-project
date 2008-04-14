@@ -667,6 +667,24 @@
       <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeavyInfantry_Death_Left.xnb</Output>
       <Time>2008-04-13T23:54:14.796875-04:00</Time>
     </Item>
+    <Item>
+      <Source>HeroIcon.png</Source>
+      <Name>HeroIcon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeroIcon.xnb</Output>
+      <Time>2008-04-14T11:23:38.7866793-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeroPortrait.png</Source>
+      <Name>HeroPortrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeroPortrait.xnb</Output>
+      <Time>2008-04-14T11:16:12.1929293-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
