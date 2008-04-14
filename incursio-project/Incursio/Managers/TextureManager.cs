@@ -58,6 +58,9 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.heavyInfantryMovingNorth = Content.Load<Texture2D>(@"HeavyInfantry_Moving_Up");
             TextureBank.EntityTextures.heavyInfantryAttackingEast = Content.Load<Texture2D>(@"HeavyInfantry_Attacking_East");
             TextureBank.EntityTextures.heavyInfantryAttackingWest = Content.Load<Texture2D>(@"HeavyInfantry_Attacking_West");
+            TextureBank.EntityTextures.heavyInfantryDeath_East = Content.Load<Texture2D>(@"HeavyInfantry_Death");
+            TextureBank.EntityTextures.heavyInfantryDeath_West = Content.Load<Texture2D>(@"HeavyInfantry_Death_Left");
+
 
             TextureBank.EntityTextures.archerEast = Content.Load<Texture2D>(@"archer_right");
             TextureBank.EntityTextures.archerWest = Content.Load<Texture2D>(@"archer_left");
@@ -120,7 +123,7 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.selectionRectangle = Content.Load<Texture2D>(@"DragSelection");
 
             //Load terrain textures
-            TextureBank.MapTiles.grass = Content.Load<Texture2D>(@"grass");
+            TextureBank.MapTiles.grass = Content.Load<Texture2D>(@"GrassTile1");
         }
 
 

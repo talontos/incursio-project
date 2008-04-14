@@ -89,18 +89,26 @@ namespace Incursio.Classes
 
       public override void setLocation(Coordinate coords)
       {
-          //hardcode blargh
-          int xStart = coords.x - 16;
-          int yStart = coords.y - (int)(96 * 0.80);
-          int xEnd = coords.x + 16;
-          int yEnd = coords.y + (int)(96 * 0.20);
-
-          map.setSingleCellOccupancy(xStart, yStart, 0);
-          map.setSingleCellOccupancy(xStart, yEnd, 0);
-          map.setSingleCellOccupancy(xEnd, yStart, 0);
-          map.setSingleCellOccupancy(xEnd, yEnd, 0);
-
+          updateOccupancy(false);
           base.setLocation(coords);
+          updateOccupancy(true);
+      }
+
+      public override void updateOccupancy(bool occupied)
+      {
+          //hardcode blargh
+          int xStart = location.x - 16;
+          int yStart = location.y - (int)(32 * 0.80);
+          int xEnd = location.x;// +16;
+          int yEnd = location.y + (int)(32 * 0.20);
+
+          if (xStart < 0 || xEnd < 0 || yStart < 0 || yEnd < 0)
+              return;
+
+          map.setSingleCellOccupancy(xStart, yStart, (byte)(occupied ? 0 : 1));
+          map.setSingleCellOccupancy(xStart, yEnd, (byte)(occupied ? 0 : 1));
+          map.setSingleCellOccupancy(xEnd, yStart, (byte)(occupied ? 0 : 1));
+          map.setSingleCellOccupancy(xEnd, yEnd, (byte)(occupied ? 0 : 1));
       }
 
       public override void updateBounds()

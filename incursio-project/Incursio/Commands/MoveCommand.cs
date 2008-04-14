@@ -20,6 +20,13 @@ namespace Incursio.Commands
 
         public MoveCommand(Coordinate destination){
             this.destination = destination;
+
+            if(MapManager.getInstance().currentMap.getCellOccupancy_pixels(destination.x, destination.y) == (byte)0){
+                //cell is occupied; move somewhere else
+                this.destination =
+                    MapManager.getInstance().currentMap.getPassableLocation(destination);
+            }
+
             this.start = null;
         }
 
