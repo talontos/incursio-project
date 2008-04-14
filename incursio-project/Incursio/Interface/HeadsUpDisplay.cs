@@ -193,6 +193,10 @@ namespace Incursio.Classes
                 {
                     spriteBatch.Draw(TextureBank.InterfaceTextures.controlPointPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.controlPointPortrait.Width, TextureBank.InterfaceTextures.controlPointPortrait.Height), Color.White);
                 }
+                else if (selectedUnits[0].getType() == State.EntityName.Hero)
+                {
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.heroPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.heroPortrait.Width, TextureBank.InterfaceTextures.heroPortrait.Height), Color.White);
+                }
             }
 
             //unit attributes
@@ -279,6 +283,14 @@ namespace Incursio.Classes
                         {
                             spriteBatch.Draw(TextureBank.InterfaceTextures.archerIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.InterfaceTextures.archerIcon.Width, TextureBank.InterfaceTextures.archerIcon.Height), Color.White);
                         }
+                        else if (selectedUnits[i].getType() == State.EntityName.HeavyInfantry)
+                        {
+                            spriteBatch.Draw(TextureBank.InterfaceTextures.heavyInfantryIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.InterfaceTextures.heavyInfantryIcon.Width, TextureBank.InterfaceTextures.heavyInfantryIcon.Height), Color.White);
+                        }
+                        else if (selectedUnits[i].getType() == State.EntityName.Hero)
+                        {
+                            spriteBatch.Draw(TextureBank.InterfaceTextures.heroIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.InterfaceTextures.heroIcon.Width, TextureBank.InterfaceTextures.heroIcon.Height), Color.White);
+                        }
                     }
                     else
                     {
@@ -289,6 +301,14 @@ namespace Incursio.Classes
                         else if (selectedUnits[i].getType() == State.EntityName.Archer)
                         {
                             spriteBatch.Draw(TextureBank.InterfaceTextures.archerIcon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, TextureBank.InterfaceTextures.archerIcon.Width, TextureBank.InterfaceTextures.archerIcon.Height), Color.White);
+                        }
+                        else if (selectedUnits[i].getType() == State.EntityName.HeavyInfantry)
+                        {
+                            spriteBatch.Draw(TextureBank.InterfaceTextures.heavyInfantryIcon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, TextureBank.InterfaceTextures.heavyInfantryIcon.Width, TextureBank.InterfaceTextures.heavyInfantryIcon.Height), Color.White);
+                        }
+                        else if (selectedUnits[i].getType() == State.EntityName.Hero)
+                        {
+                            spriteBatch.Draw(TextureBank.InterfaceTextures.heroIcon, new Rectangle(383 + i * 60, height - 84, TextureBank.InterfaceTextures.heroIcon.Width, TextureBank.InterfaceTextures.heroIcon.Height), Color.White);
                         }
                     }
 
