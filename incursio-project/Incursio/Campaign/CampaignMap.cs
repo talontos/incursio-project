@@ -11,6 +11,8 @@ namespace Incursio.Campaign
     public class CampaignMap : MapBase
     {
         public State.CampaignLevel level;
+        private bool noControlPoints = false;
+        private bool noCamp = false;
 
         public override void initializeMap(/*PASS A FILE IN DEFINING MAP??*/)
         {
@@ -35,6 +37,27 @@ namespace Incursio.Campaign
             if (   eMan.getLivePlayerEntities(State.PlayerId.COMPUTER).Count == 0      //No live entities
                 //|| eMan.getLivePlayerHeros(State.PlayerId.COMPUTER).Count == 0         //No live heros
                )
+            {
+                return State.GameState.Victory;
+            }
+
+            //if no control points are held, or the camp is destroyed
+            if (eMan.getPlayerControlPoints(State.PlayerId.HUMAN) == 0)               //If no control points are held
+            {
+                return State.GameState.Defeat;
+            }
+
+            if (eMan.getPlayerControlPoints(State.PlayerId.COMPUTER) == 0)            //If no control points are held
+            {
+                return State.GameState.Victory;
+            }
+
+            if (eMan.isPlayerCampDestroyed(State.PlayerId.HUMAN))                     //If camp is destroyed
+            {
+                return State.GameState.Defeat;
+            }
+
+            if (eMan.isPlayerCampDestroyed(State.PlayerId.COMPUTER))                 //If camp is destroyed
             {
                 return State.GameState.Victory;
             }
