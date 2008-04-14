@@ -336,6 +336,5 @@ namespace Incursio.Classes
         {
             base.issueImmediateOrder(order);
         }
-
     }
 }

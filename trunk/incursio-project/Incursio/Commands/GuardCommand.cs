@@ -26,7 +26,10 @@ namespace Incursio.Commands
 
             if(enemiesInRange.Count > 0){
                 //TODO: Select a random enemy (possibly weight them)
-                subject.issueImmediateOrder(new AttackCommand(enemiesInRange[ Incursio.rand.Next(0, enemiesInRange.Count) ]));
+                BaseGameEntity e = enemiesInRange[Incursio.rand.Next(0, enemiesInRange.Count)];
+
+                if( !(e is ControlPoint) )
+                    subject.issueImmediateOrder(new AttackCommand(e));
             }
         }
     }

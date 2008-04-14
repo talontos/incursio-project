@@ -117,5 +117,41 @@ namespace Incursio.Classes
         {
             return capping;
         }
+
+        public override void updateOccupancy(bool occupied)
+        {
+            //hardcode blagh
+            int xStart = location.x - 32;
+            int yStart = location.y - (int)(32 * 0.80);
+            int xEnd = location.x;// +32;
+            int yEnd = location.y + (int)(32 * 0.20);
+
+            if (xStart < 0 || xEnd < 0 || yStart < 0 || yEnd < 0)
+                return;
+
+            map.setSingleCellOccupancy(xStart, yStart, (byte)(occupied ? 0 : 1));
+            map.setSingleCellOccupancy(xStart, yEnd, (byte)(occupied ? 0 : 1));
+            map.setSingleCellOccupancy(xEnd, yStart, (byte)(occupied ? 0 : 1));
+            map.setSingleCellOccupancy(xEnd, yEnd, (byte)(occupied ? 0 : 1));
+
+            map.setSingleCellEntity(xStart, yStart, (occupied ? this.keyId : -1));
+            map.setSingleCellEntity(xStart, yEnd, (occupied ? this.keyId : -1));
+            map.setSingleCellEntity(xEnd, yStart, (occupied ? this.keyId : -1));
+            map.setSingleCellEntity(xEnd, yEnd, (occupied ? this.keyId : -1));
+        }
+
+        public override void setLocation(Coordinate coords)
+        {
+            updateOccupancy(false);
+
+            base.setLocation(coords);
+
+            updateOccupancy(true);
+        }
+
+        public override void takeDamage(int damage, BaseGameEntity attacker)
+        {
+            //I CANNOT BE DESTROYED, FOR I AM THE CONTROL POINT!!!!
+        }
     }
 }
