@@ -231,7 +231,11 @@ namespace Incursio.Classes
             }
         }
 
-        public byte getCellOccupancy(int pixX, int pixY){
+        public byte getCellOccupancy_cells(int x, int y){
+            return this.occupancyGrid[x, y];
+        }
+
+        public byte getCellOccupancy_pixels(int pixX, int pixY){
             int x, y;
             this.translatePixelToMapCell(pixX, pixY, out x, out y);
             return this.occupancyGrid[x, y];
@@ -281,12 +285,123 @@ namespace Incursio.Classes
             return new Point(x + minViewableX * TILE_WIDTH, y + minViewableY * TILE_HEIGHT);
         }
 
+        /// <summary>
+        /// Loops around a central location, looking for a passable spot
+        /// </summary>
+        /// <param name="destination">Destination, in pixels</param>
+        /// <returns>Passable location, in pixels</returns>
+        public Coordinate getPassableLocation(Coordinate destination){
+            Coordinate cell = new Coordinate();
+            int radius = 1;
+            int dist = 2;
+            bool found = false;
+
+            this.translatePixelToMapCell(destination.x, destination.y, out cell.x, out cell.y);
+
+            if(this.getCellOccupancy_cells(cell.x, cell.y) == (byte)1){
+                return destination;
+            }
+
+            //loop around the surrounding area looking for '(byte)1'
+
+            do
+            {
+                cell.x -= 1;
+                cell.y -= 1;
+
+                //Move right
+                for (int i = 0; i < dist; i++)
+                {
+                    //Check bounds
+                    checkBounds(cell);
+
+                    if (this.getCellOccupancy_cells(cell.x, cell.y) == (byte)1){
+                        found = true;
+                        break;
+                    }
+
+                    cell.x += 1;
+                }
+
+                if (found) break;
+
+                //Move down
+                for (int i = 0; i < dist; i++)
+                {
+                    //Check bounds
+                    checkBounds(cell);
+
+                    if (this.getCellOccupancy_cells(cell.x, cell.y) == (byte)1)
+                    {
+                        found = true;
+                        break;
+                    }
+
+                    cell.y += 1;
+                }
+
+                if (found) break;
+
+                //Move left
+                for (int i = 0; i < dist; i++)
+                {
+                    //Check bounds
+                    checkBounds(cell);
+                    if (this.getCellOccupancy_cells(cell.x, cell.y) == (byte)1)
+                    {
+                        found = true;
+                        break;
+                    }
+
+                    cell.x -= 1;
+                }
+
+                if (found) break;
+
+                //Move up
+                for (int i = 0; i < dist; i++)
+                {
+                    //Check bounds
+                    checkBounds(cell);
+
+                    if (this.getCellOccupancy_cells(cell.x, cell.y) == (byte)1)
+                    {
+                        found = true;
+                        break;
+                    }
+
+                    cell.y -= 1;
+                }
+                if (found) break;
+
+                dist += 2;
+
+            } while (this.getCellOccupancy_cells(cell.x, cell.y) == (byte)0);
+
+            this.translateMapCellToPixel(cell.x, cell.y, out cell.x, out cell.y);
+            return cell;
+        }
+
+        private Coordinate checkBounds(Coordinate cell)
+        {
+            if (cell.x <= 0)
+                cell.x = 0;
+            else if (cell.y <= 0)
+                cell.y = 0;
+            else if (cell.x > this.width)
+                cell.x = this.width;
+            else if (cell.y > this.height)
+                cell.y = this.height;
+
+            return cell;
+        }
+
         public Coordinate getClosestPassableLocation(Coordinate origin, Coordinate point){
             //translate pixel points
             this.translatePixelToMapCell(point.x, point.y, out point.x, out point.y);
             this.translatePixelToMapCell(origin.x, origin.y, out origin.x, out origin.y);
 
-            if(this.getCellOccupancy(point.x, point.y) == (byte)1){
+            if(this.getCellOccupancy_pixels(point.x, point.y) == (byte)1){
                 //passable
                 this.translateMapCellToPixel(point.x, point.y, out point.x, out point.y);
             }
@@ -307,7 +422,7 @@ namespace Incursio.Classes
                         if (point.x < 0 || point.x > this.width)
                             return null;
 
-                        curPass = this.getCellOccupancy(point.x, point.y);
+                        curPass = this.getCellOccupancy_pixels(point.x, point.y);
                     }
                 }
                 else{
@@ -321,7 +436,7 @@ namespace Incursio.Classes
                         if (point.y < 0 || point.y > this.height)
                             return null;
 
-                        curPass = this.getCellOccupancy(point.x, point.y);
+                        curPass = this.getCellOccupancy_pixels(point.x, point.y);
                     }
                 }
             }

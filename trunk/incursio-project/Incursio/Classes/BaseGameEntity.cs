@@ -30,6 +30,8 @@ namespace Incursio.Classes
         public bool justDrawn = false;
         public int currentFrameX = 0;       //for animation
         public int currentFrameY = 0;       //for animation
+        public int currentFrameXAttackDeath = 0;
+        public int currentFrameYAttackDeath = 0;
 
         public Rectangle boundingBox;
 

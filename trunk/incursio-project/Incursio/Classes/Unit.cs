@@ -22,6 +22,7 @@ namespace Incursio.Classes
         protected int updateAttackTimer = 0;
         protected int attackRange = 0;
         protected int deadTimer = 0;
+        public bool playedDeath = false;
         protected State.UnitState currentState = State.UnitState.Idle;
         protected State.Direction directionState = State.Direction.Still;
         protected bool isClose = false;
@@ -59,6 +60,10 @@ namespace Incursio.Classes
                 //in case I go idle; look for bad guys
                 if (orders.Count == 0)
                     EntityManager.getInstance().issueCommand_SingleEntity(State.Command.GUARD, false, this);
+
+                if(!this.isDead()){
+                    updateOccupancy(true);
+                }
             }
         }
 
@@ -257,7 +262,8 @@ namespace Incursio.Classes
                 //We should only do this if they aren't already attacking - that way they won't 
                 //constantly switch targets in a big battle
                 if(currentState != State.UnitState.Attacking){
-                    this.orders.Insert(0, new AttackCommand(attacker));
+                    this.issueImmediateOrder(new AttackCommand(attacker));
+                    this.setAttacking();
                     PlayerManager.getInstance().notifyPlayer(
                         this.owner,
                         new GameEvent(State.EventType.UNDER_ATTACK, /*SOUND,*/ "Unit under attack", this.location)
@@ -322,7 +328,7 @@ namespace Incursio.Classes
                 largeTargetBufferZone = (int)(64 / map.getTileWidth());
             }
 
-            if(MapManager.getInstance().currentMap.getCellDistance(location, target.location) < attackRange + largeTargetBufferZone){
+            if(MapManager.getInstance().currentMap.getCellDistance(location, target.location) <= attackRange + largeTargetBufferZone){
                 //TODO: do some math randomizing damage?
                 if (this.updateAttackTimer == this.attackSpeed * 60)    //this is the unit's attack time (attack every 1.5 seconds for example)
                 {

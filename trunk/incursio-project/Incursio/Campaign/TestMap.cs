@@ -33,6 +33,7 @@ namespace Incursio.Campaign
             LightInfantryUnit infUnit3 = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
 
             HeavyInfantryUnit heavyUnit1 = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", State.PlayerId.HUMAN);
+            HeavyInfantryUnit heavyUnit2 = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", State.PlayerId.COMPUTER);
 
             ArcherUnit archUnit1 = (ArcherUnit)entityManager.createNewEntity("Incursio.Classes.ArcherUnit", State.PlayerId.HUMAN);
             //ArcherUnit archUnit2 = (ArcherUnit)entityManager.createNewEntity("Incursio.Classes.ArcherUnit", State.PlayerId.COMPUTER);
@@ -48,6 +49,7 @@ namespace Incursio.Campaign
             infUnit1.setLocation(new Coordinate(16,16));
             infUnit2.setLocation(new Coordinate(200, 400));
             heavyUnit1.setLocation(new Coordinate(220, 440));
+            heavyUnit2.setLocation(new Coordinate(400, 440));
             //archUnit2.setLocation(new Coordinate(820, 195));
             //archUnit2.setLocation(new Coordinate(700, 200));
             infUnit3.setLocation(new Coordinate(800, 220)); //for ease of testing
@@ -58,9 +60,10 @@ namespace Incursio.Campaign
             playerTower1.setLocation(new Coordinate(150, 340));
             //infUnit3.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
 
+            heavyUnit2.setHealth(100);
             infUnit1.setHealth(80);
             infUnit2.setHealth(80);
-            infUnit3.setHealth(50);
+            infUnit3.setHealth(200);
             archUnit1.setHealth(90);
             //archUnit2.setHealth(90);
             playerCamp.setHealth(350);

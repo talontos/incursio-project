@@ -22,6 +22,10 @@ namespace Incursio.Commands
 
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
+            if(subject is LightInfantryUnit){
+                int i = 0;
+            }
+
             if( !subject.canAttack ){
                 this.finishedExecution = true;
                 return;
@@ -38,8 +42,8 @@ namespace Incursio.Commands
 
                 if(subject is Unit){
                     subject.setTarget(target);
-                    result = subject.attackTarget();
                     subject.setAttacking();
+                    result = subject.attackTarget();
                 }
                 //else{
                     //TODO: REFACTOR CLASS FOR GUARD TOWER
@@ -49,6 +53,9 @@ namespace Incursio.Commands
                 if(!result){
                     //subject is not in attack range, move toward target:
                     followCommand.execute(gameTime, ref subject);
+                }
+                else{
+                    int i = 0;
                 }
             }
         }
