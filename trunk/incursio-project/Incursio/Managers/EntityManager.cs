@@ -67,7 +67,7 @@ namespace Incursio.Managers
             entityBank.ForEach(delegate(BaseGameEntity e)
             {
                 if( area.Contains(e.getLocation().toPoint()) ){
-                    if(e.getPlayer() == State.PlayerId.HUMAN){
+                    if(e.getPlayer() == State.PlayerId.HUMAN && !e.isDead()){
                         if( !(e is Structure) )
                             selectingStructures = false;
 
@@ -394,16 +394,13 @@ namespace Incursio.Managers
         }
 
         public List<BaseGameEntity> getEntitiesInRange(ref BaseGameEntity hunter, int cellSightRange){
+            List<int> ids = MapManager.getInstance().currentMap.getEntitiesInRange(hunter.location, cellSightRange);
             List<BaseGameEntity> enemies = new List<BaseGameEntity>();
             State.PlayerId hOwner = hunter.owner;
-            Coordinate hLoc = hunter.location;
 
-            this.entityBank.ForEach(delegate(BaseGameEntity e){
-                if(e.owner != hOwner && !e.isDead() && e.getType() != State.EntityName.ControlPoint){
-                    if(MapManager.getInstance().currentMap.getCellDistance(hLoc, e.location) <= cellSightRange){
-                        enemies.Add(e);
-                    }
-                }
+            ids.ForEach(delegate(int key)
+            {
+                enemies.Add(this.getEntity(key));
             });
 
             return enemies;

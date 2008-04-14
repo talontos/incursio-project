@@ -17,7 +17,7 @@ namespace Incursio.Commands
 
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
-            return;
+            //return;
 
             //TODO: REIMPLEMENT
 
