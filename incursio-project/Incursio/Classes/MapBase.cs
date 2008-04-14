@@ -26,6 +26,8 @@ namespace Incursio.Classes
 
         public byte[,] occupancyGrid;
 
+        public int[,] entityGrid;
+
         public int TILE_WIDTH  = MapManager.TILE_WIDTH;
         public int TILE_HEIGHT = MapManager.TILE_HEIGHT;
 
@@ -48,6 +50,7 @@ namespace Incursio.Classes
             this.cameraMovePause = 0;
 
             this.occupancyGrid = new byte[0, 0];
+            this.entityGrid = new int[0, 0];
         }
 
         public MapBase(int width, int height, int screenWidth, int screenHeight)
@@ -56,18 +59,20 @@ namespace Incursio.Classes
             this.height = height / TILE_HEIGHT;
             this.tileGrid = new BaseMapEntity[this.width, this.height];
             this.occupancyGrid = new byte[this.width, this.height];
+            this.entityGrid = new int[this.width, this.height];
             this.minViewableX = 0;
             this.minViewableY = 0;
             this.maxViewableX = screenWidth / TILE_WIDTH;
             this.maxViewableY = screenHeight / TILE_HEIGHT;
             this.cameraMovePause = 0;
 
-            //initialize occupancyGrid
+            //initialize occupancyGrid and entityGrid
             for (int x = 0; x < this.height; x++)
             {
                 for (int y = 0; y < this.width; y++)
                 {
                     occupancyGrid[x, y] = 1;
+                    entityGrid[x, y] = -1;
                 }
             }
         }
@@ -78,6 +83,7 @@ namespace Incursio.Classes
             this.height = height / TILE_HEIGHT;
             this.tileGrid = new BaseMapEntity[this.width, this.height];
             this.occupancyGrid = new byte[this.width, this.height];
+            this.entityGrid = new int[this.width, this.height];
             this.minViewableX = 0;
             this.minViewableY = 0;
             this.maxViewableX = screenWidth / TILE_WIDTH;
@@ -90,6 +96,7 @@ namespace Incursio.Classes
                 for (int i = 0; i < this.width; i++)
                 {
                     occupancyGrid[i, j] = 1;
+                    entityGrid[i, j] = -1;
                 }
             }
         }
@@ -260,6 +267,25 @@ namespace Incursio.Classes
 
         }
 
+        public int getCellEntity_cells(int x, int y)
+        {
+            return this.entityGrid[x, y];
+        }
+
+        public int getCellEntity_pixels(int pixX, int pixY)
+        {
+            int x, y;
+            this.translatePixelToMapCell(pixX, pixY, out x, out y);
+            return this.entityGrid[x, y];
+        }
+
+        public void setSingleCellEntity(int pixX, int pixY, int occupant)
+        {
+            int x, y;
+            this.translatePixelToMapCell(pixX, pixY, out x, out y);
+            this.entityGrid[x, y] = occupant;
+        }
+
         private void translateMapCellToPixel(int indexX, int indexY, out int pixX, out int pixY){
             pixX = indexX * TILE_WIDTH;
             pixY = indexY * TILE_HEIGHT;
@@ -285,165 +311,100 @@ namespace Incursio.Classes
             return new Point(x + minViewableX * TILE_WIDTH, y + minViewableY * TILE_HEIGHT);
         }
 
-        /// <summary>
-        /// Loops around a central location, looking for a passable spot
-        /// </summary>
-        /// <param name="destination">Destination, in pixels</param>
-        /// <returns>Passable location, in pixels</returns>
-        public Coordinate getPassableLocation(Coordinate destination){
-            Coordinate cell = new Coordinate();
-            int radius = 1;
-            int dist = 2;
-            bool found = false;
-
-            this.translatePixelToMapCell(destination.x, destination.y, out cell.x, out cell.y);
-
-            if(this.getCellOccupancy_cells(cell.x, cell.y) == (byte)1){
-                return destination;
-            }
-
-            //loop around the surrounding area looking for '(byte)1'
-
-            do
-            {
-                cell.x -= 1;
-                cell.y -= 1;
-
-                //Move right
-                for (int i = 0; i < dist; i++)
-                {
-                    //Check bounds
-                    checkBounds(cell);
-
-                    if (this.getCellOccupancy_cells(cell.x, cell.y) == (byte)1){
-                        found = true;
-                        break;
-                    }
-
-                    cell.x += 1;
-                }
-
-                if (found) break;
-
-                //Move down
-                for (int i = 0; i < dist; i++)
-                {
-                    //Check bounds
-                    checkBounds(cell);
-
-                    if (this.getCellOccupancy_cells(cell.x, cell.y) == (byte)1)
-                    {
-                        found = true;
-                        break;
-                    }
-
-                    cell.y += 1;
-                }
-
-                if (found) break;
-
-                //Move left
-                for (int i = 0; i < dist; i++)
-                {
-                    //Check bounds
-                    checkBounds(cell);
-                    if (this.getCellOccupancy_cells(cell.x, cell.y) == (byte)1)
-                    {
-                        found = true;
-                        break;
-                    }
-
-                    cell.x -= 1;
-                }
-
-                if (found) break;
-
-                //Move up
-                for (int i = 0; i < dist; i++)
-                {
-                    //Check bounds
-                    checkBounds(cell);
-
-                    if (this.getCellOccupancy_cells(cell.x, cell.y) == (byte)1)
-                    {
-                        found = true;
-                        break;
-                    }
-
-                    cell.y -= 1;
-                }
-                if (found) break;
-
-                dist += 2;
-
-            } while (this.getCellOccupancy_cells(cell.x, cell.y) == (byte)0);
-
-            this.translateMapCellToPixel(cell.x, cell.y, out cell.x, out cell.y);
-            return cell;
-        }
-
-        private Coordinate checkBounds(Coordinate cell)
-        {
-            if (cell.x <= 0)
-                cell.x = 0;
-            else if (cell.y <= 0)
-                cell.y = 0;
-            else if (cell.x > this.width)
-                cell.x = this.width;
-            else if (cell.y > this.height)
-                cell.y = this.height;
-
-            return cell;
-        }
-
         public Coordinate getClosestPassableLocation(Coordinate origin, Coordinate point){
-            //translate pixel points
-            this.translatePixelToMapCell(point.x, point.y, out point.x, out point.y);
-            this.translatePixelToMapCell(origin.x, origin.y, out origin.x, out origin.y);
 
-            if(this.getCellOccupancy_pixels(point.x, point.y) == (byte)1){
-                //passable
-                this.translateMapCellToPixel(point.x, point.y, out point.x, out point.y);
+            if(getCellOccupancy_pixels(point.x, point.y) == (byte)1){
+                return point;
             }
-            else{
-                //NOT passable, find closest location to 'origin'
-                int distX = origin.x - point.x;
-                int distY = origin.y - point.y;
-                byte curPass = (byte)0;
 
-                if(distX < distY){
-                    //point is closer with respect to X
-                    while(curPass == (byte)0){
-                        if (distX < 0)
-                            point.x -= 1;
-                        else
-                            point.x += 1;
+            Coordinate cellOrigin = new Coordinate();
+            Coordinate cellDestination = new Coordinate();
 
-                        if (point.x < 0 || point.x > this.width)
-                            return null;
+            //translate pixel points
+            translatePixelToMapCell(origin.x, origin.y, out cellOrigin.x, out cellOrigin.y);
+            translatePixelToMapCell(point.x, point.y, out cellDestination.x, out cellDestination.y);
 
-                        curPass = this.getCellOccupancy_pixels(point.x, point.y);
+            //find where origin is in relation to point; there's only 8 possible directions...
+
+            //dir vars: true == left/up; 
+            //          false == right/down;
+            bool horizontalLeft = (cellOrigin.x > cellDestination.x);
+            bool verticalUp   = (cellOrigin.y > cellDestination.y);
+
+            //2 special cases: (4 cases total
+            if(cellOrigin.x == cellDestination.x){
+                if(verticalUp){
+                    //origin.y < dest.y; add to y value
+                    while(getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0){
+                        cellDestination.y += 1;
                     }
                 }
                 else{
-                    while (curPass == (byte)0)
+                    //subtract from y value
+                    while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
                     {
-                        if (distY < 0)
-                            point.y -= 1;
-                        else
-                            point.y += 1;
-
-                        if (point.y < 0 || point.y > this.height)
-                            return null;
-
-                        curPass = this.getCellOccupancy_pixels(point.x, point.y);
+                        cellDestination.y -= 1;
                     }
                 }
             }
 
-            this.translateMapCellToPixel(point.x, point.y, out point.x, out point.y);
+            else if(cellOrigin.y == cellDestination.y){
+                if (horizontalLeft){
+                    //origin.x < dest.x; add to x value
+                    while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                    {
+                        cellDestination.x += 1;
+                    }
+                }
+                else{
+                    //subtract from x value
+                    while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                    {
+                        cellDestination.x -= 1;
+                    }
+                }
+            }
 
-            return point;
+            //TODO: MAKE MORE ROBUST
+            else if(horizontalLeft && verticalUp){
+                //origin to northwest of destination, add to x && y values
+                while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                {
+                    cellDestination.x += 1;
+                    cellDestination.y += 1;
+                }
+            }
+
+            else if(horizontalLeft && !verticalUp){
+                //origin to southeast of destination, add to x, subtract from y
+                while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                {
+                    cellDestination.x += 1;
+                    cellDestination.y -= 1;
+                }
+            }
+
+            else if(!horizontalLeft && verticalUp){
+                //origin northeast of destination, subtract from x, add to y
+                while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                {
+                    cellDestination.x -= 1;
+                    cellDestination.y += 1;
+                }
+            }
+
+            else{
+                //origin to southeast of destination, subtract from x && y
+                while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                {
+                    cellDestination.x -= 1;
+                    cellDestination.y -= 1;
+                }
+            }
+
+            //convert back to pixels
+            this.translateMapCellToPixel(cellDestination.x, cellDestination.y, out cellDestination.x, out cellDestination.y);
+            return cellDestination;
         }
 
         public int getTileHeight()
@@ -476,6 +437,32 @@ namespace Incursio.Classes
                     this.addMapEntity(tex1, i, j);
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns a List of keyIds of all entities within SightRange from locatoin
+        /// </summary>
+        /// <param name="location">Location, in pixels</param>
+        /// <param name="sightRange"></param>
+        /// <returns>List of entities</returns>
+        public List<int> getEntitiesInRange(Coordinate location, int sightRange){
+            //TODO: Should we look in a square, or circle-ish shape?????
+            //Currently square
+            List<int> entities = new List<int>();
+
+            int xStart = Math.Max(0, location.x - sightRange);
+            int xEnd = Math.Min(location.x + sightRange, this.width);
+            int yStart = Math.Max(0, location.y - sightRange);
+            int yEnd = Math.Min(location.y + sightRange, this.height);
+
+            for(int y = yStart; y <= yEnd; y++){
+                for(int x = xStart; x <= xEnd; x++){
+                    if (entityGrid[x, y] >= 0)
+                        entities.Add(entityGrid[x, y]);
+                }
+            }
+
+            return entities;
         }
     }
 

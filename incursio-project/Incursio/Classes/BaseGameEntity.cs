@@ -159,6 +159,9 @@ namespace Incursio.Classes
         public virtual void updateOccupancy(bool occupied){
             MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y,
                 (occupied ? (byte)0 : (byte)1));
+
+            MapManager.getInstance().currentMap.setSingleCellEntity(location.x, location.y, 
+                (occupied ? this.keyId : -1));
         }
 
         public virtual void setIdle(){

@@ -21,11 +21,11 @@ namespace Incursio.Commands
         public MoveCommand(Coordinate destination){
             this.destination = destination;
 
-            if(MapManager.getInstance().currentMap.getCellOccupancy_pixels(destination.x, destination.y) == (byte)0){
+            /*if(MapManager.getInstance().currentMap.getCellOccupancy_pixels(destination.x, destination.y) == (byte)0){
                 //cell is occupied; move somewhere else
                 this.destination =
                     MapManager.getInstance().currentMap.getPassableLocation(destination);
-            }
+            }*/
 
             this.start = null;
         }
@@ -47,6 +47,21 @@ namespace Incursio.Commands
 
             //first run; find path
             else if (start == null){
+
+                //First, check passability:
+                if (MapManager.getInstance().currentMap.getCellOccupancy_pixels(destination.x, destination.y) == (byte)0)
+                {
+                    //cell is occupied; move somewhere else
+                    this.destination =
+                        //MapManager.getInstance().currentMap.getPassableLocation(destination);
+                        MapManager.getInstance().currentMap.getClosestPassableLocation(subject.location, destination);
+
+                    if(destination == null){
+                        finishedExecution = true;
+                        return;
+                    }
+                }
+
                 MovableObject unit = subject as MovableObject;
                 start = subject.getLocation();
 

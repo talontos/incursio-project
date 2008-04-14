@@ -109,6 +109,11 @@ namespace Incursio.Classes
           map.setSingleCellOccupancy(xStart, yEnd, (byte)(occupied ? 0 : 1));
           map.setSingleCellOccupancy(xEnd, yStart, (byte)(occupied ? 0 : 1));
           map.setSingleCellOccupancy(xEnd, yEnd, (byte)(occupied ? 0 : 1));
+
+          map.setSingleCellEntity(xStart, yStart, (byte)(occupied ? this.keyId : 1));
+          map.setSingleCellEntity(xStart, yEnd, (byte)(occupied ? this.keyId : 1));
+          map.setSingleCellEntity(xEnd, yStart, (byte)(occupied ? this.keyId : 1));
+          map.setSingleCellEntity(xEnd, yEnd, (byte)(occupied ? this.keyId : 1));
       }
 
       public override void updateBounds()
