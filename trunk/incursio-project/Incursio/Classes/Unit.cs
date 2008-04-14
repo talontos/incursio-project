@@ -82,8 +82,8 @@ namespace Incursio.Classes
             //return retVal;
             
             
-            float xMinimumThreshold = 0.05F;
-            float yMinimumThreshold = 0.05F;
+            float xMinimumThreshold = 0.10F;
+            float yMinimumThreshold = 0.10F;
 
             //get the direction to the target
             Vector2 direction = new Vector2(destination.x - location.x, destination.y - location.y);
@@ -342,7 +342,7 @@ namespace Incursio.Classes
 
             if(MapManager.getInstance().currentMap.getCellDistance(location, target.location) <= attackRange + largeTargetBufferZone){
                 //TODO: do some math randomizing damage?
-                if (this.updateAttackTimer == this.attackSpeed * 60)    //this is the unit's attack time (attack every 1.5 seconds for example)
+                if (this.updateAttackTimer == 0)    //this is the unit's attack time (attack every 1.5 seconds for example)
                 {
                     //basically, if we are attacking something that can attack back
                     /*if (target.getType() == State.EntityName.Archer || target.getType() == State.EntityName.LightInfantry || 
@@ -401,11 +401,11 @@ namespace Incursio.Classes
                     }
 
 
-                    this.updateAttackTimer = 0;
+                    this.updateAttackTimer = this.attackSpeed * 60;
                 }
                 else
                 {
-                    this.updateAttackTimer++;
+                    this.updateAttackTimer--;
                 }
 
                 return true;

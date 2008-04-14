@@ -38,6 +38,7 @@ namespace Incursio.Campaign
             ControlPoint cp1 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
             ControlPoint cp2 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
             ControlPoint cp3 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
+            ControlPoint cp4 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.HUMAN);
 
 
             infUnit.setLocation(new Coordinate(700, 100));
@@ -48,6 +49,7 @@ namespace Incursio.Campaign
             cp1.setLocation(new Coordinate(1000,1000));
             cp2.setLocation(new Coordinate(300, 1700));
             cp3.setLocation(new Coordinate(1700, 300));
+            cp4.setLocation(new Coordinate(500, 400));
 
             playerCamp.setHealth(350);
             computerCamp.setHealth(350);

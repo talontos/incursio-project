@@ -277,6 +277,58 @@ namespace Incursio.Managers
             return playerStructs;
         }
 
+        public int getPlayerControlPoints(State.PlayerId id)
+        {
+            int numPoints = 0;
+
+            this.entityBank.ForEach(delegate(BaseGameEntity e)
+            {
+                if (e.getType() == State.EntityName.ControlPoint && e.owner == id)
+                {
+                    numPoints++;
+                }
+            });
+
+            return numPoints;
+        }
+
+        public int getTotalControlPoints()
+        {
+            int numPoints = 0;
+
+            this.entityBank.ForEach(delegate(BaseGameEntity e)
+            {
+                if (e.getType() == State.EntityName.ControlPoint)
+                {
+                    numPoints++;
+                }
+            });
+
+            return numPoints;
+        }
+
+        public bool isPlayerCampDestroyed(State.PlayerId id)
+        {
+            bool result = true;
+            this.entityBank.ForEach(delegate(BaseGameEntity e)
+            {
+                if (e.getType() == State.EntityName.Camp && e.owner == id)
+                {
+                    if ((e as CampStructure).getCurrentState() == State.StructureState.Destroyed)
+                    {
+
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                   
+                }
+            });
+
+            return result;
+        }
+
         public void tryToBuild(BaseGameEntity toBuild /*String entityType*/){
             if(selectedUnits.Count > 0 && selectedUnits[0] is CampStructure){
                 this.issueCommand(State.Command.BUILD, true, null, toBuild);
