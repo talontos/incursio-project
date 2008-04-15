@@ -75,9 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Campaign\Map1.cs" />
-    <Compile Include="Commands\Campaign\RandomMap.cs" />
-    <Compile Include="Commands\Campaign\TestMap.cs" />
+    <Compile Include="Campaign\Map1.cs" />
+    <Compile Include="Campaign\RandomMap.cs" />
+    <Compile Include="Campaign\TestMap.cs" />
     <Compile Include="Classes\AI\BaseAI.cs" />
     <Compile Include="Classes\AIPlayer.cs" />
     <Compile Include="Classes\AI\DefensiveAI.cs" />
@@ -85,7 +85,7 @@
     <Compile Include="Classes\ArcherUnit.cs" />
     <Compile Include="Classes\BaseGameEntity.cs" />
     <Compile Include="Classes\BaseMapEntity.cs" />
-    <Compile Include="Commands\Campaign\CampaignMap.cs" />
+    <Compile Include="Campaign\CampaignMap.cs" />
     <Compile Include="Classes\CampStructure.cs" />
     <Compile Include="Classes\ControlPoint.cs" />
     <Compile Include="Classes\GuardTowerStructure.cs" />
