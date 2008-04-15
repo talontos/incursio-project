@@ -10,9 +10,11 @@ namespace Incursio.Managers
 {
     class SoundManager
     {
-        ISoundEngine soundEngine;
-        private static SoundManager instance;
+        
+        ISoundEngine soundEngine = null;
+        private static SoundManager instance = null;
 
+        //creates an instance of the sound manager
         public static SoundManager getInstance()
         {
             if (instance == null)
@@ -20,25 +22,45 @@ namespace Incursio.Managers
                 instance = new SoundManager();
                 instance.InitializeEngine();
             }
-            return (instance);
+            return instance;
         }
 
-        //Initializes the audio engine
         public void InitializeEngine()
         {
             ISoundEngine soundEngine = new ISoundEngine();
         }
 
         //update the sound engine
-        //public void updateSounds()
-        //{
-        //    soundEngine.Update();
-        //}
+        public void updateSounds()
+        {
+            try
+            {
+                soundEngine.Update();
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine("Null Reference Exception Found!");
+                Console.WriteLine("Update Error");
+                Console.WriteLine(e);
+            }
+        }
 
         //Plays the sound
-        public void PlaySound(String file, bool loop)
+        //Files must be .mp3, .ogg, or .wav
+        //file need to be in the form of "../../../Content/Audio/<File Name Here>"
+        //loop will loop the sound if true.  Otherwise, sound will play once and stop
+        public void PlaySound(String filename, bool loop) 
         {
-            soundEngine.Play2D(file, loop);
+            try
+            {
+                soundEngine.Play2D(filename, loop);
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine("Null Reference Exception Found!");
+                Console.WriteLine("Song File error");
+                Console.WriteLine(e);
+            }
         }
     
         //Stops the sound
