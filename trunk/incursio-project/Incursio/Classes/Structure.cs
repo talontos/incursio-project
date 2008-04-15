@@ -111,6 +111,8 @@ namespace Incursio.Classes
                 this.health = 0;
                 EntityManager.getInstance().removeEntity(this.keyId);
             }
+
+            notifyUnderAttack();
         }
 
         public override bool isDead()
@@ -121,6 +123,14 @@ namespace Incursio.Classes
         public virtual void updateResourceTick()
         {
 
+        }
+
+        protected override void notifyUnderAttack()
+        {
+            PlayerManager.getInstance().notifyPlayer(
+                this.owner,
+                new GameEvent(State.EventType.UNDER_ATTACK, /*SOUND,*/ "Base Under Attack!", this.location)
+            );
         }
     }
 }

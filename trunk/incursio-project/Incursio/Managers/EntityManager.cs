@@ -18,6 +18,9 @@ namespace Incursio.Managers
 
         private List<BaseGameEntity> entityBank;
         private List<BaseGameEntity> selectedUnits;
+
+        public List<List<BaseGameEntity>> groups;
+
         private ObjectFactory factory;
 
         private int nextKeyId;
@@ -27,9 +30,14 @@ namespace Incursio.Managers
             selectedUnits = new List<BaseGameEntity>();
             factory = ObjectFactory.getInstance();
             nextKeyId = 0;
+
+            groups = new List<List<BaseGameEntity>>(10);
+            for (int i = 0; i < groups.Capacity; i++)
+                groups.Add( new List<BaseGameEntity>());
         }
 
-        public static EntityManager getInstance(){
+        public static EntityManager getInstance()
+        {
             if (instance == null)
                 instance = new EntityManager();
             return instance;
@@ -492,6 +500,34 @@ namespace Incursio.Managers
                 }
 
             }
+        }
+
+        /// <summary>
+        /// Assigns the selected entites to a group
+        /// </summary>
+        /// <param name="groupNum">Group Number [0,9]</param>
+        public void assignGroup(int groupNum){
+            groups[groupNum] = selectedUnits;
+        }
+
+        /// <summary>
+        /// Selects the specified group number, [0,9]
+        /// </summary>
+        /// <param name="groupNum"></param>
+        public void selectGroup(int groupNum){
+
+            if(!InputManager.getInstance().shifting()){
+                selectedUnits.Clear();
+            }
+
+            //we need to ensure that dead units are removed
+            // from groups
+            for(int i = 0; i < groups[groupNum].Count; i++){
+                if (groups[groupNum][i].isDead())
+                    groups[groupNum].RemoveAt(i);
+            }
+
+            selectedUnits.AddRange(groups[groupNum]);
         }
 
     }

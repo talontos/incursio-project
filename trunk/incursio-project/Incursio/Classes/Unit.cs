@@ -276,12 +276,16 @@ namespace Incursio.Classes
                         this.directionState = State.Direction.East;
                     }
 
-                    PlayerManager.getInstance().notifyPlayer(
-                        this.owner,
-                        new GameEvent(State.EventType.UNDER_ATTACK, /*SOUND,*/ "Unit under attack", this.location)
-                    );
+                    this.notifyUnderAttack();
                 }
             }
+        }
+
+        protected override void notifyUnderAttack(){
+            PlayerManager.getInstance().notifyPlayer(
+                this.owner,
+                new GameEvent(State.EventType.UNDER_ATTACK, /*SOUND,*/ "Unit under attack", this.location)
+            );
         }
 
         public long getDamage(){

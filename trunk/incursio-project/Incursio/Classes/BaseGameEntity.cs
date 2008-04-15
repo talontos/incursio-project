@@ -175,6 +175,19 @@ namespace Incursio.Classes
 
         }
 
+        public virtual void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
+        {
+
+        }
+
+        protected virtual void notifyUnderAttack()
+        {
+            PlayerManager.getInstance().notifyPlayer(
+                this.owner,
+                new GameEvent(State.EventType.UNDER_ATTACK, /*SOUND,*/ "We're Under Attack!", this.location)
+            );
+        }
+
         #region Getters/Setters
         public virtual void setType(State.EntityName name)
         {

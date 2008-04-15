@@ -146,5 +146,56 @@ namespace Incursio.Classes
       {
           this.currentState = State.StructureState.Attacking;
       }
+
+      public override void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
+      {
+          this.visible = true;
+          this.justDrawn = false;
+          //onScreen = currentMap.positionOnScreen(this.getLocation());
+          //Rectangle unit = new Rectangle(this.getLocation().x, this.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+          Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.location);
+          Rectangle unit = this.boundingBox;
+
+          if (this.currentState == State.StructureState.BeingBuilt)
+          {
+              //TODO: draw construction?
+          }
+          else if (this.currentState == State.StructureState.Building)
+          {
+              //TODO: draw something special for when the structure is building something (fires flickering or w/e)
+              if (this.getPlayer() == State.PlayerId.HUMAN)
+              {
+                  spriteBatch.Draw(TextureBank.EntityTextures.guardTowerTexturePlayer,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.guardTowerTexturePlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.guardTowerTexturePlayer.Height * 0.80),
+                      TextureBank.EntityTextures.guardTowerTexturePlayer.Width, TextureBank.EntityTextures.guardTowerTexturePlayer.Height), Color.White);
+              }
+              else
+              {
+                  spriteBatch.Draw(TextureBank.EntityTextures.guardTowerTextureComputer,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.guardTowerTextureComputer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.guardTowerTextureComputer.Height * 0.80),
+                      TextureBank.EntityTextures.guardTowerTextureComputer.Width, TextureBank.EntityTextures.guardTowerTextureComputer.Height), Color.White);
+              }
+
+          }
+          else if (this.currentState == State.StructureState.Destroyed)
+          {
+              //TODO: building asploded
+          }
+          else if (this.currentState == State.StructureState.Idle || this.currentState == State.StructureState.Attacking)
+          {
+              if (this.getPlayer() == State.PlayerId.HUMAN)
+              {
+                  spriteBatch.Draw(TextureBank.EntityTextures.guardTowerTexturePlayer,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.guardTowerTexturePlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.guardTowerTexturePlayer.Height * 0.80),
+                      TextureBank.EntityTextures.guardTowerTexturePlayer.Width, TextureBank.EntityTextures.guardTowerTexturePlayer.Height), Color.White);
+              }
+              else
+              {
+                  spriteBatch.Draw(TextureBank.EntityTextures.guardTowerTextureComputer,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.guardTowerTextureComputer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.guardTowerTextureComputer.Height * 0.80),
+                      TextureBank.EntityTextures.guardTowerTextureComputer.Width, TextureBank.EntityTextures.guardTowerTextureComputer.Height), Color.White);
+              }
+          }
+      }
     }
 }
