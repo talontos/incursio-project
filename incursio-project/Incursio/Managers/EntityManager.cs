@@ -9,6 +9,7 @@ using Incursio.Managers;
 using Incursio.Interface;
 using Incursio.Utils;
 using Incursio.Commands;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Incursio.Managers
 {
@@ -528,6 +529,10 @@ namespace Incursio.Managers
             }
 
             selectedUnits.AddRange(groups[groupNum]);
+        }
+
+        public Color getColorMask(State.PlayerId player){
+            return (player == State.PlayerId.HUMAN ? Color.White : Color.OrangeRed);
         }
 
     }
