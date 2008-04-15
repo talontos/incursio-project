@@ -45,8 +45,21 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.lightInfantrySouth = Content.Load<Texture2D>(@"infantry_still");
             TextureBank.EntityTextures.lightInfantryNorth = Content.Load<Texture2D>(@"infantry_back");
             TextureBank.EntityTextures.lightInfantryDead = Content.Load<Texture2D>(@"infantry_dead");
-            TextureBank.EntityTextures.lightInfantryMovingWest = Content.Load<Texture2D>(@"Infantry_Moving_left");
             TextureBank.EntityTextures.lightInfantryMovingEast = Content.Load<Texture2D>(@"Infantry_Moving_right");
+            TextureBank.EntityTextures.lightInfantryMovingWest = Content.Load<Texture2D>(@"Infantry_Moving_left");
+            //TextureBank.EntityTextures.lightInfantryMovingNorth = Content.Load<Texture2D>(@"Infantry_Moving_Down");
+            //TextureBank.EntityTextures.lightInfantryMovingSouth = Content.Load<Texture2D>(@"Infantry_Moving_Up");
+            //TextureBank.EntityTextures.lightInfantryAttackingEast = Content.Load<Texture2D>(@"LightInfantry_Attacking_East");
+            //TextureBank.EntityTextures.lightInfantryAttackingWest = Content.Load<Texture2D>(@"LightInfantry_Attacking_West");
+            //TextureBank.EntityTextures.lightInfantryDeath_East = Content.Load<Texture2D>(@"LightInfantry_Death");
+            //TextureBank.EntityTextures.lightInfantryDeath_West = Content.Load<Texture2D>(@"LightInfantry_Death_Left");
+
+            TextureBank.EntityTextures.lightInfantryMovingNorth = Content.Load<Texture2D>(@"infantry_back");
+            TextureBank.EntityTextures.lightInfantryMovingSouth = Content.Load<Texture2D>(@"infantry_still");
+            TextureBank.EntityTextures.lightInfantryAttackingEast = Content.Load<Texture2D>(@"infantry_still");
+            TextureBank.EntityTextures.lightInfantryAttackingWest = Content.Load<Texture2D>(@"infantry_still");
+            TextureBank.EntityTextures.lightInfantryDeath_East = Content.Load<Texture2D>(@"infantry_dead");
+            TextureBank.EntityTextures.lightInfantryDeath_West = Content.Load<Texture2D>(@"infantry_dead");
 
             TextureBank.EntityTextures.heavyInfantryEast = Content.Load<Texture2D>(@"HeavyInfantryEast");
             TextureBank.EntityTextures.heavyInfantryWest = Content.Load<Texture2D>(@"HeavyInfantryWest");
@@ -69,6 +82,19 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.archerDead = Content.Load<Texture2D>(@"Archer_dead");
             TextureBank.EntityTextures.archerMovingWest = Content.Load<Texture2D>(@"Archer_Moving_Left");
             TextureBank.EntityTextures.archerMovingEast = Content.Load<Texture2D>(@"Archer_Moving_Right");
+            //TextureBank.EntityTextures.lightInfantryMovingNorth = Content.Load<Texture2D>(@"Infantry_Moving_Down");
+            //TextureBank.EntityTextures.lightInfantryMovingSouth = Content.Load<Texture2D>(@"Infantry_Moving_Up");
+            //TextureBank.EntityTextures.lightInfantryAttackingEast = Content.Load<Texture2D>(@"LightInfantry_Attacking_East");
+            //TextureBank.EntityTextures.lightInfantryAttackingWest = Content.Load<Texture2D>(@"LightInfantry_Attacking_West");
+            //TextureBank.EntityTextures.lightInfantryDeath_East = Content.Load<Texture2D>(@"LightInfantry_Death");
+            //TextureBank.EntityTextures.lightInfantryDeath_West = Content.Load<Texture2D>(@"LightInfantry_Death_Left");
+
+            TextureBank.EntityTextures.archerMovingNorth = Content.Load<Texture2D>(@"archer_back");
+            TextureBank.EntityTextures.archerMovingSouth = Content.Load<Texture2D>(@"archer_still");
+            TextureBank.EntityTextures.archerAttackingEast = Content.Load<Texture2D>(@"archer_still");
+            TextureBank.EntityTextures.archerAttackingWest = Content.Load<Texture2D>(@"archer_still");
+            TextureBank.EntityTextures.archerDeath_East = Content.Load<Texture2D>(@"archer_dead");
+            TextureBank.EntityTextures.archerDeath_West = Content.Load<Texture2D>(@"archer_dead");
 
             //TODO: get hero textures
             //TextureBank.EntityTextures.heroEast = Content.Load<Texture2D>(@"");
@@ -126,6 +152,7 @@ namespace Incursio.Managers
 
             //Load terrain textures
             TextureBank.MapTiles.grass = Content.Load<Texture2D>(@"GrassTile1");
+            TextureBank.MapTiles.tree1 = Content.Load<Texture2D>(@"Tree1");
         }
 
 

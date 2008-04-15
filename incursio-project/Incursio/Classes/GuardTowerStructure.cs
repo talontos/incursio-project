@@ -55,6 +55,7 @@ namespace Incursio.Classes
 
       public override bool attackTarget()
       {
+          return true;
           //if target is in attackRange, attack it!
           if (map.getCellDistance(location, target.location) < attackRange)
           {
@@ -139,6 +140,11 @@ namespace Incursio.Classes
       public override void setTarget(BaseGameEntity target)
       {
           this.target = target;
+      }
+
+      public override void setAttacking()
+      {
+          this.currentState = State.StructureState.Attacking;
       }
     }
 }

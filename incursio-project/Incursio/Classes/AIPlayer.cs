@@ -33,6 +33,9 @@ namespace Incursio.Classes
 
         public override void update(Microsoft.Xna.Framework.GameTime gameTime)
         {
+            //Make sure we always have money
+            if (this.MONETARY_UNIT < 100)
+                this.MONETARY_UNIT += 100;
             //base currently only processes messages, which we no longer need to do here
             //base.update(gameTime);
 

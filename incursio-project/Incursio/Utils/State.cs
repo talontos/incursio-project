@@ -38,6 +38,8 @@ namespace Incursio
                             //                   }-- Do we need two states?  Could just be 'InCombat'
             UnderAttack,    //Being attacked    /
 
+            Capturing,
+
             Dead,
 
             Buried,
@@ -133,6 +135,7 @@ namespace Incursio
             ATTACK_MOVE,
             STOP,
             FOLLOW,
+            CAPTURE,
             GUARD,
             BUILD,
         }

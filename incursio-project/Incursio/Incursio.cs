@@ -543,6 +543,44 @@ namespace Incursio
                                     }
                                 }
                             }
+                            else if ((e as LightInfantryUnit).getDirection() == State.Direction.South)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryMovingSouth,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantrySouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantrySouth.Height * 0.80),
+                                    TextureBank.EntityTextures.lightInfantrySouth.Width, TextureBank.EntityTextures.lightInfantrySouth.Height),
+                                    new Rectangle(e.currentFrameX, e.currentFrameY, 25, 38), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX < TextureBank.EntityTextures.lightInfantryMovingSouth.Width - 50)
+                                    {
+                                        e.currentFrameX = e.currentFrameX + 25;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = 0;
+                                    }
+                                }
+                            }
+                            else if ((e as LightInfantryUnit).getDirection() == State.Direction.North)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryMovingNorth,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantryNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryNorth.Height * 0.80),
+                                    TextureBank.EntityTextures.lightInfantryNorth.Width, TextureBank.EntityTextures.lightInfantryNorth.Height),
+                                    new Rectangle(e.currentFrameX, e.currentFrameY, 25, 38), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX < TextureBank.EntityTextures.lightInfantryMovingNorth.Width - 50)
+                                    {
+                                        e.currentFrameX = e.currentFrameX + 25;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = 0;
+                                    }
+                                }
+                            }
                         }
                         else if ((e as LightInfantryUnit).getCurrentState() == State.UnitState.UnderAttack)
                         {
@@ -915,6 +953,44 @@ namespace Incursio
                                     if (e.currentFrameX < TextureBank.EntityTextures.archerMovingEast.Width - 20)
                                     {
                                         e.currentFrameX = e.currentFrameX + 20;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = 0;
+                                    }
+                                }
+                            }
+                            else if ((e as ArcherUnit).getDirection() == State.Direction.South)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.archerMovingSouth,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerSouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerSouth.Height * 0.80),
+                                    TextureBank.EntityTextures.archerSouth.Width, TextureBank.EntityTextures.archerSouth.Height),
+                                    new Rectangle(e.currentFrameX, e.currentFrameY, 25, 38), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX < TextureBank.EntityTextures.archerMovingSouth.Width - 50)
+                                    {
+                                        e.currentFrameX = e.currentFrameX + 25;
+                                    }
+                                    else
+                                    {
+                                        e.currentFrameX = 0;
+                                    }
+                                }
+                            }
+                            else if ((e as ArcherUnit).getDirection() == State.Direction.North)
+                            {
+                                spriteBatch.Draw(TextureBank.EntityTextures.archerMovingNorth,
+                                    new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerNorth.Height * 0.80),
+                                    TextureBank.EntityTextures.archerNorth.Width, TextureBank.EntityTextures.archerNorth.Height),
+                                    new Rectangle(e.currentFrameX, e.currentFrameY, 25, 38), Color.White);
+
+                                if (frameTimer >= FRAME_LENGTH)
+                                {
+                                    if (e.currentFrameX < TextureBank.EntityTextures.archerMovingNorth.Width - 50)
+                                    {
+                                        e.currentFrameX = e.currentFrameX + 25;
                                     }
                                     else
                                     {
