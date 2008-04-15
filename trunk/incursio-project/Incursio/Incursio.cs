@@ -36,9 +36,9 @@ namespace Incursio
         MessageManager messageManager;
         
         //Sound Stuff
-        //SoundManager soundManager;              //does sound stuff
-        int x = -1;
-        ISoundEngine engine = new ISoundEngine();
+        SoundManager soundManager;              //does sound stuff
+        //int x = -1;
+        //ISoundEngine engine = new ISoundEngine();
         
         //Game Time keeping
         float frameTime;
@@ -95,7 +95,7 @@ namespace Incursio
             playerManager = PlayerManager.getInstance();
             messageManager = MessageManager.getInstance();
 
-            //soundManager = SoundManager.getInstance();
+            soundManager = SoundManager.getInstance();
             
             //set the window size to 1024x768
             this.graphics.PreferredBackBufferWidth = 1024;
@@ -268,12 +268,14 @@ namespace Incursio
                     newGameButton.Update(cursor);
                     exitGameButton.Update(cursor);
 
-                    if (x < 0)
-                    {
-                        engine.Play2D("../../../Content/Audio/explosion.wav");
-                        engine.Play2D("../../../Content/Audio/Thunderhorse.mp3", true);
-                    }
-                    x = 1;
+                    //if (x < 0)
+                    //{
+                    //    engine.Play2D("../../../Content/Audio/explosion.wav");
+                    //    engine.Play2D("../../../Content/Audio/Thunderhorse.mp3", true);
+                    //}
+                    //x = 1;
+
+                    SoundManager.getInstance().PlaySound("../../../Content/Audio/Thunderhorse.mp3", false);
 
                     if (!newGameButton.getPressed() && newGameButton.getFocus())
                     {
