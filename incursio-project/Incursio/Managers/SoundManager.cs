@@ -10,9 +10,13 @@ namespace Incursio.Managers
 {
     class SoundManager
     {
-        
         ISoundEngine soundEngine = null;
         private static SoundManager instance = null;
+
+        private SoundManager()
+        {
+            soundEngine = new ISoundEngine();
+        }
 
         //creates an instance of the sound manager
         public static SoundManager getInstance()
@@ -20,7 +24,7 @@ namespace Incursio.Managers
             if (instance == null)
             {
                 instance = new SoundManager();
-                instance.InitializeEngine();
+                //instance.InitializeEngine();
             }
             return instance;
         }
@@ -53,11 +57,14 @@ namespace Incursio.Managers
         {
             try
             {
-                soundEngine.Play2D(filename, loop);
+                if (soundEngine.IsCurrentlyPlaying(filename) == false)
+                {
+                    soundEngine.Play2D(filename, loop);
+                }
             }
             catch (NullReferenceException e)
             {
-                Console.WriteLine("Null Reference Exception Found!");
+                Console.WriteLine("\n Null Reference Exception Found!");
                 Console.WriteLine("Song File error");
                 Console.WriteLine(e);
             }
@@ -66,7 +73,7 @@ namespace Incursio.Managers
         //Stops the sound
         public void StopSound(String file)
         {
-            //method isn't needed using irrKlang
+            soundEngine.StopAllSounds();
         }
 
         public ISoundEngine getAudioEngine()
