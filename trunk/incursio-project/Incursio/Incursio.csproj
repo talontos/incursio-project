@@ -96,11 +96,14 @@
     <Compile Include="Classes\PathFinding\MovableObject.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Structure.cs" />
+    <Compile Include="Classes\Terrain\Grass.cs" />
+    <Compile Include="Classes\Terrain\Tree.cs" />
     <Compile Include="Classes\Unit.cs" />
     <Compile Include="Commands\AttackCommand.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\BuildCommand.cs" />
     <Compile Include="Commands\AttackMoveCommand.cs" />
+    <Compile Include="Commands\CaptureCommand.cs" />
     <Compile Include="Commands\FollowCommand.cs" />
     <Compile Include="Commands\GuardCommand.cs" />
     <Compile Include="Commands\MoveCommand.cs" />

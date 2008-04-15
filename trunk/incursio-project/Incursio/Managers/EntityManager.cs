@@ -182,10 +182,11 @@ namespace Incursio.Managers
                             selectedUnits.ForEach(delegate (BaseGameEntity u){
                                 if (u is HeavyInfantryUnit)
                                 {
-                                    (e as ControlPoint).startCap((u as HeavyInfantryUnit));
+                                    EntityManager.getInstance().issueCommand_SingleEntity(State.Command.CAPTURE, false, u, e);
                                 }
-
-                                EntityManager.getInstance().issueCommand(State.Command.MOVE, false, null, e.getLocation());
+                                else{
+                                    EntityManager.getInstance().issueCommand(State.Command.MOVE, false, null, e.getLocation());
+                                }
                             });
                         }
                         //NOW, if unit is enemy, selected units attack!
@@ -394,9 +395,11 @@ namespace Incursio.Managers
                         {
 
                         }
-                        else
+                        else{
                             command = new AttackCommand(args[0] as BaseGameEntity);
-                            (e as Unit).setCurrentState(State.UnitState.Attacking);
+                            e.setAttacking();
+                        }
+                         
                         break;
 
                     ////////////////////////
@@ -422,6 +425,15 @@ namespace Incursio.Managers
                     case State.Command.BUILD:
                         //TODO: We probably shouldn't be passing unit objects through all this
                         command = new BuildCommand(args[0] as BaseGameEntity);
+                        break;
+
+                    ////////////////////////
+                    case State.Command.CAPTURE:
+                        //try in case args[0] is not a controlpoint
+                        try{
+                            command = new CaptureCommand(args[0] as ControlPoint);
+                        }
+                        finally{}
                         break;
 
                     ////////////////////////

@@ -22,8 +22,14 @@ namespace Incursio.Managers
             public static Texture2D lightInfantrySouth;
             public static Texture2D lightInfantryNorth;
             public static Texture2D lightInfantryDead;
-            public static Texture2D lightInfantryMovingWest;
             public static Texture2D lightInfantryMovingEast;
+            public static Texture2D lightInfantryMovingWest;
+            public static Texture2D lightInfantryMovingSouth;
+            public static Texture2D lightInfantryMovingNorth;
+            public static Texture2D lightInfantryAttackingEast;
+            public static Texture2D lightInfantryAttackingWest;
+            public static Texture2D lightInfantryDeath_East;
+            public static Texture2D lightInfantryDeath_West;
 
             public static Texture2D heavyInfantryEast;
             public static Texture2D heavyInfantryWest;
@@ -45,6 +51,12 @@ namespace Incursio.Managers
             public static Texture2D archerDead;
             public static Texture2D archerMovingWest;
             public static Texture2D archerMovingEast;
+            public static Texture2D archerMovingSouth;
+            public static Texture2D archerMovingNorth;
+            public static Texture2D archerAttackingEast;
+            public static Texture2D archerAttackingWest;
+            public static Texture2D archerDeath_East;
+            public static Texture2D archerDeath_West;
 
             public static Texture2D heroEast;
             public static Texture2D heroWest;

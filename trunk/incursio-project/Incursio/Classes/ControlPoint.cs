@@ -40,6 +40,7 @@ namespace Incursio.Classes
             heroStartingHealth = capturingHero.health;
             timeSpentCapping = 0;
             capping = true;
+            
         }
 
         public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
@@ -57,7 +58,7 @@ namespace Incursio.Classes
                 else
                 {
                     //if the hero gets attacked, cancel capping
-                    if (capturingHero.getCurrentState() == State.UnitState.Attacking || capturingHero.health < heroStartingHealth)
+                    if (capturingHero.getCurrentState() != State.UnitState.Capturing || capturingHero.health < heroStartingHealth)
                     {
                         capping = false;
                         timeSpentCapping = 0;

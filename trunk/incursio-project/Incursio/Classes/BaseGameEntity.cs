@@ -53,8 +53,10 @@ namespace Incursio.Classes
             //TODO: draw unit here?
             //TODO: check if i'm clicked?
 
-            if (this.isDead())
+            if (this.isDead()){
+                this.updateOccupancy(false);
                 return;
+            }
 
             if (orders.Count > 0){
                 //check validity of next command

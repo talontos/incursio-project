@@ -10,6 +10,7 @@ using Incursio.Interface;
 
 using Incursio.Utils;
 using Incursio.Managers;
+using Incursio.Classes.Terrain;
 
 namespace Incursio.Classes
 {
@@ -428,13 +429,15 @@ namespace Incursio.Classes
         }
 
         public virtual void loadTerrain(){
-            //for now, do this
-            BaseMapEntity tex1 = new BaseMapEntity(TextureBank.MapTiles.grass);
+            //Cover map with grass
+            Grass grass;
             for (int j = 0; j < this.height; j++)
             {
                 for (int i = 0; i < this.width; i++)
                 {
-                    this.addMapEntity(tex1, i, j);
+                    grass = new Grass(i, j);
+                    this.addMapEntity(grass, i, j);
+                    //grass doesn't need to set occupancy
                 }
             }
         }

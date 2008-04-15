@@ -27,14 +27,31 @@ namespace Incursio.Classes
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime, AIPlayer player){
             //BUILD MY ARMY
             //TODO: Improve - this currently just constantly builds light infantry!
-            EntityManager.getInstance().getLivePlayerStructures(player.id).ForEach(delegate(Structure s)
-            {
-                if(s.isConstructor){
-                    if( !(s as CampStructure).isBuilding() ){
-                        (s as CampStructure).build(new LightInfantryUnit());
+            List<Structure> myGuys = EntityManager.getInstance().getLivePlayerStructures(player.id);
+            
+            if(EntityManager.getInstance().getLivePlayerUnits(player.id).Count < 15){
+                //build Army
+                myGuys.ForEach(delegate(Structure s)
+                {
+                    if(s.isConstructor){
+                        if( !(s as CampStructure).isBuilding() ){
+
+                            int randU = Incursio.rand.Next(0, 100);
+
+                            if(randU > 60)
+                                (s as CampStructure).build(new LightInfantryUnit());
+
+                            else if (randU > 30)
+                                (s as CampStructure).build(new ArcherUnit());
+
+                            else
+                                (s as CampStructure).build(new HeavyInfantryUnit());
+
+                            s.setDestination(new Coordinate(Incursio.rand.Next(20, 2000), Incursio.rand.Next(20, 2000)));
+                        }
                     }
-                }
-            });
+                });
+            }
 
             //TODO: CHECK EVENTS
 

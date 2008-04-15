@@ -5,6 +5,7 @@ using System.Text;
 using Incursio.Classes;
 using Incursio.Managers;
 using Incursio.Utils;
+using Incursio.Classes.Terrain;
 
 namespace Incursio.Campaign
 {
@@ -40,6 +41,27 @@ namespace Incursio.Campaign
             ControlPoint cp3 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
             ControlPoint cp4 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.HUMAN);
 
+            GuardTowerStructure gth1 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.HUMAN);
+            GuardTowerStructure gth2 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.HUMAN);
+            GuardTowerStructure gth3 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.HUMAN);
+
+            GuardTowerStructure gt1 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
+            GuardTowerStructure gt2 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
+            GuardTowerStructure gt3 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
+            GuardTowerStructure gt4 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
+            GuardTowerStructure gt5 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
+            GuardTowerStructure gt6 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
+
+            gth1.setLocation(new Coordinate(75, 700));
+            gth2.setLocation(new Coordinate(700, 100));
+            gth3.setLocation(new Coordinate(600, 500));
+
+            gt1.setLocation(new Coordinate(900, 900));
+            gt2.setLocation(new Coordinate(300, 1500));
+            gt3.setLocation(new Coordinate(1400, 400));
+            gt4.setLocation(new Coordinate(1500, 1300));
+            gt5.setLocation(new Coordinate(1300, 1600));
+            gt6.setLocation(new Coordinate(1775, 1200));
 
             infUnit.setLocation(new Coordinate(700, 100));
             heavyUnit.setLocation(new Coordinate(300, 100));
@@ -53,6 +75,24 @@ namespace Incursio.Campaign
 
             playerCamp.setHealth(350);
             computerCamp.setHealth(350);
+        }
+
+        public override void loadTerrain()
+        {
+            //load grass
+            base.loadTerrain();
+
+            //load whatever for this map
+
+            //um, trees
+            /*
+            Tree[] trees = {new Tree(20, 2),
+                            new Tree(10, 50)};
+
+            for(int i = 0; i < trees.Length; i++){
+                trees[i].addToMap(this);
+            }
+             * */
         }
     }
 }
