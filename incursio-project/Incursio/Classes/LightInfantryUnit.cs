@@ -4,6 +4,8 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 
 using Incursio.Managers;
+using Microsoft.Xna.Framework;
+using Incursio.Utils;
 
 namespace Incursio.Classes
 {
@@ -37,6 +39,206 @@ namespace Incursio.Classes
               myRef.Width,
               myRef.Height
           );
+      }
+
+      public override void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
+      {
+
+          this.visible = true;
+          this.justDrawn = true;
+          Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.location);
+          //Rectangle unit = new Rectangle(this.getLocation().x, this.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+          Rectangle unit = this.boundingBox;
+
+          //depending on the unit's state, draw their textures
+          //idle
+          if (this.currentState == State.UnitState.Idle)
+          {
+              switch(this.directionState){
+                  
+                  case State.Direction.Still:
+                  case State.Direction.South:
+                      spriteBatch.Draw(TextureBank.EntityTextures.lightInfantrySouth,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantrySouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantrySouth.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantrySouth.Width, TextureBank.EntityTextures.lightInfantrySouth.Height), Color.White);
+                      break;
+
+                  case State.Direction.East:
+                      spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryEast,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantryEast.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryEast.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantryEast.Width, TextureBank.EntityTextures.lightInfantryEast.Height), Color.White);
+                      break;
+
+                  case State.Direction.West:
+                      spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryWest,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantryWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryWest.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantryWest.Width, TextureBank.EntityTextures.lightInfantryWest.Height), Color.White);
+                      break;
+
+                  case State.Direction.North:
+                      spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryNorth,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantryNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryNorth.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantryNorth.Width, TextureBank.EntityTextures.lightInfantryNorth.Height), Color.White);
+                      break;
+              }
+              
+          }
+          else if (this.currentState == State.UnitState.Attacking)
+          {
+              switch (this.directionState){
+                  case State.Direction.West:
+                  case State.Direction.North:
+                      spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryAttackingWest,
+                      new Rectangle(onScreen.x - (25 / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryWest.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantryWest.Width, TextureBank.EntityTextures.lightInfantryWest.Height),
+                      new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 25, 30), Color.White);
+
+                      if (frameTimer >= FRAME_LENGTH)
+                      {
+                          if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.lightInfantryAttackingWest.Width - 25)
+                          {
+                              this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 25;
+                          }
+                          else
+                          {
+                              this.currentFrameXAttackDeath = 0;
+                          }
+                      }
+                      break;
+
+                  case State.Direction.East:
+                  case State.Direction.South:
+                      spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryAttackingEast,
+                      new Rectangle(onScreen.x - (25 / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryEast.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantryEast.Width, TextureBank.EntityTextures.lightInfantryEast.Height),
+                      new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 25, 30), Color.White);
+
+                      if (frameTimer >= FRAME_LENGTH)
+                      {
+                          if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.lightInfantryAttackingEast.Width - 25)
+                          {
+                              this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 25;
+                          }
+                          else
+                          {
+                              this.currentFrameXAttackDeath = 0;
+                          }
+                      }
+                      break;
+              }
+          }
+          else if (this.currentState == State.UnitState.Dead)
+          {
+              //TODO:
+              //Dead stuff
+              spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryDead,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantryDead.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryDead.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantryDead.Width, TextureBank.EntityTextures.lightInfantryDead.Height), Color.White);
+
+          }
+          else if (this.currentState == State.UnitState.Guarding)
+          {
+              //TODO:
+              //Guarding Animation
+          }
+          else if (this.currentState == State.UnitState.Moving)
+          {
+
+              switch(this.directionState){
+                  case State.Direction.West:
+                      spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryMovingWest,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantryWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryWest.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantryWest.Width, TextureBank.EntityTextures.lightInfantryWest.Height),
+                      new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), Color.White);
+
+                      if (frameTimer >= FRAME_LENGTH)
+                      {
+                          if (this.currentFrameX < TextureBank.EntityTextures.lightInfantryMovingWest.Width - 20)
+                          {
+                              this.currentFrameX = this.currentFrameX + 20;
+                          }
+                          else
+                          {
+                              this.currentFrameX = 0;
+                          }
+                      }
+                      break;
+
+                  case State.Direction.East:
+                      spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryMovingEast,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantryEast.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryEast.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantryEast.Width, TextureBank.EntityTextures.lightInfantryEast.Height),
+                      new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), Color.White);
+
+                      if (frameTimer >= FRAME_LENGTH)
+                      {
+                          if (this.currentFrameX < TextureBank.EntityTextures.lightInfantryMovingEast.Width - 20)
+                          {
+                              this.currentFrameX = this.currentFrameX + 20;
+                          }
+                          else
+                          {
+                              this.currentFrameX = 0;
+                          }
+                      }
+                      break;
+
+                  case State.Direction.South:
+                      spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryMovingSouth,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantrySouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantrySouth.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantrySouth.Width, TextureBank.EntityTextures.lightInfantrySouth.Height),
+                      new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), Color.White);
+
+                      if (frameTimer >= FRAME_LENGTH)
+                      {
+                          if (this.currentFrameX < TextureBank.EntityTextures.lightInfantryMovingSouth.Width - 20)
+                          {
+                              this.currentFrameX = this.currentFrameX + 20;
+                          }
+                          else
+                          {
+                              this.currentFrameX = 0;
+                          }
+                      }
+                      break;
+
+                  case State.Direction.North:
+                      spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryMovingNorth,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantryNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryNorth.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantryNorth.Width, TextureBank.EntityTextures.lightInfantryNorth.Height),
+                      new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), Color.White);
+
+                      if (frameTimer >= FRAME_LENGTH)
+                      {
+                          if (this.currentFrameX < TextureBank.EntityTextures.lightInfantryMovingNorth.Width - 20)
+                          {
+                              this.currentFrameX = this.currentFrameX + 20;
+                          }
+                          else
+                          {
+                              this.currentFrameX = 0;
+                          }
+                      }
+                      break;
+              }
+
+          }
+          else if (this.currentState == State.UnitState.UnderAttack)
+          {
+              //TODO:
+              //Under Attack Animation
+              spriteBatch.Draw(TextureBank.EntityTextures.lightInfantrySouth,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantrySouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantrySouth.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantrySouth.Width, TextureBank.EntityTextures.lightInfantrySouth.Height), Color.Red);
+          }
+          else
+          {
+              spriteBatch.Draw(TextureBank.EntityTextures.lightInfantrySouth,
+                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantrySouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantrySouth.Height * 0.80),
+                      TextureBank.EntityTextures.lightInfantrySouth.Width, TextureBank.EntityTextures.lightInfantrySouth.Height), Color.White);
+          }
+
+      
       }
     }
 }

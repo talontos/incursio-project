@@ -154,5 +154,47 @@ namespace Incursio.Classes
         {
             //I CANNOT BE DESTROYED, FOR I AM THE CONTROL POINT!!!!
         }
+
+        public override void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
+        {
+            this.visible = true;
+            //onScreen = currentMap.positionOnScreen(this.getLocation());
+            //Rectangle unit = new Rectangle(this.getLocation().x, this.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+            Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.location);
+            Rectangle unit = this.boundingBox;
+
+            if (this.currentState == State.StructureState.Building)
+            {
+                //TODO: draw something special for when the structure is building something (fires flickering or w/e)
+                if (this.getPlayer() == State.PlayerId.HUMAN)
+                {
+                    spriteBatch.Draw(TextureBank.EntityTextures.controlPointPlayer,
+                        new Rectangle(onScreen.x - (TextureBank.EntityTextures.controlPointPlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.controlPointPlayer.Height * 0.80),
+                        TextureBank.EntityTextures.controlPointPlayer.Width, TextureBank.EntityTextures.controlPointPlayer.Height), Color.White);
+                }
+                else
+                {
+                    spriteBatch.Draw(TextureBank.EntityTextures.controlPointComputer,
+                        new Rectangle(onScreen.x - (TextureBank.EntityTextures.controlPointComputer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.controlPointComputer.Height * 0.80),
+                        TextureBank.EntityTextures.controlPointComputer.Width, TextureBank.EntityTextures.controlPointComputer.Height), Color.White);
+                }
+
+            }
+            else if (this.currentState == State.StructureState.Idle || this.currentState == State.StructureState.Attacking)
+            {
+                if (this.getPlayer() == State.PlayerId.HUMAN)
+                {
+                    spriteBatch.Draw(TextureBank.EntityTextures.controlPointPlayer,
+                        new Rectangle(onScreen.x - (TextureBank.EntityTextures.controlPointPlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.controlPointPlayer.Height * 0.80),
+                        TextureBank.EntityTextures.controlPointPlayer.Width, TextureBank.EntityTextures.controlPointPlayer.Height), Color.White);
+                }
+                else
+                {
+                    spriteBatch.Draw(TextureBank.EntityTextures.controlPointComputer,
+                        new Rectangle(onScreen.x - (TextureBank.EntityTextures.controlPointComputer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.controlPointComputer.Height * 0.80),
+                        TextureBank.EntityTextures.controlPointComputer.Width, TextureBank.EntityTextures.controlPointComputer.Height), Color.White);
+                }
+            }
+        }
     }
 }

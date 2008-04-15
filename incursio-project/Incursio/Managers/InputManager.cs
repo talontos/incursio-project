@@ -91,6 +91,61 @@ namespace Incursio.Managers
 
             }
 
+            if (this.keyPressed(Keys.Space)){
+                //TODO: RESPOND TO MESSAGES
+            }
+
+            #region GROUP_SET_SELECT
+            if (this.keyPressed(Keys.NumPad0) || this.keyPressed(Keys.D0))
+            {
+                setSelectGroup(0);
+            }
+
+            if (this.keyPressed(Keys.NumPad1) || this.keyPressed(Keys.D1))
+            {
+                setSelectGroup(1);
+            }
+
+            if (this.keyPressed(Keys.NumPad2) || this.keyPressed(Keys.D2))
+            {
+                setSelectGroup(2);
+            }
+
+            if (this.keyPressed(Keys.NumPad3) || this.keyPressed(Keys.D3))
+            {
+                setSelectGroup(3);
+            }
+
+            if (this.keyPressed(Keys.NumPad4) || this.keyPressed(Keys.D4))
+            {
+                setSelectGroup(4);
+            }
+
+            if (this.keyPressed(Keys.NumPad5) || this.keyPressed(Keys.D5))
+            {
+                setSelectGroup(5);
+            }
+
+            if (this.keyPressed(Keys.NumPad6) || this.keyPressed(Keys.D6))
+            {
+                setSelectGroup(6);
+            }
+
+            if (this.keyPressed(Keys.NumPad7) || this.keyPressed(Keys.D7))
+            {
+                setSelectGroup(7);
+            }
+
+            if (this.keyPressed(Keys.NumPad8) || this.keyPressed(Keys.D8))
+            {
+                setSelectGroup(8);
+            }
+
+            if (this.keyPressed(Keys.NumPad9) || this.keyPressed(Keys.D9))
+            {
+                setSelectGroup(9);
+            }
+            #endregion
 
             #endregion
 
@@ -179,6 +234,11 @@ namespace Incursio.Managers
             return (keyStateCurrent.IsKeyDown(Keys.LeftAlt) || keyStateCurrent.IsKeyDown(Keys.RightAlt));
         }
 
+        public bool ctrling()
+        {
+            return (keyStateCurrent.IsKeyDown(Keys.LeftControl) || keyStateCurrent.IsKeyDown(Keys.RightControl));
+        }
+
         public bool rightClick(){
             return (mouseStateCurrent.RightButton == ButtonState.Pressed
                  && mouseStatePrev.RightButton == ButtonState.Released);
@@ -231,6 +291,17 @@ namespace Incursio.Managers
                     getVisibleSelectionRectangle(), 
                     Microsoft.Xna.Framework.Graphics.Color.Blue
             );
+        }
+
+        private void setSelectGroup(int groupNum){
+            if(ctrling()){
+                //assigning group
+                EntityManager.getInstance().assignGroup(groupNum);
+            }
+            else{
+                //selecting group
+                EntityManager.getInstance().selectGroup(groupNum);
+            }
         }
     }
 }

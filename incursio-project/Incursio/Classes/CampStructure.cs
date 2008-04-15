@@ -220,7 +220,7 @@ namespace Incursio.Classes
                         this.owner,
                         new GameEvent(State.EventType.CREATION_COMPLETE,
                         /*SOUND,*/
-                            "Construction Complete",
+                            "Unit Ready",
                             this.location
                         )
                     );
@@ -335,6 +335,100 @@ namespace Incursio.Classes
         public override void issueSingleOrder(BaseCommand order)
         {
             base.issueImmediateOrder(order);
+        }
+
+        public override void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
+        {
+            this.visible = true;
+            this.justDrawn = false;
+            //onScreen = currentMap.positionOnScreen(this.getLocation());
+            //Rectangle unit = new Rectangle(this.getLocation().x, this.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+            Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.location);
+            Rectangle unit = this.boundingBox;
+
+            if (this.currentState == State.StructureState.BeingBuilt)
+            {
+                //TODO: draw construction?
+            }
+            else if (this.currentState == State.StructureState.Building)
+            {
+                //TODO: draw something special for when the structure is building something (fires flickering or w/e)
+                if (this.getPlayer() == State.PlayerId.HUMAN)
+                {
+                    spriteBatch.Draw(TextureBank.EntityTextures.campTexturePlayerBuilding,
+                        new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTexturePlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTexturePlayer.Height * 0.80),
+                        TextureBank.EntityTextures.campTexturePlayer.Width, TextureBank.EntityTextures.campTexturePlayer.Height),
+                        new Rectangle(this.currentFrameX, this.currentFrameY, 64, 64), Color.White);
+
+                    if (frameTimer >= FRAME_LENGTH)
+                    {
+                        if (this.currentFrameX < TextureBank.EntityTextures.campTexturePlayerBuilding.Width - 64)
+                        {
+                            this.currentFrameX = this.currentFrameX + 64;
+                        }
+                        else
+                        {
+                            this.currentFrameX = 0;
+                        }
+                    }
+                }
+                else
+                {
+                    spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputer,
+                        new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTextureComputer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTextureComputer.Height * 0.80),
+                        TextureBank.EntityTextures.campTextureComputer.Width, TextureBank.EntityTextures.campTextureComputer.Height), Color.White);
+                }
+
+            }
+            else if (this.currentState == State.StructureState.Destroyed)
+            {
+                //TODO: building asploded
+                if (this.getPlayer() == State.PlayerId.HUMAN)
+                {
+                    spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputerExploded,
+                        new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTextureComputerDestroyed.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTextureComputerDestroyed.Height * 0.80),
+                        TextureBank.EntityTextures.campTextureComputerDestroyed.Width, TextureBank.EntityTextures.campTextureComputerDestroyed.Height), Color.White);
+                }
+                else
+                {
+                    spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputerExploded,
+                        new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTextureComputerDestroyed.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTextureComputerDestroyed.Height * 0.80),
+                        TextureBank.EntityTextures.campTextureComputerDestroyed.Width, TextureBank.EntityTextures.campTextureComputerDestroyed.Height), Color.White);
+                }
+            }
+            else if (this.currentState == State.StructureState.Idle)
+            {
+                if (this.getPlayer() == State.PlayerId.HUMAN)
+                {
+                    spriteBatch.Draw(TextureBank.EntityTextures.campTexturePlayer,
+                        new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTexturePlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTexturePlayer.Height * 0.80),
+                        TextureBank.EntityTextures.campTexturePlayer.Width, TextureBank.EntityTextures.campTexturePlayer.Height), Color.White);
+                }
+                else
+                {
+                    float ratio = (float)this.getHealth() / this.getMaxHealth();
+
+                    if (ratio >= 0.50)
+                    {
+                        spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputer,
+                            new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTextureComputer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTextureComputer.Height * 0.80),
+                            TextureBank.EntityTextures.campTextureComputer.Width, TextureBank.EntityTextures.campTextureComputer.Height), Color.White);
+                    }
+                    else if (ratio < 0.50 && ratio >= 0.25)
+                    {
+                        spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputerDamaged,
+                            new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTextureComputer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTextureComputer.Height * 0.80),
+                            TextureBank.EntityTextures.campTextureComputer.Width, TextureBank.EntityTextures.campTextureComputer.Height), Color.White);
+                    }
+                    else if (ratio < 0.25 && ratio >= 0.00)
+                    {
+                        spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputerDestroyed,
+                            new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTextureComputer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTextureComputer.Height * 0.80),
+                            TextureBank.EntityTextures.campTextureComputer.Width, TextureBank.EntityTextures.campTextureComputer.Height), Color.White);
+                    }
+
+                }
+            }
         }
     }
 }
