@@ -143,6 +143,7 @@ namespace Incursio.Managers
             public static Texture2D guardTowerPortrait;
             public static Texture2D guardTowerIcon;
             public static Texture2D controlPointPortrait;
+            public static Texture2D controlPointInterfaceIcon;
             public static Texture2D heroIcon;
             public static Texture2D heroPortrait;
             /////////////////////////////

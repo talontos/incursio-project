@@ -13,7 +13,7 @@ namespace Incursio.Classes
             //TODO: set Archer Values
             this.armor = 1;
             this.damage = 10;
-            this.moveSpeed = 200.0f;
+            this.moveSpeed = 150.0f;
             this.attackSpeed = 3;
             this.sightRange = 12;
             this.attackRange = 10;
