@@ -50,10 +50,9 @@ namespace Incursio.Classes
       {
           this.visible = true;
           this.justDrawn = false;
-          //onScreen = currentMap.positionOnScreen(this.getLocation());
-          //Rectangle unit = new Rectangle(this.getLocation().x, this.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
           Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.location);
           Rectangle unit = this.boundingBox;
+          Color colorMask = EntityManager.getInstance().getColorMask(this.owner);
 
           //depending on the unit's state, draw their textures
           //idle
@@ -64,25 +63,25 @@ namespace Incursio.Classes
                   case State.Direction.Still:
                       spriteBatch.Draw(TextureBank.EntityTextures.archerSouth,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerSouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerSouth.Height * 0.80),
-                          TextureBank.EntityTextures.archerSouth.Width, TextureBank.EntityTextures.archerSouth.Height), Color.White);
+                          TextureBank.EntityTextures.archerSouth.Width, TextureBank.EntityTextures.archerSouth.Height), colorMask);
                       break;
 
                   case State.Direction.East:
                       spriteBatch.Draw(TextureBank.EntityTextures.archerEast,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerEast.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerEast.Height * 0.80),
-                          TextureBank.EntityTextures.archerEast.Width, TextureBank.EntityTextures.archerEast.Height), Color.White);
+                          TextureBank.EntityTextures.archerEast.Width, TextureBank.EntityTextures.archerEast.Height), colorMask);
                       break;
 
                   case State.Direction.West:
                       spriteBatch.Draw(TextureBank.EntityTextures.archerWest,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerWest.Height * 0.80),
-                          TextureBank.EntityTextures.archerWest.Width, TextureBank.EntityTextures.archerWest.Height), Color.White);
+                          TextureBank.EntityTextures.archerWest.Width, TextureBank.EntityTextures.archerWest.Height), colorMask);
                       break;
 
                   case State.Direction.North:
                       spriteBatch.Draw(TextureBank.EntityTextures.archerNorth,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerNorth.Height * 0.80),
-                          TextureBank.EntityTextures.archerNorth.Width, TextureBank.EntityTextures.archerNorth.Height), Color.White);
+                          TextureBank.EntityTextures.archerNorth.Width, TextureBank.EntityTextures.archerNorth.Height), colorMask);
                       break;
               }
 
@@ -95,7 +94,7 @@ namespace Incursio.Classes
                       spriteBatch.Draw(TextureBank.EntityTextures.archerAttackingWest,
                           new Rectangle(onScreen.x - (25 / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerWest.Height * 0.80),
                           TextureBank.EntityTextures.archerWest.Width, TextureBank.EntityTextures.archerWest.Height),
-                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 25, 30), Color.White);
+                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 25, 30), colorMask);
 
                       if (frameTimer >= FRAME_LENGTH)
                       {
@@ -115,7 +114,7 @@ namespace Incursio.Classes
                       spriteBatch.Draw(TextureBank.EntityTextures.archerAttackingEast,
                           new Rectangle(onScreen.x - (25 / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerEast.Height * 0.80),
                           TextureBank.EntityTextures.archerEast.Width, TextureBank.EntityTextures.archerEast.Height),
-                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 25, 30), Color.White);
+                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 25, 30), colorMask);
 
                       if (frameTimer >= FRAME_LENGTH)
                       {
@@ -135,7 +134,7 @@ namespace Incursio.Classes
           {
               spriteBatch.Draw(TextureBank.EntityTextures.archerDead,
                       new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerDead.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerDead.Height * 0.80),
-                      TextureBank.EntityTextures.archerDead.Width, TextureBank.EntityTextures.archerDead.Height), Color.White);
+                      TextureBank.EntityTextures.archerDead.Width, TextureBank.EntityTextures.archerDead.Height), colorMask);
           }
           else if (this.currentState == State.UnitState.Guarding)
           {
@@ -149,7 +148,7 @@ namespace Incursio.Classes
                       spriteBatch.Draw(TextureBank.EntityTextures.archerMovingWest,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerWest.Height * 0.80),
                           TextureBank.EntityTextures.archerWest.Width, TextureBank.EntityTextures.archerWest.Height),
-                          new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), Color.White);
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), colorMask);
 
                       if (frameTimer >= FRAME_LENGTH)
                       {
@@ -168,7 +167,7 @@ namespace Incursio.Classes
                       spriteBatch.Draw(TextureBank.EntityTextures.archerMovingEast,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerWest.Height * 0.80),
                           TextureBank.EntityTextures.archerWest.Width, TextureBank.EntityTextures.archerWest.Height),
-                          new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), Color.White);
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), colorMask);
 
                       if (frameTimer >= FRAME_LENGTH)
                       {
@@ -187,7 +186,7 @@ namespace Incursio.Classes
                       spriteBatch.Draw(TextureBank.EntityTextures.archerMovingSouth,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerSouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerSouth.Height * 0.80),
                           TextureBank.EntityTextures.archerSouth.Width, TextureBank.EntityTextures.archerSouth.Height),
-                          new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), Color.White);
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), colorMask);
 
                       if (frameTimer >= FRAME_LENGTH)
                       {
@@ -206,7 +205,7 @@ namespace Incursio.Classes
                       spriteBatch.Draw(TextureBank.EntityTextures.archerMovingNorth,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerNorth.Height * 0.80),
                           TextureBank.EntityTextures.archerNorth.Width, TextureBank.EntityTextures.archerNorth.Height),
-                          new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), Color.White);
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), colorMask);
 
                       if (frameTimer >= FRAME_LENGTH)
                       {
@@ -234,7 +233,7 @@ namespace Incursio.Classes
           {
               spriteBatch.Draw(TextureBank.EntityTextures.archerSouth,
                       new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerSouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerSouth.Height * 0.80),
-                      TextureBank.EntityTextures.archerSouth.Width, TextureBank.EntityTextures.archerSouth.Height), Color.White);
+                      TextureBank.EntityTextures.archerSouth.Width, TextureBank.EntityTextures.archerSouth.Height), colorMask);
           }
       }
     }

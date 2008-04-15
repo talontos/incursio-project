@@ -46,11 +46,9 @@ namespace Incursio.Classes
           {
               this.visible = true;
               this.justDrawn = true;
-              //onScreen = currentMap.positionOnScreen(this.getLocation());
               Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(location);
-
-              //Rectangle unit = new Rectangle(this.getLocation().x, this.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
               Rectangle unit = this.boundingBox;
+              Color colorMask = EntityManager.getInstance().getColorMask(this.owner);
 
               //depending on the unit's state, draw their textures
               //idle
@@ -61,25 +59,25 @@ namespace Incursio.Classes
                       case State.Direction.South:
                           spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantrySouth,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantrySouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantrySouth.Height * 0.80),
-                          TextureBank.EntityTextures.heavyInfantrySouth.Width, TextureBank.EntityTextures.heavyInfantrySouth.Height), Color.White);
+                          TextureBank.EntityTextures.heavyInfantrySouth.Width, TextureBank.EntityTextures.heavyInfantrySouth.Height), colorMask);
                           break;
 
                       case State.Direction.East:
                           spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryEast,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryEast.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryEast.Height * 0.80),
-                          TextureBank.EntityTextures.heavyInfantryEast.Width, TextureBank.EntityTextures.heavyInfantryEast.Height), Color.White);
+                          TextureBank.EntityTextures.heavyInfantryEast.Width, TextureBank.EntityTextures.heavyInfantryEast.Height), colorMask);
                           break;
 
                       case State.Direction.West:
                           spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryWest,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryWest.Height * 0.80),
-                          TextureBank.EntityTextures.heavyInfantryWest.Width, TextureBank.EntityTextures.heavyInfantryWest.Height), Color.White);
+                          TextureBank.EntityTextures.heavyInfantryWest.Width, TextureBank.EntityTextures.heavyInfantryWest.Height), colorMask);
                           break;
 
                       case State.Direction.North:
                           spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryNorth,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryNorth.Height * 0.80),
-                          TextureBank.EntityTextures.heavyInfantryNorth.Width, TextureBank.EntityTextures.heavyInfantryNorth.Height), Color.White);
+                          TextureBank.EntityTextures.heavyInfantryNorth.Width, TextureBank.EntityTextures.heavyInfantryNorth.Height), colorMask);
                           break;
                   }
 
@@ -91,7 +89,7 @@ namespace Incursio.Classes
                       case State.Direction.South:
                           spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryAttackingEast,
                           new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
-                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 45, 38), Color.White);
+                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 45, 38), colorMask);
 
                           if (frameTimer >= FRAME_LENGTH)
                           {
@@ -119,7 +117,7 @@ namespace Incursio.Classes
                       case State.Direction.West:
                           spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryAttackingWest,
                           new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
-                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 45, 38), Color.White);
+                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 45, 38), colorMask);
 
                           if (frameTimer >= FRAME_LENGTH)
                           {
@@ -154,7 +152,7 @@ namespace Incursio.Classes
                           {
                               spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryDeath_East,
                               new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
-                              new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 45, 38), Color.White);
+                              new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 45, 38), colorMask);
 
                               if (frameTimer >= FRAME_LENGTH)
                               {
@@ -172,7 +170,7 @@ namespace Incursio.Classes
                           {
                               spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryDeath_East,
                               new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
-                              new Rectangle(135, 0, 45, 38), Color.White);
+                              new Rectangle(135, 0, 45, 38), colorMask);
                           }
                           break;
 
@@ -182,7 +180,7 @@ namespace Incursio.Classes
                           {
                               spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryDeath_West,
                               new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
-                              new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 45, 38), Color.White);
+                              new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 45, 38), colorMask);
 
                               if (frameTimer >= FRAME_LENGTH)
                               {
@@ -200,7 +198,7 @@ namespace Incursio.Classes
                           {
                               spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryDeath_West,
                               new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
-                              new Rectangle(135, 0, 45, 38), Color.White);
+                              new Rectangle(135, 0, 45, 38), colorMask);
                           }
                           break;
 
@@ -219,7 +217,7 @@ namespace Incursio.Classes
                           spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryMovingEast,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryEast.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryEast.Height * 0.80),
                           TextureBank.EntityTextures.heavyInfantryEast.Width, TextureBank.EntityTextures.heavyInfantryEast.Height),
-                          new Rectangle(this.currentFrameX, this.currentFrameY, 25, 38), Color.White);
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 25, 38), colorMask);
 
                           if (frameTimer >= FRAME_LENGTH)
                           {
@@ -238,7 +236,7 @@ namespace Incursio.Classes
                           spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryMovingWest,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryWest.Height * 0.80),
                           TextureBank.EntityTextures.heavyInfantryWest.Width, TextureBank.EntityTextures.heavyInfantryWest.Height),
-                          new Rectangle(this.currentFrameX, this.currentFrameY, 25, 38), Color.White);
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 25, 38), colorMask);
 
                           if (frameTimer >= FRAME_LENGTH)
                           {
@@ -257,7 +255,7 @@ namespace Incursio.Classes
                           spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryMovingSouth,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantrySouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantrySouth.Height * 0.80),
                           TextureBank.EntityTextures.heavyInfantrySouth.Width, TextureBank.EntityTextures.heavyInfantrySouth.Height),
-                          new Rectangle(this.currentFrameX, this.currentFrameY, 25, 38), Color.White);
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 25, 38), colorMask);
 
                           if (frameTimer >= FRAME_LENGTH)
                           {
@@ -276,7 +274,7 @@ namespace Incursio.Classes
                           spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryMovingNorth,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryNorth.Height * 0.80),
                           TextureBank.EntityTextures.heavyInfantryNorth.Width, TextureBank.EntityTextures.heavyInfantryNorth.Height),
-                          new Rectangle(this.currentFrameX, this.currentFrameY, 25, 38), Color.White);
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 25, 38), colorMask);
 
                           if (frameTimer >= FRAME_LENGTH)
                           {
@@ -301,7 +299,7 @@ namespace Incursio.Classes
               {
                   spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantrySouth,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantrySouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantrySouth.Height * 0.80),
-                          TextureBank.EntityTextures.heavyInfantrySouth.Width, TextureBank.EntityTextures.heavyInfantrySouth.Height), Color.White);
+                          TextureBank.EntityTextures.heavyInfantrySouth.Width, TextureBank.EntityTextures.heavyInfantrySouth.Height), colorMask);
               }
           }
       }
