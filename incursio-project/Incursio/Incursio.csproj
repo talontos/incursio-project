@@ -56,10 +56,7 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="irrKlang.NET, Version=1.0.4.0, Culture=neutral, PublicKeyToken=a854741bd80517c7">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\Program Files\IrrKlang\irrKlang-1.0.4\bin\dotnet\irrKlang.NET.dll</HintPath>
-    </Reference>
+    <Reference Include="irrKlang.NET, Version=1.0.4.0, Culture=neutral, PublicKeyToken=a854741bd80517c7" />
     <Reference Include="Microsoft.Xna.Framework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=6d5c3888ef60e27d, processorArchitecture=x86">
       <Private>False</Private>
       <SpecificVersion>True</SpecificVersion>
@@ -78,9 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Campaign\Map1.cs" />
-    <Compile Include="Campaign\RandomMap.cs" />
-    <Compile Include="Campaign\TestMap.cs" />
+    <Compile Include="Commands\Campaign\Map1.cs" />
+    <Compile Include="Commands\Campaign\RandomMap.cs" />
+    <Compile Include="Commands\Campaign\TestMap.cs" />
     <Compile Include="Classes\AI\BaseAI.cs" />
     <Compile Include="Classes\AIPlayer.cs" />
     <Compile Include="Classes\AI\DefensiveAI.cs" />
@@ -88,7 +85,7 @@
     <Compile Include="Classes\ArcherUnit.cs" />
     <Compile Include="Classes\BaseGameEntity.cs" />
     <Compile Include="Classes\BaseMapEntity.cs" />
-    <Compile Include="Campaign\CampaignMap.cs" />
+    <Compile Include="Commands\Campaign\CampaignMap.cs" />
     <Compile Include="Classes\CampStructure.cs" />
     <Compile Include="Classes\ControlPoint.cs" />
     <Compile Include="Classes\GuardTowerStructure.cs" />
@@ -118,7 +115,7 @@
     <Compile Include="Managers\MapManager.cs" />
     <Compile Include="Managers\MessageManager.cs" />
     <Compile Include="Managers\PlayerManager.cs" />
-    <None Include="Managers\SoundManager.cs" />
+    <Compile Include="Managers\SoundManager.cs" />
     <Compile Include="Managers\TextureBank.cs" />
     <Compile Include="Managers\TextureManager.cs" />
     <Compile Include="Utils\DebugUtil.cs" />

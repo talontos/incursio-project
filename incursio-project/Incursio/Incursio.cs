@@ -16,6 +16,8 @@ using Incursio.Utils;
 using Incursio.Interface;
 using Incursio.Managers;
 
+using IrrKlang;
+
 namespace Incursio
 {
     /// <summary>
@@ -32,8 +34,12 @@ namespace Incursio
         TextureManager textureManager;
         PlayerManager playerManager;
         MessageManager messageManager;
+        
+        //Sound Stuff
         //SoundManager soundManager;              //does sound stuff
-
+        int x = -1;
+        ISoundEngine engine = new ISoundEngine();
+        
         //Game Time keeping
         float frameTime;
 
@@ -181,6 +187,7 @@ namespace Incursio
             cursor.Update();    //update the cursor
             kbState = Keyboard.GetState();  //get the present state of the keyboard
             keysPressed = (Keys[])kbState.GetPressedKeys(); //get all the keys that are being pressed
+            //soundManager.updateSounds();
 
             //Check game state!
             this.checkState(gameTime);
@@ -227,6 +234,8 @@ namespace Incursio
 
                 case (State.GameState.InPlay):
 
+                    //this.soundManager.PlaySound("../../../Content/Audio/Thunderhorse.mp3", true);
+
                     hud.update(cursor);
 
                     //update entities
@@ -240,8 +249,6 @@ namespace Incursio
 
                     MessageManager.getInstance().update();
 
-                    //SoundManager.getInstance().updateSounds();
-                    
                     //listener for menu button
                     gameMenuButton.Update(cursor);
                     if (!gameMenuButton.getPressed() && gameMenuButton.getFocus()) //if the menu button is pressed, pause the game
@@ -256,10 +263,17 @@ namespace Incursio
                     break;
 
                 case (State.GameState.Menu):
-
+                    
                     //listener for menu button
                     newGameButton.Update(cursor);
                     exitGameButton.Update(cursor);
+
+                    if (x < 0)
+                    {
+                        engine.Play2D("../../../Content/Audio/explosion.wav");
+                        engine.Play2D("../../../Content/Audio/Thunderhorse.mp3", true);
+                    }
+                    x = 1;
 
                     if (!newGameButton.getPressed() && newGameButton.getFocus())
                     {
