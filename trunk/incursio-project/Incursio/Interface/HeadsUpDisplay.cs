@@ -337,6 +337,12 @@ namespace Incursio.Classes
                 new Rectangle(945, 10, TextureBank.InterfaceTextures.moneyIcon.Width, TextureBank.InterfaceTextures.moneyIcon.Height), Color.White);
             spriteBatch.DrawString(font, " " + PlayerManager.getInstance().humanPlayer.MONETARY_UNIT, new Vector2(975, 23), Color.White, 0, font.MeasureString("XXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
+            spriteBatch.Draw(TextureBank.InterfaceTextures.controlPointInterfaceIcon,
+                new Rectangle(860, 12, TextureBank.InterfaceTextures.controlPointInterfaceIcon.Width, TextureBank.InterfaceTextures.controlPointInterfaceIcon.Height), Color.White);
+
+            spriteBatch.DrawString(font, " " + EntityManager.getInstance().getPlayerControlPoints(State.PlayerId.HUMAN) + "/" + EntityManager.getInstance().getTotalControlPoints(), new Vector2(900, 23), Color.White, 0, font.MeasureString("XXXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
+
+
         }
     }
 }
