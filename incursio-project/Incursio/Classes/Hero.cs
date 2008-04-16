@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Incursio.Utils;
+using Incursio.Managers;
 
 namespace Incursio.Classes
 {
@@ -10,16 +13,24 @@ namespace Incursio.Classes
     {
       public static String HERO_CLASS = "Incursio.Classes.Hero";
 
-      private String name = "";
-      private int level = 1;
-      private long experiencePoints = 0;
-      private long pointsToNextLevel = 1000;
+      public String name = "";
+      public int level = 1;
+      public long experiencePoints = 0;
+      public long pointsToNextLevel = 1000;
 
       public Hero() : base(){
+          this.pointValue = 1000;
+
           //TODO: set hero properties
-          this.moveSpeed = 150.0f;
-          this.sightRange = 15;
+          this.moveSpeed = 115.0f;
+          this.sightRange = 8;
           this.setType(State.EntityName.Hero);
+          this.armor = 10;
+          this.damage = 50;
+          this.attackSpeed = 3;
+          this.attackRange = 1;
+          this.maxHealth = 500;
+          this.health = 500;
       }
 
       public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
@@ -27,15 +38,34 @@ namespace Incursio.Classes
           base.Update(gameTime, ref myRef);
       }
 
+      public override void updateBounds()
+      {
+          Microsoft.Xna.Framework.Graphics.Texture2D myRef = TextureBank.EntityTextures.heavyInfantrySouth;
+
+          this.boundingBox = new Microsoft.Xna.Framework.Rectangle(
+              location.x - myRef.Width / 2,
+              (int)(location.y - myRef.Height * 0.80),
+              myRef.Width,
+              myRef.Height
+          );
+      }
+
       /// <summary>
       /// performs experience & level-up actions
       /// </summary>
       public override void killedTarget()
       {
-          this.experiencePoints += target.pointValue;
+          this.gainExperience(target.pointValue);
+
+          base.killedTarget();
+      }
+
+      public void gainExperience(int exp){
+          this.experiencePoints += exp;
 
           //CHECK FOR LEVEL-UP
-          if(experiencePoints >= pointsToNextLevel){
+          if (experiencePoints >= pointsToNextLevel)
+          {
               level++;
 
               //TODO: Review this number - we might want to make it smaller
@@ -43,86 +73,274 @@ namespace Incursio.Classes
 
               //TODO: Dispatch GameEvent
           }
-
-          base.killedTarget();
       }
 
       public override void drawThyself(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
       {
-          //TODO: once we get hero textures, uncomment AND REFORMAT this block
-          /*if (e.getType() == State.EntityName.Hero)
           {
-              e.visible = true;
-              onScreen = currentMap.positionOnScreen(e.getLocation());
-              Rectangle unit = new Rectangle(e.getLocation().x, e.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+              this.visible = true;
+              this.justDrawn = true;
+              Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(location);
+              Rectangle unit = this.boundingBox;
+              Color colorMask = Color.Gold;//EntityManager.getInstance().getColorMask(this.owner);
 
               //depending on the unit's state, draw their textures
               //idle
-              if ((e as Hero).getCurrentState() == State.UnitState.Idle)
+              if (this.currentState == State.UnitState.Idle)
               {
-                  //south or idle
-                  if ((e as Hero).getDirection() == State.Direction.Still || (e as Hero).getDirection() == State.Direction.South)
-                  {
-                      spriteBatch.Draw(this.heroSouth,
-                          new Rectangle(onScreen.x - (this.heroSouth.Width / 2), onScreen.y - (int)(this.heroSouth.Height * 0.80),
-                          this.heroSouth.Width, this.heroSouth.Height), Color.White);
-                  }
-                  //east
-                  else if ((e as Hero).getDirection() == State.Direction.East)
-                  {
-                      spriteBatch.Draw(this.heroEast,
-                          new Rectangle(onScreen.x - (this.heroEast.Width / 2), onScreen.y - (int)(this.heroEast.Height * 0.80),
-                          this.heroEast.Width, this.heroEast.Height), Color.White);
-                  }
-                  //west
-                  else if ((e as Hero).getDirection() == State.Direction.West)
-                  {
-                      spriteBatch.Draw(this.heroWest,
-                          new Rectangle(onScreen.x - (this.heroWest.Width / 2), onScreen.y - (int)(this.heroWest.Height * 0.80),
-                          this.heroWest.Width, this.heroWest.Height), Color.White);
-                  }
-                  //north
-                  else if ((e as Hero).getDirection() == State.Direction.North)
-                  {
-                      spriteBatch.Draw(this.heroNorth,
-                          new Rectangle(onScreen.x - (this.heroNorth.Width / 2), onScreen.y - (int)(this.heroNorth.Height * 0.80),
-                          this.heroNorth.Width, this.heroNorth.Height), Color.White);
+                  switch(this.directionState){
+                      case State.Direction.Still:
+                      case State.Direction.South:
+                          spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantrySouth,
+                          new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantrySouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantrySouth.Height * 0.80),
+                          TextureBank.EntityTextures.heavyInfantrySouth.Width, TextureBank.EntityTextures.heavyInfantrySouth.Height), colorMask);
+                          break;
+
+                      case State.Direction.East:
+                          spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryEast,
+                          new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryEast.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryEast.Height * 0.80),
+                          TextureBank.EntityTextures.heavyInfantryEast.Width, TextureBank.EntityTextures.heavyInfantryEast.Height), colorMask);
+                          break;
+
+                      case State.Direction.West:
+                          spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryWest,
+                          new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryWest.Height * 0.80),
+                          TextureBank.EntityTextures.heavyInfantryWest.Width, TextureBank.EntityTextures.heavyInfantryWest.Height), colorMask);
+                          break;
+
+                      case State.Direction.North:
+                          spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryNorth,
+                          new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryNorth.Height * 0.80),
+                          TextureBank.EntityTextures.heavyInfantryNorth.Width, TextureBank.EntityTextures.heavyInfantryNorth.Height), colorMask);
+                          break;
                   }
 
               }
-              else if ((e as Hero).getCurrentState() == State.UnitState.Attacking)
+              else if (this.currentState == State.UnitState.Attacking)
               {
-                  //TODO:
-                  //Attacking Animation
+                  switch(this.directionState){
+                      case State.Direction.East:
+                      case State.Direction.South:
+                          spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryAttackingEast,
+                          new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
+                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 45, 38), colorMask);
+
+                          if (frameTimer >= FRAME_LENGTH)
+                          {
+                              if (this.attackFramePause >= 4 || this.currentFrameXAttackDeath > 0)
+                              {
+                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heavyInfantryAttackingEast.Width - 45)
+                                  {
+                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 45;
+                                  }
+                                  else
+                                  {
+                                      this.currentFrameXAttackDeath = 0;
+                                  }
+                                  this.attackFramePause = 0;
+                              }
+                              else
+                              {
+                                  this.attackFramePause++;
+                              }
+
+                          }
+                          break;
+
+                      case State.Direction.North:
+                      case State.Direction.West:
+                          spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryAttackingWest,
+                          new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
+                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 45, 38), colorMask);
+
+                          if (frameTimer >= FRAME_LENGTH)
+                          {
+                              if (this.attackFramePause >= 4 || this.currentFrameXAttackDeath > 0)
+                              {
+                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heavyInfantryAttackingEast.Width - 45)
+                                  {
+                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 45;
+                                  }
+                                  else
+                                  {
+                                      this.currentFrameXAttackDeath = 0;
+                                  }
+                                  this.attackFramePause = 0;
+                              }
+                              else
+                              {
+                                  this.attackFramePause++;
+                              }
+                          }
+                          break;
+
+                  }
+
               }
-              else if ((e as Hero).getCurrentState() == State.UnitState.Dead)
+              else if (this.currentState == State.UnitState.Dead)
               {
-                  //TODO:
-                  //Dead stuff
-                  //with hero death, end the current map in defeat for player hero, victory if computer hero
+                  switch(this.directionState){
+                      case State.Direction.West:
+                      case State.Direction.North:
+                          if (!this.playedDeath)
+                          {
+                              spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryDeath_East,
+                              new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
+                              new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 45, 38), colorMask);
+
+                              if (frameTimer >= FRAME_LENGTH)
+                              {
+                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heavyInfantryDeath_East.Width - 45)
+                                  {
+                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 45;
+                                  }
+                                  else
+                                  {
+                                      this.playedDeath = true;
+                                  }
+                              }
+                          }
+                          else
+                          {
+                              spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryDeath_East,
+                              new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
+                              new Rectangle(135, 0, 45, 38), colorMask);
+                          }
+                          break;
+
+                      case State.Direction.East:
+                      case State.Direction.South:
+                          if (!this.playedDeath)
+                          {
+                              spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryDeath_West,
+                              new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
+                              new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 45, 38), colorMask);
+
+                              if (frameTimer >= FRAME_LENGTH)
+                              {
+                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heavyInfantryDeath_West.Width - 45)
+                                  {
+                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 45;
+                                  }
+                                  else
+                                  {
+                                      this.playedDeath = true;
+                                  }
+                              }
+                          }
+                          else
+                          {
+                              spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryDeath_West,
+                              new Rectangle(onScreen.x - (int)(45 / 2), onScreen.y - (int)(38 * 0.80), 45, 38),
+                              new Rectangle(135, 0, 45, 38), colorMask);
+                          }
+                          break;
+
+                  }
+
               }
-              else if ((e as Hero).getCurrentState() == State.UnitState.Guarding)
+              else if (this.currentState == State.UnitState.Guarding)
               {
                   //TODO:
                   //Guarding Animation
               }
-              else if ((e as Hero).getCurrentState() == State.UnitState.Moving)
+              else if (this.currentState == State.UnitState.Moving)
               {
-                  //TODO:
-                  //Moving Animation
+                  switch(this.directionState){
+                      case State.Direction.East:
+                          spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryMovingEast,
+                          new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryEast.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryEast.Height * 0.80),
+                          TextureBank.EntityTextures.heavyInfantryEast.Width, TextureBank.EntityTextures.heavyInfantryEast.Height),
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 25, 38), colorMask);
+
+                          if (frameTimer >= FRAME_LENGTH)
+                          {
+                              if (this.currentFrameX < TextureBank.EntityTextures.heavyInfantryMovingEast.Width - 25)
+                              {
+                                  this.currentFrameX = this.currentFrameX + 25;
+                              }
+                              else
+                              {
+                                  this.currentFrameX = 0;
+                              }
+                          }
+                          break;
+
+                      case State.Direction.West:
+                          spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryMovingWest,
+                          new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryWest.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryWest.Height * 0.80),
+                          TextureBank.EntityTextures.heavyInfantryWest.Width, TextureBank.EntityTextures.heavyInfantryWest.Height),
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 25, 38), colorMask);
+
+                          if (frameTimer >= FRAME_LENGTH)
+                          {
+                              if (this.currentFrameX > 0)
+                              {
+                                  this.currentFrameX = this.currentFrameX - 25;
+                              }
+                              else
+                              {
+                                  this.currentFrameX = TextureBank.EntityTextures.heavyInfantryMovingWest.Width - TextureBank.EntityTextures.heavyInfantryWest.Width;
+                              }
+                          }
+                          break;
+
+                      case State.Direction.South:
+                          spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryMovingSouth,
+                          new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantrySouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantrySouth.Height * 0.80),
+                          TextureBank.EntityTextures.heavyInfantrySouth.Width, TextureBank.EntityTextures.heavyInfantrySouth.Height),
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 25, 38), colorMask);
+
+                          if (frameTimer >= FRAME_LENGTH)
+                          {
+                              if (this.currentFrameX < TextureBank.EntityTextures.heavyInfantryMovingSouth.Width - 50)
+                              {
+                                  this.currentFrameX = this.currentFrameX + 25;
+                              }
+                              else
+                              {
+                                  this.currentFrameX = 0;
+                              }
+                          }
+                          break;
+
+                      case State.Direction.North:
+                          spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantryMovingNorth,
+                          new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantryNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantryNorth.Height * 0.80),
+                          TextureBank.EntityTextures.heavyInfantryNorth.Width, TextureBank.EntityTextures.heavyInfantryNorth.Height),
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 25, 38), colorMask);
+
+                          if (frameTimer >= FRAME_LENGTH)
+                          {
+                              if (this.currentFrameX < TextureBank.EntityTextures.heavyInfantryMovingNorth.Width - 50)
+                              {
+                                  this.currentFrameX = this.currentFrameX + 25;
+                              }
+                              else
+                              {
+                                  this.currentFrameX = 0;
+                              }
+                          }
+                          break;
+                  }
               }
-              else if ((e as Hero).getCurrentState() == State.UnitState.UnderAttack)
+              else if (this.currentState == State.UnitState.UnderAttack)
               {
                   //TODO:
                   //Under Attack Animation
               }
               else
               {
-                  spriteBatch.Draw(this.heroSouth,
-                          new Rectangle(onScreen.x - (this.heroSouth.Width / 2), onScreen.y - (int)(this.heroSouth.Height * 0.80),
-                          this.heroSouth.Width, this.heroSouth.Height), Color.White);
+                  spriteBatch.Draw(TextureBank.EntityTextures.heavyInfantrySouth,
+                          new Rectangle(onScreen.x - (TextureBank.EntityTextures.heavyInfantrySouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heavyInfantrySouth.Height * 0.80),
+                          TextureBank.EntityTextures.heavyInfantrySouth.Width, TextureBank.EntityTextures.heavyInfantrySouth.Height), colorMask);
               }
-          }*/
+          }
+      
+      }
+
+      public void finishCapture(ControlPoint c){
+          gainExperience(c.pointValue);
       }
 
     }

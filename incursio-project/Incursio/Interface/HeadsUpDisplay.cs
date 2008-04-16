@@ -196,6 +196,9 @@ namespace Incursio.Classes
                 else if (selectedUnits[0].getType() == State.EntityName.Hero)
                 {
                     spriteBatch.Draw(TextureBank.InterfaceTextures.heroPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.heroPortrait.Width, TextureBank.InterfaceTextures.heroPortrait.Height), Color.White);
+                    //write level (&& exp?)
+                    string levelString = "Lvl " + (selectedUnits[0] as Hero).level;
+                    spriteBatch.DrawString(font, levelString, new Vector2(270, height - 120), Color.White, 0, font.MeasureString(levelString) / 2, 1.0f, SpriteEffects.None, 0.5f);
                 }
             }
 

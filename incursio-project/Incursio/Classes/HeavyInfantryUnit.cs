@@ -15,6 +15,8 @@ namespace Incursio.Classes
       public static String CLASSNAME = "Incursio.Classes.HeavyInfantryUnit";
 
         public HeavyInfantryUnit() : base(){
+            this.pointValue = 100;
+
             //TODO: set values
             this.moveSpeed = 100.0f;
             this.armor = 5;

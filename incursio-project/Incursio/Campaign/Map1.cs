@@ -29,6 +29,7 @@ namespace Incursio.Campaign
             base.initializeMap();
 
             //testing unit creation/placement/moving///
+            Hero playerHero = (Hero)entityManager.createNewEntity("Incursio.Classes.Hero", State.PlayerId.HUMAN);
 
             CampStructure playerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", State.PlayerId.HUMAN);
             CampStructure computerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", State.PlayerId.COMPUTER);
@@ -63,8 +64,9 @@ namespace Incursio.Campaign
             gt5.setLocation(new Coordinate(1300, 1600));
             gt6.setLocation(new Coordinate(1775, 1200));
 
-            infUnit.setLocation(new Coordinate(700, 100));
+            //infUnit.setLocation(new Coordinate(700, 100));
             heavyUnit.setLocation(new Coordinate(300, 100));
+            playerHero.setLocation(new Coordinate(150, 500));
             playerCamp.setLocation(new Coordinate(100, 400));
             computerCamp.setLocation(new Coordinate(1700, 1700));
 

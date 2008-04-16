@@ -18,6 +18,8 @@ namespace Incursio.Classes
       protected BaseGameEntity target = null;
 
         public GuardTowerStructure() : base(){
+            this.pointValue = 250;
+
             this.maxHealth = 350;
             this.health = maxHealth;
             this.sightRange = 10;

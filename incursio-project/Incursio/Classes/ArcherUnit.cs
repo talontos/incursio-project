@@ -13,6 +13,8 @@ namespace Incursio.Classes
     {
       public static String CLASSNAME = "Incursio.Classes.ArcherUnit";
         public ArcherUnit() : base(){
+            this.pointValue = 75;
+
             //TODO: set Archer Values
             this.armor = 1;
             this.damage = 10;

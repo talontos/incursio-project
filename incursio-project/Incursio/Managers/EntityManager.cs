@@ -189,7 +189,7 @@ namespace Incursio.Managers
                         {
                             //if there is a HERO among the selected units, start the cap
                             selectedUnits.ForEach(delegate (BaseGameEntity u){
-                                if (u is HeavyInfantryUnit)
+                                if (u is Hero)
                                 {
                                     EntityManager.getInstance().issueCommand_SingleEntity(State.Command.CAPTURE, false, u, e);
                                 }
