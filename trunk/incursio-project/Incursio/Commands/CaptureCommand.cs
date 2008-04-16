@@ -22,7 +22,7 @@ namespace Incursio.Commands
 
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
-            if( !(subject is HeavyInfantryUnit) ){
+            if( !(subject is Hero) ){
                 this.finishedExecution = true;
                 return;
             }
@@ -38,8 +38,8 @@ namespace Incursio.Commands
                 }
                 else{
                     if(!capTarget.isCapping()){
-                        (subject as HeavyInfantryUnit).setCurrentState(State.UnitState.Capturing);
-                        capTarget.startCap((subject as HeavyInfantryUnit));
+                        (subject as Hero).setCurrentState(State.UnitState.Capturing);
+                        capTarget.startCap((subject as Hero));
                     }
                 }
             }

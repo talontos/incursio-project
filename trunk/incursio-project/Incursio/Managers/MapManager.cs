@@ -8,6 +8,7 @@ using Incursio.Campaign;
 using Microsoft.Xna.Framework;
 using Incursio.Utils.PathFinding;
 using Incursio.Classes.PathFinding;
+using Incursio.Utils;
 
 namespace Incursio.Managers
 {
@@ -60,10 +61,15 @@ namespace Incursio.Managers
         }
 
         public void UpdateCampaign(GameTime gameTime){
-            State.GameState winState = currentMap.inspectWinConditions();
+            GameResult winState = currentMap.inspectWinConditions();
 
-            if (winState != State.GameState.None)
-                Incursio.getInstance().currentState = winState;
+
+            if (winState.resultState != State.GameState.None)
+                Incursio.getInstance().GameResult = winState;
+        }
+
+        public void showLocation(Coordinate location){
+            this.currentMap.showLocation(location);
         }
     }
 }

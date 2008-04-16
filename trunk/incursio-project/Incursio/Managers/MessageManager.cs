@@ -18,7 +18,7 @@ namespace Incursio.Managers
         public static MessageManager instance;
 
         private SpriteFont font;
-        private List<string> messages;
+        private List<GameEvent> messages;
 
         private const int MESSAGE_PAUSE_TIME = 3;
         private int timeDisplayedFirst;
@@ -28,7 +28,7 @@ namespace Incursio.Managers
 
         public MessageManager()
         {
-            messages = new List<string>();
+            messages = new List<GameEvent>();
             timeDisplayedFirst = 0;
             timeDisplayedSecond = 0;
             timeDisplayedThird = 0;
@@ -46,7 +46,7 @@ namespace Incursio.Managers
             font = incFont;
         }
 
-        public void addMessage(string msg)
+        public void addMessage(GameEvent msg)
         {
             if (msg != null)
             {
@@ -99,19 +99,26 @@ namespace Incursio.Managers
         {
             if (messages.Count == 1)
             {
-                spriteBatch.DrawString(font, messages[0], new Vector2(512, 100), Color.Red, 0, font.MeasureString(messages[0]) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                spriteBatch.DrawString(font, messages[0].stringMessage, new Vector2(512, 100), Color.Red, 0, font.MeasureString(messages[0].stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
             }
             else if (messages.Count == 2)
             {
-                spriteBatch.DrawString(font, messages[0], new Vector2(512, 100), Color.Red, 0, font.MeasureString(messages[0]) / 2, 1.0f, SpriteEffects.None, 0.5f);
-                spriteBatch.DrawString(font, messages[1], new Vector2(512, 120), Color.Red, 0, font.MeasureString(messages[1]) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                spriteBatch.DrawString(font, messages[0].stringMessage, new Vector2(512, 100), Color.Red, 0, font.MeasureString(messages[0].stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                spriteBatch.DrawString(font, messages[1].stringMessage, new Vector2(512, 120), Color.Red, 0, font.MeasureString(messages[1].stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
             }
             else if (messages.Count == 3)
             {
-                spriteBatch.DrawString(font, messages[0], new Vector2(512, 100), Color.Red, 0, font.MeasureString(messages[0]) / 2, 1.0f, SpriteEffects.None, 0.5f);
-                spriteBatch.DrawString(font, messages[1], new Vector2(512, 120), Color.Red, 0, font.MeasureString(messages[1]) / 2, 1.0f, SpriteEffects.None, 0.5f);
-                spriteBatch.DrawString(font, messages[2], new Vector2(512, 140), Color.Red, 0, font.MeasureString(messages[2]) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                spriteBatch.DrawString(font, messages[0].stringMessage, new Vector2(512, 100), Color.Red, 0, font.MeasureString(messages[0].stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                spriteBatch.DrawString(font, messages[1].stringMessage, new Vector2(512, 120), Color.Red, 0, font.MeasureString(messages[1].stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                spriteBatch.DrawString(font, messages[2].stringMessage, new Vector2(512, 140), Color.Red, 0, font.MeasureString(messages[2].stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
             }
+        }
+
+        public Coordinate getLastMessageLocation(){
+            if (messages.Count > 0)
+                return messages[messages.Count - 1].location;
+
+            return null;
         }
     }
 }

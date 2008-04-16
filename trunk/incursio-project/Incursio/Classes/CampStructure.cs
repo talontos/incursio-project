@@ -36,6 +36,8 @@ namespace Incursio.Classes
         String currentBuildForObjectFactory = "IDLE"; //and this is for the object factory
 
         public CampStructure() : base(){
+            this.pointValue = 1000;
+
             //TODO: Set camp properties
             this.maxHealth = 350;
             this.health = 350;

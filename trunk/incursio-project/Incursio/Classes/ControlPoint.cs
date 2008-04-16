@@ -20,11 +20,12 @@ namespace Incursio.Classes
 
         int income = 12;    //monatary amount
         int timeSpentCapping = 0;
-        HeavyInfantryUnit capturingHero;
+        Hero capturingHero;
         long heroStartingHealth;
         bool capping = false;
 
         public ControlPoint() : base(){
+            this.pointValue = 500;
             //TODO: set controlpoint values
             this.sightRange = 250;
             this.setType(State.EntityName.ControlPoint);
@@ -34,7 +35,7 @@ namespace Incursio.Classes
             //this.isConstructor = true;
         }
 
-        public void startCap(HeavyInfantryUnit capturingHero)
+        public void startCap(Hero capturingHero)
         {
             this.capturingHero = capturingHero;
             heroStartingHealth = capturingHero.health;
@@ -43,17 +44,25 @@ namespace Incursio.Classes
             
         }
 
+        private void finishCapture(){
+            this.owner = capturingHero.getPlayer(); //change over ownership
+            timeForResource = 0;
+            timeSpentCapping = 0;
+            
+            capturingHero.finishCapture(this);
+
+            capturingHero = null;
+            capping = false;
+
+        }
+
         public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
         {
             if (capping)
             {
                 if (timeSpentCapping >= TIME_TO_CAPTURE * 60)
                 {
-                    this.owner = capturingHero.getPlayer(); //change over ownership
-                    timeForResource = 0;
-                    timeSpentCapping = 0;
-                    capturingHero = null;
-                    capping = false;
+                    this.finishCapture();
                 }
                 else
                 {

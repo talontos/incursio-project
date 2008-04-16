@@ -93,6 +93,11 @@ namespace Incursio.Managers
 
             if (this.keyPressed(Keys.Space)){
                 //TODO: RESPOND TO MESSAGES
+                Coordinate coord = MessageManager.getInstance().getLastMessageLocation();
+                if(coord != null){
+                    MapManager.getInstance().showLocation(coord);
+                }
+                
             }
 
             #region GROUP_SET_SELECT

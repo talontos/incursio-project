@@ -54,6 +54,23 @@ namespace Incursio
         //game information
         public State.GameState currentState = State.GameState.Initializing;
 
+        private GameResult gameResult = new GameResult();
+
+        public GameResult GameResult{
+            get {
+                return gameResult;
+            }
+
+            set {
+                if (value.resultState != State.GameState.None)
+                    currentState = value.resultState;
+
+                gameResult = value;
+                
+            }
+        }
+        public GameResult result = new GameResult();
+
         //interface components
         SpriteFont font;
         Vector2 FontPos;
@@ -193,9 +210,6 @@ namespace Incursio
             this.checkState(gameTime);
 
             base.Update(gameTime);
-
-            frameString = frameTime + " FPS";
-            Console.Out.Write(frameString);
         }
 
         /// <summary>
@@ -338,6 +352,7 @@ namespace Incursio
         /// </summary>
         public void drawState()
         {
+            string stateString = this.gameResult.result;
             switch (this.currentState)
             {
                 case (State.GameState.Initializing):
@@ -390,12 +405,12 @@ namespace Incursio
                     break;
 
                 case (State.GameState.Defeat):
-                    spriteBatch.DrawString(font, "Game State: DEFEAT", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: DEFEAT") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    spriteBatch.DrawString(font, "Game State: Massive Failure! " + stateString, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: Massive Failure! " + stateString) / 2, 1.0f, SpriteEffects.None, 0.5f);
                     //TODO: perform Defeat actions
                     break;
 
                 case (State.GameState.Victory):
-                    spriteBatch.DrawString(font, "Game State: Epic Win!!!", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: VICTORY") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    spriteBatch.DrawString(font, "Game State: Epic Win!!! " + stateString, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: Epic Win!!! " + stateString) / 2, 1.0f, SpriteEffects.None, 0.5f);
                     //TODO: perform Victory actions
                     break;
 
@@ -486,6 +501,13 @@ namespace Incursio
                         height = TextureBank.EntityTextures.archerSouth.Height + 15;
                     }
                     else if (u.getType() == State.EntityName.HeavyInfantry)
+                    {
+                        xOffSet = (int)(TextureBank.EntityTextures.archerSouth.Width / 2) + 13;
+                        yOffSet = (int)(TextureBank.EntityTextures.archerSouth.Height * 0.80) + 12;
+                        width = TextureBank.EntityTextures.archerSouth.Width + 25;
+                        height = TextureBank.EntityTextures.archerSouth.Height + 25;
+                    }
+                    else if (u.getType() == State.EntityName.Hero)
                     {
                         xOffSet = (int)(TextureBank.EntityTextures.archerSouth.Width / 2) + 13;
                         yOffSet = (int)(TextureBank.EntityTextures.archerSouth.Height * 0.80) + 12;

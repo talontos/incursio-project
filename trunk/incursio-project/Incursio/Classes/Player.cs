@@ -36,7 +36,7 @@ namespace Incursio.Classes
             this.events.ForEach(delegate(GameEvent e){
                 //TODO: PROCESS MESSAGES
                 //TODO: PLAY SOUNDS
-                MessageManager.getInstance().addMessage(e.stringMessage);
+                MessageManager.getInstance().addMessage(e);
             });
             this.events = new List<GameEvent>();
             

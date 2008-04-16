@@ -14,6 +14,8 @@ namespace Incursio.Classes
       public static string CLASSNAME = "Incursio.Classes.LightInfantryUnit";
 
       public LightInfantryUnit() : base(){
+          this.pointValue = 50;
+
           //TODO: set LightInfantry Values
           this.armor = 1;
           this.damage = 25;
