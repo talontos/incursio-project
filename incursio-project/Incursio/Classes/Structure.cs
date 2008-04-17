@@ -110,6 +110,7 @@ namespace Incursio.Classes
             {
                 this.health = 0;
                 EntityManager.getInstance().removeEntity(this.keyId);
+                SoundManager.getInstance().PlaySound("../../../Content/Audio/explosion.wav", false);
             }
 
             notifyUnderAttack();
