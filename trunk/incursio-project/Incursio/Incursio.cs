@@ -37,7 +37,6 @@ namespace Incursio
         
         //Sound Stuff
         SoundManager soundManager;              //does sound stuff
-        //int x = -1;
         //ISoundEngine engine = new ISoundEngine();
         
         //Game Time keeping
@@ -248,8 +247,6 @@ namespace Incursio
 
                 case (State.GameState.InPlay):
 
-                    //this.soundManager.PlaySound("../../../Content/Audio/Thunderhorse.mp3", true);
-
                     hud.update(cursor);
 
                     //update entities
@@ -282,15 +279,8 @@ namespace Incursio
                     newGameButton.Update(cursor);
                     exitGameButton.Update(cursor);
 
-                    //if (x < 0)
-                    //{
-                    //    engine.Play2D("../../../Content/Audio/explosion.wav");
-                    //    engine.Play2D("../../../Content/Audio/Thunderhorse.mp3", true);
-                    //}
-                    //x = 1;
-
-                    SoundManager.getInstance().PlaySound("../../../Content/Audio/Thunderhorse.mp3", false);
-
+                    SoundManager.getInstance().PlaySound("../../../Content/Audio/Thunderhorse.mp3", true);
+                    
                     if (!newGameButton.getPressed() && newGameButton.getFocus())
                     {
                         newGameButton.setFocus(false);
@@ -312,10 +302,12 @@ namespace Incursio
 
                 case (State.GameState.Defeat):
                     //TODO: perform Defeat actions
+                    //SoundManager.getInstance().StopSound();
                     break;
 
                 case (State.GameState.Victory):
                     //TODO: perform Victory actions
+                    //SoundManager.getInstance().StopSound();
                     break;
 
                 case (State.GameState.PausedPlay):

@@ -29,12 +29,14 @@ namespace Incursio.Managers
             return instance;
         }
 
-        public void InitializeEngine()
-        {
-            ISoundEngine soundEngine = new ISoundEngine();
-        }
+        //public void InitializeEngine()
+        //{
+        //    ISoundEngine soundEngine = new ISoundEngine();
+        //}
 
         //update the sound engine
+        //This class is pointless unless the game is using 3D sound
+        //We may try 3D sounds later
         public void updateSounds()
         {
             try
@@ -51,15 +53,17 @@ namespace Incursio.Managers
 
         //Plays the sound
         //Files must be .mp3, .ogg, or .wav
-        //file need to be in the form of "../../../Content/Audio/<File Name Here>"
+        //file need to be in the form of "../../../Content/Audio/<File Name Here>". Make sure to include the extension
         //loop will loop the sound if true.  Otherwise, sound will play once and stop
         public void PlaySound(String filename, bool loop) 
         {
             try
             {
+                //This makes sure that the file will only start once and not stack on top of itself over and over.
                 if (soundEngine.IsCurrentlyPlaying(filename) == false)
                 {
                     soundEngine.Play2D(filename, loop);
+                    //this.setVolume(volLev);
                 }
             }
             catch (NullReferenceException e)
@@ -71,10 +75,20 @@ namespace Incursio.Managers
         }
     
         //Stops the sound
+        //IrrKlangs only stop method.  Will cause all sounds currently being played by the engine to stop
         public void StopSound(String file)
         {
             soundEngine.StopAllSounds();
         }
+
+
+        //Method for volume control
+        //Pass in a floating point to control volume.
+        //0.0 = muted, 1.0 = full volume (this is in accordance to the speaker level)
+        //public void setVolume(float volLev)
+        //{
+        //    soundEngine.g
+        //}
 
         public ISoundEngine getAudioEngine()
         {
