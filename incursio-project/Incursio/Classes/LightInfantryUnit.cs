@@ -87,6 +87,8 @@ namespace Incursio.Classes
           }
           else if (this.currentState == State.UnitState.Attacking)
           {
+              SoundManager.getInstance().PlaySound("../../../Content/Audio/steelsword.wav", false);
+
               switch (this.directionState){
                   case State.Direction.West:
                   case State.Direction.North:
