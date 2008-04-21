@@ -62,6 +62,12 @@ namespace Incursio.Managers
             public static Texture2D heroWest;
             public static Texture2D heroSouth;
             public static Texture2D heroNorth;
+            public static Texture2D heroMovingEast;
+            public static Texture2D heroMovingWest;
+            public static Texture2D heroMovingSouth;
+            public static Texture2D heroMovingNorth;
+            public static Texture2D heroAttackingEast;
+            public static Texture2D heroAttackingWest;
             /////////////////////////////
 
             //Structure Textures/////////

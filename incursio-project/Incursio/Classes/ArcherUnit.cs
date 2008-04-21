@@ -90,7 +90,7 @@ namespace Incursio.Classes
           }
           else if (this.currentState == State.UnitState.Attacking)
           {
-              SoundManager.getInstance().PlaySound("../../../Content/Audio/bow release.wav", false);
+              //SoundManager.getInstance().PlaySound("../../../Content/Audio/bow release.wav", false);
 
               switch(this.directionState){
                   case State.Direction.West:

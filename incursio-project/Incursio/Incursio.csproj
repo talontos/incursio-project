@@ -14,8 +14,8 @@
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
     <StartupObject>Incursio.IncursioProgram</StartupObject>
-    <ManifestCertificateThumbprint>28E155C8712AF0924610A300BEBC766C01DD5C81</ManifestCertificateThumbprint>
-    <ManifestKeyFile>Incursio_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>71AC381BF82B761861E4E28EC5773D50A1F1AA1E</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Incursio_3_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -31,6 +31,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationVersion>0.2.1.%2a</ApplicationVersion>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -118,7 +119,7 @@
     <Compile Include="Managers\MapManager.cs" />
     <Compile Include="Managers\MessageManager.cs" />
     <Compile Include="Managers\PlayerManager.cs" />
-    <Compile Include="Managers\SoundManager.cs" />
+    <None Include="Managers\SoundManager.cs" />
     <Compile Include="Managers\TextureBank.cs" />
     <Compile Include="Managers\TextureManager.cs" />
     <Compile Include="Utils\DebugUtil.cs" />
@@ -149,6 +150,7 @@
     <None Include="app.config" />
     <None Include="Incursio_1_TemporaryKey.pfx" />
     <None Include="Incursio_2_TemporaryKey.pfx" />
+    <None Include="Incursio_3_TemporaryKey.pfx" />
     <None Include="Incursio_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
