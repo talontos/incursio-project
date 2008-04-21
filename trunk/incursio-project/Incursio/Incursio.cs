@@ -36,7 +36,7 @@ namespace Incursio
         MessageManager messageManager;
         
         //Sound Stuff
-        SoundManager soundManager;              //does sound stuff
+        //SoundManager soundManager;              //does sound stuff
         //ISoundEngine engine = new ISoundEngine();
         
         //Game Time keeping
@@ -111,7 +111,7 @@ namespace Incursio
             playerManager = PlayerManager.getInstance();
             messageManager = MessageManager.getInstance();
 
-            soundManager = SoundManager.getInstance();
+            //soundManager = SoundManager.getInstance();
             
             //set the window size to 1024x768
             this.graphics.PreferredBackBufferWidth = 1024;
@@ -193,12 +193,7 @@ namespace Incursio
         {
             frameTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (frameTimer > FRAME_LENGTH)
-            {
-                frameTimer = 0;
-            }
-            else
-                frameTimer++;
+            
 
             cursor.Update();    //update the cursor
             kbState = Keyboard.GetState();  //get the present state of the keyboard
@@ -218,6 +213,13 @@ namespace Incursio
         protected override void Draw(GameTime gameTime)
         {
             graphics.GraphicsDevice.Clear(Color.White);
+
+            if (frameTimer > FRAME_LENGTH)
+            {
+                frameTimer = 0;
+            }
+            else
+                frameTimer++;
 
             base.Draw(gameTime);
 
@@ -279,7 +281,7 @@ namespace Incursio
                     newGameButton.Update(cursor);
                     exitGameButton.Update(cursor);
 
-                    SoundManager.getInstance().PlaySound("../../../Content/Audio/Thunderhorse.mp3", true);
+                    //SoundManager.getInstance().PlaySound("../../../Content/Audio/Thunderhorse.mp3", true);
                     
                     if (!newGameButton.getPressed() && newGameButton.getFocus())
                     {
@@ -501,10 +503,10 @@ namespace Incursio
                     }
                     else if (u.getType() == State.EntityName.Hero)
                     {
-                        xOffSet = (int)(TextureBank.EntityTextures.archerSouth.Width / 2) + 13;
-                        yOffSet = (int)(TextureBank.EntityTextures.archerSouth.Height * 0.80) + 12;
-                        width = TextureBank.EntityTextures.archerSouth.Width + 25;
-                        height = TextureBank.EntityTextures.archerSouth.Height + 25;
+                        xOffSet = (int)(TextureBank.EntityTextures.heroSouth.Width / 2) + 13;
+                        yOffSet = (int)(TextureBank.EntityTextures.heroSouth.Height * 0.80) + 12;
+                        width = TextureBank.EntityTextures.heroSouth.Width + 25;
+                        height = TextureBank.EntityTextures.heroSouth.Height + 25;
                     }
                     else if (u.getType() == State.EntityName.Camp)
                     {
