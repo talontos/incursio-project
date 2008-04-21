@@ -21,17 +21,15 @@ namespace Incursio.Managers
         private List<GameEvent> messages;
 
         private const int MESSAGE_PAUSE_TIME = 3;
-        private int timeDisplayedFirst;
-        private int timeDisplayedSecond;
-        private int timeDisplayedThird;
+        private const int MAXIMUM_DISPLAYED_SYSTEM_MESSAGES = 3;
+        private int numberSystemMessages = 0;
+        private int systemMessageYCoordOffset = 0;
+
 
 
         public MessageManager()
         {
             messages = new List<GameEvent>();
-            timeDisplayedFirst = 0;
-            timeDisplayedSecond = 0;
-            timeDisplayedThird = 0;
         }
 
         public static MessageManager getInstance()
@@ -59,8 +57,32 @@ namespace Incursio.Managers
             //if we have messages to display
             if (messages.Count > 0)
             {
+
+                messages.ForEach(delegate(GameEvent e)
+                {
+                    switch(e.type)
+                    {
+                        case State.EventType.TAKING_DAMAGE:
+                        case State.EventType.GAIN_RESOURCE:
+                            if (e.displayTick > MESSAGE_PAUSE_TIME * 20)
+                            {
+                                messages.Remove(e);
+                            }
+                            break;
+                        case State.EventType.CANT_MOVE_THERE:
+                        case State.EventType.CREATION_COMPLETE:
+                        case State.EventType.NOT_ENOUGH_RESOURCES:
+                        case State.EventType.UNDER_ATTACK:
+                            if (e.displayTick > MESSAGE_PAUSE_TIME * 60)
+                            {
+                                messages.Remove(e);
+                            }
+                            break;
+                    }
+                    
+                });
                 //if we've displayed the message for the specified amount of time
-                if (timeDisplayedFirst >= MESSAGE_PAUSE_TIME * 60)
+                /*if (timeDisplayedFirst >= MESSAGE_PAUSE_TIME * 60)
                 {
                     messages.Remove(messages[0]);   //remove the message
                     if (messages.Count > 1)
@@ -91,27 +113,56 @@ namespace Incursio.Managers
                     {
                         timeDisplayedThird++;
                     }
-                }
+                }*/
             }
         }
 
         public void displayMessages(SpriteBatch spriteBatch)
         {
-            if (messages.Count == 1)
+            Coordinate loc = new Coordinate();
+
+            messages.ForEach(delegate(GameEvent e)
             {
-                spriteBatch.DrawString(font, messages[0].stringMessage, new Vector2(512, 100), Color.Red, 0, font.MeasureString(messages[0].stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
-            }
-            else if (messages.Count == 2)
-            {
-                spriteBatch.DrawString(font, messages[0].stringMessage, new Vector2(512, 100), Color.Red, 0, font.MeasureString(messages[0].stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
-                spriteBatch.DrawString(font, messages[1].stringMessage, new Vector2(512, 120), Color.Red, 0, font.MeasureString(messages[1].stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
-            }
-            else if (messages.Count == 3)
-            {
-                spriteBatch.DrawString(font, messages[0].stringMessage, new Vector2(512, 100), Color.Red, 0, font.MeasureString(messages[0].stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
-                spriteBatch.DrawString(font, messages[1].stringMessage, new Vector2(512, 120), Color.Red, 0, font.MeasureString(messages[1].stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
-                spriteBatch.DrawString(font, messages[2].stringMessage, new Vector2(512, 140), Color.Red, 0, font.MeasureString(messages[2].stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
-            }
+                switch (e.type)
+                {
+                    case State.EventType.CANT_MOVE_THERE:
+                    case State.EventType.CREATION_COMPLETE:
+                    case State.EventType.NOT_ENOUGH_RESOURCES:
+                    case State.EventType.UNDER_ATTACK:
+                        if (numberSystemMessages <= MAXIMUM_DISPLAYED_SYSTEM_MESSAGES)
+                        {
+                            e.displayTick++;
+                            spriteBatch.DrawString(font, e.stringMessage, new Vector2(512, 100 + systemMessageYCoordOffset), Color.Red, 0, font.MeasureString(e.stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                            systemMessageYCoordOffset = systemMessageYCoordOffset + 15;
+                            numberSystemMessages++;
+                        }
+                        
+                        break;
+
+                    case State.EventType.TAKING_DAMAGE:
+                        e.displayTick++;
+                        if(Incursio.getInstance().currentMap.isOnScreen(e.location))
+                        {
+                            loc = Incursio.getInstance().currentMap.positionOnScreen(e.location);
+                            spriteBatch.DrawString(font, e.stringMessage, new Vector2(loc.x, loc.y - 35), Color.Red, 0, font.MeasureString(e.stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                        }
+                        break;
+
+                    case State.EventType.GAIN_RESOURCE:
+                        e.displayTick++;
+                        if (Incursio.getInstance().currentMap.isOnScreen(e.location))
+                        {
+                            loc = Incursio.getInstance().currentMap.positionOnScreen(e.location);
+                            spriteBatch.DrawString(font, e.stringMessage, new Vector2(loc.x, loc.y - 35), Color.Gold, 0, font.MeasureString(e.stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                        }  
+                        break;
+                }
+            });
+
+            //reset each time
+            numberSystemMessages = 0;
+            systemMessageYCoordOffset = 0;
+            
         }
 
         public Coordinate getLastMessageLocation(){

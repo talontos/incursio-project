@@ -189,6 +189,8 @@ namespace Incursio.Classes
                 timeForResource = 0;
                 if (this.owner == State.PlayerId.HUMAN)
                 {
+                    MessageManager.getInstance().addMessage(new GameEvent(State.EventType.GAIN_RESOURCE, Convert.ToString(income), this.location));
+
                     PlayerManager.getInstance().humanPlayer.MONETARY_UNIT = PlayerManager.getInstance().humanPlayer.MONETARY_UNIT + income;
                 }
                 else
