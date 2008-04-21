@@ -12,6 +12,7 @@ namespace Incursio.Utils
         //public SOUND? audibleMessage;
         public String stringMessage;
         public Coordinate location;
+        public int displayTick = 0;
 
         public GameEvent(State.EventType type, /*SOUND,*/ String stringMsg, Coordinate loc){
             this.type = type;

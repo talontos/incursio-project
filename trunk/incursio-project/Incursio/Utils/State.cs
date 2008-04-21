@@ -151,6 +151,8 @@ namespace Incursio
             CREATION_COMPLETE,
             CANT_MOVE_THERE,
             NOT_ENOUGH_RESOURCES,
+            TAKING_DAMAGE,
+            GAIN_RESOURCE,
         }
     }
 }

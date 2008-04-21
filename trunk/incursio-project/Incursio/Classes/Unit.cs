@@ -249,6 +249,8 @@ namespace Incursio.Classes
             //TODO: some math using my armor
             this.health -= damage;
 
+            MessageManager.getInstance().addMessage(new GameEvent(State.EventType.TAKING_DAMAGE, Convert.ToString(damage), this.location));
+
             if (this.health <= 0)
             {
                 this.health = 0;
