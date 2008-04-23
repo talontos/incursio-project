@@ -226,6 +226,47 @@ namespace Incursio.Classes
             }
         }
 
+        public void moveCameraToEvent(Coordinate coords)
+        {
+            int cellX, cellY;
+            this.translatePixelToMapCell(coords.x, coords.y, out cellX, out cellY);
+
+            int viewableX = maxViewableX - minViewableX;
+            int viewableY = maxViewableY - minViewableY;
+
+            if (cellX - (viewableX / 2) < 0)
+            {
+                minViewableX = 0;
+                maxViewableX = viewableX;
+            }
+            else if (cellX + (viewableX / 2) > this.width)
+            {
+                minViewableX = width - viewableX;
+                maxViewableX = width;
+            }
+            else
+            {
+                minViewableX = cellX - (viewableX / 2);
+                maxViewableX = cellX + (viewableX / 2);
+            }
+
+            if (cellY - (viewableY / 2) < 0)
+            {
+                minViewableY = 0;
+                maxViewableY = viewableY;
+            }
+            else if (cellY + (viewableY / 2) > this.height)
+            {
+                minViewableY = height - viewableY;
+                maxViewableY = height;
+            }
+            else
+            {
+                minViewableY = cellY - (viewableY / 2);
+                maxViewableY = cellY + (viewableY / 2);
+            }
+        }
+
         /// <summary>
         /// Compares two cells, using 2 pixel-coordinates.
         /// If cells are the same, returns true (can move, duh).
