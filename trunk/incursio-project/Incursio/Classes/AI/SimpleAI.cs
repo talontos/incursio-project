@@ -104,8 +104,7 @@ namespace Incursio.Classes
             {
                 //'order' random unit
                 int randU = Incursio.rand.Next(0, 100);
-                Coordinate dest = null;// new Coordinate(Incursio.rand.Next(100, MapManager.getInstance().currentMap.width - 100),
-                                       //          Incursio.rand.Next(100, MapManager.getInstance().currentMap.height - 100));
+                Coordinate dest = new Coordinate(Incursio.rand.Next(20, 2000), Incursio.rand.Next(20, 2000));
 
                 if (randU > 60)
                     this.buildList.Add(new EntityBuildOrder(dest, new LightInfantryUnit()));
