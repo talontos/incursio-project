@@ -18,6 +18,7 @@ namespace Incursio.Classes
         public const int ARCHER_BUILD_TIME = 7;
         public const int GUARD_TOWER_BUILD_TIME = 15;
         public const int ITEM_UPGRADE_BUILD_TIME = 90;
+        public const int HEAL_TICK = 4;
 
         public const int COST_LIGHT_INFANTRY = 45;
         public const int COST_HEAVY_INFANTRY = 90;
@@ -28,6 +29,10 @@ namespace Incursio.Classes
         int newUnitPlacementX = 10;
         int newUnitPlacementY = 120;    //little bit of hard coding, but can't really help it here 
         int income = 8;
+
+        private int healTimer = 0;
+        public int healRange = 4;
+        public int healthBoost = 10;
 
         Coordinate destination;
         Coordinate newStructureCoords;
@@ -52,6 +57,21 @@ namespace Incursio.Classes
 
         public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
         {
+            if (this.healTimer >= HEAL_TICK * 90)
+            {
+                EntityManager.getInstance().healEntitiesInRange(this, this.healRange, true);
+                healTimer = 0;
+            }
+            else if (this.healTimer >= HEAL_TICK * 60)
+            {
+                //heal units in range
+                EntityManager.getInstance().healEntitiesInRange(this, this.healRange, false);
+                healTimer++;
+            }
+            else{
+                healTimer++;
+            }
+
             this.updateOccupancy(true);
             base.Update(gameTime, ref myRef);
         }
@@ -89,6 +109,7 @@ namespace Incursio.Classes
                         owningPlayer.dispatchEvent(
                             new GameEvent(
                                 State.EventType.NOT_ENOUGH_RESOURCES,
+                                this,
                                 "Not Enough Resources",
                                 this.location
                             )
@@ -116,6 +137,7 @@ namespace Incursio.Classes
                         owningPlayer.dispatchEvent(
                             new GameEvent(
                                 State.EventType.NOT_ENOUGH_RESOURCES,
+                                this,
                                 "Not Enough Resources",
                                 this.location
                             )
@@ -143,6 +165,7 @@ namespace Incursio.Classes
                         owningPlayer.dispatchEvent(
                             new GameEvent(
                                 State.EventType.NOT_ENOUGH_RESOURCES,
+                                this,
                                 "Not Enough Resources",
                                 this.location
                             )
@@ -170,6 +193,7 @@ namespace Incursio.Classes
                         owningPlayer.dispatchEvent(
                             new GameEvent(
                                 State.EventType.NOT_ENOUGH_RESOURCES,
+                                this,
                                 "Not Enough Resources",
                                 this.location
                             )
@@ -189,7 +213,7 @@ namespace Incursio.Classes
                 timeForResource = 0;
                 if (this.owner == State.PlayerId.HUMAN)
                 {
-                    MessageManager.getInstance().addMessage(new GameEvent(State.EventType.GAIN_RESOURCE, Convert.ToString(income), this.location));
+                    MessageManager.getInstance().addMessage(new GameEvent(State.EventType.GAIN_RESOURCE, this, Convert.ToString(income), this.location));
 
                     PlayerManager.getInstance().humanPlayer.MONETARY_UNIT = PlayerManager.getInstance().humanPlayer.MONETARY_UNIT + income;
                 }
@@ -223,7 +247,8 @@ namespace Incursio.Classes
                     PlayerManager.getInstance().notifyPlayer(
                         this.owner,
                         new GameEvent(State.EventType.CREATION_COMPLETE,
-                        /*SOUND,*/
+                            this,
+                            /*SOUND,*/
                             "Unit Ready",
                             this.location
                         )
@@ -242,7 +267,8 @@ namespace Incursio.Classes
                     
                     PlayerManager.getInstance().notifyPlayer(
                         this.owner,
-                        new GameEvent(State.EventType.CREATION_COMPLETE, 
+                        new GameEvent(State.EventType.CREATION_COMPLETE,
+                            this,
                             /*SOUND,*/ 
                             "Construction Complete", 
                             this.location

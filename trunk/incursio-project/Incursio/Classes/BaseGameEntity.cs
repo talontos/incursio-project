@@ -210,8 +210,18 @@ namespace Incursio.Classes
         {
             PlayerManager.getInstance().notifyPlayer(
                 this.owner,
-                new GameEvent(State.EventType.UNDER_ATTACK, /*SOUND,*/ "We're Under Attack!", this.location)
+                new GameEvent(State.EventType.UNDER_ATTACK, this,/*SOUND,*/ "We're Under Attack!", this.location)
             );
+        }
+
+        public virtual void heal(int boost){
+            if(health < maxHealth){
+                this.health += boost; 
+                MessageManager.getInstance().addMessage(new GameEvent(State.EventType.HEALING, this, Convert.ToString(boost), this.location));
+            }
+
+            if (health > maxHealth)
+                health = maxHealth;
         }
 
         #region Getters/Setters

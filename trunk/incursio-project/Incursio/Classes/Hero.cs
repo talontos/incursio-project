@@ -85,7 +85,7 @@ namespace Incursio.Classes
               this.armor += Hero.armorIncrement;
 
               PlayerManager.getInstance().notifyPlayer(this.owner,
-                  new GameEvent(State.EventType.LEVEL_UP, "Hero Level Up!", location));
+                  new GameEvent(State.EventType.LEVEL_UP, this, "Hero Level Up!", location));
 
               //TODO: Review this number - we might want to make it smaller
               pointsToNextLevel *= level;
@@ -119,7 +119,7 @@ namespace Incursio.Classes
               this.justDrawn = true;
               Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(location);
               Rectangle unit = this.boundingBox;
-              Color colorMask = Color.White;//EntityManager.getInstance().getColorMask(this.owner);
+              Color colorMask = EntityManager.getInstance().getColorMask(this.owner);
 
               //depending on the unit's state, draw their textures
               //idle

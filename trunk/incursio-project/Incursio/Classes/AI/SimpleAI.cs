@@ -18,6 +18,8 @@ namespace Incursio.Classes
         private List<EntityBuildOrder> buildList = new List<EntityBuildOrder>();
         private int minPreferredArmySize = 20;
 
+        private int baseAnalyzeCounter = 0;
+
         public SimpleAI(){
 
         }
@@ -29,12 +31,8 @@ namespace Incursio.Classes
         /// <param name="gameTime"></param>
         /// <param name="player"></param>
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime, AIPlayer player){
-            //BUILD MY ARMY
-            //TODO: Improve - this currently just constantly builds light infantry!
-            List<Structure> myGuys = EntityManager.getInstance().getLivePlayerStructures(player.id);
-
             //continue building army, if necessary
-            this.queueBuildRandomUnit(ref player);
+            this.queueBuildRandomUnit(true);
 
             //checks events
             this.processEvents(ref player);
@@ -43,10 +41,20 @@ namespace Incursio.Classes
             if(!EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER)[0].isBuilding()){
                 this.buildNextEntity();
             }
+
+            //analyze defenses
+            if(baseAnalyzeCounter < 60){
+                baseAnalyzeCounter++;
+            }
+            else{
+                this.analyzeDefenses();
+            }
+
         }
 
         public override void processEvents(ref AIPlayer player)
         {
+            State.PlayerId id = player.id;
             EntityManager manager = EntityManager.getInstance();
             player.events.ForEach(delegate(GameEvent e)
             {
@@ -56,7 +64,16 @@ namespace Incursio.Classes
                         //we need to stop them
 
                         //TODO: don't send everyone unless it's last one?
-                        this.allUnitsAssault(e.location);
+                        if (EntityManager.getInstance().getPlayerTotalOwnedControlPoints(id) == 1)
+                        {
+                            this.allUnitsAssault(e.location);
+                        }
+                        else{
+                            //find some guys to send
+                            int numAttackers = EntityManager.getInstance().getEntitiesInRange(ref e.entity, e.entity.sightRange).Count;
+
+                            this.sendUnitsToAttack(numAttackers, e.location);
+                        }
                         break;
                     case State.EventType.POINT_CAPTURED:
                         //we need to fortify this point
@@ -97,10 +114,11 @@ namespace Incursio.Classes
             }
         }
 
-        private void queueBuildRandomUnit(ref AIPlayer player){
-            List<Structure> myGuys = EntityManager.getInstance().getLivePlayerStructures(player.id);
+        private void queueBuildRandomUnit(bool checkCap){
+            List<Structure> myGuys = EntityManager.getInstance().getLivePlayerStructures(State.PlayerId.COMPUTER);
 
-            if (EntityManager.getInstance().getLivePlayerUnits(player.id).Count + this.buildList.Count <= this.minPreferredArmySize)
+            if (EntityManager.getInstance().getLivePlayerUnits(State.PlayerId.COMPUTER).Count + this.buildList.Count <= this.minPreferredArmySize
+                || !checkCap)
             {
                 //'order' random unit
                 int randU = Incursio.rand.Next(0, 100);
@@ -115,6 +133,72 @@ namespace Incursio.Classes
                 else
                     this.buildList.Add(new EntityBuildOrder(dest, new HeavyInfantryUnit()));
             }
+        }
+
+        private void sendUnitsToAttack(int num, Coordinate location){
+            List<BaseGameEntity> myGuys = EntityManager.getInstance().getLivePlayerUnits(State.PlayerId.COMPUTER);
+            List<BaseGameEntity> toSend = new List<BaseGameEntity>();
+
+            //select num entities that are not busy
+            for(int i = Incursio.rand.Next(0, myGuys.Count - 1); i < myGuys.Count; i++){
+                if( !(myGuys[i] is Unit))
+                    continue;
+
+                if(toSend.Count < num){
+                        
+                    Unit u = myGuys[i] as Unit;
+                    switch(u.getCurrentState()){
+                        case State.UnitState.Guarding:
+                        case State.UnitState.Idle:
+                        case State.UnitState.Wandering:
+                            toSend.Add(myGuys[i]);
+                            break;
+                    }
+                }
+            }
+
+            EntityManager.getInstance().issueCommand(State.Command.ATTACK_MOVE, false, toSend, location);
+        }
+
+        private void analyzeDefenses(){
+            List<Structure> myStructs = EntityManager.getInstance().getLivePlayerStructures(State.PlayerId.COMPUTER);
+
+            List<BaseGameEntity> surroundings = new List<BaseGameEntity>();
+            int numTowers = 0;
+            int numMen = 0;
+            int numEnemies = 0;
+
+            myStructs.ForEach(delegate(Structure s)
+            {
+                //ignore towers?
+                if( !(s is GuardTowerStructure) ){
+                    //make sure we have towers and men guarding it
+                    surroundings = EntityManager.getInstance().getEntitiesInRange( (s as BaseGameEntity), s.sightRange);
+
+                    surroundings.ForEach(delegate(BaseGameEntity e)
+                    {
+                        if (e.owner == State.PlayerId.COMPUTER)
+                        {
+                            if (e is Unit)
+                                numMen++;
+                            else if (e is GuardTowerStructure)
+                                numTowers++;
+                        }
+                        else
+                            numEnemies++;
+                    });
+
+                    if(numTowers == 0){
+                        //BUILD SOME TOWERS!
+                    }
+
+                    if(numMen == 0){
+                        //GET SOME MEN OVER HERE!
+                        this.queueBuildRandomUnit(false);
+                    }
+                }
+            });
+
         }
     }
 }

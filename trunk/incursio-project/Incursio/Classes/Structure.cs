@@ -107,7 +107,7 @@ namespace Incursio.Classes
             //TODO: some math using my armor
             this.health -= damage;
 
-            MessageManager.getInstance().addMessage(new GameEvent(State.EventType.TAKING_DAMAGE, Convert.ToString(damage), this.location));
+            MessageManager.getInstance().addMessage(new GameEvent(State.EventType.TAKING_DAMAGE, this, Convert.ToString(damage), this.location));
 
             if (this.health <= 0)
             {
@@ -133,7 +133,7 @@ namespace Incursio.Classes
         {
             PlayerManager.getInstance().notifyPlayer(
                 this.owner,
-                new GameEvent(State.EventType.UNDER_ATTACK, /*SOUND,*/ "Base Under Attack!", this.location)
+                new GameEvent(State.EventType.UNDER_ATTACK, this, /*SOUND,*/ "Base Under Attack!", this.location)
             );
         }
     }
