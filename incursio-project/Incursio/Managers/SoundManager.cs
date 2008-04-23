@@ -13,7 +13,7 @@ namespace Incursio.Managers
         ISoundEngine soundEngine = null;
         private static SoundManager instance = null;
 
-        private SoundManager()
+        public SoundManager()
         {
             soundEngine = new ISoundEngine();
         }
@@ -63,8 +63,22 @@ namespace Incursio.Managers
                 if (soundEngine.IsCurrentlyPlaying(filename) == false)
                 {
                     soundEngine.Play2D(filename, loop);
-                    //this.setVolume(volLev);
                 }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine("\n Null Reference Exception Found!");
+                Console.WriteLine("Song File error");
+                Console.WriteLine(e);
+            }
+        }
+
+        //Works the same way as playSound, but does so in a 3D environment
+        public void PlaySound3D(String filename, float xVal, float yVal, bool loop)
+        {
+            try
+            {
+                soundEngine.Play3D(filename, xVal, yVal, 0, loop);
             }
             catch (NullReferenceException e)
             {

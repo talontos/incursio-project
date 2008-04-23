@@ -12,6 +12,7 @@ namespace Incursio.Classes
   public class LightInfantryUnit : Unit
     {
       public static string CLASSNAME = "Incursio.Classes.LightInfantryUnit";
+      private static SoundManager LightSM = new SoundManager();
 
       public LightInfantryUnit() : base(){
           this.pointValue = 50;
@@ -87,7 +88,8 @@ namespace Incursio.Classes
           }
           else if (this.currentState == State.UnitState.Attacking)
           {
-              //SoundManager.getInstance().PlaySound("../../../Content/Audio/steelsword.wav", false);
+              LightSM.PlaySound("../../../Content/Audio/steelsword.wav", false);
+              //LightSM.updateSounds();
 
               switch (this.directionState){
                   case State.Direction.West:

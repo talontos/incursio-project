@@ -12,6 +12,7 @@ namespace Incursio.Classes
   public class ArcherUnit : Unit
     {
       public static String CLASSNAME = "Incursio.Classes.ArcherUnit";
+      private static SoundManager RcherSM = new SoundManager();
         public ArcherUnit() : base(){
             this.pointValue = 75;
 
@@ -92,7 +93,8 @@ namespace Incursio.Classes
           }
           else if (this.currentState == State.UnitState.Attacking)
           {
-              //SoundManager.getInstance().PlaySound("../../../Content/Audio/bow release.wav", false);
+              RcherSM.PlaySound("../../../Content/Audio/bow release.wav", false);
+              //RcherSM.updateSounds();
 
               switch(this.directionState){
                   case State.Direction.West:

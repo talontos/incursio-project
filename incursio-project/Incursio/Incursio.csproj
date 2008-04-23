@@ -14,7 +14,7 @@
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
     <StartupObject>Incursio.IncursioProgram</StartupObject>
-    <ManifestCertificateThumbprint>374C26BEB6DD7C45372C79EEA3E595A1BBF24814</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>BF3D8A77DA0C58E7821C988C3F514F9C3E647E7C</ManifestCertificateThumbprint>
     <ManifestKeyFile>Incursio_4_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
@@ -120,7 +120,7 @@
     <Compile Include="Managers\MapManager.cs" />
     <Compile Include="Managers\MessageManager.cs" />
     <Compile Include="Managers\PlayerManager.cs" />
-    <None Include="Managers\SoundManager.cs" />
+    <Compile Include="Managers\SoundManager.cs" />
     <Compile Include="Managers\TextureBank.cs" />
     <Compile Include="Managers\TextureManager.cs" />
     <Compile Include="Utils\DebugUtil.cs" />

@@ -202,7 +202,6 @@ namespace Incursio
             cursor.Update();    //update the cursor
             kbState = Keyboard.GetState();  //get the present state of the keyboard
             keysPressed = (Keys[])kbState.GetPressedKeys(); //get all the keys that are being pressed
-            //soundManager.updateSounds();
 
             //Check game state!
             this.checkState(gameTime);

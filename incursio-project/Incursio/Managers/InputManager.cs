@@ -98,10 +98,12 @@ namespace Incursio.Managers
             if(this.keyPressed(Keys.C)){
                 //select camp
                 EntityManager.getInstance().selectPlayerCamp();
+                Incursio.getInstance().currentMap.moveCameraToEvent(EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location);
             }
 
             if(this.keyPressed(Keys.E)){
                 EntityManager.getInstance().selectPlayerHero();
+                Incursio.getInstance().currentMap.moveCameraToEvent(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].location);
             }
 
             //unit commands
