@@ -153,6 +153,7 @@ namespace Incursio
             CANT_MOVE_THERE,
             NOT_ENOUGH_RESOURCES,
             TAKING_DAMAGE,
+            HEALING,
             ENEMY_CAPTURING_POINT,
             POINT_CAPTURED,
             LEVEL_UP,
