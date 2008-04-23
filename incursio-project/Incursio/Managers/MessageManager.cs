@@ -131,7 +131,7 @@ namespace Incursio.Managers
                         if (numberSystemMessages <= MAXIMUM_DISPLAYED_SYSTEM_MESSAGES)
                         {
                             e.displayTick++;
-                            spriteBatch.DrawString(font, e.stringMessage, new Vector2(512, 100 + systemMessageYCoordOffset), Color.Red, 0, font.MeasureString(e.stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                            spriteBatch.DrawString(font, e.stringMessage, new Vector2(75, 600 + systemMessageYCoordOffset), Color.Red, 0, font.MeasureString(e.stringMessage) / 4, 1.0f, SpriteEffects.None, 0.5f);
                             systemMessageYCoordOffset = systemMessageYCoordOffset + 15;
                             numberSystemMessages++;
                         }

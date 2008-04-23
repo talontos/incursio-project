@@ -96,7 +96,12 @@ namespace Incursio.Managers
             }
 
             if(this.keyPressed(Keys.C)){
-                //try to build Camp
+                //select camp
+                EntityManager.getInstance().selectPlayerCamp();
+            }
+
+            if(this.keyPressed(Keys.E)){
+                EntityManager.getInstance().selectPlayerHero();
             }
 
             //unit commands
