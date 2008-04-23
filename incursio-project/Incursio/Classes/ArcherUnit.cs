@@ -17,11 +17,13 @@ namespace Incursio.Classes
 
             //TODO: set Archer Values
             this.armor = 1;
-            this.damage = 10;
+            this.damage = 20;
             this.moveSpeed = 150.0f;
             this.attackSpeed = 3;
             this.sightRange = 12;
             this.attackRange = 10;
+            this.maxHealth = 100;
+            this.health = 100;
             this.setType(State.EntityName.Archer);
 
         }

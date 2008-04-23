@@ -126,34 +126,31 @@ namespace Incursio.Classes
             */
         }
 
-        public void update(Keys[] keysPressed, int screenWidth, int screenHeight)
+        public void update()
         {
 
-            for (int i = 0; i < keysPressed.Length; i++)    //scan through the keys being pressed down
+            if (InputManager.getInstance().MOVE_RIGHT && maxViewableX < this.width)
             {
-                if (keysPressed[i] == Keys.Right && maxViewableX < this.width)
-                {
-                    this.maxViewableX++;
-                    this.minViewableX++;
-                }
-                else if (keysPressed[i] == Keys.Left && minViewableX > 0)
-                {
-                    this.maxViewableX--;
-                    this.minViewableX--;
-                }
-
-                if (keysPressed[i] == Keys.Up && minViewableY > 0)
-                {
-                    this.maxViewableY--;
-                    this.minViewableY--;
-                }
-                else if (keysPressed[i] == Keys.Down && maxViewableY < this.height)
-                {
-                    this.maxViewableY++;
-                    this.minViewableY++;
-                }
+                this.maxViewableX++;
+                this.minViewableX++;
+            }
+            else if (InputManager.getInstance().MOVE_LEFT && minViewableX > 0)
+            {
+                this.maxViewableX--;
+                this.minViewableX--;
             }
 
+            if (InputManager.getInstance().MOVE_UP && minViewableY > 0)
+            {
+                this.maxViewableY--;
+                this.minViewableY--;
+            }
+            else if (InputManager.getInstance().MOVE_DOWN && maxViewableY < this.height)
+            {
+                this.maxViewableY++;
+                this.minViewableY++;
+            }
+        
         }
 
         public void draw(SpriteBatch spriteBatch, Cursor cursor)

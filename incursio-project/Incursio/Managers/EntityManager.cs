@@ -287,7 +287,31 @@ namespace Incursio.Managers
             return playerStructs;
         }
 
-        public int getPlayerControlPoints(State.PlayerId id)
+        public List<CampStructure> getLivePlayerCamps(State.PlayerId player)
+        {
+            List<CampStructure> playerStructs = new List<CampStructure>();
+            this.entityBank.ForEach(delegate(BaseGameEntity e)
+            {
+                if (e.getPlayer() == player && !e.isDead() && e is CampStructure)
+                    playerStructs.Add(e as CampStructure);
+            });
+
+            return playerStructs;
+        }
+
+        public List<ControlPoint> getPlayerControlPoints(State.PlayerId player)
+        {
+            List<ControlPoint> playerStructs = new List<ControlPoint>();
+            this.entityBank.ForEach(delegate(BaseGameEntity e)
+            {
+                if (e.getPlayer() == player && !e.isDead() && e is ControlPoint)
+                    playerStructs.Add(e as ControlPoint);
+            });
+
+            return playerStructs;
+        }
+
+        public int getPlayerTotalOwnedControlPoints(State.PlayerId id)
         {
             int numPoints = 0;
 
@@ -301,6 +325,7 @@ namespace Incursio.Managers
 
             return numPoints;
         }
+
 
         public int getTotalControlPoints()
         {
@@ -467,7 +492,29 @@ namespace Incursio.Managers
             this.issueCommand(commandType, append, list, args);
         }
 
-        public List<BaseGameEntity> getEntitiesInRange(ref BaseGameEntity hunter, int cellSightRange){
+        public void getAllEntitiesInRange(ref BaseGameEntity hunter, int cellSightRange, 
+                out List<BaseGameEntity> friendlies, out List<BaseGameEntity> enemies){
+            friendlies = new List<BaseGameEntity>();
+            enemies = new List<BaseGameEntity>();
+
+            List<int> ids = MapManager.getInstance().currentMap.getEntitiesInRange(hunter.location, cellSightRange);
+            State.PlayerId hOwner = hunter.owner;
+            BaseGameEntity e;
+
+            for(int i = 0; i < ids.Count; i++){
+                e = this.getEntity(ids[i]);
+                if (!e.isDead())
+                {
+                    if (e.owner != hOwner)
+                        enemies.Add(e);
+                    else
+                        friendlies.Add(e);
+                }
+            }
+        }
+
+        public List<BaseGameEntity> getEntitiesInRange(ref BaseGameEntity hunter, int cellSightRange)
+        {
             List<int> ids = MapManager.getInstance().currentMap.getEntitiesInRange(hunter.location, cellSightRange);
             List<BaseGameEntity> enemies = new List<BaseGameEntity>();
             State.PlayerId hOwner = hunter.owner;
@@ -476,7 +523,7 @@ namespace Incursio.Managers
             ids.ForEach(delegate(int key)
             {
                 e = this.getEntity(key);
-                if (e.owner != hOwner)
+                if (!e.isDead() && e.owner != hOwner)
                     enemies.Add(e);
             });
 
@@ -518,7 +565,7 @@ namespace Incursio.Managers
         public void selectGroup(int groupNum){
 
             if(!InputManager.getInstance().shifting()){
-                selectedUnits.Clear();
+                selectedUnits = new List<BaseGameEntity>();
             }
 
             //we need to ensure that dead units are removed
@@ -531,8 +578,61 @@ namespace Incursio.Managers
             selectedUnits.AddRange(groups[groupNum]);
         }
 
+        public void selectPlayerHero(){
+            this.selectedUnits = new List<BaseGameEntity>();
+            this.selectedUnits.Add(this.getLivePlayerHeros(State.PlayerId.HUMAN)[0] as BaseGameEntity);
+        }
+
+        public void selectPlayerCamp(){
+            this.selectedUnits = new List<BaseGameEntity>();
+            this.selectedUnits.Add(this.getLivePlayerCamps(State.PlayerId.HUMAN)[0] as BaseGameEntity);
+        }
+
         public Color getColorMask(State.PlayerId player){
             return (player == State.PlayerId.HUMAN ? Color.White : Color.OrangeRed);
+        }
+
+        public State.ThreatLevel analyzeThreat(ref int myDamage, ref int myArmor, 
+            ref int myHealth, ref int myRange, ref int myAttackSpeed, ref BaseGameEntity e){
+
+            int eDamage, eArmor, eHealth, eRange, eAttackSpeed, myThreat, eThreat;
+
+            eDamage = e.getAttackDamage();
+            eArmor = e.getArmor();
+            eHealth = (int)e.health;
+            eRange = e.getAttackRange();
+            eAttackSpeed = e.getAttackSpeed();
+
+            //eThreat is much lower if they are already in battle
+            eThreat = (((eHealth + eRange) / myDamage) / (e.isAttacking() ? 2 : 1)) / eAttackSpeed;
+            myThreat = ((myHealth + myRange) / eDamage) / myAttackSpeed;
+
+            if (e.isCapturing())
+            {
+                //if e is a hero and is capturing, we must stop him!
+                return State.ThreatLevel.Medium;
+            }
+            else if (eThreat < 0)
+            {
+                //poses no threat, don't worry about it
+                return State.ThreatLevel.None;
+            }
+            else if (eThreat > myThreat)
+            {
+                //he'll probably kill me, stay away
+                return State.ThreatLevel.High;
+            }
+            else if (eThreat == myThreat)
+            {
+                return State.ThreatLevel.Medium;
+            }
+            else if (eThreat <= myThreat)
+            {
+                //at most it is formidable
+                return State.ThreatLevel.Low;
+            }
+
+            else return State.ThreatLevel.None;
         }
 
     }

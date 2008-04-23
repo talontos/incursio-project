@@ -31,7 +31,7 @@ namespace Incursio.Commands
                 return;
             }
 
-            if(this.target.getHealth() <= 0 && target.getType() != State.EntityName.ControlPoint){
+            if(this.target.isDead()){
                 this.finishedExecution = true;
                 subject.setIdle();
                 subject.issueAdditionalOrder(new GuardCommand());
@@ -40,7 +40,7 @@ namespace Incursio.Commands
                 //if subject is in attack range of target, set attack state & notify manager
                 bool result = false;
 
-                if(subject is Unit){
+                if(subject.canAttack){
                     subject.setTarget(target);
                     subject.setAttacking();
                     result = subject.attackTarget();
@@ -52,7 +52,10 @@ namespace Incursio.Commands
 
                 if(!result){
                     //subject is not in attack range, move toward target:
-                    followCommand.execute(gameTime, ref subject);
+                    if (subject.canMove)
+                        followCommand.execute(gameTime, ref subject);
+                    else
+                        this.finishedExecution = true;
                 }
                 else{
                     int i = 0;

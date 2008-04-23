@@ -14,8 +14,8 @@
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
     <StartupObject>Incursio.IncursioProgram</StartupObject>
-    <ManifestCertificateThumbprint>71AC381BF82B761861E4E28EC5773D50A1F1AA1E</ManifestCertificateThumbprint>
-    <ManifestKeyFile>Incursio_3_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>374C26BEB6DD7C45372C79EEA3E595A1BBF24814</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Incursio_4_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -105,6 +105,7 @@
     <Compile Include="Commands\BuildCommand.cs" />
     <Compile Include="Commands\AttackMoveCommand.cs" />
     <Compile Include="Commands\CaptureCommand.cs" />
+    <Compile Include="Commands\CommanderGuardCommand.cs" />
     <Compile Include="Commands\FollowCommand.cs" />
     <Compile Include="Commands\GuardCommand.cs" />
     <Compile Include="Commands\MoveCommand.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Managers\TextureBank.cs" />
     <Compile Include="Managers\TextureManager.cs" />
     <Compile Include="Utils\DebugUtil.cs" />
+    <Compile Include="Utils\EntityBuildOrder.cs" />
     <Compile Include="Utils\GameEvent.cs" />
     <Compile Include="Utils\GameResult.cs" />
     <Compile Include="Utils\ObjectFactory.cs" />
@@ -151,6 +153,7 @@
     <None Include="Incursio_1_TemporaryKey.pfx" />
     <None Include="Incursio_2_TemporaryKey.pfx" />
     <None Include="Incursio_3_TemporaryKey.pfx" />
+    <None Include="Incursio_4_TemporaryKey.pfx" />
     <None Include="Incursio_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

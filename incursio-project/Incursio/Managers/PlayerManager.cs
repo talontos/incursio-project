@@ -58,6 +58,14 @@ namespace Incursio.Managers
             });
         }
 
+        public Player getPlayerById(State.PlayerId id){
+            switch(id){
+                case State.PlayerId.COMPUTER: return this.computerPlayer;
+                case State.PlayerId.HUMAN: return this.humanPlayer;
+                default: return null;
+            }
+        }
+
 
     }
 }

@@ -30,11 +30,12 @@ namespace Incursio.Campaign
 
             //testing unit creation/placement/moving///
             Hero playerHero = (Hero)entityManager.createNewEntity("Incursio.Classes.Hero", State.PlayerId.HUMAN);
+            Hero compHero = (Hero)entityManager.createNewEntity("Incursio.Classes.Hero", State.PlayerId.COMPUTER);
 
             CampStructure playerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", State.PlayerId.HUMAN);
             CampStructure computerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", State.PlayerId.COMPUTER);
 
-            LightInfantryUnit infUnit = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
+            //LightInfantryUnit infUnit = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
             HeavyInfantryUnit heavyUnit = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", State.PlayerId.HUMAN);
 
             ControlPoint cp1 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
@@ -67,6 +68,7 @@ namespace Incursio.Campaign
             //infUnit.setLocation(new Coordinate(700, 100));
             heavyUnit.setLocation(new Coordinate(300, 100));
             playerHero.setLocation(new Coordinate(150, 500));
+            compHero.setLocation(new Coordinate(1600, 1600));
             playerCamp.setLocation(new Coordinate(100, 400));
             computerCamp.setLocation(new Coordinate(1700, 1700));
 

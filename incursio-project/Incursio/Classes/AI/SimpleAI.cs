@@ -14,6 +14,10 @@ namespace Incursio.Classes
     /// </summary>
     public class SimpleAI : BaseAI
     {
+
+        private List<EntityBuildOrder> buildList = new List<EntityBuildOrder>();
+        private int minPreferredArmySize = 20;
+
         public SimpleAI(){
 
         }
@@ -28,34 +32,90 @@ namespace Incursio.Classes
             //BUILD MY ARMY
             //TODO: Improve - this currently just constantly builds light infantry!
             List<Structure> myGuys = EntityManager.getInstance().getLivePlayerStructures(player.id);
-            
-            if(EntityManager.getInstance().getLivePlayerUnits(player.id).Count < 15){
-                //build Army
-                myGuys.ForEach(delegate(Structure s)
-                {
-                    if(s.isConstructor){
-                        if( !(s as CampStructure).isBuilding() ){
 
-                            int randU = Incursio.rand.Next(0, 100);
+            //continue building army, if necessary
+            this.queueBuildRandomUnit(ref player);
 
-                            if(randU > 60)
-                                (s as CampStructure).build(new LightInfantryUnit());
+            //checks events
+            this.processEvents(ref player);
 
-                            else if (randU > 30)
-                                (s as CampStructure).build(new ArcherUnit());
-
-                            else
-                                (s as CampStructure).build(new HeavyInfantryUnit());
-
-                            s.setDestination(new Coordinate(Incursio.rand.Next(20, 2000), Incursio.rand.Next(20, 2000)));
-                        }
-                    }
-                });
+            //processEvents will catch a creation_complete event; but if the camp is idle, we need to use it!
+            if(!EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER)[0].isBuilding()){
+                this.buildNextEntity();
             }
+        }
 
-            //TODO: CHECK EVENTS
+        public override void processEvents(ref AIPlayer player)
+        {
+            EntityManager manager = EntityManager.getInstance();
+            player.events.ForEach(delegate(GameEvent e)
+            {
+                switch (e.type)
+                {
+                    case State.EventType.ENEMY_CAPTURING_POINT:
+                        //we need to stop them
 
-            base.Update(gameTime, player);
+                        //TODO: don't send everyone unless it's last one?
+                        this.allUnitsAssault(e.location);
+                        break;
+                    case State.EventType.POINT_CAPTURED:
+                        //we need to fortify this point
+                        //we should build 1-2 towers near the point
+                        //  in between the point and the enemy base
+                        //  we also should station a few units here
+                        //      *enqueue towers, enqueue OR re-assign units
+                        break;
+                    case State.EventType.UNDER_ATTACK:
+                        //we should help, depending on what it is
+                        break;
+                    case State.EventType.CREATION_COMPLETE:
+                        //we just finished building something;
+                        //build the next thing on our list
+                        this.buildNextEntity();
+                        break;
+                }
+            });
+
+            player.events = new List<GameEvent>();
+        }
+
+        private void buildNextEntity(){
+            if (buildList.Count > 0)
+            {
+                //pop next order off queue and build
+                EntityBuildOrder order = buildList[0];
+                buildList.Remove(order);
+
+                //right now we only have one constructor-class structure; so this is okay
+                CampStructure camp = EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER)[0];
+                camp.build(order.entity);
+
+                if (order.entity is GuardTowerStructure)
+                    camp.setNewStructureCoords(order.location);
+                else
+                    camp.setDestination(order.location);
+            }
+        }
+
+        private void queueBuildRandomUnit(ref AIPlayer player){
+            List<Structure> myGuys = EntityManager.getInstance().getLivePlayerStructures(player.id);
+
+            if (EntityManager.getInstance().getLivePlayerUnits(player.id).Count + this.buildList.Count <= this.minPreferredArmySize)
+            {
+                //'order' random unit
+                int randU = Incursio.rand.Next(0, 100);
+                Coordinate dest = null;// new Coordinate(Incursio.rand.Next(100, MapManager.getInstance().currentMap.width - 100),
+                                       //          Incursio.rand.Next(100, MapManager.getInstance().currentMap.height - 100));
+
+                if (randU > 60)
+                    this.buildList.Add(new EntityBuildOrder(dest, new LightInfantryUnit()));
+
+                else if (randU > 30)
+                    this.buildList.Add(new EntityBuildOrder(dest, new ArcherUnit()));
+
+                else
+                    this.buildList.Add(new EntityBuildOrder(dest, new HeavyInfantryUnit()));
+            }
         }
     }
 }

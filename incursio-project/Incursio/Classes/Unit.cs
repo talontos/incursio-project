@@ -298,7 +298,7 @@ namespace Incursio.Classes
             this.damage = damage;
         }
 
-        public long getArmor()
+        public override int getArmor()
         {
             return this.armor;
         }
@@ -464,6 +464,21 @@ namespace Incursio.Classes
             return null;
         }
 
+        public override int getAttackDamage()
+        {
+            return this.damage;
+        }
+
+        public override int getAttackRange()
+        {
+            return this.attackRange;
+        }
+
+        public override int getAttackSpeed()
+        {
+            return this.attackSpeed;
+        }
+
         protected virtual void updateDirectionTexture(){
             switch(directionState){
                 //TODO: reload my texture depending on my directionState
@@ -483,6 +498,11 @@ namespace Incursio.Classes
         public override void setAttacking()
         {
             this.currentState = State.UnitState.Attacking;
+        }
+
+        public override bool isAttacking()
+        {
+            return (this.currentState == State.UnitState.Attacking);
         }
 
         public override void setIdle()

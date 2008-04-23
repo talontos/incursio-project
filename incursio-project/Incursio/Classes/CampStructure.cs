@@ -263,12 +263,14 @@ namespace Incursio.Classes
 
         public override void setDestination(Coordinate dest)
         {
-            this.destination = dest;
+            if(dest != null)
+                this.destination = dest;
         }
 
         public void setNewStructureCoords(Coordinate coords)
         {
-            this.newStructureCoords = coords;
+            if(coords != null)
+                this.newStructureCoords = coords;
         }
 
         public override void updateOccupancy(bool occupied)

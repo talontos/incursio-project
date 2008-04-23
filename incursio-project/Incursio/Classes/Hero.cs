@@ -13,6 +13,13 @@ namespace Incursio.Classes
     {
       public static String HERO_CLASS = "Incursio.Classes.Hero";
 
+      private static int healthIncrement = 25;
+      private static int damageIncrement = 25;
+      private static int armorIncrement = 5;
+
+      public const int RESOURCE_TICK = 4;
+      public int timeForResource = 0;
+
       public String name = "";
       public int level = 1;
       public long experiencePoints = 0;
@@ -26,16 +33,18 @@ namespace Incursio.Classes
           this.sightRange = 8;
           this.setType(State.EntityName.Hero);
           this.armor = 10;
-          this.damage = 50;
+          this.damage = 25;
           this.attackSpeed = 3;
           this.attackRange = 1;
-          this.maxHealth = 500;
-          this.health = 500;
+          this.maxHealth = 200;
+          this.health = 200;
       }
 
       public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
       {
           base.Update(gameTime, ref myRef);
+
+          this.updateResourceTick();
       }
 
       public override void updateBounds()
@@ -68,10 +77,38 @@ namespace Incursio.Classes
           {
               level++;
 
+              //increment health
+              this.maxHealth += Hero.healthIncrement;              
+              //increment damage
+              this.damage += Hero.damageIncrement;
+              //increment defense
+              this.armor += Hero.armorIncrement;
+
+              PlayerManager.getInstance().notifyPlayer(this.owner,
+                  new GameEvent(State.EventType.LEVEL_UP, "Hero Level Up!", location));
+
               //TODO: Review this number - we might want to make it smaller
               pointsToNextLevel *= level;
+          }
+      }
 
-              //TODO: Dispatch GameEvent
+      /// <summary>
+      /// Earns money for the player.  Additional money is computed as
+      ///   double the Hero's Level
+      /// </summary>
+      public void updateResourceTick()
+      {
+          //give the owner money
+          if (timeForResource >= RESOURCE_TICK * 60)
+          {
+              Player owningPlayer = PlayerManager.getInstance().getPlayerById(this.owner);
+              timeForResource = 0;
+
+              owningPlayer.MONETARY_UNIT += this.level * 2;
+          }
+          else
+          {
+              timeForResource++;
           }
       }
 
@@ -341,6 +378,11 @@ namespace Incursio.Classes
 
       public void finishCapture(ControlPoint c){
           gainExperience(c.pointValue);
+      }
+
+      public override bool isCapturing()
+      {
+          return this.currentState == State.UnitState.Capturing;
       }
 
     }
