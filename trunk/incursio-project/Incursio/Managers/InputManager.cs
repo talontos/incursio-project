@@ -25,6 +25,11 @@ namespace Incursio.Managers
         public Vector2 mouseDragStart_shifted = new Vector2(-1, -1);
         public Vector2 mouseDragEnd_shifted = new Vector2(-1, -1);
 
+        public bool MOVE_UP = false,
+                    MOVE_LEFT = false,
+                    MOVE_DOWN = false,
+                    MOVE_RIGHT = false;
+
         //public int dragDetectCounter = 0;
         public bool dragging = false;
 
@@ -51,12 +56,29 @@ namespace Incursio.Managers
             if(this.keyPressed(Keys.Escape))
                 Incursio.getInstance().pause_play();
 
+            this.clearMoveDirections();
+
+            if(keyStateCurrent.IsKeyDown(Keys.W) || keyStateCurrent.IsKeyDown(Keys.Up)){
+                MOVE_UP = true;
+            }
+            else if (keyStateCurrent.IsKeyDown(Keys.S) || keyStateCurrent.IsKeyDown(Keys.Down))
+            {
+                MOVE_DOWN = true;
+            }
+
+            if (keyStateCurrent.IsKeyDown(Keys.A) || keyStateCurrent.IsKeyDown(Keys.Left)){
+                MOVE_LEFT = true;
+            }
+            else if (keyStateCurrent.IsKeyDown(Keys.D) || keyStateCurrent.IsKeyDown(Keys.Right)){
+                MOVE_RIGHT = true;
+            }
+
             //Entity construction
             if(this.keyPressed(Keys.L)){
                 EntityManager.getInstance().tryToBuild(new LightInfantryUnit());// LightInfantryUnit.CLASSNAME);
             }
 
-            if (this.keyPressed(Keys.A))
+            if (this.keyPressed(Keys.R))
             {
                 EntityManager.getInstance().tryToBuild(new ArcherUnit());// ArcherUnit.CLASSNAME);
             }
@@ -98,6 +120,11 @@ namespace Incursio.Managers
                     MapManager.getInstance().showLocation(coord);
                 }
                 
+            }
+
+            if(this.keyPressed(Keys.F11)){
+                //Set Full-Screen
+                Incursio.getInstance().toggleFullScreen();
             }
 
             #region GROUP_SET_SELECT
@@ -307,6 +334,13 @@ namespace Incursio.Managers
                 //selecting group
                 EntityManager.getInstance().selectGroup(groupNum);
             }
+        }
+
+        private void clearMoveDirections(){
+            this.MOVE_DOWN = false;
+            this.MOVE_LEFT = false;
+            this.MOVE_RIGHT = false;
+            this.MOVE_UP = false;
         }
     }
 }

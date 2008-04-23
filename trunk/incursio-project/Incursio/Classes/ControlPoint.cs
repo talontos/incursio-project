@@ -41,6 +41,9 @@ namespace Incursio.Classes
             heroStartingHealth = capturingHero.health;
             timeSpentCapping = 0;
             capping = true;
+
+            PlayerManager.getInstance().notifyPlayer(this.owner, 
+                new GameEvent(State.EventType.ENEMY_CAPTURING_POINT, "Enemy Capturing Point", location));
             
         }
 
@@ -50,7 +53,9 @@ namespace Incursio.Classes
             timeSpentCapping = 0;
             
             capturingHero.finishCapture(this);
-
+            PlayerManager.getInstance().notifyPlayer(capturingHero.owner, 
+                new GameEvent(State.EventType.ENEMY_CAPTURING_POINT, "Control Point Captured!", location));
+            
             capturingHero = null;
             capping = false;
 

@@ -137,6 +137,7 @@ namespace Incursio
             FOLLOW,
             CAPTURE,
             GUARD,
+            COMMANDER_GUARD,
             BUILD,
         }
 
@@ -152,7 +153,17 @@ namespace Incursio
             CANT_MOVE_THERE,
             NOT_ENOUGH_RESOURCES,
             TAKING_DAMAGE,
+            ENEMY_CAPTURING_POINT,
+            POINT_CAPTURED,
+            LEVEL_UP,
             GAIN_RESOURCE,
+        }
+
+        public enum ThreatLevel{
+            None,   //can't even attack
+            High,  //probably kill me
+            Medium,
+            Low,
         }
     }
 }

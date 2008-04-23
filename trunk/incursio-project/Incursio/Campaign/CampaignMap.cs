@@ -51,12 +51,12 @@ namespace Incursio.Campaign
             }*/
 
             //if no control points are held, or the camp is destroyed
-            if (eMan.getPlayerControlPoints(State.PlayerId.HUMAN) == 0)               //If no control points are held
+            if (eMan.getPlayerTotalOwnedControlPoints(State.PlayerId.HUMAN) == 0)               //If no control points are held
             {
                 result = new GameResult(State.GameState.Defeat, "You have Lost all Control Points!");
             }
 
-            if (eMan.getPlayerControlPoints(State.PlayerId.COMPUTER) == 0)            //If no control points are held
+            if (eMan.getPlayerTotalOwnedControlPoints(State.PlayerId.COMPUTER) == 0)            //If no control points are held
             {
                 result = new GameResult(State.GameState.Victory, "You have Conquered all Control Points!");
             }

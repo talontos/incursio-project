@@ -116,7 +116,6 @@ namespace Incursio.Managers
                 }*/
             }
         }
-
         public void displayMessages(SpriteBatch spriteBatch)
         {
             Coordinate loc = new Coordinate();

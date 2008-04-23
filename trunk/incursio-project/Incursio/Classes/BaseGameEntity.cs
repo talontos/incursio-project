@@ -28,6 +28,7 @@ namespace Incursio.Classes
         public bool canMove = false;
         public bool isConstructor = false;
         public bool justDrawn = false;
+        public bool smartGuarding = true;
         public int currentFrameX = 0;       //for animation
         public int currentFrameY = 0;       //for animation
         public int currentFrameXAttackDeath = 0;
@@ -178,6 +179,31 @@ namespace Incursio.Classes
         public virtual void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
 
+        }
+
+        public virtual bool isCapturing(){
+            return false;
+        }
+
+        public virtual bool isAttacking()
+        {
+            return false;
+        }
+
+        public virtual int getAttackDamage(){
+            return -1;
+        }
+
+        public virtual int getArmor(){
+            return -1;
+        }
+
+        public virtual int getAttackRange(){
+            return 0;
+        }
+
+        public virtual int getAttackSpeed(){
+            return -1;
         }
 
         protected virtual void notifyUnderAttack()

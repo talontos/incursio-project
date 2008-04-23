@@ -11,10 +11,10 @@ namespace Incursio.Classes
 {
   public class GuardTowerStructure : Structure
     {
-      protected int damage = 10;
-      protected int attackSpeed = 1;
+      protected int damage = 20;
+      protected int attackSpeed = 4;
       protected int updateAttackTimer = 0;
-      protected int attackRange = 10;
+      protected int attackRange = 14;
       protected BaseGameEntity target = null;
 
         public GuardTowerStructure() : base(){
@@ -27,6 +27,7 @@ namespace Incursio.Classes
             this.map = Incursio.getInstance().currentMap;
             this.currentState = State.StructureState.Idle;
 
+            smartGuarding = false;
             canAttack = true;
         }
 
@@ -57,7 +58,7 @@ namespace Incursio.Classes
 
       public override bool attackTarget()
       {
-          return true;
+          
           //if target is in attackRange, attack it!
           if (map.getCellDistance(location, target.location) < attackRange)
           {
@@ -147,6 +148,32 @@ namespace Incursio.Classes
       public override void setAttacking()
       {
           this.currentState = State.StructureState.Attacking;
+      }
+
+      public override bool isAttacking()
+      {
+          return this.currentState == State.StructureState.Attacking;
+      }
+
+      public override int getAttackDamage()
+      {
+          return this.damage;
+      }
+
+      public override int getAttackSpeed()
+      {
+          return this.attackSpeed;
+      }
+
+      public override int getArmor()
+      {
+          //TODO: STRUCTURE ARMOR
+          return 0;
+      }
+
+      public override int getAttackRange()
+      {
+          return this.attackRange;
       }
 
       public override void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)

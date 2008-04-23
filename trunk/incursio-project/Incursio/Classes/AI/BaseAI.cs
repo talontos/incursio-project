@@ -26,18 +26,29 @@ namespace Incursio.Classes
         /// <param name="gameTime"></param>
         /// <param name="player"></param>
         public virtual void Update(Microsoft.Xna.Framework.GameTime gameTime, AIPlayer player){
-            
+            this.processEvents(ref player);
+        }
+
+        public virtual void processEvents(ref AIPlayer player){
+            EntityManager manager = EntityManager.getInstance();
             player.events.ForEach(delegate(GameEvent e)
             {
-                /*if(e.type == State.EventType.UNDER_ATTACK){
-                    //send troops to help?
-                    EntityManager manager = EntityManager.getInstance();
-                    manager.issueCommand(State.Command.MOVE, false, manager.getLivePlayerUnits(player.id), e.location);
-                }*/
+                switch (e.type)
+                {
+                    case State.EventType.ENEMY_CAPTURING_POINT:
+                        //we need to stop them
+                        this.allUnitsAssault(e.location);
+                        break;
+                }
+
             });
 
             player.events = new List<GameEvent>();
-            
+        }
+
+        public virtual void allUnitsAssault(Coordinate target){
+            EntityManager.getInstance().issueCommand(State.Command.ATTACK_MOVE, false,
+                EntityManager.getInstance().getLivePlayerUnits(State.PlayerId.COMPUTER), target);
         }
     }
 }

@@ -122,6 +122,10 @@ namespace Incursio
             return instance;
         }
 
+        public void toggleFullScreen(){
+            this.graphics.ToggleFullScreen();
+        }
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -256,7 +260,7 @@ namespace Incursio
 
                     InputManager.getInstance().Update(gameTime);
 
-                    MapManager.getInstance().currentMap.update(keysPressed, 1024, 768);
+                    MapManager.getInstance().currentMap.update();
 
                     PlayerManager.getInstance().updatePlayers(gameTime);
 

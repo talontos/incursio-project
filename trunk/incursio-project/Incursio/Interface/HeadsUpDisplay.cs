@@ -343,7 +343,7 @@ namespace Incursio.Classes
             spriteBatch.Draw(TextureBank.InterfaceTextures.controlPointInterfaceIcon,
                 new Rectangle(860, 12, TextureBank.InterfaceTextures.controlPointInterfaceIcon.Width, TextureBank.InterfaceTextures.controlPointInterfaceIcon.Height), Color.White);
 
-            spriteBatch.DrawString(font, " " + EntityManager.getInstance().getPlayerControlPoints(State.PlayerId.HUMAN) + "/" + EntityManager.getInstance().getTotalControlPoints(), new Vector2(900, 23), Color.White, 0, font.MeasureString("XXXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, " " + EntityManager.getInstance().getPlayerTotalOwnedControlPoints(State.PlayerId.HUMAN) + "/" + EntityManager.getInstance().getTotalControlPoints(), new Vector2(900, 23), Color.White, 0, font.MeasureString("XXXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
 
         }
