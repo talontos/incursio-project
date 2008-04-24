@@ -25,6 +25,12 @@ namespace Incursio.Managers
             return instance;
         }
 
+        public void reinitializeInstance()
+        {
+            instance = new PlayerManager();
+            instance.initializePlayerManager();
+        }
+
         public void updatePlayers(GameTime gameTime){
 
             players.ForEach(delegate(Player p)

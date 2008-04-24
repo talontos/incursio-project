@@ -64,7 +64,7 @@ namespace Incursio.Classes
             this.minViewableX = 0;
             this.minViewableY = 0;
             this.maxViewableX = screenWidth / TILE_WIDTH;
-            this.maxViewableY = screenHeight / TILE_HEIGHT;
+            this.maxViewableY = (screenHeight - (int)(TextureBank.InterfaceTextures.headsUpDisplay.Height)) / TILE_HEIGHT;
             this.cameraMovePause = 0;
 
             //initialize occupancyGrid and entityGrid

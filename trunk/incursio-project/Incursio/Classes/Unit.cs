@@ -27,7 +27,7 @@ namespace Incursio.Classes
         protected State.Direction directionState = State.Direction.South;
         protected bool isClose = false;
 
-        private Coordinate destination = null;
+        protected Coordinate destination = null;
         public BaseGameEntity target = null;
 
         //TEXTURES

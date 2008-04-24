@@ -15,7 +15,7 @@ namespace Incursio.Campaign
             : base()
         {
             this.level = State.CampaignLevel.THREE;
-            //this.setMapDimensions(2048, 1024, 1024, 768);
+            
             this.setMapDimensions(2048, 2048, 1024, 768);
         }
 

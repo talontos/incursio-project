@@ -63,7 +63,10 @@ namespace Incursio.Interface
         {
             if (TextureBank.InterfaceTextures.cursorEvent != null)
             {
-                batch.Draw(TextureBank.InterfaceTextures.cursorEvent, this.pos, new Color(255, 255, 255, 125));
+                batch.Draw(TextureBank.InterfaceTextures.cursorEvent, 
+                    new Vector2 (this.pos.X - (int)(TextureBank.InterfaceTextures.cursorEvent.Width / 2),
+                                 this.pos.Y - (int)(TextureBank.InterfaceTextures.cursorEvent.Height * 0.80)), 
+                    new Color(255, 255, 255, 125));
             }
             else
             {

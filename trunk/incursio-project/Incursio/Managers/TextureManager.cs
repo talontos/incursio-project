@@ -82,6 +82,7 @@ namespace Incursio.Managers
             //TextureBank.EntityTextures.lightInfantryDeath_East = Content.Load<Texture2D>(@"LightInfantry_Death");
             //TextureBank.EntityTextures.lightInfantryDeath_West = Content.Load<Texture2D>(@"LightInfantry_Death_Left");
 
+            TextureBank.EntityTextures.arrow = Content.Load<Texture2D>(@"Arrow");
             
             TextureBank.EntityTextures.heroEast = Content.Load<Texture2D>(@"HeroEast");
             TextureBank.EntityTextures.heroWest = Content.Load<Texture2D>(@"HeroWest");
