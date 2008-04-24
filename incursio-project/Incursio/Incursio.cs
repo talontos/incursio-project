@@ -105,7 +105,7 @@ namespace Incursio
             keysPressed = new Keys[15];
             Content.RootDirectory = "Content";
 
-            currentMap = MapManager.getInstance().setCurrentLevel(State.CampaignLevel.ONE);
+            
             //MapManager.getInstance().initializeCurrentMap();
 
             playerManager = PlayerManager.getInstance();
@@ -161,7 +161,7 @@ namespace Incursio
             clickDestination = Content.Load<Texture2D>(@"destinationClick");
 
             //initialize the current map
-            MapManager.getInstance().initializeCurrentMap();
+            //MapManager.getInstance().initializeCurrentMap();
 
             // load the HUD
             hud.loadHeadsUpDisplay();
@@ -289,6 +289,10 @@ namespace Incursio
                     if (!newGameButton.getPressed() && newGameButton.getFocus())
                     {
                         newGameButton.setFocus(false);
+                        EntityManager.getInstance().reinitializeInstance();
+                        PlayerManager.getInstance().reinitializeInstance();
+                        currentMap = MapManager.getInstance().setCurrentLevel(State.CampaignLevel.ONE);
+                        MapManager.getInstance().initializeCurrentMap();
                         currentState = State.GameState.InPlay;
                     }
 

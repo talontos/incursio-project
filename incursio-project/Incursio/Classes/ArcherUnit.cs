@@ -12,6 +12,16 @@ namespace Incursio.Classes
   public class ArcherUnit : Unit
     {
       public static String CLASSNAME = "Incursio.Classes.ArcherUnit";
+      
+      //ARROW STUFF//
+      private Vector2 arrowPos = new Vector2(-1, -1);
+      const int ARROW_LENGTH = 5;
+      const int ARROW_SPEED = 5;
+      bool drawArrow = false;
+      Coordinate arrowOnScreen = new Coordinate(-1, -1);
+      double arrowAngle = 0;
+      private Vector2 arrowDestination = new Vector2(-1, -1);
+
       private static SoundManager RcherSM = new SoundManager();
         public ArcherUnit() : base(){
             this.pointValue = 75;
@@ -32,11 +42,171 @@ namespace Incursio.Classes
       public override void Update(Microsoft.Xna.Framework.GameTime gameTime, ref BaseGameEntity myRef)
       {
           base.Update(gameTime, ref myRef);
+
+          if (drawArrow)
+          {
+              updateArrow();
+              if(MapManager.getInstance().currentMap.isOnScreen(new Coordinate((int)arrowPos.X, (int)arrowPos.Y)))
+              {
+                  Coordinate arrowOnScreen = MapManager.getInstance().currentMap.positionOnScreen(new Coordinate((int)arrowPos.X, (int)arrowPos.Y));
+              }
+              
+          }
       }
 
       public override string getTextureName()
       {
           return @"archerUnit";
+      }
+
+      public override bool attackTarget()
+      {
+          //if target is in attackRange, attack it.
+
+          int largeTargetBufferZone = 0;
+
+          if (target.getType() == State.EntityName.Camp)
+          {
+              largeTargetBufferZone = (int)(64 / map.getTileWidth());
+          }
+          else if (target.getType() == State.EntityName.GuardTower)
+          {
+              largeTargetBufferZone = (int)(64 / map.getTileWidth());
+          }
+
+          if (MapManager.getInstance().currentMap.getCellDistance(location, target.location) <= attackRange + largeTargetBufferZone)
+          {
+              //TODO: do some math randomizing damage?
+              if (this.updateAttackTimer == 0)    //this is the unit's attack time (attack every 1.5 seconds for example)
+              {
+
+                  if (target.getLocation().x > this.location.x)
+                  {
+                      this.directionState = State.Direction.East;
+                  }
+                  else if (target.getLocation().x < this.location.x)
+                  {
+                      this.directionState = State.Direction.West;
+                  }
+
+                  target.takeDamage(this.damage, this);
+                  
+                  //SHOOT AN ARROW DAWG
+                  startArrow();
+
+
+                  //if we just killed the thing
+
+                  //if (target is Unit && (target as Unit).getCurrentState() == State.UnitState.Dead ||
+                  //   target is Structure && (target as Structure).getCurrentState() == State.StructureState.Destroyed)
+                  if (target.isDead())
+                  {
+                      //TODO:
+                      //add AI for attacking more enemies!
+                      //but for now:
+
+                      //NOTE: killedTarget needs to be performed BEFORE
+                      //  target is set to null so that we know WHAT we killed
+                      this.killedTarget();
+
+                      target = null;
+                      destination = null;
+                      currentState = State.UnitState.Idle;
+                  }
+
+
+                  this.updateAttackTimer = this.attackSpeed * 60;
+              }
+              else
+              {
+                  this.updateAttackTimer--;
+              }
+
+              return true;
+          }
+          else return false;// updateMovement();
+      }
+
+      public void updateArrow()
+      {
+          double newPosX = Math.Cos(arrowAngle) * ARROW_SPEED;
+          double newPosY = Math.Sin(arrowAngle) * ARROW_SPEED;
+
+          //determine the direction, and if we are close enough to the destination, end movement
+          if (arrowPos.X > arrowDestination.X)
+          {
+              if (arrowPos.X + newPosX < arrowDestination.X)
+              {
+                  drawArrow = false;
+              }
+          }
+          else if (arrowPos.X < arrowDestination.X)
+          {
+              if (arrowPos.X + newPosX > arrowDestination.X)
+              {
+                  drawArrow = false;
+              }
+          }
+
+          arrowPos.X = arrowPos.X + (float)newPosX;
+          arrowPos.Y = arrowPos.Y + (float)newPosY;
+      }
+
+      public void startArrow()
+      {
+          if (!drawArrow)
+          {
+              drawArrow = true;
+              arrowPos.X = (float)location.x;
+              arrowPos.Y = (float)location.y;
+              arrowDestination.X = (float)target.location.x;
+              arrowDestination.Y = (float)target.location.y;
+
+              //find angle between arrow and destination
+              //straight shots first
+              if (arrowPos.Y == arrowDestination.Y && arrowPos.X == arrowDestination.X)
+              {
+                  arrowAngle = 0;
+              }
+              else if (arrowPos.Y == arrowDestination.Y && arrowPos.X > arrowDestination.X)
+              {
+                  arrowAngle = 180;
+              }
+              else if (arrowPos.X == arrowDestination.X && arrowPos.Y > arrowDestination.Y)
+              {
+                  arrowAngle = 90;
+              }
+              else if (arrowPos.X == arrowDestination.X && arrowPos.Y < arrowDestination.Y)
+              {
+                  arrowAngle = 270;
+              }
+              //if none of those, do based off quadrants
+              else
+              {
+                  //quadrant one
+                  if (arrowPos.X < arrowDestination.X && arrowPos.Y > arrowDestination.Y)
+                  {
+                      arrowAngle = (180 / Math.PI) * Math.Atan((arrowPos.Y - arrowDestination.Y) / (arrowDestination.X - arrowPos.X));
+                  }
+                  //quadrant two
+                  else if (arrowPos.X > arrowDestination.X && arrowPos.Y > arrowDestination.Y)
+                  {
+                      arrowAngle = 90 + (180 / Math.PI) * Math.Atan((arrowPos.Y - arrowDestination.Y) / (arrowPos.X - arrowDestination.X));
+                  }
+                  //quadrant three
+                  else if (arrowPos.X > arrowDestination.X && arrowPos.Y < arrowDestination.Y)
+                  {
+                      arrowAngle = 180 + (180 / Math.PI) * Math.Atan((arrowDestination.Y - arrowPos.Y) / (arrowPos.X - arrowDestination.X));
+                  }
+                  //quadrant four
+                  else if (arrowPos.X < arrowDestination.X && arrowPos.Y < arrowDestination.Y)
+                  {
+                      arrowAngle = 270 + (180 / Math.PI)* Math.Atan((arrowDestination.Y - arrowPos.Y) / (arrowDestination.X - arrowPos.X));
+                  }
+              }
+          }
+
+          
       }
 
       public override void updateBounds()
@@ -58,6 +228,14 @@ namespace Incursio.Classes
           Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.location);
           Rectangle unit = this.boundingBox;
           Color colorMask = EntityManager.getInstance().getColorMask(this.owner);
+
+          //draw the arrow if needed
+          if (drawArrow)
+          {
+              spriteBatch.Draw(TextureBank.EntityTextures.arrow, 
+                  new Vector2(arrowOnScreen.x, arrowOnScreen.y),
+                  null, Color.White, (float)arrowAngle, new Vector2(TextureBank.EntityTextures.arrow.Width / 2, TextureBank.EntityTextures.arrow.Height / 2), 1.0f, SpriteEffects.None, 0f);
+          }
 
           //depending on the unit's state, draw their textures
           //idle

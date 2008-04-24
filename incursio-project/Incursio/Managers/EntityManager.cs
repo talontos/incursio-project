@@ -44,6 +44,11 @@ namespace Incursio.Managers
             return instance;
         }
 
+        public void reinitializeInstance()
+        {
+            instance = new EntityManager();
+        }
+
         public List<BaseGameEntity> getSelectedUnits(){
             return selectedUnits;
         }

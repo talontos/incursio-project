@@ -16,6 +16,7 @@ namespace Incursio.Campaign
 
         public override void initializeMap(/*PASS A FILE IN DEFINING MAP??*/)
         {
+            
             base.initializeMap();
         }
 

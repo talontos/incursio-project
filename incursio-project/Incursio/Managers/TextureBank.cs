@@ -58,6 +58,8 @@ namespace Incursio.Managers
             public static Texture2D archerDeath_East;
             public static Texture2D archerDeath_West;
 
+            public static Texture2D arrow;
+
             public static Texture2D heroEast;
             public static Texture2D heroWest;
             public static Texture2D heroSouth;
