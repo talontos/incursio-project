@@ -257,7 +257,8 @@ namespace Incursio
                     //update entities
                     EntityManager.getInstance().updateAllEntities(gameTime);
 
-                    InputManager.getInstance().Update(gameTime);
+                    //NOTE: InputUpdate has been moved outside of this case
+                    //InputManager.getInstance().Update(gameTime);
 
                     MapManager.getInstance().currentMap.update();
 
@@ -346,6 +347,9 @@ namespace Incursio
 
                 default: break;
             }
+
+            //update input regardless; this update checks for State to determine what to update
+            InputManager.getInstance().Update(gameTime);
         }
 
         /// <summary>
@@ -393,6 +397,8 @@ namespace Incursio
                 case (State.GameState.Menu):
                     spriteBatch.DrawString(font, "INCURSIO", FontPos, Color.White, 0, font.MeasureString("INCURSIO") / 2, 1.0f, SpriteEffects.None, 0.5f);
                     graphics.GraphicsDevice.Clear(Color.SteelBlue);
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground, 
+                        new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
                     
                     newGameButton.Draw(spriteBatch);
                     exitGameButton.Draw(spriteBatch);
@@ -420,8 +426,12 @@ namespace Incursio
 
                     spriteBatch.DrawString(font, "Game Paused", new Vector2(520, 100), Color.White, 0, font.MeasureString("Game Paused") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.pauseMenuBackground,
+                        new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
+                    
                     exitGameToMenuButton.Draw(spriteBatch);
                     resumeGameButton.Draw(spriteBatch);
+                    
                  
                     //TODO: perform PausedPlay actions
                     break;

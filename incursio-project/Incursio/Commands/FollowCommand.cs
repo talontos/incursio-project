@@ -5,6 +5,7 @@ using System.Text;
 using Incursio.Classes;
 using Incursio.Commands;
 using Microsoft.Xna.Framework;
+using Incursio.Managers;
 
 namespace Incursio.Commands
 {
@@ -33,7 +34,7 @@ namespace Incursio.Commands
                 this.finishedExecution = true;
             }
             else{
-                if(this.followTarget.location != this.moveCommand.destination)
+                if(MapManager.getInstance().currentMap.getCellDistance(this.followTarget.location, subject.location) > 1)
                     this.updateMoveCommand();
 
                 moveCommand.execute(gameTime, ref subject);

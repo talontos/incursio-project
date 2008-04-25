@@ -144,6 +144,10 @@ namespace Incursio.Managers
 
             TextureBank.InterfaceTextures.selectionRectangle = Content.Load<Texture2D>(@"DragSelection");
 
+            // load background Images
+            TextureBank.InterfaceTextures.mainMenuBackground = Content.Load<Texture2D>(@"Splash_Screen");
+            TextureBank.InterfaceTextures.pauseMenuBackground = Content.Load<Texture2D>(@"Pause_Screen");
+
             //Load terrain textures
             TextureBank.MapTiles.grass = Content.Load<Texture2D>(@"GrassTile1");
             TextureBank.MapTiles.tree1 = Content.Load<Texture2D>(@"Tree1");

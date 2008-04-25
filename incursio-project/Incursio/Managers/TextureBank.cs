@@ -155,6 +155,13 @@ namespace Incursio.Managers
             public static Texture2D heroIcon;
             public static Texture2D heroPortrait;
             /////////////////////////////
+
+            /////Background Images///////
+            public static Texture2D mainMenuBackground;
+            public static Texture2D pauseMenuBackground;
+            public static Texture2D victoryMenuBackground;
+            public static Texture2D defeatMenuBackground;
+
         }
     }
 }

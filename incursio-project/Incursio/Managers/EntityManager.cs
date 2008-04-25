@@ -380,8 +380,8 @@ namespace Incursio.Managers
         {
             if (selectedUnits.Count > 0 && selectedUnits[0] is CampStructure)
             {
-                (selectedUnits[0] as CampStructure).setNewStructureCoords(new Coordinate((int)point.X, (int)point.Y));
-                this.issueCommand(State.Command.BUILD, false, null, toBuild);
+                //(selectedUnits[0] as CampStructure).setNewStructureCoords(new Coordinate((int)point.X, (int)point.Y));
+                this.issueCommand(State.Command.BUILD, false, null, toBuild, new Coordinate((int)point.X, (int)point.Y));
             }
         }
 
@@ -463,7 +463,7 @@ namespace Incursio.Managers
                     ////////////////////////
                     case State.Command.BUILD:
                         //TODO: We probably shouldn't be passing unit objects through all this
-                        command = new BuildCommand(args[0] as BaseGameEntity);
+                        command = new BuildCommand(args[0] as BaseGameEntity, (args.Length > 1 ? args[1] : null) as Coordinate);
                         break;
 
                     ////////////////////////
