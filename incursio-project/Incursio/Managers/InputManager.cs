@@ -152,7 +152,7 @@ namespace Incursio.Managers
                 Coordinate coord = MessageManager.getInstance().getLastMessageLocation();
                 if (coord != null)
                 {
-                    MapManager.getInstance().showLocation(coord);
+                    Incursio.getInstance().currentMap.moveCameraToEvent(MessageManager.getInstance().getLastMessageLocation());
                 }
 
             }

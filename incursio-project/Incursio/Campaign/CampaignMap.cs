@@ -11,8 +11,8 @@ namespace Incursio.Campaign
     public class CampaignMap : MapBase
     {
         public State.CampaignLevel level;
-        private bool noControlPoints = false;
-        private bool noCamp = false;
+        //private bool noControlPoints = false;
+        //private bool noCamp = false;
 
         public override void initializeMap(/*PASS A FILE IN DEFINING MAP??*/)
         {

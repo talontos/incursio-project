@@ -47,7 +47,7 @@ namespace Incursio
         /////////////////////////////
 
         //map initialization
-        BaseMapEntity tex1;
+        //BaseMapEntity tex1;
         public MapBase currentMap;
 
         //game information
@@ -91,7 +91,7 @@ namespace Incursio
         const int FRAME_LENGTH = 8;
 
         //analyze FPS
-        string frameString;
+        //string frameString;
 
         public Incursio(){
 

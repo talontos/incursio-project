@@ -22,10 +22,6 @@ namespace Incursio.Commands
 
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
-            if(subject is LightInfantryUnit){
-                int i = 0;
-            }
-
             if( !subject.canAttack ){
                 this.finishedExecution = true;
                 return;
@@ -56,9 +52,6 @@ namespace Incursio.Commands
                         followCommand.execute(gameTime, ref subject);
                     else
                         this.finishedExecution = true;
-                }
-                else{
-                    int i = 0;
                 }
             }
         }

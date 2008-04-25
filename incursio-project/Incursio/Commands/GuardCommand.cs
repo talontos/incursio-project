@@ -49,10 +49,6 @@ namespace Incursio.Commands
             //analyze enemies to determine who to attack
             enemies.ForEach(delegate(BaseGameEntity e)
             {
-                if (subject is GuardTowerStructure && subject.owner == State.PlayerId.COMPUTER)
-                {
-                    int i = 0;
-                }
                 switch(EntityManager.getInstance().analyzeThreat(ref myDamage, ref myArmor, 
                         ref myHealth, ref myRange, ref myAttackSpeed, ref e))
                 {

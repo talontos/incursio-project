@@ -32,7 +32,7 @@ namespace Incursio.Interface
             this.bringUpMenu = false;
         }
 
-        public void Action(Cursor cursor, SpriteBatch spriteBatch)
+        public override void Action(Cursor cursor, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
             spriteBatch.Draw(holderBox, new Rectangle(465, 344, holderBox.Width, holderBox.Height), Color.White);
@@ -41,7 +41,7 @@ namespace Incursio.Interface
             spriteBatch.End();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             if (bringUpMenu)
             {

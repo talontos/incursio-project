@@ -14,8 +14,8 @@
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
     <StartupObject>Incursio.IncursioProgram</StartupObject>
-    <ManifestCertificateThumbprint>BF3D8A77DA0C58E7821C988C3F514F9C3E647E7C</ManifestCertificateThumbprint>
-    <ManifestKeyFile>Incursio_4_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>0D56CE7BF36E256834903A04965D3303B0A663F4</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Incursio_5_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -154,6 +154,7 @@
     <None Include="Incursio_2_TemporaryKey.pfx" />
     <None Include="Incursio_3_TemporaryKey.pfx" />
     <None Include="Incursio_4_TemporaryKey.pfx" />
+    <None Include="Incursio_5_TemporaryKey.pfx" />
     <None Include="Incursio_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
