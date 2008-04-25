@@ -479,11 +479,11 @@ namespace Incursio.Classes
             return this.attackSpeed;
         }
 
-        protected virtual void updateDirectionTexture(){
+        /*protected virtual void updateDirectionTexture(){
             switch(directionState){
                 //TODO: reload my texture depending on my directionState
             }
-        }
+        }*/
 
         public override void setTarget(BaseGameEntity target)
         {

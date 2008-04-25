@@ -91,6 +91,7 @@ namespace Incursio.Classes
                         }
                         else if(e.entity is CampStructure){
                             //send help to camp
+                            this.allUnitsAssault(e.location);
                         }
                         break;
                     case State.EventType.CREATION_COMPLETE:
@@ -125,13 +126,6 @@ namespace Incursio.Classes
                 //right now we only have one constructor-class structure; so this is okay
                 CampStructure camp = EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER)[0];
                 camp.build(order);
-
-                /*
-                if (order.entity is GuardTowerStructure)
-                    camp.setNewStructureCoords(order.location);
-                else
-                    camp.setDestination(order.location);
-                */
             }
         }
 

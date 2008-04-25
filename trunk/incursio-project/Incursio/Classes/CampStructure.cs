@@ -55,6 +55,28 @@ namespace Incursio.Classes
             this.isConstructor = true;
         }
 
+        public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
+        {
+            if (this.healTimer == HEAL_TICK * 90)
+            {
+                EntityManager.getInstance().healEntitiesInRange(this, this.healRange, true);
+                healTimer = 0;
+            }
+            else if (this.healTimer == HEAL_TICK * 60)
+            {
+                //heal units in range
+                EntityManager.getInstance().healEntitiesInRange(this, this.healRange, false);
+                healTimer++;
+            }
+            else
+            {
+                healTimer++;
+            }
+
+            this.updateOccupancy(true);
+            base.Update(gameTime, ref myRef);
+        }
+
         public override void build(EntityBuildOrder toBeBuilt)
         {
             if (buildProject != null)

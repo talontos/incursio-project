@@ -32,7 +32,7 @@ namespace Incursio.Interface
             isFocus = false;
         }
 
-        public void Draw(SpriteBatch batch)
+        public virtual void Draw(SpriteBatch batch)
         {
             if (isPressed == false || isFocus == false)
             {
@@ -65,7 +65,7 @@ namespace Incursio.Interface
 
         }
 
-        public void Action(Cursor cursor, SpriteBatch spriteBatch)
+        public virtual void Action(Cursor cursor, SpriteBatch spriteBatch)
         {
 
         }

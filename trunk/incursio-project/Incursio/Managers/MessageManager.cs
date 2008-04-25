@@ -15,7 +15,7 @@ namespace Incursio.Managers
 {
     class MessageManager
     {
-        public static MessageManager instance;
+        private static MessageManager instance;
 
         private SpriteFont font;
         private List<GameEvent> messages;
