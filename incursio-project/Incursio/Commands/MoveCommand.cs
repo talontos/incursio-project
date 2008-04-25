@@ -18,6 +18,8 @@ namespace Incursio.Commands
         public Coordinate destination;
         public Coordinate start;
 
+        private Coordinate prevLocation;
+
         public MoveCommand(Coordinate destination){
             this.destination = destination;
 
@@ -100,11 +102,25 @@ namespace Incursio.Commands
                 }
             }
 
+            if(subject.isMoving() && prevLocation != null){
+                if (Math.Abs(prevLocation.x - subject.location.x) < 40 ||
+                    Math.Abs(prevLocation.y - subject.location.y) < 40)
+                {
+                    //OH NO I'M STUCK
+                    bool stuck = true;
+
+                    //TODO: insert intermediary move command to try
+                    //  to get back on course
+                }
+            }
+
             //move towards destination
 
             subject.setDestination(this.destination);
             (subject as Unit).setCurrentState(State.UnitState.Moving);
-            
+
+            this.prevLocation = subject.getLocation();
+
             this.finishedExecution = subject.updateMovement((float)gameTime.ElapsedGameTime.TotalSeconds);
         }
     }

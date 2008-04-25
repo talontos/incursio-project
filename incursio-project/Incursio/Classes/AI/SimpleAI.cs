@@ -16,9 +16,17 @@ namespace Incursio.Classes
     {
 
         private List<EntityBuildOrder> buildList = new List<EntityBuildOrder>();
-        private int minPreferredArmySize = 20;
+        private int minPreferredArmySize = 10;
+        private bool baseSecure = false;
 
-        private int baseAnalyzeCounter = 0;
+        private bool preparingAssault = false;
+        private bool assaultReady = false;
+        private Coordinate assaultRallyPoint = null;
+        private int preferredAssaultForceSize = 5;
+        private List<BaseGameEntity> assaultForce = new List<BaseGameEntity>();
+
+        //init'd at 60 so it analyzes immediately
+        private int baseAnalyzeCounter = 60;
 
         public SimpleAI(){
 
@@ -32,7 +40,7 @@ namespace Incursio.Classes
         /// <param name="player"></param>
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime, AIPlayer player){
             //continue building army, if necessary
-            this.queueBuildRandomUnit(true);
+            //this.queueBuildRandomUnit(true);
 
             //checks events
             this.processEvents(ref player);
@@ -42,12 +50,23 @@ namespace Incursio.Classes
                 this.buildNextEntity();
             }
 
-            //analyze defenses
+            //analyze defenses periodically
             if(baseAnalyzeCounter < 60){
                 baseAnalyzeCounter++;
             }
             else{
+                this.queueBuildRandomUnit(true, null);
                 this.analyzeDefenses();
+
+                if (baseSecure){
+                    //get ready to attack player
+                    this.prepareAssault();
+                }
+                else{
+                    this.preparingAssault = false;
+                }
+
+                baseAnalyzeCounter = 0;
             }
 
         }
@@ -97,6 +116,10 @@ namespace Incursio.Classes
                     case State.EventType.CREATION_COMPLETE:
                         //we just finished building something;
                         //build the next thing on our list
+                        if(e.entity is Unit && this.preparingAssault){
+                            this.assaultForce.Add(e.entity as BaseGameEntity);
+                        }
+
                         this.buildNextEntity();
                         break;
                 }
@@ -129,7 +152,11 @@ namespace Incursio.Classes
             }
         }
 
-        private void queueBuildRandomUnit(bool checkCap){
+        private void queueAssaultUnit(){
+            this.queueBuildRandomUnit(false, this.assaultRallyPoint);
+        }
+
+        private void queueBuildRandomUnit(bool checkCap, Coordinate location){
             List<Structure> myGuys = EntityManager.getInstance().getLivePlayerStructures(State.PlayerId.COMPUTER);
 
             if (EntityManager.getInstance().getLivePlayerUnits(State.PlayerId.COMPUTER).Count + this.buildList.Count <= this.minPreferredArmySize
@@ -137,7 +164,10 @@ namespace Incursio.Classes
             {
                 //'order' random unit
                 int randU = Incursio.rand.Next(0, 100);
-                Coordinate dest = new Coordinate(Incursio.rand.Next(20, 2000), Incursio.rand.Next(20, 2000));
+                Coordinate dest = location;
+
+                if (dest == null)
+                    dest = new Coordinate(Incursio.rand.Next(20, 2000), Incursio.rand.Next(20, 2000));
 
                 if (randU > 60)
                     this.buildList.Add(new EntityBuildOrder(dest, new LightInfantryUnit()));
@@ -175,45 +205,84 @@ namespace Incursio.Classes
             EntityManager.getInstance().issueCommand(State.Command.ATTACK_MOVE, false, toSend, location);
         }
 
+        private void sendUnitsToAttack(Coordinate location){
+            EntityManager.getInstance().issueCommand(State.Command.ATTACK_MOVE, false, assaultForce, location);
+        }
+
         private void analyzeDefenses(){
+            baseSecure = true;
+
             List<Structure> myStructs = EntityManager.getInstance().getLivePlayerStructures(State.PlayerId.COMPUTER);
 
-            List<BaseGameEntity> surroundings = new List<BaseGameEntity>();
-            int numTowers = 0;
-            int numMen = 0;
-            int numEnemies = 0;
+            List<BaseGameEntity> friendlies = new List<BaseGameEntity>();
+
+            //TODO: ANALYZE ENEMIES?
+            List<BaseGameEntity> enemies = new List<BaseGameEntity>();
+            int numTowers;
+            int numMen;
+            int numEnemies;
 
             myStructs.ForEach(delegate(Structure s)
             {
+                numTowers = 0;
+                numMen = 0;
+                numEnemies = 0;
+
                 //ignore towers?
                 if( !(s is GuardTowerStructure) ){
                     //make sure we have towers and men guarding it
-                    surroundings = EntityManager.getInstance().getEntitiesInRange( (s as BaseGameEntity), s.sightRange);
+                    EntityManager.getInstance().getAllEntitiesInRange( s.owner, s.location, s.sightRange, out friendlies, out enemies);
 
-                    surroundings.ForEach(delegate(BaseGameEntity e)
+                    friendlies.ForEach(delegate(BaseGameEntity e)
                     {
-                        if (e.owner == State.PlayerId.COMPUTER)
-                        {
-                            if (e is Unit)
-                                numMen++;
-                            else if (e is GuardTowerStructure)
-                                numTowers++;
-                        }
-                        else
-                            numEnemies++;
+                        if (e is Unit)
+                            numMen++;
+                        else if (e is GuardTowerStructure)
+                            numTowers++;
+                        
                     });
 
-                    if(numTowers == 0){
+                    if(numTowers < 1){
                         //BUILD SOME TOWERS!
                         this.buildGuardTowerNearLocation(s.location);
+                        baseSecure = false;
                     }
 
-                    if(numMen == 0){
+                    if(numMen < 2){
                         //GET SOME MEN OVER HERE!
-                        this.queueBuildRandomUnit(false);
+                        this.queueBuildRandomUnit(false, s.location);
+                        baseSecure = false;
                     }
                 }
             });
+        }
+
+        private void prepareAssault(){
+            //FIXME OMG: Queue is populating TOO FAST
+            if (preparingAssault == false)
+                this.buildList = new List<EntityBuildOrder>();
+
+            this.preparingAssault = true;
+
+            //TODO: DECIDE WHAT TO ATTACK
+            if(assaultRallyPoint == null){
+                assaultRallyPoint = MapManager.getInstance().currentMap.getClosestPassableLocation(
+                    EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location,
+                    EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER)[0].location);
+            }
+
+            assaultReady = (assaultForce.Count >= preferredAssaultForceSize);
+
+            if(assaultReady){
+                //ATTACK!!!!
+                preparingAssault = false;
+                this.sendUnitsToAttack(EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location);
+            }
+            else{
+                //queue unit
+                if (this.buildList.Count == 0)
+                    this.queueAssaultUnit();
+            }
 
         }
     }

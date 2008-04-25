@@ -46,7 +46,7 @@ namespace Incursio.Classes
             //TODO: Set camp properties
             this.maxHealth = 350;
             this.health = 350;
-            this.sightRange = 500;
+            this.sightRange = 6;
             this.setType(State.EntityName.Camp);
             this.map = Incursio.getInstance().currentMap;
 
@@ -254,7 +254,7 @@ namespace Incursio.Classes
                     PlayerManager.getInstance().notifyPlayer(
                         this.owner,
                         new GameEvent(State.EventType.CREATION_COMPLETE,
-                            this,
+                            temp,
                             /*SOUND,*/
                             "Unit Ready",
                             this.location
@@ -275,7 +275,7 @@ namespace Incursio.Classes
                     PlayerManager.getInstance().notifyPlayer(
                         this.owner,
                         new GameEvent(State.EventType.CREATION_COMPLETE,
-                            this,
+                            temp,
                             /*SOUND,*/ 
                             "Construction Complete", 
                             this.location
@@ -386,6 +386,22 @@ namespace Incursio.Classes
         public override void issueSingleOrder(BaseCommand order)
         {
             base.issueImmediateOrder(order);
+        }
+
+        /// <summary> 
+        /// For camps, we don't want to lose our queue.
+        /// If we are issued a List of orders (which by default empties order queue),
+        /// we want to add these to the end of the queue
+        /// </summary>
+        /// <param name="order">Order to be issued</param>
+        public override void issueOrderList(params BaseCommand[] commands)
+        {
+            this.orders.AddRange(commands);
+        }
+
+        public void cancelCurrentOrder(){
+            if (this.orders.Count > 0)
+                this.orders.RemoveAt(0);
         }
 
         public override void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)

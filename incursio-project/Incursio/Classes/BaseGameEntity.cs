@@ -190,6 +190,11 @@ namespace Incursio.Classes
             return false;
         }
 
+        public virtual bool isMoving()
+        {
+            return false;
+        }
+
         public virtual int getAttackDamage(){
             return -1;
         }

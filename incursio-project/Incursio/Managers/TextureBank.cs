@@ -90,7 +90,7 @@ namespace Incursio.Managers
         }
 
         public static class MapTiles{
-            public static Texture2D grass;
+            public static Texture2D grass1;
             //...
 
             public static Texture2D shore1;
