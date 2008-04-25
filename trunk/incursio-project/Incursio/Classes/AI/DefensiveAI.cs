@@ -27,7 +27,7 @@ namespace Incursio.Classes
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime, AIPlayer player){
             //BUILD MY ARMY
             //TODO: Improve - this currently just constantly builds light infantry!
-            EntityManager.getInstance().getLivePlayerStructures(player.id).ForEach(delegate(Structure s)
+            /*EntityManager.getInstance().getLivePlayerStructures(player.id).ForEach(delegate(Structure s)
             {
                 if(s.isConstructor){
                     if( !(s as CampStructure).isBuilding() ){
@@ -35,7 +35,7 @@ namespace Incursio.Classes
                     }
                 }
             });
-
+            */
             //TODO: CHECK EVENTS
 
             base.Update(gameTime, player);

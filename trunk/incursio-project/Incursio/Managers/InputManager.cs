@@ -51,14 +51,33 @@ namespace Incursio.Managers
             mouseStateCurrent = Mouse.GetState();
             keyStateCurrent = Keyboard.GetState();
 
-            #region KEYBOARD COMMANDS
             //interface
             if(this.keyPressed(Keys.Escape))
                 Incursio.getInstance().pause_play();
 
+            if(this.keyPressed(Keys.F11)){
+                //Set Full-Screen
+                Incursio.getInstance().toggleFullScreen();
+            }
+
+            //only update these things if game is in play
+            if(Incursio.getInstance().currentState == State.GameState.InPlay){
+                this.Update_PlayState(gameTime);
+            }
+
+            //save states for previous
+            mouseStatePrev = mouseStateCurrent;
+            keyStatePrev = keyStateCurrent;
+        }
+
+        private void Update_PlayState(GameTime gameTime){
+            
+            #region KEYBOARD COMMANDS
+            
             this.clearMoveDirections();
 
-            if(keyStateCurrent.IsKeyDown(Keys.W) || keyStateCurrent.IsKeyDown(Keys.Up)){
+            if (keyStateCurrent.IsKeyDown(Keys.W) || keyStateCurrent.IsKeyDown(Keys.Up))
+            {
                 MOVE_UP = true;
             }
             else if (keyStateCurrent.IsKeyDown(Keys.S) || keyStateCurrent.IsKeyDown(Keys.Down))
@@ -66,15 +85,18 @@ namespace Incursio.Managers
                 MOVE_DOWN = true;
             }
 
-            if (keyStateCurrent.IsKeyDown(Keys.A) || keyStateCurrent.IsKeyDown(Keys.Left)){
+            if (keyStateCurrent.IsKeyDown(Keys.A) || keyStateCurrent.IsKeyDown(Keys.Left))
+            {
                 MOVE_LEFT = true;
             }
-            else if (keyStateCurrent.IsKeyDown(Keys.D) || keyStateCurrent.IsKeyDown(Keys.Right)){
+            else if (keyStateCurrent.IsKeyDown(Keys.D) || keyStateCurrent.IsKeyDown(Keys.Right))
+            {
                 MOVE_RIGHT = true;
             }
 
             //Entity construction
-            if(this.keyPressed(Keys.L)){
+            if (this.keyPressed(Keys.L))
+            {
                 EntityManager.getInstance().tryToBuild(new LightInfantryUnit());// LightInfantryUnit.CLASSNAME);
             }
 
@@ -88,30 +110,34 @@ namespace Incursio.Managers
                 EntityManager.getInstance().tryToBuild(new HeavyInfantryUnit());// HeavyInfantryUnit.CLASSNAME);
             }
 
-            if(this.keyPressed(Keys.T))
+            if (this.keyPressed(Keys.T))
             {
                 //try to build guard Tower
                 positioningTower = true;
                 TextureBank.InterfaceTextures.cursorEvent = TextureBank.EntityTextures.guardTowerTexturePlayer;
             }
 
-            if(this.keyPressed(Keys.C)){
+            if (this.keyPressed(Keys.C))
+            {
                 //select camp
                 EntityManager.getInstance().selectPlayerCamp();
                 Incursio.getInstance().currentMap.moveCameraToEvent(EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location);
             }
 
-            if(this.keyPressed(Keys.E)){
+            if (this.keyPressed(Keys.E))
+            {
                 EntityManager.getInstance().selectPlayerHero();
                 Incursio.getInstance().currentMap.moveCameraToEvent(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].location);
             }
 
             //unit commands
-            if(this.keyPressed(Keys.S)){
+            if (this.keyPressed(Keys.S))
+            {
                 EntityManager.getInstance().issueCommand(State.Command.STOP, false, null);
             }
 
-            if(this.keyPressed(Keys.G)){
+            if (this.keyPressed(Keys.G))
+            {
                 EntityManager.getInstance().issueCommand(State.Command.GUARD, false, null);
             }
 
@@ -120,18 +146,15 @@ namespace Incursio.Managers
 
             }
 
-            if (this.keyPressed(Keys.Space)){
+            if (this.keyPressed(Keys.Space))
+            {
                 //TODO: RESPOND TO MESSAGES
                 Coordinate coord = MessageManager.getInstance().getLastMessageLocation();
-                if(coord != null){
+                if (coord != null)
+                {
                     MapManager.getInstance().showLocation(coord);
                 }
-                
-            }
 
-            if(this.keyPressed(Keys.F11)){
-                //Set Full-Screen
-                Incursio.getInstance().toggleFullScreen();
             }
 
             #region GROUP_SET_SELECT
@@ -195,9 +218,11 @@ namespace Incursio.Managers
 
             dragging = this.leftDragStart() || dragging;
 
-            if(dragging){
+            if (dragging)
+            {
                 //listen for mouseUp
-                if(mouseStateCurrent.LeftButton == ButtonState.Released){
+                if (mouseStateCurrent.LeftButton == ButtonState.Released)
+                {
 
                     //end drag event
 
@@ -210,15 +235,17 @@ namespace Incursio.Managers
                         mouseDragEnd = new Vector2(-1, -1);
                         mouseDragStart_shifted = new Vector2(-1, -1);
                         mouseDragEnd_shifted = new Vector2(-1, -1);
-                        
+
                     }
 
                     dragging = false;
                     //dragDetectCounter = 0;
                 }
-                else{
+                else
+                {
                     //keep track of positions
-                    if (mouseDragStart.X < 0){
+                    if (mouseDragStart.X < 0)
+                    {
                         mouseDragStart_shifted = prevPoint;
                         mouseDragStart = new Vector2(mouseStatePrev.X, mouseStatePrev.Y);
                     }
@@ -227,8 +254,9 @@ namespace Incursio.Managers
                     mouseDragEnd = new Vector2(mouseStateCurrent.X, mouseStateCurrent.Y);
                 }
             }
-            
-            if(this.leftClick()){
+
+            if (this.leftClick())
+            {
                 //If the cursor is clicking within the HUD
                 if (Incursio.getInstance().hud.isCursorWithin((int)mouseStateCurrent.X, (int)mouseStateCurrent.Y))
                 {
@@ -246,19 +274,16 @@ namespace Incursio.Managers
                 }
             }
 
-            if(this.rightClick()){
+            if (this.rightClick())
+            {
                 //If the cursor is not clicking within the HUD
                 if (!Incursio.getInstance().hud.isCursorWithin((int)mouseStateCurrent.X, (int)mouseStateCurrent.Y))
                 {
                     EntityManager.getInstance().updateUnitOrders(point);
-                }  
+                }
             }
 
             #endregion
-
-            //save states for previous
-            mouseStatePrev = mouseStateCurrent;
-            keyStatePrev = keyStateCurrent;
         }
 
         public bool keyPressed(Keys key){

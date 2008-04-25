@@ -63,7 +63,7 @@ namespace Incursio.Classes
                     case State.EventType.ENEMY_CAPTURING_POINT:
                         //we need to stop them
 
-                        //TODO: don't send everyone unless it's last one?
+                        //don't send everyone unless it's last one?
                         if (EntityManager.getInstance().getPlayerTotalOwnedControlPoints(id) == 1)
                         {
                             this.allUnitsAssault(e.location);
@@ -81,9 +81,17 @@ namespace Incursio.Classes
                         //  in between the point and the enemy base
                         //  we also should station a few units here
                         //      *enqueue towers, enqueue OR re-assign units
+                        this.buildGuardTowerNearLocation(e.entity.location);
                         break;
                     case State.EventType.UNDER_ATTACK:
                         //we should help, depending on what it is
+                        if(e.entity is Hero){
+                            //send help to hero?
+                            //hero retreat?
+                        }
+                        else if(e.entity is CampStructure){
+                            //send help to camp
+                        }
                         break;
                     case State.EventType.CREATION_COMPLETE:
                         //we just finished building something;
@@ -96,6 +104,17 @@ namespace Incursio.Classes
             player.events = new List<GameEvent>();
         }
 
+        /// <summary>
+        /// Orders a Guard Tower to be build between location 'c' and the Human Base
+        /// </summary>
+        /// <param name="c"></param>
+        private void buildGuardTowerNearLocation(Coordinate c){
+            this.buildList.Add(new EntityBuildOrder(
+               MapManager.getInstance().currentMap.getClosestPassableLocation(EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location, c),
+               new GuardTowerStructure())
+           );
+        }
+
         private void buildNextEntity(){
             if (buildList.Count > 0)
             {
@@ -105,12 +124,14 @@ namespace Incursio.Classes
 
                 //right now we only have one constructor-class structure; so this is okay
                 CampStructure camp = EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER)[0];
-                camp.build(order.entity);
+                camp.build(order);
 
+                /*
                 if (order.entity is GuardTowerStructure)
                     camp.setNewStructureCoords(order.location);
                 else
                     camp.setDestination(order.location);
+                */
             }
         }
 
@@ -190,6 +211,7 @@ namespace Incursio.Classes
 
                     if(numTowers == 0){
                         //BUILD SOME TOWERS!
+                        this.buildGuardTowerNearLocation(s.location);
                     }
 
                     if(numMen == 0){

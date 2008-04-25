@@ -55,28 +55,7 @@ namespace Incursio.Classes
             this.isConstructor = true;
         }
 
-        public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
-        {
-            if (this.healTimer >= HEAL_TICK * 90)
-            {
-                EntityManager.getInstance().healEntitiesInRange(this, this.healRange, true);
-                healTimer = 0;
-            }
-            else if (this.healTimer >= HEAL_TICK * 60)
-            {
-                //heal units in range
-                EntityManager.getInstance().healEntitiesInRange(this, this.healRange, false);
-                healTimer++;
-            }
-            else{
-                healTimer++;
-            }
-
-            this.updateOccupancy(true);
-            base.Update(gameTime, ref myRef);
-        }
-
-        public override void build(BaseGameEntity toBeBuilt)
+        public override void build(EntityBuildOrder toBeBuilt)
         {
             if (buildProject != null)
             {
@@ -90,7 +69,16 @@ namespace Incursio.Classes
                 else
                     owningPlayer = PlayerManager.getInstance().computerPlayer;
 
-                if (toBeBuilt.getType() == State.EntityName.LightInfantry)
+                if(toBeBuilt.location != null){
+                    if(toBeBuilt.entity is GuardTowerStructure){
+                        this.setNewStructureCoords(toBeBuilt.location);
+                    }
+                    else{
+                        this.setDestination(toBeBuilt.location);
+                    }
+                }
+
+                if (toBeBuilt.entity.getType() == State.EntityName.LightInfantry)
                 {
                     //if we have enough resources, build it
                     if (owningPlayer.MONETARY_UNIT >= COST_LIGHT_INFANTRY)
@@ -99,7 +87,7 @@ namespace Incursio.Classes
                         currentBuildForObjectFactory = "Incursio.Classes.LightInfantryUnit";
                         this.timeBuilt = 0;
                         this.timeRequired = LIGHT_INFANTRY_BUILD_TIME * 60;
-                        this.buildProject = toBeBuilt;
+                        this.buildProject = toBeBuilt.entity;
                         this.currentState = State.StructureState.Building;
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_LIGHT_INFANTRY;
                     }
@@ -114,11 +102,10 @@ namespace Incursio.Classes
                                 this.location
                             )
                         );
-                        //MessageManager.getInstance().addMessage("Not enough resources");
                     }
-                    
+
                 }
-                else if (toBeBuilt.getType() == State.EntityName.Archer)
+                else if (toBeBuilt.entity.getType() == State.EntityName.Archer)
                 {
                     //if we have enough resources, build it
                     if (owningPlayer.MONETARY_UNIT >= COST_ARCHER)
@@ -127,7 +114,7 @@ namespace Incursio.Classes
                         currentBuildForObjectFactory = "Incursio.Classes.ArcherUnit";
                         this.timeBuilt = 0;
                         this.timeRequired = ARCHER_BUILD_TIME * 60;
-                        this.buildProject = toBeBuilt;
+                        this.buildProject = toBeBuilt.entity;
                         this.currentState = State.StructureState.Building;
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_ARCHER;
                     }
@@ -142,11 +129,10 @@ namespace Incursio.Classes
                                 this.location
                             )
                         );
-                        //MessageManager.getInstance().addMessage("Not enough resources");
                     }
-                    
+
                 }
-                else if (toBeBuilt.getType() == State.EntityName.HeavyInfantry)
+                else if (toBeBuilt.entity.getType() == State.EntityName.HeavyInfantry)
                 {
                     //if we have enough resources, build it
                     if (owningPlayer.MONETARY_UNIT >= COST_HEAVY_INFANTRY)
@@ -155,7 +141,7 @@ namespace Incursio.Classes
                         currentBuildForObjectFactory = "Incursio.Classes.HeavyInfantryUnit";
                         this.timeBuilt = 0;
                         this.timeRequired = HEAVY_INFANTRY_BUILD_TIME * 60;
-                        this.buildProject = toBeBuilt;
+                        this.buildProject = toBeBuilt.entity;
                         this.currentState = State.StructureState.Building;
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_HEAVY_INFANTRY;
                     }
@@ -170,11 +156,10 @@ namespace Incursio.Classes
                                 this.location
                             )
                         );
-                        //MessageManager.getInstance().addMessage("Not enough resources");
                     }
-  
+
                 }
-                else if (toBeBuilt.getType() == State.EntityName.GuardTower)
+                else if (toBeBuilt.entity.getType() == State.EntityName.GuardTower)
                 {
                     //if we have enough resources, build it
                     if (owningPlayer.MONETARY_UNIT >= COST_GUARD_TOWER)
@@ -183,7 +168,7 @@ namespace Incursio.Classes
                         currentBuildForObjectFactory = "Incursio.Classes.GuardTowerStructure";
                         this.timeBuilt = 0;
                         this.timeRequired = GUARD_TOWER_BUILD_TIME * 60;
-                        this.buildProject = toBeBuilt;
+                        this.buildProject = toBeBuilt.entity;
                         this.currentState = State.StructureState.Building;
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_GUARD_TOWER;
                     }
@@ -198,12 +183,12 @@ namespace Incursio.Classes
                                 this.location
                             )
                         );
-                        //MessageManager.getInstance().addMessage("Not enough resources");
                     }
-                    
+
                 }
-            } 
+            }
         }
+
 
         public override void updateResourceTick()
         {
@@ -295,8 +280,20 @@ namespace Incursio.Classes
 
         public void setNewStructureCoords(Coordinate coords)
         {
-            if(coords != null)
+            if(coords != null && MapManager.getInstance().currentMap.getCellOccupancy_pixels(coords.x, coords.y) == (byte)1){
                 this.newStructureCoords = coords;
+            }
+            else{
+                PlayerManager.getInstance().notifyPlayer(
+                    this.owner,
+                    new GameEvent(State.EventType.CANT_MOVE_THERE,
+                        this,
+                        /*SOUND,*/
+                        "Cannot Build There",
+                        this.location
+                    )
+                );
+            }
         }
 
         public override void updateOccupancy(bool occupied)

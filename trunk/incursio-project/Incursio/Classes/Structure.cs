@@ -77,10 +77,15 @@ namespace Incursio.Classes
         {
             this.currentState = state;
         }
-
+/*
         public virtual void build(BaseGameEntity toBeBuilt)
         {
             this.buildProject = toBeBuilt;
+        }
+*/
+        public virtual void build(EntityBuildOrder toBeBuilt)
+        {
+            this.buildProject = toBeBuilt.entity;
         }
 
         public virtual void buildTick()

@@ -31,7 +31,7 @@ namespace Incursio.Classes
             canAttack = true;
         }
 
-      public override void build(BaseGameEntity toBeBuilt)
+      public override void build(EntityBuildOrder toBeBuilt)
       {
           //guardtower upgrades?
           base.build(toBeBuilt);
