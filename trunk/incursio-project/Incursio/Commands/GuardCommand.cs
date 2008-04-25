@@ -19,7 +19,7 @@ namespace Incursio.Commands
         {
             //look for enemy units within subject's sightRange
             List<BaseGameEntity> enemiesInRange, friendliesInRange;
-            EntityManager.getInstance().getAllEntitiesInRange(ref subject, subject.sightRange, out friendliesInRange, out enemiesInRange);
+            EntityManager.getInstance().getAllEntitiesInRange(subject.owner, subject.location, subject.sightRange, out friendliesInRange, out enemiesInRange);
             
             List<BaseGameEntity> formidableEnemies = this.analyzeEnemiesInRange(enemiesInRange, subject);
 

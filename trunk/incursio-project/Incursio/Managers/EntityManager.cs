@@ -497,20 +497,19 @@ namespace Incursio.Managers
             this.issueCommand(commandType, append, list, args);
         }
 
-        public void getAllEntitiesInRange(ref BaseGameEntity hunter, int cellSightRange, 
+        public void getAllEntitiesInRange(State.PlayerId owner, Coordinate location, int cellSightRange, 
                 out List<BaseGameEntity> friendlies, out List<BaseGameEntity> enemies){
             friendlies = new List<BaseGameEntity>();
             enemies = new List<BaseGameEntity>();
 
-            List<int> ids = MapManager.getInstance().currentMap.getEntitiesInRange(hunter.location, cellSightRange);
-            State.PlayerId hOwner = hunter.owner;
+            List<int> ids = MapManager.getInstance().currentMap.getEntitiesInRange(location, cellSightRange);
             BaseGameEntity e;
 
             for(int i = 0; i < ids.Count; i++){
                 e = this.getEntity(ids[i]);
                 if (!e.isDead())
                 {
-                    if (e.owner != hOwner)
+                    if (e.owner != owner)
                         enemies.Add(e);
                     else
                         friendlies.Add(e);
@@ -658,6 +657,12 @@ namespace Incursio.Managers
             }
 
             else return State.ThreatLevel.None;
+        }
+
+        public void cancelCurrentBuildOrder(State.PlayerId id){
+            if(selectedUnits.Count > 0 && selectedUnits[0] is CampStructure && selectedUnits[0].owner == id){
+                (selectedUnits[0] as CampStructure).cancelCurrentOrder();
+            }
         }
 
     }

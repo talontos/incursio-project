@@ -121,17 +121,17 @@ namespace Incursio.Managers
             {
                 //select camp
                 EntityManager.getInstance().selectPlayerCamp();
-                Incursio.getInstance().currentMap.moveCameraToEvent(EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location);
+                MapManager.getInstance().currentMap.moveCameraToEvent(EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location);
             }
 
             if (this.keyPressed(Keys.E))
             {
                 EntityManager.getInstance().selectPlayerHero();
-                Incursio.getInstance().currentMap.moveCameraToEvent(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].location);
+                MapManager.getInstance().currentMap.moveCameraToEvent(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].location);
             }
 
             //unit commands
-            if (this.keyPressed(Keys.S))
+            if (this.keyPressed(Keys.Q))
             {
                 EntityManager.getInstance().issueCommand(State.Command.STOP, false, null);
             }
@@ -155,6 +155,11 @@ namespace Incursio.Managers
                     Incursio.getInstance().currentMap.moveCameraToEvent(MessageManager.getInstance().getLastMessageLocation());
                 }
 
+            }
+
+            if(this.keyPressed(Keys.X)){
+                //Cancel current command from Camp, if selected
+                EntityManager.getInstance().cancelCurrentBuildOrder(State.PlayerId.HUMAN);
             }
 
             #region GROUP_SET_SELECT

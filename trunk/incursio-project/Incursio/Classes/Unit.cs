@@ -505,6 +505,11 @@ namespace Incursio.Classes
             return (this.currentState == State.UnitState.Attacking);
         }
 
+        public override bool isMoving()
+        {
+            return this.currentState == State.UnitState.Moving;
+        }
+
         public override void setIdle()
         {
             this.currentState = State.UnitState.Idle;
