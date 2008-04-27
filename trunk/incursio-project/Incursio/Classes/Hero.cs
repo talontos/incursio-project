@@ -6,9 +6,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Incursio.Utils;
 using Incursio.Managers;
 
+using System.Xml;
+using System.Xml.Serialization;
+
 namespace Incursio.Classes
 {
     // the colon is the java equivalent of 'extends'
+    [Serializable]
   public class Hero : Unit
     {
       public static String HERO_CLASS = "Incursio.Classes.Hero";
@@ -20,7 +24,7 @@ namespace Incursio.Classes
       public const int RESOURCE_TICK = 4;
       public int timeForResource = 0;
 
-      public String name = "";
+      public String name = "Trogdor the Burninator";
       public int level = 1;
       public long experiencePoints = 0;
       public long pointsToNextLevel = 1000;
