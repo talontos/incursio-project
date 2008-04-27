@@ -266,6 +266,8 @@ namespace Incursio
 
                     MessageManager.getInstance().update();
 
+                    FileManager.getInstance().saveCurrentGame();
+
                     //listener for menu button
                     gameMenuButton.Update(cursor);
                     if (!gameMenuButton.getPressed() && gameMenuButton.getFocus()) //if the menu button is pressed, pause the game
@@ -286,7 +288,7 @@ namespace Incursio
                     exitGameButton.Update(cursor);
 
                     //SoundManager.getInstance().PlaySound("../../../Content/Audio/Thunderhorse.mp3", true);
-                    
+
                     if (!newGameButton.getPressed() && newGameButton.getFocus())
                     {
                         newGameButton.setFocus(false);
