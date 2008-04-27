@@ -44,6 +44,24 @@ namespace Incursio.Classes
           this.health = 200;
       }
 
+      public void setHero_Badass()
+      {
+          this.pointValue = 1000;
+
+          //set badass hero properties
+          this.moveSpeed = 115.0f;
+          this.sightRange = 8;
+          this.setType(State.EntityName.Hero);
+          this.armor = 15;
+          this.damage = 25;
+          this.level = 10;
+          this.experiencePoints = 10000;
+          this.attackSpeed = 3;
+          this.attackRange = 1;
+          this.maxHealth = 500;
+          this.health = 500;
+      }
+
       public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
       {
           base.Update(gameTime, ref myRef);
@@ -389,5 +407,33 @@ namespace Incursio.Classes
           return this.currentState == State.UnitState.Capturing;
       }
 
+      protected override void notifyUnderAttack()
+      {
+          PlayerManager.getInstance().notifyPlayer(
+              this.owner,
+              new GameEvent(State.EventType.UNDER_ATTACK, this, /*SOUND,*/ "Hero under attack", this.location)
+          );
+      }
+
+      public override void takeDamage(int damage, BaseGameEntity attacker)
+      {
+          base.takeDamage(damage, attacker);
+
+          //notify close-to-death stuff
+          if (this.health < (this.maxHealth * 0.3))
+          {
+              PlayerManager.getInstance().notifyPlayer(
+                  this.owner,
+                  new GameEvent(State.EventType.UNDER_ATTACK, this, /*SOUND,*/ "Hero is about to die!", this.location)
+              );
+          }
+          else if (this.health < (this.maxHealth * 0.6))
+          {
+              PlayerManager.getInstance().notifyPlayer(
+                  this.owner,
+                  new GameEvent(State.EventType.UNDER_ATTACK, this, /*SOUND,*/ "Hero is in Battle!", this.location)
+              );
+          }
+      }
     }
 }

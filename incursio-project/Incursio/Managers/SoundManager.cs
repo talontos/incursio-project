@@ -13,7 +13,7 @@ namespace Incursio.Managers
         ISoundEngine soundEngine = null;
         private static SoundManager instance = null;
 
-        public SoundManager()
+        private SoundManager()
         {
             soundEngine = new ISoundEngine();
         }
@@ -57,6 +57,7 @@ namespace Incursio.Managers
         //loop will loop the sound if true.  Otherwise, sound will play once and stop
         public void PlaySound(String filename, bool loop) 
         {
+            filename = "../../../Content/Audio/" + filename;
             try
             {
                 //This makes sure that the file will only start once and not stack on top of itself over and over.

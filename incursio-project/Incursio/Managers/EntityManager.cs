@@ -71,6 +71,19 @@ namespace Incursio.Managers
             });
         }
 
+        public List<DefenseReport> updatePlayerKeyPoints(State.PlayerId player){
+            List<DefenseReport> reports = new List<DefenseReport>();
+            
+            MapManager.getInstance().keyPoints.ForEach(delegate(KeyPoint point)
+            {
+                if(point.owner == player){
+                    reports.Add(point.Update());
+                }
+            });
+
+            return reports;
+        }
+
         public void updateUnitSelection(Rectangle area){
 
             //IF NO UNITS ARE IN THE SELECTED AREA,

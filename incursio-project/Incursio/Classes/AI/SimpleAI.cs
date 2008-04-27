@@ -55,7 +55,7 @@ namespace Incursio.Classes
                 baseAnalyzeCounter++;
             }
             else{
-                this.queueBuildRandomUnit(true, null);
+                this.queueBuildRandomUnit(true, null, null);
                 this.analyzeDefenses();
 
                 if (baseSecure){
@@ -100,13 +100,18 @@ namespace Incursio.Classes
                         //  in between the point and the enemy base
                         //  we also should station a few units here
                         //      *enqueue towers, enqueue OR re-assign units
-                        this.buildGuardTowerNearLocation(e.entity.location);
+                        this.buildGuardTowerNearLocation(e.entity.location, null);
                         break;
                     case State.EventType.UNDER_ATTACK:
                         //we should help, depending on what it is
                         if(e.entity is Hero){
                             //send help to hero?
                             //hero retreat?
+                            if(e.entity.health < e.entity.maxHealth * 0.4){
+                                EntityManager.getInstance().issueCommand_SingleEntity(State.Command.MOVE,
+                                    false, e.entity, 
+                                    EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER)[0].location);
+                            }
                         }
                         else if(e.entity is CampStructure){
                             //send help to camp
@@ -132,10 +137,11 @@ namespace Incursio.Classes
         /// Orders a Guard Tower to be build between location 'c' and the Human Base
         /// </summary>
         /// <param name="c"></param>
-        private void buildGuardTowerNearLocation(Coordinate c){
+        private void buildGuardTowerNearLocation(Coordinate c, KeyPoint k){
             this.buildList.Add(new EntityBuildOrder(
                MapManager.getInstance().currentMap.getClosestPassableLocation(EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location, c),
-               new GuardTowerStructure())
+               new GuardTowerStructure(),
+               k)
            );
         }
 
@@ -153,10 +159,10 @@ namespace Incursio.Classes
         }
 
         private void queueAssaultUnit(){
-            this.queueBuildRandomUnit(false, this.assaultRallyPoint);
+            this.queueBuildRandomUnit(false, this.assaultRallyPoint, null);
         }
 
-        private void queueBuildRandomUnit(bool checkCap, Coordinate location){
+        private void queueBuildRandomUnit(bool checkCap, Coordinate location, KeyPoint keyPoint){
             List<Structure> myGuys = EntityManager.getInstance().getLivePlayerStructures(State.PlayerId.COMPUTER);
 
             if (EntityManager.getInstance().getLivePlayerUnits(State.PlayerId.COMPUTER).Count + this.buildList.Count <= this.minPreferredArmySize
@@ -170,13 +176,13 @@ namespace Incursio.Classes
                     dest = new Coordinate(Incursio.rand.Next(20, 2000), Incursio.rand.Next(20, 2000));
 
                 if (randU > 60)
-                    this.buildList.Add(new EntityBuildOrder(dest, new LightInfantryUnit()));
+                    this.buildList.Add(new EntityBuildOrder(dest, new LightInfantryUnit(), keyPoint));
 
                 else if (randU > 30)
-                    this.buildList.Add(new EntityBuildOrder(dest, new ArcherUnit()));
+                    this.buildList.Add(new EntityBuildOrder(dest, new ArcherUnit(), keyPoint));
 
                 else
-                    this.buildList.Add(new EntityBuildOrder(dest, new HeavyInfantryUnit()));
+                    this.buildList.Add(new EntityBuildOrder(dest, new HeavyInfantryUnit(), keyPoint));
             }
         }
 
@@ -210,57 +216,31 @@ namespace Incursio.Classes
         }
 
         private void analyzeDefenses(){
-            baseSecure = true;
+            List<DefenseReport> reports = EntityManager.getInstance().updatePlayerKeyPoints(State.PlayerId.COMPUTER);
+            this.baseSecure = true;
 
-            List<Structure> myStructs = EntityManager.getInstance().getLivePlayerStructures(State.PlayerId.COMPUTER);
-
-            List<BaseGameEntity> friendlies = new List<BaseGameEntity>();
-
-            //TODO: ANALYZE ENEMIES?
-            List<BaseGameEntity> enemies = new List<BaseGameEntity>();
-            int numTowers;
-            int numMen;
-            int numEnemies;
-
-            myStructs.ForEach(delegate(Structure s)
+            reports.ForEach(delegate(DefenseReport r)
             {
-                numTowers = 0;
-                numMen = 0;
-                numEnemies = 0;
+                if(!r.secure){
+                    this.baseSecure = false;
 
-                //ignore towers?
-                if( !(s is GuardTowerStructure) ){
-                    //make sure we have towers and men guarding it
-                    EntityManager.getInstance().getAllEntitiesInRange( s.owner, s.location, s.sightRange, out friendlies, out enemies);
-
-                    friendlies.ForEach(delegate(BaseGameEntity e)
-                    {
-                        if (e is Unit)
-                            numMen++;
-                        else if (e is GuardTowerStructure)
-                            numTowers++;
-                        
-                    });
-
-                    if(numTowers < 1){
-                        //BUILD SOME TOWERS!
-                        this.buildGuardTowerNearLocation(s.location);
-                        baseSecure = false;
+                    int i;
+                    //point not secure, order stuff for it
+                    for(i = 0; i < r.numUnitsToBuild; i++){
+                        this.queueBuildRandomUnit(false, r.location, r.keyPoint);
                     }
 
-                    if(numMen < 2){
-                        //GET SOME MEN OVER HERE!
-                        this.queueBuildRandomUnit(false, s.location);
-                        baseSecure = false;
+                    for(i = 0; i < r.numTowersToBuild; i++){
+                        this.buildGuardTowerNearLocation(r.location, r.keyPoint);
                     }
                 }
             });
         }
-
+ 
         private void prepareAssault(){
             //FIXME OMG: Queue is populating TOO FAST
-            if (preparingAssault == false)
-                this.buildList = new List<EntityBuildOrder>();
+            //if (preparingAssault == false)
+            //    this.buildList = new List<EntityBuildOrder>();
 
             this.preparingAssault = true;
 
@@ -277,6 +257,7 @@ namespace Incursio.Classes
                 //ATTACK!!!!
                 preparingAssault = false;
                 this.sendUnitsToAttack(EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location);
+                this.assaultForce = new List<BaseGameEntity>();
             }
             else{
                 //queue unit

@@ -17,6 +17,7 @@ namespace Incursio.Classes
         public State.EntityName entityType;
         public long maxHealth = 100;
         public long health = 100;
+        public int armor = 0;
         public int  sightRange = 0;
         public State.PlayerId owner;
         public Coordinate location = new Coordinate(0,0);
@@ -121,7 +122,12 @@ namespace Incursio.Classes
 
         public virtual void takeDamage(int damage, BaseGameEntity attacker){
             //TODO: some math using my armor
-            this.health -= damage;
+            int damageTaken = (damage - armor) + (Incursio.rand.Next(0, 10) - 5);  //[-5,+5]
+
+            this.health -= damageTaken;
+
+            MessageManager.getInstance().addMessage(new GameEvent(State.EventType.TAKING_DAMAGE, this, Convert.ToString(damageTaken), this.location));
+
             if (this.health < 0)
             {
                 this.health = 0;

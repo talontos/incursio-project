@@ -20,11 +20,12 @@ namespace Incursio.Managers
         public static int TILE_HEIGHT = 32;
 
         public MapBase currentMap;
+        public List<KeyPoint> keyPoints;
 
         public PathFinder pathFinder;
 
         private MapManager(){
-        
+            keyPoints = new List<KeyPoint>();
         }
 
         public static MapManager getInstance(){
@@ -58,6 +59,16 @@ namespace Incursio.Managers
 
         public void initializeCurrentMap(){
             currentMap.initializeMap();
+
+            //create the key points
+            List<BaseGameEntity> all = EntityManager.getInstance().getAllEntities();
+
+            all.ForEach(delegate(BaseGameEntity e)
+            {
+                if(e is CampStructure || e is ControlPoint){
+                    this.keyPoints.Add(new KeyPoint((e as Structure)));
+                }
+            });
         }
 
         public void UpdateCampaign(GameTime gameTime){

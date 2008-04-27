@@ -16,7 +16,6 @@ namespace Incursio.Classes
         protected const int TIME_DEAD_UNTIL_DESPAWN = 5;
 
         protected int damage = 0;
-        protected int armor = 0;
         //protected int speed = 0;
         protected int attackSpeed = 0;
         protected int updateAttackTimer = 0;
@@ -247,9 +246,8 @@ namespace Incursio.Classes
         public override void takeDamage(int damage, BaseGameEntity attacker)
         {
             //TODO: some math using my armor
-            this.health -= damage;
-
-            MessageManager.getInstance().addMessage(new GameEvent(State.EventType.TAKING_DAMAGE, this, Convert.ToString(damage), this.location));
+            //this.health -= damage;
+            base.takeDamage(damage, attacker);
 
             if (this.health <= 0)
             {
@@ -266,16 +264,23 @@ namespace Incursio.Classes
                 //We should only do this if they aren't already attacking - that way they won't 
                 //constantly switch targets in a big battle
                 if(currentState != State.UnitState.Attacking){
-                    this.issueImmediateOrder(new AttackCommand(attacker));
-                    this.setAttacking();
 
-                    if (attacker.getLocation().x < this.location.x)
-                    {
-                        this.directionState = State.Direction.West;
+                    if(currentState == State.UnitState.Moving && this.health < this.maxHealth * 0.4){
+                        //keep going?
                     }
-                    else if (attacker.getLocation().x > this.location.x)
-                    {
-                        this.directionState = State.Direction.East;
+                    else{
+                        this.issueImmediateOrder(new AttackCommand(attacker));
+
+                        this.setAttacking();
+
+                        if (attacker.getLocation().x < this.location.x)
+                        {
+                            this.directionState = State.Direction.West;
+                        }
+                        else if (attacker.getLocation().x > this.location.x)
+                        {
+                            this.directionState = State.Direction.East;
+                        }
                     }
 
                     this.notifyUnderAttack();
@@ -385,6 +390,7 @@ namespace Incursio.Classes
                         this.directionState = State.Direction.West;
                     }
 
+                    this.playAttackSound();
                     target.takeDamage(this.damage, this);
 
                     //if we just killed the thing
@@ -513,6 +519,10 @@ namespace Incursio.Classes
         public override void setIdle()
         {
             this.currentState = State.UnitState.Idle;
+        }
+
+        public virtual void playAttackSound(){
+            SoundManager.getInstance().PlaySound(SoundBank.AttackSounds.SwordAttack, false);
         }
     }
 }

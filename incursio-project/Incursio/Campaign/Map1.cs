@@ -69,6 +69,8 @@ namespace Incursio.Campaign
             heavyUnit.setLocation(new Coordinate(300, 100));
             playerHero.setLocation(new Coordinate(150, 500));
             compHero.setLocation(new Coordinate(1600, 1600));
+            compHero.setHero_Badass();
+
             playerCamp.setLocation(new Coordinate(100, 400));
             computerCamp.setLocation(new Coordinate(1700, 1700));
 
