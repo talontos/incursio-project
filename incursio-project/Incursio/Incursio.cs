@@ -266,7 +266,8 @@ namespace Incursio
 
                     MessageManager.getInstance().update();
 
-                    FileManager.getInstance().saveCurrentGame();
+                    //FileManager.getInstance().saveCurrentGame("HeroSave.txt");
+                    //FileManager.getInstance().loadGame("HeroSave.txt");
 
                     //listener for menu button
                     gameMenuButton.Update(cursor);

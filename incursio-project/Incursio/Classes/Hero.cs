@@ -26,8 +26,8 @@ namespace Incursio.Classes
 
       public String name = "Trogdor the Burninator";
       public int level = 1;
-      public long experiencePoints = 0;
-      public long pointsToNextLevel = 1000;
+      public int experiencePoints = 0;
+      public int pointsToNextLevel = 1000;
 
       public Hero() : base(){
           this.pointValue = 1000;
