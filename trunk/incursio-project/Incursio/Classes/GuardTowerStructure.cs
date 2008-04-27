@@ -22,6 +22,7 @@ namespace Incursio.Classes
 
             this.maxHealth = 350;
             this.health = maxHealth;
+            this.armor = 5;
             this.sightRange = 10;
             this.setType(State.EntityName.GuardTower);
             this.map = Incursio.getInstance().currentMap;
@@ -64,6 +65,7 @@ namespace Incursio.Classes
           {
               if (this.updateAttackTimer == this.attackSpeed * 60)
               {
+                  this.playAttackSound();
                   target.takeDamage(this.damage, this);
 
                   if (target is Unit && (target as Unit).getCurrentState() == State.UnitState.Dead ||
@@ -225,6 +227,11 @@ namespace Incursio.Classes
                       TextureBank.EntityTextures.guardTowerTextureComputer.Width, TextureBank.EntityTextures.guardTowerTextureComputer.Height), Color.White);
               }
           }
+      }
+
+      public virtual void playAttackSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundBank.AttackSounds.ArrowAttack, false);
       }
     }
 }

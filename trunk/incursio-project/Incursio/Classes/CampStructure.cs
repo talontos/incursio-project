@@ -36,6 +36,7 @@ namespace Incursio.Classes
 
         Coordinate destination;
         Coordinate newStructureCoords;
+        Coordinate spawnPoint;
 
         String currentlyBuildingThis = "IDLE"; //this is for the HUD to display what it's building
         String currentBuildForObjectFactory = "IDLE"; //and this is for the object factory
@@ -46,6 +47,7 @@ namespace Incursio.Classes
             //TODO: Set camp properties
             this.maxHealth = 350;
             this.health = 350;
+            this.armor = 10;
             this.sightRange = 6;
             this.setType(State.EntityName.Camp);
             this.map = Incursio.getInstance().currentMap;
@@ -53,6 +55,7 @@ namespace Incursio.Classes
             setDefaultDestination();
 
             this.isConstructor = true;
+            spawnPoint = new Coordinate(this.location.x, this.location.y + 10);
         }
 
         public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
@@ -109,7 +112,7 @@ namespace Incursio.Classes
                         currentBuildForObjectFactory = "Incursio.Classes.LightInfantryUnit";
                         this.timeBuilt = 0;
                         this.timeRequired = LIGHT_INFANTRY_BUILD_TIME * 60;
-                        this.buildProject = toBeBuilt.entity;
+                        this.buildProject = toBeBuilt;
                         this.currentState = State.StructureState.Building;
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_LIGHT_INFANTRY;
                     }
@@ -136,7 +139,7 @@ namespace Incursio.Classes
                         currentBuildForObjectFactory = "Incursio.Classes.ArcherUnit";
                         this.timeBuilt = 0;
                         this.timeRequired = ARCHER_BUILD_TIME * 60;
-                        this.buildProject = toBeBuilt.entity;
+                        this.buildProject = toBeBuilt;
                         this.currentState = State.StructureState.Building;
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_ARCHER;
                     }
@@ -163,7 +166,7 @@ namespace Incursio.Classes
                         currentBuildForObjectFactory = "Incursio.Classes.HeavyInfantryUnit";
                         this.timeBuilt = 0;
                         this.timeRequired = HEAVY_INFANTRY_BUILD_TIME * 60;
-                        this.buildProject = toBeBuilt.entity;
+                        this.buildProject = toBeBuilt;
                         this.currentState = State.StructureState.Building;
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_HEAVY_INFANTRY;
                     }
@@ -190,7 +193,7 @@ namespace Incursio.Classes
                         currentBuildForObjectFactory = "Incursio.Classes.GuardTowerStructure";
                         this.timeBuilt = 0;
                         this.timeRequired = GUARD_TOWER_BUILD_TIME * 60;
-                        this.buildProject = toBeBuilt.entity;
+                        this.buildProject = toBeBuilt;
                         this.currentState = State.StructureState.Building;
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_GUARD_TOWER;
                     }
@@ -239,16 +242,21 @@ namespace Incursio.Classes
         {
             if (this.timeBuilt >= this.timeRequired)
             {
-                if (buildProject.getType() != State.EntityName.GuardTower)
+                if (buildProject.entity.getType() != State.EntityName.GuardTower)
                 {
                     Unit temp = ( EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.owner) as Unit);
-                    temp.setLocation(this.location);
+                    temp.setLocation(this.spawnPoint);
                     temp.issueSingleOrder(new MoveCommand(this.destination));
                     timeBuilt = 0;
                     timeRequired = 0;
                     this.currentState = State.StructureState.Idle;
                     this.currentBuildForObjectFactory = "IDLE";
                     this.currentlyBuildingThis = "IDLE";
+
+                    if(this.buildProject.keyPoint != null){
+                        this.buildProject.keyPoint.numUnitsOrdered--;
+                    }
+                    
                     this.buildProject = null;
 
                     PlayerManager.getInstance().notifyPlayer(
@@ -270,6 +278,12 @@ namespace Incursio.Classes
                     this.currentState = State.StructureState.Idle;
                     this.currentBuildForObjectFactory = "IDLE";
                     this.currentlyBuildingThis = "IDLE";
+
+                    if (this.buildProject.keyPoint != null)
+                    {
+                        this.buildProject.keyPoint.numGuardTowersOrdered--;
+                    }
+
                     this.buildProject = null;
                     
                     PlayerManager.getInstance().notifyPlayer(
@@ -349,6 +363,8 @@ namespace Incursio.Classes
             updateOccupancy(true);
 
             setDefaultDestination();
+
+            this.spawnPoint = new Coordinate(this.location.x, this.location.y + 10);
         }
 
         public override void updateBounds()

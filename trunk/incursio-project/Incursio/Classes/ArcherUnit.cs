@@ -22,7 +22,6 @@ namespace Incursio.Classes
       double arrowAngle = 0;
       private Vector2 arrowDestination = new Vector2(-1, -1);
 
-      private static SoundManager RcherSM = new SoundManager();
         public ArcherUnit() : base(){
             this.pointValue = 75;
 
@@ -271,8 +270,6 @@ namespace Incursio.Classes
           }
           else if (this.currentState == State.UnitState.Attacking)
           {
-              RcherSM.PlaySound("../../../Content/Audio/bow release.wav", false);
-              //RcherSM.updateSounds();
 
               switch(this.directionState){
                   case State.Direction.West:
@@ -421,6 +418,11 @@ namespace Incursio.Classes
                       new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerSouth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerSouth.Height * 0.80),
                       TextureBank.EntityTextures.archerSouth.Width, TextureBank.EntityTextures.archerSouth.Height), colorMask);
           }
+      }
+
+      public override void playAttackSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundBank.AttackSounds.ArrowAttack, false);
       }
     }
 }

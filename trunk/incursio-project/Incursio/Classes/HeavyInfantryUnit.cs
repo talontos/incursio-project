@@ -13,7 +13,6 @@ namespace Incursio.Classes
     {
 
       public static String CLASSNAME = "Incursio.Classes.HeavyInfantryUnit";
-      private static SoundManager HeavySM = new SoundManager();
 
         public HeavyInfantryUnit() : base(){
             this.pointValue = 100;
@@ -87,10 +86,6 @@ namespace Incursio.Classes
               }
               else if (this.currentState == State.UnitState.Attacking)
               {
-                  //if unit is attacking, will play the attack sound FX, but only if the unit is visible on screen.
-                  //HeavySM.PlaySound3D("../../../Content/Audio/steelsword.wav", this.location.x, this.location.y, false);
-                  //HeavySM.updateSounds();
-                  HeavySM.PlaySound("../../../Content/Audio/steelsword.wav", false);
 
                   switch(this.directionState){
                       case State.Direction.East:

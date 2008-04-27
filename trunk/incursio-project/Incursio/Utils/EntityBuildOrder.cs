@@ -9,6 +9,13 @@ namespace Incursio.Utils
     {
         public Coordinate location;
         public BaseGameEntity entity;
+        public KeyPoint keyPoint;
+
+        public EntityBuildOrder(Coordinate l, BaseGameEntity e, KeyPoint k){
+            location = l;
+            entity = e;
+            keyPoint = k;
+        }
 
         public EntityBuildOrder(Coordinate l, BaseGameEntity e){
             location = l;

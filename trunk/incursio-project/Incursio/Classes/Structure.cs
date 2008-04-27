@@ -16,7 +16,7 @@ namespace Incursio.Classes
         protected int timeBuilt = 0;
         protected int timeRequired = 0;
         protected int timeForResource = 0;
-        protected BaseGameEntity buildProject;
+        protected EntityBuildOrder buildProject;
 
         protected State.StructureState currentState;
         public Structure()
@@ -85,7 +85,7 @@ namespace Incursio.Classes
 */
         public virtual void build(EntityBuildOrder toBeBuilt)
         {
-            this.buildProject = toBeBuilt.entity;
+            this.buildProject = toBeBuilt;
         }
 
         public virtual void buildTick()
@@ -110,9 +110,8 @@ namespace Incursio.Classes
         public override void takeDamage(int damage, BaseGameEntity attacker)
         {
             //TODO: some math using my armor
-            this.health -= damage;
-
-            MessageManager.getInstance().addMessage(new GameEvent(State.EventType.TAKING_DAMAGE, this, Convert.ToString(damage), this.location));
+            //this.health -= damage;
+            base.takeDamage(damage, attacker);
 
             if (this.health <= 0)
             {

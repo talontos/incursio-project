@@ -303,7 +303,11 @@ namespace Incursio.Classes
 
         public byte getCellOccupancy_cells(int x, int y)
         {
-            return this.occupancyGrid[x, y];
+            if (x < occupancyGrid.GetLowerBound(0) || x > occupancyGrid.GetUpperBound(0) ||
+                y < occupancyGrid.GetLowerBound(1) || y > occupancyGrid.GetUpperBound(1))
+                return (byte)0;
+            else
+                return this.occupancyGrid[x, y];
         }
 
         public byte getCellOccupancy_pixels(int pixX, int pixY)

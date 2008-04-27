@@ -21,7 +21,12 @@ namespace Incursio.Commands
             List<BaseGameEntity> enemiesInRange, friendliesInRange;
             EntityManager.getInstance().getAllEntitiesInRange(subject.owner, subject.location, subject.sightRange, out friendliesInRange, out enemiesInRange);
             
-            List<BaseGameEntity> formidableEnemies = this.analyzeEnemiesInRange(enemiesInRange, subject);
+            List<BaseGameEntity> formidableEnemies;
+
+            if (subject is GuardTowerStructure || subject is HeavyInfantryUnit)
+                formidableEnemies = enemiesInRange;
+            else
+                formidableEnemies = this.analyzeEnemiesInRange(enemiesInRange, subject);
 
             if(formidableEnemies.Count > 0){
 
