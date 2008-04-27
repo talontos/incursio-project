@@ -33,11 +33,12 @@ namespace Incursio.Managers
 
         }
 
-        public void saveCurrentGame()
+        public void saveCurrentGame(String fileName)
         {
             try
             {
-                    TextWriter tw = new StreamWriter("HeroSave.txt");
+                    //write stuff to a file
+                    TextWriter tw = new StreamWriter(fileName);
                     tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].name);
                     tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].level);
                     tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].experiencePoints);
@@ -58,6 +59,11 @@ namespace Incursio.Managers
             try
             {
                 //read file here
+                TextReader tr = new StreamReader(fileName);
+                EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].name = tr.ReadLine();
+                EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].level = Convert.ToInt16(tr.ReadLine());
+                EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].experiencePoints = Convert.ToInt32(tr.ReadLine());
+                EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].pointsToNextLevel = Convert.ToInt32(tr.ReadLine());
             }
             catch (FileLoadException e)
             {
