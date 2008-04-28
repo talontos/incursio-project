@@ -98,6 +98,12 @@ namespace Incursio
         //analyze FPS
         //string frameString;
 
+        //Game Data Storage stuff
+        //IAsyncResult result;
+        //Object stateobj;
+        //bool GameSaveRequested = false;
+        //GamePadState currentState;
+
         public Incursio(){
 
             //this.IsFixedTimeStep = false;
@@ -110,7 +116,8 @@ namespace Incursio
             keysPressed = new Keys[15];
             Content.RootDirectory = "Content";
 
-            
+            this.Components.Add(new GamerServicesComponent(this));
+
             //MapManager.getInstance().initializeCurrentMap();
 
             playerManager = PlayerManager.getInstance();

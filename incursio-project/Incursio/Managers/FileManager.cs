@@ -28,6 +28,16 @@ namespace Incursio.Managers
             return instance;
         }
 
+        public static void getInfo()
+        {
+            SaveGame saved = new SaveGame();
+
+            saved.name = EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].name;
+            saved.lvl = EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].level;
+            saved.xp = EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].experiencePoints;
+            saved.xpToGo = EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].pointsToNextLevel;
+        }
+
         public void loadEntityConfiguration()
         {
 
@@ -37,19 +47,25 @@ namespace Incursio.Managers
         {
             try
             {
-                    //write stuff to a file
-                    TextWriter tw = new StreamWriter(fileName);
-                    tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].name);
-                    tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].level);
-                    tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].experiencePoints);
-                    tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].pointsToNextLevel);
-                    tw.WriteLine(DateTime.Now);
-                    tw.Close();
-
+                ////Open up a writer
+                //TextWriter tw = new StreamWriter(fileName);
+                ////write stuff to the file
+                //tw.WriteLine(name);
+                //tw.WriteLine(lvl);
+                //tw.WriteLine(xp);
+                //tw.WriteLine(xpToGo);
+                //tw.WriteLine(DateTime.Now);
+                ////Close the writer
+                //tw.Close();
             }
             catch (IOException e)
             {
                 Console.WriteLine("IO exception found");
+                Console.WriteLine(e);
+            }
+            catch (StorageDeviceNotConnectedException e)
+            {
+                Console.WriteLine("Storage device was not connected");
                 Console.WriteLine(e);
             }
         }
@@ -58,12 +74,15 @@ namespace Incursio.Managers
         {
             try
             {
-                //read file here
+                //open up a reader
                 TextReader tr = new StreamReader(fileName);
+                //read the file and set the info
                 EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].name = tr.ReadLine();
                 EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].level = Convert.ToInt16(tr.ReadLine());
                 EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].experiencePoints = Convert.ToInt32(tr.ReadLine());
                 EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].pointsToNextLevel = Convert.ToInt32(tr.ReadLine());
+                //close the reader
+                tr.Close();
             }
             catch (FileLoadException e)
             {

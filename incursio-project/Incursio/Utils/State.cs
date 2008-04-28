@@ -168,5 +168,22 @@ namespace Incursio
             Medium,
             Low,
         }
+
+        public enum WaterType
+        {
+            OpenWater,
+            ShoreRight,
+            ShoreLeft,
+            ShoreUp,
+            ShoreDown,
+            ShoreLowerLeft,
+            ShoreLowerRight,
+            ShoreUpperLeft,
+            ShoreUpperRight,
+            ShoreOpenLowerLeft,
+            ShoreOpenLowerRight,
+            ShoreOpenUpperLeft,
+            ShoreOpenUpperRight,
+        }
     }
 }

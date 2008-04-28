@@ -91,14 +91,52 @@ namespace Incursio.Campaign
             //load whatever for this map
 
             //um, trees
-            /*
-            Tree[] trees = {new Tree(20, 2),
+            
+            Tree[] trees = {new Tree(16, 2),
+                            new Tree(15, 3),
                             new Tree(10, 50)};
+
+            //LETS TRY TO DRAW SOME WATER
+            Water[] water = {new Water(0, 0, State.WaterType.OpenWater),
+                new Water(0, 1, State.WaterType.OpenWater),
+                new Water(0, 2, State.WaterType.OpenWater),
+                new Water(0, 3, State.WaterType.OpenWater),
+                new Water(0, 4, State.WaterType.OpenWater),
+                new Water(0, 5, State.WaterType.OpenWater),
+                new Water(1, 0, State.WaterType.OpenWater),
+                new Water(1, 1, State.WaterType.OpenWater),
+                new Water(1, 2, State.WaterType.OpenWater),
+                new Water(1, 3, State.WaterType.OpenWater),
+                new Water(1, 4, State.WaterType.OpenWater),
+                new Water(2, 0, State.WaterType.OpenWater),
+                new Water(2, 1, State.WaterType.OpenWater),
+                new Water(2, 2, State.WaterType.OpenWater),
+                new Water(2, 3, State.WaterType.OpenWater),
+                new Water(3, 0, State.WaterType.OpenWater),
+                new Water(3, 1, State.WaterType.OpenWater),
+                new Water(0, 6, State.WaterType.ShoreDown),
+                new Water(1, 6, State.WaterType.ShoreLowerRight),
+                new Water(1, 5, State.WaterType.ShoreOpenUpperLeft),
+                new Water(2, 5, State.WaterType.ShoreLowerRight),
+                new Water(2, 4, State.WaterType.ShoreOpenUpperLeft),
+                new Water(3, 4, State.WaterType.ShoreLowerRight),
+                new Water(3, 3, State.WaterType.ShoreRight),
+                new Water(3, 2, State.WaterType.ShoreOpenUpperLeft),
+                new Water(4, 2, State.WaterType.ShoreLowerRight),
+                new Water(4, 1, State.WaterType.ShoreRight),
+                new Water(4, 0, State.WaterType.ShoreRight)
+
+            };
 
             for(int i = 0; i < trees.Length; i++){
                 trees[i].addToMap(this);
             }
-             * */
+
+            for (int i = 0; i < water.Length; i++)
+            {
+                water[i].addToMap(this);
+            }
+            
         }
     }
 }
