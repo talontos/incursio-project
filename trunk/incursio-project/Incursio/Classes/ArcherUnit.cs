@@ -47,7 +47,7 @@ namespace Incursio.Classes
               updateArrow();
               if(MapManager.getInstance().currentMap.isOnScreen(new Coordinate((int)arrowPos.X, (int)arrowPos.Y)))
               {
-                  Coordinate arrowOnScreen = MapManager.getInstance().currentMap.positionOnScreen(new Coordinate((int)arrowPos.X, (int)arrowPos.Y));
+                  arrowOnScreen = MapManager.getInstance().currentMap.positionOnScreen(new Coordinate((int)arrowPos.X, (int)arrowPos.Y));
               }
               
           }
@@ -128,8 +128,8 @@ namespace Incursio.Classes
 
       public void updateArrow()
       {
-          double newPosX = Math.Cos(arrowAngle) * ARROW_SPEED;
-          double newPosY = Math.Sin(arrowAngle) * ARROW_SPEED;
+          double newPosX = /*(-1) **/ (Math.Cos(arrowAngle * (Math.PI / 180)) * ARROW_SPEED);
+          double newPosY = (-1) * (Math.Sin(arrowAngle * (Math.PI / 180)) * ARROW_SPEED); //INVERT TO COMPENSATE FOR PIXEL GROWTH DIRECTION
 
           //determine the direction, and if we are close enough to the destination, end movement
           if (arrowPos.X > arrowDestination.X)
@@ -157,9 +157,11 @@ namespace Incursio.Classes
           {
               drawArrow = true;
               arrowPos.X = (float)location.x;
-              arrowPos.Y = (float)location.y;
+              arrowPos.Y = (float)location.y;              
               arrowDestination.X = (float)target.location.x;
               arrowDestination.Y = (float)target.location.y;
+              arrowOnScreen.x = -1;
+              arrowOnScreen.y = -1;
 
               //find angle between arrow and destination
               //straight shots first
@@ -190,7 +192,7 @@ namespace Incursio.Classes
                   //quadrant two
                   else if (arrowPos.X > arrowDestination.X && arrowPos.Y > arrowDestination.Y)
                   {
-                      arrowAngle = 90 + (180 / Math.PI) * Math.Atan((arrowPos.Y - arrowDestination.Y) / (arrowPos.X - arrowDestination.X));
+                      arrowAngle = 90 + (90 - (180 / Math.PI) * Math.Atan((arrowPos.Y - arrowDestination.Y) / (arrowPos.X - arrowDestination.X)));
                   }
                   //quadrant three
                   else if (arrowPos.X > arrowDestination.X && arrowPos.Y < arrowDestination.Y)
@@ -200,7 +202,7 @@ namespace Incursio.Classes
                   //quadrant four
                   else if (arrowPos.X < arrowDestination.X && arrowPos.Y < arrowDestination.Y)
                   {
-                      arrowAngle = 270 + (180 / Math.PI)* Math.Atan((arrowDestination.Y - arrowPos.Y) / (arrowDestination.X - arrowPos.X));
+                      arrowAngle = 270 + (90 - (180 / Math.PI)* Math.Atan((arrowDestination.Y - arrowPos.Y) / (arrowDestination.X - arrowPos.X)));
                   }
               }
           }
@@ -233,7 +235,7 @@ namespace Incursio.Classes
           {
               spriteBatch.Draw(TextureBank.EntityTextures.arrow, 
                   new Vector2(arrowOnScreen.x, arrowOnScreen.y),
-                  null, Color.White, (float)arrowAngle, new Vector2(TextureBank.EntityTextures.arrow.Width / 2, TextureBank.EntityTextures.arrow.Height / 2), 1.0f, SpriteEffects.None, 0f);
+                  null, Color.White, -1 * ((float)(arrowAngle * (Math.PI / 180))), new Vector2(TextureBank.EntityTextures.arrow.Width / 2, TextureBank.EntityTextures.arrow.Height / 2), 1.0f, SpriteEffects.None, 0f);
           }
 
           //depending on the unit's state, draw their textures
