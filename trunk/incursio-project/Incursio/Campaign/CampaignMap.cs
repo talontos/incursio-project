@@ -43,13 +43,13 @@ namespace Incursio.Campaign
             //TODO: We can remove this one; others will override it
             if (eMan.getLivePlayerEntities(State.PlayerId.COMPUTER).Count == 0)         //No live entities
             {
-                result = new GameResult(State.GameState.Defeat, "Your Enemy's Entire Army has Fallen!");
+                result = new GameResult(State.GameState.Victory, "Your Enemy's Entire Army has Fallen!");
             }
 
-            /*if (eMan.getLivePlayerHeros(State.PlayerId.COMPUTER).Count == 0)         //No live heros
+            if (eMan.getLivePlayerHeros(State.PlayerId.COMPUTER).Count == 0)         //No live heros
             {
-                result = new GameResult(State.GameState.Defeat, "Your Enemy's Hero has Fallen!");
-            }*/
+                result = new GameResult(State.GameState.Victory, "Your Enemy's Hero has Fallen!");
+            }
 
             //if no control points are held, or the camp is destroyed
             if (eMan.getPlayerTotalOwnedControlPoints(State.PlayerId.HUMAN) == 0)               //If no control points are held

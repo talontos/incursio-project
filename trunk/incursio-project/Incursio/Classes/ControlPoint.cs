@@ -29,7 +29,7 @@ namespace Incursio.Classes
             //TODO: set controlpoint values
             this.sightRange = 10;
             this.setType(State.EntityName.ControlPoint);
-            this.map = Incursio.getInstance().currentMap;
+            this.map = MapManager.getInstance().currentMap;
 
             //TEMP - mitch
             //this.isConstructor = true;

@@ -124,6 +124,9 @@ namespace Incursio.Managers
             {
                 switch (e.type)
                 {
+                    case State.EventType.LEVEL_UP:
+                    case State.EventType.ENEMY_CAPTURING_POINT:
+                    case State.EventType.POINT_CAPTURED:
                     case State.EventType.CANT_MOVE_THERE:
                     case State.EventType.CREATION_COMPLETE:
                     case State.EventType.NOT_ENOUGH_RESOURCES:
@@ -140,27 +143,27 @@ namespace Incursio.Managers
 
                     case State.EventType.TAKING_DAMAGE:
                         e.displayTick++;
-                        if(Incursio.getInstance().currentMap.isOnScreen(e.location))
+                        if (MapManager.getInstance().currentMap.isOnScreen(e.location))
                         {
-                            loc = Incursio.getInstance().currentMap.positionOnScreen(e.location);
+                            loc = MapManager.getInstance().currentMap.positionOnScreen(e.location);
                             spriteBatch.DrawString(font, e.stringMessage, new Vector2(loc.x, loc.y - 35), Color.Red, 0, font.MeasureString(e.stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
                         }
                         break;
 
                     case State.EventType.GAIN_RESOURCE:
                         e.displayTick++;
-                        if (Incursio.getInstance().currentMap.isOnScreen(e.location))
+                        if (MapManager.getInstance().currentMap.isOnScreen(e.location))
                         {
-                            loc = Incursio.getInstance().currentMap.positionOnScreen(e.location);
+                            loc = MapManager.getInstance().currentMap.positionOnScreen(e.location);
                             spriteBatch.DrawString(font, e.stringMessage, new Vector2(loc.x, loc.y - 35), Color.Gold, 0, font.MeasureString(e.stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
                         }  
                         break;
 
                     case State.EventType.HEALING:
                         e.displayTick++;
-                        if (Incursio.getInstance().currentMap.isOnScreen(e.location))
+                        if (MapManager.getInstance().currentMap.isOnScreen(e.location))
                         {
-                            loc = Incursio.getInstance().currentMap.positionOnScreen(e.location);
+                            loc = MapManager.getInstance().currentMap.positionOnScreen(e.location);
                             spriteBatch.DrawString(font, e.stringMessage, new Vector2(loc.x, loc.y - 35), Color.Blue, 0, font.MeasureString(e.stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
                         }
                         break;

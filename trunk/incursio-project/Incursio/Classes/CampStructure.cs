@@ -50,7 +50,7 @@ namespace Incursio.Classes
             this.armor = 10;
             this.sightRange = 6;
             this.setType(State.EntityName.Camp);
-            this.map = Incursio.getInstance().currentMap;
+            this.map = MapManager.getInstance().currentMap;
 
             setDefaultDestination();
 

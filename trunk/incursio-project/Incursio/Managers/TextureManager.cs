@@ -141,13 +141,18 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.newGameButtonPressed = Content.Load<Texture2D>(@"newGamePressed");
             TextureBank.InterfaceTextures.exitGameButton = Content.Load<Texture2D>(@"exitGameButton");
             TextureBank.InterfaceTextures.exitGameButtonPressed = Content.Load<Texture2D>(@"exitGameButtonPressed");
+            TextureBank.InterfaceTextures.saveGameButton = Content.Load<Texture2D>(@"saveButton");
+            TextureBank.InterfaceTextures.saveGameButtonPressed = Content.Load<Texture2D>(@"saveButtonPressed");
+            TextureBank.InterfaceTextures.loadGameButton = Content.Load<Texture2D>(@"loadButton");
+            TextureBank.InterfaceTextures.loadGameButtonPressed = Content.Load<Texture2D>(@"loadButtonPressed");
 
             TextureBank.InterfaceTextures.selectionRectangle = Content.Load<Texture2D>(@"DragSelection");
 
             // load background Images
             TextureBank.InterfaceTextures.mainMenuBackground = Content.Load<Texture2D>(@"Splash_Screen");
             TextureBank.InterfaceTextures.pauseMenuBackground = Content.Load<Texture2D>(@"Pause_Screen");
-
+            TextureBank.InterfaceTextures.victoryMenuBackground = Content.Load<Texture2D>(@"win");
+            TextureBank.InterfaceTextures.defeatMenuBackground = Content.Load<Texture2D>(@"Defeat");
             //Load terrain textures
             TextureBank.MapTiles.grass1 = Content.Load<Texture2D>(@"GrassTile1");
             TextureBank.MapTiles.tree1 = Content.Load<Texture2D>(@"Tree1");

@@ -47,8 +47,7 @@ namespace Incursio.Utils
             // build new <classname>
             BaseGameEntity product = Activator.CreateInstance(classType) as BaseGameEntity;
 
-            if (product is Unit)
-                (product as Unit).setMap(Incursio.getInstance().currentMap);
+            product.setMap(MapManager.getInstance().currentMap);
 
             return product;
         }
@@ -73,8 +72,7 @@ namespace Incursio.Utils
 
             product.setPlayer(owningPlayer);
 
-            if (product is Unit)
-                (product as Unit).setMap(MapManager.getInstance().currentMap);
+            product.setMap(MapManager.getInstance().currentMap);
 
             //TODO: remove Incursio's entityBank & functions
             //The EntityManager will keep up with them

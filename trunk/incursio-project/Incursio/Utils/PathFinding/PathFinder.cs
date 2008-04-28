@@ -54,6 +54,7 @@ namespace Incursio.Utils.PathFinding
         private ushort GridX = 24;
         private ushort GridY =24;
         private bool nodeFound = false;
+        private bool lengthSpecified = false;
         private uint endPosition = 0;
         private uint startPosition = 0;
         private int newGone = 0;
@@ -104,11 +105,13 @@ namespace Incursio.Utils.PathFinding
         #endregion
 
         #region PATHFINDING IMPLEMENTATION
-        public List<PathReturnNode> FindPath(Point start, Point end)
+        public List<PathReturnNode> FindPath(Point start, Point end, int length)
         {
             nodeFound = false;
             isStop = false;
             isStopped = false;
+
+            lengthSpecified = length > 0;
 
             NodeOpenVal += 2;
             NodeCloseVal += 2;
@@ -144,7 +147,7 @@ namespace Incursio.Utils.PathFinding
                 PosY = (ushort)PathInfoGrid[Position].PosY;
 
                 //Found end node - vaild path is found
-                if (Position == endPosition)
+                if (Position == endPosition || (lengthSpecified && Math.Abs(Position - endPosition) <= length))
                 {
                     PathInfoGrid[Position].OpenOrClosed = NodeCloseVal;
                     nodeFound = true;
@@ -216,6 +219,37 @@ namespace Incursio.Utils.PathFinding
 
                     PathInfoGrid[newPosition].OpenOrClosed = NodeOpenVal;                    
                 }
+            }
+            
+            //we just want a piece of it
+            if(lengthSpecified){
+                SolovedList.Clear();
+
+                //Add end node to found list
+                PathGridNode foundNodeEnd = PathInfoGrid[endPosition];
+                PathReturnNode foundNode;
+
+                foundNode.Parrent = foundNodeEnd.Parrent;
+                foundNode.Pos = foundNodeEnd.Pos;
+                foundNode.PosX = foundNodeEnd.PosX;
+                foundNode.PosY = foundNodeEnd.PosY;
+
+                SolovedList.Add(foundNode);
+
+                //Add rest of the nodes by parrents
+                while (foundNode.Pos != startPosition)
+                {
+                    foundNodeEnd = PathInfoGrid[foundNode.Parrent];
+                    foundNode.Parrent = foundNodeEnd.Parrent;
+                    foundNode.Pos = foundNodeEnd.Pos;
+                    foundNode.PosX = foundNodeEnd.PosX;
+                    foundNode.PosY = foundNodeEnd.PosY;
+                    SolovedList.Add(foundNode);
+                }
+
+                isStopped = true;
+
+                return SolovedList;
             }
 
             //Vaild path is found

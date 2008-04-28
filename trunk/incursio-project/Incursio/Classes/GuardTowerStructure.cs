@@ -25,7 +25,7 @@ namespace Incursio.Classes
             this.armor = 5;
             this.sightRange = 10;
             this.setType(State.EntityName.GuardTower);
-            this.map = Incursio.getInstance().currentMap;
+            this.map = MapManager.getInstance().currentMap;
             this.currentState = State.StructureState.Idle;
 
             smartGuarding = false;

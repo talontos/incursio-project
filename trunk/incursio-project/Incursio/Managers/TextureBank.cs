@@ -140,6 +140,10 @@ namespace Incursio.Managers
             public static Texture2D newGameButtonPressed;
             public static Texture2D exitGameButton;
             public static Texture2D exitGameButtonPressed;
+            public static Texture2D saveGameButton;
+            public static Texture2D saveGameButtonPressed;
+            public static Texture2D loadGameButton;
+            public static Texture2D loadGameButtonPressed;
 
             public static Texture2D archerPortrait;
             public static Texture2D archerIcon;

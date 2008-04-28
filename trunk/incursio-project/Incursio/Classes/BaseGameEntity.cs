@@ -299,6 +299,11 @@ namespace Incursio.Classes
         public virtual void setKeyId(int key){
             this.keyId = key;
         }
+
+        public virtual void setMap(MapBase map){
+            this.map = map;
+        }
+
         #endregion
 
         #region SPECIAL GET-SET
