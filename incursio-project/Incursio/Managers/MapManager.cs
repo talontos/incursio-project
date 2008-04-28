@@ -53,6 +53,7 @@ namespace Incursio.Managers
 
             this.pathFinder = new PathFinder(currentMap.occupancyGrid);
             MovableObject.Initalize(currentMap.width, currentMap.TILE_WIDTH);
+            Incursio.getInstance().currentMap = this.currentMap;
 
             return this.currentMap;
         }
@@ -63,6 +64,7 @@ namespace Incursio.Managers
             //create the key points
             List<BaseGameEntity> all = EntityManager.getInstance().getAllEntities();
 
+            this.keyPoints = new List<KeyPoint>();
             all.ForEach(delegate(BaseGameEntity e)
             {
                 if(e is CampStructure || e is ControlPoint){

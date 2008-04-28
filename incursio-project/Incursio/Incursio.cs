@@ -80,8 +80,13 @@ namespace Incursio
         Button exitGameToMenuButton;
         KeyboardState kbState;  //lets us know if any input is coming in through the keyboard
         Keys[] keysPressed;
-        Button newGameButton;
+        Button mapSelectButton;
+        Button newGameButton_level1;
+        Button newGameButton_level2;
+        Button newGameButton_level3;
         Button exitGameButton;
+        Button saveButton;
+        Button loadButton;
         Texture2D clickDestination;
         int clickDestinationFader = 0;
         Coordinate cursorAtClick;
@@ -168,12 +173,22 @@ namespace Incursio
 
             // load paused game menu components
             gameMenuButton = new Button(new Vector2(465, 738), TextureBank.InterfaceTextures.gameMenuButton, TextureBank.InterfaceTextures.gameMenuButtonPressed);
-            resumeGameButton = new Button(new Vector2(475, 349), TextureBank.InterfaceTextures.resumeGameButton, TextureBank.InterfaceTextures.resumeGameButtonPressed);
-            exitGameToMenuButton = new Button(new Vector2(475, 384), TextureBank.InterfaceTextures.exitGameToMenuButton, TextureBank.InterfaceTextures.exitGameToMenuButtonPressed);
+            //resumeGameButton = new Button(new Vector2(475, 349), TextureBank.InterfaceTextures.resumeGameButton, TextureBank.InterfaceTextures.resumeGameButtonPressed);
+            resumeGameButton = new ResumeGameButton();
+            //exitGameToMenuButton = new Button(new Vector2(475, 384), TextureBank.InterfaceTextures.exitGameToMenuButton, TextureBank.InterfaceTextures.exitGameToMenuButtonPressed);
+            exitGameToMenuButton = new ExitGameToMenuButton();
+
+            saveButton = new SaveButton();
+            loadButton = new LoadButton();
 
             //load the menu components
-            newGameButton = new Button(new Vector2(400, 638), TextureBank.InterfaceTextures.newGameButton, TextureBank.InterfaceTextures.newGameButtonPressed);
-            exitGameButton = new Button(new Vector2(524, 638), TextureBank.InterfaceTextures.exitGameButton, TextureBank.InterfaceTextures.exitGameButtonPressed);
+            mapSelectButton = new MapSelectButton();
+            //newGameButton = new Button(new Vector2(400, 638), TextureBank.InterfaceTextures.newGameButton, TextureBank.InterfaceTextures.newGameButtonPressed);
+            newGameButton_level1 = new NewGameButton(State.CampaignLevel.ONE);
+            newGameButton_level2 = new NewGameButton(State.CampaignLevel.TWO);
+            newGameButton_level3 = new NewGameButton(State.CampaignLevel.THREE);
+            //exitGameButton = new Button(new Vector2(524, 638), TextureBank.InterfaceTextures.exitGameButton, TextureBank.InterfaceTextures.exitGameButtonPressed);
+            exitGameButton = new ExitGameButton();
 
             //once everything is loaded up, go to the main menu
             currentState = State.GameState.Menu;
@@ -285,28 +300,13 @@ namespace Incursio
                 case (State.GameState.Menu):
                     
                     //listener for menu button
-                    newGameButton.Update(cursor);
+                    mapSelectButton.Update(cursor);
                     exitGameButton.Update(cursor);
+                    break;
 
-                    //SoundManager.getInstance().PlaySound("../../../Content/Audio/Thunderhorse.mp3", true);
-
-                    if (!newGameButton.getPressed() && newGameButton.getFocus())
-                    {
-                        newGameButton.setFocus(false);
-                        EntityManager.getInstance().reinitializeInstance();
-                        PlayerManager.getInstance().reinitializeInstance();
-                        currentMap = MapManager.getInstance().setCurrentLevel(State.CampaignLevel.ONE);
-                        MapManager.getInstance().initializeCurrentMap();
-                        currentState = State.GameState.InPlay;
-                    }
-
-                    if (!exitGameButton.getPressed() && exitGameButton.getFocus())    //if exitGameButton is pressed, exit the game
-                    {
-                        UnloadContent();
-                        Exit();                         //exit the game
-                    }
-
-                    //TODO: perform Menu actions
+                case State.GameState.MapSelection:
+                    newGameButton_level1.Update(cursor);
+                    exitGameToMenuButton.Update(cursor);
                     break;
 
                 case (State.GameState.Credits):
@@ -315,11 +315,15 @@ namespace Incursio
 
                 case (State.GameState.Defeat):
                     //TODO: perform Defeat actions
+                    mapSelectButton.Update(cursor);
+                    exitGameButton.Update(cursor);
                     //SoundManager.getInstance().StopSound();
                     break;
 
                 case (State.GameState.Victory):
                     //TODO: perform Victory actions
+                    mapSelectButton.Update(cursor);
+                    exitGameButton.Update(cursor);
                     //SoundManager.getInstance().StopSound();
                     break;
 
@@ -329,19 +333,6 @@ namespace Incursio
 
                     exitGameToMenuButton.Update(cursor);
                     resumeGameButton.Update(cursor);
-
-                    if (!resumeGameButton.getPressed() && resumeGameButton.getFocus())
-                    {
-                        resumeGameButton.setFocus(false);
-                        currentState = State.GameState.InPlay;
-                    }
-
-                    if (!exitGameToMenuButton.getPressed() && exitGameToMenuButton.getFocus())
-                    {
-                        exitGameToMenuButton.setFocus(false);
-                        currentState = State.GameState.Menu;
-                    }
-
                     //TODO: perform PausedPlay actions
                     break;
 
@@ -402,11 +393,23 @@ namespace Incursio
                     graphics.GraphicsDevice.Clear(Color.SteelBlue);
                     spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground, 
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
-                    
-                    newGameButton.Draw(spriteBatch);
+
+                    mapSelectButton.Draw(spriteBatch);
                     exitGameButton.Draw(spriteBatch);
+                    saveButton.Draw(spriteBatch);
+                    loadButton.Draw(spriteBatch);
                 
                     //TODO: perform Menu actions
+                    break;
+
+                case State.GameState.MapSelection:
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground,
+                        new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
+
+                    spriteBatch.DrawString(font, "Game State: MAP SELECTION", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: MAP SELECTION") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    newGameButton_level1.Draw(spriteBatch);
+                    exitGameToMenuButton.Draw(spriteBatch);
+
                     break;
 
                 case (State.GameState.Credits):
@@ -417,8 +420,11 @@ namespace Incursio
                 case (State.GameState.Defeat):
                     spriteBatch.DrawString(font, "Game State: Massive Failure! " + stateString, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: Massive Failure! " + stateString) / 2, 1.0f, SpriteEffects.None, 0.5f);
 
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground,
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.defeatMenuBackground,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
+
+                    mapSelectButton.Draw(spriteBatch);
+                    exitGameButton.Draw(spriteBatch);
 
                     //TODO: perform Defeat actions
                     break;
@@ -426,8 +432,11 @@ namespace Incursio
                 case (State.GameState.Victory):
                     spriteBatch.DrawString(font, "Game State: Epic Win!!! " + stateString, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: Epic Win!!! " + stateString) / 2, 1.0f, SpriteEffects.None, 0.5f);
 
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground,
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.victoryMenuBackground,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
+
+                    mapSelectButton.Draw(spriteBatch);
+                    exitGameButton.Draw(spriteBatch);
 
                     //TODO: perform Victory actions
                     break;
@@ -606,6 +615,11 @@ namespace Incursio
                 case State.GameState.InPlay:        currentState = State.GameState.PausedPlay; break;
                 case State.GameState.PausedPlay:    currentState = State.GameState.InPlay; break;
             }
+        }
+
+        public void exitGame(){
+            UnloadContent();
+            Exit();
         }
     }
 }

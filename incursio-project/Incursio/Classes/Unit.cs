@@ -236,10 +236,10 @@ namespace Incursio.Classes
         public override void setLocation(Coordinate coords)
         {
             //empty our current location
-            Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, 0);
+            MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, 0);
             base.setLocation(coords);
             //occupy new location
-            Incursio.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, 1);
+            MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, 1);
         }
 
         //since units can take damage and then give damage, we'll set up a function just for them

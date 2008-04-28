@@ -163,7 +163,7 @@ namespace Incursio.Managers
                 Coordinate coord = MessageManager.getInstance().getLastMessageLocation();
                 if (coord != null)
                 {
-                    Incursio.getInstance().currentMap.moveCameraToEvent(MessageManager.getInstance().getLastMessageLocation());
+                    MapManager.getInstance().currentMap.moveCameraToEvent(MessageManager.getInstance().getLastMessageLocation());
                 }
 
             }

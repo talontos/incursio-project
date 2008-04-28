@@ -44,12 +44,16 @@ namespace Incursio.Classes
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime, AIPlayer player){
             //continue building army, if necessary
             //this.queueBuildRandomUnit(true);
+            List<CampStructure> camps = EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER);
+            if(camps.Count == 0){
+                return;
+            }
 
             //checks events
             this.processEvents(ref player);
 
             //processEvents will catch a creation_complete event; but if the camp is idle, we need to use it!
-            if(!EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER)[0].isBuilding()){
+            if(!camps[0].isBuilding()){
                 this.buildNextEntity();
             }
 

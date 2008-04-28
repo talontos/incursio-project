@@ -11,6 +11,7 @@ using Incursio.Interface;
 using Incursio.Utils;
 using Incursio.Managers;
 using Incursio.Classes.Terrain;
+using Incursio.Utils.PathFinding;
 
 namespace Incursio.Classes
 {
@@ -395,6 +396,34 @@ namespace Incursio.Classes
             return new Point(x + minViewableX * TILE_WIDTH, y + minViewableY * TILE_HEIGHT);
         }
 
+        public Coordinate getClosestPassableLocation_new(Coordinate origin, Coordinate point)
+        {
+
+            if (getCellOccupancy_pixels(point.x, point.y) == (byte)1)
+            {
+                return point;
+            }
+
+            Coordinate cellOrigin = new Coordinate();
+            Coordinate cellDestination = new Coordinate();
+
+            //translate pixel points
+            translatePixelToMapCell(origin.x, origin.y, out cellOrigin.x, out cellOrigin.y);
+            translatePixelToMapCell(point.x, point.y, out cellDestination.x, out cellDestination.y);
+
+            //find a path from the origin to the destination with length l & return the last node
+            List<PathReturnNode> path = MapManager.getInstance().pathFinder.FindPath(cellOrigin.toPoint(), cellDestination.toPoint(), 1);
+
+            //convert back to pixels
+            //If path not found, return origin
+            if (path == null)
+                this.translateMapCellToPixel(cellOrigin.x, cellOrigin.y, out cellDestination.x, out cellDestination.y);
+            else
+                this.translateMapCellToPixel(path[0].PosX, path[0].PosY, out cellDestination.x, out cellDestination.y);
+
+            return (cellDestination);
+        }
+
         public Coordinate getClosestPassableLocation(Coordinate origin, Coordinate point)
         {
 
@@ -410,6 +439,7 @@ namespace Incursio.Classes
             translatePixelToMapCell(origin.x, origin.y, out cellOrigin.x, out cellOrigin.y);
             translatePixelToMapCell(point.x, point.y, out cellDestination.x, out cellDestination.y);
 
+            
             //find where origin is in relation to point; there's only 8 possible directions...
 
             //dir vars: true == left/up;
@@ -510,6 +540,7 @@ namespace Incursio.Classes
 
             //convert back to pixels
             this.translateMapCellToPixel(cellDestination.x, cellDestination.y, out cellDestination.x, out cellDestination.y);
+
             return cellDestination;
         }
 
@@ -576,9 +607,9 @@ namespace Incursio.Classes
                 xStart = Math.Max(0, cellLocation.X - sightRange);
             }
 
-            if (cellLocation.X + sightRange >= Incursio.getInstance().currentMap.width)
+            if (cellLocation.X + sightRange >= MapManager.getInstance().currentMap.width)
             {
-                xStart = Incursio.getInstance().currentMap.width - 1;
+                xStart = MapManager.getInstance().currentMap.width - 1;
             }
             else
             {
@@ -594,9 +625,9 @@ namespace Incursio.Classes
                 yStart = Math.Max(0, cellLocation.Y - sightRange);
             }
 
-            if (cellLocation.Y + sightRange >= Incursio.getInstance().currentMap.height)
+            if (cellLocation.Y + sightRange >= MapManager.getInstance().currentMap.height)
             {
-                yEnd = Incursio.getInstance().currentMap.height - 1;
+                yEnd = MapManager.getInstance().currentMap.height - 1;
             }
             else
             {

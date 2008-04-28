@@ -112,8 +112,15 @@
     <Compile Include="Commands\StopCommand.cs" />
     <Compile Include="Interface\Button.cs" />
     <Compile Include="Interface\Cursor.cs" />
+    <Compile Include="Interface\ExitGameButton.cs" />
+    <Compile Include="Interface\ExitGameToMenuButton.cs" />
     <Compile Include="Interface\GameMenuButton.cs" />
     <Compile Include="Interface\HeadsUpDisplay.cs" />
+    <Compile Include="Interface\LoadButton.cs" />
+    <Compile Include="Interface\MapSelectButton.cs" />
+    <Compile Include="Interface\NewGameButton.cs" />
+    <Compile Include="Interface\ResumeGameButton.cs" />
+    <Compile Include="Interface\SaveButton.cs" />
     <Compile Include="Managers\EntityManager.cs" />
     <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Managers\InputManager.cs" />
