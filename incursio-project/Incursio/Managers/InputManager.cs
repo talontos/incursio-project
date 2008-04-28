@@ -25,6 +25,9 @@ namespace Incursio.Managers
         public Vector2 mouseDragStart_shifted = new Vector2(-1, -1);
         public Vector2 mouseDragEnd_shifted = new Vector2(-1, -1);
 
+        private bool enterStringMode = false;
+        private string enteredString = "";
+
         public bool MOVE_UP = false,
                     MOVE_LEFT = false,
                     MOVE_DOWN = false,
@@ -51,6 +54,10 @@ namespace Incursio.Managers
             mouseStateCurrent = Mouse.GetState();
             keyStateCurrent = Keyboard.GetState();
 
+            if(enterStringMode){
+                
+            }
+
             //interface
             if(this.keyPressed(Keys.Escape))
                 Incursio.getInstance().pause_play();
@@ -60,8 +67,17 @@ namespace Incursio.Managers
                 Incursio.getInstance().toggleFullScreen();
             }
 
+            if(this.keyPressed(Keys.Enter)){
+                if(enterStringMode){
+                    //perform action
+                }
+
+                this.enterStringMode = !this.enterStringMode;
+                this.enteredString = "";
+            }
+
             //only update these things if game is in play
-            if(Incursio.getInstance().currentState == State.GameState.InPlay){
+            if(Incursio.getInstance().currentState == State.GameState.InPlay && !enterStringMode){
                 this.Update_PlayState(gameTime);
             }
 
@@ -141,11 +157,6 @@ namespace Incursio.Managers
                 EntityManager.getInstance().issueCommand(State.Command.GUARD, false, null);
             }
 
-            if (this.keyPressed(Keys.Enter))
-            {
-
-            }
-
             if (this.keyPressed(Keys.Space))
             {
                 //TODO: RESPOND TO MESSAGES
@@ -157,9 +168,13 @@ namespace Incursio.Managers
 
             }
 
+            if(this.keyPressed(Keys.Delete)){
+                EntityManager.getInstance().killSelectedUnits();
+            }
+
             if(this.keyPressed(Keys.X)){
                 //Cancel current command from Camp, if selected
-                EntityManager.getInstance().cancelCurrentBuildOrder(State.PlayerId.HUMAN);
+                //EntityManager.getInstance().cancelCurrentBuildOrder(State.PlayerId.HUMAN);
             }
 
             #region GROUP_SET_SELECT

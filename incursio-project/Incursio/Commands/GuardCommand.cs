@@ -35,6 +35,9 @@ namespace Incursio.Commands
 
                 if( !(e is ControlPoint) )
                     subject.issueImmediateOrder(new AttackCommand(e));
+                else if( subject is Hero){
+                    subject.issueImmediateOrder(new CaptureCommand(e as ControlPoint));
+                }
             }
         }
 
@@ -51,24 +54,35 @@ namespace Incursio.Commands
             int myRange = subject.getAttackRange();
             int myAttackSpeed = subject.getAttackSpeed();
 
+            bool done = false;
+
             //analyze enemies to determine who to attack
             enemies.ForEach(delegate(BaseGameEntity e)
             {
-                switch(EntityManager.getInstance().analyzeThreat(ref myDamage, ref myArmor, 
-                        ref myHealth, ref myRange, ref myAttackSpeed, ref e))
-                {
-                    case State.ThreatLevel.High:
-                        //RUN MOFO
-                        break;
-                    case State.ThreatLevel.Medium:
-                        //I can maybe take him
-                        //just merge with Low:
-                    case State.ThreatLevel.Low:
-                        //I can take him
-                        formidableEnemies.Add(e);
-                        break;
-                    case State.ThreatLevel.None:
-                        break;
+                if(subject is Hero && e is ControlPoint && e.owner != subject.owner){
+                    //capture the point!
+                    formidableEnemies = new List<BaseGameEntity>();
+                    formidableEnemies.Add(e);
+                    done = true;
+                }
+
+                if(!done){
+                    switch(EntityManager.getInstance().analyzeThreat(ref myDamage, ref myArmor, 
+                            ref myHealth, ref myRange, ref myAttackSpeed, ref e))
+                    {
+                        case State.ThreatLevel.High:
+                            //RUN MOFO
+                            break;
+                        case State.ThreatLevel.Medium:
+                            //I can maybe take him
+                            //just merge with Low:
+                        case State.ThreatLevel.Low:
+                            //I can take him
+                            formidableEnemies.Add(e);
+                            break;
+                        case State.ThreatLevel.None:
+                            break;
+                    }
                 }
             });
 

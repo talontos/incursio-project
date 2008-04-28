@@ -14,6 +14,10 @@ namespace Incursio.Utils
             }
         }
 
+        private State.PlayerId prevOwner;
+
+        public int priority = -1;
+
         public Structure structure;
 
         private int preferredNumTowers = 1;
@@ -27,8 +31,13 @@ namespace Incursio.Utils
 
         public bool pointSecure = false;
 
+        public KeyPoint(){
+
+        }
+
         public KeyPoint(Structure structure){
             this.structure = structure;
+            this.prevOwner = this.owner;
 
             if(this.structure is CampStructure){
                 //this.setDefensePreferences(3, 5);
@@ -46,6 +55,13 @@ namespace Incursio.Utils
             this.numUnits = 0;
             this.numGuardTowers = 0;
             this.pointSecure = true;
+
+            if(this.owner != prevOwner){
+                //owner changed, reset values
+                this.numGuardTowersOrdered = 0;
+                this.numUnitsOrdered = 0;
+                this.prevOwner = this.owner;
+            }
 
             DefenseReport report = new DefenseReport(this.structure.location, this);
 

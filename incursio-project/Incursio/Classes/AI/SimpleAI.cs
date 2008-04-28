@@ -16,12 +16,14 @@ namespace Incursio.Classes
     {
 
         private List<EntityBuildOrder> buildList = new List<EntityBuildOrder>();
-        private int minPreferredArmySize = 10;
+        private int minPreferredArmySize = 15;
         private bool baseSecure = false;
 
         private bool preparingAssault = false;
         private bool assaultReady = false;
+        private bool assaultWithHero = false;
         private Coordinate assaultRallyPoint = null;
+        private Coordinate assaultTarget = null;
         private int preferredAssaultForceSize = 5;
         private List<BaseGameEntity> assaultForce = new List<BaseGameEntity>();
 
@@ -29,7 +31,8 @@ namespace Incursio.Classes
         private int baseAnalyzeCounter = 60;
 
         public SimpleAI(){
-
+            this.minPreferredArmySize = Incursio.rand.Next(10, 16);
+            this.preferredAssaultForceSize = Incursio.rand.Next(3, 10);
         }
 
         /// <summary>
@@ -164,7 +167,7 @@ namespace Incursio.Classes
 
         private void queueBuildRandomUnit(bool checkCap, Coordinate location, KeyPoint keyPoint){
             List<Structure> myGuys = EntityManager.getInstance().getLivePlayerStructures(State.PlayerId.COMPUTER);
-
+            
             if (EntityManager.getInstance().getLivePlayerUnits(State.PlayerId.COMPUTER).Count + this.buildList.Count <= this.minPreferredArmySize
                 || !checkCap)
             {
@@ -172,8 +175,10 @@ namespace Incursio.Classes
                 int randU = Incursio.rand.Next(0, 100);
                 Coordinate dest = location;
 
-                if (dest == null)
-                    dest = new Coordinate(Incursio.rand.Next(20, 2000), Incursio.rand.Next(20, 2000));
+                if (dest == null){
+                    dest = new Coordinate(Incursio.rand.Next(20, MapManager.getInstance().currentMap.width_pix),
+                                            Incursio.rand.Next(20, MapManager.getInstance().currentMap.height_pix));
+                }
 
                 if (randU > 60)
                     this.buildList.Add(new EntityBuildOrder(dest, new LightInfantryUnit(), keyPoint));
@@ -236,15 +241,70 @@ namespace Incursio.Classes
                 }
             });
         }
- 
-        private void prepareAssault(){
+
+        private void analyzeEnemyDefenses(){
+            List<KeyPoint> points = EntityManager.getInstance().getPlayerKeyPoints(State.PlayerId.HUMAN);
+
+            points.ForEach(delegate(KeyPoint p)
+            {
+                //TODO: BETTER ANALYSIS
+                //p.priority = p.numGuardTowers + p.numUnits - this.assaultForce.Count;
+
+                
+                if(p.numGuardTowers == 0 && p.numUnits == 0){
+                    //perfect time to attack
+                    p.priority = 5;
+                }
+                else if(p.numGuardTowers == 0 && p.numUnits < this.assaultForce.Count){
+                    //not a bad target
+                    p.priority = 4;
+                }
+                else if(p.numUnits == 0 && p.numGuardTowers < this.assaultForce.Count/2){
+                    p.priority = 3;
+                }
+                //TODO: perhaps differentiate between camps and CPs?
+                else{
+                    //they have many guard towers and many men...let's put this off a bit
+                    p.priority = 1;
+                }
+                
+            });
+
+            //Find the highest priority target (best chance of sucess)
+
+            //priority defaults to -1
+            KeyPoint target = new KeyPoint();
+
+            for(int i = 0; i < points.Count; i++){
+                if(points[i].priority > target.priority){
+                    target = points[i];
+                }
+            }
+
+            this.assaultTarget = target.structure.location;
+
+            //if target is a camp, the hero can sit back
+            //   if it's a control point, we'll need him to capture it
+            if(target.structure is CampStructure){
+                //don't really need hero
+                assaultWithHero = false;
+            }
+            else if(target.structure is ControlPoint){
+                //include hero in attack
+                assaultWithHero = true;
+            }
+
+            //EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location
+        }
+
+        private void prepareAssault()
+        {
             //FIXME OMG: Queue is populating TOO FAST
             //if (preparingAssault == false)
             //    this.buildList = new List<EntityBuildOrder>();
 
             this.preparingAssault = true;
 
-            //TODO: DECIDE WHAT TO ATTACK
             if(assaultRallyPoint == null){
                 assaultRallyPoint = MapManager.getInstance().currentMap.getClosestPassableLocation(
                     EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location,
@@ -254,10 +314,18 @@ namespace Incursio.Classes
             assaultReady = (assaultForce.Count >= preferredAssaultForceSize);
 
             if(assaultReady){
+                //DECIDE WHAT TO ATTACK
+                this.analyzeEnemyDefenses();
+
                 //ATTACK!!!!
                 preparingAssault = false;
-                this.sendUnitsToAttack(EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location);
+                if(assaultWithHero){
+                    this.assaultForce.Add(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.COMPUTER)[0]);
+                }
+                this.sendUnitsToAttack(this.assaultTarget);
                 this.assaultForce = new List<BaseGameEntity>();
+
+                this.preferredAssaultForceSize = Incursio.rand.Next(3, 10);
             }
             else{
                 //queue unit

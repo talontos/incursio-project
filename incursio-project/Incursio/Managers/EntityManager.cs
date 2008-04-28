@@ -84,6 +84,21 @@ namespace Incursio.Managers
             return reports;
         }
 
+        public List<KeyPoint> getPlayerKeyPoints(State.PlayerId player){
+            List<KeyPoint> points = new List<KeyPoint>();
+            MapManager.getInstance().keyPoints.ForEach(delegate(KeyPoint point)
+            {
+                if (point.owner == player)
+                {
+                    //update to make sure stats are correct
+                    point.Update();
+                    points.Add(point);
+                }
+            });
+
+            return points;
+        }
+
         public void updateUnitSelection(Rectangle area){
 
             //IF NO UNITS ARE IN THE SELECTED AREA,
@@ -676,6 +691,19 @@ namespace Incursio.Managers
             if(selectedUnits.Count > 0 && selectedUnits[0] is CampStructure && selectedUnits[0].owner == id){
                 (selectedUnits[0] as CampStructure).cancelCurrentOrder();
             }
+        }
+
+        public void killSelectedUnits(){
+            selectedUnits.ForEach(delegate(BaseGameEntity e)
+            {
+                if( !(e is ControlPoint)){
+                    e.health = 0;
+                    if (e is Structure)
+                        (e as Structure).setCurrentState(State.StructureState.Destroyed);
+                    else if (e is Unit)
+                        (e as Unit).setCurrentState(State.UnitState.Dead);
+                }
+            });
         }
 
     }
