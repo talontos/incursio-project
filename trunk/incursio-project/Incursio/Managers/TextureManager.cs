@@ -87,11 +87,11 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.heroEast = Content.Load<Texture2D>(@"HeroEast");
             TextureBank.EntityTextures.heroWest = Content.Load<Texture2D>(@"HeroWest");
             TextureBank.EntityTextures.heroSouth = Content.Load<Texture2D>(@"HeroStill");
-            //TextureBank.EntityTextures.heroNorth = Content.Load<Texture2D>(@"");
+            TextureBank.EntityTextures.heroNorth = Content.Load<Texture2D>(@"Hero_North");
             TextureBank.EntityTextures.heroMovingEast = Content.Load<Texture2D>(@"Hero_Moving_Right");
             TextureBank.EntityTextures.heroMovingWest = Content.Load<Texture2D>(@"Hero_Moving_Left");
             TextureBank.EntityTextures.heroMovingSouth = Content.Load<Texture2D>(@"Hero_Moving_South");
-            //TextureBank.EntityTextures.heroMovingNorth = Content.Load<Texture2D>(@"");
+            TextureBank.EntityTextures.heroMovingNorth = Content.Load<Texture2D>(@"Hero_Moving_North");
             TextureBank.EntityTextures.heroAttackingEast = Content.Load<Texture2D>(@"Hero_Attacking_Right");
             TextureBank.EntityTextures.heroAttackingWest = Content.Load<Texture2D>(@"Hero_Attacking_Left");
 
@@ -156,6 +156,27 @@ namespace Incursio.Managers
             //Load terrain textures
             TextureBank.MapTiles.grass1 = Content.Load<Texture2D>(@"GrassTile1");
             TextureBank.MapTiles.tree1 = Content.Load<Texture2D>(@"Tree1");
+
+            TextureBank.MapTiles.openWater = Content.Load<Texture2D>(@"OpenWater");
+            TextureBank.MapTiles.shoreDown = Content.Load<Texture2D>(@"RiverDown");
+            TextureBank.MapTiles.shoreLeft = Content.Load<Texture2D>(@"RiverLeft");
+            TextureBank.MapTiles.shoreRight = Content.Load<Texture2D>(@"RiverRight");
+            TextureBank.MapTiles.shoreUp = Content.Load<Texture2D>(@"RiverUp");
+            TextureBank.MapTiles.shoreLowerLeftCorner = Content.Load<Texture2D>(@"RiverLowerLeftCorner");
+            TextureBank.MapTiles.shoreLowerRightCorner = Content.Load<Texture2D>(@"RiverLowerRightCorner");
+            TextureBank.MapTiles.shoreOpenLowerLeftCorner = Content.Load<Texture2D>(@"RiverOpenLowerLeftCorner");
+            TextureBank.MapTiles.shoreOpenLowerRightCorner = Content.Load<Texture2D>(@"RiverOpenLowerRightCorner");
+            TextureBank.MapTiles.shoreUpperLeftCorner = Content.Load<Texture2D>(@"RiverUpperLeftCorner");
+            TextureBank.MapTiles.shoreUpperRightCorner = Content.Load<Texture2D>(@"RiverUpperRightCorner");
+            TextureBank.MapTiles.shoreOpenUpperLeftCorner = Content.Load<Texture2D>(@"RiverOpenUpperLeftCorner");
+            TextureBank.MapTiles.shoreOpenUpperRightCorner = Content.Load<Texture2D>(@"RiverOpenUpperRightCorner");
+
+            TextureBank.MapTiles.roadHorizontal = Content.Load<Texture2D>(@"RoadHorizontal");
+            TextureBank.MapTiles.roadVertical = Content.Load<Texture2D>(@"RoadVertical");
+            TextureBank.MapTiles.roadElbowDownLeft = Content.Load<Texture2D>(@"RoadHorizontalBendDown");
+            TextureBank.MapTiles.roadElbowDownRight = Content.Load<Texture2D>(@"RoadVerticalBendRight2");
+            TextureBank.MapTiles.roadElbowUpLeft = Content.Load<Texture2D>(@"RoadHorizontalBendUp");
+            TextureBank.MapTiles.roadElbowUpRight = Content.Load<Texture2D>(@"RoadVerticalBendRight");
         }
 
 

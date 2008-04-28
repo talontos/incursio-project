@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Campaign\Map1.cs" />
+    <Compile Include="Campaign\Port.cs" />
     <Compile Include="Campaign\RandomMap.cs" />
     <Compile Include="Campaign\TestMap.cs" />
     <Compile Include="Classes\AI\BaseAI.cs" />
@@ -96,9 +97,11 @@
     <Compile Include="Classes\MapBase.cs" />
     <Compile Include="Classes\PathFinding\MovableObject.cs" />
     <Compile Include="Classes\Player.cs" />
+    <Compile Include="Classes\SaveGame.cs" />
     <Compile Include="Classes\Structure.cs" />
     <Compile Include="Classes\Terrain\Grass.cs" />
     <Compile Include="Classes\Terrain\Tree.cs" />
+    <Compile Include="Classes\Terrain\Water.cs" />
     <Compile Include="Classes\Unit.cs" />
     <Compile Include="Commands\AttackCommand.cs" />
     <Compile Include="Commands\BaseCommand.cs" />

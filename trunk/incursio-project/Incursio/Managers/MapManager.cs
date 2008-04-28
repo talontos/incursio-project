@@ -39,7 +39,7 @@ namespace Incursio.Managers
             //TODO: Define Different levels
             switch(level){
                 case State.CampaignLevel.ONE:   
-                    currentMap = new Map1();  
+                    currentMap = new Port();  
                     break;
 
                 case State.CampaignLevel.TWO:   

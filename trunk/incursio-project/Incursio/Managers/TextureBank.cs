@@ -96,11 +96,29 @@ namespace Incursio.Managers
             public static Texture2D shore1;
             //...
 
-            public static Texture2D water1;
+            public static Texture2D openWater;
+            public static Texture2D shoreDown;
+            public static Texture2D shoreLeft;
+            public static Texture2D shoreRight;
+            public static Texture2D shoreUp;
+            public static Texture2D shoreLowerLeftCorner;
+            public static Texture2D shoreLowerRightCorner;
+            public static Texture2D shoreUpperLeftCorner;
+            public static Texture2D shoreUpperRightCorner;
+            public static Texture2D shoreOpenLowerLeftCorner;
+            public static Texture2D shoreOpenLowerRightCorner;
+            public static Texture2D shoreOpenUpperLeftCorner;
+            public static Texture2D shoreOpenUpperRightCorner;
             //...
 
             public static Texture2D tree1;
             //...
+            public static Texture2D roadHorizontal;
+            public static Texture2D roadVertical;
+            public static Texture2D roadElbowUpRight;
+            public static Texture2D roadElbowUpLeft;
+            public static Texture2D roadElbowDownRight;
+            public static Texture2D roadElbowDownLeft;
 
             //...
         }

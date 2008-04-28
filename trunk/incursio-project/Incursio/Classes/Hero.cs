@@ -12,7 +12,6 @@ using System.Xml.Serialization;
 namespace Incursio.Classes
 {
     // the colon is the java equivalent of 'extends'
-    [Serializable]
   public class Hero : Unit
     {
       public static String HERO_CLASS = "Incursio.Classes.Hero";
@@ -168,9 +167,9 @@ namespace Incursio.Classes
                           break;
 
                       case State.Direction.North:
-                          /*spriteBatch.Draw(TextureBank.EntityTextures.heroNorth,
+                          spriteBatch.Draw(TextureBank.EntityTextures.heroNorth,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.heroNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heroNorth.Height * 0.80),
-                          TextureBank.EntityTextures.heroNorth.Width, TextureBank.EntityTextures.heroNorth.Height), colorMask);*/
+                          TextureBank.EntityTextures.heroNorth.Width, TextureBank.EntityTextures.heroNorth.Height), colorMask);
                           break;
                   }
 
@@ -181,27 +180,27 @@ namespace Incursio.Classes
                       case State.Direction.East:
                       case State.Direction.South:
                           spriteBatch.Draw(TextureBank.EntityTextures.heroAttackingEast,
-                          new Rectangle(onScreen.x - (int)(54 / 2), onScreen.y - (int)(50 * 0.80), 54, 50),
-                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 54, 50), colorMask);
+                          new Rectangle(onScreen.x - (int)(36 / 2), onScreen.y - (int)(40 * 0.80), 36, 40),
+                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 36, 40), colorMask);
 
                           if (frameTimer >= FRAME_LENGTH)
                           {
-                              if (this.attackFramePause >= 4 || this.currentFrameXAttackDeath > 0)
-                              {
-                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heroAttackingEast.Width - 54)
+                              //if (this.attackFramePause >= 4 || this.currentFrameXAttackDeath > 0)
+                              //{
+                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heroAttackingEast.Width - 36)
                                   {
-                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 54;
+                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 36;
                                   }
                                   else
                                   {
                                       this.currentFrameXAttackDeath = 0;
                                   }
-                                  this.attackFramePause = 0;
-                              }
-                              else
-                              {
-                                  this.attackFramePause++;
-                              }
+                              //    this.attackFramePause = 0;
+                              //}
+                              //else
+                              //{
+                              //    this.attackFramePause++;
+                              //}
 
                           }
                           break;
@@ -209,27 +208,27 @@ namespace Incursio.Classes
                       case State.Direction.North:
                       case State.Direction.West:
                           spriteBatch.Draw(TextureBank.EntityTextures.heroAttackingWest,
-                          new Rectangle(onScreen.x - (int)(54 / 2), onScreen.y - (int)(50 * 0.80), 54, 50),
-                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 54, 50), colorMask);
+                          new Rectangle(onScreen.x - (int)(36 / 2), onScreen.y - (int)(40 * 0.80), 36, 40),
+                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 36, 40), colorMask);
 
                           if (frameTimer >= FRAME_LENGTH)
                           {
-                              if (this.attackFramePause >= 3 || this.currentFrameXAttackDeath > 0)
-                              {
-                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heroAttackingEast.Width - 54)
+                              //if (this.attackFramePause >= 3 || this.currentFrameXAttackDeath > 0)
+                              //{
+                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heroAttackingEast.Width - 36)
                                   {
-                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 54;
+                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 36;
                                   }
                                   else
                                   {
                                       this.currentFrameXAttackDeath = 0;
                                   }
-                                  this.attackFramePause = 0;
-                              }
-                              else
-                              {
-                                  this.attackFramePause++;
-                              }
+                              //    this.attackFramePause = 0;
+                              //}
+                              //else
+                              //{
+                              //    this.attackFramePause++;
+                              //}
                           }
                           break;
 
@@ -364,22 +363,22 @@ namespace Incursio.Classes
                           break;
 
                       case State.Direction.North:
-                          /*spriteBatch.Draw(TextureBank.EntityTextures.heroMovingNorth,
+                          spriteBatch.Draw(TextureBank.EntityTextures.heroMovingNorth,
                           new Rectangle(onScreen.x - (TextureBank.EntityTextures.heroNorth.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.heroNorth.Height * 0.80),
-                          TextureBank.EntityTextures.heroMovingNorth.Width, TextureBank.EntityTextures.heroMovingNorth.Height),
-                          new Rectangle(this.currentFrameX, this.currentFrameY, 40, 50), colorMask);
+                          TextureBank.EntityTextures.heroNorth.Width, TextureBank.EntityTextures.heroNorth.Height),
+                          new Rectangle(this.currentFrameX, this.currentFrameY, 35, 40), colorMask);
 
                           if (frameTimer >= FRAME_LENGTH)
                           {
-                              if (this.currentFrameX < TextureBank.EntityTextures.heroMovingNorth.Width - 40)
+                              if (this.currentFrameX < TextureBank.EntityTextures.heroMovingNorth.Width - 35)
                               {
-                                  this.currentFrameX = this.currentFrameX + 40;
+                                  this.currentFrameX = this.currentFrameX + 35;
                               }
                               else
                               {
                                   this.currentFrameX = 0;
                               }
-                          }*/
+                          }
                           break;
                   }
               }

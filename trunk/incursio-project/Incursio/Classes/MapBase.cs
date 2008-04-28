@@ -29,6 +29,7 @@ namespace Incursio.Classes
         public int height_pix;
 
         protected BaseMapEntity[,] tileGrid;
+        protected List<BaseMapEntity> objectList;
 
         public byte[,] occupancyGrid;
 
@@ -57,6 +58,7 @@ namespace Incursio.Classes
 
             this.occupancyGrid = new byte[0, 0];
             this.entityGrid = new int[0, 0];
+            this.objectList = new List<BaseMapEntity>();
         }
 
         public MapBase(int width, int height, int screenWidth, int screenHeight)
@@ -83,6 +85,8 @@ namespace Incursio.Classes
                     entityGrid[x, y] = -1;
                 }
             }
+
+            this.objectList = new List<BaseMapEntity>();
         }
 
         public virtual void setMapDimensions(int width, int height, int screenWidth, int screenHeight)
@@ -192,6 +196,24 @@ namespace Incursio.Classes
                 }
                 screenY++;
             }
+
+            //draw objects on map (trees, brushes, etc)
+            objectList.ForEach(delegate(BaseMapEntity e)
+            {
+                int xPos;
+                int yPos;
+                this.translateMapCellToPixel(e.location.x, e.location.y, out xPos, out yPos);
+
+                if(this.isOnScreen(new Coordinate(xPos, yPos)))
+                {
+                    Coordinate locationOnScreen = this.positionOnScreen(new Coordinate(xPos, yPos));
+
+                    spriteBatch.Draw(e.texture,
+                        new Rectangle((int)(locationOnScreen.x - (e.texture.Width / 2)), (int)(locationOnScreen.y - (e.texture.Height * 0.90)),
+                        e.texture.Width, e.texture.Height), 
+                        Color.White);
+                }
+            });
         }
 
 
@@ -201,6 +223,15 @@ namespace Incursio.Classes
             {
                 this.tileGrid[xPos, yPos] = entity;
                 this.occupancyGrid[xPos, yPos] = entity.passable ? (byte)1 : (byte)0;
+            }
+        }
+
+        public void addObjectEntity(BaseMapEntity entity)
+        {
+            if (entity.location.x >= 0 && entity.location.x < this.width && entity.location.y >= 0 && entity.location.y < this.height)
+            {
+                this.objectList.Add(entity);
+                //entity.setOccupancy(ref occupancyGrid);
             }
         }
 
