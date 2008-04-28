@@ -40,7 +40,7 @@ namespace Incursio.Campaign
 
             ControlPoint cp1 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
             ControlPoint cp2 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
-            ControlPoint cp3 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
+            ControlPoint cp3 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.HUMAN);
             ControlPoint cp4 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.HUMAN);
 
             GuardTowerStructure gth1 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.HUMAN);
@@ -49,7 +49,7 @@ namespace Incursio.Campaign
 
             GuardTowerStructure gt1 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
             GuardTowerStructure gt2 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
-            GuardTowerStructure gt3 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
+            //GuardTowerStructure gt3 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
             GuardTowerStructure gt4 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
             GuardTowerStructure gt5 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
             GuardTowerStructure gt6 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
@@ -60,7 +60,7 @@ namespace Incursio.Campaign
 
             gt1.setLocation(new Coordinate(900, 900));
             gt2.setLocation(new Coordinate(300, 1500));
-            gt3.setLocation(new Coordinate(1400, 400));
+            //gt3.setLocation(new Coordinate(1400, 400));
             gt4.setLocation(new Coordinate(1500, 1300));
             gt5.setLocation(new Coordinate(1300, 1600));
             gt6.setLocation(new Coordinate(1775, 1200));

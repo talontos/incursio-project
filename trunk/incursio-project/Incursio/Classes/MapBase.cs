@@ -23,6 +23,10 @@ namespace Incursio.Classes
         public int width;
         public int height;
 
+        //width/height, in pixels
+        public int width_pix;
+        public int height_pix;
+
         protected BaseMapEntity[,] tileGrid;
 
         public byte[,] occupancyGrid;
@@ -56,6 +60,8 @@ namespace Incursio.Classes
 
         public MapBase(int width, int height, int screenWidth, int screenHeight)
         {
+            this.width_pix = width;
+            this.height_pix = height;
             this.width = width / TILE_WIDTH;
             this.height = height / TILE_HEIGHT;
             this.tileGrid = new BaseMapEntity[this.width, this.height];
@@ -80,6 +86,8 @@ namespace Incursio.Classes
 
         public virtual void setMapDimensions(int width, int height, int screenWidth, int screenHeight)
         {
+            this.width_pix = width;
+            this.height_pix = height;
             this.width = width / TILE_WIDTH;
             this.height = height / TILE_HEIGHT;
             this.tileGrid = new BaseMapEntity[this.width, this.height];
@@ -415,7 +423,8 @@ namespace Incursio.Classes
                 if (verticalUp)
                 {
                     //origin.y < dest.y; add to y value
-                    while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                    while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0 &&
+                    cellDestination.y <= this.height_pix)
                     {
                         cellDestination.y += 1;
                     }
@@ -423,7 +432,8 @@ namespace Incursio.Classes
                 else
                 {
                     //subtract from y value
-                    while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                    while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0 &&
+                    cellDestination.y >= 0)
                     {
                         cellDestination.y -= 1;
                     }
@@ -436,7 +446,8 @@ namespace Incursio.Classes
                 if (horizontalLeft)
                 {
                     //origin.x < dest.x; add to x value
-                    while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                    while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0 &&
+                    cellDestination.x <= this.width_pix)
                     {
                         cellDestination.x += 1;
                     }
@@ -444,7 +455,8 @@ namespace Incursio.Classes
                 else
                 {
                     //subtract from x value
-                    while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                    while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0 &&
+                    cellDestination.x >= 0)
                     {
                         cellDestination.x -= 1;
                     }
@@ -455,7 +467,8 @@ namespace Incursio.Classes
             else if (horizontalLeft && verticalUp)
             {
                 //origin to northwest of destination, add to x && y values
-                while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0 &&
+                    cellDestination.x <= this.width_pix && cellDestination.y <= this.height_pix)
                 {
                     cellDestination.x += 1;
                     cellDestination.y += 1;
@@ -465,7 +478,8 @@ namespace Incursio.Classes
             else if (horizontalLeft && !verticalUp)
             {
                 //origin to southeast of destination, add to x, subtract from y
-                while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0 &&
+                    cellDestination.x <= this.width_pix && cellDestination.y >= 0)
                 {
                     cellDestination.x += 1;
                     cellDestination.y -= 1;
@@ -475,7 +489,8 @@ namespace Incursio.Classes
             else if (!horizontalLeft && verticalUp)
             {
                 //origin northeast of destination, subtract from x, add to y
-                while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0 &&
+                    cellDestination.x >= 0 && cellDestination.y <= this.height_pix)
                 {
                     cellDestination.x -= 1;
                     cellDestination.y += 1;
@@ -485,7 +500,8 @@ namespace Incursio.Classes
             else
             {
                 //origin to southeast of destination, subtract from x && y
-                while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0)
+                while (getCellOccupancy_cells(cellDestination.x, cellDestination.y) == (byte)0 &&
+                    cellDestination.x >= 0 && cellDestination.y >= 0)
                 {
                     cellDestination.x -= 1;
                     cellDestination.y -= 1;

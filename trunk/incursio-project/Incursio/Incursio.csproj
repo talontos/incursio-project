@@ -17,7 +17,7 @@
     <ManifestCertificateThumbprint>4B9555AF275B8CFC6CEC528B138592E1F1D70902</ManifestCertificateThumbprint>
     <ManifestKeyFile>Incursio_6_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>C:\Program Files\Incursio\</PublishUrl>
     <Install>true</Install>
@@ -120,13 +120,16 @@
     <Compile Include="Managers\MapManager.cs" />
     <Compile Include="Managers\MessageManager.cs" />
     <Compile Include="Managers\PlayerManager.cs" />
+    <Compile Include="Managers\SoundBank.cs" />
     <Compile Include="Managers\SoundManager.cs" />
     <Compile Include="Managers\TextureBank.cs" />
     <Compile Include="Managers\TextureManager.cs" />
     <Compile Include="Utils\DebugUtil.cs" />
+    <Compile Include="Utils\DefenseReport.cs" />
     <Compile Include="Utils\EntityBuildOrder.cs" />
     <Compile Include="Utils\GameEvent.cs" />
     <Compile Include="Utils\GameResult.cs" />
+    <Compile Include="Utils\KeyPoint.cs" />
     <Compile Include="Utils\ObjectFactory.cs" />
     <Compile Include="Utils\PathFinding\PathFinder.cs" />
     <Compile Include="Utils\PathFinding\PriorityQueue.cs" />
@@ -150,13 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Incursio_1_TemporaryKey.pfx" />
-    <None Include="Incursio_2_TemporaryKey.pfx" />
-    <None Include="Incursio_3_TemporaryKey.pfx" />
-    <None Include="Incursio_4_TemporaryKey.pfx" />
-    <None Include="Incursio_5_TemporaryKey.pfx" />
     <None Include="Incursio_6_TemporaryKey.pfx" />
-    <None Include="Incursio_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

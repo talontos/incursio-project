@@ -416,11 +416,19 @@ namespace Incursio
 
                 case (State.GameState.Defeat):
                     spriteBatch.DrawString(font, "Game State: Massive Failure! " + stateString, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: Massive Failure! " + stateString) / 2, 1.0f, SpriteEffects.None, 0.5f);
+
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground,
+                        new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
+
                     //TODO: perform Defeat actions
                     break;
 
                 case (State.GameState.Victory):
                     spriteBatch.DrawString(font, "Game State: Epic Win!!! " + stateString, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: Epic Win!!! " + stateString) / 2, 1.0f, SpriteEffects.None, 0.5f);
+
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground,
+                        new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
+
                     //TODO: perform Victory actions
                     break;
 
