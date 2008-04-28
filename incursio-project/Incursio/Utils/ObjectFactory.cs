@@ -80,6 +80,7 @@ namespace Incursio.Utils
             //The EntityManager will keep up with them
             //This line is left in for now to keep the game working
             return product;
+
         }
 
     }

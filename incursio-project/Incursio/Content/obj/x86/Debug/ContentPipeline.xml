@@ -847,6 +847,33 @@
       <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\HeroWest.xnb</Output>
       <Time>2008-04-21T09:35:02.390625-04:00</Time>
     </Item>
+    <Item>
+      <Source>Arrow.png</Source>
+      <Name>Arrow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Arrow.xnb</Output>
+      <Time>2008-04-25T10:47:13.75-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Pause_Screen.png</Source>
+      <Name>Pause_Screen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Pause_Screen.xnb</Output>
+      <Time>2008-04-25T10:47:13.765625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Splash_Screen.png</Source>
+      <Name>Splash_Screen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\INCURSIO\incursio-project\Incursio\bin\x86\Debug\Content\Splash_Screen.xnb</Output>
+      <Time>2008-04-25T10:47:13.765625-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
