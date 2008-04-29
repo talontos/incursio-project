@@ -298,8 +298,8 @@ namespace Incursio
 
                     MessageManager.getInstance().update();
 
-                    //FileManager.getInstance().saveCurrentGame("HeroSave.txt");
-                    //FileManager.getInstance().loadGame("HeroSave.txt");
+                    //FileManager.getInstance().saveCurrentGame("HeroSave.zomgwtflolbbq");
+                    //FileManager.getInstance().loadGame("HeroSave.zomgwtflolbbq");
 
                     //listener for menu button
                     gameMenuButton.Update(cursor);
