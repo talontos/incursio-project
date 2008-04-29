@@ -328,6 +328,10 @@ namespace Incursio.Classes
             this.currentState = newState;
         }
 
+        public void setDirectionState(State.Direction dir){
+            this.directionState = dir;
+        }
+
         public void setMap(MapBase map)
         {
             this.map = map;

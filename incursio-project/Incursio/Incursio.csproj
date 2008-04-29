@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Campaign\CreditsMap.cs" />
     <Compile Include="Campaign\Map1.cs" />
     <Compile Include="Campaign\Port.cs" />
     <Compile Include="Campaign\RandomMap.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Commands\MoveCommand.cs" />
     <Compile Include="Commands\StopCommand.cs" />
     <Compile Include="Interface\Button.cs" />
+    <Compile Include="Interface\CreditsButton.cs" />
     <Compile Include="Interface\Cursor.cs" />
     <Compile Include="Interface\ExitGameButton.cs" />
     <Compile Include="Interface\ExitGameToMenuButton.cs" />

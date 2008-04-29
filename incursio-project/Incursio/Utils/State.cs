@@ -144,6 +144,7 @@ namespace Incursio
         }
 
         public enum CampaignLevel{
+            CREDITS,
             ONE,
             TWO,
             THREE,

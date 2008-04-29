@@ -76,18 +76,19 @@ namespace Incursio
         Vector2 FontPos;
         public HeadsUpDisplay hud;
         Cursor cursor;
-        Button gameMenuButton;
-        Button resumeGameButton;
-        Button exitGameToMenuButton;
         KeyboardState kbState;  //lets us know if any input is coming in through the keyboard
         Keys[] keysPressed;
+        Button gameMenuButton;
+        /*
+        Button resumeGameButton;
+        Button exitGameToMenuButton;
         Button mapSelectButton;
         Button newGameButton_level1;
         Button newGameButton_level2;
         Button newGameButton_level3;
         Button exitGameButton;
         Button saveButton;
-        Button loadButton;
+        Button loadButton;*/
         Texture2D clickDestination;
         int clickDestinationFader = 0;
         Coordinate cursorAtClick;
@@ -177,33 +178,27 @@ namespace Incursio
             cursor = new Cursor(new Vector2(0, 0));
             clickDestination = Content.Load<Texture2D>(@"destinationClick");
 
-            //initialize the current map
-            //MapManager.getInstance().initializeCurrentMap();
-
             // load the HUD
             hud.loadHeadsUpDisplay();
 
             // load paused game menu components
-            gameMenuButton = new Button(new Vector2(465, 738), TextureBank.InterfaceTextures.gameMenuButton, TextureBank.InterfaceTextures.gameMenuButtonPressed);
-            //resumeGameButton = new Button(new Vector2(475, 349), TextureBank.InterfaceTextures.resumeGameButton, TextureBank.InterfaceTextures.resumeGameButtonPressed);
-            resumeGameButton = new ResumeGameButton();
-            //exitGameToMenuButton = new Button(new Vector2(475, 384), TextureBank.InterfaceTextures.exitGameToMenuButton, TextureBank.InterfaceTextures.exitGameToMenuButtonPressed);
-            exitGameToMenuButton = new ExitGameToMenuButton();
+            this.gameMenuButton = new Button(new Vector2(465, 738), TextureBank.InterfaceTextures.gameMenuButton, TextureBank.InterfaceTextures.gameMenuButtonPressed);
+            Button resumeGameButton = new ResumeGameButton();
+            Button exitGameToMenuButton = new ExitGameToMenuButton();
 
-            saveButton = new SaveButton();
-            loadButton = new LoadButton();
+            Button saveButton = new SaveButton();
+            Button loadButton = new LoadButton();
 
             //load the menu components
-            mapSelectButton = new MapSelectButton();
-            //newGameButton = new Button(new Vector2(400, 638), TextureBank.InterfaceTextures.newGameButton, TextureBank.InterfaceTextures.newGameButtonPressed);
-            newGameButton_level1 = new NewGameButton(State.CampaignLevel.ONE);
-            newGameButton_level2 = new NewGameButton(State.CampaignLevel.TWO);
-            newGameButton_level3 = new NewGameButton(State.CampaignLevel.THREE);
-            //exitGameButton = new Button(new Vector2(524, 638), TextureBank.InterfaceTextures.exitGameButton, TextureBank.InterfaceTextures.exitGameButtonPressed);
-            exitGameButton = new ExitGameButton();
+            Button mapSelectButton = new MapSelectButton();
+            Button newGameButton_level1 = new NewGameButton(State.CampaignLevel.ONE);
+            Button newGameButton_level2 = new NewGameButton(State.CampaignLevel.TWO);
+            Button newGameButton_level3 = new NewGameButton(State.CampaignLevel.THREE);
+            Button exitGameButton = new ExitGameButton();
+            Button creditsButton = new CreditsButton();
 
             //create menus
-            mainMenu = new MenuSet(600, 500, mapSelectButton, loadButton, exitGameButton);
+            mainMenu = new MenuSet(600, 500, mapSelectButton, loadButton, creditsButton, exitGameButton);
             mapSelectionMenu = new MenuSet(600, 500, newGameButton_level1, newGameButton_level2, newGameButton_level3);
             pauseMenu = new MenuSet(600, 500, resumeGameButton, saveButton, exitGameToMenuButton);
 
@@ -277,6 +272,7 @@ namespace Incursio
         /// It will also perform the neccessary computations dependent upon the state
         /// </summary>
         private void checkState(GameTime gameTime){
+
             switch(this.currentState){
                 case (State.GameState.Initializing): 
                     //TODO: perform initializing actions
@@ -350,7 +346,7 @@ namespace Incursio
 
                 case (State.GameState.PausedPlay):
 
-                    InputManager.getInstance().Update(gameTime);
+                    //InputManager.getInstance().Update(gameTime);
 
                     //exitGameToMenuButton.Update(cursor);
                     //resumeGameButton.Update(cursor);

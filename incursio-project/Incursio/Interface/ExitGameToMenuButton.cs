@@ -24,6 +24,8 @@ namespace Incursio.Interface
             if (!this.getPressed() && this.getFocus())
             {
                 this.setFocus(false);
+                EntityManager.getInstance().reinitializeInstance();
+                PlayerManager.getInstance().reinitializeInstance();
                 Incursio.getInstance().currentState = State.GameState.Menu;
             }
         }
