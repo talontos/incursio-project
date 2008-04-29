@@ -11,9 +11,20 @@ namespace Incursio.Interface
         public SaveButton() : 
             base(new Vector2(0, 0), 
                 TextureBank.InterfaceTextures.saveGameButton, 
-                TextureBank.InterfaceTextures.saveGameButtonPressed
-        ){
+                TextureBank.InterfaceTextures.saveGameButtonPressed)
+        {
 
         }
+
+        public override void Update(Cursor cursor)
+        {
+            base.Update(cursor);
+
+            if (!this.getPressed() && this.getFocus()) //find out if the button is pressed
+            {
+                FileManager.getInstance().saveCurrentGame("Hero.wtf");
+            }
+        }
+
     }
 }
