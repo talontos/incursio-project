@@ -185,5 +185,15 @@ namespace Incursio
             ShoreOpenUpperLeft,
             ShoreOpenUpperRight,
         }
+
+        public enum RoadType
+        {
+            Horizontal,
+            Vertical,
+            ElbowUpRight,
+            ElbowUpLeft,
+            ElbowDownLeft,
+            ElbowDownRight,
+        }
     }
 }

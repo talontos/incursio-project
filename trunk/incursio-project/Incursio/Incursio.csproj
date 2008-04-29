@@ -100,6 +100,7 @@
     <Compile Include="Classes\SaveGame.cs" />
     <Compile Include="Classes\Structure.cs" />
     <Compile Include="Classes\Terrain\Grass.cs" />
+    <Compile Include="Classes\Terrain\Road.cs" />
     <Compile Include="Classes\Terrain\Tree.cs" />
     <Compile Include="Classes\Terrain\Water.cs" />
     <Compile Include="Classes\Unit.cs" />
