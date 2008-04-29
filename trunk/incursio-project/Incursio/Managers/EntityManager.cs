@@ -26,6 +26,8 @@ namespace Incursio.Managers
 
         private int nextKeyId;
 
+        public Hero hero;
+
         private EntityManager(){
             entityBank = new List<BaseGameEntity>();
             selectedUnits = new List<BaseGameEntity>();
@@ -35,6 +37,8 @@ namespace Incursio.Managers
             groups = new List<List<BaseGameEntity>>(10);
             for (int i = 0; i < groups.Capacity; i++)
                 groups.Add( new List<BaseGameEntity>());
+
+            hero = null;
         }
 
         public static EntityManager getInstance()

@@ -11,9 +11,19 @@ namespace Incursio.Interface
         public LoadButton() : 
             base(new Vector2(0, 50), 
                 TextureBank.InterfaceTextures.loadGameButton, 
-                TextureBank.InterfaceTextures.loadGameButtonPressed
-        ){
+                TextureBank.InterfaceTextures.loadGameButtonPressed)
+        {
 
+        }
+
+        public override void Update(Cursor cursor)
+        {
+            base.Update(cursor);
+
+            if (!this.getPressed() && this.getFocus()) //find out if the button is pressed
+            {
+                FileManager.getInstance().loadGame("Hero.wtf");
+            }
         }
     }
 }
