@@ -69,6 +69,9 @@ namespace Incursio.Managers
                                 messages.Remove(e);
                             }
                             break;
+                        case State.EventType.LEVEL_UP:
+                        case State.EventType.ENEMY_CAPTURING_POINT:
+                        case State.EventType.POINT_CAPTURED:
                         case State.EventType.CANT_MOVE_THERE:
                         case State.EventType.CREATION_COMPLETE:
                         case State.EventType.NOT_ENOUGH_RESOURCES:

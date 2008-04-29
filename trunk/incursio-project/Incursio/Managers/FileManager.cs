@@ -63,18 +63,19 @@ namespace Incursio.Managers
             {
                 //open up a reader
                 TextReader tr = new StreamReader(fileName);
+                Hero hero = new Hero();
 
                 //read the file and set hero info and stats
-                EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].name = tr.ReadLine();
-                EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].level = Convert.ToInt32(tr.ReadLine());
-                EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].experiencePoints = Convert.ToInt32(tr.ReadLine());
-                EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].pointsToNextLevel = Convert.ToInt32(tr.ReadLine());
-                EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].damage = Convert.ToInt32(tr.ReadLine());
-                EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].armor = Convert.ToInt32(tr.ReadLine());
-                EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].maxHealth = Convert.ToInt32(tr.ReadLine());
-                EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].health = EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].maxHealth;
+                hero.name = tr.ReadLine();
+                hero.level = Convert.ToInt32(tr.ReadLine());
+                hero.experiencePoints = Convert.ToInt32(tr.ReadLine());
+                hero.pointsToNextLevel = Convert.ToInt32(tr.ReadLine());
+                hero.damage = Convert.ToInt32(tr.ReadLine());
+                hero.armor = Convert.ToInt32(tr.ReadLine());
+                hero.maxHealth = Convert.ToInt32(tr.ReadLine());
+                hero.health = hero.maxHealth;
 
-                
+                Incursio.getInstance().setHero(hero);
                 //close the reader
                 tr.Close();
             }

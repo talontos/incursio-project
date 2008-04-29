@@ -61,6 +61,16 @@ namespace Incursio.Classes
           this.health = 500;
       }
 
+      public void copyHeroStats(Hero h){
+          this.maxHealth = h.maxHealth;
+          this.health = h.health;
+          this.damage = h.damage;
+          this.experiencePoints = h.experiencePoints;
+          this.pointsToNextLevel = h.pointsToNextLevel;
+          this.name = h.name;
+          this.armor = h.armor;
+      }
+
       public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
       {
           base.Update(gameTime, ref myRef);

@@ -14,6 +14,8 @@ namespace Incursio.Campaign
         private int dirCounter = 0;
         private State.Direction curDir = State.Direction.West;
 
+        private const string CREDITS = "";
+
         public CreditsMap()
             : base()
         {
@@ -31,6 +33,7 @@ namespace Incursio.Campaign
         {
 
             //TODO: Draw credits
+
 
             //update dancing light infantry
             if(dirCounter >= 60){

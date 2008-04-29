@@ -60,7 +60,16 @@ namespace Incursio.Classes
                 return;
             }
 
-            if (orders.Count > 0){
+            this.processOrderList(gameTime, ref myRef);
+
+            if (this.health > this.maxHealth)
+                this.health = this.maxHealth;
+        }
+
+        protected virtual void processOrderList(GameTime gameTime, ref BaseGameEntity myRef)
+        {
+            if (orders.Count > 0)
+            {
                 //check validity of next command
                 if (orders[0].finishedExecution)
                     orders.RemoveAt(0);
@@ -68,15 +77,12 @@ namespace Incursio.Classes
             }
 
             //if I still have orders...
-            if(orders.Count > 0){
+            if (orders.Count > 0)
+            {
                 orders[0].execute(gameTime, ref myRef);
 
                 //check type for player notification
-
             }
-
-            if (this.health > this.maxHealth)
-                this.health = this.maxHealth;
         }
 
         /// <summary>

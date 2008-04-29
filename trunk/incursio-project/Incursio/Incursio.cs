@@ -51,6 +51,8 @@ namespace Incursio
         //BaseMapEntity tex1;
         public MapBase currentMap;
 
+        private Hero hero;
+
         //game information
         public State.GameState currentState = State.GameState.Initializing;
 
@@ -79,16 +81,6 @@ namespace Incursio
         KeyboardState kbState;  //lets us know if any input is coming in through the keyboard
         Keys[] keysPressed;
         Button gameMenuButton;
-        /*
-        Button resumeGameButton;
-        Button exitGameToMenuButton;
-        Button mapSelectButton;
-        Button newGameButton_level1;
-        Button newGameButton_level2;
-        Button newGameButton_level3;
-        Button exitGameButton;
-        Button saveButton;
-        Button loadButton;*/
         Texture2D clickDestination;
         int clickDestinationFader = 0;
         Coordinate cursorAtClick;
@@ -573,6 +565,9 @@ namespace Incursio
                         yOffSet = (int)(TextureBank.EntityTextures.campTextureComputer.Height * 0.80) + 15;
                         width = TextureBank.EntityTextures.campTextureComputer.Width + 50;
                         height = TextureBank.EntityTextures.campTextureComputer.Height + 40;
+
+                        //draw build queue
+                        (u as CampStructure).drawBuildQueue(spriteBatch);
                     }
                     else if (u.getType() == State.EntityName.GuardTower)
                     {
@@ -639,9 +634,21 @@ namespace Incursio
             }
         }
 
+        public void setHero(Hero h){
+            this.hero = h;
+        }
+
+        public Hero getHero(){
+            return this.hero;
+        }
+
         public void exitGame(){
             UnloadContent();
             Exit();
+        }
+
+        public SpriteFont getFont(){
+            return this.font;
         }
     }
 }

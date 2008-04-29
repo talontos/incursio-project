@@ -41,10 +41,6 @@ namespace Incursio.Commands
                     subject.setAttacking();
                     result = subject.attackTarget();
                 }
-                //else{
-                    //TODO: REFACTOR CLASS FOR GUARD TOWER
-                    //result = (subject as GuardTowerStructure).attackTarget();
-                //}
 
                 if(!result){
                     //subject is not in attack range, move toward target:

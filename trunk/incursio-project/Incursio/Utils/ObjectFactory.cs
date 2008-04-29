@@ -74,9 +74,13 @@ namespace Incursio.Utils
 
             product.setMap(MapManager.getInstance().currentMap);
 
-            //TODO: remove Incursio's entityBank & functions
-            //The EntityManager will keep up with them
-            //This line is left in for now to keep the game working
+            //check for hero stats to load
+            if(product is Hero && owningPlayer == State.PlayerId.HUMAN && Incursio.getInstance().getHero() != null){
+                (product as Hero).copyHeroStats(Incursio.getInstance().getHero());
+
+                Incursio.getInstance().setHero(product as Hero);
+            }
+
             return product;
 
         }
