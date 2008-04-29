@@ -38,6 +38,9 @@ namespace Incursio.Managers
         public MapBase setCurrentLevel(State.CampaignLevel level){
             //TODO: Define Different levels
             switch(level){
+                case State.CampaignLevel.CREDITS:
+                    currentMap = new CreditsMap();
+                    break;
                 case State.CampaignLevel.ONE:   
                     currentMap = new Map1();  
                     break;

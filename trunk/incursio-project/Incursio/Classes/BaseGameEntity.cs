@@ -74,6 +74,9 @@ namespace Incursio.Classes
                 //check type for player notification
 
             }
+
+            if (this.health > this.maxHealth)
+                this.health = this.maxHealth;
         }
 
         /// <summary>
@@ -123,6 +126,8 @@ namespace Incursio.Classes
         public virtual void takeDamage(int damage, BaseGameEntity attacker){
             //TODO: some math using my armor
             int damageTaken = (damage - armor) + (Incursio.rand.Next(0, 10) - 5);  //[-5,+5]
+            if (damageTaken < 0)
+                damageTaken = 0;
 
             this.health -= damageTaken;
 

@@ -397,13 +397,13 @@ namespace Incursio.Classes
             this.entityGrid[x, y] = occupant;
         }
 
-        private void translateMapCellToPixel(int indexX, int indexY, out int pixX, out int pixY)
+        protected void translateMapCellToPixel(int indexX, int indexY, out int pixX, out int pixY)
         {
             pixX = (indexX * TILE_WIDTH + (TILE_WIDTH / 2));
             pixY = (indexY * TILE_HEIGHT + (TILE_HEIGHT / 2));
         }
 
-        private void translatePixelToMapCell(int pixX, int pixY, out int indexX, out int indexY)
+        protected void translatePixelToMapCell(int pixX, int pixY, out int indexX, out int indexY)
         {
             indexX = pixX / TILE_WIDTH;
             indexY = pixY / TILE_HEIGHT;
