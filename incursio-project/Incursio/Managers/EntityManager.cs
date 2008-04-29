@@ -99,7 +99,21 @@ namespace Incursio.Managers
             return points;
         }
 
-        public void updateUnitSelection(Rectangle area){
+        public void addToSelectedUnits(BaseGameEntity e){
+            if (selectedUnits.Count < 12)
+                selectedUnits.Add(e);
+        }
+
+        public void addToSelectedUnits(List<BaseGameEntity> es){
+            for(int i = 0; i < 12 && i < es.Count; i++){
+                if (selectedUnits.Count < 12)
+                    selectedUnits.Add(es[i]);
+                else break;
+            }
+        }
+
+        public void updateUnitSelection(Rectangle area)
+        {
 
             //IF NO UNITS ARE IN THE SELECTED AREA,
             //  WE SHOULD PROBABLY KEEP OUR CURRENT SELECTION
@@ -121,10 +135,11 @@ namespace Incursio.Managers
             });
 
             if(unitsInArea.Count != 0){
-                if (InputManager.getInstance().shifting())   //append
-                    this.selectedUnits.AddRange(unitsInArea);
-                else
-                    this.selectedUnits = unitsInArea;
+                if (!InputManager.getInstance().shifting()){
+                    this.selectedUnits = new List<BaseGameEntity>();
+                }
+
+                this.addToSelectedUnits(unitsInArea);
             }
         }
 
@@ -151,7 +166,7 @@ namespace Incursio.Managers
 
                             if (e.getPlayer() == State.PlayerId.COMPUTER){
                                 selectedUnits = new List<BaseGameEntity>();
-                                selectedUnits.Add(e);                             //numUnitsSelected = 1;
+                                this.addToSelectedUnits(e);
                             }
                             else
                             {
@@ -174,7 +189,7 @@ namespace Incursio.Managers
                                     }
                                     else if (!e.isDead())
                                     {
-                                        selectedUnits.Add(e);
+                                        this.addToSelectedUnits(e);
                                         //numUnitsSelected++;
                                     }
                                 }
@@ -184,6 +199,7 @@ namespace Incursio.Managers
 
                                     selectedUnits = new List<BaseGameEntity>();
                                     selectedUnits.Add(e);
+                                    
                                     //numUnitsSelected = 1;
                                 }
                             }

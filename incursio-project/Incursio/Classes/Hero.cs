@@ -80,6 +80,11 @@ namespace Incursio.Classes
           );
       }
 
+      public double getPercentageLvlUp()
+      {
+          return (float)experiencePoints / pointsToNextLevel;
+      }
+
       /// <summary>
       /// performs experience & level-up actions
       /// </summary>
