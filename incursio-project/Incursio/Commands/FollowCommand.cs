@@ -34,8 +34,9 @@ namespace Incursio.Commands
                 this.finishedExecution = true;
             }
             else{
-                if(MapManager.getInstance().currentMap.getCellDistance(this.followTarget.location, subject.location) > 1)
-                    this.updateMoveCommand();
+                if(MapManager.getInstance().currentMap.getCellDistance(this.followTarget.location, subject.location) > 1){
+//                    this.updateMoveCommand();
+                }
 
                 moveCommand.execute(gameTime, ref subject);
             }

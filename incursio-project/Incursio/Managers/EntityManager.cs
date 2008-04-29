@@ -26,8 +26,6 @@ namespace Incursio.Managers
 
         private int nextKeyId;
 
-        public Hero hero;
-
         private EntityManager(){
             entityBank = new List<BaseGameEntity>();
             selectedUnits = new List<BaseGameEntity>();
@@ -37,8 +35,6 @@ namespace Incursio.Managers
             groups = new List<List<BaseGameEntity>>(10);
             for (int i = 0; i < groups.Capacity; i++)
                 groups.Add( new List<BaseGameEntity>());
-
-            hero = null;
         }
 
         public static EntityManager getInstance()
@@ -51,6 +47,7 @@ namespace Incursio.Managers
         public void reinitializeInstance()
         {
             instance = new EntityManager();
+            //Incursio.getInstance().setHero(null);
         }
 
         public List<BaseGameEntity> getSelectedUnits(){
@@ -429,7 +426,7 @@ namespace Incursio.Managers
             if (selectedUnits.Count > 0 && selectedUnits[0] is CampStructure)
             {
                 //(selectedUnits[0] as CampStructure).setNewStructureCoords(new Coordinate((int)point.X, (int)point.Y));
-                this.issueCommand(State.Command.BUILD, false, null, toBuild, new Coordinate((int)point.X, (int)point.Y));
+                this.issueCommand(State.Command.BUILD, true, null, toBuild, new Coordinate((int)point.X, (int)point.Y));
             }
         }
 

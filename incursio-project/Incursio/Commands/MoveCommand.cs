@@ -19,6 +19,7 @@ namespace Incursio.Commands
         public Coordinate start;
 
         private Coordinate prevLocation;
+        private int stuckCounter = 0;
 
         public MoveCommand(Coordinate destination){
             this.destination = destination;
@@ -101,19 +102,29 @@ namespace Incursio.Commands
                     }
                 }
             }
-
+            /*
             if(subject.isMoving() && prevLocation != null){
-                if (Math.Abs(prevLocation.x - subject.location.x) < 40 ||
-                    Math.Abs(prevLocation.y - subject.location.y) < 40)
-                {
-                    //OH NO I'M STUCK
-                    bool stuck = true;
+                Coordinate cur = new Coordinate();
+                Coordinate prev = new Coordinate();
 
+                MapManager.getInstance().currentMap.translatePixelToMapCell(subject.location.x, subject.location.y, out cur.x, out cur.y);
+                MapManager.getInstance().currentMap.translatePixelToMapCell(prevLocation.x, cur.y, out prevLocation.x, out prev.y);
+                
+                if (cur.x == prev.x && cur.y == prev.y)
+                {
+                    stuckCounter++;
+
+                    if(stuckCounter >= 60){
+                        bool stuck = true;
                     //TODO: insert intermediary move command to try
-                    //  to get back on course
+                        //  to get back on course
+                    }
+                }
+                else{
+                    stuckCounter = 0;
                 }
             }
-
+            */
             //move towards destination
 
             subject.setDestination(this.destination);

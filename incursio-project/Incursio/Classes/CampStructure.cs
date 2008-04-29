@@ -240,6 +240,29 @@ namespace Incursio.Classes
 
         public override void buildTick()
         {
+            //check for order cancellation
+            if(this.buildProject.keyPoint != null && this.buildProject.keyPoint.owner != this.owner){
+                //can't build anymore
+                timeBuilt = 0;
+                timeRequired = 0;
+                this.currentState = State.StructureState.Idle;
+                this.currentBuildForObjectFactory = "IDLE";
+                this.currentlyBuildingThis = "IDLE";
+
+                PlayerManager.getInstance().notifyPlayer(
+                    this.owner,
+                    new GameEvent(State.EventType.CANT_MOVE_THERE,
+                        this,
+                        /*SOUND,*/
+                        "Cannot Build There",
+                        this.buildProject.location
+                    )
+                );
+
+                this.buildProject = null;
+                return;
+            }
+
             if (this.timeBuilt >= this.timeRequired)
             {
                 if (buildProject.entity.getType() != State.EntityName.GuardTower)
@@ -300,6 +323,23 @@ namespace Incursio.Classes
             else
             {
                 this.timeBuilt++;
+            }
+        }
+
+        protected override void processOrderList(GameTime gameTime, ref BaseGameEntity myRef)
+        {
+            base.processOrderList(gameTime, ref myRef);
+
+            //since we want to only queue things we can build, go ahead and check order list
+            BaseCommand c;
+            for(int i = 0; i < this.orders.Count; i++){
+                c = orders[i];
+                if(c is BuildCommand){
+                    if (!(c as BuildCommand).checkBuildAndNotify(ref myRef)){
+                        //can't build
+                        orders.Remove(c);
+                    }
+                }
             }
         }
 
@@ -401,7 +441,12 @@ namespace Incursio.Classes
         /// <param name="order">Order to be issued</param>
         public override void issueSingleOrder(BaseCommand order)
         {
-            base.issueImmediateOrder(order);
+            this.orders.Insert(0, order);
+        }
+
+        public override void issueImmediateOrder(BaseCommand order)
+        {
+            this.orders.Add(order);
         }
 
         /// <summary> 
@@ -511,6 +556,26 @@ namespace Incursio.Classes
                     }
 
                 }
+            }
+        }
+
+        public void drawBuildQueue(SpriteBatch spriteBatch){
+            //debugging; draw my queue
+            if (this.orders.Count > 0)
+            {
+                string orderList = "";
+                if (this.isBuilding())
+                    orderList += "0: " + this.buildProject.entity.getType().ToString() + "\n";
+
+                for (int i = 0; i < orders.Count; i++)
+                {
+                    if (orders[i] is BuildCommand)
+                    {
+                        orderList += (i + 1) + ": " + (orders[i] as BuildCommand).buildOrder.entity.getType().ToString() + "\n";
+                    }
+                }
+
+                spriteBatch.DrawString(Incursio.getInstance().getFont(), orderList, new Vector2(0, 0), Color.Black);
             }
         }
     }
