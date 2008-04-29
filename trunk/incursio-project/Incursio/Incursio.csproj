@@ -97,7 +97,6 @@
     <Compile Include="Classes\MapBase.cs" />
     <Compile Include="Classes\PathFinding\MovableObject.cs" />
     <Compile Include="Classes\Player.cs" />
-    <Compile Include="Classes\SaveGame.cs" />
     <Compile Include="Classes\Structure.cs" />
     <Compile Include="Classes\Terrain\Grass.cs" />
     <Compile Include="Classes\Terrain\Road.cs" />

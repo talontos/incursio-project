@@ -15,8 +15,8 @@ namespace Incursio.Classes
         //protected String type = "";    //unit type-name?
 
         public State.EntityName entityType;
-        public long maxHealth = 100;
-        public long health = 100;
+        public int maxHealth = 100;
+        public int health = 100;
         public int armor = 0;
         public int  sightRange = 0;
         public State.PlayerId owner;

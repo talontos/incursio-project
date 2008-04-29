@@ -15,7 +15,7 @@ namespace Incursio.Classes
     {
         protected const int TIME_DEAD_UNTIL_DESPAWN = 5;
 
-        protected int damage = 0;
+        public int damage = 0;
         //protected int speed = 0;
         protected int attackSpeed = 0;
         protected int updateAttackTimer = 0;
