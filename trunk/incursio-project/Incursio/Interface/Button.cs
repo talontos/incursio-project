@@ -12,7 +12,7 @@ namespace Incursio.Interface
 {
   public class Button
     {
-        protected Vector2 position;
+        public Vector2 position;
         protected Texture2D passive;
         protected Texture2D pressed;
         protected bool isPressed;

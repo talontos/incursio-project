@@ -196,7 +196,7 @@ namespace Incursio.Classes
                 else if (selectedUnits[0].getType() == State.EntityName.Hero)
                 {
                     spriteBatch.Draw(TextureBank.InterfaceTextures.heroPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.heroPortrait.Width, TextureBank.InterfaceTextures.heroPortrait.Height), Color.White);
-                    //write level (&& exp?)
+                    //write level
                     string levelString = "Lvl " + (selectedUnits[0] as Hero).level;
                     spriteBatch.DrawString(font, levelString, new Vector2(270, height - 120), Color.White, 0, font.MeasureString(levelString) / 2, 1.0f, SpriteEffects.None, 0.5f);
                 }
@@ -220,7 +220,8 @@ namespace Incursio.Classes
                 }
                 else if (selectedUnits[0].getType() == State.EntityName.Hero)
                 {
-                    spriteBatch.DrawString(font, "Hero", new Vector2(572, height - 118), Color.White, 0, font.MeasureString("Hero") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    string name = (selectedUnits[0] as Hero).name;
+                    spriteBatch.DrawString(font, name, new Vector2(572, height - 118), Color.White, 0, font.MeasureString(name) / 2, 1.0f, SpriteEffects.None, 0.5f);
                 }
                 else if (selectedUnits[0].getType() == State.EntityName.ControlPoint)
                 {
@@ -257,6 +258,18 @@ namespace Incursio.Classes
                         spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(462, height - 50, TextureBank.EntityTextures.healthRatioTexture.Width * 5, TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Black);
                         spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(462, height - 50, (int) (TextureBank.EntityTextures.healthRatioTexture.Width * 5 * buildRatio) , TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Lime);
                     }
+                    
+                }
+
+                if (selectedUnits[0].getType() == State.EntityName.Hero)
+                {
+                    double expRatio = (selectedUnits[0] as Hero).getPercentageLvlUp();
+                    string pointString = ((selectedUnits[0] as Hero).experiencePoints + "/" + (selectedUnits[0] as Hero).pointsToNextLevel);
+
+                    //EXPERIENCE POINTS
+                    spriteBatch.DrawString(font, pointString, new Vector2(425, height - 45), Color.White, 0, font.MeasureString(pointString) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(510, height - 50, TextureBank.EntityTextures.healthRatioTexture.Width * 5, TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Black);
+                    spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(510, height - 50, (int)(TextureBank.EntityTextures.healthRatioTexture.Width * 5 * expRatio), TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Lime);
                     
                 }
 
