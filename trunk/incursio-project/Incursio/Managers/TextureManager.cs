@@ -147,6 +147,20 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.saveGameButtonPressed = Content.Load<Texture2D>(@"saveButtonPressed");
             TextureBank.InterfaceTextures.loadGameButton = Content.Load<Texture2D>(@"loadButton");
             TextureBank.InterfaceTextures.loadGameButtonPressed = Content.Load<Texture2D>(@"loadButtonPressed");
+            TextureBank.InterfaceTextures.creditsButton_not_pressed = Content.Load<Texture2D>(@"Credits_button");
+            TextureBank.InterfaceTextures.creditsButton_pressed = Content.Load<Texture2D>(@"Credit_button_pressed");
+
+
+            TextureBank.InterfaceTextures.instructionsButton_pressed = Content.Load<Texture2D>(@"instruction_button_pressed");
+            TextureBank.InterfaceTextures.instructionsButton_not_pressed = Content.Load<Texture2D>(@"instructionButton");
+            TextureBank.InterfaceTextures.instructions = Content.Load<Texture2D>(@"instruction");
+
+            TextureBank.InterfaceTextures.portMap_pressed = Content.Load<Texture2D>(@"port_map_button");
+            TextureBank.InterfaceTextures.portMap_not_pressed = Content.Load<Texture2D>(@"port_map_button_pressed");
+            TextureBank.InterfaceTextures.inlandMap_pressed = Content.Load<Texture2D>(@"inland_button");
+            TextureBank.InterfaceTextures.inlandMap_not_pressed = Content.Load<Texture2D>(@"inland_button_pressed");
+            TextureBank.InterfaceTextures.capitalMap_pressed = Content.Load<Texture2D>(@"capital_button");
+            TextureBank.InterfaceTextures.capitalMap_not_pressed = Content.Load<Texture2D>(@"capital_button_press");
 
             TextureBank.InterfaceTextures.selectionRectangle = Content.Load<Texture2D>(@"DragSelection");
 

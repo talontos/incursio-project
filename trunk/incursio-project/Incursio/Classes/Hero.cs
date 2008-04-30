@@ -456,5 +456,25 @@ namespace Incursio.Classes
       {
           SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.HeroVoice.issueAttackOrder[0], false);
       }
+
+      public override void playOrderMoveSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.HeroVoice.issueMoveOrder[0], false);
+      }
+
+      public override void playDeathSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.HeroVoice.death[0], false);
+      }
+
+      public override void playEnterBattlefieldSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.HeroVoice.enterBattlefield[0], false);
+      }
+
+      public override void playSelectionSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.HeroVoice.selection[0], false);
+      }
     }
 }

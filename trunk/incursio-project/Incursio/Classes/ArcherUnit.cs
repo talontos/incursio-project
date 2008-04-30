@@ -488,5 +488,25 @@ namespace Incursio.Classes
       {
           SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.ArcherVoice.issueAttackOrder[0], false);
       }
+
+      public override void playOrderMoveSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.ArcherVoice.issueMoveOrder[0], false);
+      }
+
+      public override void playDeathSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.ArcherVoice.death[0], false);
+      }
+
+      public override void playEnterBattlefieldSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.ArcherVoice.enterBattlefield[0], false);
+      }
+
+      public override void playSelectionSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.ArcherVoice.selection[0], false);
+      }
     }
 }

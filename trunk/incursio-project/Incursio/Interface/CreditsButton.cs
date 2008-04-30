@@ -10,8 +10,8 @@ namespace Incursio.Interface
     {
         public CreditsButton() : 
             base(new Vector2(0, 0), 
-                TextureBank.InterfaceTextures.saveGameButton, 
-                TextureBank.InterfaceTextures.saveGameButtonPressed
+                TextureBank.InterfaceTextures.creditsButton_not_pressed, 
+                TextureBank.InterfaceTextures.creditsButton_pressed
         ){
 
         }

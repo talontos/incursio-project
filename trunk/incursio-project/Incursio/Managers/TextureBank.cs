@@ -156,6 +156,21 @@ namespace Incursio.Managers
             public static Texture2D newGameButton_not_pressed;
             public static Texture2D exitGameButton_pressed;
             public static Texture2D exitGameButton_not_pressed;
+
+            public static Texture2D creditsButton_pressed;
+            public static Texture2D creditsButton_not_pressed;
+
+            public static Texture2D instructionsButton_pressed;
+            public static Texture2D instructionsButton_not_pressed;
+            public static Texture2D instructions;
+
+            public static Texture2D portMap_pressed;
+            public static Texture2D portMap_not_pressed;
+            public static Texture2D inlandMap_pressed;
+            public static Texture2D inlandMap_not_pressed;
+            public static Texture2D capitalMap_pressed;
+            public static Texture2D capitalMap_not_pressed;
+
             /////////////////////////////
 
             //Portraits/Icons////////////
