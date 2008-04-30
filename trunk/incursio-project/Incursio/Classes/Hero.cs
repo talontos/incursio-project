@@ -23,7 +23,7 @@ namespace Incursio.Classes
       public const int RESOURCE_TICK = 4;
       public int timeForResource = 0;
 
-      public String name = "Trogdor the Burninator";
+      public String name = "Blargh";
       public int level = 1;
       public int experiencePoints = 0;
       public int pointsToNextLevel = 1000;
@@ -48,13 +48,15 @@ namespace Incursio.Classes
           this.pointValue = 1000;
 
           //set badass hero properties
+          this.name = "El Gato, the Scratchenator";
           this.moveSpeed = 115.0f;
           this.sightRange = 8;
           this.setType(State.EntityName.Hero);
           this.armor = 15;
           this.damage = 25;
-          this.level = 10;
+          this.level = 15;
           this.experiencePoints = 10000;
+          this.pointsToNextLevel = 20000;
           this.attackSpeed = 3;
           this.attackRange = 1;
           this.maxHealth = 500;
@@ -448,6 +450,11 @@ namespace Incursio.Classes
                   new GameEvent(State.EventType.UNDER_ATTACK, this, /*SOUND,*/ "Hero is in Battle!", this.location)
               );
           }
+      }
+
+      public override void playOrderAttackSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.HeroVoice.issueAttackOrder[0], false);
       }
     }
 }

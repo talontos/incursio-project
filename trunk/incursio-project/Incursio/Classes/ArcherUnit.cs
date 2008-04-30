@@ -481,7 +481,12 @@ namespace Incursio.Classes
 
       public override void playAttackSound()
       {
-          SoundManager.getInstance().PlaySound(SoundBank.AttackSounds.ArrowAttack, false);
+          SoundManager.getInstance().PlaySound(SoundCollection.AttackSounds.ArrowAttack, false);
+      }
+
+      public override void playOrderAttackSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.ArcherVoice.issueAttackOrder[0], false);
       }
     }
 }

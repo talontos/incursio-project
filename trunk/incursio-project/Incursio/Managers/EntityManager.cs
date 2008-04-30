@@ -101,8 +101,9 @@ namespace Incursio.Managers
         }
 
         public void addToSelectedUnits(BaseGameEntity e){
-            if (selectedUnits.Count < 12)
+            if (selectedUnits.Count < 12){
                 selectedUnits.Add(e);
+            }
         }
 
         public void addToSelectedUnits(List<BaseGameEntity> es){
@@ -415,7 +416,8 @@ namespace Incursio.Managers
         }
 
         public void tryToBuild(BaseGameEntity toBuild /*String entityType*/){
-            if(selectedUnits.Count > 0 && selectedUnits[0] is CampStructure){
+            if (selectedUnits.Count > 0 && selectedUnits[0] is CampStructure && selectedUnits[0].owner == State.PlayerId.HUMAN)
+            {
                 this.issueCommand(State.Command.BUILD, true, null, toBuild);
                 //this.createNewEntity(entityType, (selectedUnits[0] as CampStructure).owner);
             }

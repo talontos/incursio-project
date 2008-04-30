@@ -79,6 +79,11 @@ namespace Incursio.Managers
                 //close the reader
                 tr.Close();
             }
+            catch(FileNotFoundException fnf)
+            {
+                Console.WriteLine("FILE NOT FOUND: " + fileName);
+                Console.WriteLine(fnf);
+            }
             catch (FileLoadException e)
             {
                 Console.WriteLine("File Load Exception Found");
