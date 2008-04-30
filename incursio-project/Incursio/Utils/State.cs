@@ -15,6 +15,10 @@ namespace Incursio
 
             MapSelection,
 
+            LoadMenu,
+
+            SaveMenu,
+
             InPlay, //Game has started
 
             PausedPlay, //Game ins paused

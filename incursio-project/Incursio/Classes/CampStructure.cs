@@ -102,6 +102,13 @@ namespace Incursio.Classes
                         this.setDestination(toBeBuilt.location);
                     }
                 }
+                else if(this.destination != null){
+                    toBeBuilt.location = this.destination;
+                }
+                else{
+                    //can't do it... :-(
+                    return;
+                }
 
                 if (toBeBuilt.entity.getType() == State.EntityName.LightInfantry)
                 {
@@ -575,7 +582,7 @@ namespace Incursio.Classes
                     }
                 }
 
-                spriteBatch.DrawString(Incursio.getInstance().getFont(), orderList, new Vector2(0, 0), Color.Black);
+                spriteBatch.DrawString(Incursio.getInstance().getFont(), orderList, new Vector2(0, 0), Color.White);
             }
         }
     }

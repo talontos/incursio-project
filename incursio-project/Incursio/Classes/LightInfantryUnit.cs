@@ -297,5 +297,10 @@ namespace Incursio.Classes
 
       
       }
+
+      public override void playOrderAttackSound()
+      {
+          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.LightInfantryVoice.issueAttackOrder[0], false);
+      }
     }
 }

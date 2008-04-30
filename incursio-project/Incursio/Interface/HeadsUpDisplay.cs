@@ -267,7 +267,7 @@ namespace Incursio.Classes
                     string pointString = ((selectedUnits[0] as Hero).experiencePoints + "/" + (selectedUnits[0] as Hero).pointsToNextLevel);
 
                     //EXPERIENCE POINTS
-                    spriteBatch.DrawString(font, pointString, new Vector2(425, height - 45), Color.White, 0, font.MeasureString(pointString) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    spriteBatch.DrawString(font, pointString, new Vector2(440, height - 45), Color.White, 0, font.MeasureString(pointString) / 2, 1.0f, SpriteEffects.None, 0.5f);
                     spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(510, height - 50, TextureBank.EntityTextures.healthRatioTexture.Width * 5, TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Black);
                     spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(510, height - 50, (int)(TextureBank.EntityTextures.healthRatioTexture.Width * 5 * expRatio), TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Lime);
                     

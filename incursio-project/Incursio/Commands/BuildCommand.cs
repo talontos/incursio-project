@@ -56,13 +56,15 @@ namespace Incursio.Commands
                 //we can't build something here
 
                 //Notify owner
-                PlayerManager.getInstance().notifyPlayer(subject.owner,
-                    new GameEvent(
-                        State.EventType.CANT_MOVE_THERE, subject,
-                        "Cannot Build There",
-                        buildOrder.location
-                    )
-                );
+                if(buildOrder.entity is Structure){
+                    PlayerManager.getInstance().notifyPlayer(subject.owner,
+                        new GameEvent(
+                            State.EventType.CANT_MOVE_THERE, subject,
+                            "Cannot Build There",
+                            buildOrder.location
+                        )
+                    );
+                }
 
                 this.finishedExecution = true;
                 return false;

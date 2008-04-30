@@ -315,6 +315,26 @@ namespace Incursio.Classes
             this.map = map;
         }
 
+        public virtual void playSelectionSound(){
+
+        }
+
+        public virtual void playOrderMoveSound(){
+
+        }
+
+        public virtual void playOrderAttackSound(){
+
+        }
+
+        public virtual void playDeathSound(){
+
+        }
+
+        public virtual void playEnterBattlefieldSound(){
+
+        }
+
         #endregion
 
         #region SPECIAL GET-SET

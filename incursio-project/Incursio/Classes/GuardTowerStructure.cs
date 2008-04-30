@@ -231,7 +231,7 @@ namespace Incursio.Classes
 
       public virtual void playAttackSound()
       {
-          SoundManager.getInstance().PlaySound(SoundBank.AttackSounds.ArrowAttack, false);
+          SoundManager.getInstance().PlaySound(SoundCollection.AttackSounds.ArrowAttack, false);
       }
     }
 }

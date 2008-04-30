@@ -87,6 +87,8 @@ namespace Incursio
 
         MenuSet mainMenu;
         MenuSet mapSelectionMenu;
+        MenuSet loadMenu;
+        MenuSet saveMenu;
         MenuSet pauseMenu;
 
         //for game animation
@@ -178,8 +180,8 @@ namespace Incursio
             Button resumeGameButton = new ResumeGameButton();
             Button exitGameToMenuButton = new ExitGameToMenuButton();
 
-            Button saveButton = new SaveButton();
-            Button loadButton = new LoadButton();
+            Button saveButton = new SaveMenuButton();
+            Button loadButton = new LoadMenuButton();
 
             //load the menu components
             Button mapSelectButton = new MapSelectButton();
@@ -193,6 +195,8 @@ namespace Incursio
             mainMenu = new MenuSet(600, 500, mapSelectButton, loadButton, creditsButton, exitGameButton);
             mapSelectionMenu = new MenuSet(600, 500, newGameButton_level1, newGameButton_level2, newGameButton_level3);
             pauseMenu = new MenuSet(600, 500, resumeGameButton, saveButton, exitGameToMenuButton);
+            loadMenu = new MenuSet(600, 500, new LoadButton("Hero1.wtf"), new LoadButton("Hero2.wtf"), new LoadButton("Hero3.wtf"));
+            saveMenu = new MenuSet(600, 500, new SaveButton("Hero1.wtf"), new SaveButton("Hero2.wtf"), new SaveButton("Hero3.wtf"));
 
             //once everything is loaded up, go to the main menu
             currentState = State.GameState.Menu;
@@ -224,6 +228,7 @@ namespace Incursio
 
             //Check game state!
             this.checkState(gameTime);
+            this.playStateSounds();
 
             base.Update(gameTime);
         }
@@ -316,6 +321,16 @@ namespace Incursio
                     mapSelectionMenu.Update(cursor);
                     break;
 
+                case (State.GameState.LoadMenu):
+                    loadMenu.Update(cursor);
+
+                    break;
+
+                case (State.GameState.SaveMenu):
+                    saveMenu.Update(cursor);
+
+                    break;
+
                 case (State.GameState.Credits):
                     //TODO: perform Credits actions
                     break;
@@ -404,13 +419,28 @@ namespace Incursio
                     spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground, 
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
 
-                    //mapSelectButton.Draw(spriteBatch);
-                    //exitGameButton.Draw(spriteBatch);
-                    //saveButton.Draw(spriteBatch);
-                    //loadButton.Draw(spriteBatch);
                     mainMenu.Draw(spriteBatch);
-                
-                    //TODO: perform Menu actions
+
+                    break;
+
+                case (State.GameState.LoadMenu):
+                    spriteBatch.DrawString(font, "INCURSIO", FontPos, Color.White, 0, font.MeasureString("INCURSIO") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    graphics.GraphicsDevice.Clear(Color.SteelBlue);
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground,
+                        new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
+
+                    loadMenu.Draw(spriteBatch);
+
+                    break;
+
+                case (State.GameState.SaveMenu):
+                    spriteBatch.DrawString(font, "INCURSIO", FontPos, Color.White, 0, font.MeasureString("INCURSIO") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    graphics.GraphicsDevice.Clear(Color.SteelBlue);
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.pauseMenuBackground,
+                        new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
+
+                    saveMenu.Draw(spriteBatch);
+
                     break;
 
                 case State.GameState.MapSelection:
@@ -475,6 +505,38 @@ namespace Incursio
                     break;
 
                 default: break;
+            }
+        }
+
+        public void playStateSounds(){
+
+            //UNTIL WE GET SOUNDS
+            return;
+
+            switch(currentState){
+                case State.GameState.Menu:
+                case State.GameState.LoadMenu:
+                case State.GameState.SaveMenu:
+                case State.GameState.MapSelection:
+                    SoundManager.getInstance().PlaySound(SoundCollection.AmbientSounds.main_menu, true);
+                    break;
+
+                case State.GameState.InPlay:
+                case State.GameState.PausedPlay:
+                    SoundManager.getInstance().PlaySound(SoundCollection.AmbientSounds.inPlay, true);
+                    break;
+
+                case State.GameState.Victory:
+                    SoundManager.getInstance().PlaySound(SoundCollection.AmbientSounds.victory, true);
+                    break;
+
+                case State.GameState.Defeat:
+                    SoundManager.getInstance().PlaySound(SoundCollection.AmbientSounds.defeat, true);
+                    break;
+
+                default:
+                    break;
+
             }
         }
 
