@@ -51,8 +51,8 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.lightInfantryMovingSouth = Content.Load<Texture2D>(@"Infantry_Moving_South");
             TextureBank.EntityTextures.lightInfantryAttackingEast = Content.Load<Texture2D>(@"Infantry_Attacking_East");
             TextureBank.EntityTextures.lightInfantryAttackingWest = Content.Load<Texture2D>(@"Infantry_Attacking_West");
-            //TextureBank.EntityTextures.lightInfantryDeath_East = Content.Load<Texture2D>(@"LightInfantry_Death");
-            //TextureBank.EntityTextures.lightInfantryDeath_West = Content.Load<Texture2D>(@"LightInfantry_Death_Left");
+            TextureBank.EntityTextures.lightInfantryDeathEast = Content.Load<Texture2D>(@"LightInfantry_Death_Right");
+            TextureBank.EntityTextures.lightInfantryDeathWest = Content.Load<Texture2D>(@"LightInfantry_Death_Left");
 
             TextureBank.EntityTextures.heavyInfantryEast = Content.Load<Texture2D>(@"HeavyInfantryEast");
             TextureBank.EntityTextures.heavyInfantryWest = Content.Load<Texture2D>(@"HeavyInfantryWest");
@@ -79,8 +79,8 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.archerMovingSouth = Content.Load<Texture2D>(@"Archer_Moving_Down");
             TextureBank.EntityTextures.archerAttackingEast = Content.Load<Texture2D>(@"Archer_Attacking_East");
             TextureBank.EntityTextures.archerAttackingWest = Content.Load<Texture2D>(@"Archer_Attacking_West");
-            //TextureBank.EntityTextures.lightInfantryDeath_East = Content.Load<Texture2D>(@"LightInfantry_Death");
-            //TextureBank.EntityTextures.lightInfantryDeath_West = Content.Load<Texture2D>(@"LightInfantry_Death_Left");
+            TextureBank.EntityTextures.archerDeathEast = Content.Load<Texture2D>(@"Archer_Death_Right");
+            TextureBank.EntityTextures.archerDeathWest = Content.Load<Texture2D>(@"Archer_Death_Left");
 
             TextureBank.EntityTextures.arrow = Content.Load<Texture2D>(@"Arrow");
             
@@ -94,6 +94,8 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.heroMovingNorth = Content.Load<Texture2D>(@"Hero_Moving_North");
             TextureBank.EntityTextures.heroAttackingEast = Content.Load<Texture2D>(@"Hero_Attacking_Right");
             TextureBank.EntityTextures.heroAttackingWest = Content.Load<Texture2D>(@"Hero_Attacking_Left");
+            TextureBank.EntityTextures.heroDeathEast = Content.Load<Texture2D>(@"Hero_Death_Right");
+            TextureBank.EntityTextures.heroDeathWest = Content.Load<Texture2D>(@"Hero_Death_Left");
 
             //Load structure textures
             TextureBank.EntityTextures.campTexturePlayer = Content.Load<Texture2D>(@"Fort_friendly");
@@ -156,6 +158,7 @@ namespace Incursio.Managers
             //Load terrain textures
             TextureBank.MapTiles.grass1 = Content.Load<Texture2D>(@"GrassTile1");
             TextureBank.MapTiles.tree1 = Content.Load<Texture2D>(@"Tree1");
+            TextureBank.MapTiles.groupOfTrees = Content.Load<Texture2D>(@"GroupTrees");
 
             TextureBank.MapTiles.openWater = Content.Load<Texture2D>(@"OpenWater");
             TextureBank.MapTiles.shoreDown = Content.Load<Texture2D>(@"RiverDown");
@@ -177,6 +180,14 @@ namespace Incursio.Managers
             TextureBank.MapTiles.roadElbowDownRight = Content.Load<Texture2D>(@"RoadVerticalBendRight2");
             TextureBank.MapTiles.roadElbowUpLeft = Content.Load<Texture2D>(@"RoadHorizontalBendUp");
             TextureBank.MapTiles.roadElbowUpRight = Content.Load<Texture2D>(@"RoadVerticalBendRight");
+
+            TextureBank.MapTiles.building1 = Content.Load<Texture2D>(@"Building1");
+            TextureBank.MapTiles.building2 = Content.Load<Texture2D>(@"Building2");
+            TextureBank.MapTiles.building3 = Content.Load<Texture2D>(@"Building3");
+            TextureBank.MapTiles.dock = Content.Load<Texture2D>(@"Dock");
+            TextureBank.MapTiles.rockBig = Content.Load<Texture2D>(@"Rock3");
+            TextureBank.MapTiles.rockMedium = Content.Load<Texture2D>(@"Rock2");
+            TextureBank.MapTiles.rockSmall = Content.Load<Texture2D>(@"Rock1");
         }
 
 

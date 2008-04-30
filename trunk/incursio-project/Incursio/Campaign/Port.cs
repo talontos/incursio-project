@@ -187,7 +187,28 @@ namespace Incursio.Campaign
                             new Tree(3, 60),
                             new Tree(4, 59),
                             new Tree(2, 59),
-                            new Tree(3, 56)
+                            new Tree(3, 56),
+                            new Tree(60, 80, true),
+                            new Tree(36, 89, true),
+                            new Tree(34, 90, true),
+                            new Tree(32, 89, true),
+                            new Tree(31, 91, true),
+                            new Tree(30, 93, true),
+                            new Tree(31, 94, true),
+                            new Tree(62, 88, true),
+                            new Tree(58, 87, true),
+                            new Tree(5, 23, true),
+                            new Tree(7, 22, true),
+                            new Tree(9, 24, true),
+                            new Tree(4, 22, true),
+                            new Tree(2, 21, true),
+                            new Tree(1, 22, true),
+                            new Tree(21, 40, true),
+                            new Tree(19, 42, true),
+                            new Tree(23, 43, true),
+                            new Tree(25, 42, true),
+                            new Tree(24, 44, true),
+                            
 
 
 
@@ -246,6 +267,27 @@ namespace Incursio.Campaign
             for(int i = 0; i < roads.Length; i++){
                 this.addMapEntity(roads[i], roads[i].location.x, roads[i].location.y);
             }
+
+            this.addObjectEntity(new BaseMapEntity(TextureBank.MapTiles.dock, false, 23, 109));
+            this.addObjectEntity(new BaseMapEntity(TextureBank.MapTiles.dock, false, 26, 109));
+
+            this.addObjectEntity(new Building(22, 105, 0));
+            this.addObjectEntity(new Building(25, 105, 1));
+            this.addObjectEntity(new Building(27, 106, 2));
+            this.addObjectEntity(new Building(4, 13, 0));
+            this.addObjectEntity(new Building(56, 8, 1));
+            this.addObjectEntity(new Building(60, 11, 2));
+            this.addObjectEntity(new Building(43, 75, 1));
+
+            this.addObjectEntity(new Rock(50, 85, 0));
+            this.addObjectEntity(new Rock(52, 86, 1));
+            this.addObjectEntity(new Rock(48, 86, 2));
+            this.addObjectEntity(new Rock(5, 102, 0));
+            this.addObjectEntity(new Rock(18, 89, 1));
+            this.addObjectEntity(new Rock(23, 5, 2));
+            this.addObjectEntity(new Rock(59, 13, 1));
+            this.addObjectEntity(new Rock(38, 20, 2));
+
         }
     }
 }

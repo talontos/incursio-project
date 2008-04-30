@@ -231,7 +231,7 @@ namespace Incursio.Classes
             if (entity.location.x >= 0 && entity.location.x < this.width && entity.location.y >= 0 && entity.location.y < this.height)
             {
                 this.objectList.Add(entity);
-                //entity.setOccupancy(ref occupancyGrid);
+                entity.setOccupancy(ref occupancyGrid);
             }
         }
 
