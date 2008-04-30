@@ -132,11 +132,65 @@ namespace Incursio.Classes
           }
           else if (this.currentState == State.UnitState.Dead)
           {
-              //TODO:
-              //Dead stuff
-              spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryDead,
-                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.lightInfantryDead.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.lightInfantryDead.Height * 0.80),
-                      TextureBank.EntityTextures.lightInfantryDead.Width, TextureBank.EntityTextures.lightInfantryDead.Height), colorMask);
+              switch (this.directionState)
+              {
+                  case State.Direction.West:
+                  case State.Direction.North:
+                      if (!this.playedDeath)
+                      {
+                          spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryDeathEast,
+                          new Rectangle(onScreen.x - (int)(25 / 2), onScreen.y - (int)(30 * 0.80), 25, 30),
+                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 25, 30), colorMask);
+
+                          if (frameTimer >= FRAME_LENGTH)
+                          {
+                              if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.lightInfantryDeathEast.Width - 25)
+                              {
+                                  this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 25;
+                              }
+                              else
+                              {
+                                  this.playedDeath = true;
+                              }
+                          }
+                      }
+                      else
+                      {
+                          spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryDeathEast,
+                          new Rectangle(onScreen.x - (int)(25 / 2), onScreen.y - (int)(30 * 0.80), 25, 30),
+                          new Rectangle(75, 0, 25, 30), colorMask);
+                      }
+                      break;
+
+                  case State.Direction.East:
+                  case State.Direction.South:
+                      if (!this.playedDeath)
+                      {
+                          spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryDeathWest,
+                          new Rectangle(onScreen.x - (int)(25 / 2), onScreen.y - (int)(30 * 0.80), 25, 30),
+                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 25, 30), colorMask);
+
+                          if (frameTimer >= FRAME_LENGTH)
+                          {
+                              if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.lightInfantryDeathWest.Width - 25)
+                              {
+                                  this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 25;
+                              }
+                              else
+                              {
+                                  this.playedDeath = true;
+                              }
+                          }
+                      }
+                      else
+                      {
+                          spriteBatch.Draw(TextureBank.EntityTextures.lightInfantryDeathWest,
+                          new Rectangle(onScreen.x - (int)(25 / 2), onScreen.y - (int)(30 * 0.80), 25, 30),
+                          new Rectangle(75, 0, 25, 30), colorMask);
+                      }
+                      break;
+
+              }
 
           }
           else if (this.currentState == State.UnitState.Guarding)

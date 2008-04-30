@@ -317,9 +317,66 @@ namespace Incursio.Classes
           }
           else if (this.currentState == State.UnitState.Dead)
           {
-              spriteBatch.Draw(TextureBank.EntityTextures.archerDead,
-                      new Rectangle(onScreen.x - (TextureBank.EntityTextures.archerDead.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.archerDead.Height * 0.80),
-                      TextureBank.EntityTextures.archerDead.Width, TextureBank.EntityTextures.archerDead.Height), colorMask);
+              switch (this.directionState)
+              {
+                  case State.Direction.West:
+                  case State.Direction.North:
+                      if (!this.playedDeath)
+                      {
+                          spriteBatch.Draw(TextureBank.EntityTextures.archerDeathEast,
+                          new Rectangle(onScreen.x - (int)(33 / 2), onScreen.y - (int)(30 * 0.80), 33, 30),
+                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 33, 30), colorMask);
+
+                          if (frameTimer >= FRAME_LENGTH)
+                          {
+                              if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.archerDeathEast.Width - 33)
+                              {
+                                  this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 33;
+                              }
+                              else
+                              {
+                                  this.playedDeath = true;
+                              }
+                          }
+                      }
+                      else
+                      {
+                          spriteBatch.Draw(TextureBank.EntityTextures.archerDeathEast,
+                          new Rectangle(onScreen.x - (int)(33 / 2), onScreen.y - (int)(30 * 0.80), 33, 30),
+                          new Rectangle(66, 0, 33, 30), colorMask);
+                      }
+                      break;
+
+                  case State.Direction.East:
+                  case State.Direction.South:
+                      if (!this.playedDeath)
+                      {
+                          spriteBatch.Draw(TextureBank.EntityTextures.archerDeathWest,
+                          new Rectangle(onScreen.x - (int)(33 / 2), onScreen.y - (int)(30 * 0.80), 33, 30),
+                          new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 33, 30), colorMask);
+
+                          if (frameTimer >= FRAME_LENGTH)
+                          {
+                              if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.archerDeathWest.Width - 33)
+                              {
+                                  this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 33;
+                              }
+                              else
+                              {
+                                  this.playedDeath = true;
+                              }
+                          }
+                      }
+                      else
+                      {
+                          spriteBatch.Draw(TextureBank.EntityTextures.archerDeathWest,
+                          new Rectangle(onScreen.x - (int)(33 / 2), onScreen.y - (int)(30 * 0.80), 33, 30),
+                          new Rectangle(66, 0, 33, 30), colorMask);
+                      }
+                      break;
+
+              }
+
           }
           else if (this.currentState == State.UnitState.Guarding)
           {

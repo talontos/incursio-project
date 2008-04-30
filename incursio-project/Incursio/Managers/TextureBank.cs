@@ -28,8 +28,8 @@ namespace Incursio.Managers
             public static Texture2D lightInfantryMovingNorth;
             public static Texture2D lightInfantryAttackingEast;
             public static Texture2D lightInfantryAttackingWest;
-            public static Texture2D lightInfantryDeath_East;
-            public static Texture2D lightInfantryDeath_West;
+            public static Texture2D lightInfantryDeathEast;
+            public static Texture2D lightInfantryDeathWest;
 
             public static Texture2D heavyInfantryEast;
             public static Texture2D heavyInfantryWest;
@@ -55,8 +55,8 @@ namespace Incursio.Managers
             public static Texture2D archerMovingNorth;
             public static Texture2D archerAttackingEast;
             public static Texture2D archerAttackingWest;
-            public static Texture2D archerDeath_East;
-            public static Texture2D archerDeath_West;
+            public static Texture2D archerDeathEast;
+            public static Texture2D archerDeathWest;
 
             public static Texture2D arrow;
 
@@ -70,6 +70,8 @@ namespace Incursio.Managers
             public static Texture2D heroMovingNorth;
             public static Texture2D heroAttackingEast;
             public static Texture2D heroAttackingWest;
+            public static Texture2D heroDeathEast;
+            public static Texture2D heroDeathWest;
             /////////////////////////////
 
             //Structure Textures/////////
@@ -112,6 +114,7 @@ namespace Incursio.Managers
             //...
 
             public static Texture2D tree1;
+            public static Texture2D groupOfTrees;
             //...
             public static Texture2D roadHorizontal;
             public static Texture2D roadVertical;
@@ -121,6 +124,14 @@ namespace Incursio.Managers
             public static Texture2D roadElbowDownLeft;
 
             //...
+            public static Texture2D rockSmall;
+            public static Texture2D rockMedium;
+            public static Texture2D rockBig;
+            public static Texture2D dock;
+            public static Texture2D building1;
+            public static Texture2D building2;
+            public static Texture2D building3;
+
         }
 
         public static class InterfaceTextures
