@@ -117,6 +117,8 @@
     <Compile Include="Commands\MoveCommand.cs" />
     <Compile Include="Commands\StopCommand.cs" />
     <Compile Include="Interface\Button.cs" />
+    <Compile Include="Interface\InstructionButton.cs" />
+    <Compile Include="Interface\MainMenuButton.cs" />
     <Compile Include="Interface\SaveMenuButton.cs" />
     <Compile Include="Interface\LoadMenuButton.cs" />
     <Compile Include="Interface\CreditsButton.cs" />

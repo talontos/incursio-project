@@ -35,8 +35,8 @@ namespace Incursio.Managers
                     };
 
                 public static string[] issueMoveOrder =
-                    {"light_order_1.wav",
-                     "light_order_2.wav",
+                    {"HeroAtt.wav",
+                     "HeroAttack2.wav",
                      "light_order_3.wav"
                     };
 

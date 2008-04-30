@@ -90,6 +90,7 @@ namespace Incursio
         MenuSet loadMenu;
         MenuSet saveMenu;
         MenuSet pauseMenu;
+        MenuSet instructionsMenu;
 
         //for game animation
         int frameTimer = 0;
@@ -192,12 +193,12 @@ namespace Incursio
             Button creditsButton = new CreditsButton();
 
             //create menus
-            mainMenu = new MenuSet(600, 500, mapSelectButton, loadButton, creditsButton, exitGameButton);
-            mapSelectionMenu = new MenuSet(600, 500, newGameButton_level1, newGameButton_level2, newGameButton_level3);
+            mainMenu = new MenuSet(600, 500, mapSelectButton, loadButton, new InstructionButton(), creditsButton, exitGameButton);
+            mapSelectionMenu = new MenuSet(600, 500, newGameButton_level1, newGameButton_level2, newGameButton_level3, new MainMenuButton());
             pauseMenu = new MenuSet(600, 500, resumeGameButton, saveButton, exitGameToMenuButton);
-            loadMenu = new MenuSet(600, 500, new LoadButton("Hero1.wtf"), new LoadButton("Hero2.wtf"), new LoadButton("Hero3.wtf"));
-            saveMenu = new MenuSet(600, 500, new SaveButton("Hero1.wtf"), new SaveButton("Hero2.wtf"), new SaveButton("Hero3.wtf"));
-
+            loadMenu = new MenuSet(600, 500, new LoadButton("Hero1.wtf"), new LoadButton("Hero2.wtf"), new LoadButton("Hero3.wtf"), new MainMenuButton());
+            saveMenu = new MenuSet(600, 500, new SaveButton("Hero1.wtf"), new SaveButton("Hero2.wtf"), new SaveButton("Hero3.wtf"), new MainMenuButton());
+            instructionsMenu = new MenuSet(800, 350, new CreditsButton(), new MainMenuButton());
             //once everything is loaded up, go to the main menu
             currentState = State.GameState.Menu;
         }
@@ -361,6 +362,10 @@ namespace Incursio
                     //TODO: perform PausedPlay actions
                     break;
 
+                case (State.GameState.Instructions):
+                    instructionsMenu.Update(cursor);
+                    break;
+
                 case (State.GameState.None): 
                     break;
 
@@ -414,7 +419,7 @@ namespace Incursio
                 ////////////////////////////////////////////////
 
                 case (State.GameState.Menu):
-                    spriteBatch.DrawString(font, "INCURSIO", FontPos, Color.White, 0, font.MeasureString("INCURSIO") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    //spriteBatch.DrawString(font, "INCURSIO", FontPos, Color.White, 0, font.MeasureString("INCURSIO") / 2, 1.0f, SpriteEffects.None, 0.5f);
                     graphics.GraphicsDevice.Clear(Color.SteelBlue);
                     spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground, 
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
@@ -424,7 +429,7 @@ namespace Incursio
                     break;
 
                 case (State.GameState.LoadMenu):
-                    spriteBatch.DrawString(font, "INCURSIO", FontPos, Color.White, 0, font.MeasureString("INCURSIO") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    //spriteBatch.DrawString(font, "INCURSIO", FontPos, Color.White, 0, font.MeasureString("INCURSIO") / 2, 1.0f, SpriteEffects.None, 0.5f);
                     graphics.GraphicsDevice.Clear(Color.SteelBlue);
                     spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
@@ -434,7 +439,7 @@ namespace Incursio
                     break;
 
                 case (State.GameState.SaveMenu):
-                    spriteBatch.DrawString(font, "INCURSIO", FontPos, Color.White, 0, font.MeasureString("INCURSIO") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    //spriteBatch.DrawString(font, "INCURSIO", FontPos, Color.White, 0, font.MeasureString("INCURSIO") / 2, 1.0f, SpriteEffects.None, 0.5f);
                     graphics.GraphicsDevice.Clear(Color.SteelBlue);
                     spriteBatch.Draw(TextureBank.InterfaceTextures.pauseMenuBackground,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
@@ -447,7 +452,7 @@ namespace Incursio
                     spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
 
-                    spriteBatch.DrawString(font, "Game State: MAP SELECTION", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: MAP SELECTION") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    //spriteBatch.DrawString(font, "Game State: MAP SELECTION", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: MAP SELECTION") / 2, 1.0f, SpriteEffects.None, 0.5f);
                     //newGameButton_level1.Draw(spriteBatch);
                     //exitGameToMenuButton.Draw(spriteBatch);
                     mapSelectionMenu.Draw(spriteBatch);
@@ -455,12 +460,12 @@ namespace Incursio
                     break;
 
                 case (State.GameState.Credits):
-                    spriteBatch.DrawString(font, "Game State: CREDITS", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: CREDITS") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    //spriteBatch.DrawString(font, "Game State: CREDITS", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: CREDITS") / 2, 1.0f, SpriteEffects.None, 0.5f);
                     //TODO: perform Credits actions
                     break;
 
                 case (State.GameState.Defeat):
-                    spriteBatch.DrawString(font, "Game State: Massive Failure! " + stateString, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: Massive Failure! " + stateString) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    //spriteBatch.DrawString(font, "Game State: Massive Failure! " + stateString, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: Massive Failure! " + stateString) / 2, 1.0f, SpriteEffects.None, 0.5f);
 
                     spriteBatch.Draw(TextureBank.InterfaceTextures.defeatMenuBackground,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
@@ -498,6 +503,13 @@ namespace Incursio
                     pauseMenu.Draw(spriteBatch);
                  
                     //TODO: perform PausedPlay actions
+                    break;
+
+                case (State.GameState.Instructions):
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.instructions,
+                       new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
+
+                    instructionsMenu.Draw(spriteBatch);
                     break;
 
                 case (State.GameState.None):

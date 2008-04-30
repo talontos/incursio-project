@@ -19,6 +19,8 @@ namespace Incursio
 
             SaveMenu,
 
+            Instructions,
+
             InPlay, //Game has started
 
             PausedPlay, //Game ins paused

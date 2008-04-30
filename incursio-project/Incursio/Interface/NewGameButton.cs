@@ -17,6 +17,20 @@ namespace Incursio.Interface
         ){
 
             this.level = level;
+            switch(this.level){
+                case State.CampaignLevel.ONE:
+                    this.passive = TextureBank.InterfaceTextures.portMap_pressed;
+                    this.pressed = TextureBank.InterfaceTextures.portMap_not_pressed;
+                    break;
+                case State.CampaignLevel.TWO:
+                    this.passive = TextureBank.InterfaceTextures.inlandMap_pressed;
+                    this.pressed = TextureBank.InterfaceTextures.inlandMap_not_pressed;
+                    break;
+                case State.CampaignLevel.THREE:
+                    this.passive = TextureBank.InterfaceTextures.capitalMap_pressed;
+                    this.pressed = TextureBank.InterfaceTextures.capitalMap_not_pressed;
+                    break;
+            }
 
         }
 
