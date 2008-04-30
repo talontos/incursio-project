@@ -316,22 +316,33 @@ namespace Incursio.Classes
         }
 
         public virtual void playSelectionSound(){
+            if (owner == State.PlayerId.COMPUTER)
+                return;
+        }
+
+        public virtual void playOrderMoveSound()
+        {
+            if (owner == State.PlayerId.COMPUTER)
+                return;
 
         }
 
-        public virtual void playOrderMoveSound(){
+        public virtual void playOrderAttackSound()
+        {
+            if (owner == State.PlayerId.COMPUTER)
+                return;
 
         }
 
-        public virtual void playOrderAttackSound(){
+        public virtual void playDeathSound()
+        {
 
         }
 
-        public virtual void playDeathSound(){
-
-        }
-
-        public virtual void playEnterBattlefieldSound(){
+        public virtual void playEnterBattlefieldSound()
+        {
+            if (owner == State.PlayerId.COMPUTER)
+                return;
 
         }
 

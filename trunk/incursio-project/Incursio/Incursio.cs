@@ -54,7 +54,15 @@ namespace Incursio
         private Hero hero;
 
         //game information
-        public State.GameState currentState = State.GameState.Initializing;
+        public State.GameState currentState
+        {
+            get { return this.state; }
+            set { 
+                this.state = value;
+                SoundManager.getInstance().StopSound();
+            }
+        }
+        private State.GameState state = State.GameState.Initializing;
 
         private GameResult gameResult = new GameResult();
 
@@ -292,6 +300,7 @@ namespace Incursio
 
                     MessageManager.getInstance().update();
 
+                    //SoundManager.getInstance().PlaySound("../../../Content/Audio/Film.mp3", true);
                     //FileManager.getInstance().saveCurrentGame("HeroSave.zomgwtflolbbq");
                     //FileManager.getInstance().loadGame("HeroSave.zomgwtflolbbq");
 

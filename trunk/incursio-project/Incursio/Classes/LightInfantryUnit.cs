@@ -300,27 +300,31 @@ namespace Incursio.Classes
 
       public override void playOrderAttackSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.LightInfantryVoice.issueAttackOrder[0], false);
+         if (owner != State.PlayerId.COMPUTER)
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.LightInfantryVoice.issueAttackOrder), false);
       }
 
       public override void playOrderMoveSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.LightInfantryVoice.issueMoveOrder[0], false);
+         if (owner != State.PlayerId.COMPUTER)
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.LightInfantryVoice.issueMoveOrder), false);
       }
 
       public override void playDeathSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.LightInfantryVoice.death[0], false);
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.LightInfantryVoice.death), false);
       }
 
       public override void playEnterBattlefieldSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.LightInfantryVoice.enterBattlefield[0], false);
+         if (owner != State.PlayerId.COMPUTER)
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.LightInfantryVoice.enterBattlefield), false);
       }
 
       public override void playSelectionSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.LightInfantryVoice.selection[0], false);
+         if (owner != State.PlayerId.COMPUTER)
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.LightInfantryVoice.selection), false);
       }
     }
 }

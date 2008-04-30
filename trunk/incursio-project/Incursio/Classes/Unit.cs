@@ -22,6 +22,7 @@ namespace Incursio.Classes
         protected int attackRange = 0;
         protected int deadTimer = 0;
         public bool playedDeath = false;
+        public bool playedDeathSound = false;
         protected State.UnitState currentState = State.UnitState.Idle;
         protected State.Direction directionState = State.Direction.South;
         protected bool isClose = false;
@@ -438,6 +439,12 @@ namespace Incursio.Classes
             currentState = State.UnitState.Dead;
             if (orders.Count != 0)
                 orders = new List<BaseCommand>();
+
+            if (!playedDeathSound)
+            {
+                this.playDeathSound();
+                playedDeathSound = true;
+            }
 
             //TODO: How to handle death of entities?
             //  It'd be a waste of memory to just leave them in the entityBank,

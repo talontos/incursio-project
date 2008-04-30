@@ -10,6 +10,7 @@ namespace Incursio.Managers
         public static class AttackSounds{
             public static string SwordAttack = "steelsword.wav";
             public static string ArrowAttack = "bow release.wav";
+            public static string Explosion = "explosion.wav";
         }
 
         public static class VoiceSounds{
@@ -129,7 +130,8 @@ namespace Incursio.Managers
             }
         }
 
-        public static class AmbientSounds{
+        public static class AmbientSounds
+        {
 
         }
 
