@@ -298,6 +298,8 @@ namespace Incursio.Classes
                             this.location
                         )
                     );
+
+                    //temp.playEnterBattlefieldSound();
                 }
                 else
                 {

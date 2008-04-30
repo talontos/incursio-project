@@ -103,13 +103,20 @@ namespace Incursio.Managers
         public void addToSelectedUnits(BaseGameEntity e){
             if (selectedUnits.Count < 12){
                 selectedUnits.Add(e);
+                e.playSelectionSound();
             }
         }
 
         public void addToSelectedUnits(List<BaseGameEntity> es){
             for(int i = 0; i < 12 && i < es.Count; i++){
                 if (selectedUnits.Count < 12)
+                {
                     selectedUnits.Add(es[i]);
+                    if (i == 0)
+                    {
+                        es[i].playSelectionSound();
+                    }
+                }
                 else break;
             }
         }
@@ -200,7 +207,7 @@ namespace Incursio.Managers
                                     //shift not pressed
 
                                     selectedUnits = new List<BaseGameEntity>();
-                                    selectedUnits.Add(e);
+                                    addToSelectedUnits(e);
                                     
                                     //numUnitsSelected = 1;
                                 }
@@ -533,6 +540,11 @@ namespace Incursio.Managers
                     else{
                         e.issueSingleOrder(command);
                     }
+
+                    if (command is MoveCommand)
+                        e.playOrderMoveSound();
+                    else if (command is AttackCommand || command is AttackMoveCommand)
+                        e.playOrderAttackSound();
                 }
             });
         }
@@ -646,17 +658,17 @@ namespace Incursio.Managers
                     groups[groupNum].RemoveAt(i);
             }
 
-            selectedUnits.AddRange(groups[groupNum]);
+            addToSelectedUnits(groups[groupNum]);
         }
 
         public void selectPlayerHero(){
             this.selectedUnits = new List<BaseGameEntity>();
-            this.selectedUnits.Add(this.getLivePlayerHeros(State.PlayerId.HUMAN)[0] as BaseGameEntity);
+            this.addToSelectedUnits(this.getLivePlayerHeros(State.PlayerId.HUMAN)[0] as BaseGameEntity);
         }
 
         public void selectPlayerCamp(){
             this.selectedUnits = new List<BaseGameEntity>();
-            this.selectedUnits.Add(this.getLivePlayerCamps(State.PlayerId.HUMAN)[0] as BaseGameEntity);
+            this.addToSelectedUnits(this.getLivePlayerCamps(State.PlayerId.HUMAN)[0] as BaseGameEntity);
         }
 
         public Color getColorMask(State.PlayerId player){

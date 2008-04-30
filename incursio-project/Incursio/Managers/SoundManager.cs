@@ -91,7 +91,7 @@ namespace Incursio.Managers
     
         //Stops the sound
         //IrrKlangs only stop method.  Will cause all sounds currently being played by the engine to stop
-        public void StopSound(String file)
+        public void StopSound()
         {
             soundEngine.StopAllSounds();
         }

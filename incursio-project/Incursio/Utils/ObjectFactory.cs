@@ -81,6 +81,8 @@ namespace Incursio.Utils
                 Incursio.getInstance().setHero(product as Hero);
             }
 
+            product.playEnterBattlefieldSound();
+
             return product;
 
         }

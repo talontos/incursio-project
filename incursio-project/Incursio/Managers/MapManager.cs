@@ -42,11 +42,11 @@ namespace Incursio.Managers
                     currentMap = new CreditsMap();
                     break;
                 case State.CampaignLevel.ONE:   
-                    currentMap = new Map1();  
+                    currentMap = new Port();  
                     break;
 
                 case State.CampaignLevel.TWO:   
-                    currentMap = new Port();  
+                    currentMap = new Map1();  
                     break;
 
                 case State.CampaignLevel.THREE: 

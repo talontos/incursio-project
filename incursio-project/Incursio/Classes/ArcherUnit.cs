@@ -486,27 +486,32 @@ namespace Incursio.Classes
 
       public override void playOrderAttackSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.ArcherVoice.issueAttackOrder[0], false);
+         if (owner != State.PlayerId.COMPUTER)
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.ArcherVoice.issueAttackOrder), false);
       }
 
       public override void playOrderMoveSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.ArcherVoice.issueMoveOrder[0], false);
+         if (owner != State.PlayerId.COMPUTER)
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.ArcherVoice.issueMoveOrder), false);
       }
 
       public override void playDeathSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.ArcherVoice.death[0], false);
+          
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.ArcherVoice.death), false);
       }
 
       public override void playEnterBattlefieldSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.ArcherVoice.enterBattlefield[0], false);
+          if (owner != State.PlayerId.COMPUTER)
+            SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.ArcherVoice.enterBattlefield), false);
       }
 
       public override void playSelectionSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.ArcherVoice.selection[0], false);
+         if (owner != State.PlayerId.COMPUTER)
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.ArcherVoice.selection), false);
       }
     }
 }

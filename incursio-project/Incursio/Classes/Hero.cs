@@ -454,27 +454,31 @@ namespace Incursio.Classes
 
       public override void playOrderAttackSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.HeroVoice.issueAttackOrder[0], false);
+         if (owner != State.PlayerId.COMPUTER)
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.HeroVoice.issueAttackOrder), false);
       }
 
       public override void playOrderMoveSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.HeroVoice.issueMoveOrder[0], false);
+         if (owner != State.PlayerId.COMPUTER)
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.HeroVoice.issueMoveOrder), false);
       }
 
       public override void playDeathSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.HeroVoice.death[0], false);
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.HeroVoice.death), false);
       }
 
       public override void playEnterBattlefieldSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.HeroVoice.enterBattlefield[0], false);
+         if (owner != State.PlayerId.COMPUTER)
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.HeroVoice.enterBattlefield), false);
       }
 
       public override void playSelectionSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.VoiceSounds.HeroVoice.selection[0], false);
+         if (owner != State.PlayerId.COMPUTER)
+          SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.HeroVoice.selection), false);
       }
     }
 }
