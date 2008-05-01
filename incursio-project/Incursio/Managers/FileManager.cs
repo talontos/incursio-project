@@ -14,7 +14,7 @@ namespace Incursio.Managers
 
         private FileManager()
         {
-
+            
         }
 
         public static FileManager getInstance(){
@@ -24,10 +24,48 @@ namespace Incursio.Managers
             return instance;
         }
 
-        public void loadEntityConfiguration()
+        public void loadGameConfiguration()
         {
-            //Load entity configuration here
-            //Not implemented in this version of the game
+            //file is game.cfg.wtf
+
+            try
+            {
+                //open up a reader
+                TextReader tr = new StreamReader("game.cfg.wtf");
+
+                //read in whole file as string
+                string raw = tr.ReadToEnd();
+                string[] rawSplit = raw.Split('\n');
+                string[,] configuration = new string[rawSplit.Length, 2];
+                string[] item;
+
+                for(int i = 0; i < rawSplit.Length; i++){
+                    item = rawSplit[i].Split(':');
+                    configuration[i, 0] = item[0];
+                    configuration[i, 1] = item[1];
+                }
+
+                //now, read in the settings
+                for(int i = 0; i < configuration.Length/2; i++){
+                    try{
+                        if(configuration[i, 0].Equals("playBackgroundMusic")){
+                                SoundManager.getInstance().PLAY_BG_MUSIC = Boolean.Parse(configuration[i, 1]);
+                        }
+                    }
+                    catch(Exception ex){
+
+                    }
+                }
+
+                //close the reader
+                tr.Close();
+            }
+            catch (FileLoadException e)
+            {
+                Console.WriteLine("File Load Exception Found");
+                Console.WriteLine(e);
+            }
+            
         }
 
         public void saveCurrentGame(String fileName)

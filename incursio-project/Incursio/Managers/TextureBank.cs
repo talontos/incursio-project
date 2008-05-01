@@ -160,6 +160,13 @@ namespace Incursio.Managers
             public static Texture2D exitGameButton_pressed;
             public static Texture2D exitGameButton_not_pressed;
 
+            public static Texture2D file1_pressed;
+            public static Texture2D file1_not_pressed;
+            public static Texture2D file2_pressed;
+            public static Texture2D file2_not_pressed;
+            public static Texture2D file3_pressed;
+            public static Texture2D file3_not_pressed;
+
             public static Texture2D creditsButton_pressed;
             public static Texture2D creditsButton_not_pressed;
 

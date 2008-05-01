@@ -43,6 +43,7 @@ namespace Incursio.Interface
                 this.setFocus(false);
                 EntityManager.getInstance().reinitializeInstance();
                 PlayerManager.getInstance().reinitializeInstance();
+                MessageManager.getInstance().reinitializeInstance();
                 MapManager.getInstance().setCurrentLevel(this.level);
                 MapManager.getInstance().initializeCurrentMap();
                 Incursio.getInstance().currentState = State.GameState.InPlay;
