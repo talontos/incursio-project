@@ -118,6 +118,10 @@
     <Compile Include="Commands\MoveCommand.cs" />
     <Compile Include="Commands\StopCommand.cs" />
     <Compile Include="Interface\Button.cs" />
+    <Compile Include="Interface\BuildLightInfantryButton.cs" />
+    <Compile Include="Interface\BuildHeavyInfantryButton.cs" />
+    <Compile Include="Interface\BuildArcherButton.cs" />
+    <Compile Include="Interface\BuildTowerButton.cs" />
     <Compile Include="Interface\InstructionButton.cs" />
     <Compile Include="Interface\MainMenuButton.cs" />
     <Compile Include="Interface\SaveMenuButton.cs" />
@@ -147,6 +151,7 @@
     <Compile Include="Utils\DebugUtil.cs" />
     <Compile Include="Utils\DefenseReport.cs" />
     <Compile Include="Utils\EntityBuildOrder.cs" />
+    <Compile Include="Utils\EntityConfiguration.cs" />
     <Compile Include="Utils\GameEvent.cs" />
     <Compile Include="Utils\GameResult.cs" />
     <Compile Include="Utils\KeyPoint.cs" />

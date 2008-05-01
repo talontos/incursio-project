@@ -43,10 +43,11 @@ namespace Incursio.Classes
         {
             barX = 0;
             numUnits = 0;
-            lightInfantryButton = new Button(new Vector2(775, 605), TextureBank.InterfaceTextures.lightInfantryIcon, TextureBank.InterfaceTextures.lightInfantryIcon);
-            archerButton = new Button(new Vector2(850, 605), TextureBank.InterfaceTextures.archerIcon, TextureBank.InterfaceTextures.archerIcon);
-            towerButton = new Button(new Vector2(775, 650), TextureBank.InterfaceTextures.guardTowerIcon, TextureBank.InterfaceTextures.guardTowerIcon);
-            heavyInfantryButton = new Button(new Vector2(925, 605), TextureBank.InterfaceTextures.heavyInfantryIcon, TextureBank.InterfaceTextures.heavyInfantryIcon);
+
+            lightInfantryButton = new BuildLightInfantryButton();
+            archerButton = new BuildArcherButton();
+            towerButton = new BuildTowerButton();
+            heavyInfantryButton = new BuildHeavyInfantryButton();
         }
 
         public List<BaseGameEntity> update(Cursor cursor)
@@ -64,29 +65,6 @@ namespace Incursio.Classes
                     archerButton.Update(cursor);
                     towerButton.Update(cursor);
                     heavyInfantryButton.Update(cursor);
-
-                    //See if any buttons are being pressed
-                    if (!lightInfantryButton.getPressed() && lightInfantryButton.getFocus())
-                    {
-                        lightInfantryButton.setFocus(false);
-                        EntityManager.getInstance().tryToBuild(new LightInfantryUnit());
-                    }
-                    else if (!heavyInfantryButton.getPressed() && heavyInfantryButton.getFocus())
-                    {
-                        heavyInfantryButton.setFocus(false);
-                        EntityManager.getInstance().tryToBuild(new HeavyInfantryUnit());
-                    }
-                    else if (!archerButton.getPressed() && archerButton.getFocus())
-                    {
-                        archerButton.setFocus(false);
-                        EntityManager.getInstance().tryToBuild(new ArcherUnit());
-                    }
-                    else if (!towerButton.getPressed() && towerButton.getFocus())
-                    {
-                        towerButton.setFocus(false);
-                        InputManager.getInstance().positioningTower = true;
-                        TextureBank.InterfaceTextures.cursorEvent = TextureBank.EntityTextures.guardTowerTexturePlayer;
-                    }
                 }
             }
 

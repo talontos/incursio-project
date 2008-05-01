@@ -20,11 +20,11 @@ namespace Incursio.Classes
         public const int ITEM_UPGRADE_BUILD_TIME = 90;
         public const int HEAL_TICK = 4;
 
-        public const int COST_LIGHT_INFANTRY = 45;
-        public const int COST_HEAVY_INFANTRY = 90;
-        public const int COST_ARCHER = 60;
-        public const int COST_GUARD_TOWER = 200;
-        public const int COST_UPGRADE = 200;
+        public int COST_LIGHT_INFANTRY = EntityConfiguration.EntityPrices.COST_LIGHT_INFANTRY;
+        public int COST_HEAVY_INFANTRY = EntityConfiguration.EntityPrices.COST_HEAVY_INFANTRY;
+        public int COST_ARCHER = EntityConfiguration.EntityPrices.COST_ARCHER;
+        public int COST_GUARD_TOWER = EntityConfiguration.EntityPrices.COST_GUARD_TOWER;
+        public int COST_UPGRADE = EntityConfiguration.EntityPrices.COST_UPGRADE;
 
         int newUnitPlacementX = 10;
         int newUnitPlacementY = 120;    //little bit of hard coding, but can't really help it here 
@@ -584,7 +584,7 @@ namespace Incursio.Classes
                     }
                 }
 
-                spriteBatch.DrawString(Incursio.getInstance().getFont(), orderList, new Vector2(0, 0), Color.White);
+                spriteBatch.DrawString(Incursio.getInstance().getFont_Courier(), orderList, new Vector2(0, 0), Color.White);
             }
         }
     }

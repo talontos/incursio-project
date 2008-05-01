@@ -5,6 +5,7 @@ using System.IO;
 
 using Incursio.Classes;
 using Incursio.Managers;
+using Incursio.Utils;
 
 namespace Incursio.Managers
 {
@@ -48,9 +49,36 @@ namespace Incursio.Managers
                 //now, read in the settings
                 for(int i = 0; i < configuration.Length/2; i++){
                     try{
+                        //SOUND////////
                         if(configuration[i, 0].Equals("playBackgroundMusic")){
-                                SoundManager.getInstance().PLAY_BG_MUSIC = Boolean.Parse(configuration[i, 1]);
+                            SoundManager.getInstance().PLAY_BG_MUSIC = Boolean.Parse(configuration[i, 1]);
                         }
+
+                        //ENTITY COST///
+                        else if(configuration[i, 0].Equals("archerCost")){
+                            EntityConfiguration.EntityPrices.COST_ARCHER = int.Parse(configuration[i, 1]);
+                        }
+                        else if (configuration[i, 0].Equals("lightInfantryCost"))
+                        {
+                            EntityConfiguration.EntityPrices.COST_LIGHT_INFANTRY = int.Parse(configuration[i, 1]);
+                        }
+                        else if (configuration[i, 0].Equals("heavyInfantryCost"))
+                        {
+                            EntityConfiguration.EntityPrices.COST_HEAVY_INFANTRY = int.Parse(configuration[i, 1]);
+                        }
+                        else if (configuration[i, 0].Equals("towerCost"))
+                        {
+                            EntityConfiguration.EntityPrices.COST_GUARD_TOWER = int.Parse(configuration[i, 1]);
+                        }
+
+                        //ENTITY STATS//
+
+                        //ARCHER//
+                        else if(configuration[i, 0].Equals("archerStats"))
+                        {
+                            //archerStats:<armor=1 damage=20 moveSpeed=150 attackSpeed=3 sightRange=12 attackRange=10 maxHealth=100 health=100>
+                        }
+
                     }
                     catch(Exception ex){
 

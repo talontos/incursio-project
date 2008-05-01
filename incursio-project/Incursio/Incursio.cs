@@ -349,29 +349,27 @@ namespace Incursio
                     break;
 
                 case (State.GameState.Defeat):
-                    //TODO: perform Defeat actions
-                    //mapSelectButton.Update(cursor);
-                    //exitGameButton.Update(cursor);
                     mainMenu.Update(cursor);
-                    //SoundManager.getInstance().StopSound();
+                    try{
+                        this.hero = EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0];
+                    }
+                    catch(Exception e){}
+
                     break;
 
                 case (State.GameState.Victory):
-                    //TODO: perform Victory actions
-                    //mapSelectButton.Update(cursor);
-                    //exitGameButton.Update(cursor);
                     mainMenu.Update(cursor);
-                    //SoundManager.getInstance().StopSound();
+                    try
+                    {
+                        this.hero = EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0];
+                    }
+                    catch (Exception e) { }
+
                     break;
 
                 case (State.GameState.PausedPlay):
-
-                    //InputManager.getInstance().Update(gameTime);
-
-                    //exitGameToMenuButton.Update(cursor);
-                    //resumeGameButton.Update(cursor);
                     pauseMenu.Update(cursor);
-                    //TODO: perform PausedPlay actions
+                    
                     break;
 
                 case (State.GameState.Instructions):
@@ -737,8 +735,12 @@ namespace Incursio
             Exit();
         }
 
-        public SpriteFont getFont(){
+        public SpriteFont getFont_Courier(){
             return this.font;
+        }
+
+        public SpriteFont getFont_Arial(){
+            return Content.Load<SpriteFont>(@"Arial");
         }
     }
 }
