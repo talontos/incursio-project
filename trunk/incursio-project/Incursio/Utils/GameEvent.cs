@@ -10,15 +10,15 @@ namespace Incursio.Utils
     public class GameEvent
     {
         public State.EventType type;
-        //public SOUND? audibleMessage;
+        public String audibleMessage;
         public String stringMessage;
         public Coordinate location;
         public int displayTick = 0;
         public BaseGameEntity entity;
 
-        public GameEvent(State.EventType type, BaseGameEntity entity, /*SOUND,*/ String stringMsg, Coordinate loc){
+        public GameEvent(State.EventType type, BaseGameEntity entity, String sound, String stringMsg, Coordinate loc){
             this.type = type;
-            //this.audibleMessage = sound?;
+            this.audibleMessage = sound;
             this.stringMessage = stringMsg;
             this.location = loc;
             this.entity = entity;

@@ -466,6 +466,7 @@ namespace Incursio.Managers
             if (entitiesToCommand == null)
                 entitiesToCommand = selectedUnits;
 
+            int i = 0;
             entitiesToCommand.ForEach(delegate(BaseGameEntity e)
             {
                 if(!e.isDead()){
@@ -542,12 +543,17 @@ namespace Incursio.Managers
                             e.issueSingleOrder(command);
                         }
 
-                        if (command is MoveCommand)
-                            e.playOrderMoveSound();
-                        else if (command is AttackCommand || command is AttackMoveCommand)
-                            e.playOrderAttackSound();
+                        if (i == 0)
+                        {
+                            if (command is MoveCommand)
+                                e.playOrderMoveSound();
+                            else if (command is AttackCommand || command is AttackMoveCommand)
+                                e.playOrderAttackSound();
+                        }
                     }
                 }
+
+                i++;
             });
         }
 

@@ -99,6 +99,7 @@ namespace Incursio
         MenuSet saveMenu;
         MenuSet pauseMenu;
         MenuSet instructionsMenu;
+        MenuSet creditsMenu;
 
         //for game animation
         int frameTimer = 0;
@@ -210,6 +211,7 @@ namespace Incursio
             loadMenu = new MenuSet(600, 500, new LoadButton("Hero1.wtf", 1), new LoadButton("Hero2.wtf", 2), new LoadButton("Hero3.wtf", 3), new MainMenuButton());
             saveMenu = new MenuSet(600, 500, new SaveButton("Hero1.wtf", 1), new SaveButton("Hero2.wtf", 2), new SaveButton("Hero3.wtf", 3), new MainMenuButton());
             instructionsMenu = new MenuSet(800, 400, new CreditsButton(), new MainMenuButton());
+            creditsMenu = new MenuSet(0, 0, new MainMenuButton());
             //once everything is loaded up, go to the main menu
             currentState = State.GameState.Menu;
         }
@@ -346,6 +348,7 @@ namespace Incursio
 
                 case (State.GameState.Credits):
                     //TODO: perform Credits actions
+                    creditsMenu.Update(cursor);
                     break;
 
                 case (State.GameState.Defeat):
@@ -472,6 +475,8 @@ namespace Incursio
                 case (State.GameState.Credits):
                     //spriteBatch.DrawString(font, "Game State: CREDITS", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: CREDITS") / 2, 1.0f, SpriteEffects.None, 0.5f);
                     //TODO: perform Credits actions
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.creditsBackground, new Rectangle(0, 0, 1024, 768), Color.White);
+                    creditsMenu.Draw(spriteBatch);
                     break;
 
                 case (State.GameState.Defeat):

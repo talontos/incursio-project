@@ -155,7 +155,7 @@ namespace Incursio.Managers
             public static string main_menu = "Title.mp3";
             public static string credits = "Thunderhorse.mp3";
             public static string inPlay = "Film.mp3";
-            public static string victory = "Thunder.mp3";
+            public static string victory = "Thunderhorse.mp3";
             public static string defeat = "SadSong.mp3";
         }
 
@@ -163,7 +163,7 @@ namespace Incursio.Managers
         {
             public static String campDestroyed = "CampDestroyed.wav";
             public static String baseAttack = "BaseUnderAtt.wav";
-            public static String cantBuild = "CampDestroyed.wav";
+            public static String cantBuild = "CannotBuildThere.wav";
             public static String towerBuilt = "ConComplete.wav";
             public static String heroFallen = "HeroFallen.wav";
             public static String heroBattle = "HeroinBat.wav";
@@ -172,7 +172,7 @@ namespace Incursio.Managers
             public static String heroAtt = "HeroUnderAtt.wav";
             public static String townCapped = "TownCap.wav";
             public static String unitAtt = "Uattk.wav";
-            public static String unitReady = "UnitReady.wav";
+            //public static String unitReady = "UnitReady.wav";
         }
 
     }

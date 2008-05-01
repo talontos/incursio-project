@@ -179,6 +179,8 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.pauseMenuBackground = Content.Load<Texture2D>(@"Pause_Screen");
             TextureBank.InterfaceTextures.victoryMenuBackground = Content.Load<Texture2D>(@"win");
             TextureBank.InterfaceTextures.defeatMenuBackground = Content.Load<Texture2D>(@"Defeat");
+            TextureBank.InterfaceTextures.creditsBackground = Content.Load<Texture2D>(@"Credits");
+            
             //Load terrain textures
             TextureBank.MapTiles.grass1 = Content.Load<Texture2D>(@"GrassTile1");
             TextureBank.MapTiles.tree1 = Content.Load<Texture2D>(@"Tree1");

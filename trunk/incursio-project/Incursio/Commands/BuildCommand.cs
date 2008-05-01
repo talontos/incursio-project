@@ -60,6 +60,7 @@ namespace Incursio.Commands
                     PlayerManager.getInstance().notifyPlayer(subject.owner,
                         new GameEvent(
                             State.EventType.CANT_MOVE_THERE, subject,
+                            SoundCollection.MessageSounds.cantBuild,
                             "Cannot Build There",
                             buildOrder.location
                         )

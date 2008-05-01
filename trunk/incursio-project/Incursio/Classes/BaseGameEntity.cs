@@ -137,7 +137,7 @@ namespace Incursio.Classes
 
             this.health -= damageTaken;
 
-            MessageManager.getInstance().addMessage(new GameEvent(State.EventType.TAKING_DAMAGE, this, Convert.ToString(damageTaken), this.location));
+            MessageManager.getInstance().addMessage(new GameEvent(State.EventType.TAKING_DAMAGE, this, "", Convert.ToString(damageTaken), this.location));
 
             if (this.health < 0)
             {
@@ -232,14 +232,14 @@ namespace Incursio.Classes
         {
             PlayerManager.getInstance().notifyPlayer(
                 this.owner,
-                new GameEvent(State.EventType.UNDER_ATTACK, this,/*SOUND,*/ "We're Under Attack!", this.location)
+                new GameEvent(State.EventType.UNDER_ATTACK, this,"", "We're Under Attack!", this.location)
             );
         }
 
         public virtual void heal(int boost){
             if(health < maxHealth){
                 this.health += boost; 
-                MessageManager.getInstance().addMessage(new GameEvent(State.EventType.HEALING, this, Convert.ToString(boost), this.location));
+                MessageManager.getInstance().addMessage(new GameEvent(State.EventType.HEALING, this, "", Convert.ToString(boost), this.location));
             }
 
             if (health > maxHealth)

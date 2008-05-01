@@ -52,6 +52,7 @@ namespace Incursio.Managers
             if (msg != null)
             {
                 messages.Add(msg);
+                SoundManager.getInstance().PlaySound(msg.audibleMessage, false);
             }
         }
 

@@ -292,7 +292,7 @@ namespace Incursio.Classes
         protected override void notifyUnderAttack(){
             PlayerManager.getInstance().notifyPlayer(
                 this.owner,
-                new GameEvent(State.EventType.UNDER_ATTACK, this, /*SOUND,*/ "Unit under attack", this.location)
+                new GameEvent(State.EventType.UNDER_ATTACK, this, SoundCollection.MessageSounds.unitAtt, "Unit under attack", this.location)
             );
         }
 
