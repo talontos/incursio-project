@@ -46,7 +46,7 @@ namespace Incursio.Managers
                     break;
 
                 case State.CampaignLevel.TWO:   
-                    currentMap = new Map1();  
+                    currentMap = new Inland();  
                     break;
 
                 case State.CampaignLevel.THREE: 
