@@ -29,6 +29,18 @@ namespace Incursio.Classes.Terrain
             {
                 this.texture = TextureBank.MapTiles.building3;
             }
+            else if (type == 3)
+            {
+                this.texture = TextureBank.MapTiles.buildingGroup;
+            }
+            else if (type == 4)
+            {
+                this.texture = TextureBank.MapTiles.buildingGroupEndRight;
+            }
+            else if (type == 5)
+            {
+                this.texture = TextureBank.MapTiles.buildingGroupEndLeft;
+            }
         }
 
         public override void setOccupancy(ref byte[,] grid)
@@ -88,6 +100,186 @@ namespace Incursio.Classes.Terrain
                 if (location.x + 1 < grid.GetUpperBound(0) && location.y - 1 > 0)
                 {
                     grid[location.x + 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+            }
+            else if (type == 3)
+            {
+                grid[location.x, location.y] = (byte)(passable ? 1 : 0);
+
+                if (location.y + 1 > 0 && location.y - 1 < grid.GetUpperBound(1))
+                {
+                    grid[location.x, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+
+                /*if(location.x + 2 < grid.GetUpperBound(0))
+                {
+                    grid[location.x + 2, location.y] = (byte)(passable ? 1 : 0);
+                    grid[location.x + 2, location.y - 1] = (byte)(passable ? 1 : 0);
+
+                    grid[location.x + 1, location.y] = (byte)(passable ? 1 : 0);
+                    grid[location.x + 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }*/
+                if (location.x + 1 < grid.GetUpperBound(0))
+                {
+                    grid[location.x + 1, location.y] = (byte)(passable ? 1 : 0);
+                    grid[location.x + 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+
+                if (location.x - 1 > 0)
+                {
+                    grid[location.x - 1, location.y] = (byte)(passable ? 1 : 0);
+                }
+
+                if (location.x - 1 > 0 && location.y - 2 > 0)
+                {
+                    grid[location.x - 1, location.y - 2] = (byte)(passable ? 1 : 0);
+                    grid[location.x - 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+                else if (location.x - 1 > 0 && location.y - 1 > 0)
+                {
+                    grid[location.x - 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+
+                if (location.y - 3 > 0)
+                {
+                    grid[location.x, location.y - 3] = (byte)(passable ? 1 : 0);
+                    grid[location.x, location.y - 2] = (byte)(passable ? 1 : 0);
+
+                    if (location.x + 1 < grid.GetUpperBound(0))
+                    {
+                        grid[location.x + 1, location.y - 2] = (byte)(passable ? 1 : 0);
+                    }
+
+                    grid[location.x, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+                else if (location.y - 2 > 0)
+                {
+                    grid[location.x, location.y - 2] = (byte)(passable ? 1 : 0);
+                    grid[location.x, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+                else if (location.y - 1 > 0)
+                {
+                    grid[location.x, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+            }
+            else if (type == 4)
+            {
+                grid[location.x, location.y] = (byte)(passable ? 1 : 0);
+
+                if (location.y + 1 > 0 && location.y - 1 < grid.GetUpperBound(1))
+                {
+                    grid[location.x, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+
+                /*if(location.x + 2 < grid.GetUpperBound(0))
+                {
+                    grid[location.x + 2, location.y] = (byte)(passable ? 1 : 0);
+                    grid[location.x + 2, location.y - 1] = (byte)(passable ? 1 : 0);
+
+                    grid[location.x + 1, location.y] = (byte)(passable ? 1 : 0);
+                    grid[location.x + 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }*/
+                /*if (location.x + 1 < grid.GetUpperBound(0))
+                {
+                    grid[location.x + 1, location.y] = (byte)(passable ? 1 : 0);
+                    grid[location.x + 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }*/
+
+                if (location.x - 1 > 0)
+                {
+                    grid[location.x - 1, location.y] = (byte)(passable ? 1 : 0);
+                }
+
+                if (location.x - 1 > 0 && location.y - 2 > 0)
+                {
+                    grid[location.x - 1, location.y - 2] = (byte)(passable ? 1 : 0);
+                    grid[location.x - 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+                else if (location.x - 1 > 0 && location.y - 1 > 0)
+                {
+                    grid[location.x - 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+
+                if (location.y - 3 > 0)
+                {
+                    grid[location.x, location.y - 3] = (byte)(passable ? 1 : 0);
+                    grid[location.x, location.y - 2] = (byte)(passable ? 1 : 0);
+
+                    /*if (location.x + 1 < grid.GetUpperBound(0))
+                    {
+                        grid[location.x + 1, location.y - 2] = (byte)(passable ? 1 : 0);
+                    }*/
+
+                    grid[location.x, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+                else if (location.y - 2 > 0)
+                {
+                    grid[location.x, location.y - 2] = (byte)(passable ? 1 : 0);
+                    grid[location.x, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+                else if (location.y - 1 > 0)
+                {
+                    grid[location.x, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+            }
+            else if (type == 5)
+            {
+                grid[location.x, location.y] = (byte)(passable ? 1 : 0);
+
+                if (location.y + 1 > 0 && location.y - 1 < grid.GetUpperBound(1))
+                {
+                    grid[location.x, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+
+                /*if(location.x + 2 < grid.GetUpperBound(0))
+                {
+                    grid[location.x + 2, location.y] = (byte)(passable ? 1 : 0);
+                    grid[location.x + 2, location.y - 1] = (byte)(passable ? 1 : 0);
+
+                    grid[location.x + 1, location.y] = (byte)(passable ? 1 : 0);
+                    grid[location.x + 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }*/
+                if (location.x + 1 < grid.GetUpperBound(0))
+                {
+                    grid[location.x + 1, location.y] = (byte)(passable ? 1 : 0);
+                    grid[location.x + 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+
+                /*if (location.x - 1 > 0)
+                {
+                    grid[location.x - 1, location.y] = (byte)(passable ? 1 : 0);
+                }*/
+
+                /*if (location.x - 1 > 0 && location.y - 2 > 0)
+                {
+                    grid[location.x - 1, location.y - 2] = (byte)(passable ? 1 : 0);
+                    grid[location.x - 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+                else if (location.x - 1 > 0 && location.y - 1 > 0)
+                {
+                    grid[location.x - 1, location.y - 1] = (byte)(passable ? 1 : 0);
+                }*/
+
+                if (location.y - 3 > 0)
+                {
+                    grid[location.x, location.y - 3] = (byte)(passable ? 1 : 0);
+                    grid[location.x, location.y - 2] = (byte)(passable ? 1 : 0);
+
+                    if (location.x + 1 < grid.GetUpperBound(0))
+                    {
+                        grid[location.x + 1, location.y - 2] = (byte)(passable ? 1 : 0);
+                    }
+
+                    grid[location.x, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+                else if (location.y - 2 > 0)
+                {
+                    grid[location.x, location.y - 2] = (byte)(passable ? 1 : 0);
+                    grid[location.x, location.y - 1] = (byte)(passable ? 1 : 0);
+                }
+                else if (location.y - 1 > 0)
+                {
+                    grid[location.x, location.y - 1] = (byte)(passable ? 1 : 0);
                 }
             }
         }

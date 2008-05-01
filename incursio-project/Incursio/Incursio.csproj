@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Campaign\Capital.cs" />
     <Compile Include="Campaign\CreditsMap.cs" />
     <Compile Include="Campaign\Map1.cs" />
     <Compile Include="Campaign\Port.cs" />

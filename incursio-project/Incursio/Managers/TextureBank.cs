@@ -131,6 +131,9 @@ namespace Incursio.Managers
             public static Texture2D building1;
             public static Texture2D building2;
             public static Texture2D building3;
+            public static Texture2D buildingGroup;
+            public static Texture2D buildingGroupEndRight;
+            public static Texture2D buildingGroupEndLeft;
 
         }
 

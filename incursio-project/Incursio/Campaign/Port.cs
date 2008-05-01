@@ -57,8 +57,9 @@ namespace Incursio.Campaign
 
             ControlPoint cp6 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
             cp6.setLocation(new Coordinate(1400, 120));
+            
+            
             //set default camera position
-
             this.minViewableX = 32;
             this.maxViewableX = 64;
             this.minViewableY = 96;
