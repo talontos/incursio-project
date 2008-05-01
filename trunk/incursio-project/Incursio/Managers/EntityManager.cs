@@ -468,83 +468,85 @@ namespace Incursio.Managers
 
             entitiesToCommand.ForEach(delegate(BaseGameEntity e)
             {
-                switch (commandType)
-                {
-                    ////////////////////////
-                    case State.Command.MOVE:
-                        //TODO: PATHING!!
-                        command = new MoveCommand(args[0] as Coordinate);
-                        break;
+                if(!e.isDead()){
+                    switch (commandType)
+                    {
+                        ////////////////////////
+                        case State.Command.MOVE:
+                            //TODO: PATHING!!
+                            command = new MoveCommand(args[0] as Coordinate);
+                            break;
 
-                    ////////////////////////
-                    case State.Command.ATTACK_MOVE:
-                        //TODO: PATHING!!
-                        command = new AttackMoveCommand(args[0] as Coordinate);
-                        break;
+                        ////////////////////////
+                        case State.Command.ATTACK_MOVE:
+                            //TODO: PATHING!!
+                            command = new AttackMoveCommand(args[0] as Coordinate);
+                            break;
 
-                    ////////////////////////
-                    case State.Command.ATTACK:
-                        if (args[0] is ControlPoint)
-                        {
+                        ////////////////////////
+                        case State.Command.ATTACK:
+                            if (args[0] is ControlPoint)
+                            {
 
+                            }
+                            else{
+                                command = new AttackCommand(args[0] as BaseGameEntity);
+                                e.setAttacking();
+                            }
+                             
+                            break;
+
+                        ////////////////////////
+                        case State.Command.STOP:
+                            command = new StopCommand();
+                            break;
+
+                        ////////////////////////
+                        case State.Command.FOLLOW:
+                            if (args[0] is Unit)
+                                command = new FollowCommand(args[0] as Unit);
+                            else
+                                command = new MoveCommand((args[0] as BaseGameEntity).location);
+
+                            break;
+
+                        ////////////////////////
+                        case State.Command.GUARD:
+                            command = new GuardCommand();
+                            break;
+
+                        ////////////////////////
+                        case State.Command.BUILD:
+                            //TODO: We probably shouldn't be passing unit objects through all this
+                            command = new BuildCommand(args[0] as BaseGameEntity, (args.Length > 1 ? args[1] : null) as Coordinate);
+                            break;
+
+                        ////////////////////////
+                        case State.Command.CAPTURE:
+                            //try in case args[0] is not a controlpoint
+                            try{
+                                command = new CaptureCommand(args[0] as ControlPoint);
+                            }
+                            finally{}
+                            break;
+
+                        ////////////////////////
+                    }
+
+                    //add command if not null
+                    if (command != null){
+                        if (append){
+                            e.issueAdditionalOrder(command);
                         }
                         else{
-                            command = new AttackCommand(args[0] as BaseGameEntity);
-                            e.setAttacking();
+                            e.issueSingleOrder(command);
                         }
-                         
-                        break;
 
-                    ////////////////////////
-                    case State.Command.STOP:
-                        command = new StopCommand();
-                        break;
-
-                    ////////////////////////
-                    case State.Command.FOLLOW:
-                        if (args[0] is Unit)
-                            command = new FollowCommand(args[0] as Unit);
-                        else
-                            command = new MoveCommand((args[0] as BaseGameEntity).location);
-
-                        break;
-
-                    ////////////////////////
-                    case State.Command.GUARD:
-                        command = new GuardCommand();
-                        break;
-
-                    ////////////////////////
-                    case State.Command.BUILD:
-                        //TODO: We probably shouldn't be passing unit objects through all this
-                        command = new BuildCommand(args[0] as BaseGameEntity, (args.Length > 1 ? args[1] : null) as Coordinate);
-                        break;
-
-                    ////////////////////////
-                    case State.Command.CAPTURE:
-                        //try in case args[0] is not a controlpoint
-                        try{
-                            command = new CaptureCommand(args[0] as ControlPoint);
-                        }
-                        finally{}
-                        break;
-
-                    ////////////////////////
-                }
-
-                //add command if not null
-                if (command != null){
-                    if (append){
-                        e.issueAdditionalOrder(command);
+                        if (command is MoveCommand)
+                            e.playOrderMoveSound();
+                        else if (command is AttackCommand || command is AttackMoveCommand)
+                            e.playOrderAttackSound();
                     }
-                    else{
-                        e.issueSingleOrder(command);
-                    }
-
-                    if (command is MoveCommand)
-                        e.playOrderMoveSound();
-                    else if (command is AttackCommand || command is AttackMoveCommand)
-                        e.playOrderAttackSound();
                 }
             });
         }

@@ -107,6 +107,7 @@ namespace Incursio.Managers
 
             TextureBank.EntityTextures.guardTowerTexturePlayer = Content.Load<Texture2D>(@"Tower_friendly");
             TextureBank.EntityTextures.guardTowerTextureComputer = Content.Load<Texture2D>(@"Tower_hostile");
+            TextureBank.EntityTextures.guardTowerExploded = Content.Load<Texture2D>(@"Tower_exploded");
 
             TextureBank.EntityTextures.controlPointPlayer = Content.Load<Texture2D>(@"ControlPointFriendly");
             TextureBank.EntityTextures.controlPointComputer = Content.Load<Texture2D>(@"ControlPointEnemy");

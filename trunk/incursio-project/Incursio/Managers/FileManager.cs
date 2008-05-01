@@ -41,9 +41,12 @@ namespace Incursio.Managers
                 string[] item;
 
                 for(int i = 0; i < rawSplit.Length; i++){
-                    item = rawSplit[i].Split(':');
-                    configuration[i, 0] = item[0];
-                    configuration[i, 1] = item[1];
+                    try{
+                        item = rawSplit[i].Split(':');
+                        configuration[i, 0] = item[0];
+                        configuration[i, 1] = item[1];
+                    }
+                    catch(Exception exx){}
                 }
 
                 //now, read in the settings
