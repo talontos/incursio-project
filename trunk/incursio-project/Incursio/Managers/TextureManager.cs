@@ -122,6 +122,7 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.archerPortrait = Content.Load<Texture2D>(@"archerPortrait");
             TextureBank.InterfaceTextures.archerIcon = Content.Load<Texture2D>(@"archerIcon");
             TextureBank.InterfaceTextures.basePortrait = Content.Load<Texture2D>(@"BasePortrait");
+            TextureBank.InterfaceTextures.baseEnemyPortrait = Content.Load<Texture2D>(@"BasePortrait_hostile");
             TextureBank.InterfaceTextures.guardTowerPortrait = Content.Load<Texture2D>(@"TowerPortrait");
             TextureBank.InterfaceTextures.guardTowerIcon = Content.Load<Texture2D>(@"TowerIcon");
             TextureBank.InterfaceTextures.controlPointPortrait = Content.Load<Texture2D>(@"ControlPointIcon");

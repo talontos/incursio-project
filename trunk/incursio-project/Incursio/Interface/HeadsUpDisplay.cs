@@ -155,9 +155,13 @@ namespace Incursio.Classes
                 {
                     spriteBatch.Draw(TextureBank.InterfaceTextures.archerPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.archerPortrait.Width, TextureBank.InterfaceTextures.archerPortrait.Height), Color.White);
                 }
-                else if (selectedUnits[0].getType() == State.EntityName.Camp)
+                else if (selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].owner == State.PlayerId.HUMAN)
                 {
                     spriteBatch.Draw(TextureBank.InterfaceTextures.basePortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.basePortrait.Width, TextureBank.InterfaceTextures.basePortrait.Height), Color.White);
+                }
+                else if(selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].owner == State.PlayerId.COMPUTER)
+                {
+                    spriteBatch.Draw(TextureBank.InterfaceTextures.baseEnemyPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.baseEnemyPortrait.Width, TextureBank.InterfaceTextures.baseEnemyPortrait.Height), Color.White);
                 }
                 else if (selectedUnits[0].getType() == State.EntityName.GuardTower)
                 {
