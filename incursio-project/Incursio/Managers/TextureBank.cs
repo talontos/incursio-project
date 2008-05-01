@@ -206,6 +206,7 @@ namespace Incursio.Managers
             public static Texture2D heavyInfantryPortrait;
             public static Texture2D heavyInfantryIcon;
             public static Texture2D basePortrait;
+            public static Texture2D baseEnemyPortrait;
             public static Texture2D guardTowerPortrait;
             public static Texture2D guardTowerIcon;
             public static Texture2D controlPointPortrait;
