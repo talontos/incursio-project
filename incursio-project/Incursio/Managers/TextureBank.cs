@@ -84,6 +84,7 @@ namespace Incursio.Managers
 
             public static Texture2D guardTowerTexturePlayer;
             public static Texture2D guardTowerTextureComputer;
+            public static Texture2D guardTowerExploded;
 
             public static Texture2D controlPointPlayer;
             public static Texture2D controlPointComputer;

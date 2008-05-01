@@ -11,6 +11,10 @@ namespace Incursio.Classes
 {
   public class GuardTowerStructure : Structure
     {
+      protected byte alphaChan = 255;
+      protected int destroyedTimer = 0;
+      protected const int TIME_TILL_DESTROYED_FADE = 1;
+
       protected int damage = 20;
       protected int attackSpeed = 4;
       protected int updateAttackTimer = 0;
@@ -210,7 +214,21 @@ namespace Incursio.Classes
           }
           else if (this.currentState == State.StructureState.Destroyed)
           {
-              //TODO: building asploded
+              if(destroyedTimer < TIME_TILL_DESTROYED_FADE * 60){
+                  if (alphaChan >= 0)
+                  {
+                      spriteBatch.Draw(TextureBank.EntityTextures.guardTowerExploded,
+                          new Rectangle(onScreen.x - (TextureBank.EntityTextures.guardTowerExploded.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.guardTowerExploded.Height * 0.80),
+                          TextureBank.EntityTextures.guardTowerExploded.Width, TextureBank.EntityTextures.guardTowerExploded.Height), new Color(255, 255, 255, alphaChan));
+                      alphaChan -= 25;
+                  }
+
+                  destroyedTimer++;
+              }
+
+              
+              
+              
           }
           else if (this.currentState == State.StructureState.Idle || this.currentState == State.StructureState.Attacking)
           {
