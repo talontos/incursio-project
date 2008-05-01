@@ -33,8 +33,9 @@ namespace Incursio.Managers
 
                 public static string[] selection = 
                     {"heroAlert.wav",
-                     "HerConf2.wav",
-                     "heroConfirm.wav"
+                     "HeroConf2.wav",
+                     "heroConfirm.wav",
+                        "HeroAlert2.wav"
                     };
 
                 public static string[] issueMoveOrder =
@@ -45,11 +46,13 @@ namespace Incursio.Managers
 
                 public static string[] issueAttackOrder =
                     {"heroAtt.wav",
-                     "heroAttack2.wav"
+                     "heroAttack2.wav",
+                        "HeroAlert2.wav"
                     };
 
                 public static string[] death =
-                    {"HeroDead.wav"
+                    {"HeroDead.wav",
+                        "HeroDead2.wav"
                     };
             }
 
@@ -94,11 +97,14 @@ namespace Incursio.Managers
             public static class HeavyInfantryVoice
             {
                 public static string[] enterBattlefield = 
-                    {"HeavyInfSelect.wav"
+                    {"HeavyInfSelect.wav",
+                        "HeavyConf2.wav"
                     };
 
                 public static string[] selection = 
-                    {"HeavyInfSelect.wav"
+                    {"HeavyInfSelect.wav",
+                        "HeavyConf2.wav",
+                        "HaveAlert2.wav"
                     };
 
                 public static string[] issueMoveOrder =
@@ -106,11 +112,14 @@ namespace Incursio.Managers
                     };
 
                 public static string[] issueAttackOrder =
-                    {"HeavyInfattack.wav"
+                    {"HeavyInfattack.wav",
+                        "HeavyAttack2.wav",
+                        "HeavyAlert2.wav"
                     };
 
                 public static string[] death =
-                    {"HeavyInfdead.wav"
+                    {"HeavyInfdead.wav",
+                        "HeavyDead2.wave"
                     };
             }
 
@@ -126,12 +135,14 @@ namespace Incursio.Managers
                     };
 
                 public static string[] issueMoveOrder =
-                    {"archerConfirm2.wav"
+                    {"archerConfirm2.wav",
+                        "archerAlert2.wav"
                     };
 
                 public static string[] issueAttackOrder =
                     {"archerAttack.wav",
-                     "archerAttack2.wav"
+                     "archerAttack2.wav",
+                        "archerAlert2.wav"
                     };
 
                 public static string[] death =
@@ -146,6 +157,22 @@ namespace Incursio.Managers
             public static string inPlay = "Film.mp3";
             public static string victory = "Thunder.mp3";
             public static string defeat = "SadSong.mp3";
+        }
+
+        public static class MessageSounds
+        {
+            public static String campDestroyed = "CampDestroyed.wav";
+            public static String baseAttack = "BaseUnderAtt.wav";
+            public static String cantBuild = "CampDestroyed.wav";
+            public static String towerBuilt = "ConComplete.wav";
+            public static String heroFallen = "HeroFallen.wav";
+            public static String heroBattle = "HeroinBat.wav";
+            public static String heroLowHP = "HeroisAbouttoDie.wav";
+            public static String lvlUp = "HeroLevelUp.wav";
+            public static String heroAtt = "HeroUnderAtt.wav";
+            public static String townCapped = "TownCap.wav";
+            public static String unitAtt = "Uattk.wav";
+            public static String unitReady = "UnitReady.wav";
         }
 
     }
