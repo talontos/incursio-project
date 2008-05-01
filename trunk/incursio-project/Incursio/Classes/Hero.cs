@@ -23,7 +23,7 @@ namespace Incursio.Classes
       public const int RESOURCE_TICK = 4;
       public int timeForResource = 0;
 
-      public String name = "Blargh";
+      public String name = "Blargh, the Dragonsaver";
       public int level = 1;
       public int experiencePoints = 0;
       public int pointsToNextLevel = 1000;
@@ -48,7 +48,7 @@ namespace Incursio.Classes
           this.pointValue = 1000;
 
           //set badass hero properties
-          this.name = "El Gato, the Scratchenator";
+          this.name = "Princess";
           this.moveSpeed = 115.0f;
           this.sightRange = 8;
           this.setType(State.EntityName.Hero);
