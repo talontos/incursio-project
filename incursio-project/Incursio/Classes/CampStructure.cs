@@ -130,6 +130,7 @@ namespace Incursio.Classes
                             new GameEvent(
                                 State.EventType.NOT_ENOUGH_RESOURCES,
                                 this,
+                                "",
                                 "Not Enough Resources",
                                 this.location
                             )
@@ -157,6 +158,7 @@ namespace Incursio.Classes
                             new GameEvent(
                                 State.EventType.NOT_ENOUGH_RESOURCES,
                                 this,
+                                "",
                                 "Not Enough Resources",
                                 this.location
                             )
@@ -184,6 +186,7 @@ namespace Incursio.Classes
                             new GameEvent(
                                 State.EventType.NOT_ENOUGH_RESOURCES,
                                 this,
+                                "",
                                 "Not Enough Resources",
                                 this.location
                             )
@@ -211,6 +214,7 @@ namespace Incursio.Classes
                             new GameEvent(
                                 State.EventType.NOT_ENOUGH_RESOURCES,
                                 this,
+                                "",
                                 "Not Enough Resources",
                                 this.location
                             )
@@ -230,7 +234,7 @@ namespace Incursio.Classes
                 timeForResource = 0;
                 if (this.owner == State.PlayerId.HUMAN)
                 {
-                    MessageManager.getInstance().addMessage(new GameEvent(State.EventType.GAIN_RESOURCE, this, Convert.ToString(income), this.location));
+                    MessageManager.getInstance().addMessage(new GameEvent(State.EventType.GAIN_RESOURCE, this, "",  Convert.ToString(income), this.location));
 
                     PlayerManager.getInstance().humanPlayer.MONETARY_UNIT = PlayerManager.getInstance().humanPlayer.MONETARY_UNIT + income;
                 }
@@ -260,7 +264,7 @@ namespace Incursio.Classes
                     this.owner,
                     new GameEvent(State.EventType.CANT_MOVE_THERE,
                         this,
-                        /*SOUND,*/
+                        SoundCollection.MessageSounds.cantBuild,
                         "Cannot Build There",
                         this.buildProject.location
                     )
@@ -293,7 +297,7 @@ namespace Incursio.Classes
                         this.owner,
                         new GameEvent(State.EventType.CREATION_COMPLETE,
                             temp,
-                            /*SOUND,*/
+                            "",
                             "Unit Ready",
                             this.location
                         )
@@ -322,7 +326,7 @@ namespace Incursio.Classes
                         this.owner,
                         new GameEvent(State.EventType.CREATION_COMPLETE,
                             temp,
-                            /*SOUND,*/ 
+                            SoundCollection.MessageSounds.towerBuilt, 
                             "Construction Complete", 
                             this.location
                         )
@@ -373,7 +377,7 @@ namespace Incursio.Classes
                     this.owner,
                     new GameEvent(State.EventType.CANT_MOVE_THERE,
                         this,
-                        /*SOUND,*/
+                        SoundCollection.MessageSounds.cantBuild,
                         "Cannot Build There",
                         this.location
                     )

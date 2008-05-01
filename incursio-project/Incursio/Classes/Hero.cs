@@ -124,7 +124,7 @@ namespace Incursio.Classes
               this.armor += Hero.armorIncrement;
 
               PlayerManager.getInstance().notifyPlayer(this.owner,
-                  new GameEvent(State.EventType.LEVEL_UP, this, "Hero Level Up!", location));
+                  new GameEvent(State.EventType.LEVEL_UP, this, SoundCollection.MessageSounds.lvlUp, "Hero Level Up!", location));
 
               //TODO: Review this number - we might want to make it smaller
               pointsToNextLevel *= level;
@@ -428,7 +428,7 @@ namespace Incursio.Classes
       {
           PlayerManager.getInstance().notifyPlayer(
               this.owner,
-              new GameEvent(State.EventType.UNDER_ATTACK, this, /*SOUND,*/ "Hero under attack", this.location)
+              new GameEvent(State.EventType.UNDER_ATTACK, this, SoundCollection.MessageSounds.heroAtt, "Hero under attack", this.location)
           );
       }
 
@@ -441,14 +441,14 @@ namespace Incursio.Classes
           {
               PlayerManager.getInstance().notifyPlayer(
                   this.owner,
-                  new GameEvent(State.EventType.UNDER_ATTACK, this, /*SOUND,*/ "Hero is about to die!", this.location)
+                  new GameEvent(State.EventType.UNDER_ATTACK, this, SoundCollection.MessageSounds.heroLowHP, "Hero is about to die!", this.location)
               );
           }
           else if (this.health < (this.maxHealth * 0.6))
           {
               PlayerManager.getInstance().notifyPlayer(
                   this.owner,
-                  new GameEvent(State.EventType.UNDER_ATTACK, this, /*SOUND,*/ "Hero is in Battle!", this.location)
+                  new GameEvent(State.EventType.UNDER_ATTACK, this, SoundCollection.MessageSounds.heroBattle, "Hero is in Battle!", this.location)
               );
           }
       }

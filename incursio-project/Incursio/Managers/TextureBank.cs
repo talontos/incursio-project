@@ -221,6 +221,7 @@ namespace Incursio.Managers
             public static Texture2D pauseMenuBackground;
             public static Texture2D victoryMenuBackground;
             public static Texture2D defeatMenuBackground;
+            public static Texture2D creditsBackground;
 
         }
     }

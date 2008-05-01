@@ -32,7 +32,7 @@ namespace Incursio.Campaign
             {
                 if( !this.messageSent){
                     MessageManager.getInstance().addMessage(
-                        new GameEvent(State.EventType.GAME_OVER_MAN, null, gameOverResult.result, new Coordinate(0,0))
+                        new GameEvent(State.EventType.GAME_OVER_MAN, null, "",/*get sound for two things*/ gameOverResult.result, new Coordinate(0,0))
                     );
 
                     messageSent = true;

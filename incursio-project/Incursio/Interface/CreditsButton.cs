@@ -23,11 +23,12 @@ namespace Incursio.Interface
             if (!this.getPressed() && this.getFocus())    //if exitGameButton is pressed, exit the game
             {
                 this.setFocus(false);
-                EntityManager.getInstance().reinitializeInstance();
+                
+                /*EntityManager.getInstance().reinitializeInstance();
                 PlayerManager.getInstance().reinitializeInstance();
                 MapManager.getInstance().setCurrentLevel(State.CampaignLevel.CREDITS);
-                MapManager.getInstance().initializeCurrentMap();
-                Incursio.getInstance().currentState = State.GameState.InPlay;
+                MapManager.getInstance().initializeCurrentMap();*/
+                Incursio.getInstance().currentState = State.GameState.Credits;
             }
         }
     }

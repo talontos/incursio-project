@@ -137,7 +137,7 @@ namespace Incursio.Classes
         {
             PlayerManager.getInstance().notifyPlayer(
                 this.owner,
-                new GameEvent(State.EventType.UNDER_ATTACK, this, /*SOUND,*/ "Base Under Attack!", this.location)
+                new GameEvent(State.EventType.UNDER_ATTACK, this, SoundCollection.MessageSounds.baseAttack, "Base Under Attack!", this.location)
             );
         }
     }

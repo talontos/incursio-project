@@ -43,7 +43,7 @@ namespace Incursio.Classes
             capping = true;
 
             PlayerManager.getInstance().notifyPlayer(this.owner, 
-                new GameEvent(State.EventType.ENEMY_CAPTURING_POINT, this, "Enemy Capturing Point", location));
+                new GameEvent(State.EventType.ENEMY_CAPTURING_POINT, this, "", "Enemy Capturing Point", location));
             
         }
 
@@ -54,7 +54,7 @@ namespace Incursio.Classes
             
             capturingHero.finishCapture(this);
             PlayerManager.getInstance().notifyPlayer(capturingHero.owner, 
-                new GameEvent(State.EventType.ENEMY_CAPTURING_POINT, this, "Control Point Captured!", location));
+                new GameEvent(State.EventType.ENEMY_CAPTURING_POINT, this, SoundCollection.MessageSounds.townCapped, "Control Point Captured!", location));
             
             capturingHero = null;
             capping = false;
@@ -95,7 +95,7 @@ namespace Incursio.Classes
                 timeForResource = 0;
                 if (this.owner == State.PlayerId.HUMAN)
                 {
-                    MessageManager.getInstance().addMessage(new GameEvent(State.EventType.GAIN_RESOURCE, this, Convert.ToString(income), this.location));
+                    MessageManager.getInstance().addMessage(new GameEvent(State.EventType.GAIN_RESOURCE, this,"", Convert.ToString(income), this.location));
 
                     PlayerManager.getInstance().humanPlayer.MONETARY_UNIT = PlayerManager.getInstance().humanPlayer.MONETARY_UNIT + income;
                 }
