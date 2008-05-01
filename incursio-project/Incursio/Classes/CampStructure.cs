@@ -26,6 +26,10 @@ namespace Incursio.Classes
         public int COST_GUARD_TOWER = EntityConfiguration.EntityPrices.COST_GUARD_TOWER;
         public int COST_UPGRADE = EntityConfiguration.EntityPrices.COST_UPGRADE;
 
+        protected byte alphaChan = 255;
+        protected int destroyedTimer = 0;
+        protected const int TIME_TILL_DESTROYED_FADE = 1;
+
         int newUnitPlacementX = 10;
         int newUnitPlacementY = 120;    //little bit of hard coding, but can't really help it here 
         int income = 8;
@@ -523,18 +527,31 @@ namespace Incursio.Classes
             }
             else if (this.currentState == State.StructureState.Destroyed)
             {
-                //TODO: building asploded
-                if (this.getPlayer() == State.PlayerId.HUMAN)
+
+                if (destroyedTimer < TIME_TILL_DESTROYED_FADE * 60)
                 {
-                    spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputerExploded,
-                        new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTextureComputerDestroyed.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTextureComputerDestroyed.Height * 0.80),
-                        TextureBank.EntityTextures.campTextureComputerDestroyed.Width, TextureBank.EntityTextures.campTextureComputerDestroyed.Height), Color.White);
-                }
-                else
-                {
-                    spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputerExploded,
-                        new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTextureComputerDestroyed.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTextureComputerDestroyed.Height * 0.80),
-                        TextureBank.EntityTextures.campTextureComputerDestroyed.Width, TextureBank.EntityTextures.campTextureComputerDestroyed.Height), Color.White);
+                    if (alphaChan >= 0)
+                    {
+                    
+
+                        //TODO: building asploded
+                        if (this.getPlayer() == State.PlayerId.HUMAN)
+                        {
+                            spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputerExploded,
+                                new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTextureComputerDestroyed.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTextureComputerDestroyed.Height * 0.80),
+                                TextureBank.EntityTextures.campTextureComputerDestroyed.Width, TextureBank.EntityTextures.campTextureComputerDestroyed.Height), new Color(255, 255, 255, alphaChan));
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputerExploded,
+                                new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTextureComputerDestroyed.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTextureComputerDestroyed.Height * 0.80),
+                                TextureBank.EntityTextures.campTextureComputerDestroyed.Width, TextureBank.EntityTextures.campTextureComputerDestroyed.Height), new Color(255, 255, 255, alphaChan));
+                        }
+                        
+                        alphaChan -= 25;
+                    }
+
+                    destroyedTimer++;
                 }
             }
             else if (this.currentState == State.StructureState.Idle)

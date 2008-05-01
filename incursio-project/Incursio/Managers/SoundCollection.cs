@@ -91,7 +91,9 @@ namespace Incursio.Managers
                     };
 
                 public static string[] death =
-                    {"archerdead.wav"
+                    {"archerdead.wav",
+                     "HeroDead.wav",
+                     "HeroDead.wav"
                     };
             }
 
@@ -109,7 +111,8 @@ namespace Incursio.Managers
                     };
 
                 public static string[] issueMoveOrder =
-                    {"HeavyInfconf.wav"
+                    {"HeavyInfconf.wav",
+                     "HeavyInfSelect.wav"
                     };
 
                 public static string[] issueAttackOrder =
@@ -120,14 +123,18 @@ namespace Incursio.Managers
 
                 public static string[] death =
                     {"HeavyInfdead.wav",
-                        "HeavyDead2.wave"
+                        "HeavyDead2.wave",
+                     "HeroDead.wav",
+                     "HeroDead.wav"
                     };
             }
 
             public static class ArcherVoice
             {
                 public static string[] enterBattlefield = 
-                    {"archerAlert.wav"
+                    {"archerAlert.wav",
+                     "archerAttack.wav",
+                     "archerConfirm.wav"
                     };
 
                 public static string[] selection = 
@@ -147,7 +154,9 @@ namespace Incursio.Managers
                     };
 
                 public static string[] death =
-                    {"archerDead.wav"
+                    {"archerDead.wav",
+                     "HeroDead.wav",
+                     "HeroDead.wav"
                     };
             }
         }

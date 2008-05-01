@@ -3,4 +3,4 @@ archerCost:60
 lightInfantryCost:45
 heavyInfantryCost:90
 towerCost:200
-audioPath:../../../Content/Audio/
+audioPath:Content/Audio/
