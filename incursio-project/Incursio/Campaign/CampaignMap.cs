@@ -32,7 +32,7 @@ namespace Incursio.Campaign
             {
                 if( !this.messageSent){
                     MessageManager.getInstance().addMessage(
-                        new GameEvent(State.EventType.GAME_OVER_MAN, null, "",/*get sound for two things*/ gameOverResult.result, new Coordinate(0,0))
+                        new GameEvent(State.EventType.GAME_OVER_MAN, null, gameOverResult.sound, gameOverResult.result, new Coordinate(0,0))
                     );
 
                     messageSent = true;
@@ -53,44 +53,44 @@ namespace Incursio.Campaign
                 //TODO: We can remove this one; others will override it
                 if (eMan.getLivePlayerEntities(State.PlayerId.HUMAN).Count == 0)         //No live entities
                 {
-                    this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Entire Army has Fallen!");
+                    this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Entire Army has Fallen!", SoundCollection.MessageSounds.heroFallen);
                 }
 
                 if (eMan.getLivePlayerHeros(State.PlayerId.HUMAN).Count == 0)         //No live heros
                 {
-                    this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Hero has Fallen!");
+                    this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Hero has Fallen!", SoundCollection.MessageSounds.heroFallen);
                 }
 
                 //TODO: We can remove this one; others will override it
                 if (eMan.getLivePlayerEntities(State.PlayerId.COMPUTER).Count == 0)         //No live entities
                 {
-                    this.gameOverResult = new GameResult(State.GameState.Victory, "Your Enemy's Entire Army has Fallen!");
+                    this.gameOverResult = new GameResult(State.GameState.Victory, "Your Enemy's Entire Army has Fallen!", "");
                 }
 
                 if (eMan.getLivePlayerHeros(State.PlayerId.COMPUTER).Count == 0)         //No live heros
                 {
-                    this.gameOverResult = new GameResult(State.GameState.Victory, "Your Enemy's Hero has Fallen!");
+                    this.gameOverResult = new GameResult(State.GameState.Victory, "Your Enemy's Hero has Fallen!", "");
                 }
 
                 //if no control points are held, or the camp is destroyed
                 if (eMan.getPlayerTotalOwnedControlPoints(State.PlayerId.HUMAN) == 0)               //If no control points are held
                 {
-                    this.gameOverResult = new GameResult(State.GameState.Defeat, "You have Lost all Control Points!");
+                    this.gameOverResult = new GameResult(State.GameState.Defeat, "You have Lost all Control Points!", "");
                 }
 
                 if (eMan.getPlayerTotalOwnedControlPoints(State.PlayerId.COMPUTER) == 0)            //If no control points are held
                 {
-                    this.gameOverResult = new GameResult(State.GameState.Victory, "You have Conquered all Control Points!");
+                    this.gameOverResult = new GameResult(State.GameState.Victory, "You have Conquered all Control Points!", "");
                 }
 
                 if (eMan.isPlayerCampDestroyed(State.PlayerId.HUMAN))                     //If camp is destroyed
                 {
-                    this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Camp has been Destroyed!");
+                    this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Camp has been Destroyed!", SoundCollection.MessageSounds.campDestroyed);
                 }
 
                 if (eMan.isPlayerCampDestroyed(State.PlayerId.COMPUTER))                 //If camp is destroyed
                 {
-                    this.gameOverResult = new GameResult(State.GameState.Victory, "Your Enemy's Camp has been Destroyed!");
+                    this.gameOverResult = new GameResult(State.GameState.Victory, "Your Enemy's Camp has been Destroyed!", "");
                 }
 
                 //...

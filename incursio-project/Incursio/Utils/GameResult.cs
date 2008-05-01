@@ -8,6 +8,7 @@ namespace Incursio.Utils
     {
         public string result;
         public State.GameState resultState;
+        public string sound;
 
         //todo: statistical stuff?
         public GameResult(){
@@ -15,9 +16,10 @@ namespace Incursio.Utils
             result = "";
         }
 
-        public GameResult(State.GameState state, string result){
+        public GameResult(State.GameState state, string result, string sound){
             this.resultState = state;
             this.result = result;
+            this.sound = sound;
         }
     }
 }
