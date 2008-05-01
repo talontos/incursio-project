@@ -75,10 +75,17 @@ namespace Incursio.Utils
             product.setMap(MapManager.getInstance().currentMap);
 
             //check for hero stats to load
-            if(product is Hero && owningPlayer == State.PlayerId.HUMAN && Incursio.getInstance().getHero() != null){
-                (product as Hero).copyHeroStats(Incursio.getInstance().getHero());
+            if(product is Hero && Incursio.getInstance().getHero() != null){
 
-                Incursio.getInstance().setHero(product as Hero);
+                if(owningPlayer == State.PlayerId.HUMAN){
+                    (product as Hero).copyHeroStats(Incursio.getInstance().getHero());
+
+                    Incursio.getInstance().setHero(product as Hero);
+                }
+                else{
+                    //computer hero, set stuff
+                    (product as Hero).setHero_Badass();
+                }
             }
 
             product.playEnterBattlefieldSound();

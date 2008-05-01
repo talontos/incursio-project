@@ -16,6 +16,17 @@ namespace Incursio.Classes
     {
       public static String HERO_CLASS = "Incursio.Classes.Hero";
 
+      private static String[] heroNames = {
+          "Blargh, the Dragonsaver",
+          "Princess",
+          "Vash",
+          "Caladbolg",
+          "Dinger",
+          "Marduk, Slayer of Tiamat"
+      };
+
+      private static List<String> usedNames = new List<string>();
+
       private static int healthIncrement = 25;
       private static int damageIncrement = 25;
       private static int armorIncrement = 5;
@@ -23,12 +34,13 @@ namespace Incursio.Classes
       public const int RESOURCE_TICK = 4;
       public int timeForResource = 0;
 
-      public String name = "Blargh, the Dragonsaver";
+      public String name = "DEFAULT NAME";
       public int level = 1;
       public int experiencePoints = 0;
       public int pointsToNextLevel = 1000;
 
       public Hero() : base(){
+          this.name = this.getRandomName();
           this.pointValue = 1000;
 
           //TODO: set hero properties
@@ -46,9 +58,9 @@ namespace Incursio.Classes
       public void setHero_Badass()
       {
           this.pointValue = 1000;
-
+          this.name = this.getRandomName();
           //set badass hero properties
-          this.name = "Princess";
+          //this.name = "Princess";
           this.moveSpeed = 115.0f;
           this.sightRange = 8;
           this.setType(State.EntityName.Hero);
@@ -63,6 +75,10 @@ namespace Incursio.Classes
           this.health = 500;
       }
 
+      public static void reinitNames(){
+          Hero.usedNames = new List<string>();
+      }
+
       public void copyHeroStats(Hero h){
           this.maxHealth = h.maxHealth;
           this.level = h.level;
@@ -72,6 +88,18 @@ namespace Incursio.Classes
           this.pointsToNextLevel = h.pointsToNextLevel;
           this.name = h.name;
           this.armor = h.armor;
+      }
+
+      private string getRandomName(){
+          string n = "";
+
+          do {
+              n = Hero.heroNames[Incursio.rand.Next(0, heroNames.Length)];
+          } while (usedNames.Contains(n));
+
+          usedNames.Add(n);
+
+          return n;
       }
 
       public override void Update(GameTime gameTime, ref BaseGameEntity myRef)

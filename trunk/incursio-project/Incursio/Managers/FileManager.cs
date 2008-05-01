@@ -57,6 +57,10 @@ namespace Incursio.Managers
                             SoundManager.getInstance().PLAY_BG_MUSIC = Boolean.Parse(configuration[i, 1]);
                         }
 
+                        else if (configuration[i, 0].Equals("audioPath")){
+                            EntityConfiguration.FileConfig.audioPath = configuration[i, 1].Trim();
+                        }
+
                         //ENTITY COST///
                         else if(configuration[i, 0].Equals("archerCost")){
                             EntityConfiguration.EntityPrices.COST_ARCHER = int.Parse(configuration[i, 1]);
