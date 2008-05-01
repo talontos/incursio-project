@@ -50,7 +50,7 @@ namespace Incursio.Managers
                     break;
 
                 case State.CampaignLevel.THREE: 
-                    currentMap = new TestMap();  
+                    currentMap = new Capital();  
                     break;
             }
 

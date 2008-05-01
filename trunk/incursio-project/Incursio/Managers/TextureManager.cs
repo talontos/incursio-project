@@ -198,6 +198,9 @@ namespace Incursio.Managers
             TextureBank.MapTiles.building1 = Content.Load<Texture2D>(@"Building1");
             TextureBank.MapTiles.building2 = Content.Load<Texture2D>(@"Building2");
             TextureBank.MapTiles.building3 = Content.Load<Texture2D>(@"Building3");
+            TextureBank.MapTiles.buildingGroup = Content.Load<Texture2D>(@"GroupBuildings");
+            TextureBank.MapTiles.buildingGroupEndRight = Content.Load<Texture2D>(@"GroupBuildingsEndRight");
+            TextureBank.MapTiles.buildingGroupEndLeft = Content.Load<Texture2D>(@"GroupBuildingsEndLeft");
             TextureBank.MapTiles.dock = Content.Load<Texture2D>(@"Dock");
             TextureBank.MapTiles.rockBig = Content.Load<Texture2D>(@"Rock3");
             TextureBank.MapTiles.rockMedium = Content.Load<Texture2D>(@"Rock2");
