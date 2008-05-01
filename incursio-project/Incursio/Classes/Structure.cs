@@ -11,7 +11,7 @@ namespace Incursio.Classes
     public class Structure : BaseGameEntity
     {
         public const int RESOURCE_TICK = 4;
-
+        private bool playedDeathSound = false;
         //for building things
         protected int timeBuilt = 0;
         protected int timeRequired = 0;
@@ -65,6 +65,12 @@ namespace Incursio.Classes
                 }
 
                 updateResourceTick();
+
+                if(health <= 0 && !playedDeathSound){
+                    playedDeathSound = true;
+                    this.currentState = State.StructureState.Destroyed;
+                    SoundManager.getInstance().PlaySound(SoundCollection.AttackSounds.Explosion, false);
+                }
             }
         }
 
@@ -117,7 +123,6 @@ namespace Incursio.Classes
             {
                 this.health = 0;
                 EntityManager.getInstance().removeEntity(this.keyId);
-                //SoundManager.getInstance().PlaySound("../../../Content/Audio/explosion.wav", false);
             }
 
             notifyUnderAttack();

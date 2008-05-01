@@ -31,6 +31,7 @@ namespace Incursio.Managers
             selectedUnits = new List<BaseGameEntity>();
             factory = ObjectFactory.getInstance();
             nextKeyId = 0;
+            Hero.reinitNames();
 
             groups = new List<List<BaseGameEntity>>(10);
             for (int i = 0; i < groups.Capacity; i++)

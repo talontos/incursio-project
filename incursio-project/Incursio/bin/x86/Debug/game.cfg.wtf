@@ -3,4 +3,4 @@ archerCost:60
 lightInfantryCost:45
 heavyInfantryCost:90
 towerCost:200
-archerStats:<armor=1 damage=20 moveSpeed=150 attackSpeed=3 sightRange=12 attackRange=10 maxHealth=100 health=100>
+audioPath:../../../Content/Audio/

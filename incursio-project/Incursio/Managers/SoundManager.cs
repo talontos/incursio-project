@@ -61,7 +61,9 @@ namespace Incursio.Managers
         //loop will loop the sound if true.  Otherwise, sound will play once and stop
         public void PlaySound(String filename, bool loop) 
         {
-            filename = "../../../Content/Audio/" + filename;
+            //filename = "../../../Content/Audio/" + filename;
+            filename = EntityConfiguration.FileConfig.audioPath + filename;
+
             try
             {
                 //This makes sure that the file will only start once and not stack on top of itself over and over.
@@ -92,7 +94,7 @@ namespace Incursio.Managers
                 this.currentBGMusic = filename;
             }
 
-            filename = "../../../Content/Audio/" + filename;
+            filename = EntityConfiguration.FileConfig.audioPath + filename;
 
             try
             {

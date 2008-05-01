@@ -6,6 +6,9 @@ namespace Incursio.Utils
 {
     public class EntityConfiguration
     {
+        public static class FileConfig{
+            public static string audioPath = "../../../Content/Audio/";
+        }
 
         public static class EntityPrices{
             public static int COST_LIGHT_INFANTRY = 45;
