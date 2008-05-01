@@ -167,6 +167,7 @@ namespace Incursio
             POINT_CAPTURED,
             LEVEL_UP,
             GAIN_RESOURCE,
+            GAME_OVER_MAN,
         }
 
         public enum ThreatLevel{

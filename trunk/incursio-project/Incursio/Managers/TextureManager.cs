@@ -162,6 +162,14 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.capitalMap_pressed = Content.Load<Texture2D>(@"capital_button");
             TextureBank.InterfaceTextures.capitalMap_not_pressed = Content.Load<Texture2D>(@"capital_button_press");
 
+            TextureBank.InterfaceTextures.file1_not_pressed = Content.Load<Texture2D>(@"file1_button");
+            TextureBank.InterfaceTextures.file1_pressed = Content.Load<Texture2D>(@"file1_button_pressed");
+            TextureBank.InterfaceTextures.file2_not_pressed = Content.Load<Texture2D>(@"file2_button");
+            TextureBank.InterfaceTextures.file2_pressed = Content.Load<Texture2D>(@"file2_button_pressed");
+            TextureBank.InterfaceTextures.file3_not_pressed = Content.Load<Texture2D>(@"file3_button");
+            TextureBank.InterfaceTextures.file3_pressed = Content.Load<Texture2D>(@"file3_button_pressed");
+
+
             TextureBank.InterfaceTextures.selectionRectangle = Content.Load<Texture2D>(@"DragSelection");
 
             // load background Images

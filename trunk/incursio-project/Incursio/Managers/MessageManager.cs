@@ -31,6 +31,10 @@ namespace Incursio.Managers
             messages = new List<GameEvent>();
         }
 
+        public void reinitializeInstance(){
+            messages = new List<GameEvent>();
+        }
+
         public static MessageManager getInstance()
         {
             if (instance == null)
@@ -84,39 +88,7 @@ namespace Incursio.Managers
                     }
                     
                 });
-                //if we've displayed the message for the specified amount of time
-                /*if (timeDisplayedFirst >= MESSAGE_PAUSE_TIME * 60)
-                {
-                    messages.Remove(messages[0]);   //remove the message
-                    if (messages.Count > 1)
-                    {
-                        timeDisplayedFirst = timeDisplayedSecond;
-                        timeDisplayedSecond = 0;
-                        if (messages.Count > 2)
-                        {
-                            timeDisplayedSecond = timeDisplayedThird;
-                            timeDisplayedThird = 0;
-                        }
-                    }
-                    else
-                    {
-                        timeDisplayedFirst = 0;
-                    }
-                    
-                }
-                else
-                {
-                    timeDisplayedFirst++;
-                    if (messages.Count > 1)
-                    {
-                        timeDisplayedSecond++;
-                    }
-
-                    if (messages.Count > 2)
-                    {
-                        timeDisplayedThird++;
-                    }
-                }*/
+                
             }
         }
         public void displayMessages(SpriteBatch spriteBatch)
@@ -169,6 +141,11 @@ namespace Incursio.Managers
                             loc = MapManager.getInstance().currentMap.positionOnScreen(e.location);
                             spriteBatch.DrawString(font, e.stringMessage, new Vector2(loc.x, loc.y - 35), Color.Blue, 0, font.MeasureString(e.stringMessage) / 2, 1.0f, SpriteEffects.None, 0.5f);
                         }
+                        break;
+
+                    case State.EventType.GAME_OVER_MAN:
+                        spriteBatch.DrawString(font, e.stringMessage, new Vector2(500, 300 + systemMessageYCoordOffset), Color.Red, 0, font.MeasureString(e.stringMessage) / 4, 1.0f, SpriteEffects.None, 0.5f);
+                        numberSystemMessages++;
                         break;
                 }
             });

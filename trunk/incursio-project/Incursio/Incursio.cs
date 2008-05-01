@@ -57,9 +57,9 @@ namespace Incursio
         public State.GameState currentState
         {
             get { return this.state; }
-            set { 
+            set {
                 this.state = value;
-                SoundManager.getInstance().StopSound();
+                //SoundManager.getInstance().StopSound();
             }
         }
         private State.GameState state = State.GameState.Initializing;
@@ -119,6 +119,7 @@ namespace Incursio
 
             Incursio.instance = this;
 
+
             graphics = new GraphicsDeviceManager(this);
             hud = new HeadsUpDisplay();
             kbState = new KeyboardState();
@@ -131,6 +132,8 @@ namespace Incursio
 
             playerManager = PlayerManager.getInstance();
             messageManager = MessageManager.getInstance();
+
+            FileManager.getInstance().loadGameConfiguration();
 
             //soundManager = SoundManager.getInstance();
             
@@ -204,9 +207,9 @@ namespace Incursio
             mainMenu = new MenuSet(600, 500, mapSelectButton, loadButton, new InstructionButton(), creditsButton, exitGameButton);
             mapSelectionMenu = new MenuSet(600, 500, newGameButton_level1, newGameButton_level2, newGameButton_level3, new MainMenuButton());
             pauseMenu = new MenuSet(600, 500, resumeGameButton, saveButton, exitGameToMenuButton);
-            loadMenu = new MenuSet(600, 500, new LoadButton("Hero1.wtf"), new LoadButton("Hero2.wtf"), new LoadButton("Hero3.wtf"), new MainMenuButton());
-            saveMenu = new MenuSet(600, 500, new SaveButton("Hero1.wtf"), new SaveButton("Hero2.wtf"), new SaveButton("Hero3.wtf"), new MainMenuButton());
-            instructionsMenu = new MenuSet(800, 350, new CreditsButton(), new MainMenuButton());
+            loadMenu = new MenuSet(600, 500, new LoadButton("Hero1.wtf", 1), new LoadButton("Hero2.wtf", 2), new LoadButton("Hero3.wtf", 3), new MainMenuButton());
+            saveMenu = new MenuSet(600, 500, new SaveButton("Hero1.wtf", 1), new SaveButton("Hero2.wtf", 2), new SaveButton("Hero3.wtf", 3), new MainMenuButton());
+            instructionsMenu = new MenuSet(800, 400, new CreditsButton(), new MainMenuButton());
             //once everything is loaded up, go to the main menu
             currentState = State.GameState.Menu;
         }
@@ -532,27 +535,27 @@ namespace Incursio
         public void playStateSounds(){
 
             //UNTIL WE GET SOUNDS
-            return;
+            //return;
 
             switch(currentState){
                 case State.GameState.Menu:
                 case State.GameState.LoadMenu:
                 case State.GameState.SaveMenu:
                 case State.GameState.MapSelection:
-                    SoundManager.getInstance().PlaySound(SoundCollection.AmbientSounds.main_menu, true);
+                    SoundManager.getInstance().PlayBGMusic(SoundCollection.AmbientSounds.main_menu);
                     break;
 
                 case State.GameState.InPlay:
                 case State.GameState.PausedPlay:
-                    SoundManager.getInstance().PlaySound(SoundCollection.AmbientSounds.inPlay, true);
+                    SoundManager.getInstance().PlayBGMusic(SoundCollection.AmbientSounds.inPlay);
                     break;
 
                 case State.GameState.Victory:
-                    SoundManager.getInstance().PlaySound(SoundCollection.AmbientSounds.victory, true);
+                    SoundManager.getInstance().PlayBGMusic(SoundCollection.AmbientSounds.victory);
                     break;
 
                 case State.GameState.Defeat:
-                    SoundManager.getInstance().PlaySound(SoundCollection.AmbientSounds.defeat, true);
+                    SoundManager.getInstance().PlayBGMusic(SoundCollection.AmbientSounds.defeat);
                     break;
 
                 default:
@@ -715,6 +718,10 @@ namespace Incursio
                 case State.GameState.InPlay:        currentState = State.GameState.PausedPlay; break;
                 case State.GameState.PausedPlay:    currentState = State.GameState.InPlay; break;
             }
+        }
+
+        public void resetManagers(){
+
         }
 
         public void setHero(Hero h){

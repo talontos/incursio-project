@@ -10,12 +10,28 @@ namespace Incursio.Interface
     {
         private string filename;
 
-        public SaveButton(string file) : 
+        public SaveButton(string file, int num) : 
             base(new Vector2(0, 0), 
                 TextureBank.InterfaceTextures.saveGameButton, 
                 TextureBank.InterfaceTextures.saveGameButtonPressed)
         {
             this.filename = file;
+
+            switch (num)
+            {
+                case 1:
+                    this.pressed = TextureBank.InterfaceTextures.file1_pressed;
+                    this.passive = TextureBank.InterfaceTextures.file1_not_pressed;
+                    break;
+                case 2:
+                    this.pressed = TextureBank.InterfaceTextures.file2_pressed;
+                    this.passive = TextureBank.InterfaceTextures.file2_not_pressed;
+                    break;
+                case 3:
+                    this.pressed = TextureBank.InterfaceTextures.file3_pressed;
+                    this.passive = TextureBank.InterfaceTextures.file3_not_pressed;
+                    break;
+            }
         }
 
         public override void Update(Cursor cursor)

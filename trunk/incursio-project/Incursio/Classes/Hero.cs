@@ -65,6 +65,7 @@ namespace Incursio.Classes
 
       public void copyHeroStats(Hero h){
           this.maxHealth = h.maxHealth;
+          this.level = h.level;
           this.health = h.health;
           this.damage = h.damage;
           this.experiencePoints = h.experiencePoints;

@@ -13,6 +13,10 @@ namespace Incursio.Managers
         ISoundEngine soundEngine = null;
         private static SoundManager instance = null;
 
+        private string currentBGMusic = "";
+
+        public bool PLAY_BG_MUSIC = false;
+
         private SoundManager()
         {
             soundEngine = new ISoundEngine();
@@ -64,6 +68,38 @@ namespace Incursio.Managers
                 if (soundEngine.IsCurrentlyPlaying(filename) == false)
                 {
                     soundEngine.Play2D(filename, loop);
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine("\n Null Reference Exception Found!");
+                Console.WriteLine("Song File error");
+                Console.WriteLine(e);
+            }
+        }
+
+        public void PlayBGMusic(String filename)
+        {
+            if(!this.PLAY_BG_MUSIC){
+                return;
+            }
+
+            if (filename.Equals(this.currentBGMusic))
+                return;
+            else
+            {
+                this.StopSound();
+                this.currentBGMusic = filename;
+            }
+
+            filename = "../../../Content/Audio/" + filename;
+
+            try
+            {
+                //This makes sure that the file will only start once and not stack on top of itself over and over.
+                if (soundEngine.IsCurrentlyPlaying(filename) == false)
+                {
+                    soundEngine.Play2D(filename, true);
                 }
             }
             catch (NullReferenceException e)
