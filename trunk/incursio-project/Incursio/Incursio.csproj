@@ -78,7 +78,7 @@
   <ItemGroup>
     <Compile Include="Campaign\Capital.cs" />
     <Compile Include="Campaign\CreditsMap.cs" />
-    <Compile Include="Campaign\Map1.cs" />
+    <Compile Include="Campaign\Inland.cs" />
     <Compile Include="Campaign\Port.cs" />
     <Compile Include="Campaign\RandomMap.cs" />
     <Compile Include="Campaign\TestMap.cs" />
