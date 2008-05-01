@@ -261,14 +261,14 @@ namespace Incursio.Classes
                           if (!this.playedDeath)
                           {
                               spriteBatch.Draw(TextureBank.EntityTextures.heroDeathWest,
-                              new Rectangle(onScreen.x - (int)(30 / 2), onScreen.y - (int)(40 * 0.80), 30, 40),
-                              new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 30, 40), colorMask);
+                              new Rectangle(onScreen.x - (int)(36 / 2), onScreen.y - (int)(40 * 0.80), 36, 40),
+                              new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 36, 40), colorMask);
 
                               if (frameTimer >= FRAME_LENGTH)
                               {
-                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heavyInfantryDeath_East.Width - 30)
+                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heavyInfantryDeath_East.Width - 36)
                                   {
-                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 30;
+                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 36;
                                   }
                                   else
                                   {
@@ -279,8 +279,8 @@ namespace Incursio.Classes
                           else
                           {
                               spriteBatch.Draw(TextureBank.EntityTextures.heroDeathWest,
-                              new Rectangle(onScreen.x - (int)(30 / 2), onScreen.y - (int)(40 * 0.80), 30, 40),
-                              new Rectangle(150, 0, 30, 40), colorMask);
+                              new Rectangle(onScreen.x - (int)(36 / 2), onScreen.y - (int)(40 * 0.80), 36, 40),
+                              new Rectangle(144, 0, 36, 40), colorMask);
                           }
                           break;
 
@@ -289,14 +289,14 @@ namespace Incursio.Classes
                           if (!this.playedDeath)
                           {
                               spriteBatch.Draw(TextureBank.EntityTextures.heroDeathWest,
-                              new Rectangle(onScreen.x - (int)(30 / 2), onScreen.y - (int)(40 * 0.80), 30, 40),
-                              new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 30, 40), colorMask);
+                              new Rectangle(onScreen.x - (int)(36 / 2), onScreen.y - (int)(40 * 0.80), 36, 40),
+                              new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 36, 40), colorMask);
 
                               if (frameTimer >= FRAME_LENGTH)
                               {
-                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heavyInfantryDeath_West.Width - 30)
+                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heavyInfantryDeath_West.Width - 36)
                                   {
-                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 30;
+                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 36;
                                   }
                                   else
                                   {
@@ -307,8 +307,8 @@ namespace Incursio.Classes
                           else
                           {
                               spriteBatch.Draw(TextureBank.EntityTextures.heroDeathWest,
-                              new Rectangle(onScreen.x - (int)(30 / 2), onScreen.y - (int)(40 * 0.80), 30, 40),
-                              new Rectangle(150, 0, 30, 40), colorMask);
+                              new Rectangle(onScreen.x - (int)(36 / 2), onScreen.y - (int)(40 * 0.80), 36, 40),
+                              new Rectangle(144, 0, 36, 40), colorMask);
                           }
                           break;
 
