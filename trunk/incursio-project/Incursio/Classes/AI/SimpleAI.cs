@@ -1,3 +1,14 @@
+/****************************************
+ * Copyright © 2008, Team RobotNinja:
+ * 
+ *     - Henry Armstrong
+ *     - Andy Burras
+ *     - Mitch Martin
+ *     - Xuan Yu
+ * 
+ * All Rights Reserved
+ ***************************************/
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -303,10 +314,6 @@ namespace Incursio.Classes
 
         private void prepareAssault()
         {
-            //FIXME OMG: Queue is populating TOO FAST
-            //if (preparingAssault == false)
-            //    this.buildList = new List<EntityBuildOrder>();
-
             this.preparingAssault = true;
 
             if(assaultRallyPoint == null){

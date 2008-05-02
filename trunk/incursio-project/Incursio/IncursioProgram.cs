@@ -1,3 +1,14 @@
+/****************************************
+ * Copyright © 2008, Team RobotNinja:
+ * 
+ *     - Henry Armstrong
+ *     - Andy Burras
+ *     - Mitch Martin
+ *     - Xuan Yu
+ * 
+ * All Rights Reserved
+ ***************************************/
+
 using System;
 
 namespace Incursio
