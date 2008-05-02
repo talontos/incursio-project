@@ -35,8 +35,6 @@ namespace Incursio.Classes
 
         public ArcherUnit() : base(){
             this.pointValue = 75;
-
-            //TODO: set Archer Values
             this.armor = 1;
             this.damage = 20;
             this.moveSpeed = 150.0f;
@@ -46,7 +44,6 @@ namespace Incursio.Classes
             this.maxHealth = 100;
             this.health = 100;
             this.setType(State.EntityName.Archer);
-
         }
 
       public override void Update(Microsoft.Xna.Framework.GameTime gameTime, ref BaseGameEntity myRef)
@@ -58,15 +55,11 @@ namespace Incursio.Classes
               updateArrow();
               if(MapManager.getInstance().currentMap.isOnScreen(new Coordinate((int)arrowPos.X, (int)arrowPos.Y)))
               {
-                  arrowOnScreen = MapManager.getInstance().currentMap.positionOnScreen(new Coordinate((int)arrowPos.X, (int)arrowPos.Y));
+                  arrowOnScreen = MapManager.getInstance().currentMap.positionOnScreen(
+                      new Coordinate((int)arrowPos.X, (int)arrowPos.Y));
               }
               
           }
-      }
-
-      public override string getTextureName()
-      {
-          return @"archerUnit";
       }
 
       public override bool attackTarget()
@@ -86,8 +79,8 @@ namespace Incursio.Classes
 
           if (MapManager.getInstance().currentMap.getCellDistance(location, target.location) <= attackRange + largeTargetBufferZone)
           {
-              //TODO: do some math randomizing damage?
-              if (this.updateAttackTimer == 0)    //this is the unit's attack time (attack every 1.5 seconds for example)
+              //this is the unit's attack time (attack every 1.5 seconds for example)
+              if (this.updateAttackTimer == 0)
               {
 
                   if (target.getLocation().x > this.location.x)
@@ -106,15 +99,8 @@ namespace Incursio.Classes
 
 
                   //if we just killed the thing
-
-                  //if (target is Unit && (target as Unit).getCurrentState() == State.UnitState.Dead ||
-                  //   target is Structure && (target as Structure).getCurrentState() == State.StructureState.Destroyed)
                   if (target.isDead())
                   {
-                      //TODO:
-                      //add AI for attacking more enemies!
-                      //but for now:
-
                       //NOTE: killedTarget needs to be performed BEFORE
                       //  target is set to null so that we know WHAT we killed
                       this.killedTarget();
@@ -123,7 +109,6 @@ namespace Incursio.Classes
                       destination = null;
                       currentState = State.UnitState.Idle;
                   }
-
 
                   this.updateAttackTimer = this.attackSpeed * 60;
               }
@@ -134,12 +119,12 @@ namespace Incursio.Classes
 
               return true;
           }
-          else return false;// updateMovement();
+          else return false;
       }
 
       public void updateArrow()
       {
-          double newPosX = /*(-1) **/ (Math.Cos(arrowAngle * (Math.PI / 180)) * ARROW_SPEED);
+          double newPosX = (Math.Cos(arrowAngle * (Math.PI / 180)) * ARROW_SPEED);
           double newPosY = (-1) * (Math.Sin(arrowAngle * (Math.PI / 180)) * ARROW_SPEED); //INVERT TO COMPENSATE FOR PIXEL GROWTH DIRECTION
 
           //determine the direction, and if we are close enough to the destination, end movement

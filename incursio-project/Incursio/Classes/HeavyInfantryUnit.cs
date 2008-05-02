@@ -28,11 +28,9 @@ namespace Incursio.Classes
         public HeavyInfantryUnit() : base(){
             this.pointValue = 100;
 
-            //TODO: set values
             this.moveSpeed = 100.0f;
             this.armor = 5;
             this.damage = 30;
-            //this.speed = 2;
             this.sightRange = 8;
             this.attackSpeed = 2;
             this.attackRange = 1;

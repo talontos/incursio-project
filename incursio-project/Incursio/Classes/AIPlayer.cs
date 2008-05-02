@@ -44,11 +44,10 @@ namespace Incursio.Classes
 
         public override void update(Microsoft.Xna.Framework.GameTime gameTime)
         {
+            //TODO: Give the computer a money-system
             //Make sure we always have money
             if (this.MONETARY_UNIT < 100)
-                this.MONETARY_UNIT += 100;
-            //base currently only processes messages, which we no longer need to do here
-            //base.update(gameTime);
+                this.MONETARY_UNIT += 100;  //CHEATING!!!!
 
             //this update will perform AI actions for this player
             intelligence.Update(gameTime, this);

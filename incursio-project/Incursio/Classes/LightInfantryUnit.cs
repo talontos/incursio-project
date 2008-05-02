@@ -27,7 +27,6 @@ namespace Incursio.Classes
       public LightInfantryUnit() : base(){
           this.pointValue = 50;
 
-          //TODO: set LightInfantry Values
           this.armor = 3;
           this.damage = 25;
           this.moveSpeed = 125.0f;
@@ -35,11 +34,6 @@ namespace Incursio.Classes
           this.attackSpeed = 2;
           this.attackRange = 1;
           this.setType(State.EntityName.LightInfantry);
-      }
-
-      public override string getTextureName()
-      {
-          return @"infantryUnit";
       }
 
       public override void updateBounds()

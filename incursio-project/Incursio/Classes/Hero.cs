@@ -22,7 +22,6 @@ using System.Xml.Serialization;
 
 namespace Incursio.Classes
 {
-    // the colon is the java equivalent of 'extends'
   public class Hero : Unit
     {
       public static String HERO_CLASS = "Incursio.Classes.Hero";
@@ -54,7 +53,6 @@ namespace Incursio.Classes
           this.name = this.getRandomName();
           this.pointValue = 1000;
 
-          //TODO: set hero properties
           this.moveSpeed = 115.0f;
           this.sightRange = 8;
           this.setType(State.EntityName.Hero);
@@ -68,10 +66,9 @@ namespace Incursio.Classes
 
       public void setHero_Badass()
       {
+          //set badass hero properties
           this.pointValue = 1000;
           this.name = this.getRandomName();
-          //set badass hero properties
-          //this.name = "Princess";
           this.moveSpeed = 115.0f;
           this.sightRange = 8;
           this.setType(State.EntityName.Hero);
@@ -176,6 +173,8 @@ namespace Incursio.Classes
       /// </summary>
       public void updateResourceTick()
       {
+          //taken out for discussion; hero probably shouldn't give money
+          /*
           //give the owner money
           if (timeForResource >= RESOURCE_TICK * 60)
           {
@@ -188,6 +187,7 @@ namespace Incursio.Classes
           {
               timeForResource++;
           }
+          */
       }
 
       public override void drawThyself(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
@@ -242,23 +242,14 @@ namespace Incursio.Classes
 
                           if (frameTimer >= FRAME_LENGTH)
                           {
-                              //if (this.attackFramePause >= 4 || this.currentFrameXAttackDeath > 0)
-                              //{
-                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heroAttackingEast.Width - 36)
-                                  {
-                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 36;
-                                  }
-                                  else
-                                  {
-                                      this.currentFrameXAttackDeath = 0;
-                                  }
-                              //    this.attackFramePause = 0;
-                              //}
-                              //else
-                              //{
-                              //    this.attackFramePause++;
-                              //}
-
+                              if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heroAttackingEast.Width - 36)
+                              {
+                                  this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 36;
+                              }
+                              else
+                              {
+                                  this.currentFrameXAttackDeath = 0;
+                              }
                           }
                           break;
 
@@ -270,22 +261,14 @@ namespace Incursio.Classes
 
                           if (frameTimer >= FRAME_LENGTH)
                           {
-                              //if (this.attackFramePause >= 3 || this.currentFrameXAttackDeath > 0)
-                              //{
-                                  if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heroAttackingEast.Width - 36)
-                                  {
-                                      this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 36;
-                                  }
-                                  else
-                                  {
-                                      this.currentFrameXAttackDeath = 0;
-                                  }
-                              //    this.attackFramePause = 0;
-                              //}
-                              //else
-                              //{
-                              //    this.attackFramePause++;
-                              //}
+                              if (this.currentFrameXAttackDeath < TextureBank.EntityTextures.heroAttackingEast.Width - 36)
+                              {
+                                  this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 36;
+                              }
+                              else
+                              {
+                                  this.currentFrameXAttackDeath = 0;
+                              }
                           }
                           break;
 

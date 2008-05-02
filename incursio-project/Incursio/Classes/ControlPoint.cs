@@ -22,7 +22,8 @@ using Incursio.Commands;
 namespace Incursio.Classes
 {
     /// <summary>
-    /// Control Points are structures, but also not.  They cannot build anything, nor can they be built.  They cannot be damaged or destroyed.
+    /// Control Points are structures, but also not.  They cannot build anything, nor can they be built.  
+    /// They cannot be damaged or destroyed.
     /// They are merely nodes of influence in a map that rewards the owner with monetary amounts.
     /// </summary>
     public class ControlPoint : Structure
@@ -37,13 +38,9 @@ namespace Incursio.Classes
 
         public ControlPoint() : base(){
             this.pointValue = 500;
-            //TODO: set controlpoint values
             this.sightRange = 10;
             this.setType(State.EntityName.ControlPoint);
             this.map = MapManager.getInstance().currentMap;
-
-            //TEMP - mitch
-            //this.isConstructor = true;
         }
 
         public void startCap(Hero capturingHero)
@@ -185,14 +182,12 @@ namespace Incursio.Classes
         public override void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
             this.visible = true;
-            //onScreen = currentMap.positionOnScreen(this.getLocation());
-            //Rectangle unit = new Rectangle(this.getLocation().x, this.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
+
             Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.location);
             Rectangle unit = this.boundingBox;
 
             if (this.currentState == State.StructureState.Building)
             {
-                //TODO: draw something special for when the structure is building something (fires flickering or w/e)
                 if (this.getPlayer() == State.PlayerId.HUMAN)
                 {
                     spriteBatch.Draw(TextureBank.EntityTextures.controlPointPlayer,

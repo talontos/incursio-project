@@ -32,13 +32,11 @@ namespace Incursio.Commands
         }
 
         private void updateMoveCommand(){
-            //this.moveCommand.destination = this.followTarget.getLocation();
             this.moveCommand = new MoveCommand(followTarget.getLocation());
         }
 
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
-
             //if target is dead, set finishedExecution = true
             //otherwise, move toward target
             if (followTarget.isDead()){
@@ -46,7 +44,9 @@ namespace Incursio.Commands
             }
             else{
                 if(MapManager.getInstance().currentMap.getCellDistance(this.followTarget.location, subject.location) > 1){
-//                    this.updateMoveCommand();
+                    //TODO: fix movement; there is a problem with this.
+                    //  sometimes they'll just stand there
+                    //this.updateMoveCommand();
                 }
 
                 moveCommand.execute(gameTime, ref subject);

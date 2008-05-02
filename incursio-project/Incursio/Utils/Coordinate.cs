@@ -13,6 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+//TODO: remove this class and use Point or Vector2
+//  this is redundant
 namespace Incursio.Utils
 {
     public class Coordinate

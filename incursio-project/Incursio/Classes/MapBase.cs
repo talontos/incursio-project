@@ -136,23 +136,6 @@ namespace Incursio.Classes
             this.loadTerrain();
         }
 
-        public void showLocation(Coordinate location)
-        {
-            //try to change the viewable area to surround location
-            /*
-            int minX, minY, maxX, maxY;
-            minX = Math.Max(0, location.x - this.width / 2);
-            maxX = Math.Min(this.width, location.x + this.width / 2);
-            minY = Math.Max(0, location.y - this.height / 2);
-            maxY = Math.Min(this.height, location.y + this.height / 2);
-
-            this.maxViewableX = maxX;
-            this.minViewableX = minX;
-            this.maxViewableY = maxY;
-            this.minViewableY = minY;
-            */
-        }
-
         public void update()
         {
 

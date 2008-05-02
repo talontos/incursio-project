@@ -31,7 +31,6 @@ namespace Incursio.Classes
 
         public List<GameEvent> events;
 
-
         public Player(){
             events = new List<GameEvent>();
         }
@@ -42,15 +41,11 @@ namespace Incursio.Classes
         }
 
         public virtual void update(GameTime gameTime){
-
             //Messages
             this.events.ForEach(delegate(GameEvent e){
-                //TODO: PROCESS MESSAGES
-                //TODO: PLAY SOUNDS
                 MessageManager.getInstance().addMessage(e);
             });
             this.events = new List<GameEvent>();
-            
         }
 
         public virtual void dispatchEvent(GameEvent e){

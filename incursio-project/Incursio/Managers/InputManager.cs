@@ -184,6 +184,7 @@ namespace Incursio.Managers
             }
 
             if(this.keyPressed(Keys.X)){
+                //TODO: 
                 //Cancel current command from Camp, if selected
                 //EntityManager.getInstance().cancelCurrentBuildOrder(State.PlayerId.HUMAN);
             }

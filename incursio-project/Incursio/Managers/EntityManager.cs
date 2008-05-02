@@ -59,7 +59,6 @@ namespace Incursio.Managers
         public void reinitializeInstance()
         {
             instance = new EntityManager();
-            //Incursio.getInstance().setHero(null);
         }
 
         public List<BaseGameEntity> getSelectedUnits(){
@@ -141,14 +140,11 @@ namespace Incursio.Managers
             List<BaseGameEntity> unitsInArea = new List<BaseGameEntity>();
             //bool selectingStructures = true;
 
+            //TODO: select a single structure if no units are in range
             entityBank.ForEach(delegate(BaseGameEntity e)
             {
                 if( area.Contains(e.getLocation().toPoint()) ){
                     if(e.getPlayer() == State.PlayerId.HUMAN && !e.isDead()){
-                        //if( !(e is Structure) )
-                        //    selectingStructures = false;
-
-                        //if( selectingStructures || !(e is Structure) )
                         if( !(e is Structure) )
                             unitsInArea.Add(e);
                     }
@@ -191,12 +187,11 @@ namespace Incursio.Managers
                             }
                             else
                             {
-                                if (selectedUnits.Count == 1)//(numUnitsSelected == 1)
+                                if (selectedUnits.Count == 1)
                                 {
                                     if (selectedUnits[0].getPlayer() == State.PlayerId.COMPUTER)
                                     {
                                         selectedUnits = new List<BaseGameEntity>();
-                                        //numUnitsSelected = 0;
                                     }
                                 }
                                 bool newUnitIsSelected = selectedUnits.Contains(e as Unit);
@@ -206,12 +201,10 @@ namespace Incursio.Managers
                                     if (newUnitIsSelected)
                                     {
                                         selectedUnits.Remove(e);
-                                        //numUnitsSelected--;
                                     }
                                     else if (!e.isDead())
                                     {
                                         this.addToSelectedUnits(e);
-                                        //numUnitsSelected++;
                                     }
                                 }
                                 else
@@ -220,8 +213,6 @@ namespace Incursio.Managers
 
                                     selectedUnits = new List<BaseGameEntity>();
                                     addToSelectedUnits(e);
-                                    
-                                    //numUnitsSelected = 1;
                                 }
                             }
                             done = true;
@@ -231,7 +222,6 @@ namespace Incursio.Managers
             });
             if(!done){   //not clicking a unit
                 selectedUnits = new List<BaseGameEntity>();
-                //numUnitsSelected = 0;
             }
         }
 
@@ -247,7 +237,7 @@ namespace Incursio.Managers
             entityBank.ForEach(delegate(BaseGameEntity e)
             {
 
-                if (e.visible && !e.isDead() ) //(((e is Unit) && (e as Unit).getCurrentState() != State.UnitState.Dead && (e as Unit).getCurrentState() != State.UnitState.Buried) || ((e is Structure) && (e as Structure).getCurrentState() != State.StructureState.Destroyed)))
+                if (e.visible && !e.isDead() )
                 { //only check visible ones so we don't waste time
 
                     //get selection rectangle for e
@@ -396,7 +386,6 @@ namespace Incursio.Managers
             return numPoints;
         }
 
-
         public int getTotalControlPoints()
         {
             int numPoints = 0;
@@ -434,11 +423,11 @@ namespace Incursio.Managers
             return result;
         }
 
+        //TODO: USE STRINGS!!!!!
         public void tryToBuild(BaseGameEntity toBuild /*String entityType*/){
             if (selectedUnits.Count > 0 && selectedUnits[0] is CampStructure && selectedUnits[0].owner == State.PlayerId.HUMAN)
             {
                 this.issueCommand(State.Command.BUILD, true, null, toBuild);
-                //this.createNewEntity(entityType, (selectedUnits[0] as CampStructure).owner);
             }
         }
 
@@ -446,7 +435,6 @@ namespace Incursio.Managers
         {
             if (selectedUnits.Count > 0 && selectedUnits[0] is CampStructure)
             {
-                //(selectedUnits[0] as CampStructure).setNewStructureCoords(new Coordinate((int)point.X, (int)point.Y));
                 this.issueCommand(State.Command.BUILD, true, null, toBuild, new Coordinate((int)point.X, (int)point.Y));
             }
         }
@@ -486,7 +474,6 @@ namespace Incursio.Managers
                     {
                         ////////////////////////
                         case State.Command.MOVE:
-                            //TODO: PATHING!!
                             command = new MoveCommand(args[0] as Coordinate);
                             break;
 

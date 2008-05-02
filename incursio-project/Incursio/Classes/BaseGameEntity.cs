@@ -23,8 +23,6 @@ namespace Incursio.Classes
 {
     public class BaseGameEntity
     {
-        //protected String type = "";    //unit type-name?
-
         public State.EntityName entityType;
         public int maxHealth = 100;
         public int health = 100;
@@ -63,9 +61,6 @@ namespace Incursio.Classes
         /// <param name="gameTime">Game time passed from main loop</param>
         /// <param name="myRef">Mostly a hack, used for executing commands.  It is a reference of 'this'</param>
         public virtual void Update(GameTime gameTime, ref BaseGameEntity myRef){
-            //TODO: draw unit here?
-            //TODO: check if i'm clicked?
-
             if (this.isDead()){
                 this.updateOccupancy(false);
                 return;
@@ -92,7 +87,7 @@ namespace Incursio.Classes
             {
                 orders[0].execute(gameTime, ref myRef);
 
-                //check type for player notification
+                //check type for player notification?
             }
         }
 
@@ -135,13 +130,7 @@ namespace Incursio.Classes
             this.orders.Insert(0, order);
         }
 
-        public virtual Texture2D getCurrentTexture(){
-            //check state & return appropriate texture from TextureBank.EntityTextures
-            return null;
-        }
-
         public virtual void takeDamage(int damage, BaseGameEntity attacker){
-            //TODO: some math using my armor
             int damageTaken = (damage - armor) + (Incursio.rand.Next(0, 10) - 5);  //[-5,+5]
             if (damageTaken < 0)
                 damageTaken = 0;
@@ -156,22 +145,32 @@ namespace Incursio.Classes
             }
         }
 
-        public virtual String getTextureName(){
-            return null;
-        }
-
+        /// <summary>
+        /// Returns if this entity is dead
+        /// </summary>
+        /// <returns>Am I dead?</returns>
         public virtual bool isDead(){
             return health <= 0;
         }
 
+        /// <summary>
+        /// Updates the bounding box of the entity
+        /// </summary>
         public virtual void updateBounds(){
 
         }
 
+        /// <summary>
+        /// Attack this entity's current target
+        /// </summary>
+        /// <returns>True if target is in range</returns>
         public virtual bool attackTarget(){
             return false;
         }
 
+        /// <summary>
+        /// Process statistical information when This kills a target
+        /// </summary>
         public virtual void killedTarget(){
 
         }
@@ -204,6 +203,12 @@ namespace Incursio.Classes
 
         }
 
+        /// <summary>
+        /// Draws this entity on the screen
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        /// <param name="frameTimer"></param>
+        /// <param name="FRAME_LENGTH"></param>
         public virtual void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
 
@@ -247,7 +252,14 @@ namespace Incursio.Classes
             );
         }
 
+        /// <summary>
+        /// Heal me for boost hitpoints, unless I'm dead
+        /// </summary>
+        /// <param name="boost"></param>
         public virtual void heal(int boost){
+            if (this.isDead())
+                return;
+
             if(health < maxHealth){
                 this.health += boost; 
                 MessageManager.getInstance().addMessage(new GameEvent(State.EventType.HEALING, this, "", Convert.ToString(boost), this.location));
