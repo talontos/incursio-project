@@ -1,3 +1,14 @@
+/****************************************
+ * Copyright © 2008, Team RobotNinja:
+ * 
+ *     - Henry Armstrong
+ *     - Andy Burras
+ *     - Mitch Martin
+ *     - Xuan Yu
+ * 
+ * All Rights Reserved
+ ***************************************/
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +27,7 @@ namespace Incursio.Campaign
         private GameResult gameOverResult = null;
         private bool messageSent = false;
 
-        public override void initializeMap(/*PASS A FILE IN DEFINING MAP??*/)
+        public override void initializeMap()
         {   
             base.initializeMap();
         }
