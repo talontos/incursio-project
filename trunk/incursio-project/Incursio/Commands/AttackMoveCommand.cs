@@ -39,7 +39,7 @@ namespace Incursio.Commands
             move.execute(gameTime, ref subject);
             guard.execute(gameTime, ref subject);
 
-            this.finishedExecution = move.finishedExecution;// || guard.finishedExecution;
+            this.finishedExecution = move.finishedExecution;
         }
     }
 }

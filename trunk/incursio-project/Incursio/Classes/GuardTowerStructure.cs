@@ -32,30 +32,19 @@ namespace Incursio.Classes
       protected int attackRange = 14;
       protected BaseGameEntity target = null;
 
-        public GuardTowerStructure() : base(){
-            this.pointValue = 250;
+      public GuardTowerStructure() : base(){
+          this.pointValue = 250;
 
-            this.maxHealth = 350;
-            this.health = maxHealth;
-            this.armor = 5;
-            this.sightRange = 10;
-            this.setType(State.EntityName.GuardTower);
-            this.map = MapManager.getInstance().currentMap;
-            this.currentState = State.StructureState.Idle;
+          this.maxHealth = 350;
+          this.health = maxHealth;
+          this.armor = 5;
+          this.sightRange = 10;
+          this.setType(State.EntityName.GuardTower);
+          this.map = MapManager.getInstance().currentMap;
+          this.currentState = State.StructureState.Idle;
 
-            smartGuarding = false;
-            canAttack = true;
-        }
-
-      public override void build(EntityBuildOrder toBeBuilt)
-      {
-          //guardtower upgrades?
-          base.build(toBeBuilt);
-      }
-
-      public override void buildTick()
-      {
-          base.buildTick();
+          smartGuarding = false;
+          canAttack = true;
       }
 
       public void attack(BaseGameEntity target)
@@ -74,7 +63,6 @@ namespace Incursio.Classes
 
       public override bool attackTarget()
       {
-          
           //if target is in attackRange, attack it!
           if (map.getCellDistance(location, target.location) < attackRange)
           {
@@ -86,9 +74,6 @@ namespace Incursio.Classes
                   if (target is Unit && (target as Unit).getCurrentState() == State.UnitState.Dead ||
                        target is Structure && (target as Structure).getCurrentState() == State.StructureState.Destroyed)
                   {
-                      //TODO:
-                      //add AI for attacking more enemies!
-                      //but for now:
                       target = null;
                       currentState = State.StructureState.Idle;
                   }
@@ -197,8 +182,6 @@ namespace Incursio.Classes
       {
           this.visible = true;
           this.justDrawn = false;
-          //onScreen = currentMap.positionOnScreen(this.getLocation());
-          //Rectangle unit = new Rectangle(this.getLocation().x, this.getLocation().y, currentMap.getTileWidth(), currentMap.getTileHeight());
           Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.location);
           Rectangle unit = this.boundingBox;
 
@@ -208,7 +191,6 @@ namespace Incursio.Classes
           }
           else if (this.currentState == State.StructureState.Building)
           {
-              //TODO: draw something special for when the structure is building something (fires flickering or w/e)
               if (this.getPlayer() == State.PlayerId.HUMAN)
               {
                   spriteBatch.Draw(TextureBank.EntityTextures.guardTowerTexturePlayer,
@@ -236,10 +218,7 @@ namespace Incursio.Classes
 
                   destroyedTimer++;
               }
-
-              
-              
-              
+   
           }
           else if (this.currentState == State.StructureState.Idle || this.currentState == State.StructureState.Attacking)
           {

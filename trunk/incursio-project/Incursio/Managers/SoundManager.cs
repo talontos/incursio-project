@@ -44,11 +44,6 @@ namespace Incursio.Managers
             return instance;
         }
 
-        //public void InitializeEngine()
-        //{
-        //    ISoundEngine soundEngine = new ISoundEngine();
-        //}
-
         //update the sound engine
         //This class is pointless unless the game is using 3D sound
         //We may try 3D sounds later
@@ -72,7 +67,6 @@ namespace Incursio.Managers
         //loop will loop the sound if true.  Otherwise, sound will play once and stop
         public void PlaySound(String filename, bool loop) 
         {
-            //filename = "../../../Content/Audio/" + filename;
             filename = EntityConfiguration.FileConfig.audioPath + filename;
 
             try

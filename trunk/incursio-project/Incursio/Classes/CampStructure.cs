@@ -58,8 +58,7 @@ namespace Incursio.Classes
 
         public CampStructure() : base(){
             this.pointValue = 1000;
-
-            //TODO: Set camp properties
+            
             this.maxHealth = 350;
             this.health = 350;
             this.armor = 10;
@@ -508,7 +507,7 @@ namespace Incursio.Classes
             }
             else if (this.currentState == State.StructureState.Building)
             {
-                //TODO: draw something special for when the structure is building something (fires flickering or w/e)
+                //draw something special for when the structure is building something (fires flickering or w/e)
                 if (this.getPlayer() == State.PlayerId.HUMAN)
                 {
                     spriteBatch.Draw(TextureBank.EntityTextures.campTexturePlayerBuilding,
@@ -543,9 +542,6 @@ namespace Incursio.Classes
                 {
                     if (alphaChan >= 0)
                     {
-                    
-
-                        //TODO: building asploded
                         if (this.getPlayer() == State.PlayerId.HUMAN)
                         {
                             spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputerExploded,

@@ -17,6 +17,9 @@ using Incursio.Managers;
 
 namespace Incursio.Utils
 {
+    /// <summary>
+    /// This class represents an important point on a map; generally a camp or control point
+    /// </summary>
     public class KeyPoint
     {
         public State.PlayerId owner{
@@ -107,9 +110,6 @@ namespace Incursio.Utils
                 }
                 this.pointSecure = false;
             }
-
-            //if (numUnitsOrdered > 0 || numGuardTowersOrdered > 0)
-            //    this.pointSecure = false;
 
             report.secure = this.pointSecure;
             return report;

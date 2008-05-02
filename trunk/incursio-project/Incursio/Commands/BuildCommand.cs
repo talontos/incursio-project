@@ -22,16 +22,13 @@ namespace Incursio.Commands
 {
     public class BuildCommand : BaseCommand
     {
-        //TODO: IMPLEMENT BUILDING USING STRING
         public String buildClass;
         public EntityBuildOrder buildOrder;
-        //public BaseGameEntity toBeBuilt;
 
         public BuildCommand(BaseGameEntity toBeBuilt, Coordinate location){
             this.buildOrder = new EntityBuildOrder(location, toBeBuilt);
         }
 
-        //NOTE: for building, subject will be a structure; probably a camp
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
             //TODO: EXPAND ON THIS

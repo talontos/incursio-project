@@ -46,32 +46,17 @@ namespace Incursio
         TextureManager textureManager;
         PlayerManager playerManager;
         MessageManager messageManager;
-        
-        //Sound Stuff
-        //SoundManager soundManager;              //does sound stuff
-        //ISoundEngine engine = new ISoundEngine();
-        
-        //Game Time keeping
-        float frameTime;
 
-        //unit initialization
-
-        /////////////////////////////
-
-        //map initialization
-        //BaseMapEntity tex1;
         public MapBase currentMap;
 
+        //Hero "shell" for storing hero attributes between games
         private Hero hero;
 
         //game information
         public State.GameState currentState
         {
             get { return this.state; }
-            set {
-                this.state = value;
-                //SoundManager.getInstance().StopSound();
-            }
+            set { this.state = value; }
         }
         private State.GameState state = State.GameState.Initializing;
 
@@ -116,21 +101,9 @@ namespace Incursio
         int frameTimer = 0;
         const int FRAME_LENGTH = 8;
 
-        //analyze FPS
-        //string frameString;
-
-        //Game Data Storage stuff
-        //IAsyncResult result;
-        //Object stateobj;
-        //bool GameSaveRequested = false;
-        //GamePadState currentState;
-
         public Incursio(){
 
-            //this.IsFixedTimeStep = false;
-
             Incursio.instance = this;
-
 
             graphics = new GraphicsDeviceManager(this);
             hud = new HeadsUpDisplay();
@@ -140,15 +113,12 @@ namespace Incursio
 
             this.Components.Add(new GamerServicesComponent(this));
 
-            //MapManager.getInstance().initializeCurrentMap();
-
             playerManager = PlayerManager.getInstance();
             messageManager = MessageManager.getInstance();
 
             FileManager.getInstance().loadGameConfiguration();
-
-            //soundManager = SoundManager.getInstance();
             
+            //TODO: Make this more general
             //set the window size to 1024x768
             this.graphics.PreferredBackBufferWidth = 1024;
             this.graphics.PreferredBackBufferHeight = 768;
@@ -170,8 +140,6 @@ namespace Incursio
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -181,7 +149,7 @@ namespace Incursio
         /// </summary>
         protected override void LoadContent()
         {
-            //TODO: Load images into textureBank
+            //Load images into textureBank
             this.textureManager = TextureManager.initializeTextureManager(Content);
 
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -223,6 +191,7 @@ namespace Incursio
             saveMenu = new MenuSet(600, 500, new SaveButton("Hero1.wtf", 1), new SaveButton("Hero2.wtf", 2), new SaveButton("Hero3.wtf", 3), new MainMenuButton());
             instructionsMenu = new MenuSet(800, 400, new CreditsButton(), new MainMenuButton());
             creditsMenu = new MenuSet(0, 0, new MainMenuButton());
+
             //once everything is loaded up, go to the main menu
             currentState = State.GameState.Menu;
         }
@@ -243,11 +212,9 @@ namespace Incursio
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            frameTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            
-
             cursor.Update();    //update the cursor
+
+            //TODO: Remove these 2 lines; this should be done in the InputManager
             kbState = Keyboard.GetState();  //get the present state of the keyboard
             keysPressed = (Keys[])kbState.GetPressedKeys(); //get all the keys that are being pressed
 
@@ -279,9 +246,6 @@ namespace Incursio
 
             drawState();
 
-            //this is how to draw simple text onto the screen
-            //spriteBatch.DrawString(font, "hello world", FontPos, Color.DarkBlue, 0, font.MeasureString("hello world") / 2, 1.0f, SpriteEffects.None, 0.5f);
-
             //draw the cursor
             cursor.Draw(spriteBatch);
 
@@ -297,7 +261,6 @@ namespace Incursio
 
             switch(this.currentState){
                 case (State.GameState.Initializing): 
-                    //TODO: perform initializing actions
                     break;
 
                 case (State.GameState.InPlay):
@@ -307,18 +270,11 @@ namespace Incursio
                     //update entities
                     EntityManager.getInstance().updateAllEntities(gameTime);
 
-                    //NOTE: InputUpdate has been moved outside of this case
-                    //InputManager.getInstance().Update(gameTime);
-
                     MapManager.getInstance().currentMap.update();
 
                     PlayerManager.getInstance().updatePlayers(gameTime);
 
                     MessageManager.getInstance().update();
-
-                    //SoundManager.getInstance().PlaySound("../../../Content/Audio/Film.mp3", true);
-                    //FileManager.getInstance().saveCurrentGame("HeroSave.zomgwtflolbbq");
-                    //FileManager.getInstance().loadGame("HeroSave.zomgwtflolbbq");
 
                     //listener for menu button
                     gameMenuButton.Update(cursor);
@@ -334,16 +290,10 @@ namespace Incursio
                     break;
 
                 case (State.GameState.Menu):
-                    
-                    //listener for menu button
-                    //mapSelectButton.Update(cursor);
-                    //exitGameButton.Update(cursor);
                     mainMenu.Update(cursor);
                     break;
 
                 case State.GameState.MapSelection:
-                    //newGameButton_level1.Update(cursor);
-                    //exitGameToMenuButton.Update(cursor);
                     mapSelectionMenu.Update(cursor);
                     break;
 
@@ -358,7 +308,6 @@ namespace Incursio
                     break;
 
                 case (State.GameState.Credits):
-                    //TODO: perform Credits actions
                     creditsMenu.Update(cursor);
                     break;
 
@@ -410,7 +359,6 @@ namespace Incursio
             {
                 case (State.GameState.Initializing):
                     spriteBatch.DrawString(font, "Game State: INITIALIZING", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: INITIALIZING") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                    //TODO: perform initializing actions
                     break;
 
                 case (State.GameState.InPlay):
@@ -476,16 +424,12 @@ namespace Incursio
                     spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
 
-                    //spriteBatch.DrawString(font, "Game State: MAP SELECTION", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: MAP SELECTION") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                    //newGameButton_level1.Draw(spriteBatch);
-                    //exitGameToMenuButton.Draw(spriteBatch);
                     mapSelectionMenu.Draw(spriteBatch);
 
                     break;
 
                 case (State.GameState.Credits):
                     //spriteBatch.DrawString(font, "Game State: CREDITS", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: CREDITS") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                    //TODO: perform Credits actions
                     spriteBatch.Draw(TextureBank.InterfaceTextures.creditsBackground, new Rectangle(0, 0, 1024, 768), Color.White);
                     creditsMenu.Draw(spriteBatch);
                     break;
@@ -496,39 +440,28 @@ namespace Incursio
                     spriteBatch.Draw(TextureBank.InterfaceTextures.defeatMenuBackground,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
 
-                    //mapSelectButton.Draw(spriteBatch);
-                    //exitGameButton.Draw(spriteBatch);
                     mainMenu.Draw(spriteBatch);
 
-                    //TODO: perform Defeat actions
                     break;
 
                 case (State.GameState.Victory):
-                    spriteBatch.DrawString(font, "Game State: Epic Win!!! " + stateString, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: Epic Win!!! " + stateString) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    //spriteBatch.DrawString(font, "Game State: Epic Win!!! " + stateString, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: Epic Win!!! " + stateString) / 2, 1.0f, SpriteEffects.None, 0.5f);
 
                     spriteBatch.Draw(TextureBank.InterfaceTextures.victoryMenuBackground,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
 
-                    //mapSelectButton.Draw(spriteBatch);
-                    //exitGameButton.Draw(spriteBatch);
                     mainMenu.Draw(spriteBatch);
-
-                    //TODO: perform Victory actions
                     break;
 
                 case (State.GameState.PausedPlay):
                     graphics.GraphicsDevice.Clear(Color.SteelBlue);
 
-                    spriteBatch.DrawString(font, "Game Paused", new Vector2(520, 100), Color.White, 0, font.MeasureString("Game Paused") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    //spriteBatch.DrawString(font, "Game Paused", new Vector2(520, 100), Color.White, 0, font.MeasureString("Game Paused") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
                     spriteBatch.Draw(TextureBank.InterfaceTextures.pauseMenuBackground,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
                     
-                    //exitGameToMenuButton.Draw(spriteBatch);
-                    //resumeGameButton.Draw(spriteBatch);
                     pauseMenu.Draw(spriteBatch);
-                 
-                    //TODO: perform PausedPlay actions
                     break;
 
                 case (State.GameState.Instructions):
@@ -546,10 +479,10 @@ namespace Incursio
             }
         }
 
+        /// <summary>
+        /// Plays appropriate background sounds per state
+        /// </summary>
         public void playStateSounds(){
-
-            //UNTIL WE GET SOUNDS
-            //return;
 
             switch(currentState){
                 case State.GameState.Menu:
@@ -613,9 +546,9 @@ namespace Incursio
                         e.visible = false;
                 }
 
-               
             });
 
+            //BIG TODO: GENERALIZE THIS FOREACH SO WE DON'T NEED A CASE FOR EVERY ENTITY
             //show selection overlay on all visible selected units
             EntityManager.getInstance().getSelectedUnits().ForEach(delegate(BaseGameEntity u)
             {

@@ -94,12 +94,7 @@ namespace Incursio.Classes
         {
             this.currentState = state;
         }
-/*
-        public virtual void build(BaseGameEntity toBeBuilt)
-        {
-            this.buildProject = toBeBuilt;
-        }
-*/
+
         public virtual void build(EntityBuildOrder toBeBuilt)
         {
             this.buildProject = toBeBuilt;
@@ -126,7 +121,6 @@ namespace Incursio.Classes
 
         public override void takeDamage(int damage, BaseGameEntity attacker)
         {
-            //TODO: some math using my armor
             //this.health -= damage;
             base.takeDamage(damage, attacker);
 

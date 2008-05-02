@@ -47,11 +47,13 @@ namespace Incursio.Managers
         }
 
         public MapBase setCurrentLevel(State.CampaignLevel level){
-            //TODO: Define Different levels
+            
             switch(level){
-                case State.CampaignLevel.CREDITS:
+                //TODO: Credits 'map'?
+                /*case State.CampaignLevel.CREDITS:
                     currentMap = new CreditsMap();
                     break;
+                */
                 case State.CampaignLevel.ONE:   
                     currentMap = new Port();  
                     break;
@@ -93,10 +95,6 @@ namespace Incursio.Managers
 
             if (winState.resultState != State.GameState.None)
                 Incursio.getInstance().GameResult = winState;
-        }
-
-        public void showLocation(Coordinate location){
-            this.currentMap.showLocation(location);
         }
     }
 }

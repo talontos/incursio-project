@@ -27,7 +27,6 @@ namespace Incursio.Classes
         protected const int TIME_DEAD_UNTIL_DESPAWN = 5;
 
         public int damage = 0;
-        //protected int speed = 0;
         protected int attackSpeed = 0;
         protected int updateAttackTimer = 0;
         protected int attackRange = 0;
@@ -40,13 +39,6 @@ namespace Incursio.Classes
 
         protected Coordinate destination = null;
         public BaseGameEntity target = null;
-
-        //TEXTURES
-        public List<Texture2D> textureAnim_N;
-        public List<Texture2D> textureAnim_S;
-        public List<Texture2D> textureAnim_E;
-        public List<Texture2D> textureAnim_W;
-        public int textureIndex;
 
         public Unit() : base(){
             canAttack = true;
@@ -78,7 +70,6 @@ namespace Incursio.Classes
             }
         }
 
-        //TODO: We need to somehow take into account the game time to allow for smoother movement
         public override bool updateMovement(float ElapsedTime)
         {
 
@@ -87,11 +78,7 @@ namespace Incursio.Classes
             //move
             bool retVal = base.updateMovement(ElapsedTime);
 
-            this.updateOccupancy(true);
-
-            //MOVED TO BOTTOM
-            //return retVal;
-            
+            this.updateOccupancy(true);            
             
             float xMinimumThreshold = 0.10F;
             float yMinimumThreshold = 0.10F;
@@ -113,54 +100,21 @@ namespace Incursio.Classes
 
                 if (xDirection > xMinimumThreshold && (xDirection / yDirection) >= 1)
                 {
-                    //newX += speed;
                     this.directionState = State.Direction.East;
                 }
                 else if (xDirection < -xMinimumThreshold && (xDirection / yDirection) <= -1)
                 {
-                    //newX += -1 * speed;
                     this.directionState = State.Direction.West;
-                }
-                else
-                {
-                    //newX = destination.x;
                 }
 
                 if (yDirection > yMinimumThreshold && ((Math.Abs(xDirection)) / yDirection) < 1)
                 {
-                    //newY += speed;
                     this.directionState = State.Direction.South;
                 }
                 else if (yDirection < -yMinimumThreshold && (xDirection / yDirection) < 1)
                 {
-                    //newY += -1 * speed;
                     this.directionState = State.Direction.North;
                 }
-                else
-                {
-                    //newY = destination.y;
-                }
-                /*
-                if(!Incursio.getInstance().currentMap.requestMove(location.x, location.y, newX, newY)){
-                    //new point is occupied; we have to turn!
-                    this.currentState = State.UnitState.Idle;
-
-                    //TODO: PATHING, insert move commands in my queue
-                    return true;
-                }
-                else{
-                    //open up our old space
-                    MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, 1);
-
-                    //move
-                    location = new Coordinate(newX, newY);
-
-                    //set occupancy
-                    MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y, 0);
-
-                    return false;
-                }
-                */
             }
 
             return retVal;
@@ -192,7 +146,6 @@ namespace Incursio.Classes
             this.destination = new Coordinate(destination.x + (currentMap.getMinimumX() * currentMap.getTileWidth()), destination.y + (currentMap.getMinimumY() * currentMap.getTileHeight()));
             this.target = null;
             this.map = currentMap;
-            //this.destination = destination;
         }
 
         /// <summary>
@@ -230,8 +183,6 @@ namespace Incursio.Classes
         /// <param name="targetEntity">Target entity</param>
         public virtual void attack(BaseGameEntity targetEntity)
         {
-            /*this.currentState = State.UnitState.Attacking;
-            this.target = targetEntity;*/
             if (targetEntity is Unit && ((targetEntity as Unit).getCurrentState() != State.UnitState.Dead && (targetEntity as Unit).getCurrentState() != State.UnitState.Buried))
             {
                 this.currentState = State.UnitState.Attacking;
@@ -257,8 +208,6 @@ namespace Incursio.Classes
         //since units can take damage and then give damage, we'll set up a function just for them
         public override void takeDamage(int damage, BaseGameEntity attacker)
         {
-            //TODO: some math using my armor
-            //this.health -= damage;
             base.takeDamage(damage, attacker);
 
             if (this.health <= 0)
@@ -368,35 +317,8 @@ namespace Incursio.Classes
             }
 
             if(MapManager.getInstance().currentMap.getCellDistance(location, target.location) <= attackRange + largeTargetBufferZone){
-                //TODO: do some math randomizing damage?
                 if (this.updateAttackTimer == 0)    //this is the unit's attack time (attack every 1.5 seconds for example)
                 {
-                    //basically, if we are attacking something that can attack back
-                    /*if (target.getType() == State.EntityName.Archer || target.getType() == State.EntityName.LightInfantry || 
-                        target.getType() == State.EntityName.Hero   || target.getType() == State.EntityName.HeavyInfantry)
-                    {
-                        (target as Unit).takeDamage(this.damage, this);
-
-                        //if we just killed the unit
-                        if ((target as Unit).getCurrentState() == State.UnitState.Dead)
-                        {
-                            //TODO:
-                            //add AI for attacking more enemies!
-                            //but for now:
-                            target = null;
-                            currentState = State.UnitState.Idle;
-                        }
-                    }
-                    else if (target.getType() == State.EntityName.GuardTower)
-                    {
-                        //since guard towers are a little different, different notice
-                        (target as Structure).takeDamage(this.damage);
-                    }
-                    else
-                    {
-                        target.takeDamage(this.damage);
-                    }*/
-
                     if (target.getLocation().x > this.location.x)
                     {
                         this.directionState = State.Direction.East;
@@ -415,10 +337,6 @@ namespace Incursio.Classes
                     //   target is Structure && (target as Structure).getCurrentState() == State.StructureState.Destroyed)
                     if(target.isDead())
                     {
-                        //TODO:
-                        //add AI for attacking more enemies!
-                        //but for now:
-
                         //NOTE: killedTarget needs to be performed BEFORE
                         //  target is set to null so that we know WHAT we killed
                         this.killedTarget();
@@ -427,7 +345,6 @@ namespace Incursio.Classes
                         destination = null;
                         currentState = State.UnitState.Idle;
                     }
-
 
                     this.updateAttackTimer = this.attackSpeed * 60;
                 }
@@ -438,7 +355,7 @@ namespace Incursio.Classes
 
                 return true;
             }
-            else return false;// updateMovement();
+            else return false;
         }
 
         public override bool isDead()
@@ -473,25 +390,6 @@ namespace Incursio.Classes
             }
         }
 
-        public override Texture2D getCurrentTexture()
-        {
-            switch(this.directionState){
-                case State.Direction.North:
-                    return textureAnim_N[textureIndex];
-
-                case State.Direction.South:
-                    return textureAnim_S[textureIndex];
-
-                case State.Direction.East:
-                    return textureAnim_E[textureIndex];
-
-                case State.Direction.West:
-                    return textureAnim_W[textureIndex];
-            }
-
-            return null;
-        }
-
         public override int getAttackDamage()
         {
             return this.damage;
@@ -506,12 +404,6 @@ namespace Incursio.Classes
         {
             return this.attackSpeed;
         }
-
-        /*protected virtual void updateDirectionTexture(){
-            switch(directionState){
-                //TODO: reload my texture depending on my directionState
-            }
-        }*/
 
         public override void setTarget(BaseGameEntity target)
         {

@@ -42,7 +42,6 @@ namespace Incursio.Managers
         private TextureManager(ContentManager Content){
             //TODO: load texture definition file
 
-
             //TODO: Parse def'n file, and load Content into Content
             //  then store references in TextureBank
 

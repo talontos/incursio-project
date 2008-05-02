@@ -67,7 +67,6 @@ namespace Incursio.Commands
                 {
                     //cell is occupied; move somewhere else
                     this.destination =
-                        //MapManager.getInstance().currentMap.getPassableLocation(destination);
                         MapManager.getInstance().currentMap.getClosestPassableLocation(subject.location, destination);
 
                     if(destination == null){
@@ -79,12 +78,11 @@ namespace Incursio.Commands
                 MovableObject unit = subject as MovableObject;
                 start = subject.getLocation();
 
-                Vector2 Click = destination.toVector2();// new Vector2(MSStateCurrent.X, MSStateCurrent.Y);
+                Vector2 Click = destination.toVector2();
 
-                int X = (int)(destination.x /*+ (offX * MapManager.TILE_WIDTH)*/ ) / MapManager.TILE_WIDTH;
-                int Y = (int)(destination.y /*+ (offY * MapManager.TILE_HEIGHT)*/ ) / MapManager.TILE_HEIGHT;
+                int X = (int)(destination.x ) / MapManager.TILE_WIDTH;
+                int Y = (int)(destination.y ) / MapManager.TILE_HEIGHT;
 
-                //Point Start = new Point((int)(subject.getLocation().x / MapManager.TILE_WIDTH), (int)(subject.getLocation().y / MapManager.TILE_HEIGHT));
                 Point Start = new Point((int)(unit.PositionCurrent.X / MapManager.TILE_WIDTH), (int)(unit.PositionCurrent.Y / MapManager.TILE_HEIGHT));
                 Point End = new Point((int)(Click.X / MapManager.TILE_WIDTH), (int)(Click.Y / MapManager.TILE_HEIGHT));
 
@@ -101,41 +99,11 @@ namespace Incursio.Commands
                         unit.PathMove(ref foundPath, unit.PositionCurrent, Click);
                     else{
                         //NO PATH FOUND
-                        //TODO: MOVE TOWARD TARGET
                         start = null;
-                        
-                        //SET DESTINATION TO SOMETHING CLOSER
-                        //this.destination.x += 1;
-
-                        //return;
-                        ///////OR//////
-                        //issue CANT_MOVE_THERE GameEvent and don't worry about it
                     }
                 }
             }
-            /*
-            if(subject.isMoving() && prevLocation != null){
-                Coordinate cur = new Coordinate();
-                Coordinate prev = new Coordinate();
 
-                MapManager.getInstance().currentMap.translatePixelToMapCell(subject.location.x, subject.location.y, out cur.x, out cur.y);
-                MapManager.getInstance().currentMap.translatePixelToMapCell(prevLocation.x, cur.y, out prevLocation.x, out prev.y);
-                
-                if (cur.x == prev.x && cur.y == prev.y)
-                {
-                    stuckCounter++;
-
-                    if(stuckCounter >= 60){
-                        bool stuck = true;
-                    //TODO: insert intermediary move command to try
-                        //  to get back on course
-                    }
-                }
-                else{
-                    stuckCounter = 0;
-                }
-            }
-            */
             //move towards destination
 
             subject.setDestination(this.destination);

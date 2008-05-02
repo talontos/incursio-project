@@ -15,6 +15,10 @@ using System.Text;
 
 namespace Incursio.Managers
 {
+    /// <summary>
+    /// This is a class containing static sets of arrays for playing sounds
+    /// //each sound is the filename of the sound to play
+    /// </summary>
     public class SoundCollection
     {
 

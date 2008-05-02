@@ -41,7 +41,8 @@ namespace Incursio.Commands
 
             if(formidableEnemies.Count > 0){
 
-                //TODO: Select a random enemy (possibly weight them)
+                //Select a random enemy
+                //TODO: add weights to them
                 BaseGameEntity e = formidableEnemies[Incursio.rand.Next(0, formidableEnemies.Count)];
 
                 if( !(e is ControlPoint) )

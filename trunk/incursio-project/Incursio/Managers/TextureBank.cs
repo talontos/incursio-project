@@ -18,7 +18,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Incursio.Managers
 {
     /// <summary>
-    /// Class with 2 static subclasses.  For use to store Texture references to avoid constant string-matching
+    /// Class with static subclasses for use to store Texture references to avoid constant string-matching
     /// </summary>
     public class TextureBank
     {
