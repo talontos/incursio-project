@@ -169,5 +169,57 @@ namespace Incursio.Managers
                 Console.WriteLine(e);
             }
         }
+
+        private void ReadConfigurationFile(string sFilePath)
+        {
+            //if (sFilePath == null)
+            //{
+            //    throw new NullReferenceException("File Path was null for Projectile's ReadScript");
+            //}
+
+            //StreamReader oFileReader = new StreamReader(sFilePath);
+            //string[] sParsedString = new string[5];
+            //char[] cDelimeters = new char[1];
+            //cDelimeters[0] = ' ';
+            //const int SCRIPT_TYPE = 0;
+            //const int SCRIPT_ATTRIBUTE_1 = 1;
+            //const int SCRIPT_ATTRIBUTE_2 = 2;
+            //const int SCRIPT_ATTRIBUTE_3 = 3;
+            //const int SCRIPT_ATTRIBUTE_4 = 4;
+            //while (oFileReader.Peek() != -1)
+            //{
+            //    sParsedString = oFileReader.ReadLine().Split(cDelimeters);
+            //    if (sParsedString[SCRIPT_TYPE].Equals("Speed"))
+            //    {
+            //        m_iSpeed = Convert.ToInt32(sParsedString[SCRIPT_ATTRIBUTE_1]);
+            //    }
+            //    else if (sParsedString[SCRIPT_TYPE].Equals("Texture"))
+            //    {
+            //        try
+            //        {
+            //            m_oTexture = m_oContent.Load<Texture2D>(sParsedString[SCRIPT_ATTRIBUTE_1]);
+
+            //            if (!(m_iWidth == -1))
+            //            {
+            //                //This sets the number of columns in sprite
+            //                m_iSBColumns = m_oTexture.Width / m_iWidth;
+            //            }
+
+            //        }
+            //        catch (ContentLoadException e)
+            //        {
+
+            //        }
+            //        catch (FileNotFoundException e)
+            //        {
+
+            //        }
+            //    }
+            //    else{
+
+            //    }
+            //}
+            //oFileReader.Close();
+        }
     }
 }
