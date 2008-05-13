@@ -11,5 +11,12 @@ namespace Incursio.Entities.Components
 
         }
 
+        /// <summary>
+        /// Sets attributes of this component
+        /// </summary>
+        /// <param name="args">paired list of attributes and their values</param>
+        public virtual void setAttributes(List<KeyValuePair<string, object>> attributes){
+
+        }
     }
 }
