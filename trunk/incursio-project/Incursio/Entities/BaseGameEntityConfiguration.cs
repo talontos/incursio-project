@@ -8,7 +8,7 @@ namespace Incursio.Entities
     /// <summary>
     /// This is a class used to house all information required to construct an instance of an entity
     /// </summary>
-    public class EntityConfiguration
+    public class BaseGameEntityConfiguration
     {
         public int classID;
         public string className;
@@ -24,7 +24,7 @@ namespace Incursio.Entities
 
         public List<ComponentConfiguration> components = new List<ComponentConfiguration>();
 
-        public EntityConfiguration(int id, string name, params string[] args){
+        public BaseGameEntityConfiguration(int id, string name, params string[] args){
             this.classID = id;
             this.className = name;
 
@@ -48,6 +48,10 @@ namespace Incursio.Entities
             for (int i = 0; (i + 1) < args.Length; i += 2){
                 cc.addAttribute(new KeyValuePair<string, object>(args[i], args[i + 1]));
             }
+        }
+
+        public void setEntityAttributes(out BaseGameEntity entity){
+
         }
 
     }
