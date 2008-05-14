@@ -262,7 +262,9 @@ namespace Incursio.Classes
         /// <param name="FRAME_LENGTH"></param>
         public virtual void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
-
+            //TODO: USE COMPONENT
+            if(this.renderComponent != null)
+                this.renderComponent.drawThyself(ref spriteBatch, frameTimer, FRAME_LENGTH);
         }
 
         public virtual bool isCapturing(){
@@ -379,6 +381,9 @@ namespace Incursio.Classes
             this.updateOccupancy(false);
             this.location = coords;
             this.updateOccupancy(true);
+
+            if (this.factoryComponent != null)
+                this.factoryComponent.setSpawnAndDestination();
         }
 
         public virtual int getKeyId(){

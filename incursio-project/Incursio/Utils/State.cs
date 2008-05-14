@@ -19,75 +19,41 @@ namespace Incursio
     {
         public enum GameState{
             None,   //Defaut value; no state set
-
             Initializing,   //Application *just* started  - initializing stuff
-
             Menu,   //Game menu ???
-
             MapSelection,
-
             LoadMenu,
-
             SaveMenu,
-
             Instructions,
-
             InPlay, //Game has started
-
             PausedPlay, //Game ins paused
-
             Victory,    //Victory screen
-
             Defeat,     //Defeat screen
-
             Credits,    //Credits are 'rolling'
         }
 
-        public enum UnitState
+        public enum EntityState
         {
             Idle,   //Default value; just standing aroud
-
             Moving, //Moving from point A to B
-
             Wandering,  //moving around to random places
-
             Guarding,   //Stays in place unless enemies come into visible range
-
             Attacking,  //Attacking...duh.      \
                             //                   }-- Do we need two states?  Could just be 'InCombat'
             UnderAttack,    //Being attacked    /
-
             Capturing,
-
             Dead,
-
             Buried,
-
-        }
-
-        public enum StructureState  //states of a building
-        {
-            Idle,
-            
             BeingBuilt,
-
             Building,
-
             Destroyed,
-
-            Attacking,  //for guard towers
-
-            Guarding,
         }
 
         public enum HealthStates
         {
             Healthy,    //Full, or almost full, health       (green bar?)
-
             Wounded,    //Medium health; wounded character.  (yellow bar?)
-
             Dying,      //Low health                         (red bar?)
-
             Dead,      //Uhh...he's dead.  Game over, man
         }
 
@@ -102,42 +68,26 @@ namespace Incursio
                 //*Zooms?
 
             Still,      //Default, camera is not moving
-
             North,
-
             Northeast,
-
             East,
-
             Southeast,
-
             South,
-
             Southwest,
-
             West,
-
             Northwest,
         }
 
         public enum EntityName
         {
             NONE,
-
             LightInfantry,
-
             HeavyInfantry,
-
             Archer,
-
             Hero,
-
             GuardTower,
-
             Camp,
-
             ControlPoint,
-
             //TODO: add more entity types
 
         }

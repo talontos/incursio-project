@@ -41,7 +41,7 @@ namespace Incursio.Classes
           this.sightRange = 10;
           this.setType(State.EntityName.GuardTower);
           this.map = MapManager.getInstance().currentMap;
-          this.currentState = State.StructureState.Idle;
+          this.currentState = State.EntityState.Idle;
 
           smartGuarding = false;
           canAttack = true;
@@ -49,14 +49,14 @@ namespace Incursio.Classes
 
       public void attack(BaseGameEntity target)
       {
-          if (target is Unit && ((target as Unit).getCurrentState() != State.UnitState.Dead && (target as Unit).getCurrentState() != State.UnitState.Buried))
+          if (target is Unit && ((target as Unit).getCurrentState() != State.EntityState.Dead && (target as Unit).getCurrentState() != State.EntityState.Buried))
           {
-              this.currentState = State.StructureState.Attacking;
+              this.currentState = State.EntityState.Attacking;
               this.target = target;
           }
-          else if (target is Structure && (target as Structure).getCurrentState() != State.StructureState.Destroyed)
+          else if (target is Structure && (target as Structure).getCurrentState() != State.EntityState.Destroyed)
           {
-              this.currentState = State.StructureState.Attacking;
+              this.currentState = State.EntityState.Attacking;
               this.target = target;
           }
       }
@@ -71,11 +71,11 @@ namespace Incursio.Classes
                   this.playAttackSound();
                   target.takeDamage(this.damage, this);
 
-                  if (target is Unit && (target as Unit).getCurrentState() == State.UnitState.Dead ||
-                       target is Structure && (target as Structure).getCurrentState() == State.StructureState.Destroyed)
+                  if (target is Unit && (target as Unit).getCurrentState() == State.EntityState.Dead ||
+                       target is Structure && (target as Structure).getCurrentState() == State.EntityState.Destroyed)
                   {
                       target = null;
-                      currentState = State.StructureState.Idle;
+                      currentState = State.EntityState.Idle;
                   }
 
                   this.updateAttackTimer = 0;
@@ -149,12 +149,12 @@ namespace Incursio.Classes
 
       public override void setAttacking()
       {
-          this.currentState = State.StructureState.Attacking;
+          this.currentState = State.EntityState.Attacking;
       }
 
       public override bool isAttacking()
       {
-          return this.currentState == State.StructureState.Attacking;
+          return this.currentState == State.EntityState.Attacking;
       }
 
       public override int getAttackDamage()
@@ -185,11 +185,11 @@ namespace Incursio.Classes
           Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.location);
           Rectangle unit = this.boundingBox;
 
-          if (this.currentState == State.StructureState.BeingBuilt)
+          if (this.currentState == State.EntityState.BeingBuilt)
           {
               //TODO: draw construction?
           }
-          else if (this.currentState == State.StructureState.Building)
+          else if (this.currentState == State.EntityState.Building)
           {
               if (this.getPlayer() == State.PlayerId.HUMAN)
               {
@@ -205,7 +205,7 @@ namespace Incursio.Classes
               }
 
           }
-          else if (this.currentState == State.StructureState.Destroyed)
+          else if (this.currentState == State.EntityState.Destroyed)
           {
               if(destroyedTimer < TIME_TILL_DESTROYED_FADE * 60){
                   if (alphaChan >= 0)
@@ -220,7 +220,7 @@ namespace Incursio.Classes
               }
    
           }
-          else if (this.currentState == State.StructureState.Idle || this.currentState == State.StructureState.Attacking)
+          else if (this.currentState == State.EntityState.Idle || this.currentState == State.EntityState.Attacking)
           {
               if (this.getPlayer() == State.PlayerId.HUMAN)
               {

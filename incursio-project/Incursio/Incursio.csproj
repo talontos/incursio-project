@@ -117,6 +117,11 @@
     <Compile Include="Commands\GuardCommand.cs" />
     <Compile Include="Commands\MoveCommand.cs" />
     <Compile Include="Commands\StopCommand.cs" />
+    <Compile Include="Entities\AudioCollections\AmbientCollection.cs" />
+    <Compile Include="Entities\AudioCollections\AttackCollection.cs" />
+    <Compile Include="Entities\AudioCollections\AudioCollection.cs" />
+    <Compile Include="Entities\AudioCollections\MessageSoundCollection.cs" />
+    <Compile Include="Entities\AudioCollections\VoiceCollection.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\BaseGameEntityConfiguration.cs" />
     <Compile Include="Entities\ComponentConfiguration.cs" />
@@ -129,6 +134,12 @@
     <Compile Include="Entities\Components\MovementComponent.cs" />
     <Compile Include="Entities\Components\RenderComponent.cs" />
     <Compile Include="Entities\Components\ResourceComponent.cs" />
+    <Compile Include="Entities\TextureCollections\AttackTextures.cs" />
+    <Compile Include="Entities\TextureCollections\DamagedTextures.cs" />
+    <Compile Include="Entities\TextureCollections\DeathTextures.cs" />
+    <Compile Include="Entities\TextureCollections\MovementTextures.cs" />
+    <Compile Include="Entities\TextureCollections\StillTextures.cs" />
+    <Compile Include="Entities\TextureCollections\TextureCollection.cs" />
     <Compile Include="Interface\Button.cs" />
     <Compile Include="Interface\BuildLightInfantryButton.cs" />
     <Compile Include="Interface\BuildHeavyInfantryButton.cs" />

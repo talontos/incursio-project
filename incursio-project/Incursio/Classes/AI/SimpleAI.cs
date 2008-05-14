@@ -219,9 +219,9 @@ namespace Incursio.Classes
                         
                     Unit u = myGuys[i] as Unit;
                     switch(u.getCurrentState()){
-                        case State.UnitState.Guarding:
-                        case State.UnitState.Idle:
-                        case State.UnitState.Wandering:
+                        case State.EntityState.Guarding:
+                        case State.EntityState.Idle:
+                        case State.EntityState.Wandering:
                             toSend.Add(myGuys[i]);
                             break;
                     }

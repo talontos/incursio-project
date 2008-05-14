@@ -82,7 +82,7 @@ namespace Incursio.Classes
                 else
                 {
                     //if the hero gets attacked, cancel capping
-                    if (capturingHero.getCurrentState() != State.UnitState.Capturing || capturingHero.health < heroStartingHealth)
+                    if (capturingHero.getCurrentState() != State.EntityState.Capturing || capturingHero.health < heroStartingHealth)
                     {
                         capping = false;
                         timeSpentCapping = 0;
@@ -188,7 +188,7 @@ namespace Incursio.Classes
             Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.location);
             Rectangle unit = this.boundingBox;
 
-            if (this.currentState == State.StructureState.Building)
+            if (this.currentState == State.EntityState.Building)
             {
                 if (this.getPlayer() == State.PlayerId.HUMAN)
                 {
@@ -204,7 +204,7 @@ namespace Incursio.Classes
                 }
 
             }
-            else if (this.currentState == State.StructureState.Idle || this.currentState == State.StructureState.Attacking)
+            else if (this.currentState == State.EntityState.Idle || this.currentState == State.EntityState.Attacking)
             {
                 if (this.getPlayer() == State.PlayerId.HUMAN)
                 {

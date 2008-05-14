@@ -85,12 +85,12 @@ namespace Incursio.Campaign
                 l = (LightInfantryUnit) entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
                 translateMapCellToPixel(i, 17, out location.x, out location.y);
                 l.setLocation(new Coordinate(location.x, location.y));
-                l.setCurrentState(State.UnitState.Attacking);
+                l.setCurrentState(State.EntityState.Attacking);
 
                 l = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
                 translateMapCellToPixel(i, 2, out location.x, out location.y);
                 l.setLocation(new Coordinate(location.x, location.y));
-                l.setCurrentState(State.UnitState.Attacking);
+                l.setCurrentState(State.EntityState.Attacking);
             }
         }
     }

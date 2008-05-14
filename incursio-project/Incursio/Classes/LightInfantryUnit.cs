@@ -59,7 +59,7 @@ namespace Incursio.Classes
 
           //depending on the unit's state, draw their textures
           //idle
-          if (this.currentState == State.UnitState.Idle)
+          if (this.currentState == State.EntityState.Idle)
           {
               switch(this.directionState){
                   
@@ -90,7 +90,7 @@ namespace Incursio.Classes
               }
               
           }
-          else if (this.currentState == State.UnitState.Attacking)
+          else if (this.currentState == State.EntityState.Attacking)
           {
 
               switch (this.directionState){
@@ -135,7 +135,7 @@ namespace Incursio.Classes
                       break;
               }
           }
-          else if (this.currentState == State.UnitState.Dead)
+          else if (this.currentState == State.EntityState.Dead)
           {
               switch (this.directionState)
               {
@@ -198,12 +198,12 @@ namespace Incursio.Classes
               }
 
           }
-          else if (this.currentState == State.UnitState.Guarding)
+          else if (this.currentState == State.EntityState.Guarding)
           {
               //TODO:
               //Guarding Animation
           }
-          else if (this.currentState == State.UnitState.Moving)
+          else if (this.currentState == State.EntityState.Moving)
           {
 
               switch(this.directionState){
@@ -285,7 +285,7 @@ namespace Incursio.Classes
               }
 
           }
-          else if (this.currentState == State.UnitState.UnderAttack)
+          else if (this.currentState == State.EntityState.UnderAttack)
           {
               //TODO:
               //Under Attack Animation

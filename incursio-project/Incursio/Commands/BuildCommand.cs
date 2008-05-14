@@ -31,31 +31,19 @@ namespace Incursio.Commands
 
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
-            //TODO: EXPAND ON THIS
-            //Right now, camps are only building entities
-            if (subject is CampStructure)
+            if (subject.isConstructor)
             {
-
                 if(!this.checkBuildAndNotify(ref subject)){
                     this.finishedExecution = true;
                     return;
                 }
-
-                if (!(subject as Structure).isBuilding())
-                {
-                    (subject as CampStructure).build(buildOrder);
-                    this.finishedExecution = true;
-                    
-                }
-                else
-                {
-                    //wait for building to stop
-                    this.finishedExecution = false;
-                }
+             
+                //TODO: GENERALIZE
+                (subject as CampStructure).build(buildOrder);
 
             }
-            else
-                this.finishedExecution = true;
+
+            this.finishedExecution = true;
         }
 
         public bool checkBuildAndNotify(ref BaseGameEntity subject){

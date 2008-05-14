@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Incursio.Entities.Components;
+using Incursio.Entities.TextureCollections;
 
 namespace Incursio.Entities
 {
@@ -25,6 +26,8 @@ namespace Incursio.Entities
 
         public List<ComponentConfiguration> components = new List<ComponentConfiguration>();
 
+        public TextureCollection textureCollection;
+
         public BaseGameEntityConfiguration(int id, string name, params string[] args){
             this.classID = id;
             this.className = name;
@@ -39,6 +42,8 @@ namespace Incursio.Entities
                     case "pointValue":  pointValue  = int.Parse(args[i + 1]); break;
                     case "playerId":    playerId    = int.Parse(args[i + 1]); break;
                     case "costToBuild": costToBuild = int.Parse(args[i + 1]); break;
+                    //TODO: GET TEXTURE COLLECTION!!!
+                    case "textureCollection": textureCollection = null; break;
                     default: break;
                 }
             }

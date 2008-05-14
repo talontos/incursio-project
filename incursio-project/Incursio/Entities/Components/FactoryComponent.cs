@@ -5,11 +5,14 @@ using Incursio.Classes;
 using Incursio.Utils;
 using Incursio.Managers;
 using Incursio.Commands;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Incursio.Entities.Components
 {
     public class FactoryComponent : BaseComponent
     {
+        //TEMPORARY HARD-CODE-----------------
         public const int LIGHT_INFANTRY_BUILD_TIME = 5;
         public const int HEAVY_INFANTRY_BUILD_TIME = 10;
         public const int ARCHER_BUILD_TIME = 7;
@@ -20,6 +23,10 @@ namespace Incursio.Entities.Components
         public int COST_ARCHER = EntityConfiguration.EntityPrices.COST_ARCHER;
         public int COST_GUARD_TOWER = EntityConfiguration.EntityPrices.COST_GUARD_TOWER;
 
+        int newUnitPlacementX = 10;
+        int newUnitPlacementY = 120;    //little bit of hard coding, but can't really help it here 
+        //-------------------------------------
+
         public int timeBuilt = 0;
         public int timeRequired = 0;
         public EntityBuildOrder buildProject;
@@ -29,26 +36,45 @@ namespace Incursio.Entities.Components
         public Coordinate newStructureCoords;
         public Coordinate spawnPoint;
 
+        public List<EntityBuildOrder> buildOrders;
+
         //TODO: should we be able to define a list of buildable entities?
         //public List<int> buildableEntityIds;
 
         public FactoryComponent(BaseGameEntity entity) : base(entity){
             entity.isConstructor = true;
-            spawnPoint = new Coordinate(entity.location.x, entity.location.y + 10);
+            buildOrders = new List<EntityBuildOrder>();
+
+            setSpawnAndDestination();
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             base.Update(gameTime);
 
+            if(buildProject == null && this.buildOrders.Count > 0){
+                this.build(buildOrders[0]);
+                buildOrders.RemoveAt(0);
+            }
+
             this.buildTick();
+        }
+
+        public void setSpawnAndDestination(){
+            this.destination = new Coordinate(bgEntity.location.x + newUnitPlacementX, bgEntity.location.y + newUnitPlacementY);
+            spawnPoint = new Coordinate(bgEntity.location.x, bgEntity.location.y + 10);
+        }
+
+        public void addOrder(EntityBuildOrder o){
+            this.buildOrders.Add(o);
         }
 
         public void build(EntityBuildOrder toBeBuilt)
         {
             if (buildProject != null)
             {
-
+                //add toBeBuild to the queue
+                this.buildOrders.Add(toBeBuilt);
             }
             else
             {
@@ -72,6 +98,7 @@ namespace Incursio.Entities.Components
                 else
                 {
                     //can't do it... :-(
+                    Console.WriteLine("FACTORY COMPONENT CANNOT BUILD: location and destination are null");
                     return;
                 }
 
@@ -86,7 +113,7 @@ namespace Incursio.Entities.Components
                         this.timeBuilt = 0;
                         this.timeRequired = LIGHT_INFANTRY_BUILD_TIME * 60;
                         this.buildProject = toBeBuilt;
-                        (this.bgEntity as CampStructure).setCurrentState(State.StructureState.Building);
+                        (this.bgEntity as CampStructure).setCurrentState(State.EntityState.Building);
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_LIGHT_INFANTRY;
                     }
                     else
@@ -114,7 +141,7 @@ namespace Incursio.Entities.Components
                         this.timeBuilt = 0;
                         this.timeRequired = ARCHER_BUILD_TIME * 60;
                         this.buildProject = toBeBuilt;
-                        (this.bgEntity as CampStructure).setCurrentState(State.StructureState.Building);
+                        (this.bgEntity as CampStructure).setCurrentState(State.EntityState.Building);
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_ARCHER;
                     }
                     else
@@ -142,7 +169,7 @@ namespace Incursio.Entities.Components
                         this.timeBuilt = 0;
                         this.timeRequired = HEAVY_INFANTRY_BUILD_TIME * 60;
                         this.buildProject = toBeBuilt;
-                        (this.bgEntity as CampStructure).setCurrentState(State.StructureState.Building);
+                        (this.bgEntity as CampStructure).setCurrentState(State.EntityState.Building);
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_HEAVY_INFANTRY;
                     }
                     else
@@ -170,7 +197,7 @@ namespace Incursio.Entities.Components
                         this.timeBuilt = 0;
                         this.timeRequired = GUARD_TOWER_BUILD_TIME * 60;
                         this.buildProject = toBeBuilt;
-                        (this.bgEntity as CampStructure).setCurrentState(State.StructureState.Building);
+                        (this.bgEntity as CampStructure).setCurrentState(State.EntityState.Building);
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_GUARD_TOWER;
                     }
                     else
@@ -310,6 +337,38 @@ namespace Incursio.Entities.Components
                     )
                 );
             }
+        }
+
+        public bool isBuilding(){
+            return this.buildProject != null;
+        }
+
+        public void drawBuildQueue(SpriteBatch spriteBatch)
+        {
+            //debugging; draw my queue
+            if (this.buildOrders.Count > 0)
+            {
+                string orderList = "";
+                if (this.isBuilding())
+                    orderList += "0: " + this.buildProject.entity.ToString() + "\n";
+
+                for (int i = 0; i < this.buildOrders.Count; i++)
+                {
+                    orderList += (i + 1) + ": " + this.buildOrders[i].entity.ToString() + "\n";
+                }
+
+                spriteBatch.DrawString(Incursio.getInstance().getFont_Courier(), orderList, new Vector2(0, 0), Color.White);
+            }
+        }
+
+        public double getPercentDone()
+        {
+            if (this.isBuilding())
+            {
+                return (float)timeBuilt / timeRequired;
+            }
+            else return -1.0;
+
         }
     }
 }

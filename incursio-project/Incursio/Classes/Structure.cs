@@ -29,7 +29,7 @@ namespace Incursio.Classes
         protected int timeForResource = 0;
         protected EntityBuildOrder buildProject;
 
-        protected State.StructureState currentState;
+        protected State.EntityState currentState;
         public Structure()
         {
 
@@ -47,27 +47,27 @@ namespace Incursio.Classes
                 switch (this.currentState)
                 {
                     /////////////////////
-                    case State.StructureState.Idle:
+                    case State.EntityState.Idle:
                         //we're chillin
                         break;
 
                     /////////////////////
-                    case State.StructureState.BeingBuilt:
+                    case State.EntityState.BeingBuilt:
                         beingBuiltTick();
                         break;
 
                     /////////////////////
-                    case State.StructureState.Building:
+                    case State.EntityState.Building:
                         buildTick();
                         break;
 
                     /////////////////////
-                    case State.StructureState.Destroyed:
+                    case State.EntityState.Destroyed:
 
                         break;
 
                     /////////////////////
-                    case State.StructureState.Attacking:
+                    case State.EntityState.Attacking:
                         attackTarget();
                         break;
 
@@ -80,18 +80,18 @@ namespace Incursio.Classes
 
                 if(health <= 0 && !playedDeathSound){
                     playedDeathSound = true;
-                    this.currentState = State.StructureState.Destroyed;
+                    this.currentState = State.EntityState.Destroyed;
                     SoundManager.getInstance().PlaySound(SoundCollection.AttackSounds.Explosion, false);
                 }
             }
         }
 
-        public State.StructureState getCurrentState()
+        public State.EntityState getCurrentState()
         {
             return currentState;
         }
 
-        public void setCurrentState(State.StructureState state)
+        public void setCurrentState(State.EntityState state)
         {
             this.currentState = state;
         }
@@ -108,7 +108,7 @@ namespace Incursio.Classes
 
         public virtual bool isBuilding(){
             if (this.factoryComponent != null)
-                return this.factoryComponent.buildProject != null;
+                return this.factoryComponent.isBuilding();
             else
                 return false;
         }
@@ -139,7 +139,7 @@ namespace Incursio.Classes
 
         public override bool isDead()
         {
-            return currentState == State.StructureState.Destroyed;
+            return currentState == State.EntityState.Destroyed;
         }
 
         public virtual void updateResourceTick()

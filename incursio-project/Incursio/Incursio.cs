@@ -528,7 +528,7 @@ namespace Incursio
             {
                 e.justDrawn = false;
 
-                if (e is Unit && (e as Unit).getCurrentState() == State.UnitState.Buried)
+                if (e is Unit && (e as Unit).getCurrentState() == State.EntityState.Buried)
                 {}
                 else if (currentMap.isOnScreen(e.getLocation()))
                 {

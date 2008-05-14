@@ -34,7 +34,7 @@ namespace Incursio.Classes
         protected int deadTimer = 0;
         public bool playedDeath = false;
         public bool playedDeathSound = false;
-        protected State.UnitState currentState = State.UnitState.Idle;
+        protected State.EntityState currentState = State.EntityState.Idle;
         protected State.Direction directionState = State.Direction.South;
         protected bool isClose = false;
 
@@ -55,7 +55,7 @@ namespace Incursio.Classes
             //only perform actions when we are actively playing a map
             if (Incursio.getInstance().currentState == State.GameState.InPlay)
             {
-                if(this.currentState == State.UnitState.Dead){
+                if(this.currentState == State.EntityState.Dead){
                     die();
                     return;
                 }
@@ -135,7 +135,7 @@ namespace Incursio.Classes
         /// </summary>
         /// <param name="destination">coordinate to move toward</param>
         public void move(Coordinate destination){
-            this.currentState = State.UnitState.Moving;
+            this.currentState = State.EntityState.Moving;
 
             this.destination = destination;
             this.target = null;
@@ -148,7 +148,7 @@ namespace Incursio.Classes
         /// <param name="currentMap"></param>
         public void move(Coordinate destination, MapBase currentMap)
         {
-            this.currentState = State.UnitState.Moving;
+            this.currentState = State.EntityState.Moving;
 
             //convert the destination from on screen coords to map coords
             this.destination = new Coordinate(destination.x + (currentMap.getMinimumX() * currentMap.getTileWidth()), destination.y + (currentMap.getMinimumY() * currentMap.getTileHeight()));
@@ -165,9 +165,9 @@ namespace Incursio.Classes
         /// <param name="targetEntity">The entity to follow</param>
         public void move(BaseGameEntity targetEntity){
             if (targetEntity.getPlayer() != owner)
-                this.currentState = State.UnitState.Attacking;
+                this.currentState = State.EntityState.Attacking;
             else
-                this.currentState = State.UnitState.Moving;
+                this.currentState = State.EntityState.Moving;
 
             this.target = targetEntity;
         }
@@ -179,7 +179,7 @@ namespace Incursio.Classes
         /// </summary>
         /// <param name="targetCoord">Target coordinates</param>
         public void attack(Coordinate targetCoord){
-            this.currentState = State.UnitState.Attacking;
+            this.currentState = State.EntityState.Attacking;
             this.destination = targetCoord;
         }
 
@@ -191,14 +191,14 @@ namespace Incursio.Classes
         /// <param name="targetEntity">Target entity</param>
         public virtual void attack(BaseGameEntity targetEntity)
         {
-            if (targetEntity is Unit && ((targetEntity as Unit).getCurrentState() != State.UnitState.Dead && (targetEntity as Unit).getCurrentState() != State.UnitState.Buried))
+            if (targetEntity is Unit && ((targetEntity as Unit).getCurrentState() != State.EntityState.Dead && (targetEntity as Unit).getCurrentState() != State.EntityState.Buried))
             {
-                this.currentState = State.UnitState.Attacking;
+                this.currentState = State.EntityState.Attacking;
                 this.target = targetEntity;
             }
-            else if (targetEntity is Structure && (targetEntity as Structure).getCurrentState() != State.StructureState.Destroyed)
+            else if (targetEntity is Structure && (targetEntity as Structure).getCurrentState() != State.EntityState.Destroyed)
             {
-                this.currentState = State.UnitState.Attacking;
+                this.currentState = State.EntityState.Attacking;
                 this.target = targetEntity;
             }
         }
@@ -221,7 +221,7 @@ namespace Incursio.Classes
             if (this.health <= 0)
             {
                 this.health = 0;
-                currentState = State.UnitState.Dead;
+                currentState = State.EntityState.Dead;
                 this.currentFrameXAttackDeath = 0;
                 this.currentFrameYAttackDeath = 0;
             }
@@ -232,9 +232,9 @@ namespace Incursio.Classes
 
                 //We should only do this if they aren't already attacking - that way they won't 
                 //constantly switch targets in a big battle
-                if(currentState != State.UnitState.Attacking){
+                if(currentState != State.EntityState.Attacking){
 
-                    if(currentState == State.UnitState.Moving && this.health < this.maxHealth * 0.4){
+                    if(currentState == State.EntityState.Moving && this.health < this.maxHealth * 0.4){
                         //keep going?
                     }
                     else{
@@ -282,7 +282,7 @@ namespace Incursio.Classes
             this.armor = armor;
         }
 
-        public State.UnitState getCurrentState()
+        public State.EntityState getCurrentState()
         {
             return this.currentState;
         }
@@ -292,7 +292,7 @@ namespace Incursio.Classes
             return this.directionState;
         }
 
-        public void setCurrentState(State.UnitState newState)
+        public void setCurrentState(State.EntityState newState)
         {
             this.currentState = newState;
         }
@@ -344,7 +344,7 @@ namespace Incursio.Classes
                     //if we just killed the thing
 
                     //if (target is Unit && (target as Unit).getCurrentState() == State.UnitState.Dead ||
-                    //   target is Structure && (target as Structure).getCurrentState() == State.StructureState.Destroyed)
+                    //   target is Structure && (target as Structure).getCurrentState() == State.EntityState.Destroyed)
                     if(target.isDead())
                     {
                         //NOTE: killedTarget needs to be performed BEFORE
@@ -371,11 +371,11 @@ namespace Incursio.Classes
 
         public override bool isDead()
         {
-            return currentState == State.UnitState.Dead || currentState == State.UnitState.Buried;
+            return currentState == State.EntityState.Dead || currentState == State.EntityState.Buried;
         }
 
         protected virtual void die(){
-            currentState = State.UnitState.Dead;
+            currentState = State.EntityState.Dead;
             if (orders.Count != 0)
                 orders = new List<BaseCommand>();
 
@@ -428,22 +428,22 @@ namespace Incursio.Classes
 
         public override void setAttacking()
         {
-            this.currentState = State.UnitState.Attacking;
+            this.currentState = State.EntityState.Attacking;
         }
 
         public override bool isAttacking()
         {
-            return (this.currentState == State.UnitState.Attacking);
+            return (this.currentState == State.EntityState.Attacking);
         }
 
         public override bool isMoving()
         {
-            return this.currentState == State.UnitState.Moving;
+            return this.currentState == State.EntityState.Moving;
         }
 
         public override void setIdle()
         {
-            this.currentState = State.UnitState.Idle;
+            this.currentState = State.EntityState.Idle;
         }
 
         public virtual void playAttackSound(){
