@@ -158,7 +158,7 @@ namespace Incursio.Classes
         private void buildGuardTowerNearLocation(Coordinate c, KeyPoint k){
             this.buildList.Add(new EntityBuildOrder(
                MapManager.getInstance().currentMap.getClosestPassableLocation(EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location, c),
-               new GuardTowerStructure(),
+               State.EntityName.GuardTower,
                k)
            );
         }
@@ -196,13 +196,13 @@ namespace Incursio.Classes
                 }
 
                 if (randU > 60)
-                    this.buildList.Add(new EntityBuildOrder(dest, new LightInfantryUnit(), keyPoint));
+                    this.buildList.Add(new EntityBuildOrder(dest, State.EntityName.LightInfantry, keyPoint));
 
                 else if (randU > 30)
-                    this.buildList.Add(new EntityBuildOrder(dest, new ArcherUnit(), keyPoint));
+                    this.buildList.Add(new EntityBuildOrder(dest, State.EntityName.Archer, keyPoint));
 
                 else
-                    this.buildList.Add(new EntityBuildOrder(dest, new HeavyInfantryUnit(), keyPoint));
+                    this.buildList.Add(new EntityBuildOrder(dest, State.EntityName.HeavyInfantry, keyPoint));
             }
         }
 

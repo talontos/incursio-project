@@ -109,7 +109,7 @@ namespace Incursio.Classes
                     owningPlayer = PlayerManager.getInstance().computerPlayer;
 
                 if(toBeBuilt.location != null){
-                    if(toBeBuilt.entity is GuardTowerStructure){
+                    if(toBeBuilt.entity == State.EntityName.GuardTower){
                         this.setNewStructureCoords(toBeBuilt.location);
                     }
                     else{
@@ -124,7 +124,7 @@ namespace Incursio.Classes
                     return;
                 }
 
-                if (toBeBuilt.entity.getType() == State.EntityName.LightInfantry)
+                if (toBeBuilt.entity == State.EntityName.LightInfantry)
                 {
                     //if we have enough resources, build it
                     if (owningPlayer.MONETARY_UNIT >= COST_LIGHT_INFANTRY)
@@ -152,7 +152,7 @@ namespace Incursio.Classes
                     }
 
                 }
-                else if (toBeBuilt.entity.getType() == State.EntityName.Archer)
+                else if (toBeBuilt.entity == State.EntityName.Archer)
                 {
                     //if we have enough resources, build it
                     if (owningPlayer.MONETARY_UNIT >= COST_ARCHER)
@@ -180,7 +180,7 @@ namespace Incursio.Classes
                     }
 
                 }
-                else if (toBeBuilt.entity.getType() == State.EntityName.HeavyInfantry)
+                else if (toBeBuilt.entity == State.EntityName.HeavyInfantry)
                 {
                     //if we have enough resources, build it
                     if (owningPlayer.MONETARY_UNIT >= COST_HEAVY_INFANTRY)
@@ -208,7 +208,7 @@ namespace Incursio.Classes
                     }
 
                 }
-                else if (toBeBuilt.entity.getType() == State.EntityName.GuardTower)
+                else if (toBeBuilt.entity == State.EntityName.GuardTower)
                 {
                     //if we have enough resources, build it
                     if (owningPlayer.MONETARY_UNIT >= COST_GUARD_TOWER)
@@ -290,7 +290,7 @@ namespace Incursio.Classes
 
             if (this.timeBuilt >= this.timeRequired)
             {
-                if (buildProject.entity.getType() != State.EntityName.GuardTower)
+                if (buildProject.entity != State.EntityName.GuardTower)
                 {
                     Unit temp = ( EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.owner) as Unit);
                     temp.setLocation(this.spawnPoint);
@@ -602,13 +602,13 @@ namespace Incursio.Classes
             {
                 string orderList = "";
                 if (this.isBuilding())
-                    orderList += "0: " + this.buildProject.entity.getType().ToString() + "\n";
+                    orderList += "0: " + this.buildProject.entity.ToString() + "\n";
 
                 for (int i = 0; i < orders.Count; i++)
                 {
                     if (orders[i] is BuildCommand)
                     {
-                        orderList += (i + 1) + ": " + (orders[i] as BuildCommand).buildOrder.entity.getType().ToString() + "\n";
+                        orderList += (i + 1) + ": " + (orders[i] as BuildCommand).buildOrder.entity.ToString() + "\n";
                     }
                 }
 

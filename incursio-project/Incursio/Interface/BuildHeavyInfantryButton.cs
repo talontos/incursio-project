@@ -49,7 +49,7 @@ namespace Incursio.Interface
             if (!this.getPressed() && this.getFocus())
             {
                 this.setFocus(false);
-                EntityManager.getInstance().tryToBuild(new HeavyInfantryUnit());
+                EntityManager.getInstance().tryToBuild(State.EntityName.HeavyInfantry);
             }
         }
     }

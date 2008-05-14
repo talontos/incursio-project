@@ -1,14 +1,3 @@
-/****************************************
- * Copyright © 2008, Team RobotNinja:
- * 
- *     - Henry Armstrong
- *     - Andy Burras
- *     - Mitch Martin
- *     - Xuan Yu
- * 
- * All Rights Reserved
- ***************************************/
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,43 +9,27 @@ using Incursio.Commands;
 using Incursio.Managers;
 using Incursio.Entities.Components;
 
-namespace Incursio.Classes
+namespace Incursio.Entities
 {
     public class BaseGameEntity
     {
-        public State.EntityName entityType;
+        //ENTITY STATS
+        public int keyId = -1;
+        public String type = "";    //unit type-name?
         public int maxHealth = 100;
         public int health = 100;
         public int armor = 0;
-        public int  sightRange = 0;
-        public State.PlayerId owner;
-        public Coordinate location = new Coordinate(0,0);
-        protected MapBase map;
-        public int keyId = -1;
-        public bool visible = false;
-        public bool highlighted = false;
-        public bool canAttack = false;
-        public bool canMove = false;
-        public bool isConstructor = false;
-        public bool justDrawn = false;
-        public bool smartGuarding = true;
-        public int currentFrameX = 0;       //for animation
-        public int currentFrameY = 0;       //for animation
-        public int currentFrameXAttackDeath = 0;
-        public int currentFrameYAttackDeath = 0;
-        public int attackFramePause = 0;
-
-        public Rectangle boundingBox;
-
+        public int sightRange = 0;
+        public Coordinate location = new Coordinate(0, 0);
         public int pointValue = 0;
-
         protected List<BaseCommand> orders;
+        public int playerId = -1;
 
         public List<BaseComponent> components;
 
-        public BaseGameEntity(){
+        public BaseGameEntity()
+        {
             orders = new List<BaseCommand>();
-            components = new List<BaseComponent>();
         }
 
         /// <summary>
@@ -64,14 +37,15 @@ namespace Incursio.Classes
         /// </summary>
         /// <param name="gameTime">Game time passed from main loop</param>
         /// <param name="myRef">Mostly a hack, used for executing commands.  It is a reference of 'this'</param>
-        public virtual void Update(GameTime gameTime, ref BaseGameEntity myRef){
-            if (this.isDead()){
+        public virtual void Update(GameTime gameTime, ref BaseGameEntity myRef)
+        {
+            //TODO: draw unit here?
+            //TODO: check if i'm clicked?
+
+            if (this.isDead())
+            {
                 this.updateOccupancy(false);
                 return;
-            }
-
-            for(int i = 0; i < this.components.Count; i++){
-                this.components[i].Update(gameTime);
             }
 
             this.processOrderList(gameTime, ref myRef);
@@ -80,6 +54,7 @@ namespace Incursio.Classes
                 this.health = this.maxHealth;
         }
 
+        #region Orders
         protected virtual void processOrderList(GameTime gameTime, ref BaseGameEntity myRef)
         {
             if (orders.Count > 0)
@@ -93,18 +68,9 @@ namespace Incursio.Classes
             //if I still have orders...
             if (orders.Count > 0)
             {
-                if(orders[0] is MoveCommand){
-                    for(int i = 0; i < this.components.Count; i++){
-                        if (components[i] is MovementComponent){
-                            (components[i] as MovementComponent).currentCommand = orders[0] as MoveCommand;
-                            break;
-                        }
-                    }
-                }
-                else
-                    orders[0].execute(gameTime, ref myRef);
+                orders[0].execute(gameTime, ref myRef);
 
-                //check type for player notification?
+                //check type for player notification
             }
         }
 
@@ -127,14 +93,15 @@ namespace Incursio.Classes
         public virtual void issueOrderList(params BaseCommand[] commands)
         {
             this.orders = new List<BaseCommand>();
-            if(commands != null)this.orders.AddRange(commands);
+            if (commands != null) this.orders.AddRange(commands);
         }
 
         /// <summary>
         /// Adds a new command to the end of the entity's command list
         /// </summary>
         /// <param name="order">The new command</param>
-        public virtual void issueAdditionalOrder(BaseCommand order){
+        public virtual void issueAdditionalOrder(BaseCommand order)
+        {
             this.orders.Add(order);
         }
 
@@ -146,8 +113,17 @@ namespace Incursio.Classes
         {
             this.orders.Insert(0, order);
         }
+        #endregion
+        
+        public virtual Texture2D getCurrentTexture()
+        {
+            //check state & return appropriate texture from TextureBank.EntityTextures
+            return null;
+        }
 
-        public virtual void takeDamage(int damage, BaseGameEntity attacker){
+        public virtual void takeDamage(int damage, BaseGameEntity attacker)
+        {
+            //TODO: some math using my armor
             int damageTaken = (damage - armor) + (Incursio.rand.Next(0, 10) - 5);  //[-5,+5]
             if (damageTaken < 0)
                 damageTaken = 0;
@@ -162,33 +138,28 @@ namespace Incursio.Classes
             }
         }
 
-        /// <summary>
-        /// Returns if this entity is dead
-        /// </summary>
-        /// <returns>Am I dead?</returns>
-        public virtual bool isDead(){
+        public virtual String getTextureName()
+        {
+            return null;
+        }
+
+        public virtual bool isDead()
+        {
             return health <= 0;
         }
 
-        /// <summary>
-        /// Updates the bounding box of the entity
-        /// </summary>
-        public virtual void updateBounds(){
+        public virtual void updateBounds()
+        {
 
         }
 
-        /// <summary>
-        /// Attack this entity's current target
-        /// </summary>
-        /// <returns>True if target is in range</returns>
-        public virtual bool attackTarget(){
+        public virtual bool attackTarget()
+        {
             return false;
         }
 
-        /// <summary>
-        /// Process statistical information when This kills a target
-        /// </summary>
-        public virtual void killedTarget(){
+        public virtual void killedTarget()
+        {
 
         }
 
@@ -196,7 +167,8 @@ namespace Incursio.Classes
         /// Virtual function for moving
         /// </summary>
         /// <returns>True when destination is reached.  By default returns true.</returns>
-        public virtual bool updateMovement(float ElapsedTime){
+        public virtual bool updateMovement(float ElapsedTime)
+        {
             return true;
         }
 
@@ -204,34 +176,32 @@ namespace Incursio.Classes
         /// Sets the location of this entity in the current map as occupied (true) or unocupied (false)
         /// </summary>
         /// <param name="occupied"></param>
-        public virtual void updateOccupancy(bool occupied){
+        public virtual void updateOccupancy(bool occupied)
+        {
             MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y,
                 (occupied ? (byte)0 : (byte)1));
 
-            MapManager.getInstance().currentMap.setSingleCellEntity(location.x, location.y, 
+            MapManager.getInstance().currentMap.setSingleCellEntity(location.x, location.y,
                 (occupied ? this.keyId : -1));
         }
 
-        public virtual void setIdle(){
+        public virtual void setIdle()
+        {
 
         }
 
-        public virtual void setAttacking(){
+        public virtual void setAttacking()
+        {
 
         }
 
-        /// <summary>
-        /// Draws this entity on the screen
-        /// </summary>
-        /// <param name="spriteBatch"></param>
-        /// <param name="frameTimer"></param>
-        /// <param name="FRAME_LENGTH"></param>
         public virtual void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
 
         }
 
-        public virtual bool isCapturing(){
+        public virtual bool isCapturing()
+        {
             return false;
         }
 
@@ -245,19 +215,23 @@ namespace Incursio.Classes
             return false;
         }
 
-        public virtual int getAttackDamage(){
+        public virtual int getAttackDamage()
+        {
             return -1;
         }
 
-        public virtual int getArmor(){
+        public virtual int getArmor()
+        {
             return -1;
         }
 
-        public virtual int getAttackRange(){
+        public virtual int getAttackRange()
+        {
             return 0;
         }
 
-        public virtual int getAttackSpeed(){
+        public virtual int getAttackSpeed()
+        {
             return -1;
         }
 
@@ -265,29 +239,20 @@ namespace Incursio.Classes
         {
             PlayerManager.getInstance().notifyPlayer(
                 this.owner,
-                new GameEvent(State.EventType.UNDER_ATTACK, this,"", "We're Under Attack!", this.location)
+                new GameEvent(State.EventType.UNDER_ATTACK, this, "", "We're Under Attack!", this.location)
             );
         }
 
-        /// <summary>
-        /// Heal me for boost hitpoints, unless I'm dead
-        /// </summary>
-        /// <param name="boost"></param>
-        public virtual void heal(int boost){
-            if (this.isDead())
-                return;
-
-            if(health < maxHealth){
-                this.health += boost; 
+        public virtual void heal(int boost)
+        {
+            if (health < maxHealth)
+            {
+                this.health += boost;
                 MessageManager.getInstance().addMessage(new GameEvent(State.EventType.HEALING, this, "", Convert.ToString(boost), this.location));
             }
 
             if (health > maxHealth)
                 health = maxHealth;
-        }
-
-        public virtual string getClassName(){
-            return "";
         }
 
         #region Getters/Setters
@@ -301,11 +266,13 @@ namespace Incursio.Classes
             return this.entityType;
         }
 
-        public virtual long getHealth(){
+        public virtual long getHealth()
+        {
             return this.health;
         }
 
-        public virtual void setHealth(int health){
+        public virtual void setHealth(int health)
+        {
             this.health = health;
         }
 
@@ -319,19 +286,23 @@ namespace Incursio.Classes
             this.maxHealth = newHealth;
         }
 
-        public virtual State.PlayerId getPlayer(){
+        public virtual State.PlayerId getPlayer()
+        {
             return this.owner;
         }
 
-        public virtual void setPlayer(State.PlayerId owner){
+        public virtual void setPlayer(State.PlayerId owner)
+        {
             this.owner = owner;
         }
 
-        public virtual long getSightRange(){
+        public virtual long getSightRange()
+        {
             return this.sightRange;
         }
 
-        public virtual void setSightRange(int sightRange){
+        public virtual void setSightRange(int sightRange)
+        {
             this.sightRange = sightRange;
         }
 
@@ -347,19 +318,23 @@ namespace Incursio.Classes
             this.updateOccupancy(true);
         }
 
-        public virtual int getKeyId(){
+        public virtual int getKeyId()
+        {
             return this.keyId;
         }
 
-        public virtual void setKeyId(int key){
+        public virtual void setKeyId(int key)
+        {
             this.keyId = key;
         }
 
-        public virtual void setMap(MapBase map){
+        public virtual void setMap(MapBase map)
+        {
             this.map = map;
         }
 
-        public virtual void playSelectionSound(){
+        public virtual void playSelectionSound()
+        {
             if (owner == State.PlayerId.COMPUTER)
                 return;
         }
@@ -393,12 +368,14 @@ namespace Incursio.Classes
         #endregion
 
         #region SPECIAL GET-SET
-        
-        public virtual void setTarget(BaseGameEntity target){
-        
+
+        public virtual void setTarget(BaseGameEntity target)
+        {
+
         }
-        
-        public virtual void setDestination(Coordinate dest){
+
+        public virtual void setDestination(Coordinate dest)
+        {
 
         }
 

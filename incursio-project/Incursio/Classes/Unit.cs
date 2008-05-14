@@ -19,6 +19,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Incursio.Managers;
 using Incursio.Commands;
 using Incursio.Classes.PathFinding;
+using Incursio.Entities.Components;
 
 namespace Incursio.Classes
 {
@@ -43,6 +44,8 @@ namespace Incursio.Classes
         public Unit() : base(){
             canAttack = true;
             canMove = true;
+
+            this.components.Add(new MovementComponent(this));
         }
 
         public override void Update(GameTime gameTime, ref BaseGameEntity myRef)

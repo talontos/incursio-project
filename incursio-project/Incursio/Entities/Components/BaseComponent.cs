@@ -2,12 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Incursio.Classes;
 
 namespace Incursio.Entities.Components
 {
     public class BaseComponent
     {
-        public virtual void Update(GameTime gameTime, ref BaseGameEntity entity){
+        protected BaseEntity entity;
+
+        //TEMP
+        protected BaseGameEntity bgEntity;
+
+        public BaseComponent(ref BaseEntity e){
+            this.entity = e;
+        }
+
+        public BaseComponent(BaseGameEntity e){
+            this.bgEntity = e;
+        }
+
+        public virtual void Update(GameTime gameTime){
 
         }
 

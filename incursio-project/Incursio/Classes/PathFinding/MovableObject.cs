@@ -73,6 +73,15 @@ namespace Incursio.Classes.PathFinding
             curveX = new Curve();
             curveY = new Curve();
         }
+        
+        public MovableObject(ref BaseGameEntity entity, float moveSpeed)
+            : base()
+        {
+            this.moveSpeed = moveSpeed;
+            this.location = entity.location;
+            curveX = new Curve();
+            curveY = new Curve();
+        }
 
         public MovableObject():base()
         {
