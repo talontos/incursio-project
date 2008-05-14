@@ -62,6 +62,8 @@ namespace Incursio.Classes
           this.attackRange = 1;
           this.maxHealth = 200;
           this.health = 200;
+
+          this.experienceComponent = new global::Incursio.Entities.Components.ExperienceComponent(this);
       }
 
       public void setHero_Badass()
@@ -131,7 +133,8 @@ namespace Incursio.Classes
 
       public double getPercentageLvlUp()
       {
-          return (float)experiencePoints / pointsToNextLevel;
+          //return (float)experiencePoints / pointsToNextLevel;
+          return this.experienceComponent.getPercentageLvlUp();
       }
 
       /// <summary>
@@ -139,7 +142,7 @@ namespace Incursio.Classes
       /// </summary>
       public override void killedTarget()
       {
-          this.gainExperience(target.pointValue);
+          this.experienceComponent.gainExperience(target.pointValue);
 
           base.killedTarget();
       }

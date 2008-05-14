@@ -70,10 +70,16 @@ namespace Incursio.Classes
 
             this.isConstructor = true;
             spawnPoint = new Coordinate(this.location.x, this.location.y + 10);
+
+            this.resourceComponent = new global::Incursio.Entities.Components.ResourceComponent(this);
+            this.factoryComponent = new global::Incursio.Entities.Components.FactoryComponent(this);
+            this.healComponent = new global::Incursio.Entities.Components.HealComponent(this);
         }
 
         public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
         {
+            //handled by component
+            /*
             if (this.healTimer == HEAL_TICK * 90)
             {
                 EntityManager.getInstance().healEntitiesInRange(this, this.healRange, true);
@@ -89,6 +95,7 @@ namespace Incursio.Classes
             {
                 healTimer++;
             }
+            */
 
             this.updateOccupancy(true);
             base.Update(gameTime, ref myRef);
@@ -96,6 +103,10 @@ namespace Incursio.Classes
 
         public override void build(EntityBuildOrder toBeBuilt)
         {
+            //handled by component
+            this.factoryComponent.build(toBeBuilt);
+            return;
+
             if (buildProject != null)
             {
 
@@ -242,6 +253,9 @@ namespace Incursio.Classes
 
         public override void updateResourceTick()
         {
+            //handled by component
+            return;
+
             //give the owner money
             if (timeForResource >= RESOURCE_TICK * 60)
             {
@@ -265,6 +279,9 @@ namespace Incursio.Classes
 
         public override void buildTick()
         {
+            //handled by component
+            return;
+
             //check for order cancellation
             if(this.buildProject.keyPoint != null && this.buildProject.keyPoint.owner != this.owner){
                 //can't build anymore
@@ -372,30 +389,19 @@ namespace Incursio.Classes
 
         public String getCurrentlyBuilding()
         {
-            return currentlyBuildingThis;
+            return this.factoryComponent.currentlyBuildingThis;//currentlyBuildingThis;
         }
 
         public override void setDestination(Coordinate dest)
         {
-            if(dest != null)
-                this.destination = dest;
+            if(this.factoryComponent != null)
+                this.factoryComponent.setDestination(dest);
         }
 
         public void setNewStructureCoords(Coordinate coords)
         {
-            if(coords != null && MapManager.getInstance().currentMap.getCellOccupancy_pixels(coords.x, coords.y) == (byte)1){
-                this.newStructureCoords = coords;
-            }
-            else{
-                PlayerManager.getInstance().notifyPlayer(
-                    this.owner,
-                    new GameEvent(State.EventType.CANT_MOVE_THERE,
-                        this,
-                        SoundCollection.MessageSounds.cantBuild,
-                        "Cannot Build There",
-                        this.location
-                    )
-                );
+            if(this.factoryComponent != null){
+                this.factoryComponent.setNewStructureCoords(coords);
             }
         }
 

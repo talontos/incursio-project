@@ -75,7 +75,8 @@ namespace Incursio.Classes
                     default: break;
                 }
 
-                updateResourceTick();
+                //THIS IS BEING DONE IN A COMPONENT
+                //updateResourceTick();
 
                 if(health <= 0 && !playedDeathSound){
                     playedDeathSound = true;
@@ -106,7 +107,10 @@ namespace Incursio.Classes
         }
 
         public virtual bool isBuilding(){
-            return this.buildProject != null;
+            if (this.factoryComponent != null)
+                return this.factoryComponent.buildProject != null;
+            else
+                return false;
         }
 
         public virtual void beingBuiltTick()

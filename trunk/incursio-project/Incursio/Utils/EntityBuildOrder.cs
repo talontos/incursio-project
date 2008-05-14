@@ -18,7 +18,6 @@ namespace Incursio.Utils
 {
     public class EntityBuildOrder
     {
-        //TODO: IMPLEMENT BUILDING USING STRING, THIS WILL BE MORE EFFICIENT
         public State.EntityName entity;
         public Coordinate location;
         public KeyPoint keyPoint;
@@ -34,6 +33,14 @@ namespace Incursio.Utils
         {
             location = l;
             entity = e;
+        }
+
+        public EntityBuildOrder(Coordinate l, int entityId){
+
+        }
+
+        public EntityBuildOrder(Coordinate l, int entityId, KeyPoint k){
+
         }
     }
 }
