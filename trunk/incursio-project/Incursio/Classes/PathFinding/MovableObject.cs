@@ -79,6 +79,7 @@ namespace Incursio.Classes.PathFinding
         {
             this.moveSpeed = moveSpeed;
             this.location = entity.location;
+            this.PositionCurrent = entity.location.toVector2();
             curveX = new Curve();
             curveY = new Curve();
         }

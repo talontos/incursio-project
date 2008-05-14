@@ -75,7 +75,7 @@ namespace Incursio.Classes
 
         public override bool updateMovement(float ElapsedTime)
         {
-
+            
             this.updateOccupancy(false);
 
             //move
