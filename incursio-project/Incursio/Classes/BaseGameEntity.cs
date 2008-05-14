@@ -35,9 +35,6 @@ namespace Incursio.Classes
         public int keyId = -1;
         public bool visible = false;
         public bool highlighted = false;
-        public bool canAttack = false;
-        public bool canMove = false;
-        public bool isConstructor = false;
         public bool justDrawn = false;
         public bool smartGuarding = true;
         public int currentFrameX = 0;       //for animation
@@ -46,17 +43,25 @@ namespace Incursio.Classes
         public int currentFrameYAttackDeath = 0;
         public int attackFramePause = 0;
 
+        //BOOL VALUES for COMPONENTS
+        public bool canAttack = false;
+        public bool canMove = false;
+        public bool isConstructor = false;
+
         public Rectangle boundingBox;
 
         public int pointValue = 0;
 
         protected List<BaseCommand> orders;
 
-        public List<BaseComponent> components;
+        public RenderComponent renderComponent;
+        public MovementComponent movementComponent;
+        public FactoryComponent factoryComponent;
+        public CombatComponent combatComponent;
+        public ExperienceComponent experienceComponent;
 
         public BaseGameEntity(){
             orders = new List<BaseCommand>();
-            components = new List<BaseComponent>();
         }
 
         /// <summary>
@@ -70,9 +75,22 @@ namespace Incursio.Classes
                 return;
             }
 
-            for(int i = 0; i < this.components.Count; i++){
-                this.components[i].Update(gameTime);
-            }
+            #region Update components
+            if(renderComponent != null)
+                renderComponent.Update(gameTime);
+            
+            if(movementComponent != null)
+                movementComponent.Update(gameTime);
+            
+            if(factoryComponent != null)
+                factoryComponent.Update(gameTime);
+            
+            if(combatComponent != null)
+                combatComponent.Update(gameTime);
+            
+            if(experienceComponent != null)
+                experienceComponent.Update(gameTime);
+            #endregion
 
             this.processOrderList(gameTime, ref myRef);
 
@@ -93,16 +111,7 @@ namespace Incursio.Classes
             //if I still have orders...
             if (orders.Count > 0)
             {
-                if(orders[0] is MoveCommand){
-                    for(int i = 0; i < this.components.Count; i++){
-                        if (components[i] is MovementComponent){
-                            (components[i] as MovementComponent).currentCommand = orders[0] as MoveCommand;
-                            break;
-                        }
-                    }
-                }
-                else
-                    orders[0].execute(gameTime, ref myRef);
+                orders[0].execute(gameTime, ref myRef);
 
                 //check type for player notification?
             }
@@ -197,7 +206,12 @@ namespace Incursio.Classes
         /// </summary>
         /// <returns>True when destination is reached.  By default returns true.</returns>
         public virtual bool updateMovement(float ElapsedTime){
-            return true;
+            if(this.movementComponent != null){
+                return this.movementComponent.updateMovement(ElapsedTime);
+            }
+            else{
+                return true;
+            }
         }
 
         /// <summary>

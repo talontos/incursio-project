@@ -45,7 +45,7 @@ namespace Incursio.Classes
             canAttack = true;
             canMove = true;
 
-            this.components.Add(new MovementComponent(this));
+            this.movementComponent = new MovementComponent(this);
         }
 
         public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
@@ -73,8 +73,12 @@ namespace Incursio.Classes
             }
         }
 
+        /*
         public override bool updateMovement(float ElapsedTime)
         {
+
+            //THIS IS BEING DONE BY THE MOVEMENTCOMPONENT
+            return base.updateMovement(ElapsedTime);
             
             this.updateOccupancy(false);
 
@@ -123,6 +127,7 @@ namespace Incursio.Classes
             return retVal;
             
         }
+        */
 
         /// <summary>
         /// Changes the unit's state and destination so that 

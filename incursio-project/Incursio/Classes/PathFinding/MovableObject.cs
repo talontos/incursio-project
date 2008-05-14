@@ -267,7 +267,7 @@ namespace Incursio.Classes.PathFinding
         /// Performs moving logic
         /// </summary>
         /// <param name="ElapsedTime">Time elapsed form last frame</param>
-        public override bool updateMovement(float ElapsedTime)
+        public bool updateMoveableObjectMovement(float ElapsedTime)
         {
             bool done = true;
 
