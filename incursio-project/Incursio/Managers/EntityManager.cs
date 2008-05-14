@@ -582,10 +582,10 @@ namespace Incursio.Managers
             }
         }
 
-        public void healEntitiesInRange(CampStructure camp, int healRange, bool healNonHeros){
+        public void healEntitiesInRange(BaseGameEntity entity, int healRange, int healthBoost, bool healNonHeros){
 
-            List<int> ids = MapManager.getInstance().currentMap.getEntitiesInRange(camp.location, healRange);
-            State.PlayerId hOwner = camp.owner;
+            List<int> ids = MapManager.getInstance().currentMap.getEntitiesInRange(entity.location, healRange);
+            State.PlayerId hOwner = entity.owner;
             BaseGameEntity e;
 
             ids.ForEach(delegate(int key)
@@ -593,7 +593,7 @@ namespace Incursio.Managers
                 e = this.getEntity(key);
                 if (!e.isDead() && e.owner == hOwner && ( e is Hero || (healNonHeros && e is Unit) ) ){
                     //HEAL ME!
-                    e.heal(camp.healthBoost);
+                    e.heal(healthBoost);
                 }
             });
         }

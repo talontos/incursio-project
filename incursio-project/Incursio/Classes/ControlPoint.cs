@@ -41,6 +41,8 @@ namespace Incursio.Classes
             this.sightRange = 10;
             this.setType(State.EntityName.ControlPoint);
             this.map = MapManager.getInstance().currentMap;
+
+            this.resourceComponent = new global::Incursio.Entities.Components.ResourceComponent(this);
         }
 
         public void startCap(Hero capturingHero)

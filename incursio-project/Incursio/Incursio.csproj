@@ -120,12 +120,15 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\BaseGameEntityConfiguration.cs" />
     <Compile Include="Entities\ComponentConfiguration.cs" />
+    <Compile Include="Entities\Components\AudioComponent.cs" />
     <Compile Include="Entities\Components\BaseComponent.cs" />
     <Compile Include="Entities\Components\CombatComponent.cs" />
     <Compile Include="Entities\Components\ExperienceComponent.cs" />
     <Compile Include="Entities\Components\FactoryComponent.cs" />
+    <Compile Include="Entities\Components\HealComponent.cs" />
     <Compile Include="Entities\Components\MovementComponent.cs" />
     <Compile Include="Entities\Components\RenderComponent.cs" />
+    <Compile Include="Entities\Components\ResourceComponent.cs" />
     <Compile Include="Interface\Button.cs" />
     <Compile Include="Interface\BuildLightInfantryButton.cs" />
     <Compile Include="Interface\BuildHeavyInfantryButton.cs" />

@@ -306,11 +306,13 @@ namespace Incursio.Classes
             this.map = map;
         }
 
+        /*
         //Private helper functions//
         /// <summary>
         /// If target is in range, attack it.  otherwise, move toward it.
         /// </summary>
         public override bool attackTarget(){
+
             //if target is in attackRange, attack it.
 
             int largeTargetBufferZone = 0;
@@ -365,6 +367,7 @@ namespace Incursio.Classes
             }
             else return false;
         }
+        */
 
         public override bool isDead()
         {

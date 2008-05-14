@@ -59,6 +59,9 @@ namespace Incursio.Classes
         public FactoryComponent factoryComponent;
         public CombatComponent combatComponent;
         public ExperienceComponent experienceComponent;
+        public ResourceComponent resourceComponent;
+        public AudioComponent audioComponent;
+        public HealComponent healComponent;
 
         public BaseGameEntity(){
             orders = new List<BaseCommand>();
@@ -76,6 +79,7 @@ namespace Incursio.Classes
             }
 
             #region Update components
+            //TODO: IS THERE AN EASIER WAY TO UPDATE ALL COMPONENTS?
             if(renderComponent != null)
                 renderComponent.Update(gameTime);
             
@@ -90,6 +94,15 @@ namespace Incursio.Classes
             
             if(experienceComponent != null)
                 experienceComponent.Update(gameTime);
+
+            if (resourceComponent != null)
+                resourceComponent.Update(gameTime);
+
+            if (audioComponent != null)
+                resourceComponent.Update(gameTime);
+
+            if (healComponent != null)
+                healComponent.Update(gameTime);
             #endregion
 
             this.processOrderList(gameTime, ref myRef);
@@ -191,7 +204,14 @@ namespace Incursio.Classes
         /// </summary>
         /// <returns>True if target is in range</returns>
         public virtual bool attackTarget(){
-            return false;
+            //return false;
+
+            if(this.combatComponent != null){
+                return this.combatComponent.attackTarget();
+            }
+            else{
+                return false;
+            }
         }
 
         /// <summary>

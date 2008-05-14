@@ -21,6 +21,8 @@ namespace Incursio.Entities
         public int pointValue = 0;
         public int playerId = -1;
 
+        public int costToBuild = 0;
+
         public List<ComponentConfiguration> components = new List<ComponentConfiguration>();
 
         public BaseGameEntityConfiguration(int id, string name, params string[] args){
@@ -36,6 +38,7 @@ namespace Incursio.Entities
                     case "sightRange":  sightRange  = int.Parse(args[i + 1]); break;
                     case "pointValue":  pointValue  = int.Parse(args[i + 1]); break;
                     case "playerId":    playerId    = int.Parse(args[i + 1]); break;
+                    case "costToBuild": costToBuild = int.Parse(args[i + 1]); break;
                     default: break;
                 }
             }

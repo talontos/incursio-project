@@ -44,6 +44,8 @@ namespace Incursio.Classes
             this.maxHealth = 100;
             this.health = 100;
             this.setType(State.EntityName.Archer);
+
+            this.combatComponent = new global::Incursio.Entities.Components.CombatComponent(this);
         }
 
       public override void Update(Microsoft.Xna.Framework.GameTime gameTime, ref BaseGameEntity myRef)
