@@ -18,6 +18,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Incursio.Managers;
 using Incursio.Commands;
+using Incursio.Entities.Components;
 
 namespace Incursio.Classes
 {
@@ -71,9 +72,9 @@ namespace Incursio.Classes
             this.isConstructor = true;
             spawnPoint = new Coordinate(this.location.x, this.location.y + 10);
 
-            this.resourceComponent = new global::Incursio.Entities.Components.ResourceComponent(this);
-            this.factoryComponent = new global::Incursio.Entities.Components.FactoryComponent(this);
-            this.healComponent = new global::Incursio.Entities.Components.HealComponent(this);
+            this.resourceComponent = new ResourceComponent(this);
+            this.factoryComponent = new FactoryComponent(this);
+            this.healComponent = new HealComponent(this);
         }
 
         public override void Update(GameTime gameTime, ref BaseGameEntity myRef)
@@ -145,7 +146,7 @@ namespace Incursio.Classes
                         this.timeBuilt = 0;
                         this.timeRequired = LIGHT_INFANTRY_BUILD_TIME * 60;
                         this.buildProject = toBeBuilt;
-                        this.currentState = State.StructureState.Building;
+                        this.currentState = State.EntityState.Building;
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_LIGHT_INFANTRY;
                     }
                     else
@@ -173,7 +174,7 @@ namespace Incursio.Classes
                         this.timeBuilt = 0;
                         this.timeRequired = ARCHER_BUILD_TIME * 60;
                         this.buildProject = toBeBuilt;
-                        this.currentState = State.StructureState.Building;
+                        this.currentState = State.EntityState.Building;
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_ARCHER;
                     }
                     else
@@ -201,7 +202,7 @@ namespace Incursio.Classes
                         this.timeBuilt = 0;
                         this.timeRequired = HEAVY_INFANTRY_BUILD_TIME * 60;
                         this.buildProject = toBeBuilt;
-                        this.currentState = State.StructureState.Building;
+                        this.currentState = State.EntityState.Building;
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_HEAVY_INFANTRY;
                     }
                     else
@@ -229,7 +230,7 @@ namespace Incursio.Classes
                         this.timeBuilt = 0;
                         this.timeRequired = GUARD_TOWER_BUILD_TIME * 60;
                         this.buildProject = toBeBuilt;
-                        this.currentState = State.StructureState.Building;
+                        this.currentState = State.EntityState.Building;
                         owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_GUARD_TOWER;
                     }
                     else
@@ -287,7 +288,7 @@ namespace Incursio.Classes
                 //can't build anymore
                 timeBuilt = 0;
                 timeRequired = 0;
-                this.currentState = State.StructureState.Idle;
+                this.currentState = State.EntityState.Idle;
                 this.currentBuildForObjectFactory = "IDLE";
                 this.currentlyBuildingThis = "IDLE";
 
@@ -314,7 +315,7 @@ namespace Incursio.Classes
                     temp.issueSingleOrder(new MoveCommand(this.destination));
                     timeBuilt = 0;
                     timeRequired = 0;
-                    this.currentState = State.StructureState.Idle;
+                    this.currentState = State.EntityState.Idle;
                     this.currentBuildForObjectFactory = "IDLE";
                     this.currentlyBuildingThis = "IDLE";
 
@@ -342,7 +343,7 @@ namespace Incursio.Classes
                     temp.setLocation(newStructureCoords);
                     timeBuilt = 0;
                     timeRequired = 0;
-                    this.currentState = State.StructureState.Idle;
+                    this.currentState = State.EntityState.Idle;
                     this.currentBuildForObjectFactory = "IDLE";
                     this.currentlyBuildingThis = "IDLE";
 
@@ -454,12 +455,8 @@ namespace Incursio.Classes
 
         public double getPercentDone()
         {
-            if (this.isBuilding())
-            {
-                return (float)timeBuilt / timeRequired;
-            }
-            else return -1.0;
-            
+            //HANDLED BY COMPONENT
+            return this.factoryComponent.getPercentDone();
         }
 
         private void setDefaultDestination(){
@@ -507,11 +504,11 @@ namespace Incursio.Classes
             Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.location);
             Rectangle unit = this.boundingBox;
 
-            if (this.currentState == State.StructureState.BeingBuilt)
+            if (this.currentState == State.EntityState.BeingBuilt)
             {
                 //TODO: draw construction?
             }
-            else if (this.currentState == State.StructureState.Building)
+            else if (this.currentState == State.EntityState.Building)
             {
                 //draw something special for when the structure is building something (fires flickering or w/e)
                 if (this.getPlayer() == State.PlayerId.HUMAN)
@@ -541,7 +538,7 @@ namespace Incursio.Classes
                 }
 
             }
-            else if (this.currentState == State.StructureState.Destroyed)
+            else if (this.currentState == State.EntityState.Destroyed)
             {
 
                 if (destroyedTimer < TIME_TILL_DESTROYED_FADE * 60)
@@ -567,7 +564,7 @@ namespace Incursio.Classes
                     destroyedTimer++;
                 }
             }
-            else if (this.currentState == State.StructureState.Idle)
+            else if (this.currentState == State.EntityState.Idle)
             {
                 if (this.getPlayer() == State.PlayerId.HUMAN)
                 {
@@ -603,6 +600,10 @@ namespace Incursio.Classes
         }
 
         public void drawBuildQueue(SpriteBatch spriteBatch){
+            //HANDLED BY COMPONENT
+            this.factoryComponent.drawBuildQueue(spriteBatch);
+            return;
+
             //debugging; draw my queue
             if (this.orders.Count > 0)
             {

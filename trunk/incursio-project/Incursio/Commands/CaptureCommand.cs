@@ -49,7 +49,7 @@ namespace Incursio.Commands
                 }
                 else{
                     if(!capTarget.isCapping()){
-                        (subject as Hero).setCurrentState(State.UnitState.Capturing);
+                        (subject as Hero).setCurrentState(State.EntityState.Capturing);
                         capTarget.startCap((subject as Hero));
                     }
                 }

@@ -109,7 +109,7 @@ namespace Incursio.Commands
 
             //move towards destination
             subject.setDestination(this.destination);
-            (subject as Unit).setCurrentState(State.UnitState.Moving);
+            (subject as Unit).setCurrentState(State.EntityState.Moving);
 
             this.location = subject.getLocation();
 

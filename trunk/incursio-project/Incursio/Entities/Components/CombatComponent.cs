@@ -78,7 +78,7 @@ namespace Incursio.Entities.Components
                     //if we just killed the thing
 
                     //if (target is Unit && (target as Unit).getCurrentState() == State.UnitState.Dead ||
-                    //   target is Structure && (target as Structure).getCurrentState() == State.StructureState.Destroyed)
+                    //   target is Structure && (target as Structure).getCurrentState() == State.EntityState.Destroyed)
                     if (target.isDead())
                     {
                         //NOTE: killedTarget needs to be performed BEFORE

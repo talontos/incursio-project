@@ -408,7 +408,7 @@ namespace Incursio.Managers
             {
                 if (e.getType() == State.EntityName.Camp && e.owner == id)
                 {
-                    if ((e as CampStructure).getCurrentState() == State.StructureState.Destroyed)
+                    if ((e as CampStructure).getCurrentState() == State.EntityState.Destroyed)
                     {
 
                     }
@@ -423,16 +423,15 @@ namespace Incursio.Managers
             return result;
         }
 
-        //TODO: USE STRINGS!!!!!
         public void tryToBuild(State.EntityName toBuild){
-            if (selectedUnits.Count > 0 && selectedUnits[0] is CampStructure && selectedUnits[0].owner == State.PlayerId.HUMAN)
+            if (selectedUnits.Count > 0 && selectedUnits[0].isConstructor && selectedUnits[0].owner == State.PlayerId.HUMAN)
             {
                 this.issueCommand(State.Command.BUILD, true, null, toBuild);
             }
         }
 
         public void tryToBuild(State.EntityName toBuild, Vector2 point){
-            if (selectedUnits.Count > 0 && selectedUnits[0] is CampStructure)
+            if (selectedUnits.Count > 0 && selectedUnits[0].isConstructor)
             {
                 this.issueCommand(State.Command.BUILD, true, null, toBuild, new Coordinate((int)point.X, (int)point.Y));
             }
@@ -629,11 +628,11 @@ namespace Incursio.Managers
             {
                 if (this.entityBank[keyId] is Unit)
                 {
-                    (this.entityBank[keyId] as Unit).setCurrentState(State.UnitState.Buried);
+                    (this.entityBank[keyId] as Unit).setCurrentState(State.EntityState.Buried);
                 }
                 else if (this.entityBank[keyId] is Structure)
                 {
-                    (this.entityBank[keyId] as Structure).setCurrentState(State.StructureState.Destroyed);
+                    (this.entityBank[keyId] as Structure).setCurrentState(State.EntityState.Destroyed);
                 }
 
             }
@@ -736,9 +735,9 @@ namespace Incursio.Managers
                 if( !(e is ControlPoint)){
                     e.health = 0;
                     if (e is Structure)
-                        (e as Structure).setCurrentState(State.StructureState.Destroyed);
+                        (e as Structure).setCurrentState(State.EntityState.Destroyed);
                     else if (e is Unit)
-                        (e as Unit).setCurrentState(State.UnitState.Dead);
+                        (e as Unit).setCurrentState(State.EntityState.Dead);
                 }
             });
         }
