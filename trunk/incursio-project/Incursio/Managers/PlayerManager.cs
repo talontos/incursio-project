@@ -65,6 +65,24 @@ namespace Incursio.Managers
             players.Add(humanPlayer);
         }
 
+        /// <summary>
+        /// if player list is not full, create and add a new player
+        /// </summary>
+        /// <returns></returns>
+        public bool addNewPlayer(bool isComputer){
+            if(players.Count < 8){
+                if(isComputer)
+                    players.Add(new AIPlayer(new SimpleAI()));
+                else{
+                    players.Add(new Player());
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
         public void notifyPlayer(State.PlayerId player, GameEvent e){
             //get player
             players.ForEach(delegate(Player p)
@@ -76,11 +94,12 @@ namespace Incursio.Managers
         }
 
         public Player getPlayerById(State.PlayerId id){
-            switch(id){
-                case State.PlayerId.COMPUTER: return this.computerPlayer;
-                case State.PlayerId.HUMAN: return this.humanPlayer;
-                default: return null;
+            for(int i = 0; i < this.players.Count; i++){
+                if (players[i].id == id)
+                    return players[i];
             }
+
+            return null;
         }
 
 

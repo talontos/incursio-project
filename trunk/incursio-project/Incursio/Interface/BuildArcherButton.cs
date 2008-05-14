@@ -50,7 +50,7 @@ namespace Incursio.Interface
             if (!this.getPressed() && this.getFocus())
             {
                 this.setFocus(false);
-                EntityManager.getInstance().tryToBuild(new ArcherUnit());
+                EntityManager.getInstance().tryToBuild(State.EntityName.Archer);
             }
         }
     }

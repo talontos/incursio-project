@@ -66,7 +66,7 @@ namespace Incursio.Managers
             keyStateCurrent = Keyboard.GetState();
 
             if(enterStringMode){
-                
+                this.enteredString += this.getPressedCharacter();
             }
 
             //interface
@@ -81,6 +81,9 @@ namespace Incursio.Managers
             if(this.keyPressed(Keys.Enter)){
                 if(enterStringMode){
                     //perform action
+                    if(this.enteredString.Equals("YAR")){
+                        Incursio.getInstance().exitGame();
+                    }
                 }
 
                 this.enterStringMode = !this.enterStringMode;
@@ -124,17 +127,17 @@ namespace Incursio.Managers
             //Entity construction
             if (this.keyPressed(Keys.L))
             {
-                EntityManager.getInstance().tryToBuild(new LightInfantryUnit());// LightInfantryUnit.CLASSNAME);
+                EntityManager.getInstance().tryToBuild(State.EntityName.LightInfantry);
             }
 
             if (this.keyPressed(Keys.R))
             {
-                EntityManager.getInstance().tryToBuild(new ArcherUnit());// ArcherUnit.CLASSNAME);
+                EntityManager.getInstance().tryToBuild(State.EntityName.Archer);// ArcherUnit.CLASSNAME);
             }
 
             if (this.keyPressed(Keys.H))
             {
-                EntityManager.getInstance().tryToBuild(new HeavyInfantryUnit());// HeavyInfantryUnit.CLASSNAME);
+                EntityManager.getInstance().tryToBuild(State.EntityName.HeavyInfantry);// HeavyInfantryUnit.CLASSNAME);
             }
 
             if (this.keyPressed(Keys.T))
@@ -296,7 +299,7 @@ namespace Incursio.Managers
                 }
                 else if (this.positioningTower)
                 {
-                    EntityManager.getInstance().tryToBuild(new GuardTowerStructure(), point);
+                    EntityManager.getInstance().tryToBuild(State.EntityName.GuardTower, point);
                     this.positioningTower = false;
                     TextureBank.InterfaceTextures.cursorEvent = null;
                 }
@@ -405,6 +408,16 @@ namespace Incursio.Managers
             this.MOVE_LEFT = false;
             this.MOVE_RIGHT = false;
             this.MOVE_UP = false;
+        }
+
+        private string getPressedCharacter(){
+            Keys[] keys = keyStateCurrent.GetPressedKeys();
+            for(int i = 0; i < keys.Length; i++){
+                if(this.keyPressed(keys[i])){
+                    return this.shifting() ? keys[i].ToString().ToUpper() : keys[i].ToString().ToLower();
+                }
+            }
+            return "";
         }
     }
 }

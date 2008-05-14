@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Incursio.Classes;
 
 namespace Incursio.Entities.Components
 {
@@ -9,13 +10,13 @@ namespace Incursio.Entities.Components
         public bool canAttack = false;
         public bool smartGuarding = true;
 
-        public CombatComponent(){
+        public CombatComponent(ref BaseGameEntity entity) : base(entity){
 
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime, ref BaseGameEntity entity)
+        public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            base.Update(gameTime, ref entity);
+            base.Update(gameTime); 
         }
     }
 }

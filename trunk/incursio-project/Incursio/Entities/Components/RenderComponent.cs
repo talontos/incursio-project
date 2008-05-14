@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Incursio.Classes;
 
 namespace Incursio.Entities.Components
 {
@@ -17,13 +19,13 @@ namespace Incursio.Entities.Components
         public Rectangle boundingBox;
         //TODO: for rendering, we also now need to know what textures to use!!
 
-        public RenderComponent(/*TODO: ADD VALUES*/){
+        public RenderComponent(BaseGameEntity entity) : base(entity){
 
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime, ref BaseGameEntity entity)
+        public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            base.Update(gameTime, ref entity);
+            base.Update(gameTime);
 
             //TODO: RENDER entity
         }

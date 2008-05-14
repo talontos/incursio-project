@@ -18,6 +18,7 @@ namespace Incursio.Entities
         public int health = 100;
         public int armor = 0;
         public int sightRange = 0;
+        public Coordinate location = new Coordinate(0, 0);
         public int pointValue = 0;
         public int playerId = -1;
 
@@ -30,12 +31,12 @@ namespace Incursio.Entities
             //set all other properties that are given
             for(int i = 0; (i + 1) < args.Length; i += 2){
                 switch(args[i]){
-                    case "maxHealth":   maxHealth   = int.Parse(args[i + 1]); break;
-                    case "health":      health      = int.Parse(args[i + 1]); break;
-                    case "armor":       armor       = int.Parse(args[i + 1]); break;
-                    case "sightRange":  sightRange  = int.Parse(args[i + 1]); break;
-                    case "pointValue":  pointValue  = int.Parse(args[i + 1]); break;
-                    case "playerId":    playerId    = int.Parse(args[i + 1]); break;
+                    case "maxHealth":   maxHealth   = args[i + 1]; break;
+                    case "health":      health      = args[i + 1]; break;
+                    case "armor":       armor       = args[i + 1]; break;
+                    case "sightRange":  sightRange  = args[i + 1]; break;
+                    case "pointValue":  pointValue  = args[i + 1]; break;
+                    case "playerId":    playerId    = args[i + 1]; break;
                     default: break;
                 }
             }
@@ -49,8 +50,8 @@ namespace Incursio.Entities
             }
         }
 
-        public BaseEntity buildEntity(){
-            return new BaseEntity();
+        public void setEntityAttributes(out BaseGameEntity entity){
+
         }
 
     }

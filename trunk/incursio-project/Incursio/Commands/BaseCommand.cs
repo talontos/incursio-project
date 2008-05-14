@@ -15,6 +15,7 @@ using System.Text;
 
 using Incursio.Classes;
 using Microsoft.Xna.Framework;
+using Incursio.Classes.PathFinding;
 
 namespace Incursio.Commands
 {
@@ -26,8 +27,9 @@ namespace Incursio.Commands
         public BaseCommand(){}
 
         public virtual void execute(GameTime gameTime, ref BaseGameEntity subject)
-        {
+        {}
 
-        }
+        public virtual void execute(GameTime gameTime, ref MovableObject subject)
+        { }
     }
 }
