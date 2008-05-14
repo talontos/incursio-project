@@ -14,11 +14,25 @@ namespace Incursio.Entities.Components
 
         private MovableObject movable;
 
-        public MoveCommand currentCommand;
+        private MoveCommand _currentCommand;
+
+        public MoveCommand currentCommand{
+            get { 
+                return _currentCommand; 
+            }
+
+            set { 
+                if(this.movable != null){
+                    this.movable.PositionCurrent = this.bgEntity.location.toVector2();
+                }
+
+                _currentCommand = value;
+            }
+        }
 
         //TEMP
         public MovementComponent(BaseGameEntity e):base(e){
-            movable = new MovableObject(ref e);
+            movable = new MovableObject(ref e, this.moveSpeed);
         }
 
         public MovementComponent(ref BaseEntity e) : base(ref e){
@@ -35,17 +49,23 @@ namespace Incursio.Entities.Components
                     default: break;
                 }
             }
-
-            this.movable = new MovableObject(this.moveSpeed);
         }
 
+        //this should just update the movement of the entity...
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             base.Update(gameTime);
 
             if (currentCommand != null){
+                if(bgEntity.isConstructor){
+                    //won't move, just set destination
+                    bgEntity.setDestination(currentCommand.destination);
+                    currentCommand.finishedExecution = true;
+                }
+
                 currentCommand.execute(gameTime, ref this.movable);
-                
+
+                this.bgEntity.location = this.currentCommand.location;
 
                 if (currentCommand.finishedExecution)
                     this.currentCommand = null;

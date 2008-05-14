@@ -30,7 +30,7 @@ namespace Incursio.Commands
         public Coordinate destination;
         public Coordinate start;
 
-        private Coordinate prevLocation;
+        public Coordinate location;
         private int stuckCounter = 0;
 
         public MoveCommand(Coordinate destination){
@@ -110,7 +110,7 @@ namespace Incursio.Commands
             subject.setDestination(this.destination);
             (subject as Unit).setCurrentState(State.UnitState.Moving);
 
-            this.prevLocation = subject.getLocation();
+            this.location = subject.getLocation();
 
             this.finishedExecution = subject.updateMovement((float)gameTime.ElapsedGameTime.TotalSeconds);
         }
@@ -170,9 +170,50 @@ namespace Incursio.Commands
             //subject.setDestination(this.destination);
             //(subject as Unit).setCurrentState(State.UnitState.Moving);
 
-            this.prevLocation = subject.getLocation();
+            subject.updateOccupancy(false);
 
+            float xMinimumThreshold = 0.10F;
+            float yMinimumThreshold = 0.10F;
+
+            //get the direction to the target
+            Vector2 direction = new Vector2(destination.x - subject.location.x, destination.y - subject.location.y);
+
+            if (this.finishedExecution) //movement finished
+            {
+                subject.setIdle();
+            }
+            /*
+            else
+            {
+                float xDirection = Vector2.Normalize(direction).X;
+                float yDirection = Vector2.Normalize(direction).Y;
+
+                //int newX = location.x;
+                //int newY = location.y;
+
+                if (xDirection > xMinimumThreshold && (xDirection / yDirection) >= 1)
+                {
+                    (subject as Unit).setDirectionState(State.Direction.East);
+                }
+                else if (xDirection < -xMinimumThreshold && (xDirection / yDirection) <= -1)
+                {
+                    (subject as Unit).setDirectionState(State.Direction.West);
+                }
+
+                if (yDirection > yMinimumThreshold && ((Math.Abs(xDirection)) / yDirection) < 1)
+                {
+                    (subject as Unit).setDirectionState(State.Direction.South);
+                }
+                else if (yDirection < -yMinimumThreshold && (xDirection / yDirection) < 1)
+                {
+                    (subject as Unit).setDirectionState(State.Direction.North);
+                }
+            }
+            */
             this.finishedExecution = subject.updateMovement((float)gameTime.ElapsedGameTime.TotalSeconds);
+            subject.updateOccupancy(true);
+
+            this.location = subject.getLocation();
         }
     
     }
