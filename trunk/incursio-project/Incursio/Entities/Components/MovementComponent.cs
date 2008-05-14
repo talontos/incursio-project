@@ -5,6 +5,7 @@ using Incursio.Classes.PathFinding;
 using Incursio.Classes;
 using Microsoft.Xna.Framework;
 using Incursio.Commands;
+using Incursio.Utils;
 
 namespace Incursio.Entities.Components
 {
@@ -12,27 +13,12 @@ namespace Incursio.Entities.Components
     {
         public float moveSpeed = 320.0f;
 
-        private MovableObject movable;
-
-        private MoveCommand _currentCommand;
-
-        public MoveCommand currentCommand{
-            get { 
-                return _currentCommand; 
-            }
-
-            set { 
-                if(this.movable != null){
-                    this.movable.PositionCurrent = this.bgEntity.location.toVector2();
-                }
-
-                _currentCommand = value;
-            }
-        }
+        public MovableObject movable;
 
         //TEMP
         public MovementComponent(BaseGameEntity e):base(e){
             movable = new MovableObject(ref e, this.moveSpeed);
+            e.canMove = true;
         }
 
         public MovementComponent(ref BaseEntity e) : base(ref e){
@@ -51,25 +37,64 @@ namespace Incursio.Entities.Components
             }
         }
 
+        public void updateMovableLocation(){
+            this.movable.PositionCurrent = this.bgEntity.location.toVector2();
+        }
+
         //this should just update the movement of the entity...
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             base.Update(gameTime);
+        }
 
-            if (currentCommand != null){
-                if(bgEntity.isConstructor){
-                    //won't move, just set destination
-                    bgEntity.setDestination(currentCommand.destination);
-                    currentCommand.finishedExecution = true;
+        public virtual bool updateMovement(float ElapsedTime)
+        {
+            this.bgEntity.updateOccupancy(false);
+
+            //move
+            bool retVal = this.movable.updateMoveableObjectMovement(ElapsedTime);
+
+            this.bgEntity.location = new Coordinate( (int)movable.PositionCurrent.X, (int)movable.PositionCurrent.Y);
+
+            this.bgEntity.updateOccupancy(true);
+
+            if (retVal) //movement finished
+            {
+                this.bgEntity.setIdle();// currentState = State.UnitState.Idle;
+            }
+            else
+            {
+                /*
+                float xMinimumThreshold = 0.10F;
+                float yMinimumThreshold = 0.10F;
+                
+                //get the direction to the target
+                Vector2 direction = new Vector2(destination.x - location.x, destination.y - location.y);
+                
+                float xDirection = Vector2.Normalize(direction).X;
+                float yDirection = Vector2.Normalize(direction).Y;
+
+                if (xDirection > xMinimumThreshold && (xDirection / yDirection) >= 1)
+                {
+                    this.directionState = State.Direction.East;
+                }
+                else if (xDirection < -xMinimumThreshold && (xDirection / yDirection) <= -1)
+                {
+                    this.directionState = State.Direction.West;
                 }
 
-                currentCommand.execute(gameTime, ref this.movable);
-
-                this.bgEntity.location = this.currentCommand.location;
-
-                if (currentCommand.finishedExecution)
-                    this.currentCommand = null;
+                if (yDirection > yMinimumThreshold && ((Math.Abs(xDirection)) / yDirection) < 1)
+                {
+                    this.directionState = State.Direction.South;
+                }
+                else if (yDirection < -yMinimumThreshold && (xDirection / yDirection) < 1)
+                {
+                    this.directionState = State.Direction.North;
+                }
+                */
             }
+
+            return retVal;
         }
     }
 }
