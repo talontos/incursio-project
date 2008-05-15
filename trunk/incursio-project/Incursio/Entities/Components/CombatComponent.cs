@@ -19,7 +19,7 @@ namespace Incursio.Entities.Components
             entity.canAttack = true;
         }
 
-        public override void setAttributes(List<KeyValuePair<string, object>> attributes)
+        public override void setAttributes(List<KeyValuePair<string, string>> attributes)
         {
             base.setAttributes(attributes);
 
@@ -27,9 +27,9 @@ namespace Incursio.Entities.Components
             {
                 switch (attributes[i].Key)
                 {
-                    case "damage":      damage      = (int)attributes[i].Value; break;
-                    case "attackSpeed": attackSpeed = (int)attributes[i].Value; break;
-                    case "attackRange": attackRange = (int)attributes[i].Value; break;
+                    case "damage":      damage      = int.Parse(attributes[i].Value); break;
+                    case "attackSpeed": attackSpeed = int.Parse(attributes[i].Value); break;
+                    case "attackRange": attackRange = int.Parse(attributes[i].Value); break;
                     default: break;
                 }
             }

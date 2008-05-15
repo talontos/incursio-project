@@ -25,13 +25,13 @@ namespace Incursio.Entities.Components
             //we somehow need a movableobject
         }
 
-        public override void setAttributes(List<KeyValuePair<string, object>> attributes)
+        public override void setAttributes(List<KeyValuePair<string, string>> attributes)
         {
             base.setAttributes(attributes);
 
             for(int i = 0; i < attributes.Count; i++){
                 switch (attributes[i].Key){
-                    case "moveSpeed": moveSpeed = (float)attributes[i].Value; break;
+                    case "moveSpeed": moveSpeed = float.Parse(attributes[i].Value); break;
                     default: break;
                 }
             }

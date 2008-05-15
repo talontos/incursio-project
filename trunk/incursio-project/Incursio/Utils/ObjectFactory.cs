@@ -108,7 +108,7 @@ namespace Incursio.Utils
         /// <param name="classname">the FULLY QUALIFIED NAME of the class. 
         /// <param name="owningPlayer">Enumerated PlayerID to be assigned as the owner</param>
         /// <returns>The newly created instance</returns>
-        public BaseEntity create(int classID, int owningPlayerID)
+        public BaseGameEntity create(int classID, int owningPlayerID)
         {
             BaseGameEntityConfiguration config;
 
@@ -124,9 +124,9 @@ namespace Incursio.Utils
                 return null;
 
             // build new <classname>
-            BaseEntity product = config.buildEntity();
+            BaseGameEntity product = config.buildEntity();
 
-            product.setPlayer(owningPlayerID);
+            //product.setPlayer(owningPlayerID);
 
             //check for hero stats to load
             /*

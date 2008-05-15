@@ -40,8 +40,8 @@ namespace Incursio.Managers
 
         public void loadGameConfiguration()
         {
+            //This is temporary now.  We'll be switching to XML configurations.
             //file is game.cfg.wtf
-
             try
             {
                 //open up a reader
@@ -113,6 +113,9 @@ namespace Incursio.Managers
                 Console.WriteLine("File Load Exception Found");
                 Console.WriteLine(e);
             }
+
+            //Load XML Configurations
+            this.ReadConfigurationFile("../../../Configuration/EntityConfiguration.xml");
             
         }
 
@@ -253,17 +256,17 @@ namespace Incursio.Managers
                             string typeToSet = compType.Value;
                             entityNode.Attributes.Remove(compType);
 
-                            string[] componentAttributes = new string[node.Attributes.Count * 2];
+                            string[] componentAttributes = new string[entityNode.Attributes.Count * 2];
 
                             //Getting the number of attributes for the entity
-                            int numOfAtt = node.Attributes.Count;
+                            int numOfAtt = entityNode.Attributes.Count;
 
                             //Looping over these attributes and adding them to the string array
                             for (int j = 0; j < numOfAtt; j++)
                             {
-                                XmlAttribute newAttr = node.Attributes[j];
-                                entityAttributes[j * 2] = newAttr.Name;
-                                entityAttributes[(j * 2) + 1] = newAttr.Value;
+                                XmlAttribute newAttr = entityNode.Attributes[j];
+                                componentAttributes[j * 2] = newAttr.Name;
+                                componentAttributes[(j * 2) + 1] = newAttr.Value;
                             }
                             
                             //adding the component
@@ -285,15 +288,17 @@ namespace Incursio.Managers
                         Console.WriteLine("Unrecognizable format or value in parsing XML.");
                     }
 
-                    //Adding the entity list to the object factory
-                    ObjectFactory.getInstance().entities = entityList;
                 }
+                //Adding the entity list to the object factory
+                ObjectFactory.getInstance().entities = entityList;
             }
             catch (FileLoadException e)
             {
                 Console.WriteLine("File Load Exception Found");
                 Console.WriteLine(e);
             }
+
+            BaseGameEntity en = ObjectFactory.getInstance().create(0, 0);
         }
     }
 }
