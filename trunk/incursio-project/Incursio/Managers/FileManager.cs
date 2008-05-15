@@ -17,6 +17,8 @@ using System.IO;
 using Incursio.Classes;
 using Incursio.Managers;
 using Incursio.Utils;
+using System.Xml;
+using Incursio.Entities;
 
 namespace Incursio.Managers
 {
@@ -170,56 +172,128 @@ namespace Incursio.Managers
             }
         }
 
-        private void ReadConfigurationFile(string sFilePath)
+        private void ReadConfigurationFile(string sFileName)
         {
-            //if (sFilePath == null)
-            //{
-            //    throw new NullReferenceException("File Path was null for Projectile's ReadScript");
-            //}
+            //Iterators
+            int audioIterator = 0;
+            int entityIterator = 0;
+            int textureIterator = 0;
 
-            //StreamReader oFileReader = new StreamReader(sFilePath);
-            //string[] sParsedString = new string[5];
-            //char[] cDelimeters = new char[1];
-            //cDelimeters[0] = ' ';
-            //const int SCRIPT_TYPE = 0;
-            //const int SCRIPT_ATTRIBUTE_1 = 1;
-            //const int SCRIPT_ATTRIBUTE_2 = 2;
-            //const int SCRIPT_ATTRIBUTE_3 = 3;
-            //const int SCRIPT_ATTRIBUTE_4 = 4;
-            //while (oFileReader.Peek() != -1)
-            //{
-            //    sParsedString = oFileReader.ReadLine().Split(cDelimeters);
-            //    if (sParsedString[SCRIPT_TYPE].Equals("Speed"))
-            //    {
-            //        m_iSpeed = Convert.ToInt32(sParsedString[SCRIPT_ATTRIBUTE_1]);
-            //    }
-            //    else if (sParsedString[SCRIPT_TYPE].Equals("Texture"))
-            //    {
-            //        try
-            //        {
-            //            m_oTexture = m_oContent.Load<Texture2D>(sParsedString[SCRIPT_ATTRIBUTE_1]);
+            //Lists for object factory
+            List<BaseGameEntityConfiguration> entityList = new List<BaseGameEntityConfiguration>();
+            
+            try
+            {
+                //Loading the XML document
+                XmlDocument doc = new XmlDocument();
+                doc.Load(sFileName);
 
-            //            if (!(m_iWidth == -1))
-            //            {
-            //                //This sets the number of columns in sprite
-            //                m_iSBColumns = m_oTexture.Width / m_iWidth;
-            //            }
+                //Flags
+                bool readingAudio = false;
+                bool readingEntities = false;
+                bool readingTextures = false;
+                
 
-            //        }
-            //        catch (ContentLoadException e)
-            //        {
+                foreach (XmlNode node in doc.DocumentElement.ChildNodes)
+                {
+                    if (node.Name == "Audio")
+                    {
+                        readingAudio = true;
+                        readingEntities = false;
+                        readingTextures = false;
+                    }
+                    else if (node.Name == "Entity")
+                    {
+                        readingAudio = false;
+                        readingEntities = true;
+                        readingTextures = false;
+                    }
+                    else if (node.Name == "Texture")
+                    {
+                        readingAudio = false;
+                        readingEntities = false;
+                        readingTextures = true;
+                    }
 
-            //        }
-            //        catch (FileNotFoundException e)
-            //        {
+                    if (readingAudio)
+                    {
+                        //Parsing audio code goes here
 
-            //        }
-            //    }
-            //    else{
+                    }
+                    else if (readingEntities)
+                    {
+                        //Iterating the entityIterator for an accurate ID
+                        entityIterator++;
 
-            //    }
-            //}
-            //oFileReader.Close();
+                        //Getting specific attributes
+                        XmlAttribute name = node.Attributes["name"];
+                        string nameToSet = name.Value;
+                        node.Attributes.Remove(name);
+
+                        string[] entityAttributes = new string[node.Attributes.Count * 2];
+                        
+                        //Getting the number of attributes for the entity
+                        int numOfAttributes = node.Attributes.Count;
+
+                        //Looping over these attributes and adding them to the string array
+                        for (int i = 0; i < numOfAttributes; i++)
+                        {
+                            XmlAttribute newAttribute = node.Attributes[i];
+                            entityAttributes[i * 2] = newAttribute.Name;
+                            entityAttributes[(i * 2) + 1] = newAttribute.Value;
+                        }
+
+                        //Building a new BaseGameEntityConfiguration
+                        BaseGameEntityConfiguration entity = new BaseGameEntityConfiguration(entityIterator, nameToSet, entityAttributes);
+                        
+                        foreach (XmlNode entityNode in node.ChildNodes)
+                        {
+                            //Getting specific attributes
+                            XmlAttribute compType = entityNode.Attributes["type"];
+                            string typeToSet = compType.Value;
+                            entityNode.Attributes.Remove(compType);
+
+                            string[] componentAttributes = new string[node.Attributes.Count * 2];
+
+                            //Getting the number of attributes for the entity
+                            int numOfAtt = node.Attributes.Count;
+
+                            //Looping over these attributes and adding them to the string array
+                            for (int j = 0; j < numOfAtt; j++)
+                            {
+                                XmlAttribute newAttr = node.Attributes[j];
+                                entityAttributes[j * 2] = newAttr.Name;
+                                entityAttributes[(j * 2) + 1] = newAttr.Value;
+                            }
+                            
+                            //adding the component
+                            entity.addComponentConfiguration(typeToSet, componentAttributes);
+                        }
+
+                        //adding the entity to the list
+                        entityList.Add(entity);
+                        
+                    }
+                    else if (readingTextures)
+                    {
+                        //TODO: Parsing textures code goes here
+
+                    }
+                    else
+                    {
+                        //ERROR!!! this shoud not happen
+                        Console.WriteLine("Unrecognizable format or value in parsing XML.");
+                    }
+
+                    //Adding the entity list to the object factory
+                    ObjectFactory.getInstance().entities = entityList;
+                }
+            }
+            catch (FileLoadException e)
+            {
+                Console.WriteLine("File Load Exception Found");
+                Console.WriteLine(e);
+            }
         }
     }
 }
