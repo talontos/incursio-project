@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Content>
+
+	<TextureCollection name="Light Infantry">
+		<Still north="infantry_back" south="infantry_still" east="infantry_right" west="infantry_left"/>
+		<Movement north="Infantry_Moving_North" south="Infantry_Moving_South" east="Infantry_Moving_Right" west="Infantry_Moving_Left" />
+		<Attacking east="Infantry_Attacking_East" west="Infantry_Attacking_West" />
+		<Death east="LightInfantry_Death_Right" west="LightInfantry_Death_Left"/>
+	</TextureCollection>
+
+	<TextureCollection name="Hero">
+		<Still north="Hero_North" south="HeroStill" east="HeroEast" west="HeroWest"/>
+		<Movement north="Hero_Moving_North" south="Hero_Moving_South" east="Hero_Moving_Right" west="Hero_Moving_Left" />
+		<Attacking east="Hero_Attacking_Right" west="Hero_Attacking_Left" />
+		<Death east="Hero_Death_Right" west="Hero_Death_Left"/>
+	</TextureCollection>
+
+	<TextureCollection name="Heavy Infantry">
+		<Still north="HeavyInfantryNorth" south="HeavyInfantrySouth" east="HeavyInfantryEast" west="HeavyInfantryWest"/>
+		<Movement north="HeavyInfantry_Moving_Up" south="HeavyInfantry_Moving_Down" east="HeavyInfantry_Moving_Right" west="HeavyInfantry_Moving_Left" />
+		<Attacking east="HeavyInfantry_Attacking_East" west="HeavyInfantry_Attacking_West" />
+		<Death east="HeavyInfantry_Death" west="HeavyInfantry_Death_Left"/>
+	</TextureCollection>
+
+	<TextureCollection name="Archer">
+		<Still north="archer_Back" south="archer_Still" east="archer_right" west="archer_left"/>
+		<Movement north="Archer_Moving_Up" south="Archer_Moving_Down" east="Archer_Moving_Right" west="Archer_Moving_Left" />
+		<Attacking east="Archer_Attacking_East" west="Archer_Attacking_West" />
+		<Death east="Archer_Death_Right" west="Archer_Death_Left"/>
+	</TextureCollection>
+
+	<!-- STRUCTURE TEXTURES NEED TO BE GENERALIZED -->
+	<TextureCollection name="Camp">
+		<Still/>
+		<Damaged></Damaged>
+	</TextureCollection>
+
+	<TextureCollection name="Control Point">
+		<Still></Still>
+		<Damaged></Damaged>
+	</TextureCollection>
+
+	<TextureCollection name="Guard Tower">
+		<Still></Still>
+		<Attacking></Attacking>
+		<Damaged></Damaged>
+	</TextureCollection>
+	
+</Content>
