@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<AudioCollection name="Hero">
+		<enterBattlefield></enterBattlefield>
+		
+		<levelUp></levelUp>
+		
+		<selection>
+			<file name="heroAlert.wav"/>
+			<file name="HeroConf2.wav"/>
+			<file name="HeroConfirm.wav"/>
+			<file name="HeroAlert2.wav"/>
+		</selection>
+		
+		<issueMoveOrder>
+			<file name="HeroAtt.wav"/>
+			<file name="HeroAttack2.wav"/>
+			<file name="heroConfirm.wav"/>
+		</issueMoveOrder>
+		
+		<issueAttackOrder>
+			<file name="heroAtt.wav"/>
+			<file name="heroAttack2.wav"/>
+			<file name="HeroAlert2.wav"/>
+		</issueAttackOrder>
+		
+		<death>
+			<file name="HeroDead.wav"/>
+			<file name="HeroDead2.wav"/>
+		</death>
+	</AudioCollection>
+
+	<AudioCollection name="LightInfantry">
+		<enterBattlefield>
+			<file name="arr.wav"/>
+			<file name="yaharr.wav"/>
+			<file name="yaho.wav"/>
+		</enterBattlefield>
+
+		<selection>
+			<file name="arr.wav"/>
+			<file name="aye_captain.wav"/>
+			<file name="aye_commander.wav"/>
+		</selection>
+
+		<issueMoveOrder>
+			<file name="that_where_my_rum_is.wav"/>
+			<file name="arr.wav"/>
+			<file name="aye_captain.wav"/>
+			<file name="aye_commander.wav"/>
+			<file name="just_what_I_wanted.wav"/>
+		</issueMoveOrder>
+
+		<issueAttackOrder>
+			<file name="aye_pointy.wav"/>
+			<file name="arr.wav"/>
+			<file name="aye_captain"/>
+			<file name="aye_commander.wav"/>
+		</issueAttackOrder>
+
+		<death>
+			<file name="archerdead"/>
+			<file name="HeroDead.wav"/>
+			<file name="HeroDead.wav"/>
+		</death>
+	</AudioCollection>
+
+	<AudioCollection name="HeavyInfantry">
+		<enterBattlefield>
+			<file name="HeavyInfSelect.wav"/>
+			<file name="HeavyConf2.wav"/>
+		</enterBattlefield>
+
+		<selection>
+			<file name="HeavyInfSelect.wav"/>
+			<file name="HeavyConf2.wav"/>
+			<file name="HaveAlert2.wav"/>
+		</selection>
+
+		<issueMoveOrder>
+			<file name="HeavyInfconf.wav"/>
+			<file name="HeavyInfSelect.wav"/>
+		</issueMoveOrder>
+
+		<issueAttackOrder>
+			<file name="HeavyInfattack.wav"/>
+			<file name="HeavyAttack2.wav"/>
+			<file name="HeavyAlert2.wav"/>
+		</issueAttackOrder>
+
+		<death>
+			<file name="HeavyInfdead"/>
+			<file name="HeavyDead2.wav"/>
+			<file name="HeroDead.wav"/>
+			<file name="HeroDead.wav"/>
+		</death>
+	</AudioCollection>
+
+	<AudioCollection name="Archer">
+		<enterBattlefield>
+			<file name="archerAlert.wav"/>
+			<file name="archerAttack.wav"/>
+			<file name="archerConfirm.wav"/>
+		</enterBattlefield>
+
+		<selection>
+			<file name="archerAlert.wav"/>
+			<file name="archerConfirm.wav"/>
+		</selection>
+
+		<issueMoveOrder>
+			<file name="archerConfirm2.wav"/>
+			<file name="archerAlert2.wav"/>
+		</issueMoveOrder>
+
+		<issueAttackOrder>
+			<file name="archerAttack.wav"/>
+			<file name="archerAttack2.wav"/>
+			<file name="archerAlert2.wav"/>
+		</issueAttackOrder>
+
+		<death>
+			<file name="archerDead.wav"/>
+			<file name="HeroDead.wav"/>
+			<file name="HeroDead.wav"/>
+		</death>
+	</AudioCollection>
+
+	<AudioCollection name="Messages">
+		
+		<campDestroyed>
+			<file name="CampDestroyed.wav"/>
+		</campDestroyed>
+
+		<baseAttack>
+			<file name="BaseUnderAtt.wav"/>
+		</baseAttack>
+
+		<cantBuild>
+			<file name="CannotBuildThere.wav"/>
+		</cantBuild>
+
+		<structureBuild>
+			<file name="ConComplete.wav"/>
+		</structureBuild>
+
+		<heroFallen>
+			<file name="HeroFallen.wav"/>
+		</heroFallen>
+
+		<heroBattle>
+			<file name="HeroinBat.wav"/>
+		</heroBattle>
+
+		<heroLowHP>
+			<file name="HeroisAbouttoDie"/>
+		</heroLowHP>
+
+		<lvlUp>
+			<file name="HeroLevelUp"/>
+		</lvlUp>
+
+		<heroAtt>
+			<file name="HeroUnderAtt.wav"/>
+		</heroAtt>
+
+		<townCapped>
+			<file name="TownCap.wav"/>
+		</townCapped>
+
+		<unitAtt>
+			<file name="Uattk.wav"/>
+		</unitAtt>
+
+		<unitReady>
+			<file name="UnitReady.wav"/>
+		</unitReady>
+		
+	</AudioCollection>
+
+	<AudioCollection name="Ambient">
+		<MainMenu>
+			<file name="Title.mp3"/>
+		</MainMenu>
+		<Credits>
+			<file name="Thunderhorse.mp3"/>
+		</Credits>
+		<InPlay>
+			<file name="Film.mp3"/>
+		</InPlay>
+		<Victory>
+			<file name="Thunderhorse.mp3"/>
+		</Victory>
+		<Defeat>
+			<file name="SadSong.mp3"/>
+		</Defeat>
+	</AudioCollection>
+</configuration>
