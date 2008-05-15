@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<Entity name="Hero" maxHealth="100" health="100" pointValue="1000" armor="10" sightRange="8">
+		<Component type="RenderComponent" collectionName=""/>
+		<Component type="MovementComponent" moveSpeed="115.0"/>
+		<Component type="AudioComponent" collectionName=""/>
+		<Component type="CombatComponent" damage="25" attackRange="1" attackSpeed="3"/>
+		<Component type="ExperienceComponent"/>
+	</Entity>
+
+	<Entity name="Light Infantry" maxHealth="100" health="100" pointValue="50" armor="3" sightRange="10">
+		<Component type="RenderComponent" collectionName=""/>
+		<Component type="MovementComponent" moveSpeed="125.0"/>
+		<Component type="AudioComponent" collectionName=""/>
+		<Component type="CombatComponent" damage="25" attackRange="1" attackSpeed="2"/>
+	</Entity>
+
+	<Entity name="Heavy Infantry" maxHealth="150" health="150" pointValue="100" armor="5" sightRange="8">
+		<Component type="RenderComponent" collectionName=""/>
+		<Component type="MovementComponent" moveSpeed="100.0"/>
+		<Component type="AudioComponent" collectionName=""/>
+		<Component type="CombatComponent" damage="30" attackRange="1" attackSpeed="2"/>
+	</Entity>
+
+	<Entity name="Archer" maxHealth="100" health="100" pointValue="75" armor="1" sightRange="12">
+		<Component type="RenderComponent" collectionName=""/>
+		<Component type="MovementComponent" moveSpeed="150.0"/>
+		<Component type="AudioComponent" collectionName=""/>
+		<Component type="CombatComponent" damage="20" attackRange="10" attackSpeed="3"/>
+	</Entity>
+
+	<Entity name="Guard Tower" maxHealth="350" health="350" pointValue="1000" armor="5" sightRange="14">
+		<Component type="RenderComponent" collectionName=""/>
+		<Component type="CombatComponent" damage="25" attackRange="14" attackSpeed="4"/>
+	</Entity>
+
+	<Entity name="Camp" maxHealth="350" health="350" pointValue="1000" armor="10" sightRange="6">
+		<Component type="RenderComponent" collectionName=""/>
+	</Entity>
+
+	<Entity name="Control Point" pointValue="500" sightRange="10">
+		<Component type="RenderComponent" collectionName=""/>
+	</Entity>
+</configuration>
