@@ -40,11 +40,17 @@ namespace Incursio.Entities.Components
             base.Update(gameTime);
 
             updateBounds();
-            //TODO: RENDER entity
         }
 
         public void updateBounds(){
+            Texture2D myRef = this.textures.still.South;
 
+            this.boundingBox = new Rectangle(
+                this.bgEntity.location.x - myRef.Width / 2,
+                (int)(this.bgEntity.location.y - myRef.Height * 0.80),
+                myRef.Width,
+                myRef.Height
+            );
         }
 
         public void drawThyself(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
@@ -67,7 +73,7 @@ namespace Incursio.Entities.Components
             */
             #endregion
 
-            //depending on the unit's state, draw their textures
+            //depending on the unit's state, draw its textures
             //idle
             #region IDLE
             if (this.currentState == State.EntityState.Idle)

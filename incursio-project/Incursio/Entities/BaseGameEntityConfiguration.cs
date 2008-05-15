@@ -20,7 +20,6 @@ namespace Incursio.Entities
         public int armor = 0;
         public int sightRange = 0;
         public int pointValue = 0;
-        public int playerId = -1;
 
         public int costToBuild = 0;
 
@@ -40,7 +39,6 @@ namespace Incursio.Entities
                     case "armor":       armor       = int.Parse(args[i + 1]); break;
                     case "sightRange":  sightRange  = int.Parse(args[i + 1]); break;
                     case "pointValue":  pointValue  = int.Parse(args[i + 1]); break;
-                    case "playerId":    playerId    = int.Parse(args[i + 1]); break;
                     case "costToBuild": costToBuild = int.Parse(args[i + 1]); break;
                     //TODO: GET TEXTURE COLLECTION!!!
                     case "textureCollection": textureCollection = null; break;
@@ -49,7 +47,7 @@ namespace Incursio.Entities
             }
         }
 
-        private void addComponentConfiguration(string componentType, params string[] args){
+        public void addComponentConfiguration(string componentType, params string[] args){
             ComponentConfiguration cc = new ComponentConfiguration(componentType);
 
             for (int i = 0; (i + 1) < args.Length; i += 2){
