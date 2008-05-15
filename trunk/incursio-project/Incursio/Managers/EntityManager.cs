@@ -21,6 +21,7 @@ using Incursio.Interface;
 using Incursio.Utils;
 using Incursio.Commands;
 using Microsoft.Xna.Framework.Graphics;
+using Incursio.Entities;
 
 namespace Incursio.Managers
 {
@@ -741,6 +742,5 @@ namespace Incursio.Managers
                 }
             });
         }
-
     }
 }

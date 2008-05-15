@@ -188,8 +188,9 @@
     <Compile Include="Utils\Coordinate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\defaultEntitySettings.xml" />
-    <Content Include="Configuration\textureDefinitions.xml" />
+    <Content Include="Configuration\AudioConfiguration.xml" />
+    <Content Include="Configuration\EntityConfiguration.xml" />
+    <Content Include="Configuration\TextureConfiguration.xml" />
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
