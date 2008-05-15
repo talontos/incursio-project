@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Incursio.Entities.Components;
 using Incursio.Entities.TextureCollections;
+using Incursio.Classes;
 
 namespace Incursio.Entities
 {
@@ -14,7 +15,6 @@ namespace Incursio.Entities
         public int classID;
         public string className;
 
-        public int keyId = -1;
         public int maxHealth = 100;
         public int health = 100;
         public int armor = 0;
@@ -51,12 +51,27 @@ namespace Incursio.Entities
             ComponentConfiguration cc = new ComponentConfiguration(componentType);
 
             for (int i = 0; (i + 1) < args.Length; i += 2){
-                cc.addAttribute(new KeyValuePair<string, object>(args[i], args[i + 1]));
+                cc.addAttribute(new KeyValuePair<string, string>(args[i], args[i + 1]));
             }
+
+            this.components.Add(cc);
         }
 
-        public BaseEntity buildEntity(){
-            return new BaseEntity();
+        public BaseGameEntity buildEntity(){
+            BaseGameEntity e = new BaseGameEntity();
+            e.entityName = this.className;
+            e.maxHealth = this.maxHealth;
+            e.health = this.health;
+            e.armor = this.armor;
+            e.sightRange = this.sightRange;
+            e.pointValue = this.pointValue;
+
+            this.components.ForEach(delegate(ComponentConfiguration cc)
+            {
+                cc.addToEntity(e);
+            });
+
+            return e;
         }
 
     }

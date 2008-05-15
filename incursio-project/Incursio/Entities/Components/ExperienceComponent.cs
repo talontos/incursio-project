@@ -19,7 +19,7 @@ namespace Incursio.Entities.Components
 
         }
 
-        public override void setAttributes(List<KeyValuePair<string, object>> attributes)
+        public override void setAttributes(List<KeyValuePair<string, string>> attributes)
         {
             base.setAttributes(attributes);
 
@@ -27,12 +27,12 @@ namespace Incursio.Entities.Components
             {
                 switch (attributes[i].Key)
                 {
-                    case "level": level = (int)attributes[i].Value; break;
-                    case "experiencePoints": experiencePoints = (int)attributes[i].Value; break;
-                    case "pointsToNextLevel": pointsToNextLevel = (int)attributes[i].Value; break;
-                    case "healthIncrement": healthIncrement = (int)attributes[i].Value; break;
-                    case "damageIncrement": damageIncrement = (int)attributes[i].Value; break;
-                    case "armorIncrement": armorIncrement = (int)attributes[i].Value; break;
+                    case "level": level = int.Parse(attributes[i].Value); break;
+                    case "experiencePoints": experiencePoints = int.Parse(attributes[i].Value); break;
+                    case "pointsToNextLevel": pointsToNextLevel = int.Parse(attributes[i].Value); break;
+                    case "healthIncrement": healthIncrement = int.Parse(attributes[i].Value); break;
+                    case "damageIncrement": damageIncrement = int.Parse(attributes[i].Value); break;
+                    case "armorIncrement": armorIncrement = int.Parse(attributes[i].Value); break;
                     default: break;
                 }
             }

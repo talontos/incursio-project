@@ -17,7 +17,7 @@ namespace Incursio.Entities.Components
 
         }
 
-        public override void setAttributes(List<KeyValuePair<string, object>> attributes)
+        public override void setAttributes(List<KeyValuePair<string, string>> attributes)
         {
             base.setAttributes(attributes);
         }
