@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Incursio.Entities.AudioCollections;
 
 namespace Incursio.Managers
 {
@@ -21,6 +22,35 @@ namespace Incursio.Managers
     /// </summary>
     public class SoundCollection
     {
+        private static SoundCollection instance;
+
+        public List<AudioCollection> audioCollections;
+
+        private SoundCollection(){
+            this.audioCollections = new List<AudioCollection>();
+        }
+
+        public AudioCollection getCollectionByName(string name){
+            for(int i = 0; i < this.audioCollections.Count; i++){
+                if (audioCollections[i].name.Equals(name))
+                    return audioCollections[i];
+            }
+
+            return null;
+        }
+
+        public static SoundCollection getInstance()
+        {
+            if(instance == null)
+                instance = new SoundCollection();
+
+            return instance;
+        }
+
+        public static string selectRandomSound(string[] list)
+        {
+            return list[Incursio.rand.Next(0, list.Length)];
+        }
 
         public static class AttackSounds{
             public static string SwordAttack = "steelsword.wav";
@@ -28,10 +58,6 @@ namespace Incursio.Managers
             public static string Explosion = "explosion.wav";
         }
 
-        public static string selectRandomSound(string[] list)
-        {
-            return list[Incursio.rand.Next(0, list.Length)];
-        }
 
         public static class VoiceSounds{
 

@@ -15,6 +15,18 @@ namespace Incursio.Entities.Components
 
         }
 
+        public override void setAttributes(List<KeyValuePair<string, string>> attributes)
+        {
+            base.setAttributes(attributes);
+
+            for(int i = 0; i < attributes.Count; i++){
+                switch(attributes[i].Key){
+                    case "collectionName": this.audioCollection = SoundCollection.getInstance().getCollectionByName(attributes[i].Value); break;
+                    default: break;
+                }
+            }
+        }
+
         public void playSelectionSound()
         {
             SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(audioCollection.voices.selection), false);

@@ -2,48 +2,116 @@
 <Content>
 
 	<TextureCollection name="Light Infantry">
-		<Still north="infantry_back" south="infantry_still" east="infantry_right" west="infantry_left"/>
-		<Movement north="Infantry_Moving_North" south="Infantry_Moving_South" east="Infantry_Moving_Right" west="Infantry_Moving_Left" />
-		<Attacking east="Infantry_Attacking_East" west="Infantry_Attacking_West" />
-		<Death east="LightInfantry_Death_Right" west="LightInfantry_Death_Left"/>
+		<Still>
+			<north file="infantry_back"/>
+			<south file="infantry_still"/>
+			<east file="infantry_right"/>
+			<west file="infantry_left"/>
+		</Still>
+		<Movement>
+			<north file="Infantry_Moving_North" frameWidth="20" frameHeight=""/>
+			<south file="Infantry_Moving_South" frameWidth="20" frameHeight=""/>
+			<east file="Infantry_Moving_Right" frameWidth="20" frameHeight=""/>
+			<west file="Infantry_Moving_Left" frameWidth="20" frameHeight=""/>
+		</Movement>
+		<Attacking>
+			<east file="Infantry_Attacking_East" frameWidth="25" frameHeight=""/>
+			<west file="Infantry_Attacking_West" frameWidth="25" frameHeight=""/>
+		</Attacking>
+		<Death>
+			<east file="LightInfantry_Death_Right" frameWidth="25" frameHeight=""/>
+			<west file="LightInfantry_Death_Left" frameWidth="25" frameHeight=""/>
+		</Death>
 	</TextureCollection>
 
 	<TextureCollection name="Hero">
-		<Still north="Hero_North" south="HeroStill" east="HeroEast" west="HeroWest"/>
-		<Movement north="Hero_Moving_North" south="Hero_Moving_South" east="Hero_Moving_Right" west="Hero_Moving_Left" />
-		<Attacking east="Hero_Attacking_Right" west="Hero_Attacking_Left" />
-		<Death east="Hero_Death_Right" west="Hero_Death_Left"/>
+		<Still>
+			<north file="Hero_North"/>
+			<south file="HeroStill"/>
+			<east file="HeroEast"/>
+			<west file="HeroWest"/>
+		</Still>
+		<Movement>
+			<north file="Hero_Moving_North" frameWidth="36" frameHeight=""/>
+			<south file="Hero_Moving_South" frameWidth="36" frameHeight=""/>
+			<east file="Hero_Moving_Right" frameWidth="36" frameHeight=""/>
+			<west file="Hero_Moving_Left" frameWidth="36" frameHeight=""/>
+		</Movement>
+		<Attacking>
+			<east file="Hero_Attacking_Right" frameWidth="36" frameHeight=""/>
+			<west file="Hero_Attacking_Left" frameWidth="36" frameHeight=""/>
+		</Attacking>
+		<Death>
+			<east file="Hero_Death_Right" frameWidth="36" frameHeight=""/>
+			<west file="Hero_Death_Left" frameWidth="36" frameHeight=""/>
+		</Death>
 	</TextureCollection>
 
 	<TextureCollection name="Heavy Infantry">
-		<Still north="HeavyInfantryNorth" south="HeavyInfantrySouth" east="HeavyInfantryEast" west="HeavyInfantryWest"/>
-		<Movement north="HeavyInfantry_Moving_Up" south="HeavyInfantry_Moving_Down" east="HeavyInfantry_Moving_Right" west="HeavyInfantry_Moving_Left" />
-		<Attacking east="HeavyInfantry_Attacking_East" west="HeavyInfantry_Attacking_West" />
-		<Death east="HeavyInfantry_Death" west="HeavyInfantry_Death_Left"/>
+		<Still>
+			<north file="HeavyInfantryNorth"/>
+			<south file="HeavyInfantrySouth"/>
+			<east file="HeavyInfantryEast"/>
+			<west file="HeavyInfantryWest"/>
+		</Still>
+		<Movement>
+			<north file="HeavyInfantry_Moving_Up" frameWidth="25" frameHeight=""/>
+			<south file="HeavyInfantry_Moving_Down" frameWidth="25" frameHeight=""/>
+			<east file="HeavyInfantry_Moving_Right" frameWidth="25" frameHeight=""/>
+			<west file="HeavyInfantry_Moving_Left" frameWidth="25" frameHeight=""/>
+		</Movement>
+		<Attacking>
+			<east file="HeavyInfantry_Attacking_East" frameWidth="45" frameHeight=""/>
+			<west file="HeavyInfantry_Attacking_West" frameWidth="45" frameHeight=""/>
+		</Attacking>
+		<Death>
+			<east file="HeavyInfantry_Death" frameWidth="45" frameHeight=""/>
+			<west file="HeavyInfantry_Death_Left" frameWidth="45" frameHeight=""/>
+		</Death>
 	</TextureCollection>
 
 	<TextureCollection name="Archer">
-		<Still north="archer_Back" south="archer_Still" east="archer_right" west="archer_left"/>
-		<Movement north="Archer_Moving_Up" south="Archer_Moving_Down" east="Archer_Moving_Right" west="Archer_Moving_Left" />
-		<Attacking east="Archer_Attacking_East" west="Archer_Attacking_West" />
-		<Death east="Archer_Death_Right" west="Archer_Death_Left"/>
+		<Still>
+			<north file="archer_Back"/>
+			<south file="archer_Still"/>
+			<east file="archer_right"/>
+			<west file="archer_left"/>
+		</Still>
+		<Movement>
+			<north file="Archer_Moving_Up" frameWidth="20" frameHeight=""/>
+			<south file="Archer_Moving_Down" frameWidth="20" frameHeight=""/>
+			<east file="Archer_Moving_Right" frameWidth="20" frameHeight=""/>
+			<west file="Archer_Moving_Left" frameWidth="20" frameHeight=""/>
+		</Movement>
+		<Attacking>
+			<east file="Archer_Attacking_East" frameWidth="25" frameHeight=""/>
+			<west file="Archer_Attacking_West" frameWidth="25" frameHeight=""/>
+		</Attacking>
+		<Death>
+			<east file="Archer_Death_Right" frameWidth="33" frameHeight=""/>
+			<west file="Archer_Death_Left" frameWidth="33" frameHeight=""/>
+		</Death>
 	</TextureCollection>
 
 	<!-- STRUCTURE TEXTURES NEED TO BE GENERALIZED -->
 	<TextureCollection name="Camp">
-		<Still/>
-		<Damaged></Damaged>
+		<Still>
+			<south file=""/>
+			<building file="" frameWidth="64" frameHeight=""/>
+		</Still>
+		<Damaged>
+			<destroyed file="" frameWidth="64" frameHeight=""/>
+		</Damaged>
 	</TextureCollection>
 
 	<TextureCollection name="Control Point">
-		<Still></Still>
-		<Damaged></Damaged>
+		<Still/>
 	</TextureCollection>
 
 	<TextureCollection name="Guard Tower">
-		<Still></Still>
-		<Attacking></Attacking>
-		<Damaged></Damaged>
+		<Still/>
+		<Attacking/>
+		<Damaged/>
 	</TextureCollection>
 	
 </Content>

@@ -22,7 +22,33 @@ namespace Incursio.Managers
     /// </summary>
     public class TextureBank
     {
-        public static class EntityTextures{
+
+        private static TextureBank instance;
+
+        public List<global::Incursio.Entities.TextureCollections.TextureCollection> textureCollections;
+
+        private TextureBank(){
+            this.textureCollections = new List<global::Incursio.Entities.TextureCollections.TextureCollection>();
+        }
+
+        public static TextureBank getInstance(){
+            if(instance == null)
+                instance = new TextureBank();
+
+            return instance;
+        }
+
+        public global::Incursio.Entities.TextureCollections.TextureCollection getCollectionByName(string name){
+            for(int i = 0; i < this.textureCollections.Count; i++){
+                if (textureCollections[i].name.Equals(name))
+                    return textureCollections[i];
+            }
+
+            return null;
+        }
+
+        public static class EntityTextures
+        {
 
             public static Texture2D selectedUnitOverlayTexture;
             public static Texture2D healthRatioTexture;

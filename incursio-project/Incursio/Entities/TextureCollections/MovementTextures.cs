@@ -2,14 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Incursio.Utils;
 
 namespace Incursio.Entities.TextureCollections
 {
     public class MovementTextures
     {
-        public Texture2D North;
-        public Texture2D South;
-        public Texture2D East;
-        public Texture2D West;
+        public GameTexture North;
+        public GameTexture South;
+        public GameTexture East;
+        public GameTexture West;
     }
 }
