@@ -35,6 +35,20 @@ namespace Incursio.Entities.Components
 
         }
 
+        public override void setAttributes(List<KeyValuePair<string, string>> attributes)
+        {
+            base.setAttributes(attributes);
+
+            for (int i = 0; i < attributes.Count; i++)
+            {
+                switch (attributes[i].Key)
+                {
+                    case "collectionName": this.textures = TextureBank.getInstance().getCollectionByName(attributes[i].Value); break;
+                    default: break;
+                }
+            }
+        }
+
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             base.Update(gameTime);
@@ -43,7 +57,7 @@ namespace Incursio.Entities.Components
         }
 
         public void updateBounds(){
-            Texture2D myRef = this.textures.still.South;
+            Texture2D myRef = this.textures.still.South.texture;
 
             this.boundingBox = new Rectangle(
                 this.bgEntity.location.x - myRef.Width / 2,
@@ -82,27 +96,27 @@ namespace Incursio.Entities.Components
                 {
                     case State.Direction.South:
                     case State.Direction.Still:
-                        spriteBatch.Draw(this.textures.still.South,
-                            new Rectangle(onScreen.x - (this.textures.still.South.Width / 2), onScreen.y - (int)(this.textures.still.South.Height * 0.80),
-                            this.textures.still.South.Width, this.textures.still.South.Height), colorMask);
+                        spriteBatch.Draw(this.textures.still.South.texture,
+                            new Rectangle(onScreen.x - (this.textures.still.South.texture.Width / 2), onScreen.y - (int)(this.textures.still.South.texture.Height * 0.80),
+                            this.textures.still.South.texture.Width, this.textures.still.South.texture.Height), colorMask);
                         break;
 
                     case State.Direction.East:
-                        spriteBatch.Draw(this.textures.still.East,
-                            new Rectangle(onScreen.x - (this.textures.still.East.Width / 2), onScreen.y - (int)(this.textures.still.East.Height * 0.80),
-                            this.textures.still.East.Width, this.textures.still.East.Height), colorMask);
+                        spriteBatch.Draw(this.textures.still.East.texture,
+                            new Rectangle(onScreen.x - (this.textures.still.East.texture.Width / 2), onScreen.y - (int)(this.textures.still.East.texture.Height * 0.80),
+                            this.textures.still.East.texture.Width, this.textures.still.East.texture.Height), colorMask);
                         break;
 
                     case State.Direction.West:
-                        spriteBatch.Draw(this.textures.still.West,
-                            new Rectangle(onScreen.x - (this.textures.still.West.Width / 2), onScreen.y - (int)(this.textures.still.West.Height * 0.80),
-                            this.textures.still.West.Width, this.textures.still.West.Height), colorMask);
+                        spriteBatch.Draw(this.textures.still.West.texture,
+                            new Rectangle(onScreen.x - (this.textures.still.West.texture.Width / 2), onScreen.y - (int)(this.textures.still.West.texture.Height * 0.80),
+                            this.textures.still.West.texture.Width, this.textures.still.West.texture.Height), colorMask);
                         break;
 
                     case State.Direction.North:
-                        spriteBatch.Draw(this.textures.still.North,
-                            new Rectangle(onScreen.x - (this.textures.still.North.Width / 2), onScreen.y - (int)(this.textures.still.North.Height * 0.80),
-                            this.textures.still.North.Width, this.textures.still.North.Height), colorMask);
+                        spriteBatch.Draw(this.textures.still.North.texture,
+                            new Rectangle(onScreen.x - (this.textures.still.North.texture.Width / 2), onScreen.y - (int)(this.textures.still.North.texture.Height * 0.80),
+                            this.textures.still.North.texture.Width, this.textures.still.North.texture.Height), colorMask);
                         break;
                 }
 
@@ -118,16 +132,16 @@ namespace Incursio.Entities.Components
             else if (this.currentState == State.EntityState.Building)
             {
                 //draw something special for when the structure is building something (fires flickering or w/e)
-                spriteBatch.Draw(this.textures.still.Building,
-                    new Rectangle(onScreen.x - (this.textures.still.Building.Width / 2), onScreen.y - (int)(this.textures.still.Building.Height * 0.80),
-                    this.textures.still.Building.Width, this.textures.still.Building.Height),
-                    new Rectangle(this.currentFrameX, this.currentFrameY, 64, 64), Color.White);
+                spriteBatch.Draw(this.textures.still.Building.texture,
+                    new Rectangle(onScreen.x - (this.textures.still.Building.texture.Width / 2), onScreen.y - (int)(this.textures.still.Building.texture.Height * 0.80),
+                    this.textures.still.Building.texture.Width, this.textures.still.Building.texture.Height),
+                    new Rectangle(this.currentFrameX, this.currentFrameY, this.textures.still.Building.frameWidth, this.textures.still.Building.frameHeight), Color.White);
 
                 if (frameTimer >= FRAME_LENGTH)
                 {
-                    if (this.currentFrameX < this.textures.still.Building.Width - 64)
+                    if (this.currentFrameX < this.textures.still.Building.texture.Width - this.textures.still.Building.frameWidth)
                     {
-                        this.currentFrameX = this.currentFrameX + 64;
+                        this.currentFrameX = this.currentFrameX + this.textures.still.Building.frameWidth;
                     }
                     else
                     {
@@ -143,9 +157,9 @@ namespace Incursio.Entities.Components
                 {
                     if (this.textures.damaged.alphaChan >= 0)
                     {
-                        spriteBatch.Draw(this.textures.damaged.exploded,
-                            new Rectangle(onScreen.x - (TextureBank.EntityTextures.guardTowerExploded.Width / 2), onScreen.y - (int)(this.textures.damaged.exploded.Height * 0.80),
-                            this.textures.damaged.exploded.Width, this.textures.damaged.exploded.Height), new Color(255, 255, 255, this.textures.damaged.alphaChan));
+                        spriteBatch.Draw(this.textures.damaged.exploded.texture,
+                            new Rectangle(onScreen.x - (TextureBank.EntityTextures.guardTowerExploded.Width / 2), onScreen.y - (int)(this.textures.damaged.exploded.texture.Height * 0.80),
+                            this.textures.damaged.exploded.texture.Width, this.textures.damaged.exploded.texture.Height), new Color(255, 255, 255, this.textures.damaged.alphaChan));
                         this.textures.damaged.alphaChan -= 25;
                     }
 
@@ -162,16 +176,16 @@ namespace Incursio.Entities.Components
                 {
                     case State.Direction.West:
                     case State.Direction.North:
-                        spriteBatch.Draw(this.textures.attacking.West,
-                            new Rectangle(onScreen.x - (25 / 2), onScreen.y - (int)(this.textures.attacking.West.Height * 0.80),
-                            this.textures.attacking.West.Width, this.textures.attacking.West.Height),
-                            new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 25, 30), colorMask);
+                        spriteBatch.Draw(this.textures.attacking.West.texture,
+                            new Rectangle(onScreen.x - (this.textures.attacking.West.frameWidth / 2), onScreen.y - (int)(this.textures.attacking.West.texture.Height * 0.80),
+                            this.textures.attacking.West.texture.Width, this.textures.attacking.West.texture.Height),
+                            new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, this.textures.attacking.West.frameWidth, this.textures.attacking.West.frameHeight), colorMask);
 
                         if (frameTimer >= FRAME_LENGTH)
                         {
-                            if (this.currentFrameXAttackDeath < this.textures.attacking.West.Width - 25)
+                            if (this.currentFrameXAttackDeath < this.textures.attacking.West.texture.Width - this.textures.attacking.West.frameWidth)
                             {
-                                this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 25;
+                                this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + this.textures.attacking.West.frameWidth;
                             }
                             else
                             {
@@ -182,16 +196,16 @@ namespace Incursio.Entities.Components
 
                     case State.Direction.East:
                     case State.Direction.South:
-                        spriteBatch.Draw(this.textures.attacking.East,
-                            new Rectangle(onScreen.x - (25 / 2), onScreen.y - (int)(this.textures.attacking.East.Height * 0.80),
-                            this.textures.attacking.East.Width, this.textures.attacking.East.Height),
-                            new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 25, 30), colorMask);
+                        spriteBatch.Draw(this.textures.attacking.East.texture,
+                            new Rectangle(onScreen.x - (this.textures.attacking.East.frameWidth / 2), onScreen.y - (int)(this.textures.attacking.East.texture.Height * 0.80),
+                            this.textures.attacking.East.texture.Width, this.textures.attacking.East.texture.Height),
+                            new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, this.textures.attacking.East.frameWidth, this.textures.attacking.East.frameHeight), colorMask);
 
                         if (frameTimer >= FRAME_LENGTH)
                         {
-                            if (this.currentFrameXAttackDeath < this.textures.attacking.East.Width - 25)
+                            if (this.currentFrameXAttackDeath < this.textures.attacking.East.texture.Width - this.textures.attacking.East.frameWidth)
                             {
-                                this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 25;
+                                this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + this.textures.attacking.East.frameWidth;
                             }
                             else
                             {
@@ -211,15 +225,18 @@ namespace Incursio.Entities.Components
                     case State.Direction.North:
                         if (!this.playedDeath)
                         {
-                            spriteBatch.Draw(this.textures.death.East,
-                            new Rectangle(onScreen.x - (int)(33 / 2), onScreen.y - (int)(30 * 0.80), 33, 30),
-                            new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 33, 30), colorMask);
+                            spriteBatch.Draw(this.textures.death.East.texture,
+                            new Rectangle(onScreen.x - (int)(this.textures.death.East.frameWidth / 2), 
+                                onScreen.y - (int)(this.textures.death.East.frameHeight * 0.80), 
+                                this.textures.death.East.frameWidth, this.textures.death.East.frameHeight),
+                            new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 
+                                this.textures.death.East.frameWidth, this.textures.death.East.frameHeight), colorMask);
 
                             if (frameTimer >= FRAME_LENGTH)
                             {
-                                if (this.currentFrameXAttackDeath < this.textures.death.East.Width - 33)
+                                if (this.currentFrameXAttackDeath < this.textures.death.East.texture.Width - this.textures.death.East.frameWidth)
                                 {
-                                    this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 33;
+                                    this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + this.textures.death.East.frameWidth;
                                 }
                                 else
                                 {
@@ -229,9 +246,11 @@ namespace Incursio.Entities.Components
                         }
                         else
                         {
-                            spriteBatch.Draw(this.textures.death.East,
-                            new Rectangle(onScreen.x - (int)(33 / 2), onScreen.y - (int)(30 * 0.80), 33, 30),
-                            new Rectangle(66, 0, 33, 30), colorMask);
+                            spriteBatch.Draw(this.textures.death.East.texture,
+                                new Rectangle(onScreen.x - (int)(this.textures.death.East.frameWidth / 2), 
+                                    onScreen.y - (int)(this.textures.death.East.frameHeight * 0.80), this.textures.death.East.frameWidth, 
+                                    this.textures.death.East.frameHeight),
+                                new Rectangle(this.textures.death.East.frameWidth * 2, 0, this.textures.death.East.frameWidth, this.textures.death.East.frameHeight), colorMask);
                         }
                         break;
 
@@ -239,15 +258,18 @@ namespace Incursio.Entities.Components
                     case State.Direction.South:
                         if (!this.playedDeath)
                         {
-                            spriteBatch.Draw(this.textures.death.West,
-                            new Rectangle(onScreen.x - (int)(33 / 2), onScreen.y - (int)(30 * 0.80), 33, 30),
-                            new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 33, 30), colorMask);
+                            spriteBatch.Draw(this.textures.death.West.texture,
+                                new Rectangle(onScreen.x - (int)(this.textures.death.West.frameWidth / 2), 
+                                    onScreen.y - (int)(this.textures.death.West.frameHeight * 0.80), this.textures.death.West.frameWidth, 
+                                    this.textures.death.West.frameHeight),
+                                new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, 
+                                    this.textures.death.West.frameWidth, this.textures.death.West.frameHeight), colorMask);
 
                             if (frameTimer >= FRAME_LENGTH)
                             {
-                                if (this.currentFrameXAttackDeath < this.textures.death.West.Width - 33)
+                                if (this.currentFrameXAttackDeath < this.textures.death.West.texture.Width - this.textures.death.West.frameWidth)
                                 {
-                                    this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + 33;
+                                    this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + this.textures.death.West.frameWidth;
                                 }
                                 else
                                 {
@@ -257,9 +279,12 @@ namespace Incursio.Entities.Components
                         }
                         else
                         {
-                            spriteBatch.Draw(this.textures.death.West,
-                            new Rectangle(onScreen.x - (int)(33 / 2), onScreen.y - (int)(30 * 0.80), 33, 30),
-                            new Rectangle(66, 0, 33, 30), colorMask);
+                            spriteBatch.Draw(this.textures.death.West.texture,
+                                new Rectangle(onScreen.x - (int)(this.textures.death.West.frameWidth / 2), 
+                                    onScreen.y - (int)(this.textures.death.West.frameHeight * 0.80), this.textures.death.West.frameWidth, 
+                                    this.textures.death.West.frameHeight),
+                                new Rectangle(this.textures.death.West.frameWidth * 2, 0, this.textures.death.West.frameWidth, 
+                                    this.textures.death.West.frameHeight), colorMask);
                         }
                         break;
 
@@ -280,16 +305,18 @@ namespace Incursio.Entities.Components
                 switch (this.directionState)
                 {
                     case State.Direction.West:
-                        spriteBatch.Draw(this.textures.movement.West,
-                            new Rectangle(onScreen.x - (this.textures.still.West.Width / 2), onScreen.y - (int)(this.textures.still.West.Height * 0.80),
-                            this.textures.still.West.Width, this.textures.still.West.Height),
-                            new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), colorMask);
+                        spriteBatch.Draw(this.textures.movement.West.texture,
+                            new Rectangle(onScreen.x - (this.textures.still.West.texture.Width / 2), 
+                                onScreen.y - (int)(this.textures.still.West.texture.Height * 0.80),
+                                this.textures.still.West.texture.Width, this.textures.still.West.texture.Height),
+                            new Rectangle(this.currentFrameX, this.currentFrameY, this.textures.movement.West.frameWidth, 
+                                this.textures.movement.West.frameHeight), colorMask);
 
                         if (frameTimer >= FRAME_LENGTH)
                         {
-                            if (this.currentFrameX < this.textures.movement.West.Width - 20)
+                            if (this.currentFrameX < this.textures.movement.West.texture.Width - this.textures.movement.West.frameWidth)
                             {
-                                this.currentFrameX = this.currentFrameX + 20;
+                                this.currentFrameX = this.currentFrameX + this.textures.movement.West.frameWidth;
                             }
                             else
                             {
@@ -299,16 +326,18 @@ namespace Incursio.Entities.Components
                         break;
 
                     case State.Direction.East:
-                        spriteBatch.Draw(this.textures.movement.East,
-                            new Rectangle(onScreen.x - (this.textures.still.West.Width / 2), onScreen.y - (int)(this.textures.still.West.Height * 0.80),
-                            this.textures.still.West.Width, this.textures.still.West.Height),
-                            new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), colorMask);
+                        spriteBatch.Draw(this.textures.movement.East.texture,
+                            new Rectangle(onScreen.x - (this.textures.still.West.texture.Width / 2), 
+                                onScreen.y - (int)(this.textures.still.West.texture.Height * 0.80),
+                                this.textures.still.West.texture.Width, this.textures.still.West.texture.Height),
+                            new Rectangle(this.currentFrameX, this.currentFrameY, this.textures.movement.East.frameWidth, 
+                                this.textures.movement.East.frameHeight), colorMask);
 
                         if (frameTimer >= FRAME_LENGTH)
                         {
-                            if (this.currentFrameX < this.textures.movement.East.Width - 20)
+                            if (this.currentFrameX < this.textures.movement.East.texture.Width - this.textures.movement.East.frameWidth)
                             {
-                                this.currentFrameX = this.currentFrameX + 20;
+                                this.currentFrameX = this.currentFrameX + this.textures.movement.East.frameWidth;
                             }
                             else
                             {
@@ -318,16 +347,17 @@ namespace Incursio.Entities.Components
                         break;
 
                     case State.Direction.South:
-                        spriteBatch.Draw(this.textures.movement.South,
-                            new Rectangle(onScreen.x - (this.textures.still.South.Width / 2), onScreen.y - (int)(this.textures.still.South.Height * 0.80),
-                            this.textures.still.South.Width, this.textures.still.South.Height),
-                            new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), colorMask);
+                        spriteBatch.Draw(this.textures.movement.South.texture,
+                            new Rectangle(onScreen.x - (this.textures.still.South.texture.Width / 2), 
+                                onScreen.y - (int)(this.textures.still.South.texture.Height * 0.80),
+                                this.textures.still.South.texture.Width, this.textures.still.South.texture.Height),
+                            new Rectangle(this.currentFrameX, this.currentFrameY, this.textures.movement.South.frameWidth, this.textures.movement.South.frameHeight), colorMask);
 
                         if (frameTimer >= FRAME_LENGTH)
                         {
-                            if (this.currentFrameX < this.textures.movement.South.Width - 20)
+                            if (this.currentFrameX < this.textures.movement.South.texture.Width - this.textures.movement.South.frameWidth)
                             {
-                                this.currentFrameX = this.currentFrameX + 20;
+                                this.currentFrameX = this.currentFrameX + this.textures.movement.South.frameWidth;
                             }
                             else
                             {
@@ -337,16 +367,18 @@ namespace Incursio.Entities.Components
                         break;
 
                     case State.Direction.North:
-                        spriteBatch.Draw(this.textures.movement.North,
-                            new Rectangle(onScreen.x - (this.textures.still.North.Width / 2), onScreen.y - (int)(this.textures.still.North.Height * 0.80),
-                            this.textures.still.North.Width, this.textures.still.North.Height),
-                            new Rectangle(this.currentFrameX, this.currentFrameY, 20, 30), colorMask);
+                        spriteBatch.Draw(this.textures.movement.North.texture,
+                            new Rectangle(onScreen.x - (this.textures.still.North.texture.Width / 2), 
+                                onScreen.y - (int)(this.textures.still.North.texture.Height * 0.80),
+                                this.textures.still.North.texture.Width, this.textures.still.North.texture.Height),
+                            new Rectangle(this.currentFrameX, this.currentFrameY, 
+                                this.textures.movement.North.frameWidth, this.textures.movement.North.frameHeight), colorMask);
 
                         if (frameTimer >= FRAME_LENGTH)
                         {
-                            if (this.currentFrameX < this.textures.movement.North.Width - 20)
+                            if (this.currentFrameX < this.textures.movement.North.texture.Width - this.textures.movement.North.frameWidth)
                             {
-                                this.currentFrameX = this.currentFrameX + 20;
+                                this.currentFrameX = this.currentFrameX + this.textures.movement.North.frameWidth;
                             }
                             else
                             {
@@ -370,9 +402,9 @@ namespace Incursio.Entities.Components
             #region ELSE
             else
             {
-                spriteBatch.Draw(this.textures.still.South,
-                        new Rectangle(onScreen.x - (this.textures.still.South.Width / 2), onScreen.y - (int)(this.textures.still.South.Height * 0.80),
-                        this.textures.still.South.Width, this.textures.still.South.Height), colorMask);
+                spriteBatch.Draw(this.textures.still.South.texture,
+                        new Rectangle(onScreen.x - (this.textures.still.South.texture.Width / 2), onScreen.y - (int)(this.textures.still.South.texture.Height * 0.80),
+                        this.textures.still.South.texture.Width, this.textures.still.South.texture.Height), colorMask);
             }
             #endregion
         }

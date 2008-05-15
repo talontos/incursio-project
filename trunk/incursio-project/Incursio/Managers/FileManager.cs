@@ -114,7 +114,12 @@ namespace Incursio.Managers
                 Console.WriteLine(e);
             }
 
+            //----------------------------------------//
+            
             //Load XML Configurations
+            //TODO: Store config locations somewhere...
+            this.ReadConfigurationFile("../../../Configuration/TextureConfiguration.xml");
+            this.ReadConfigurationFile("../../../Configuration/AudioConfiguration.xml");
             this.ReadConfigurationFile("../../../Configuration/EntityConfiguration.xml");
             
         }

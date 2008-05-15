@@ -40,8 +40,6 @@ namespace Incursio.Entities
                     case "sightRange":  sightRange  = int.Parse(args[i + 1]); break;
                     case "pointValue":  pointValue  = int.Parse(args[i + 1]); break;
                     case "costToBuild": costToBuild = int.Parse(args[i + 1]); break;
-                    //TODO: GET TEXTURE COLLECTION!!!
-                    case "textureCollection": textureCollection = null; break;
                     default: break;
                 }
             }

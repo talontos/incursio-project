@@ -177,6 +177,7 @@
     <Compile Include="Utils\EntityConfiguration.cs" />
     <Compile Include="Utils\GameEvent.cs" />
     <Compile Include="Utils\GameResult.cs" />
+    <Compile Include="Utils\GameTexture.cs" />
     <Compile Include="Utils\KeyPoint.cs" />
     <Compile Include="Utils\ObjectFactory.cs" />
     <Compile Include="Utils\PathFinding\PathFinder.cs" />
