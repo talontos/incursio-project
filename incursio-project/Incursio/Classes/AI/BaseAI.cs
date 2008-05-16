@@ -59,7 +59,7 @@ namespace Incursio.Classes
 
         public virtual void allUnitsAssault(Coordinate target){
             EntityManager.getInstance().issueCommand(State.Command.ATTACK_MOVE, false,
-                EntityManager.getInstance().getLivePlayerUnits(State.PlayerId.COMPUTER), target);
+                EntityManager.getInstance().getLivePlayerUnits(PlayerManager.getInstance().computerPlayerId), target);
         }
     }
 }

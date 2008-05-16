@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Incursio.Entities.TextureCollections
 {
@@ -9,15 +10,21 @@ namespace Incursio.Entities.TextureCollections
         public int id;
         public string name;
 
+        public Texture2D portrait;
+
         public StillTextures still;
         public MovementTextures movement;
         public AttackTextures attacking;
         public DeathTextures death;
         public DamagedTextures damaged;
 
-        public TextureCollection(int id, string name){
+        public TextureCollection(int id, string name, string portraitName){
             this.id = id;
             this.name = name;
+
+            if(portraitName != null && portraitName.Length > 0){
+                //TODO: LOAD PORTRAIT
+            }
         }
 
         public TextureSet addSetOfType(string type){

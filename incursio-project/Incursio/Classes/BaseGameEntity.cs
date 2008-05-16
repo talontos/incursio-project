@@ -30,7 +30,7 @@ namespace Incursio.Classes
         public int health = 100;
         public int armor = 0;
         public int  sightRange = 0;
-        public State.PlayerId owner;
+        public int owner;
         public Coordinate location = new Coordinate(0,0);
         protected MapBase map;
         public int keyId = -1;
@@ -58,6 +58,8 @@ namespace Incursio.Classes
         public RenderComponent renderComponent;
         public MovementComponent movementComponent;
         public FactoryComponent factoryComponent;
+        public CapturableComponent capturableComponent;
+        public CaptureComponent captureComponent;
         public CombatComponent combatComponent;
         public ExperienceComponent experienceComponent;
         public ResourceComponent resourceComponent;
@@ -66,6 +68,10 @@ namespace Incursio.Classes
 
         public BaseGameEntity(){
             orders = new List<BaseCommand>();
+
+            //TODO: REMOVE
+            //TEMPORARY!!!!!
+            renderComponent = new RenderComponent(this);
         }
 
         /// <summary>
@@ -89,6 +95,12 @@ namespace Incursio.Classes
             
             if(factoryComponent != null)
                 factoryComponent.Update(gameTime);
+
+            if (capturableComponent != null)
+                capturableComponent.Update(gameTime);
+
+            if (captureComponent != null)
+                captureComponent.Update(gameTime);
             
             if(combatComponent != null)
                 combatComponent.Update(gameTime);
@@ -356,11 +368,11 @@ namespace Incursio.Classes
             this.maxHealth = newHealth;
         }
 
-        public virtual State.PlayerId getPlayer(){
+        public virtual int getPlayer(){
             return this.owner;
         }
 
-        public virtual void setPlayer(State.PlayerId owner){
+        public virtual void setPlayer(int owner){
             this.owner = owner;
         }
 
@@ -400,21 +412,16 @@ namespace Incursio.Classes
         }
 
         public virtual void playSelectionSound(){
-            if (owner == State.PlayerId.COMPUTER)
-                return;
+            
         }
 
         public virtual void playOrderMoveSound()
         {
-            if (owner == State.PlayerId.COMPUTER)
-                return;
 
         }
 
         public virtual void playOrderAttackSound()
         {
-            if (owner == State.PlayerId.COMPUTER)
-                return;
 
         }
 
@@ -425,8 +432,6 @@ namespace Incursio.Classes
 
         public virtual void playEnterBattlefieldSound()
         {
-            if (owner == State.PlayerId.COMPUTER)
-                return;
 
         }
 

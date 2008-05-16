@@ -132,13 +132,13 @@ namespace Incursio.Managers
                 TextWriter tw = new StreamWriter(fileName);
                 
                 ////write hero info and stats
-                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].name);
-                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].level);
-                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].experiencePoints);
-                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].pointsToNextLevel);
-                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].damage);
-                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].armor);
-                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].maxHealth);
+                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].name);
+                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].level);
+                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].experiencePoints);
+                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].pointsToNextLevel);
+                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].damage);
+                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].armor);
+                tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].maxHealth);
                 tw.WriteLine(DateTime.Now);
                 
                 ////Close the writer

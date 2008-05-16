@@ -27,7 +27,7 @@ namespace Incursio.Classes
         public int heroId;
         public long MONETARY_UNIT = 0;
         public int ownedControlPoints = 0;
-        public State.PlayerId id;
+        public int id;
 
         public List<GameEvent> events;
 

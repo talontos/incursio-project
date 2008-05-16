@@ -38,10 +38,10 @@ namespace Incursio.Campaign
             EntityManager entityManager = EntityManager.getInstance();
 
             //create camps in random locations
-            CampStructure playerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", State.PlayerId.HUMAN);
+            CampStructure playerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", PlayerManager.getInstance().currentPlayerId);
             playerCamp.setLocation( new Coordinate(Incursio.rand.Next(mapWidth / 2), Incursio.rand.Next(mapHeight - 100)));
 
-            CampStructure computerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", State.PlayerId.COMPUTER);
+            CampStructure computerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", PlayerManager.getInstance().computerPlayerId);
             computerCamp.setLocation( new Coordinate(Incursio.rand.Next(mapWidth / 2, mapWidth), Incursio.rand.Next(mapHeight - 100)));
 
 
@@ -54,47 +54,47 @@ namespace Incursio.Campaign
             
             //lights
             for(int i = 0; i < numLight; i++){
-                LightInfantryUnit infUnitp = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
+                LightInfantryUnit infUnitp = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", PlayerManager.getInstance().currentPlayerId);
                 infUnitp.setLocation(new Coordinate(Incursio.rand.Next(mapWidth), Incursio.rand.Next(mapHeight)));
-                LightInfantryUnit infUnitc = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
+                LightInfantryUnit infUnitc = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", PlayerManager.getInstance().computerPlayerId);
                 infUnitc.setLocation(new Coordinate(Incursio.rand.Next(mapWidth), Incursio.rand.Next(mapHeight)));
             }
 
             //heavys
             for (int i = 0; i < numHeavy; i++)
             {
-                HeavyInfantryUnit infUnitp = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", State.PlayerId.HUMAN);
+                HeavyInfantryUnit infUnitp = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", PlayerManager.getInstance().currentPlayerId);
                 infUnitp.setLocation(new Coordinate(Incursio.rand.Next(mapWidth), Incursio.rand.Next(mapHeight)));
-                HeavyInfantryUnit infUnitc = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", State.PlayerId.COMPUTER);
+                HeavyInfantryUnit infUnitc = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", PlayerManager.getInstance().computerPlayerId);
                 infUnitc.setLocation(new Coordinate(Incursio.rand.Next(mapWidth), Incursio.rand.Next(mapHeight)));
             }
 
             //archers
             for (int i = 0; i < numArch; i++)
             {
-                ArcherUnit archUnitp = (ArcherUnit)entityManager.createNewEntity("Incursio.Classes.ArcherUnit", State.PlayerId.HUMAN);
+                ArcherUnit archUnitp = (ArcherUnit)entityManager.createNewEntity("Incursio.Classes.ArcherUnit", PlayerManager.getInstance().currentPlayerId);
                 archUnitp.setLocation(new Coordinate(Incursio.rand.Next(mapWidth), Incursio.rand.Next(mapHeight)));
-                ArcherUnit archUnitc = (ArcherUnit)entityManager.createNewEntity("Incursio.Classes.ArcherUnit", State.PlayerId.COMPUTER);
+                ArcherUnit archUnitc = (ArcherUnit)entityManager.createNewEntity("Incursio.Classes.ArcherUnit", PlayerManager.getInstance().computerPlayerId);
                 archUnitc.setLocation(new Coordinate(Incursio.rand.Next(mapWidth), Incursio.rand.Next(mapHeight)));
             }
 
             //towers
             for (int i = 0; i < numTower; i++)
             {
-                GuardTowerStructure playerTowerp = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.HUMAN);
+                GuardTowerStructure playerTowerp = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", PlayerManager.getInstance().currentPlayerId);
                 playerTowerp.setLocation(new Coordinate(Incursio.rand.Next(50, mapWidth - 50), Incursio.rand.Next(50, mapHeight - 50)));
 
-                GuardTowerStructure playerTowerc = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.COMPUTER);
+                GuardTowerStructure playerTowerc = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", PlayerManager.getInstance().computerPlayerId);
                 playerTowerc.setLocation(new Coordinate(Incursio.rand.Next(50, mapWidth - 50), Incursio.rand.Next(50, mapHeight - 50)));
             }
 
             //control points
             for (int i = 0; i < numPoints; i++)
             {
-                ControlPoint playerPoint = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.HUMAN);
+                ControlPoint playerPoint = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().currentPlayerId);
                 playerPoint.setLocation(new Coordinate(Incursio.rand.Next(50, mapWidth - 50), Incursio.rand.Next(50, mapHeight - 100)));
 
-                ControlPoint computerPoint = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
+                ControlPoint computerPoint = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
                 computerPoint.setLocation(new Coordinate(Incursio.rand.Next(50, mapWidth - 50), Incursio.rand.Next(50, mapHeight - 100)));
             }
         }

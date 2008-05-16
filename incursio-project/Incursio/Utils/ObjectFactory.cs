@@ -66,7 +66,7 @@ namespace Incursio.Utils
         /// <param name="classname">the FULLY QUALIFIED NAME of the class. 
         /// <param name="owningPlayer">Enumerated PlayerID to be assigned as the owner</param>
         /// <returns>The newly created instance</returns>
-        public BaseGameEntity create(String classname, State.PlayerId owningPlayer)
+        public BaseGameEntity create(String classname, int owningPlayer)
         {
             // parse classname
             Type classType = Type.GetType(classname, false, true);
@@ -84,7 +84,7 @@ namespace Incursio.Utils
             //check for hero stats to load
             if(product is Hero && Incursio.getInstance().getHero() != null){
 
-                if(owningPlayer == State.PlayerId.HUMAN){
+                if(owningPlayer == PlayerManager.getInstance().currentPlayerId){
                     (product as Hero).copyHeroStats(Incursio.getInstance().getHero());
 
                     Incursio.getInstance().setHero(product as Hero);
@@ -133,7 +133,7 @@ namespace Incursio.Utils
             if (product is Hero && Incursio.getInstance().getHero() != null)
             {
 
-                if (owningPlayer == State.PlayerId.HUMAN)
+                if (owningPlayer == PlayerManager.getInstance().currentPlayerId)
                 {
                     (product as Hero).copyHeroStats(Incursio.getInstance().getHero());
 

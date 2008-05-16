@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Incursio.Classes;
+using Incursio.Managers;
+using Incursio.Utils;
 
 namespace Incursio.Entities.Components
 {
@@ -59,17 +61,16 @@ namespace Incursio.Entities.Components
 
                 //increment health
                 this.bgEntity.maxHealth += this.healthIncrement;
+
                 //increment damage
                 if(this.bgEntity.combatComponent != null)
                     this.bgEntity.combatComponent.damage += this.damageIncrement;
+                
                 //increment defense
                 this.bgEntity.armor += this.armorIncrement;
 
-                //TODO: NOTIFY PLAYER
-                /*
-                PlayerManager.getInstance().notifyPlayer(this.owner,
-                    new GameEvent(State.EventType.LEVEL_UP, this, SoundCollection.MessageSounds.lvlUp, "Hero Level Up!", location));
-                */
+                PlayerManager.getInstance().notifyPlayer(this.bgEntity.owner,
+                    new GameEvent(State.EventType.LEVEL_UP, this.bgEntity, SoundCollection.MessageSounds.lvlUp, (this.bgEntity.entityName + " Level Up!"), this.bgEntity.location));
 
                 //TODO: Review this number - we might want to make it smaller
                 pointsToNextLevel *= level;

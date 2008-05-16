@@ -151,13 +151,13 @@ namespace Incursio.Managers
             {
                 //select camp
                 EntityManager.getInstance().selectPlayerCamp();
-                MapManager.getInstance().currentMap.moveCameraToEvent(EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location);
+                MapManager.getInstance().currentMap.moveCameraToEvent(EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().currentPlayerId)[0].location);
             }
 
             if (this.keyPressed(Keys.E))
             {
                 EntityManager.getInstance().selectPlayerHero();
-                MapManager.getInstance().currentMap.moveCameraToEvent(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.HUMAN)[0].location);
+                MapManager.getInstance().currentMap.moveCameraToEvent(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].location);
             }
 
             //unit commands
@@ -189,7 +189,7 @@ namespace Incursio.Managers
             if(this.keyPressed(Keys.X)){
                 //TODO: 
                 //Cancel current command from Camp, if selected
-                //EntityManager.getInstance().cancelCurrentBuildOrder(State.PlayerId.HUMAN);
+                //EntityManager.getInstance().cancelCurrentBuildOrder(PlayerManager.getInstance().currentPlayerId);
             }
 
             #region GROUP_SET_SELECT

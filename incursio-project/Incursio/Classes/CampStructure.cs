@@ -115,7 +115,7 @@ namespace Incursio.Classes
             else
             {
                 Player owningPlayer;
-                if (this.owner == State.PlayerId.HUMAN)
+                if (this.owner == PlayerManager.getInstance().currentPlayerId)
                     owningPlayer = PlayerManager.getInstance().humanPlayer;
                 else
                     owningPlayer = PlayerManager.getInstance().computerPlayer;
@@ -261,7 +261,7 @@ namespace Incursio.Classes
             if (timeForResource >= RESOURCE_TICK * 60)
             {
                 timeForResource = 0;
-                if (this.owner == State.PlayerId.HUMAN)
+                if (this.owner == PlayerManager.getInstance().currentPlayerId)
                 {
                     MessageManager.getInstance().addMessage(new GameEvent(State.EventType.GAIN_RESOURCE, this, "",  Convert.ToString(income), this.location));
 
@@ -511,7 +511,7 @@ namespace Incursio.Classes
             else if (this.currentState == State.EntityState.Building)
             {
                 //draw something special for when the structure is building something (fires flickering or w/e)
-                if (this.getPlayer() == State.PlayerId.HUMAN)
+                if (this.getPlayer() == PlayerManager.getInstance().currentPlayerId)
                 {
                     spriteBatch.Draw(TextureBank.EntityTextures.campTexturePlayerBuilding,
                         new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTexturePlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTexturePlayer.Height * 0.80),
@@ -545,7 +545,7 @@ namespace Incursio.Classes
                 {
                     if (alphaChan >= 0)
                     {
-                        if (this.getPlayer() == State.PlayerId.HUMAN)
+                        if (this.getPlayer() == PlayerManager.getInstance().currentPlayerId)
                         {
                             spriteBatch.Draw(TextureBank.EntityTextures.campTextureComputerExploded,
                                 new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTextureComputerDestroyed.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTextureComputerDestroyed.Height * 0.80),
@@ -566,7 +566,7 @@ namespace Incursio.Classes
             }
             else if (this.currentState == State.EntityState.Idle)
             {
-                if (this.getPlayer() == State.PlayerId.HUMAN)
+                if (this.getPlayer() == PlayerManager.getInstance().currentPlayerId)
                 {
                     spriteBatch.Draw(TextureBank.EntityTextures.campTexturePlayer,
                         new Rectangle(onScreen.x - (TextureBank.EntityTextures.campTexturePlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.campTexturePlayer.Height * 0.80),

@@ -24,6 +24,8 @@ namespace Incursio.Entities
             BaseComponent bc;
             switch(this.type){
                 case "AudioComponent":      bc = new AudioComponent(e);         e.audioComponent =      (AudioComponent)bc;      break;
+                case "CapturableComponent": bc = new CapturableComponent(e);    e.capturableComponent = (CapturableComponent)bc; break;
+                case "CaptureComponent":    bc = new CaptureComponent(e);       e.captureComponent =    (CaptureComponent)bc;    break;
                 case "CombatComponent":     bc = new CombatComponent(e);        e.combatComponent =     (CombatComponent)bc;     break;
                 case "ExperienceComponent": bc = new ExperienceComponent(e);    e.experienceComponent = (ExperienceComponent)bc; break;
                 case "FactoryComponent":    bc = new FactoryComponent(e);       e.factoryComponent =    (FactoryComponent)bc;    break;
