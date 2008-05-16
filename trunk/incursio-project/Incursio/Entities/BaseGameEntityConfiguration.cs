@@ -4,6 +4,7 @@ using System.Text;
 using Incursio.Entities.Components;
 using Incursio.Entities.TextureCollections;
 using Incursio.Classes;
+using Incursio.Entities.AudioCollections;
 
 namespace Incursio.Entities
 {
@@ -24,8 +25,6 @@ namespace Incursio.Entities
         public int costToBuild = 0;
 
         public List<ComponentConfiguration> components = new List<ComponentConfiguration>();
-
-        public TextureCollection textureCollection;
 
         public BaseGameEntityConfiguration(int id, string name, params string[] args){
             this.classID = id;

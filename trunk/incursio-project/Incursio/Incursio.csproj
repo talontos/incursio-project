@@ -140,6 +140,7 @@
     <Compile Include="Entities\TextureCollections\MovementTextures.cs" />
     <Compile Include="Entities\TextureCollections\StillTextures.cs" />
     <Compile Include="Entities\TextureCollections\TextureCollection.cs" />
+    <Compile Include="Entities\TextureCollections\TextureSet.cs" />
     <Compile Include="Interface\Button.cs" />
     <Compile Include="Interface\BuildLightInfantryButton.cs" />
     <Compile Include="Interface\BuildHeavyInfantryButton.cs" />

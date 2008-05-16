@@ -19,5 +19,16 @@ namespace Incursio.Entities.TextureCollections
             this.id = id;
             this.name = name;
         }
+
+        public TextureSet addSetOfType(string type){
+            switch(type){
+                case "Still":       still = new StillTextures();        return still;
+                case "Movement":    movement = new MovementTextures();  return movement;
+                case "Attacking":   attacking = new AttackTextures();   return attacking;
+                case "Death":       death = new DeathTextures();        return death;
+                case "Damaged":     damaged = new DamagedTextures();    return damaged;
+                default: return null;
+            }
+        }
     }
 }
