@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Content>
 
-	<TextureCollection name="Light Infantry">
+	<TextureCollection name="Light Infantry" portrait="lightInfantryPortrait">
 		<Still>
 			<north file="infantry_back"/>
 			<south file="infantry_still"/>
@@ -24,7 +24,7 @@
 		</Death>
 	</TextureCollection>
 
-	<TextureCollection name="Hero">
+	<TextureCollection name="Hero" portrait="HeroPortrait">
 		<Still>
 			<north file="Hero_North"/>
 			<south file="HeroStill"/>
@@ -47,7 +47,7 @@
 		</Death>
 	</TextureCollection>
 
-	<TextureCollection name="Heavy Infantry">
+	<TextureCollection name="Heavy Infantry" portrait="HeavyInfantryPortrait">
 		<Still>
 			<north file="HeavyInfantryNorth"/>
 			<south file="HeavyInfantrySouth"/>
@@ -70,7 +70,7 @@
 		</Death>
 	</TextureCollection>
 
-	<TextureCollection name="Archer">
+	<TextureCollection name="Archer" portrait="archerPortrait">
 		<Still>
 			<north file="archer_Back"/>
 			<south file="archer_Still"/>
@@ -94,7 +94,7 @@
 	</TextureCollection>
 
 	<!-- STRUCTURE TEXTURES NEED TO BE GENERALIZED -->
-	<TextureCollection name="Camp">
+	<TextureCollection name="Camp" portrait="BasePortrait">
 		<Still>
 			<south file=""/>
 			<building file="" frameWidth="64" frameHeight=""/>
@@ -104,11 +104,11 @@
 		</Damaged>
 	</TextureCollection>
 
-	<TextureCollection name="Control Point">
+	<TextureCollection name="Control Point" portrait="ControlPointIcon">
 		<Still/>
 	</TextureCollection>
 
-	<TextureCollection name="Guard Tower">
+	<TextureCollection name="Guard Tower" portrait="TowerPortrait">
 		<Still/>
 		<Attacking/>
 		<Damaged/>

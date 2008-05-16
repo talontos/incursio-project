@@ -39,22 +39,22 @@ namespace Incursio.Campaign
             base.initializeMap();
 
             //testing unit creation/placement/moving///
-            LightInfantryUnit infUnit1 = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
-            LightInfantryUnit infUnit2 = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
-            LightInfantryUnit infUnit3 = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
+            LightInfantryUnit infUnit1 = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", PlayerManager.getInstance().currentPlayerId);
+            LightInfantryUnit infUnit2 = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", PlayerManager.getInstance().currentPlayerId);
+            LightInfantryUnit infUnit3 = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", PlayerManager.getInstance().computerPlayerId);
 
-            HeavyInfantryUnit heavyUnit1 = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", State.PlayerId.HUMAN);
-            HeavyInfantryUnit heavyUnit2 = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", State.PlayerId.COMPUTER);
+            HeavyInfantryUnit heavyUnit1 = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", PlayerManager.getInstance().currentPlayerId);
+            HeavyInfantryUnit heavyUnit2 = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", PlayerManager.getInstance().computerPlayerId);
 
-            ArcherUnit archUnit1 = (ArcherUnit)entityManager.createNewEntity("Incursio.Classes.ArcherUnit", State.PlayerId.HUMAN);
-            //ArcherUnit archUnit2 = (ArcherUnit)entityManager.createNewEntity("Incursio.Classes.ArcherUnit", State.PlayerId.COMPUTER);
+            ArcherUnit archUnit1 = (ArcherUnit)entityManager.createNewEntity("Incursio.Classes.ArcherUnit", PlayerManager.getInstance().currentPlayerId);
+            //ArcherUnit archUnit2 = (ArcherUnit)entityManager.createNewEntity("Incursio.Classes.ArcherUnit", PlayerManager.getInstance().computerPlayerId);
 
-            CampStructure playerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", State.PlayerId.HUMAN);
-            CampStructure computerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", State.PlayerId.COMPUTER);
+            CampStructure playerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", PlayerManager.getInstance().currentPlayerId);
+            CampStructure computerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", PlayerManager.getInstance().computerPlayerId);
 
-            GuardTowerStructure playerTower1 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", State.PlayerId.HUMAN);
+            GuardTowerStructure playerTower1 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", PlayerManager.getInstance().currentPlayerId);
 
-            ControlPoint point1 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", State.PlayerId.COMPUTER);
+            ControlPoint point1 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
 
             //infUnit1.setLocation(new Coordinate(rand.Next(0, 1024), rand.Next(0, 768)));
             infUnit1.setLocation(new Coordinate(16,16));

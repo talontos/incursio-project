@@ -484,13 +484,13 @@ namespace Incursio.Classes
 
       public override void playOrderAttackSound()
       {
-         if (owner != State.PlayerId.COMPUTER)
+          if (owner == PlayerManager.getInstance().currentPlayerId)
           SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.ArcherVoice.issueAttackOrder), false);
       }
 
       public override void playOrderMoveSound()
       {
-         if (owner != State.PlayerId.COMPUTER)
+          if (owner == PlayerManager.getInstance().currentPlayerId)
           SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.ArcherVoice.issueMoveOrder), false);
       }
 
@@ -502,13 +502,13 @@ namespace Incursio.Classes
 
       public override void playEnterBattlefieldSound()
       {
-          if (owner != State.PlayerId.COMPUTER)
+          if (owner == PlayerManager.getInstance().currentPlayerId)
             SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.ArcherVoice.enterBattlefield), false);
       }
 
       public override void playSelectionSound()
       {
-         if (owner != State.PlayerId.COMPUTER)
+         if (owner == PlayerManager.getInstance().currentPlayerId)
           SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.ArcherVoice.selection), false);
       }
     }

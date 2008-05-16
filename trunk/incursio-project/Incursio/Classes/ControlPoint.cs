@@ -43,6 +43,7 @@ namespace Incursio.Classes
             this.map = MapManager.getInstance().currentMap;
 
             this.resourceComponent = new global::Incursio.Entities.Components.ResourceComponent(this);
+            this.capturableComponent = new global::Incursio.Entities.Components.CapturableComponent(this);
         }
 
         public void startCap(Hero capturingHero)
@@ -103,7 +104,7 @@ namespace Incursio.Classes
             if (timeForResource >= RESOURCE_TICK * 60)
             {
                 timeForResource = 0;
-                if (this.owner == State.PlayerId.HUMAN)
+                if (this.owner == PlayerManager.getInstance().currentPlayerId)
                 {
                     MessageManager.getInstance().addMessage(new GameEvent(State.EventType.GAIN_RESOURCE, this,"", Convert.ToString(income), this.location));
 
@@ -190,7 +191,7 @@ namespace Incursio.Classes
 
             if (this.currentState == State.EntityState.Building)
             {
-                if (this.getPlayer() == State.PlayerId.HUMAN)
+                if (this.getPlayer() == PlayerManager.getInstance().currentPlayerId)
                 {
                     spriteBatch.Draw(TextureBank.EntityTextures.controlPointPlayer,
                         new Rectangle(onScreen.x - (TextureBank.EntityTextures.controlPointPlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.controlPointPlayer.Height * 0.80),
@@ -206,7 +207,7 @@ namespace Incursio.Classes
             }
             else if (this.currentState == State.EntityState.Idle || this.currentState == State.EntityState.Attacking)
             {
-                if (this.getPlayer() == State.PlayerId.HUMAN)
+                if (this.getPlayer() == PlayerManager.getInstance().currentPlayerId)
                 {
                     spriteBatch.Draw(TextureBank.EntityTextures.controlPointPlayer,
                         new Rectangle(onScreen.x - (TextureBank.EntityTextures.controlPointPlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.controlPointPlayer.Height * 0.80),

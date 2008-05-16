@@ -191,7 +191,7 @@ namespace Incursio.Classes
           }
           else if (this.currentState == State.EntityState.Building)
           {
-              if (this.getPlayer() == State.PlayerId.HUMAN)
+              if (this.getPlayer() == PlayerManager.getInstance().currentPlayerId)
               {
                   spriteBatch.Draw(TextureBank.EntityTextures.guardTowerTexturePlayer,
                       new Rectangle(onScreen.x - (TextureBank.EntityTextures.guardTowerTexturePlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.guardTowerTexturePlayer.Height * 0.80),
@@ -222,7 +222,7 @@ namespace Incursio.Classes
           }
           else if (this.currentState == State.EntityState.Idle || this.currentState == State.EntityState.Attacking)
           {
-              if (this.getPlayer() == State.PlayerId.HUMAN)
+              if (this.getPlayer() == PlayerManager.getInstance().currentPlayerId)
               {
                   spriteBatch.Draw(TextureBank.EntityTextures.guardTowerTexturePlayer,
                       new Rectangle(onScreen.x - (TextureBank.EntityTextures.guardTowerTexturePlayer.Width / 2), onScreen.y - (int)(TextureBank.EntityTextures.guardTowerTexturePlayer.Height * 0.80),

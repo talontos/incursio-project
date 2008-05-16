@@ -20,8 +20,19 @@ namespace Incursio.Managers
 {
     class PlayerManager
     {
-        public Player computerPlayer;
-        public Player humanPlayer;
+        public Player computerPlayer{
+            get{return this.getPlayerById(computerPlayerId);}
+        }
+
+        public Player humanPlayer{
+            get { return this.getPlayerById(currentPlayerId); }
+        }
+
+        //TEMPORARY
+        public int currentPlayerId = 0;
+        public int computerPlayerId = 1;
+
+        public int MAX_PLAYERS = 2;
 
         private List<Player> players;
 
@@ -52,17 +63,12 @@ namespace Incursio.Managers
         }
 
         public void initializePlayerManager(){
-            //TODO: remove separate players; use list
-            this.computerPlayer = new AIPlayer(new SimpleAI());
-            this.computerPlayer.id = State.PlayerId.COMPUTER;
+            this.players = new List<Player>(this.MAX_PLAYERS);
 
-            this.humanPlayer = new Player();
-            this.humanPlayer.id = State.PlayerId.HUMAN;
+            this.addNewPlayer(true);
+            this.addNewPlayer(false);
+
             this.humanPlayer.MONETARY_UNIT = 1000;
-
-            this.players = new List<Player>();
-            players.Add(computerPlayer);
-            players.Add(humanPlayer);
         }
 
         /// <summary>
@@ -70,11 +76,11 @@ namespace Incursio.Managers
         /// </summary>
         /// <returns></returns>
         public bool addNewPlayer(bool isComputer){
-            if(players.Count < 8){
+            if(players.Count < this.MAX_PLAYERS){
                 if(isComputer)
-                    players.Add(new AIPlayer(new SimpleAI()));
+                    this.insertPlayer(new AIPlayer(new SimpleAI()));
                 else{
-                    players.Add(new Player());
+                    this.insertPlayer(new Player());
                 }
 
                 return true;
@@ -83,7 +89,12 @@ namespace Incursio.Managers
             return false;
         }
 
-        public void notifyPlayer(State.PlayerId player, GameEvent e){
+        private void insertPlayer(Player newPlayer){
+            newPlayer.id = players.Count;
+            players.Add(newPlayer);
+        }
+
+        public void notifyPlayer(int player, GameEvent e){
             //get player
             players.ForEach(delegate(Player p)
             {
@@ -93,13 +104,8 @@ namespace Incursio.Managers
             });
         }
 
-        public Player getPlayerById(State.PlayerId id){
-            for(int i = 0; i < this.players.Count; i++){
-                if (players[i].id == id)
-                    return players[i];
-            }
-
-            return null;
+        public Player getPlayerById(int id){
+            return players[id];
         }
 
 

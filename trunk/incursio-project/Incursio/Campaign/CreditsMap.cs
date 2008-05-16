@@ -49,13 +49,13 @@ namespace Incursio.Campaign
             //update dancing light infantry
             if(dirCounter >= 60){
                 curDir = curDir == State.Direction.West ? State.Direction.East : State.Direction.West;
-                EntityManager.getInstance().getLivePlayerUnits(State.PlayerId.HUMAN).ForEach(delegate(BaseGameEntity e)
+                EntityManager.getInstance().getLivePlayerUnits(PlayerManager.getInstance().currentPlayerId).ForEach(delegate(BaseGameEntity e)
                 {
                     (e as Unit).setDirectionState(curDir);
                 });
 
                 curDir = curDir == State.Direction.West ? State.Direction.East : State.Direction.West;
-                EntityManager.getInstance().getLivePlayerUnits(State.PlayerId.COMPUTER).ForEach(delegate(BaseGameEntity e)
+                EntityManager.getInstance().getLivePlayerUnits(PlayerManager.getInstance().computerPlayerId).ForEach(delegate(BaseGameEntity e)
                 {
                     (e as Unit).setDirectionState(curDir);
                 });
@@ -82,12 +82,12 @@ namespace Incursio.Campaign
             LightInfantryUnit l;
             Coordinate location = new Coordinate();
             for(int i = 0; i < this.width; i++){
-                l = (LightInfantryUnit) entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.HUMAN);
+                l = (LightInfantryUnit) entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", PlayerManager.getInstance().currentPlayerId);
                 translateMapCellToPixel(i, 17, out location.x, out location.y);
                 l.setLocation(new Coordinate(location.x, location.y));
                 l.setCurrentState(State.EntityState.Attacking);
 
-                l = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", State.PlayerId.COMPUTER);
+                l = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", PlayerManager.getInstance().computerPlayerId);
                 translateMapCellToPixel(i, 2, out location.x, out location.y);
                 l.setLocation(new Coordinate(location.x, location.y));
                 l.setCurrentState(State.EntityState.Attacking);

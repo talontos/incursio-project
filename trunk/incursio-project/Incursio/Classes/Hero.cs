@@ -64,6 +64,7 @@ namespace Incursio.Classes
           this.health = 200;
 
           this.experienceComponent = new global::Incursio.Entities.Components.ExperienceComponent(this);
+          this.captureComponent = new global::Incursio.Entities.Components.CaptureComponent(this);
       }
 
       public void setHero_Badass()
@@ -480,13 +481,13 @@ namespace Incursio.Classes
 
       public override void playOrderAttackSound()
       {
-         if (owner != State.PlayerId.COMPUTER)
+         if (owner != PlayerManager.getInstance().computerPlayerId)
           SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.HeroVoice.issueAttackOrder), false);
       }
 
       public override void playOrderMoveSound()
       {
-         if (owner != State.PlayerId.COMPUTER)
+         if (owner != PlayerManager.getInstance().computerPlayerId)
           SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.HeroVoice.issueMoveOrder), false);
       }
 
@@ -497,13 +498,13 @@ namespace Incursio.Classes
 
       public override void playEnterBattlefieldSound()
       {
-         if (owner != State.PlayerId.COMPUTER)
+         if (owner != PlayerManager.getInstance().computerPlayerId)
           SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.HeroVoice.enterBattlefield), false);
       }
 
       public override void playSelectionSound()
       {
-         if (owner != State.PlayerId.COMPUTER)
+         if (owner != PlayerManager.getInstance().computerPlayerId)
           SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.HeroVoice.selection), false);
       }
     }

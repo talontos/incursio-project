@@ -22,13 +22,13 @@ namespace Incursio.Utils
     /// </summary>
     public class KeyPoint
     {
-        public State.PlayerId owner{
+        public int owner{
             get { 
-                return (this.structure != null ? this.structure.owner : State.PlayerId.HUMAN);
+                return (this.structure != null ? this.structure.owner : PlayerManager.getInstance().currentPlayerId);
             }
         }
 
-        private State.PlayerId prevOwner;
+        private int prevOwner;
 
         public int priority = -1;
 

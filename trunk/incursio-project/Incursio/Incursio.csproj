@@ -127,6 +127,8 @@
     <Compile Include="Entities\ComponentConfiguration.cs" />
     <Compile Include="Entities\Components\AudioComponent.cs" />
     <Compile Include="Entities\Components\BaseComponent.cs" />
+    <Compile Include="Entities\Components\CapturableComponent.cs" />
+    <Compile Include="Entities\Components\CaptureComponent.cs" />
     <Compile Include="Entities\Components\CombatComponent.cs" />
     <Compile Include="Entities\Components\ExperienceComponent.cs" />
     <Compile Include="Entities\Components\FactoryComponent.cs" />

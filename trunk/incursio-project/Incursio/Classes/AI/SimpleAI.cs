@@ -55,7 +55,7 @@ namespace Incursio.Classes
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime, AIPlayer player){
             //continue building army, if necessary
             //this.queueBuildRandomUnit(true);
-            List<CampStructure> camps = EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER);
+            List<CampStructure> camps = EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().computerPlayerId);
             if(camps.Count == 0){
                 return;
             }
@@ -91,7 +91,7 @@ namespace Incursio.Classes
 
         public override void processEvents(ref AIPlayer player)
         {
-            State.PlayerId id = player.id;
+            int id = player.id;
             EntityManager manager = EntityManager.getInstance();
             player.events.ForEach(delegate(GameEvent e)
             {
@@ -128,7 +128,7 @@ namespace Incursio.Classes
                             if(e.entity.health < e.entity.maxHealth * 0.4){
                                 EntityManager.getInstance().issueCommand_SingleEntity(State.Command.MOVE,
                                     false, e.entity, 
-                                    EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER)[0].location);
+                                    EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().computerPlayerId)[0].location);
                             }
                         }
                         else if(e.entity is CampStructure){
@@ -157,7 +157,7 @@ namespace Incursio.Classes
         /// <param name="c"></param>
         private void buildGuardTowerNearLocation(Coordinate c, KeyPoint k){
             this.buildList.Add(new EntityBuildOrder(
-               MapManager.getInstance().currentMap.getClosestPassableLocation(EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location, c),
+               MapManager.getInstance().currentMap.getClosestPassableLocation(EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().currentPlayerId)[0].location, c),
                State.EntityName.GuardTower,
                k)
            );
@@ -171,7 +171,7 @@ namespace Incursio.Classes
                 buildList.Remove(order);
 
                 //right now we only have one constructor-class structure; so this is okay
-                CampStructure camp = EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER)[0];
+                CampStructure camp = EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().computerPlayerId)[0];
                 camp.build(order);
             }
         }
@@ -181,9 +181,9 @@ namespace Incursio.Classes
         }
 
         private void queueBuildRandomUnit(bool checkCap, Coordinate location, KeyPoint keyPoint){
-            List<Structure> myGuys = EntityManager.getInstance().getLivePlayerStructures(State.PlayerId.COMPUTER);
+            List<Structure> myGuys = EntityManager.getInstance().getLivePlayerStructures(PlayerManager.getInstance().computerPlayerId);
             
-            if (EntityManager.getInstance().getLivePlayerUnits(State.PlayerId.COMPUTER).Count + this.buildList.Count <= this.minPreferredArmySize
+            if (EntityManager.getInstance().getLivePlayerUnits(PlayerManager.getInstance().computerPlayerId).Count + this.buildList.Count <= this.minPreferredArmySize
                 || !checkCap)
             {
                 //'order' random unit
@@ -207,7 +207,7 @@ namespace Incursio.Classes
         }
 
         private void sendUnitsToAttack(int num, Coordinate location){
-            List<BaseGameEntity> myGuys = EntityManager.getInstance().getLivePlayerUnits(State.PlayerId.COMPUTER);
+            List<BaseGameEntity> myGuys = EntityManager.getInstance().getLivePlayerUnits(PlayerManager.getInstance().computerPlayerId);
             List<BaseGameEntity> toSend = new List<BaseGameEntity>();
 
             //select num entities that are not busy
@@ -236,7 +236,7 @@ namespace Incursio.Classes
         }
 
         private void analyzeDefenses(){
-            List<DefenseReport> reports = EntityManager.getInstance().updatePlayerKeyPoints(State.PlayerId.COMPUTER);
+            List<DefenseReport> reports = EntityManager.getInstance().updatePlayerKeyPoints(PlayerManager.getInstance().computerPlayerId);
             this.baseSecure = true;
 
             reports.ForEach(delegate(DefenseReport r)
@@ -258,7 +258,7 @@ namespace Incursio.Classes
         }
 
         private void analyzeEnemyDefenses(){
-            List<KeyPoint> points = EntityManager.getInstance().getPlayerKeyPoints(State.PlayerId.HUMAN);
+            List<KeyPoint> points = EntityManager.getInstance().getPlayerKeyPoints(PlayerManager.getInstance().currentPlayerId);
 
             points.ForEach(delegate(KeyPoint p)
             {
@@ -309,7 +309,7 @@ namespace Incursio.Classes
                 assaultWithHero = true;
             }
 
-            //EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location
+            //EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().currentPlayerId)[0].location
         }
 
         private void prepareAssault()
@@ -318,8 +318,8 @@ namespace Incursio.Classes
 
             if(assaultRallyPoint == null){
                 assaultRallyPoint = MapManager.getInstance().currentMap.getClosestPassableLocation(
-                    EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.HUMAN)[0].location,
-                    EntityManager.getInstance().getLivePlayerCamps(State.PlayerId.COMPUTER)[0].location);
+                    EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().currentPlayerId)[0].location,
+                    EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().computerPlayerId)[0].location);
             }
 
             assaultReady = (assaultForce.Count >= preferredAssaultForceSize);
@@ -331,7 +331,7 @@ namespace Incursio.Classes
                 //ATTACK!!!!
                 preparingAssault = false;
                 if(assaultWithHero){
-                    this.assaultForce.Add(EntityManager.getInstance().getLivePlayerHeros(State.PlayerId.COMPUTER)[0]);
+                    this.assaultForce.Add(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().computerPlayerId)[0]);
                 }
                 this.sendUnitsToAttack(this.assaultTarget);
                 this.assaultForce = new List<BaseGameEntity>();

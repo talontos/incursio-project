@@ -70,7 +70,7 @@ namespace Incursio.Classes
             if (numUnitsSelected > 0)
             {
 
-                if (selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].getPlayer() == State.PlayerId.HUMAN)
+                if (selectedUnits[0].factoryComponent != null && selectedUnits[0].getPlayer() == PlayerManager.getInstance().currentPlayerId)
                 {
                     lightInfantryButton.Update(cursor);
                     archerButton.Update(cursor);
@@ -85,7 +85,7 @@ namespace Incursio.Classes
 
                 if (numUnitsSelected > 0)
                 {
-                    if (selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].getPlayer() == State.PlayerId.HUMAN)
+                    if (selectedUnits[0].factoryComponent != null && selectedUnits[0].getPlayer() == PlayerManager.getInstance().currentPlayerId)
                     {
 
                     }
@@ -158,6 +158,10 @@ namespace Incursio.Classes
             //for the selected unit portrait
             if (numUnitsSelected != 0)
             {
+
+                spriteBatch.Draw(selectedUnits[0].renderComponent.textures.portrait, new Rectangle(241, height - 129, selectedUnits[0].renderComponent.textures.portrait.Width, selectedUnits[0].renderComponent.textures.portrait.Height), Color.White);
+                
+                /*
                 if (selectedUnits[0].getType() == State.EntityName.LightInfantry)
                 {
                     spriteBatch.Draw(TextureBank.InterfaceTextures.lightInfantryPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.lightInfantryPortrait.Width, TextureBank.InterfaceTextures.lightInfantryPortrait.Height), Color.White);
@@ -166,11 +170,11 @@ namespace Incursio.Classes
                 {
                     spriteBatch.Draw(TextureBank.InterfaceTextures.archerPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.archerPortrait.Width, TextureBank.InterfaceTextures.archerPortrait.Height), Color.White);
                 }
-                else if (selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].owner == State.PlayerId.HUMAN)
+                else if (selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].owner == PlayerManager.getInstance().currentPlayerId)
                 {
                     spriteBatch.Draw(TextureBank.InterfaceTextures.basePortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.basePortrait.Width, TextureBank.InterfaceTextures.basePortrait.Height), Color.White);
                 }
-                else if(selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].owner == State.PlayerId.COMPUTER)
+                else if(selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].owner == PlayerManager.getInstance().computerPlayerId)
                 {
                     spriteBatch.Draw(TextureBank.InterfaceTextures.baseEnemyPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.baseEnemyPortrait.Width, TextureBank.InterfaceTextures.baseEnemyPortrait.Height), Color.White);
                 }
@@ -193,12 +197,16 @@ namespace Incursio.Classes
                     string levelString = "Lvl " + (selectedUnits[0] as Hero).level;
                     spriteBatch.DrawString(font, levelString, new Vector2(270, height - 120), Color.White, 0, font.MeasureString(levelString) / 2, 1.0f, SpriteEffects.None, 0.5f);
                 }
+                */
             }
 
             //unit attributes
             if (numUnitsSelected == 1)
             {
                 //for the unit's display name
+                spriteBatch.DrawString(font, selectedUnits[0].entityName, new Vector2(572, height - 118), Color.White, 0, font.MeasureString(selectedUnits[0].entityName) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                
+                /*
                 if (selectedUnits[0].getType() == State.EntityName.LightInfantry)
                 {
                     spriteBatch.DrawString(font, "Light Infantry", new Vector2(572, height - 118), Color.White, 0, font.MeasureString("Light Infantry") / 2, 1.0f, SpriteEffects.None, 0.5f);
@@ -232,32 +240,32 @@ namespace Incursio.Classes
                 {
                     spriteBatch.DrawString(font, "Control Point", new Vector2(572, height - 118), Color.White, 0, font.MeasureString("Control Point") / 2, 1.0f, SpriteEffects.None, 0.5f);
                 }
+                */
 
                 //stats!
                 spriteBatch.DrawString(font, "Health: " + selectedUnits[0].getHealth(), new Vector2(572, height - 90), Color.White, 0, font.MeasureString("Health: XXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
-                if(selectedUnits[0].getType() == State.EntityName.Archer || selectedUnits[0].getType() == State.EntityName.HeavyInfantry ||
-                   selectedUnits[0].getType() == State.EntityName.Hero   || selectedUnits[0].getType() == State.EntityName.LightInfantry)
-                spriteBatch.DrawString(font, "Attack: " + (selectedUnits[0] as Unit).getDamage() + "   Armor: " + (selectedUnits[0] as Unit).getArmor(), new Vector2(572, height - 65), Color.White, 0, font.MeasureString("Attack: XXX   Armor: XXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                if(selectedUnits[0].combatComponent != null)
+                    spriteBatch.DrawString(font, "Attack: " + selectedUnits[0].combatComponent.damage + "   Armor: " + selectedUnits[0].armor, new Vector2(572, height - 65), Color.White, 0, font.MeasureString("Attack: XXX   Armor: XXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
-                if (selectedUnits[0].getType() == State.EntityName.Camp)
+                if (selectedUnits[0].factoryComponent != null)
                 {
-                    double buildRatio = (selectedUnits[0] as CampStructure).getPercentDone();
+                    double buildRatio = selectedUnits[0].factoryComponent.getPercentDone();
 
                     //lets the player know what we're building, and the progress on that construction
-                    if ((selectedUnits[0] as CampStructure).isBuilding())
+                    if (selectedUnits[0].factoryComponent.isBuilding())
                     {
-                        spriteBatch.DrawString(font, "Building:  " + (selectedUnits[0] as CampStructure).getCurrentlyBuilding(), new Vector2(572, height - 65), Color.White, 0, font.MeasureString("Building:  XXXXXXXXXXXXXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                        spriteBatch.DrawString(font, "Building:  " + selectedUnits[0].factoryComponent.currentlyBuildingThis, new Vector2(572, height - 65), Color.White, 0, font.MeasureString("Building:  XXXXXXXXXXXXXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
                         spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(462, height - 50, TextureBank.EntityTextures.healthRatioTexture.Width * 5, TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Black);
                         spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(462, height - 50, (int) (TextureBank.EntityTextures.healthRatioTexture.Width * 5 * buildRatio) , TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Lime);
                     }
                     
                 }
 
-                if (selectedUnits[0].getType() == State.EntityName.Hero)
+                if (selectedUnits[0].experienceComponent != null)
                 {
-                    double expRatio = (selectedUnits[0] as Hero).getPercentageLvlUp();
-                    string pointString = ((selectedUnits[0] as Hero).experiencePoints + "/" + (selectedUnits[0] as Hero).pointsToNextLevel);
+                    double expRatio = selectedUnits[0].experienceComponent.getPercentageLvlUp();
+                    string pointString = (selectedUnits[0].experienceComponent.experiencePoints + "/" + selectedUnits[0].experienceComponent.pointsToNextLevel);
 
                     //EXPERIENCE POINTS
                     spriteBatch.DrawString(font, pointString, new Vector2(440, height - 45), Color.White, 0, font.MeasureString(pointString) / 2, 1.0f, SpriteEffects.None, 0.5f);
@@ -328,7 +336,7 @@ namespace Incursio.Classes
             //UNIT / STRUCTURE COMMANDS
             if (numUnitsSelected > 0)
             {
-                if (selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].getPlayer() == State.PlayerId.HUMAN)
+                if (selectedUnits[0].factoryComponent != null && selectedUnits[0].getPlayer() == PlayerManager.getInstance().currentPlayerId)
                 {
                     //Go through the available commands for the camp
                     lightInfantryButton.Draw(spriteBatch);
@@ -349,7 +357,7 @@ namespace Incursio.Classes
             spriteBatch.Draw(TextureBank.InterfaceTextures.controlPointInterfaceIcon,
                 new Rectangle(860, 12, TextureBank.InterfaceTextures.controlPointInterfaceIcon.Width, TextureBank.InterfaceTextures.controlPointInterfaceIcon.Height), Color.White);
 
-            spriteBatch.DrawString(font, " " + EntityManager.getInstance().getPlayerTotalOwnedControlPoints(State.PlayerId.HUMAN) + "/" + EntityManager.getInstance().getTotalControlPoints(), new Vector2(900, 23), Color.White, 0, font.MeasureString("XXXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, " " + EntityManager.getInstance().getPlayerTotalOwnedControlPoints(PlayerManager.getInstance().currentPlayerId) + "/" + EntityManager.getInstance().getTotalControlPoints(), new Vector2(900, 23), Color.White, 0, font.MeasureString("XXXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
 
         }

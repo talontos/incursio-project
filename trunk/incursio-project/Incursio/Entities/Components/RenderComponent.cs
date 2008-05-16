@@ -433,7 +433,7 @@ namespace Incursio.Entities.Components
                 new Rectangle(onScreen.x - xOffSet, onScreen.y - yOffSet, width, height),
                 Color.White);
 
-            //if (this.bgEntity.getPlayer() == State.PlayerId.HUMAN)
+            //if (this.bgEntity.getPlayer() == PlayerManager.getInstance().currentPlayerId)
             //{
                 spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture,
                     new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),

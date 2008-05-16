@@ -62,44 +62,44 @@ namespace Incursio.Campaign
                 //GameResult result = new GameResult();
 
                 //TODO: We can remove this one; others will override it
-                if (eMan.getLivePlayerEntities(State.PlayerId.HUMAN).Count == 0)         //No live entities
+                if (eMan.getLivePlayerEntities(PlayerManager.getInstance().currentPlayerId).Count == 0)         //No live entities
                 {
                     this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Entire Army has Fallen!", SoundCollection.MessageSounds.heroFallen);
                 }
 
-                if (eMan.getLivePlayerHeros(State.PlayerId.HUMAN).Count == 0)         //No live heros
+                if (eMan.getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId).Count == 0)         //No live heros
                 {
                     this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Hero has Fallen!", SoundCollection.MessageSounds.heroFallen);
                 }
 
                 //TODO: We can remove this one; others will override it
-                if (eMan.getLivePlayerEntities(State.PlayerId.COMPUTER).Count == 0)         //No live entities
+                if (eMan.getLivePlayerEntities(PlayerManager.getInstance().computerPlayerId).Count == 0)         //No live entities
                 {
                     this.gameOverResult = new GameResult(State.GameState.Victory, "Your Enemy's Entire Army has Fallen!", "");
                 }
 
-                if (eMan.getLivePlayerHeros(State.PlayerId.COMPUTER).Count == 0)         //No live heros
+                if (eMan.getLivePlayerHeros(PlayerManager.getInstance().computerPlayerId).Count == 0)         //No live heros
                 {
                     this.gameOverResult = new GameResult(State.GameState.Victory, "Your Enemy's Hero has Fallen!", "");
                 }
 
                 //if no control points are held, or the camp is destroyed
-                if (eMan.getPlayerTotalOwnedControlPoints(State.PlayerId.HUMAN) == 0)               //If no control points are held
+                if (eMan.getPlayerTotalOwnedControlPoints(PlayerManager.getInstance().currentPlayerId) == 0)               //If no control points are held
                 {
                     this.gameOverResult = new GameResult(State.GameState.Defeat, "You have Lost all Control Points!", "");
                 }
 
-                if (eMan.getPlayerTotalOwnedControlPoints(State.PlayerId.COMPUTER) == 0)            //If no control points are held
+                if (eMan.getPlayerTotalOwnedControlPoints(PlayerManager.getInstance().computerPlayerId) == 0)            //If no control points are held
                 {
                     this.gameOverResult = new GameResult(State.GameState.Victory, "You have Conquered all Control Points!", "");
                 }
 
-                if (eMan.isPlayerCampDestroyed(State.PlayerId.HUMAN))                     //If camp is destroyed
+                if (eMan.isPlayerCampDestroyed(PlayerManager.getInstance().currentPlayerId))                     //If camp is destroyed
                 {
                     this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Camp has been Destroyed!", SoundCollection.MessageSounds.campDestroyed);
                 }
 
-                if (eMan.isPlayerCampDestroyed(State.PlayerId.COMPUTER))                 //If camp is destroyed
+                if (eMan.isPlayerCampDestroyed(PlayerManager.getInstance().computerPlayerId))                 //If camp is destroyed
                 {
                     this.gameOverResult = new GameResult(State.GameState.Victory, "Your Enemy's Camp has been Destroyed!", "");
                 }

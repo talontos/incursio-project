@@ -84,7 +84,7 @@ namespace Incursio.Managers
             });
         }
 
-        public List<DefenseReport> updatePlayerKeyPoints(State.PlayerId player){
+        public List<DefenseReport> updatePlayerKeyPoints(int player){
             List<DefenseReport> reports = new List<DefenseReport>();
             
             MapManager.getInstance().keyPoints.ForEach(delegate(KeyPoint point)
@@ -97,7 +97,7 @@ namespace Incursio.Managers
             return reports;
         }
 
-        public List<KeyPoint> getPlayerKeyPoints(State.PlayerId player){
+        public List<KeyPoint> getPlayerKeyPoints(int player){
             List<KeyPoint> points = new List<KeyPoint>();
             MapManager.getInstance().keyPoints.ForEach(delegate(KeyPoint point)
             {
@@ -145,7 +145,7 @@ namespace Incursio.Managers
             entityBank.ForEach(delegate(BaseGameEntity e)
             {
                 if( area.Contains(e.getLocation().toPoint()) ){
-                    if(e.getPlayer() == State.PlayerId.HUMAN && !e.isDead()){
+                    if(e.getPlayer() == PlayerManager.getInstance().currentPlayerId && !e.isDead()){
                         if( !(e is Structure) )
                             unitsInArea.Add(e);
                     }
@@ -182,7 +182,7 @@ namespace Incursio.Managers
                         if (unit.Contains(new Point(Convert.ToInt32(point.X), Convert.ToInt32(point.Y))))
                         {
 
-                            if (e.getPlayer() == State.PlayerId.COMPUTER){
+                            if (e.getPlayer() == PlayerManager.getInstance().computerPlayerId){
                                 selectedUnits = new List<BaseGameEntity>();
                                 this.addToSelectedUnits(e);
                             }
@@ -190,7 +190,7 @@ namespace Incursio.Managers
                             {
                                 if (selectedUnits.Count == 1)
                                 {
-                                    if (selectedUnits[0].getPlayer() == State.PlayerId.COMPUTER)
+                                    if (selectedUnits[0].getPlayer() == PlayerManager.getInstance().computerPlayerId)
                                     {
                                         selectedUnits = new List<BaseGameEntity>();
                                     }
@@ -231,7 +231,7 @@ namespace Incursio.Managers
 
             //Don't bother running if there is no selection,
             //And don't let user command computer's units
-            if (selectedUnits.Count == 0 || selectedUnits[0].owner == State.PlayerId.COMPUTER)
+            if (selectedUnits.Count == 0 || selectedUnits[0].owner == PlayerManager.getInstance().computerPlayerId)
                 return;
 
             //clicking entity
@@ -246,7 +246,7 @@ namespace Incursio.Managers
                     if (unit.Contains(new Point(Convert.ToInt32(point.X), Convert.ToInt32(point.Y))))
                     {
                         //if it's a control point, initialize a cap
-                        if(e.getPlayer() == State.PlayerId.COMPUTER && e.getType() == State.EntityName.ControlPoint)
+                        if(e.getPlayer() == PlayerManager.getInstance().computerPlayerId && e.getType() == State.EntityName.ControlPoint)
                         {
                             //if there is a HERO among the selected units, start the cap
                             selectedUnits.ForEach(delegate (BaseGameEntity u){
@@ -260,7 +260,7 @@ namespace Incursio.Managers
                             });
                         }
                         //NOW, if unit is enemy, selected units attack!
-                        else if (e.getPlayer() == State.PlayerId.COMPUTER)
+                        else if (e.getPlayer() == PlayerManager.getInstance().computerPlayerId)
                         {
                             EntityManager.getInstance().issueCommand(State.Command.ATTACK, false, null, e);
                             
@@ -295,7 +295,7 @@ namespace Incursio.Managers
             return null;
         }
 
-        public List<BaseGameEntity> getPlayerEntities(State.PlayerId player){
+        public List<BaseGameEntity> getPlayerEntities(int player){
             List<BaseGameEntity> playerEntities = new List<BaseGameEntity>();
             this.entityBank.ForEach(delegate(BaseGameEntity e){
                 if (e.getPlayer() == player)
@@ -305,7 +305,7 @@ namespace Incursio.Managers
             return playerEntities;
         }
 
-        public List<BaseGameEntity> getLivePlayerEntities(State.PlayerId player){
+        public List<BaseGameEntity> getLivePlayerEntities(int player){
             List<BaseGameEntity> playerEntities = new List<BaseGameEntity>();
             this.entityBank.ForEach(delegate(BaseGameEntity e){
                 if (e.getPlayer() == player && !e.isDead())
@@ -315,7 +315,7 @@ namespace Incursio.Managers
             return playerEntities;
         }
 
-        public List<BaseGameEntity> getLivePlayerUnits(State.PlayerId player){
+        public List<BaseGameEntity> getLivePlayerUnits(int player){
             List<BaseGameEntity> playerUnits = new List<BaseGameEntity>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
@@ -325,7 +325,7 @@ namespace Incursio.Managers
             return playerUnits;
         }
 
-        public List<Hero> getLivePlayerHeros(State.PlayerId player){
+        public List<Hero> getLivePlayerHeros(int player){
             List<Hero> playerHeros = new List<Hero>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
@@ -336,7 +336,7 @@ namespace Incursio.Managers
             return playerHeros;
         }
 
-        public List<Structure> getLivePlayerStructures(State.PlayerId player)
+        public List<Structure> getLivePlayerStructures(int player)
         {
             List<Structure> playerStructs = new List<Structure>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
@@ -348,7 +348,7 @@ namespace Incursio.Managers
             return playerStructs;
         }
 
-        public List<CampStructure> getLivePlayerCamps(State.PlayerId player)
+        public List<CampStructure> getLivePlayerCamps(int player)
         {
             List<CampStructure> playerStructs = new List<CampStructure>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
@@ -360,7 +360,7 @@ namespace Incursio.Managers
             return playerStructs;
         }
 
-        public List<ControlPoint> getPlayerControlPoints(State.PlayerId player)
+        public List<ControlPoint> getPlayerControlPoints(int player)
         {
             List<ControlPoint> playerStructs = new List<ControlPoint>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
@@ -372,7 +372,7 @@ namespace Incursio.Managers
             return playerStructs;
         }
 
-        public int getPlayerTotalOwnedControlPoints(State.PlayerId id)
+        public int getPlayerTotalOwnedControlPoints(int id)
         {
             int numPoints = 0;
 
@@ -402,7 +402,7 @@ namespace Incursio.Managers
             return numPoints;
         }
 
-        public bool isPlayerCampDestroyed(State.PlayerId id)
+        public bool isPlayerCampDestroyed(int id)
         {
             bool result = true;
             this.entityBank.ForEach(delegate(BaseGameEntity e)
@@ -425,7 +425,7 @@ namespace Incursio.Managers
         }
 
         public void tryToBuild(State.EntityName toBuild){
-            if (selectedUnits.Count > 0 && selectedUnits[0].isConstructor && selectedUnits[0].owner == State.PlayerId.HUMAN)
+            if (selectedUnits.Count > 0 && selectedUnits[0].isConstructor && selectedUnits[0].owner == PlayerManager.getInstance().currentPlayerId)
             {
                 this.issueCommand(State.Command.BUILD, true, null, toBuild);
             }
@@ -438,7 +438,7 @@ namespace Incursio.Managers
             }
         }
 
-        public BaseGameEntity createNewEntity(String entityType, State.PlayerId player){
+        public BaseGameEntity createNewEntity(String entityType, int player){
             BaseGameEntity product = this.factory.create(entityType, player);
             product.keyId = nextKeyId;
             this.entityBank.Insert(nextKeyId++, product);
@@ -562,7 +562,7 @@ namespace Incursio.Managers
             this.issueCommand(commandType, append, list, args);
         }
 
-        public void getAllEntitiesInRange(State.PlayerId owner, Coordinate location, int cellSightRange, 
+        public void getAllEntitiesInRange(int owner, Coordinate location, int cellSightRange, 
                 out List<BaseGameEntity> friendlies, out List<BaseGameEntity> enemies){
             friendlies = new List<BaseGameEntity>();
             enemies = new List<BaseGameEntity>();
@@ -585,7 +585,7 @@ namespace Incursio.Managers
         public void healEntitiesInRange(BaseGameEntity entity, int healRange, int healthBoost, bool healNonHeros){
 
             List<int> ids = MapManager.getInstance().currentMap.getEntitiesInRange(entity.location, healRange);
-            State.PlayerId hOwner = entity.owner;
+            int hOwner = entity.owner;
             BaseGameEntity e;
 
             ids.ForEach(delegate(int key)
@@ -606,7 +606,7 @@ namespace Incursio.Managers
         {
             List<int> ids = MapManager.getInstance().currentMap.getEntitiesInRange(hunter.location, cellSightRange);
             List<BaseGameEntity> enemies = new List<BaseGameEntity>();
-            State.PlayerId hOwner = hunter.owner;
+            int hOwner = hunter.owner;
             BaseGameEntity e;
 
             ids.ForEach(delegate(int key)
@@ -669,16 +669,16 @@ namespace Incursio.Managers
 
         public void selectPlayerHero(){
             this.selectedUnits = new List<BaseGameEntity>();
-            this.addToSelectedUnits(this.getLivePlayerHeros(State.PlayerId.HUMAN)[0] as BaseGameEntity);
+            this.addToSelectedUnits(this.getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0] as BaseGameEntity);
         }
 
         public void selectPlayerCamp(){
             this.selectedUnits = new List<BaseGameEntity>();
-            this.addToSelectedUnits(this.getLivePlayerCamps(State.PlayerId.HUMAN)[0] as BaseGameEntity);
+            this.addToSelectedUnits(this.getLivePlayerCamps(PlayerManager.getInstance().currentPlayerId)[0] as BaseGameEntity);
         }
 
-        public Color getColorMask(State.PlayerId player){
-            return (player == State.PlayerId.HUMAN ? Color.White : Color.OrangeRed);
+        public Color getColorMask(int player){
+            return (player == PlayerManager.getInstance().currentPlayerId ? Color.White : Color.OrangeRed);
         }
 
         public State.ThreatLevel analyzeThreat(ref int myDamage, ref int myArmor, 
@@ -724,7 +724,7 @@ namespace Incursio.Managers
             else return State.ThreatLevel.None;
         }
 
-        public void cancelCurrentBuildOrder(State.PlayerId id){
+        public void cancelCurrentBuildOrder(int id){
             if(selectedUnits.Count > 0 && selectedUnits[0] is CampStructure && selectedUnits[0].owner == id){
                 (selectedUnits[0] as CampStructure).cancelCurrentOrder();
             }

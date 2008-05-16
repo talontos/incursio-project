@@ -294,11 +294,11 @@ namespace Incursio.Entities
             this.maxHealth = newHealth;
         }
 
-        public virtual State.PlayerId getPlayer()
+        public virtual int getPlayer()
         {
             //taken out for refactoring
             //return this.playerId;
-            return State.PlayerId.COMPUTER;
+            return PlayerManager.getInstance().computerPlayerId;
         }
 
         public virtual void setPlayer(int playerId)
@@ -347,14 +347,14 @@ namespace Incursio.Entities
         public virtual void playSelectionSound()
         {
             //taken out for refactoring
-            //if (owner == State.PlayerId.COMPUTER)
+            //if (owner == PlayerManager.getInstance().computerPlayerId)
                 return;
         }
 
         public virtual void playOrderMoveSound()
         {
             //taken out for refactoring
-            //if (owner == State.PlayerId.COMPUTER)
+            //if (owner == PlayerManager.getInstance().computerPlayerId)
                 return;
 
         }
@@ -362,7 +362,7 @@ namespace Incursio.Entities
         public virtual void playOrderAttackSound()
         {
             //taken out for refactoring
-            //if (owner == State.PlayerId.COMPUTER)
+            //if (owner == PlayerManager.getInstance().computerPlayerId)
                 return;
 
         }
@@ -375,7 +375,7 @@ namespace Incursio.Entities
         public virtual void playEnterBattlefieldSound()
         {
             //taken out for refactoring
-            //if (owner == State.PlayerId.COMPUTER)
+            //if (owner == PlayerManager.getInstance().computerPlayerId)
                 return;
 
         }
