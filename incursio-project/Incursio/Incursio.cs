@@ -41,11 +41,8 @@ namespace Incursio
         //UNCOMMENT THE RANDOM-NUMBER-SEED FOR DEBUGGING RANDOM BEHAVIOR
         public static Random rand = new Random(/*DebugUtil.RandomNumberSeed*/);
 
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;                //draws our images
-        TextureManager textureManager;
-        PlayerManager playerManager;
-        MessageManager messageManager;
+        public GraphicsDeviceManager graphics;
+        public SpriteBatch spriteBatch;                //draws our images
 
         public MapBase currentMap;
 
@@ -113,9 +110,6 @@ namespace Incursio
 
             this.Components.Add(new GamerServicesComponent(this));
 
-            playerManager = PlayerManager.getInstance();
-            messageManager = MessageManager.getInstance();
-
             FileManager.getInstance().loadGameConfiguration();
             
             //TODO: Make this more general
@@ -150,8 +144,7 @@ namespace Incursio
         protected override void LoadContent()
         {
             //Load images into textureBank
-            this.textureManager = TextureManager.initializeTextureManager(Content);
-
+            TextureManager.initializeTextureManager(Content);
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("Courier New");
@@ -159,7 +152,7 @@ namespace Incursio
             MessageManager.getInstance().setFont(Content.Load<SpriteFont>("Arial"));
 
             FontPos = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
-
+            
             // create cursor
             cursor = new Cursor(new Vector2(0, 0));
             clickDestination = Content.Load<Texture2D>(@"destinationClick");
@@ -384,7 +377,7 @@ namespace Incursio
                     gameMenuButton.Draw(spriteBatch);
 
                     //display any messages that need to be shown
-                    messageManager.displayMessages(spriteBatch);
+                    MessageManager.getInstance().displayMessages(spriteBatch);
 
                     break;
 

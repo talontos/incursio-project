@@ -286,6 +286,31 @@ namespace Incursio.Managers
                     {
                         //TODO: Parsing textures code goes here
 
+                        /******TEXTURE CONFIGURATION PARSING**************************************************************************************
+                         * each texture node will have the node name 'TextureCollection', and will have one attribute, 'name'
+                         * 
+                         * For each of these TextureCollection nodes, a TextureCollection object can be instantiated using its name (& id)
+                         * 
+                         * Each TC node will consist of sub-nodes of (possible) types:
+                         *      Still
+                         *      Movement
+                         *      Death
+                         *      Damaged
+                         *      Attacking
+                         * 
+                         * These can be added simpley by calling the method addSetOfType(string type) on the instantiated TextureCollection.
+                         *      type is the same as the sub-node name (listed above)
+                         * 
+                         * addSetOfType will instantiate a TextureCollection's TextureSet of that type and return it so that we can add textures.
+                         * 
+                         * Each of these sub-nodes can consist of various sub-sub-nodes.  Generally they represent the 4 cardinal directions, but
+                         *      this is not always so.  To assist initializing their properties, they all inherit from TextureSet, which provides
+                         *      a method addTexture(params string[] attributes).  
+                         * 
+                         * addTexture will allow each set to parse all of their attribute data themselves.
+                         * 
+                         * Once the completed list of TextureCollections is created, we can add it to the TextureBank (textureCollections)
+                         *************************************************************************************************************************/
                     }
                     else
                     {
@@ -294,6 +319,11 @@ namespace Incursio.Managers
                     }
 
                 }
+                //TODO: MAP ENTITIES TO THEIR TEXTURES & AUDIO
+
+                //TODO: ADD TEXTURES & AUDIO TO THEIR RESPECTIVE BANKS
+                    //do we really need to store these configurations if the entities have them already?
+
                 //Adding the entity list to the object factory
                 ObjectFactory.getInstance().entities = entityList;
             }
@@ -302,8 +332,6 @@ namespace Incursio.Managers
                 Console.WriteLine("File Load Exception Found");
                 Console.WriteLine(e);
             }
-
-            BaseGameEntity en = ObjectFactory.getInstance().create(0, 0);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Incursio.Utils
     {
         public static class FileConfig{
             public static string audioPath = "../../../Content/Audio/";
+            public static string texturePath = "../../../Content/";
         }
 
         public static class EntityPrices{
