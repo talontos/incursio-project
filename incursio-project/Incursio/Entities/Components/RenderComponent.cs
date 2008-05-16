@@ -408,5 +408,43 @@ namespace Incursio.Entities.Components
             }
             #endregion
         }
+
+        public void drawSelectionOverlay(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        {
+            Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.bgEntity.getLocation());
+            double healthRatio = (float)this.bgEntity.getHealth() / this.bgEntity.getMaxHealth();
+
+            //determine health-bar color
+            Color healthColor = healthRatio > 66 ? Color.Lime : healthRatio > 33 ? Color.Yellow : Color.Red;
+
+            double healthBarTypicalWidth = 0.59375;             //these horrible numbers are ratios for the healthbar of the
+            double healthBarTypicalHeight = 0.03125;            //selecetedUnitOverlayTexture.  These account for changes in
+            double healthBarTypicalStartWidth = 0.25;           //overlay size, so that the healthbar will still display where
+            double healthBarTypicalStartHeight = 0.0625;        //it should.
+
+            
+            //TODO: THESE NUMBERS WILL HAVE TO BE MODIFIED TO CALCULATE DYNAMICALLY
+            int xOffSet = (int)(this.textures.still.South.texture.Width / 2) + 10;
+            int yOffSet = (int)(this.textures.still.South.texture.Height * 0.80) + 7;
+            int width = this.textures.still.South.texture.Width + 20;
+            int height = this.textures.still.South.texture.Height + 15;
+
+            spriteBatch.Draw(TextureBank.EntityTextures.selectedUnitOverlayTexture,
+                new Rectangle(onScreen.x - xOffSet, onScreen.y - yOffSet, width, height),
+                Color.White);
+
+            //if (this.bgEntity.getPlayer() == State.PlayerId.HUMAN)
+            //{
+                spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture,
+                    new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
+                    healthColor);
+            //}
+            //else
+            //{
+            //    spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture,
+            //        new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
+            //        Color.Red);
+            //}
+        }
     }
 }

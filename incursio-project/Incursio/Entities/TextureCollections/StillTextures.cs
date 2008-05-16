@@ -24,6 +24,7 @@ namespace Incursio.Entities.TextureCollections
                 case "South": South = this.makeGameTexture(name, frameWidth, frameHeight); break;
                 case "East": East = this.makeGameTexture(name, frameWidth, frameHeight); break;
                 case "West": West = this.makeGameTexture(name, frameWidth, frameHeight); break;
+                case "Building": Building = this.makeGameTexture(name, frameWidth, frameHeight); break;
                 default: return;
             }
         }
