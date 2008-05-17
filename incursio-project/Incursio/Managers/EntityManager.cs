@@ -34,14 +34,11 @@ namespace Incursio.Managers
 
         public List<List<BaseGameEntity>> groups;
 
-        private ObjectFactory factory;
-
         private int nextKeyId;
 
         private EntityManager(){
             entityBank = new List<BaseGameEntity>();
             selectedUnits = new List<BaseGameEntity>();
-            factory = ObjectFactory.getInstance();
             nextKeyId = 0;
             Hero.reinitNames();
 
@@ -423,6 +420,14 @@ namespace Incursio.Managers
 
             return result;
         }
+        
+        public void tryToBuild(int toBuildId){
+            if (selectedUnits.Count > 0 && selectedUnits[0].isConstructor && selectedUnits[0].owner == PlayerManager.getInstance().currentPlayerId)
+            {
+                //TODO: IMPL
+                //this.issueCommand(State.Command.BUILD, true, null, toBuildId);
+            }
+        }
 
         public void tryToBuild(State.EntityName toBuild){
             if (selectedUnits.Count > 0 && selectedUnits[0].isConstructor && selectedUnits[0].owner == PlayerManager.getInstance().currentPlayerId)
@@ -439,7 +444,7 @@ namespace Incursio.Managers
         }
 
         public BaseGameEntity createNewEntity(String entityType, int player){
-            BaseGameEntity product = this.factory.create(entityType, player);
+            BaseGameEntity product = ObjectFactory.getInstance().create(entityType, player);
             product.keyId = nextKeyId;
             this.entityBank.Insert(nextKeyId++, product);
 
@@ -516,8 +521,11 @@ namespace Incursio.Managers
 
                         ////////////////////////
                         case State.Command.BUILD:
-                            //TODO: We probably shouldn't be passing unit objects through all this
-                            command = new BuildCommand( (State.EntityName)args[0], (args.Length > 1 ? args[1] : null) as Coordinate);
+                            //TODO: TEMPORARY!!!!  we need to get rid of EntityName
+                            //if(args[0] is State.EntityName)
+                                command = new BuildCommand( (State.EntityName)args[0], (args.Length > 1 ? args[1] : null) as Coordinate);
+                            //else
+                            //    command = new BuildCommand((int)args[0], (args.Length > 1 ? args[1] : null) as Coordinate);
                             break;
 
                         ////////////////////////
