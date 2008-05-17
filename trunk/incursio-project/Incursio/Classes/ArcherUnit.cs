@@ -479,9 +479,10 @@ namespace Incursio.Classes
 
       public override void playAttackSound()
       {
-          SoundManager.getInstance().PlaySound(SoundCollection.AttackSounds.ArrowAttack, false);
+          SoundManager.getInstance().PlaySound(SoundManager.getInstance().AudioCollection.attack.ArrowAttack, false);
       }
 
+      /*
       public override void playOrderAttackSound()
       {
           if (owner == PlayerManager.getInstance().currentPlayerId)
@@ -511,5 +512,6 @@ namespace Incursio.Classes
          if (owner == PlayerManager.getInstance().currentPlayerId)
           SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.ArcherVoice.selection), false);
       }
+      */
     }
 }

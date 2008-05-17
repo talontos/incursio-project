@@ -16,6 +16,7 @@ using Incursio.Classes;
 using Microsoft.Xna.Framework;
 using Incursio.Utils;
 using IrrKlang;
+using Incursio.Entities.AudioCollections;
 
 namespace Incursio.Managers
 {
@@ -27,6 +28,26 @@ namespace Incursio.Managers
         private string currentBGMusic = "";
 
         public bool PLAY_BG_MUSIC = false;
+
+        private AudioCollection audioCollection;
+
+        public AudioCollection AudioCollection{
+            get{return audioCollection;}
+
+            set{
+                if (value == null)
+                {
+                    audioCollection = new AudioCollection(-1, "GameAudio");
+
+                    //Ambient and Message collections contain default values.
+                    //we do not need to manually set them.
+                    audioCollection.addSetOfType("AmbientCollection");
+                    audioCollection.addSetOfType("MessageCollection");
+                }
+                else
+                    audioCollection = value;
+            }
+        }
 
         private SoundManager()
         {

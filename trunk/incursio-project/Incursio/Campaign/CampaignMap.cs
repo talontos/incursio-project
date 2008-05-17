@@ -64,12 +64,12 @@ namespace Incursio.Campaign
                 //TODO: We can remove this one; others will override it
                 if (eMan.getLivePlayerEntities(PlayerManager.getInstance().currentPlayerId).Count == 0)         //No live entities
                 {
-                    this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Entire Army has Fallen!", SoundCollection.MessageSounds.heroFallen);
+                    this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Entire Army has Fallen!", SoundManager.getInstance().AudioCollection.messages.heroFallen);
                 }
 
                 if (eMan.getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId).Count == 0)         //No live heros
                 {
-                    this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Hero has Fallen!", SoundCollection.MessageSounds.heroFallen);
+                    this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Hero has Fallen!", SoundManager.getInstance().AudioCollection.messages.heroFallen);
                 }
 
                 //TODO: We can remove this one; others will override it
@@ -96,7 +96,7 @@ namespace Incursio.Campaign
 
                 if (eMan.isPlayerCampDestroyed(PlayerManager.getInstance().currentPlayerId))                     //If camp is destroyed
                 {
-                    this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Camp has been Destroyed!", SoundCollection.MessageSounds.campDestroyed);
+                    this.gameOverResult = new GameResult(State.GameState.Defeat, "Your Camp has been Destroyed!", SoundManager.getInstance().AudioCollection.messages.campDestroyed);
                 }
 
                 if (eMan.isPlayerCampDestroyed(PlayerManager.getInstance().computerPlayerId))                 //If camp is destroyed

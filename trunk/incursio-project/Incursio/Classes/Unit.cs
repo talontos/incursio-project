@@ -260,7 +260,7 @@ namespace Incursio.Classes
         protected override void notifyUnderAttack(){
             PlayerManager.getInstance().notifyPlayer(
                 this.owner,
-                new GameEvent(State.EventType.UNDER_ATTACK, this, SoundCollection.MessageSounds.unitAtt, "Unit under attack", this.location)
+                new GameEvent(State.EventType.UNDER_ATTACK, this, SoundManager.getInstance().AudioCollection.messages.unitAtt, "Unit under attack", this.location)
             );
         }
 
@@ -447,7 +447,7 @@ namespace Incursio.Classes
         }
 
         public virtual void playAttackSound(){
-            SoundManager.getInstance().PlaySound(SoundCollection.AttackSounds.SwordAttack, false);
+            SoundManager.getInstance().PlaySound(SoundManager.getInstance().AudioCollection.attack.SwordAttack, false);
         }
     }
 }

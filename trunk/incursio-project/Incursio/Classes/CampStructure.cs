@@ -296,7 +296,7 @@ namespace Incursio.Classes
                     this.owner,
                     new GameEvent(State.EventType.CANT_MOVE_THERE,
                         this,
-                        SoundCollection.MessageSounds.cantBuild,
+                        SoundManager.getInstance().AudioCollection.messages.cantBuild,
                         "Cannot Build There",
                         this.buildProject.location
                     )
@@ -358,7 +358,7 @@ namespace Incursio.Classes
                         this.owner,
                         new GameEvent(State.EventType.CREATION_COMPLETE,
                             temp,
-                            SoundCollection.MessageSounds.towerBuilt, 
+                            SoundManager.getInstance().AudioCollection.messages.towerBuilt, 
                             "Construction Complete", 
                             this.location
                         )

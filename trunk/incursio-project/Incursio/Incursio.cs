@@ -482,20 +482,20 @@ namespace Incursio
                 case State.GameState.LoadMenu:
                 case State.GameState.SaveMenu:
                 case State.GameState.MapSelection:
-                    SoundManager.getInstance().PlayBGMusic(SoundCollection.AmbientSounds.main_menu);
+                    SoundManager.getInstance().PlayBGMusic(SoundManager.getInstance().AudioCollection.ambience.main_menu);
                     break;
 
                 case State.GameState.InPlay:
                 case State.GameState.PausedPlay:
-                    SoundManager.getInstance().PlayBGMusic(SoundCollection.AmbientSounds.inPlay);
+                    SoundManager.getInstance().PlayBGMusic(SoundManager.getInstance().AudioCollection.ambience.inPlay);
                     break;
 
                 case State.GameState.Victory:
-                    SoundManager.getInstance().PlayBGMusic(SoundCollection.AmbientSounds.victory);
+                    SoundManager.getInstance().PlayBGMusic(SoundManager.getInstance().AudioCollection.ambience.victory);
                     break;
 
                 case State.GameState.Defeat:
-                    SoundManager.getInstance().PlayBGMusic(SoundCollection.AmbientSounds.defeat);
+                    SoundManager.getInstance().PlayBGMusic(SoundManager.getInstance().AudioCollection.ambience.defeat);
                     break;
 
                 default:

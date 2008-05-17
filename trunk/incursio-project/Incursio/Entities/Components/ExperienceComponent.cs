@@ -70,7 +70,7 @@ namespace Incursio.Entities.Components
                 this.bgEntity.armor += this.armorIncrement;
 
                 PlayerManager.getInstance().notifyPlayer(this.bgEntity.owner,
-                    new GameEvent(State.EventType.LEVEL_UP, this.bgEntity, SoundCollection.MessageSounds.lvlUp, (this.bgEntity.entityName + " Level Up!"), this.bgEntity.location));
+                    new GameEvent(State.EventType.LEVEL_UP, this.bgEntity, SoundManager.getInstance().AudioCollection.messages.lvlUp, (this.bgEntity.entityName + " Level Up!"), this.bgEntity.location));
 
                 //TODO: Review this number - we might want to make it smaller
                 pointsToNextLevel *= level;

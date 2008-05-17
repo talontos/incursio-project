@@ -412,27 +412,32 @@ namespace Incursio.Classes
         }
 
         public virtual void playSelectionSound(){
-            
+            if(audioComponent != null)
+                this.audioComponent.playSelectionSound();
         }
 
         public virtual void playOrderMoveSound()
         {
-
+            if (audioComponent != null)
+                this.audioComponent.playOrderMoveSound();
         }
 
         public virtual void playOrderAttackSound()
         {
-
+            if (audioComponent != null)
+                this.audioComponent.playOrderAttackSound();
         }
 
         public virtual void playDeathSound()
         {
-
+            if (audioComponent != null)
+                this.audioComponent.playDeathSound();
         }
 
         public virtual void playEnterBattlefieldSound()
         {
-
+            if (audioComponent != null)
+                this.audioComponent.playEnterBattlefieldSound();
         }
 
         #endregion

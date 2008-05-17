@@ -81,7 +81,7 @@ namespace Incursio.Classes
                 if(health <= 0 && !playedDeathSound){
                     playedDeathSound = true;
                     this.currentState = State.EntityState.Destroyed;
-                    SoundManager.getInstance().PlaySound(SoundCollection.AttackSounds.Explosion, false);
+                    SoundManager.getInstance().PlaySound(SoundManager.getInstance().AudioCollection.attack.Explosion, false);
                 }
             }
         }
@@ -151,7 +151,7 @@ namespace Incursio.Classes
         {
             PlayerManager.getInstance().notifyPlayer(
                 this.owner,
-                new GameEvent(State.EventType.UNDER_ATTACK, this, SoundCollection.MessageSounds.baseAttack, "Base Under Attack!", this.location)
+                new GameEvent(State.EventType.UNDER_ATTACK, this, SoundManager.getInstance().AudioCollection.messages.baseAttack, "Base Under Attack!", this.location)
             );
         }
     }
