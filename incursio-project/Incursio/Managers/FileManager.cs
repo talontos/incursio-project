@@ -227,6 +227,35 @@ namespace Incursio.Managers
                     {
                         //Parsing audio code goes here
 
+                        /******SOUND CONFIGURATION PARSING************************
+                         * each audio collection node will have the node name 'AudioCollection', and will have one attribute, 'name'
+                         * 
+                         * For each of these AudioCollection nodes, a AudioCollection object can be instantiated using its name (& id)
+                         * 
+                         * Each AudioCollection node will consist of sub-nodes of (possible) types:
+                         *      VoiceCollection
+                         *      AttackCollection
+                         *      AmbientCollection
+                         *      MessageCollection
+                         * 
+                         * These can be added simpley by calling the method addSetOfType(string type) on the instantiated AudioCollection.
+                         *      type is the same as the sub-node name (listed above)
+                         * 
+                         * addSetOfType will instantiate a AudioCollection's AudioSet of that type and return it so that we can add audio filenames.
+                         * 
+                         * Each of these sub-nodes can consist of various sub-sub-nodes.  They represent various types of sounds.
+                         *      To assist initializing their properties, they all inherit from AudioSet, which provides
+                         *      a method addSound(string type, string fileName).  
+                         * 
+                         * addSound will allow each set to sort the given data into different sound types.
+                         * 
+                         * Once the completed list of AudioCollections is created, they can be mapped to EntityConfigurations
+                         * 
+                         * The SoundBank will look for a particular AudioCollection, named "GameAudio."  This sets ambient music and message
+                         *      sounds, and includes default filenames.  Technically this set can be omitted from the XML file.  If
+                         *      no GameAudio AudioCollection exists, SoundBank can create a new one with the defaults.
+                         *************************************************************************************************************************/
+
                     }
                     else if (readingEntities)
                     {
@@ -305,7 +334,7 @@ namespace Incursio.Managers
                          * 
                          * Each of these sub-nodes can consist of various sub-sub-nodes.  Generally they represent the 4 cardinal directions, but
                          *      this is not always so.  To assist initializing their properties, they all inherit from TextureSet, which provides
-                         *      a method addTexture(params string[] attributes).  
+                         *      a method addTexture(string name, int fw, int fh), where fw and fh represent frameWidth and frameHeight, respectively.
                          * 
                          * addTexture will allow each set to parse all of their attribute data themselves.
                          * 
@@ -319,10 +348,14 @@ namespace Incursio.Managers
                     }
 
                 }
+                //TODO: Set the AudioCollection "GameAudio" to SoundManager's AudioCollection property.
+                //      if no GameAudio collection exists, pass a null to SoundManager.
+
                 //TODO: MAP ENTITIES TO THEIR TEXTURES & AUDIO
 
-                //TODO: ADD TEXTURES & AUDIO TO THEIR RESPECTIVE BANKS
+                //TODO: ADD TEXTURES TO BANK
                     //do we really need to store these configurations if the entities have them already?
+                    //perhaps when we load terrain textures from XML...but not entities
 
                 //Adding the entity list to the object factory
                 ObjectFactory.getInstance().entities = entityList;

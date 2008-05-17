@@ -47,18 +47,18 @@ namespace Incursio.Managers
             return instance;
         }
 
-        public static string selectRandomSound(string[] list)
+        public static string selectRandomSound(List<string> list)
         {
-            return list[Incursio.rand.Next(0, list.Length)];
+            return list[Incursio.rand.Next(0, list.Count)];
         }
 
+        /*
         public static class AttackSounds{
             public static string SwordAttack = "steelsword.wav";
             public static string ArrowAttack = "bow release.wav";
             public static string Explosion = "explosion.wav";
         }
-
-
+        
         public static class VoiceSounds{
 
             public static class HeroVoice
@@ -225,6 +225,6 @@ namespace Incursio.Managers
             public static String unitAtt = "Uattk.wav";
             //public static String unitReady = "UnitReady.wav";
         }
-
+        */
     }
 }

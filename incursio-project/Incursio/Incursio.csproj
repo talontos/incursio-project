@@ -119,8 +119,9 @@
     <Compile Include="Commands\StopCommand.cs" />
     <Compile Include="Entities\AudioCollections\AmbientCollection.cs" />
     <Compile Include="Entities\AudioCollections\AttackCollection.cs" />
+    <Compile Include="Entities\AudioCollections\AudioSet.cs" />
     <Compile Include="Entities\AudioCollections\AudioCollection.cs" />
-    <Compile Include="Entities\AudioCollections\MessageSoundCollection.cs" />
+    <Compile Include="Entities\AudioCollections\MessageCollection.cs" />
     <Compile Include="Entities\AudioCollections\VoiceCollection.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\BaseGameEntityConfiguration.cs" />
@@ -174,7 +175,7 @@
     <Compile Include="Managers\SoundManager.cs" />
     <Compile Include="Managers\TextureBank.cs" />
     <Compile Include="Managers\TextureManager.cs" />
-    <Compile Include="Utils\DebugUtil.cs" />
+    <Compile Include="Utils\Util.cs" />
     <Compile Include="Utils\DefenseReport.cs" />
     <Compile Include="Utils\EntityBuildOrder.cs" />
     <Compile Include="Utils\EntityConfiguration.cs" />

@@ -65,7 +65,7 @@ namespace Incursio.Classes
             
             capturingHero.finishCapture(this);
             PlayerManager.getInstance().notifyPlayer(capturingHero.owner, 
-                new GameEvent(State.EventType.ENEMY_CAPTURING_POINT, this, SoundCollection.MessageSounds.townCapped, "Control Point Captured!", location));
+                new GameEvent(State.EventType.ENEMY_CAPTURING_POINT, this, SoundManager.getInstance().AudioCollection.messages.townCapped, "Control Point Captured!", location));
             
             capturingHero = null;
             capping = false;

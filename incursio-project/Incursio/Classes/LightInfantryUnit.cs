@@ -302,7 +302,7 @@ namespace Incursio.Classes
 
       
       }
-
+      /*
       public override void playOrderAttackSound()
       {
          if (owner != PlayerManager.getInstance().computerPlayerId)
@@ -331,5 +331,6 @@ namespace Incursio.Classes
          if (owner != PlayerManager.getInstance().computerPlayerId)
           SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(SoundCollection.VoiceSounds.LightInfantryVoice.selection), false);
       }
+      */
     }
 }

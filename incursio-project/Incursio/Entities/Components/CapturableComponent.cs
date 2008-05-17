@@ -86,7 +86,7 @@ namespace Incursio.Entities.Components
 
             capturingEntity.captureComponent.finishCapture(this);
             PlayerManager.getInstance().notifyPlayer(capturingEntity.owner,
-                new GameEvent(State.EventType.ENEMY_CAPTURING_POINT, this.bgEntity, SoundCollection.MessageSounds.townCapped, "Control Point Captured!", bgEntity.location));
+                new GameEvent(State.EventType.ENEMY_CAPTURING_POINT, this.bgEntity, SoundManager.getInstance().AudioCollection.messages.townCapped, "Control Point Captured!", bgEntity.location));
 
             capturingEntity = null;
             capping = false;
