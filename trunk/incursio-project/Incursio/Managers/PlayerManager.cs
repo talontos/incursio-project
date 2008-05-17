@@ -20,10 +20,12 @@ namespace Incursio.Managers
 {
     class PlayerManager
     {
+        //TEMPRORARY
         public Player computerPlayer{
             get{return this.getPlayerById(computerPlayerId);}
         }
 
+        //TEMPRORARY
         public Player humanPlayer{
             get { return this.getPlayerById(currentPlayerId); }
         }

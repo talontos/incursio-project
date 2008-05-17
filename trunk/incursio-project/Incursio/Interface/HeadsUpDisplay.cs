@@ -28,6 +28,8 @@ namespace Incursio.Classes
         Button towerButton;
         Button heavyInfantryButton;
 
+        BuildEntityPanel buildPanel;
+
         //helper variables for determining selection
         private int barX;
         private int numUnits;
@@ -37,28 +39,20 @@ namespace Incursio.Classes
         /// loadHeadsUpDisplay loads the HUD content into the game.  from here it can be displayed on the screen.
         /// note:  the HUD will only be displayed when the gamestate is in scenario play.
         /// </summary>
-        /*public void loadHeadsUpDisplay(Texture2D bar, Texture2D lightInfantry, Texture2D archer, Texture2D infIcon, Texture2D archIcon, Texture2D resourceBar)
-        {
-            // Load the images for the UI
-            utilityBar = bar;
-            lightInfantryPortrait = lightInfantry;
-            archerPortrait = archer;
-            lightInfantryIcon = infIcon;
-            archerIcon = archIcon;
-            barX = 0;
-            numUnits = 0;
-            this.resourceBar = resourceBar;
-        }*/
 
         public void loadHeadsUpDisplay()
         {
             barX = 0;
             numUnits = 0;
 
+            buildPanel = new BuildEntityPanel();
+
+            /*
             lightInfantryButton = new BuildLightInfantryButton();
             archerButton = new BuildArcherButton();
             towerButton = new BuildTowerButton();
             heavyInfantryButton = new BuildHeavyInfantryButton();
+            */
         }
 
         public List<BaseGameEntity> update(Cursor cursor)
@@ -72,10 +66,13 @@ namespace Incursio.Classes
 
                 if (selectedUnits[0].factoryComponent != null && selectedUnits[0].getPlayer() == PlayerManager.getInstance().currentPlayerId)
                 {
+                    this.buildPanel.Update(cursor);
+                    /*
                     lightInfantryButton.Update(cursor);
                     archerButton.Update(cursor);
                     towerButton.Update(cursor);
                     heavyInfantryButton.Update(cursor);
+                    */
                 }
             }
 
@@ -339,13 +336,14 @@ namespace Incursio.Classes
                 if (selectedUnits[0].factoryComponent != null && selectedUnits[0].getPlayer() == PlayerManager.getInstance().currentPlayerId)
                 {
                     //Go through the available commands for the camp
+
+                    buildPanel.Draw(spriteBatch);
+                    /*
                     lightInfantryButton.Draw(spriteBatch);
                     archerButton.Draw(spriteBatch);
                     towerButton.Draw(spriteBatch);
                     heavyInfantryButton.Draw(spriteBatch);
-                    //spriteBatch.Draw(TextureBank.InterfaceTextures.lightInfantryIcon, new Rectangle(775, height - 163, 75, 48), Color.White);
-                    //spriteBatch.Draw(TextureBank.InterfaceTextures.archerIcon, new Rectangle(850, height - 163, 75, 48), Color.White);
-                    //spriteBatch.Draw(TextureBank.InterfaceTextures.guardTowerIcon, new Rectangle(925, height - 163, 75, 48), Color.White);
+                    */
                 }
             }
 
