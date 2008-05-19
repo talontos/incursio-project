@@ -21,10 +21,6 @@ namespace Incursio.Entities.Components
             e.canMove = true;
         }
 
-        public MovementComponent(ref BaseEntity e) : base(ref e){
-            //we somehow need a movableobject
-        }
-
         public override void setAttributes(List<KeyValuePair<string, string>> attributes)
         {
             base.setAttributes(attributes);

@@ -47,6 +47,7 @@ namespace Incursio
             BeingBuilt,
             Building,
             Destroyed,
+            Projectile,
         }
 
         public enum HealthStates

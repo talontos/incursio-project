@@ -8,13 +8,10 @@ namespace Incursio.Entities.Components
 {
     public class BaseComponent
     {
-        protected BaseEntity entity;
-
-        //TEMP
         protected BaseGameEntity bgEntity;
 
-        public BaseComponent(ref BaseEntity e){
-            this.entity = e;
+        public BaseComponent(){
+
         }
 
         public BaseComponent(BaseGameEntity e){

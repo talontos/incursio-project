@@ -105,7 +105,7 @@ namespace Incursio.Classes
                   {
                       //NOTE: killedTarget needs to be performed BEFORE
                       //  target is set to null so that we know WHAT we killed
-                      this.killedTarget();
+                      this.killedTarget(ref target);
 
                       target = null;
                       destination = null;

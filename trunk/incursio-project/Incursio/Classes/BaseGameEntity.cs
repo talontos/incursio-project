@@ -228,10 +228,12 @@ namespace Incursio.Classes
         }
 
         /// <summary>
-        /// Process statistical information when This kills a target
+        /// Gain experience and process statistical information when This kills a target
         /// </summary>
-        public virtual void killedTarget(){
-
+        public virtual void killedTarget(ref BaseGameEntity deadGuy){
+            if(this.experienceComponent != null){
+                this.experienceComponent.gainExperience(deadGuy.pointValue);
+            }
         }
 
         /// <summary>

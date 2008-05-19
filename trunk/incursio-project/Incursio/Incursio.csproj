@@ -125,6 +125,7 @@
     <Compile Include="Entities\AudioCollections\VoiceCollection.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\BaseGameEntityConfiguration.cs" />
+    <Compile Include="Entities\Projectiles\BaseProjectile.cs" />
     <Compile Include="Entities\ComponentConfiguration.cs" />
     <Compile Include="Entities\Components\AudioComponent.cs" />
     <Compile Include="Entities\Components\BaseComponent.cs" />
