@@ -141,11 +141,9 @@ namespace Incursio.Classes
       /// <summary>
       /// performs experience & level-up actions
       /// </summary>
-      public override void killedTarget()
+      public override void killedTarget(ref BaseGameEntity deadGuy)
       {
-          this.experienceComponent.gainExperience(target.pointValue);
-
-          base.killedTarget();
+          base.killedTarget(ref deadGuy);
       }
 
       public void gainExperience(int exp){

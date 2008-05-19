@@ -29,6 +29,7 @@ namespace Incursio.Entities.Components
             {
                 switch (attributes[i].Key)
                 {
+                    //TODO: EXP AND LVL ALWAYS NEED TO BE PROPORTIONATE!!!!!
                     case "level": level = int.Parse(attributes[i].Value); break;
                     case "experiencePoints": experiencePoints = int.Parse(attributes[i].Value); break;
                     case "pointsToNextLevel": pointsToNextLevel = int.Parse(attributes[i].Value); break;

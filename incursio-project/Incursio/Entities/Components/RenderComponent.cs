@@ -6,6 +6,7 @@ using Incursio.Classes;
 using Incursio.Utils;
 using Incursio.Managers;
 using Microsoft.Xna.Framework.Graphics;
+using Incursio.Entities.Projectiles;
 
 namespace Incursio.Entities.Components
 {
@@ -15,6 +16,9 @@ namespace Incursio.Entities.Components
         public bool highlighted = false;
         public bool justDrawn = false;
         public bool playedDeath = false;
+        public bool isProjectile = false;
+
+        public BaseProjectile projectile;
 
         public int currentFrameX = 0;       //for animation
         public int currentFrameY = 0;       //for animation
@@ -33,6 +37,10 @@ namespace Incursio.Entities.Components
 
         public RenderComponent(BaseGameEntity entity) : base(entity){
 
+        }
+
+        public RenderComponent(BaseProjectile projectile){
+            this.projectile = projectile;
         }
 
         public override void setAttributes(List<KeyValuePair<string, string>> attributes)
@@ -75,16 +83,18 @@ namespace Incursio.Entities.Components
             Rectangle unit = this.boundingBox;
             Color colorMask = EntityManager.getInstance().getColorMask(this.bgEntity.owner);
 
-            //TODO: PROJECTILES
+            //draw the projectile if needed
             #region PROJECTILES
-            /*//draw the arrow if needed
-            if (drawArrow)
+            if (isProjectile && this.projectile.draw)
             {
                 spriteBatch.Draw(TextureBank.EntityTextures.arrow,
-                    new Vector2(arrowOnScreen.x, arrowOnScreen.y),
-                    null, Color.White, -1 * ((float)(arrowAngle * (Math.PI / 180))), new Vector2(TextureBank.EntityTextures.arrow.Width / 2, TextureBank.EntityTextures.arrow.Height / 2), 1.0f, SpriteEffects.None, 0f);
+                    this.projectile.onScreen,
+                    null, Color.White, -1 * ((float)(this.projectile.angle * (Math.PI / 180))),
+                    new Vector2(this.projectile.texture.Width / 2, 
+                        this.projectile.texture.Height / 2), 
+                    1.0f, SpriteEffects.None, 0f);
             }
-            */
+            
             #endregion
 
             //depending on the unit's state, draw its textures
@@ -429,22 +439,15 @@ namespace Incursio.Entities.Components
             int width = this.textures.still.South.texture.Width + 20;
             int height = this.textures.still.South.texture.Height + 15;
 
+            //draw health bar overlay
             spriteBatch.Draw(TextureBank.EntityTextures.selectedUnitOverlayTexture,
                 new Rectangle(onScreen.x - xOffSet, onScreen.y - yOffSet, width, height),
                 Color.White);
 
-            //if (this.bgEntity.getPlayer() == PlayerManager.getInstance().currentPlayerId)
-            //{
-                spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture,
-                    new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
-                    healthColor);
-            //}
-            //else
-            //{
-            //    spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture,
-            //        new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
-            //        Color.Red);
-            //}
+            //draw health bar
+            spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture,
+                new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
+                healthColor);
         }
     }
 }
