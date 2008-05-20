@@ -19,6 +19,8 @@ using Incursio.Managers;
 using Incursio.Utils;
 using System.Xml;
 using Incursio.Entities;
+using Incursio.Entities.TextureCollections;
+using Incursio.Entities.Components;
 
 namespace Incursio.Managers
 {
@@ -185,12 +187,13 @@ namespace Incursio.Managers
         private void ReadConfigurationFile(string sFileName)
         {
             //Iterators
-            int audioIterator = 0;
-            int entityIterator = 0;
-            int textureIterator = 0;
+            int audioIterator = -1;
+            int entityIterator = -1;
+            int textureIterator = -1;
 
             //Lists for object factory
             List<BaseGameEntityConfiguration> entityList = new List<BaseGameEntityConfiguration>();
+            List<TextureCollection> textureList = new List<TextureCollection>();
             
             try
             {
@@ -206,7 +209,7 @@ namespace Incursio.Managers
 
                 foreach (XmlNode node in doc.DocumentElement.ChildNodes)
                 {
-                    if (node.Name == "Audio")
+                    if (node.Name == "AudioCollection")
                     {
                         readingAudio = true;
                         readingEntities = false;
@@ -218,7 +221,7 @@ namespace Incursio.Managers
                         readingEntities = true;
                         readingTextures = false;
                     }
-                    else if (node.Name == "Texture")
+                    else if (node.Name == "TextureCollection")
                     {
                         readingAudio = false;
                         readingEntities = false;
@@ -315,8 +318,6 @@ namespace Incursio.Managers
                     }
                     else if (readingTextures)
                     {
-                        //TODO: Parsing textures code goes here
-
                         /******TEXTURE CONFIGURATION PARSING**************************************************************************************
                          * each texture node will have the node name 'TextureCollection', and will have one attribute, 'name'
                          * 
@@ -342,6 +343,57 @@ namespace Incursio.Managers
                          * 
                          * Once the completed list of TextureCollections is created, we can add it to the TextureBank (textureCollections)
                          *************************************************************************************************************************/
+
+                        //Iterating the entityIterator for an accurate ID
+                        textureIterator++;
+
+                        //Getting specific attributes
+                        XmlAttribute name = node.Attributes["name"];
+                        XmlAttribute portrait = node.Attributes["portrait"];
+                        XmlAttribute icon = node.Attributes["icon"];
+                        
+                        string nameToSet = name.Value;
+                        string portToSet = portrait.Value;
+                        string iconToSet = icon.Value;
+                        
+                        node.Attributes.Remove(name);
+                        node.Attributes.Remove(portrait);
+                        node.Attributes.Remove(icon);
+
+                        //Building a new TextureCollection
+                        TextureCollection texture = new TextureCollection(textureIterator, nameToSet, portToSet, iconToSet);
+
+                        foreach (XmlNode texNode in node.ChildNodes)
+                        {
+                            TextureSet set = texture.addSetOfType(texNode.Name);
+
+                            if(set != null){
+                                string nodeName, width, height;
+                                XmlAttribute att;
+
+                                foreach(XmlNode subNode in texNode.ChildNodes){
+                                    try{
+                                        nodeName = subNode.Attributes["file"].Value;
+
+                                        att = subNode.Attributes["frameWidth"];
+                                        width = (att == null ? "0" : att.Value.Length == 0 ? "0" : att.Value);
+
+                                        att = subNode.Attributes["frameHeight"];
+                                        height = (att == null ? "0" : att.Value.Length == 0 ? "0" : att.Value);
+
+                                        set.addTexture(subNode.Name, nodeName, int.Parse(width), int.Parse(height));
+                                    }
+                                    catch(Exception e){
+                                        Console.WriteLine("Skipping Texture Configuration #" + textureIterator + " because of:");
+                                        Console.WriteLine(e.StackTrace);
+                                    }
+                                }
+                            }
+
+                        }
+
+                        //adding the texture to the list
+                        textureList.Add(texture);
                     }
                     else
                     {
@@ -354,13 +406,22 @@ namespace Incursio.Managers
                 //      if no GameAudio collection exists, pass a null to SoundManager.
 
                 //TODO: MAP ENTITIES TO THEIR TEXTURES & AUDIO
+                    //this could be done already if we store the list throughout the game..
 
                 //TODO: ADD TEXTURES TO BANK
                     //do we really need to store these configurations if the entities have them already?
                     //perhaps when we load terrain textures from XML...but not entities
 
                 //Adding the entity list to the object factory
-                ObjectFactory.getInstance().entities = entityList;
+                if(readingEntities)
+                    ObjectFactory.getInstance().entities = entityList;
+                else if(readingAudio){
+
+                }
+                else if (readingTextures)
+                {
+                    TextureBank.getInstance().textureCollections = textureList;
+                }
             }
             catch (FileLoadException e)
             {

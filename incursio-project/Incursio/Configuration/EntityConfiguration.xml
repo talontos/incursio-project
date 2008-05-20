@@ -39,7 +39,7 @@
 	<Entity name="Camp" maxHealth="350" health="350" pointValue="1000" armor="10" sightRange="6">
 		<Component type="RenderComponent" collectionName="Camp"/>
 		<Component type="ResourceComponent" amount="8"/>
-		<Component type="FactoryComponent"/>
+		<Component type="FactoryComponent" buildTimeFactor="9"/>
 		<Component type="AudioComponent" collectionName="Camp"/>
 	</Entity>
 

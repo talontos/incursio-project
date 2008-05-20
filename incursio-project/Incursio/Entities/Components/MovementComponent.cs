@@ -12,8 +12,10 @@ namespace Incursio.Entities.Components
     public class MovementComponent : BaseComponent
     {
         public float moveSpeed = 320.0f;
+        public Coordinate destination;
 
         public MovableObject movable;
+        public State.Direction directionState;
 
         //TEMP
         public MovementComponent(BaseGameEntity e):base(e){
@@ -60,12 +62,12 @@ namespace Incursio.Entities.Components
             }
             else
             {
-                /*
+                
                 float xMinimumThreshold = 0.10F;
                 float yMinimumThreshold = 0.10F;
                 
                 //get the direction to the target
-                Vector2 direction = new Vector2(destination.x - location.x, destination.y - location.y);
+                Vector2 direction = new Vector2(this.destination.x - movable.location.x, destination.y - movable.location.y);
                 
                 float xDirection = Vector2.Normalize(direction).X;
                 float yDirection = Vector2.Normalize(direction).Y;
@@ -87,7 +89,7 @@ namespace Incursio.Entities.Components
                 {
                     this.directionState = State.Direction.North;
                 }
-                */
+                
             }
 
             return retVal;

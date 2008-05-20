@@ -16,6 +16,7 @@ using System.Text;
 using Incursio.Classes;
 using Incursio.Managers;
 using Incursio.Utils;
+using Incursio.Entities;
 
 namespace Incursio.Campaign
 {
@@ -29,15 +30,41 @@ namespace Incursio.Campaign
             this.setMapDimensions(2048, 2048, 1024, 768);
         }
 
+        public override GameResult inspectWinConditions()
+        {
+            //return base.inspectWinConditions();
+
+            //neverending game
+            return new GameResult();
+        }
+
         public override void initializeMap()
         {
             //This map right now will represent our test environment
 
             EntityManager entityManager = EntityManager.getInstance();
 
-
             base.initializeMap();
 
+            //
+
+            //let's make one of each...
+
+            List<BaseGameEntityConfiguration> all = ObjectFactory.getInstance().entities;
+
+            int x = 50, y = 50, player = PlayerManager.getInstance().currentPlayerId;
+
+            for(int i = 0; i < all.Count; i++){
+                BaseGameEntity e = EntityManager.getInstance().createNewEntity(i, player);
+                e.setLocation(new Coordinate(x, y));
+
+                x += 50;
+                y += 50;
+            }
+            
+
+
+            /*
             //testing unit creation/placement/moving///
             LightInfantryUnit infUnit1 = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", PlayerManager.getInstance().currentPlayerId);
             LightInfantryUnit infUnit2 = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", PlayerManager.getInstance().currentPlayerId);
@@ -80,6 +107,8 @@ namespace Incursio.Campaign
             playerCamp.setHealth(350);
             computerCamp.setHealth(350);
             playerTower1.setHealth(350);
+            
+            */
         }
     }
 }

@@ -26,7 +26,8 @@ namespace Incursio.Utils
 
         private void loadTexture(string name){
             //TODO: GET PATH FOR NAME
-            this.texture = Texture2D.FromFile(Incursio.getInstance().spriteBatch.GraphicsDevice, name);
+            this.texture = Texture2D.FromFile(Incursio.getInstance().spriteBatch.GraphicsDevice, 
+            global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + name);
         }
     }
 }

@@ -19,9 +19,9 @@ namespace Incursio.Entities.TextureCollections
 
             switch (type)
             {
-                case "Damaged": damaged = this.makeGameTexture(name, frameWidth, frameHeight); break;
-                case "Destroyed": destroyed = this.makeGameTexture(name, frameWidth, frameHeight); break;
-                case "Exploded": exploded = this.makeGameTexture(name, frameWidth, frameHeight); break;
+                case "damaged": damaged = this.makeGameTexture(name, frameWidth, frameHeight); break;
+                case "destroyed": destroyed = this.makeGameTexture(name, frameWidth, frameHeight); break;
+                case "exploded": exploded = this.makeGameTexture(name, frameWidth, frameHeight); break;
                 default: return;
             }
         }

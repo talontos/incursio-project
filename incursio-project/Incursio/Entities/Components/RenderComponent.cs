@@ -32,7 +32,7 @@ namespace Incursio.Entities.Components
         public const int TIME_TILL_DESTROYED_FADE = 1;
 
         //public State.EntityState currentState;
-        public State.Direction directionState;
+        public State.Direction directionState = State.Direction.Still;
         public global::Incursio.Entities.TextureCollections.TextureCollection textures;
 
         public RenderComponent(BaseGameEntity entity) : base(entity){
@@ -83,6 +83,9 @@ namespace Incursio.Entities.Components
 
         public void drawThyself(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
+            if (this.bgEntity.movementComponent != null)
+                this.directionState = bgEntity.movementComponent.directionState;
+
             this.visible = true;
             this.justDrawn = false;
             Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.bgEntity.location);

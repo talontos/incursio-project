@@ -264,11 +264,11 @@ namespace Incursio.Classes
         }
 
         public virtual void setIdle(){
-
+            this.currentState = State.EntityState.Idle;
         }
 
         public virtual void setAttacking(){
-
+            this.currentState = State.EntityState.Attacking;
         }
 
         /// <summary>
@@ -285,33 +285,43 @@ namespace Incursio.Classes
         }
 
         public virtual bool isCapturing(){
-            return false;
+            return currentState == State.EntityState.Capturing;
         }
 
         public virtual bool isAttacking()
         {
-            return false;
+            return currentState == State.EntityState.Attacking;
         }
 
         public virtual bool isMoving()
         {
-            return false;
+            return currentState == State.EntityState.Moving;
         }
 
         public virtual int getAttackDamage(){
+            if(combatComponent != null){
+                return combatComponent.damage;
+            }
+
             return -1;
         }
 
         public virtual int getArmor(){
-            return -1;
+            return this.armor;
         }
 
         public virtual int getAttackRange(){
+            if (combatComponent != null)
+                return combatComponent.attackRange;
+
             return 0;
         }
 
         public virtual int getAttackSpeed(){
-            return -1;
+            if(combatComponent != null)
+                return combatComponent.attackSpeed;
+
+            return 0;
         }
 
         protected virtual void notifyUnderAttack()
@@ -455,7 +465,9 @@ namespace Incursio.Classes
         }
         
         public virtual void setDestination(Coordinate dest){
-
+            if(this.movementComponent != null){
+                this.movementComponent.destination = dest;
+            }
         }
 
         #endregion

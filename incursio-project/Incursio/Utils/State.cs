@@ -124,6 +124,7 @@ namespace Incursio
             ONE,
             TWO,
             THREE,
+            DEBUG,
         }
 
         public enum EventType{
