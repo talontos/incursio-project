@@ -28,16 +28,16 @@ namespace Incursio.Commands
 
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
+            if (subject.combatComponent == null){
+                this.finishedExecution = true;
+                return;
+            }
+
             //look for enemy units within subject's sightRange
             List<BaseGameEntity> enemiesInRange, friendliesInRange;
             EntityManager.getInstance().getAllEntitiesInRange(subject.owner, subject.location, subject.sightRange, out friendliesInRange, out enemiesInRange);
             
-            List<BaseGameEntity> formidableEnemies;
-
-            if (subject is GuardTowerStructure || subject is HeavyInfantryUnit)
-                formidableEnemies = enemiesInRange;
-            else
-                formidableEnemies = this.analyzeEnemiesInRange(enemiesInRange, subject);
+            List<BaseGameEntity> formidableEnemies = this.analyzeEnemiesInRange(enemiesInRange, subject);
 
             if(formidableEnemies.Count > 0){
 
@@ -55,8 +55,8 @@ namespace Incursio.Commands
 
         private List<BaseGameEntity> analyzeEnemiesInRange(List<BaseGameEntity> enemies, BaseGameEntity subject){
 
-            //right now just use for guard towers - they'll attack anything
-            if (!subject.smartGuarding)
+            //if false, they'll attack anything
+            if (!subject.combatComponent.smartGuarding)
                 return enemies;
 
             List<BaseGameEntity> formidableEnemies = new List<BaseGameEntity>();

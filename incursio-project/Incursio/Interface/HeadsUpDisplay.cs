@@ -23,10 +23,12 @@ namespace Incursio.Classes
 {
   public class HeadsUpDisplay
     {
+        /*
         Button lightInfantryButton;
         Button archerButton;
         Button towerButton;
         Button heavyInfantryButton;
+        */
 
         BuildEntityPanel buildPanel;
 
@@ -271,7 +273,7 @@ namespace Incursio.Classes
                     
                 }
 
-                if (selectedUnits[0].getType() == State.EntityName.ControlPoint && (selectedUnits[0] as ControlPoint).isCapping())
+                if (selectedUnits[0].capturableComponent != null && selectedUnits[0].capturableComponent.isCapping())
                 {
                     
                     double capRatio = (selectedUnits[0] as ControlPoint).getPercentageDone();
@@ -289,6 +291,8 @@ namespace Incursio.Classes
 
                     if (i <= 5)
                     {
+                        spriteBatch.Draw(selectedUnits[i].renderComponent.textures.icon, new Rectangle(383 + i * 60, height - 129, selectedUnits[i].renderComponent.textures.icon.Width, selectedUnits[i].renderComponent.textures.icon.Height), Color.White);
+                        /*
                         if (selectedUnits[i].getType() == State.EntityName.LightInfantry)
                         {
                             spriteBatch.Draw(TextureBank.InterfaceTextures.lightInfantryIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.InterfaceTextures.lightInfantryIcon.Width, TextureBank.InterfaceTextures.lightInfantryIcon.Height), Color.White);
@@ -305,9 +309,13 @@ namespace Incursio.Classes
                         {
                             spriteBatch.Draw(TextureBank.InterfaceTextures.heroIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.InterfaceTextures.heroIcon.Width, TextureBank.InterfaceTextures.heroIcon.Height), Color.White);
                         }
+                        */
                     }
                     else
                     {
+                        spriteBatch.Draw(selectedUnits[i].renderComponent.textures.icon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, selectedUnits[i].renderComponent.textures.icon.Width, selectedUnits[i].renderComponent.textures.icon.Height), Color.White);
+
+                        /*
                         if (selectedUnits[i].getType() == State.EntityName.LightInfantry)
                         {
                             spriteBatch.Draw(TextureBank.InterfaceTextures.lightInfantryIcon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, TextureBank.InterfaceTextures.lightInfantryIcon.Width, TextureBank.InterfaceTextures.lightInfantryIcon.Height), Color.White);
@@ -324,6 +332,7 @@ namespace Incursio.Classes
                         {
                             spriteBatch.Draw(TextureBank.InterfaceTextures.heroIcon, new Rectangle(383 + i * 60, height - 84, TextureBank.InterfaceTextures.heroIcon.Width, TextureBank.InterfaceTextures.heroIcon.Height), Color.White);
                         }
+                        */
                     }
 
                 }
@@ -350,7 +359,7 @@ namespace Incursio.Classes
             //RESOURCE BAR
             spriteBatch.Draw(TextureBank.InterfaceTextures.moneyIcon,
                 new Rectangle(945, 10, TextureBank.InterfaceTextures.moneyIcon.Width, TextureBank.InterfaceTextures.moneyIcon.Height), Color.White);
-            spriteBatch.DrawString(font, " " + PlayerManager.getInstance().humanPlayer.MONETARY_UNIT, new Vector2(975, 23), Color.White, 0, font.MeasureString("XXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, " " + PlayerManager.getInstance().currentPlayer.MONETARY_UNIT, new Vector2(975, 23), Color.White, 0, font.MeasureString("XXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
             spriteBatch.Draw(TextureBank.InterfaceTextures.controlPointInterfaceIcon,
                 new Rectangle(860, 12, TextureBank.InterfaceTextures.controlPointInterfaceIcon.Width, TextureBank.InterfaceTextures.controlPointInterfaceIcon.Height), Color.White);

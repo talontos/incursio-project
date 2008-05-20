@@ -43,7 +43,7 @@ namespace Incursio.Classes
             this.attackRange = 10;
             this.maxHealth = 100;
             this.health = 100;
-            this.setType(State.EntityName.Archer);
+            //this.setType(State.EntityName.Archer);
 
             this.combatComponent = new global::Incursio.Entities.Components.CombatComponent(this);
         }
@@ -63,7 +63,7 @@ namespace Incursio.Classes
               
           }
       }
-
+      /*
       public override bool attackTarget()
       {
           //if target is in attackRange, attack it.
@@ -123,7 +123,7 @@ namespace Incursio.Classes
           }
           else return false;
       }
-
+      */
       public void updateArrow()
       {
           double newPosX = (Math.Cos(arrowAngle * (Math.PI / 180)) * ARROW_SPEED);
@@ -219,7 +219,7 @@ namespace Incursio.Classes
               myRef.Height
           );
       }
-
+      /*
       public override void drawThyself(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
       {
           this.visible = true;
@@ -476,7 +476,7 @@ namespace Incursio.Classes
                       TextureBank.EntityTextures.archerSouth.Width, TextureBank.EntityTextures.archerSouth.Height), colorMask);
           }
       }
-
+      */
       public override void playAttackSound()
       {
           SoundManager.getInstance().PlaySound(SoundManager.getInstance().AudioCollection.attack.ArrowAttack, false);

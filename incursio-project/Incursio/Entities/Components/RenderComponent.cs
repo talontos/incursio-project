@@ -31,7 +31,7 @@ namespace Incursio.Entities.Components
         public int destroyedTimer = 0;
         public const int TIME_TILL_DESTROYED_FADE = 1;
 
-        public State.EntityState currentState;
+        //public State.EntityState currentState;
         public State.Direction directionState;
         public global::Incursio.Entities.TextureCollections.TextureCollection textures;
 
@@ -75,6 +75,12 @@ namespace Incursio.Entities.Components
             );
         }
 
+        public void updateOccupancy(){
+            //TODO: CALCULATE OCCUPANCY SIZE FROM TEXTURE
+
+            //TODO: UPDATE OCCUPANCY
+        }
+
         public void drawThyself(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
             this.visible = true;
@@ -100,7 +106,7 @@ namespace Incursio.Entities.Components
             //depending on the unit's state, draw its textures
             //idle
             #region IDLE
-            if (this.currentState == State.EntityState.Idle)
+            if (this.bgEntity.currentState == State.EntityState.Idle)
             {
                 switch (this.directionState)
                 {
@@ -133,13 +139,13 @@ namespace Incursio.Entities.Components
             }
             #endregion
             #region BEING_BUILT
-            else if (this.currentState == State.EntityState.BeingBuilt)
+            else if (this.bgEntity.currentState == State.EntityState.BeingBuilt)
             {
                 //TODO: draw construction?
             }
             #endregion
             #region BUILDING
-            else if (this.currentState == State.EntityState.Building)
+            else if (this.bgEntity.currentState == State.EntityState.Building)
             {
                 //draw something special for when the structure is building something (fires flickering or w/e)
                 spriteBatch.Draw(this.textures.still.Building.texture,
@@ -161,7 +167,7 @@ namespace Incursio.Entities.Components
             }
             #endregion
             #region DESTROYED
-            else if (this.currentState == State.EntityState.Destroyed)
+            else if (this.bgEntity.currentState == State.EntityState.Destroyed)
             {
                 if (destroyedTimer < TIME_TILL_DESTROYED_FADE * 60)
                 {
@@ -179,7 +185,7 @@ namespace Incursio.Entities.Components
             }
             #endregion
             #region ATTACKING
-            else if (this.currentState == State.EntityState.Attacking)
+            else if (this.bgEntity.currentState == State.EntityState.Attacking)
             {
 
                 switch (this.directionState)
@@ -227,7 +233,7 @@ namespace Incursio.Entities.Components
             }
             #endregion
             #region DEAD
-            else if (this.currentState == State.EntityState.Dead)
+            else if (this.bgEntity.currentState == State.EntityState.Dead)
             {
                 switch (this.directionState)
                 {
@@ -303,14 +309,14 @@ namespace Incursio.Entities.Components
             }
             #endregion
             #region GUARDING
-            else if (this.currentState == State.EntityState.Guarding)
+            else if (this.bgEntity.currentState == State.EntityState.Guarding)
             {
                 //TODO:
                 //Guarding Animation
             }
             #endregion
             #region MOVING
-            else if (this.currentState == State.EntityState.Moving)
+            else if (this.bgEntity.currentState == State.EntityState.Moving)
             {
                 switch (this.directionState)
                 {
@@ -403,7 +409,7 @@ namespace Incursio.Entities.Components
             }
             #endregion
             #region UNDER_ATTACK
-            else if (this.currentState == State.EntityState.UnderAttack)
+            else if (this.bgEntity.currentState == State.EntityState.UnderAttack)
             {
                 //TODO:
                 //Under Attack Animation

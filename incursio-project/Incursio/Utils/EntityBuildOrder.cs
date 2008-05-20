@@ -19,6 +19,7 @@ namespace Incursio.Utils
     public class EntityBuildOrder
     {
         public State.EntityName entity;
+        public int entityId;
         public Coordinate location;
         public KeyPoint keyPoint;
 
@@ -36,11 +37,15 @@ namespace Incursio.Utils
         }
 
         public EntityBuildOrder(Coordinate l, int entityId){
-
+            this.location = l;
+            this.entityId = entityId;
         }
 
-        public EntityBuildOrder(Coordinate l, int entityId, KeyPoint k){
-
+        public EntityBuildOrder(Coordinate l, int entityId, KeyPoint k)
+        {
+            this.location = l;
+            this.entityId = entityId;
+            keyPoint = k;
         }
     }
 }

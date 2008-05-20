@@ -39,7 +39,7 @@ namespace Incursio.Classes
         public ControlPoint() : base(){
             this.pointValue = 500;
             this.sightRange = 10;
-            this.setType(State.EntityName.ControlPoint);
+            //this.setType(State.EntityName.ControlPoint);
             this.map = MapManager.getInstance().currentMap;
 
             this.resourceComponent = new global::Incursio.Entities.Components.ResourceComponent(this);
@@ -108,7 +108,7 @@ namespace Incursio.Classes
                 {
                     MessageManager.getInstance().addMessage(new GameEvent(State.EventType.GAIN_RESOURCE, this,"", Convert.ToString(income), this.location));
 
-                    PlayerManager.getInstance().humanPlayer.MONETARY_UNIT = PlayerManager.getInstance().humanPlayer.MONETARY_UNIT + income;
+                    PlayerManager.getInstance().currentPlayer.MONETARY_UNIT = PlayerManager.getInstance().currentPlayer.MONETARY_UNIT + income;
                 }
                 else
                 {
@@ -181,7 +181,7 @@ namespace Incursio.Classes
         {
             //I CANNOT BE DESTROYED, FOR I AM THE CONTROL POINT!!!!
         }
-
+        /*
         public override void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
             this.visible = true;
@@ -221,5 +221,6 @@ namespace Incursio.Classes
                 }
             }
         }
+        */
     }
 }

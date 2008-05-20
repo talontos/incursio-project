@@ -126,12 +126,14 @@ namespace Incursio.Managers
 
         public void saveCurrentGame(String fileName)
         {
+            //BIG TODO: REDO THIS!!
             try
             {
                 ////Open up a writer
                 TextWriter tw = new StreamWriter(fileName);
                 
                 ////write hero info and stats
+                /*
                 tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].name);
                 tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].level);
                 tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].experiencePoints);
@@ -140,7 +142,7 @@ namespace Incursio.Managers
                 tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].armor);
                 tw.WriteLine(EntityManager.getInstance().getLivePlayerHeros(PlayerManager.getInstance().currentPlayerId)[0].maxHealth);
                 tw.WriteLine(DateTime.Now);
-                
+                */
                 ////Close the writer
                 tw.Close();
             }

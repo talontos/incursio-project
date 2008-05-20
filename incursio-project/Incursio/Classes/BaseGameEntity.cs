@@ -24,7 +24,7 @@ namespace Incursio.Classes
 {
     public class BaseGameEntity
     {
-        public State.EntityName entityType;
+        //public State.EntityName entityType;
         public string entityName;
         public int maxHealth = 100;
         public int health = 100;
@@ -37,12 +37,14 @@ namespace Incursio.Classes
         public bool visible = false;
         public bool highlighted = false;
         public bool justDrawn = false;
-        public bool smartGuarding = true;
+        //public bool smartGuarding = true;
         public int currentFrameX = 0;       //for animation
         public int currentFrameY = 0;       //for animation
         public int currentFrameXAttackDeath = 0;
         public int currentFrameYAttackDeath = 0;
         public int attackFramePause = 0;
+
+        public State.EntityState currentState = State.EntityState.Idle;
 
         //BOOL VALUES for COMPONENTS
         public bool canAttack = false;
@@ -275,9 +277,9 @@ namespace Incursio.Classes
         /// <param name="spriteBatch"></param>
         /// <param name="frameTimer"></param>
         /// <param name="FRAME_LENGTH"></param>
-        public virtual void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
+        public void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
-            //TODO: USE COMPONENT
+            //TODO: USE COMPONENT - ie REMOVE FROM SUBCLASSES
             if(this.renderComponent != null)
                 this.renderComponent.drawThyself(ref spriteBatch, frameTimer, FRAME_LENGTH);
         }
@@ -342,6 +344,7 @@ namespace Incursio.Classes
         }
 
         #region Getters/Setters
+        /*
         public virtual void setType(State.EntityName name)
         {
             this.entityType = name;
@@ -351,6 +354,7 @@ namespace Incursio.Classes
         {
             return this.entityType;
         }
+        */
 
         public virtual long getHealth(){
             return this.health;
