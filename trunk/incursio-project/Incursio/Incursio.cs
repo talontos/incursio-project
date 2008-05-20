@@ -109,8 +109,6 @@ namespace Incursio
             Content.RootDirectory = "Content";
 
             this.Components.Add(new GamerServicesComponent(this));
-
-            FileManager.getInstance().loadGameConfiguration();
             
             //TODO: Make this more general
             //set the window size to 1024x768
@@ -148,6 +146,8 @@ namespace Incursio
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("Courier New");
+
+            FileManager.getInstance().loadGameConfiguration();
 
             MessageManager.getInstance().setFont(Content.Load<SpriteFont>("Arial"));
 
@@ -477,6 +477,8 @@ namespace Incursio
         /// </summary>
         public void playStateSounds(){
 
+            //TODO: TURN SOUNDS BACK ON
+            return;
             switch(currentState){
                 case State.GameState.Menu:
                 case State.GameState.LoadMenu:

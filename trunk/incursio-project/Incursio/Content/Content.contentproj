@@ -129,13 +129,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArcherPortraint.png">
-      <Name>archerPortrait</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="InfantryUnit.png">
       <Name>infantryUnit</Name>
       <Importer>TextureImporter</Importer>
@@ -987,6 +980,13 @@
   <ItemGroup>
     <Compile Include="Credits.png">
       <Name>Credits</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArcherPortrait.png">
+      <Name>ArcherPortrait</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

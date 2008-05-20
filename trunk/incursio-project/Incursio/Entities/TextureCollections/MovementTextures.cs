@@ -19,10 +19,10 @@ namespace Incursio.Entities.TextureCollections
 
             switch (type)
             {
-                case "North": North = this.makeGameTexture(name, frameWidth, frameHeight); break;
-                case "South": South = this.makeGameTexture(name, frameWidth, frameHeight); break;
-                case "East": East = this.makeGameTexture(name, frameWidth, frameHeight); break;
-                case "West": West = this.makeGameTexture(name, frameWidth, frameHeight); break;
+                case "north": North = this.makeGameTexture(name, frameWidth, frameHeight); break;
+                case "south": South = this.makeGameTexture(name, frameWidth, frameHeight); break;
+                case "east": East = this.makeGameTexture(name, frameWidth, frameHeight); break;
+                case "west": West = this.makeGameTexture(name, frameWidth, frameHeight); break;
                 default: return;
             }
         }

@@ -171,32 +171,27 @@ namespace Incursio.Managers
                 }
                 else
                 {
-                    if (e.visible)
+                    if (e.renderComponent.visible)
                     { //only check visible ones so we don't waste time
 
                         //get selection rectangle for current unit
-                        Rectangle unit = e.boundingBox;
+                        Rectangle unit = e.renderComponent.boundingBox;
                         if (unit.Contains(new Point(Convert.ToInt32(point.X), Convert.ToInt32(point.Y))))
                         {
-
-                            if (e.getPlayer() == PlayerManager.getInstance().computerPlayerId){
-                                selectedUnits = new List<BaseGameEntity>();
-                                this.addToSelectedUnits(e);
-                            }
-                            else
-                            {
+                            //if unit belongs to the current player, we want them (un)selected
+                            if(e.owner == PlayerManager.getInstance().currentPlayerId){
                                 if (selectedUnits.Count == 1)
                                 {
-                                    if (selectedUnits[0].getPlayer() == PlayerManager.getInstance().computerPlayerId)
+                                    if (selectedUnits[0].getPlayer() != PlayerManager.getInstance().currentPlayerId)
                                     {
                                         selectedUnits = new List<BaseGameEntity>();
                                     }
                                 }
-                                bool newUnitIsSelected = selectedUnits.Contains(e as Unit);
+
                                 if (InputManager.getInstance().shifting())
                                 {
                                     //just add/remove new guy
-                                    if (newUnitIsSelected)
+                                    if (selectedUnits.Contains(e))
                                     {
                                         selectedUnits.Remove(e);
                                     }
@@ -213,6 +208,12 @@ namespace Incursio.Managers
                                     addToSelectedUnits(e);
                                 }
                             }
+                            else{
+                                //selecting a single enemy
+                                selectedUnits = new List<BaseGameEntity>();
+                                this.addToSelectedUnits(e);
+                            }
+
                             done = true;
                         }
                     } 

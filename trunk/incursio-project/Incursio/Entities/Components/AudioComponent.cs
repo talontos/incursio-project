@@ -25,6 +25,10 @@ namespace Incursio.Entities.Components
                     default: break;
                 }
             }
+
+            //remove me
+            if (audioCollection == null)
+                this.bgEntity.audioComponent = null;
         }
 
         public void playSelectionSound()

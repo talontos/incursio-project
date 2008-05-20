@@ -1,117 +1,125 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Content>
 
-	<TextureCollection name="Light Infantry" portrait="lightInfantryPortrait" icon="InfantryIcon">
+	<TextureCollection name="Light Infantry" portrait="lightInfantryPortrait.png" icon="InfantryIcon.png">
 		<Still>
-			<north file="infantry_back"/>
-			<south file="infantry_still"/>
-			<east file="infantry_right"/>
-			<west file="infantry_left"/>
+			<north file="infantry_back.png"/>
+			<south file="infantry_still.png"/>
+			<east file="infantry_right.png"/>
+			<west file="infantry_left.png"/>
 		</Still>
 		<Movement>
-			<north file="Infantry_Moving_North" frameWidth="20" frameHeight=""/>
-			<south file="Infantry_Moving_South" frameWidth="20" frameHeight=""/>
-			<east file="Infantry_Moving_Right" frameWidth="20" frameHeight=""/>
-			<west file="Infantry_Moving_Left" frameWidth="20" frameHeight=""/>
+			<north file="Infantry_Moving_North.png" frameWidth="20" frameHeight="30"/>
+			<south file="Infantry_Moving_South.png" frameWidth="20" frameHeight="30"/>
+			<east file="Infantry_Moving_Right.png" frameWidth="20" frameHeight="30"/>
+			<west file="Infantry_Moving_Left.png" frameWidth="20" frameHeight="30"/>
 		</Movement>
 		<Attacking>
-			<east file="Infantry_Attacking_East" frameWidth="25" frameHeight=""/>
-			<west file="Infantry_Attacking_West" frameWidth="25" frameHeight=""/>
+			<east file="Infantry_Attacking_East.png" frameWidth="25" frameHeight="30"/>
+			<west file="Infantry_Attacking_West.png" frameWidth="25" frameHeight="30"/>
 		</Attacking>
 		<Death>
-			<east file="LightInfantry_Death_Right" frameWidth="25" frameHeight=""/>
-			<west file="LightInfantry_Death_Left" frameWidth="25" frameHeight=""/>
+			<east file="LightInfantry_Death_Right.png" frameWidth="25" frameHeight="30"/>
+			<west file="LightInfantry_Death_Left.png" frameWidth="25" frameHeight="30"/>
 		</Death>
 	</TextureCollection>
 
-	<TextureCollection name="Hero" portrait="HeroPortrait" icon="HeroIcon">
+	<TextureCollection name="Hero" portrait="HeroPortrait.png" icon="HeroIcon.png">
 		<Still>
-			<north file="Hero_North"/>
-			<south file="HeroStill"/>
-			<east file="HeroEast"/>
-			<west file="HeroWest"/>
+			<north file="Hero_North.png"/>
+			<south file="HeroStill.png"/>
+			<east file="HeroEast.png"/>
+			<west file="HeroWest.png"/>
 		</Still>
 		<Movement>
-			<north file="Hero_Moving_North" frameWidth="36" frameHeight=""/>
-			<south file="Hero_Moving_South" frameWidth="36" frameHeight=""/>
-			<east file="Hero_Moving_Right" frameWidth="36" frameHeight=""/>
-			<west file="Hero_Moving_Left" frameWidth="36" frameHeight=""/>
+			<north file="Hero_Moving_North.png" frameWidth="36" frameHeight="40"/>
+			<south file="Hero_Moving_South.png" frameWidth="36" frameHeight="40"/>
+			<east file="Hero_Moving_Right.png" frameWidth="36" frameHeight="40"/>
+			<west file="Hero_Moving_Left.png" frameWidth="36" frameHeight="40"/>
 		</Movement>
 		<Attacking>
-			<east file="Hero_Attacking_Right" frameWidth="36" frameHeight=""/>
-			<west file="Hero_Attacking_Left" frameWidth="36" frameHeight=""/>
+			<east file="Hero_Attacking_Right.png" frameWidth="36" frameHeight="40"/>
+			<west file="Hero_Attacking_Left.png" frameWidth="36" frameHeight="40"/>
 		</Attacking>
 		<Death>
-			<east file="Hero_Death_Right" frameWidth="36" frameHeight=""/>
-			<west file="Hero_Death_Left" frameWidth="36" frameHeight=""/>
+			<east file="Hero_Death_Right.png" frameWidth="36" frameHeight="40"/>
+			<west file="Hero_Death_Left.png" frameWidth="36" frameHeight="40"/>
 		</Death>
 	</TextureCollection>
 
-	<TextureCollection name="Heavy Infantry" portrait="HeavyInfantryPortrait" icon="HeavyInfantryIcon">
+	<TextureCollection name="Heavy Infantry" portrait="HeavyInfantryPortrait.png" icon="HeavyInfantryIcon.png">
 		<Still>
-			<north file="HeavyInfantryNorth"/>
-			<south file="HeavyInfantrySouth"/>
-			<east file="HeavyInfantryEast"/>
-			<west file="HeavyInfantryWest"/>
+			<north file="HeavyInfantryNorth.png"/>
+			<south file="HeavyInfantrySouth.png"/>
+			<east file="HeavyInfantryEast.png"/>
+			<west file="HeavyInfantryWest.png"/>
 		</Still>
 		<Movement>
-			<north file="HeavyInfantry_Moving_Up" frameWidth="25" frameHeight=""/>
-			<south file="HeavyInfantry_Moving_Down" frameWidth="25" frameHeight=""/>
-			<east file="HeavyInfantry_Moving_Right" frameWidth="25" frameHeight=""/>
-			<west file="HeavyInfantry_Moving_Left" frameWidth="25" frameHeight=""/>
+			<north file="HeavyInfantry_Moving_Up.png" frameWidth="25" frameHeight="38"/>
+			<south file="HeavyInfantry_Moving_Down.png" frameWidth="25" frameHeight="38"/>
+			<east file="HeavyInfantry_Moving_Right.png" frameWidth="25" frameHeight="38"/>
+			<west file="HeavyInfantry_Moving_Left.png" frameWidth="25" frameHeight="38"/>
 		</Movement>
 		<Attacking>
-			<east file="HeavyInfantry_Attacking_East" frameWidth="45" frameHeight=""/>
-			<west file="HeavyInfantry_Attacking_West" frameWidth="45" frameHeight=""/>
+			<east file="HeavyInfantry_Attacking_East.png" frameWidth="45" frameHeight="38"/>
+			<west file="HeavyInfantry_Attacking_West.png" frameWidth="45" frameHeight="38"/>
 		</Attacking>
 		<Death>
-			<east file="HeavyInfantry_Death" frameWidth="45" frameHeight=""/>
-			<west file="HeavyInfantry_Death_Left" frameWidth="45" frameHeight=""/>
+			<east file="HeavyInfantry_Death.png" frameWidth="45" frameHeight="38"/>
+			<west file="HeavyInfantry_Death_Left.png" frameWidth="45" frameHeight="38"/>
 		</Death>
 	</TextureCollection>
 
-	<TextureCollection name="Archer" portrait="archerPortrait" icon="archerIcon">
+	<TextureCollection name="Archer" portrait="ArcherPortrait.png" icon="ArcherIcon.png">
 		<Still>
-			<north file="archer_Back"/>
-			<south file="archer_Still"/>
-			<east file="archer_right"/>
-			<west file="archer_left"/>
+			<north file="archer_Back.png"/>
+			<south file="archer_Still.png"/>
+			<east file="archer_right.png"/>
+			<west file="archer_left.png"/>
 		</Still>
 		<Movement>
-			<north file="Archer_Moving_Up" frameWidth="20" frameHeight=""/>
-			<south file="Archer_Moving_Down" frameWidth="20" frameHeight=""/>
-			<east file="Archer_Moving_Right" frameWidth="20" frameHeight=""/>
-			<west file="Archer_Moving_Left" frameWidth="20" frameHeight=""/>
+			<north file="Archer_Moving_Up.png" frameWidth="20" frameHeight="30"/>
+			<south file="Archer_Moving_Down.png" frameWidth="20" frameHeight="30"/>
+			<east file="Archer_Moving_Right.png" frameWidth="20" frameHeight="30"/>
+			<west file="Archer_Moving_Left.png" frameWidth="20" frameHeight="30"/>
 		</Movement>
 		<Attacking>
-			<east file="Archer_Attacking_East" frameWidth="25" frameHeight=""/>
-			<west file="Archer_Attacking_West" frameWidth="25" frameHeight=""/>
+			<east file="Archer_Attacking_East.png" frameWidth="25" frameHeight="30"/>
+			<west file="Archer_Attacking_West.png" frameWidth="25" frameHeight="30"/>
 		</Attacking>
 		<Death>
-			<east file="Archer_Death_Right" frameWidth="33" frameHeight=""/>
-			<west file="Archer_Death_Left" frameWidth="33" frameHeight=""/>
+			<east file="Archer_Death_Right.png" frameWidth="33" frameHeight="30"/>
+			<west file="Archer_Death_Left.png" frameWidth="33" frameHeight="30"/>
 		</Death>
 	</TextureCollection>
 
-	<!-- STRUCTURE TEXTURES NEED TO BE GENERALIZED -->
-	<TextureCollection name="Camp" portrait="BasePortrait" icon="InfantryIcon">
+	<TextureCollection name="Camp" portrait="BasePortrait.png" icon="InfantryIcon.png">
 		<Still>
-			<south file=""/>
-			<building file="" frameWidth="64" frameHeight=""/>
+			<south file="Fort_friendly.png"/>
+			<building file="Fort_Friendly_Building.png" frameWidth="64" frameHeight="64"/>
 		</Still>
 		<Damaged>
-			<destroyed file="" frameWidth="64" frameHeight=""/>
+			<destroyed file="Fort_Friently_exploded_animation.png" frameWidth="64" frameHeight="64"/>
 		</Damaged>
 	</TextureCollection>
 
-	<TextureCollection name="Control Point" portrait="ControlPointIcon" icon="InfantryIcon">
-		<Still/>
+	<TextureCollection name="Control Point" portrait="ControlPointIcon.png" icon="InfantryIcon.png">
+		<Still>
+			<south file="ControlPointFriendly.png"/>
+		</Still>
 	</TextureCollection>
 
-	<TextureCollection name="Guard Tower" portrait="TowerPortrait" icon="TowerIcon">
-		<Still/>
-		<Attacking/>
-		<Damaged/>
+	<TextureCollection name="Guard Tower" portrait="TowerPortrait.png" icon="TowerIcon.png">
+		<Still>
+			<south file="Tower_friendly.png"/>
+		</Still>
+		<Attacking>
+			<east file="Tower_friendly_attacking.png"/>
+			<west file="Tower_friendly_attacking.png"/>
+		</Attacking>
+		<Damaged>
+			<destroyed file="Tower_exploded.png"/>
+		</Damaged>
 	</TextureCollection>
 	
 </Content>
