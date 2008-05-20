@@ -29,7 +29,6 @@ namespace Incursio.Classes
         protected int timeForResource = 0;
         protected EntityBuildOrder buildProject;
 
-        protected State.EntityState currentState;
         public Structure()
         {
 
@@ -116,11 +115,6 @@ namespace Incursio.Classes
         public virtual void beingBuiltTick()
         {
 
-        }
-
-        public virtual void setMap(MapBase map)
-        {
-            this.map = map;
         }
 
         public override void takeDamage(int damage, BaseGameEntity attacker)

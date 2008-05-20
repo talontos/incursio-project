@@ -55,7 +55,7 @@ namespace Incursio.Classes
 
           this.moveSpeed = 115.0f;
           this.sightRange = 8;
-          this.setType(State.EntityName.Hero);
+          //this.setType(State.EntityName.Hero);
           this.armor = 10;
           this.damage = 25;
           this.attackSpeed = 3;
@@ -74,7 +74,7 @@ namespace Incursio.Classes
           this.name = this.getRandomName();
           this.moveSpeed = 115.0f;
           this.sightRange = 8;
-          this.setType(State.EntityName.Hero);
+          //this.setType(State.EntityName.Hero);
           this.armor = 15;
           this.damage = 25;
           this.level = 15;
@@ -191,7 +191,7 @@ namespace Incursio.Classes
           }
           */
       }
-
+      /*
       public override void drawThyself(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
       {
           {
@@ -438,7 +438,7 @@ namespace Incursio.Classes
           }
       
       }
-
+      */
       public void finishCapture(ControlPoint c){
           gainExperience(c.pointValue);
       }

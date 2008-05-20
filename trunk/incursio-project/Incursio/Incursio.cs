@@ -47,7 +47,7 @@ namespace Incursio
         public MapBase currentMap;
 
         //Hero "shell" for storing hero attributes between games
-        private Hero hero;
+        private BaseGameEntity hero;
 
         //game information
         public State.GameState currentState
@@ -509,34 +509,23 @@ namespace Incursio
         /// </summary>
         public void drawEntity()
         {
-            Coordinate onScreen;
-            double healthRatio;
-            double healthBarTypicalWidth = 0.59375;             //these horrible numbers are ratios for the healthbar of the
-            double healthBarTypicalHeight = 0.03125;            //selecetedUnitOverlayTexture.  These account for changes in
-            double healthBarTypicalStartWidth = 0.25;           //overlay size, so that the healthbar will still display where
-            double healthBarTypicalStartHeight = 0.0625;        //it should.
+            //Coordinate onScreen;
+            //double healthRatio;
+            //double healthBarTypicalWidth = 0.59375;             //these horrible numbers are ratios for the healthbar of the
+            //double healthBarTypicalHeight = 0.03125;            //selecetedUnitOverlayTexture.  These account for changes in
+            //double healthBarTypicalStartWidth = 0.25;           //overlay size, so that the healthbar will still display where
+            //double healthBarTypicalStartHeight = 0.0625;        //it should.
 
             //draw all visible units
             EntityManager.getInstance().getAllEntities().ForEach(delegate(BaseGameEntity e)
             {
                 e.justDrawn = false;
 
-                if (e is Unit && (e as Unit).getCurrentState() == State.EntityState.Buried)
+                if (e.currentState == State.EntityState.Buried)
                 {}
                 else if (currentMap.isOnScreen(e.getLocation()))
                 {
-                    if (e.getType() == State.EntityName.LightInfantry ||
-                        e.getType() == State.EntityName.HeavyInfantry ||
-                        e.getType() == State.EntityName.Archer ||
-                        e.getType() == State.EntityName.Hero ||
-                        e.getType() == State.EntityName.Camp ||
-                        e.getType() == State.EntityName.GuardTower ||
-                        e.getType() == State.EntityName.ControlPoint)
-                    {
-                        e.drawThyself(ref spriteBatch, frameTimer, FRAME_LENGTH);
-                    }
-                    else if(!e.justDrawn)
-                        e.visible = false;
+                    e.drawThyself(ref spriteBatch, frameTimer, FRAME_LENGTH);
                 }
 
             });
@@ -546,9 +535,11 @@ namespace Incursio
             EntityManager.getInstance().getSelectedUnits().ForEach(delegate(BaseGameEntity u)
             {
                 if(currentMap.isOnScreen(u.getLocation())){
+                    u.renderComponent.drawSelectionOverlay(ref spriteBatch);
+
+                    /*
                     onScreen = currentMap.positionOnScreen(u.getLocation());
-
-
+                    
                     healthRatio = (float)u.getHealth() / u.getMaxHealth();
 
                     int xOffSet = 0;
@@ -626,7 +617,7 @@ namespace Incursio
                             new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
                             Color.Red);
                     }
-                   
+                   */
                 }
             });
         }
@@ -668,7 +659,7 @@ namespace Incursio
             this.hero = h;
         }
 
-        public Hero getHero(){
+        public BaseGameEntity getHero(){
             return this.hero;
         }
 

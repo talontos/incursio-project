@@ -34,7 +34,6 @@ namespace Incursio.Classes
         protected int deadTimer = 0;
         public bool playedDeath = false;
         public bool playedDeathSound = false;
-        protected State.EntityState currentState = State.EntityState.Idle;
         protected State.Direction directionState = State.Direction.South;
         protected bool isClose = false;
 
@@ -299,11 +298,6 @@ namespace Incursio.Classes
 
         public void setDirectionState(State.Direction dir){
             this.directionState = dir;
-        }
-
-        public void setMap(MapBase map)
-        {
-            this.map = map;
         }
 
         /*

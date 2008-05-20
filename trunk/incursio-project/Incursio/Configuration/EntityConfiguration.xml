@@ -32,7 +32,7 @@
 
 	<Entity name="Guard Tower" maxHealth="350" health="350" pointValue="1000" armor="5" sightRange="14" costToBuild="200">
 		<Component type="RenderComponent" collectionName="Guard Tower"/>
-		<Component type="CombatComponent" damage="25" attackRange="14" attackSpeed="4"/>
+		<Component type="CombatComponent" damage="25" attackRange="14" attackSpeed="4" smartGuarding="false"/>
 		<Component type="AudioComponent" collectionName="Guard Tower"/>
 	</Entity>
 

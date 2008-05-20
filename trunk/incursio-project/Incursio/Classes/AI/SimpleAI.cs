@@ -55,7 +55,7 @@ namespace Incursio.Classes
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime, AIPlayer player){
             //continue building army, if necessary
             //this.queueBuildRandomUnit(true);
-            List<CampStructure> camps = EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().computerPlayerId);
+            List<BaseGameEntity> camps = EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().computerPlayerId);
             if(camps.Count == 0){
                 return;
             }
@@ -64,7 +64,7 @@ namespace Incursio.Classes
             this.processEvents(ref player);
 
             //processEvents will catch a creation_complete event; but if the camp is idle, we need to use it!
-            if(!camps[0].isBuilding()){
+            if(!camps[0].factoryComponent.isBuilding()){
                 this.buildNextEntity();
             }
 
@@ -171,8 +171,8 @@ namespace Incursio.Classes
                 buildList.Remove(order);
 
                 //right now we only have one constructor-class structure; so this is okay
-                CampStructure camp = EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().computerPlayerId)[0];
-                camp.build(order);
+                BaseGameEntity camp = EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().computerPlayerId)[0];
+                camp.factoryComponent.build(order);
             }
         }
 
@@ -181,7 +181,7 @@ namespace Incursio.Classes
         }
 
         private void queueBuildRandomUnit(bool checkCap, Coordinate location, KeyPoint keyPoint){
-            List<Structure> myGuys = EntityManager.getInstance().getLivePlayerStructures(PlayerManager.getInstance().computerPlayerId);
+            List<BaseGameEntity> myGuys = EntityManager.getInstance().getLivePlayerStructures(PlayerManager.getInstance().computerPlayerId);
             
             if (EntityManager.getInstance().getLivePlayerUnits(PlayerManager.getInstance().computerPlayerId).Count + this.buildList.Count <= this.minPreferredArmySize
                 || !checkCap)
@@ -195,6 +195,7 @@ namespace Incursio.Classes
                                             Incursio.rand.Next(20, MapManager.getInstance().currentMap.height_pix));
                 }
 
+                //TODO: REDO THIS!!
                 if (randU > 60)
                     this.buildList.Add(new EntityBuildOrder(dest, State.EntityName.LightInfantry, keyPoint));
 

@@ -30,9 +30,10 @@ namespace Incursio.Entities.Components
             {
                 switch (attributes[i].Key)
                 {
-                    case "damage":      damage      = int.Parse(attributes[i].Value); break;
-                    case "attackSpeed": attackSpeed = int.Parse(attributes[i].Value); break;
-                    case "attackRange": attackRange = int.Parse(attributes[i].Value); break;
+                    case "damage":          damage          = int.Parse(attributes[i].Value); break;
+                    case "attackSpeed":     attackSpeed     = int.Parse(attributes[i].Value); break;
+                    case "attackRange":     attackRange     = int.Parse(attributes[i].Value); break;
+                    case "smartGuarding":   smartGuarding   = bool.Parse(attributes[i].Value); break;
                     default: break;
                 }
             }
@@ -66,12 +67,8 @@ namespace Incursio.Entities.Components
 
             int largeTargetBufferZone = 0;
 
-            if (target.getType() == State.EntityName.Camp)
-            {
-                largeTargetBufferZone = (int)(64 / MapManager.TILE_WIDTH);
-            }
-            else if (target.getType() == State.EntityName.GuardTower)
-            {
+            //TODO: REDO THIS BUFFER ZONE CALCULATION
+            if(target.movementComponent == null){
                 largeTargetBufferZone = (int)(64 / MapManager.TILE_WIDTH);
             }
 

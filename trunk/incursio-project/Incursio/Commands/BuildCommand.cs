@@ -29,6 +29,10 @@ namespace Incursio.Commands
             this.buildOrder = new EntityBuildOrder(location, toBeBuilt);
         }
 
+        public BuildCommand(int classToBeBuilt, Coordinate location){
+            this.buildOrder = new EntityBuildOrder(location, classToBeBuilt);
+        }
+
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
             if (subject.isConstructor)
@@ -37,10 +41,8 @@ namespace Incursio.Commands
                     this.finishedExecution = true;
                     return;
                 }
-             
-                //TODO: GENERALIZE
-                (subject as CampStructure).build(buildOrder);
 
+                subject.factoryComponent.build(buildOrder);
             }
 
             this.finishedExecution = true;
@@ -51,7 +53,8 @@ namespace Incursio.Commands
             {
                 //we can't build something here
 
-                //Notify owner
+                //TODO: Notify owner
+                /*
                 if(buildOrder.entity is Structure){
                     PlayerManager.getInstance().notifyPlayer(subject.owner,
                         new GameEvent(
@@ -62,7 +65,7 @@ namespace Incursio.Commands
                         )
                     );
                 }
-
+                */
                 this.finishedExecution = true;
                 return false;
             }
@@ -85,6 +88,8 @@ namespace Incursio.Commands
 
             //now we need to make sure that, if we're building a tower, 
             //  that it's close to a key point
+            //TODO: CHECK FOR STRUCTURE BUILD OK
+            /*
             if(buildOrder.entity is GuardTowerStructure){
 
                 if(buildOrder.keyPoint == null){
@@ -114,6 +119,7 @@ namespace Incursio.Commands
                     return false;
                 }
             }
+            */
 
             return true;
         }

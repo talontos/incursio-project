@@ -37,7 +37,7 @@ namespace Incursio.Classes
             this.maxHealth = 150;
             this.health = 150;
 
-            this.setType(State.EntityName.HeavyInfantry);
+            //this.setType(State.EntityName.HeavyInfantry);
         }
 
       public override void updateBounds()
@@ -51,7 +51,7 @@ namespace Incursio.Classes
               myRef.Height
           );
       }
-
+      /*
       public override void drawThyself(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
       {
           {
@@ -314,7 +314,7 @@ namespace Incursio.Classes
               }
           }
       }
-
+      */
       /*
       public override void playOrderAttackSound()
       {

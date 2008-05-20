@@ -12,7 +12,10 @@ namespace Incursio.Entities.Components
 {
     public class FactoryComponent : BaseComponent
     {
+        public int buildCostToTimeFactor = 9;
+
         //TEMPORARY HARD-CODE-----------------
+        /*
         public const int LIGHT_INFANTRY_BUILD_TIME = 5;
         public const int HEAVY_INFANTRY_BUILD_TIME = 10;
         public const int ARCHER_BUILD_TIME = 7;
@@ -22,6 +25,7 @@ namespace Incursio.Entities.Components
         public int COST_HEAVY_INFANTRY = EntityConfiguration.EntityPrices.COST_HEAVY_INFANTRY;
         public int COST_ARCHER = EntityConfiguration.EntityPrices.COST_ARCHER;
         public int COST_GUARD_TOWER = EntityConfiguration.EntityPrices.COST_GUARD_TOWER;
+        */
 
         int newUnitPlacementX = 10;
         int newUnitPlacementY = 120;    //little bit of hard coding, but can't really help it here 
@@ -31,7 +35,7 @@ namespace Incursio.Entities.Components
         public int timeRequired = 0;
         public EntityBuildOrder buildProject;
         public string currentlyBuildingThis = "";
-        public string currentBuildForObjectFactory = "";
+        public int currentBuildForObjectFactory = -1;
         public Coordinate destination;
         public Coordinate newStructureCoords;
         public Coordinate spawnPoint;
@@ -39,6 +43,7 @@ namespace Incursio.Entities.Components
         public List<EntityBuildOrder> buildOrders;
 
         //TODO: should we be able to define a list of buildable entities?
+        //  so that certain buildings build certain entities
         //public List<int> buildableEntityIds;
 
         public FactoryComponent(BaseGameEntity entity) : base(entity){
@@ -46,6 +51,17 @@ namespace Incursio.Entities.Components
             buildOrders = new List<EntityBuildOrder>();
 
             setSpawnAndDestination();
+        }
+
+        public override void setAttributes(List<KeyValuePair<string, string>> attributes)
+        {
+            base.setAttributes(attributes);
+
+            for(int i = 0; i < attributes.Count; i++){
+                switch(attributes[i].Key){
+                    case "builtTimeFactor": this.buildCostToTimeFactor = int.Parse(attributes[i].Value); break;
+                }
+            }
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
@@ -82,7 +98,8 @@ namespace Incursio.Entities.Components
 
                 if (toBeBuilt.location != null)
                 {
-                    if (toBeBuilt.entity == State.EntityName.GuardTower)
+                    //TODO: FIX FOR STRUCTURES
+                    /*if (toBeBuilt.entity == State.EntityName.GuardTower)
                     {
                         this.setNewStructureCoords(toBeBuilt.location);
                     }
@@ -90,6 +107,8 @@ namespace Incursio.Entities.Components
                     {
                         this.setDestination(toBeBuilt.location);
                     }
+                    */
+                    this.setDestination(toBeBuilt.location);
                 }
                 else if (this.destination != null)
                 {
@@ -102,118 +121,32 @@ namespace Incursio.Entities.Components
                     return;
                 }
 
-                if (toBeBuilt.entity == State.EntityName.LightInfantry)
+                BaseGameEntityConfiguration config = ObjectFactory.getInstance().entities[toBeBuilt.entityId];
+
+                if (owningPlayer.MONETARY_UNIT >= config.costToBuild)
                 {
-                    //if we have enough resources, build it
-                    if (owningPlayer.MONETARY_UNIT >= COST_LIGHT_INFANTRY)
-                    {
-                        this.currentlyBuildingThis = "Light Infantry";
-                        this.currentBuildForObjectFactory = "Incursio.Classes.LightInfantryUnit";
+                    this.currentlyBuildingThis = config.className;
+                    this.currentBuildForObjectFactory = config.classID;
 
-                        this.timeBuilt = 0;
-                        this.timeRequired = LIGHT_INFANTRY_BUILD_TIME * 60;
-                        this.buildProject = toBeBuilt;
-                        (this.bgEntity as CampStructure).setCurrentState(State.EntityState.Building);
-                        owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_LIGHT_INFANTRY;
-                    }
-                    else
-                    {
-                        //send message to player
-                        owningPlayer.dispatchEvent(
-                            new GameEvent(
-                                State.EventType.NOT_ENOUGH_RESOURCES,
-                                this.bgEntity,
-                                "",
-                                "Not Enough Resources",
-                                this.bgEntity.location
-                            )
-                        );
-                    }
+                    this.timeBuilt = 0;
+                    this.timeRequired = (config.costToBuild / this.buildCostToTimeFactor) * 60;
+                    this.buildProject = toBeBuilt;
 
+                    this.bgEntity.currentState = State.EntityState.Building;
+                    owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - config.costToBuild;
                 }
-                else if (toBeBuilt.entity == State.EntityName.Archer)
+                else
                 {
-                    //if we have enough resources, build it
-                    if (owningPlayer.MONETARY_UNIT >= COST_ARCHER)
-                    {
-                        this.currentlyBuildingThis = "Archer";
-                        this.currentBuildForObjectFactory = "Incursio.Classes.ArcherUnit";
-                        this.timeBuilt = 0;
-                        this.timeRequired = ARCHER_BUILD_TIME * 60;
-                        this.buildProject = toBeBuilt;
-                        (this.bgEntity as CampStructure).setCurrentState(State.EntityState.Building);
-                        owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_ARCHER;
-                    }
-                    else
-                    {
-                        //send message to player
-                        owningPlayer.dispatchEvent(
-                            new GameEvent(
-                                State.EventType.NOT_ENOUGH_RESOURCES,
-                                this.bgEntity,
-                                "",
-                                "Not Enough Resources",
-                                this.bgEntity.location
-                            )
-                        );
-                    }
-
-                }
-                else if (toBeBuilt.entity == State.EntityName.HeavyInfantry)
-                {
-                    //if we have enough resources, build it
-                    if (owningPlayer.MONETARY_UNIT >= COST_HEAVY_INFANTRY)
-                    {
-                        this.currentlyBuildingThis = "Heavy Infantry";
-                        this.currentBuildForObjectFactory = "Incursio.Classes.HeavyInfantryUnit";
-                        this.timeBuilt = 0;
-                        this.timeRequired = HEAVY_INFANTRY_BUILD_TIME * 60;
-                        this.buildProject = toBeBuilt;
-                        (this.bgEntity as CampStructure).setCurrentState(State.EntityState.Building);
-                        owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_HEAVY_INFANTRY;
-                    }
-                    else
-                    {
-                        //send message to player
-                        owningPlayer.dispatchEvent(
-                            new GameEvent(
-                                State.EventType.NOT_ENOUGH_RESOURCES,
-                                this.bgEntity,
-                                "",
-                                "Not Enough Resources",
-                                this.bgEntity.location
-                            )
-                        );
-                    }
-
-                }
-                else if (toBeBuilt.entity == State.EntityName.GuardTower)
-                {
-                    //if we have enough resources, build it
-                    if (owningPlayer.MONETARY_UNIT >= COST_GUARD_TOWER)
-                    {
-                        this.currentlyBuildingThis = "Guard Tower";
-                        this.currentBuildForObjectFactory = "Incursio.Classes.GuardTowerStructure";
-                        this.timeBuilt = 0;
-                        this.timeRequired = GUARD_TOWER_BUILD_TIME * 60;
-                        this.buildProject = toBeBuilt;
-                        (this.bgEntity as CampStructure).setCurrentState(State.EntityState.Building);
-                        owningPlayer.MONETARY_UNIT = owningPlayer.MONETARY_UNIT - COST_GUARD_TOWER;
-                    }
-                    else
-                    {
-                        //send message to player
-                        owningPlayer.dispatchEvent(
-                            new GameEvent(
-                                State.EventType.NOT_ENOUGH_RESOURCES,
-                                this.bgEntity,
-                                "",
-                                "Not Enough Resources",
-                                this.bgEntity.location
-                            )
-                        );
-                    }
-
+                    //send message to player
+                    owningPlayer.dispatchEvent(
+                        new GameEvent(
+                            State.EventType.NOT_ENOUGH_RESOURCES,
+                            this.bgEntity,
+                            "",
+                            "Not Enough Resources",
+                            this.bgEntity.location
+                        )
+                    );
                 }
             }
         }
@@ -230,7 +163,7 @@ namespace Incursio.Entities.Components
                 timeBuilt = 0;
                 timeRequired = 0;
                 this.bgEntity.setIdle();
-                this.currentBuildForObjectFactory = "IDLE";
+                this.currentBuildForObjectFactory = -1;
                 this.currentlyBuildingThis = "IDLE";
 
                 PlayerManager.getInstance().notifyPlayer(
@@ -249,15 +182,15 @@ namespace Incursio.Entities.Components
 
             if (this.timeBuilt >= this.timeRequired)
             {
-                if (buildProject.entity != State.EntityName.GuardTower)
-                {
-                    Unit temp = (EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.bgEntity.owner) as Unit);
+                //if (buildProject.entity != State.EntityName.GuardTower)
+                //{
+                    BaseGameEntity temp = (EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.bgEntity.owner));
                     temp.setLocation(this.spawnPoint);
                     temp.issueSingleOrder(new MoveCommand(this.destination));
                     timeBuilt = 0;
                     timeRequired = 0;
                     this.bgEntity.setIdle();
-                    this.currentBuildForObjectFactory = "IDLE";
+                    this.currentBuildForObjectFactory = -1;
                     this.currentlyBuildingThis = "IDLE";
 
                     if (this.buildProject.keyPoint != null)
@@ -273,12 +206,14 @@ namespace Incursio.Entities.Components
                             temp,
                             "",
                             "Unit Ready",
-                            this.bgEntity.location
+                            temp.location
                         )
                     );
 
-                    //temp.playEnterBattlefieldSound();
-                }
+                    temp.playEnterBattlefieldSound();
+                //}
+                //TODO: REWORK FOR STRUCTURES!
+                /*
                 else
                 {
                     GuardTowerStructure temp = (EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.bgEntity.owner) as GuardTowerStructure);
@@ -306,6 +241,7 @@ namespace Incursio.Entities.Components
                         )
                     );
                 }
+                */
             }
             else
             {

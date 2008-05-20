@@ -46,7 +46,7 @@ namespace Incursio.Entities.Components
                 {
                     MessageManager.getInstance().addMessage(new GameEvent(State.EventType.GAIN_RESOURCE, this.bgEntity, "", Convert.ToString(income), this.bgEntity.location));
 
-                    PlayerManager.getInstance().humanPlayer.MONETARY_UNIT = PlayerManager.getInstance().humanPlayer.MONETARY_UNIT + income;
+                    PlayerManager.getInstance().currentPlayer.MONETARY_UNIT = PlayerManager.getInstance().currentPlayer.MONETARY_UNIT + income;
                 }
                 else
                 {

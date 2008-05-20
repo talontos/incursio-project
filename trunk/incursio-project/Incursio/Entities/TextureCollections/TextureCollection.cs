@@ -11,6 +11,7 @@ namespace Incursio.Entities.TextureCollections
         public string name;
 
         public Texture2D portrait;
+        public Texture2D icon;
 
         public StillTextures still;
         public MovementTextures movement;
@@ -18,12 +19,21 @@ namespace Incursio.Entities.TextureCollections
         public DeathTextures death;
         public DamagedTextures damaged;
 
-        public TextureCollection(int id, string name, string portraitName){
+        public TextureCollection(int id, string name, string portraitName, string iconName){
             this.id = id;
             this.name = name;
 
             if(portraitName != null && portraitName.Length > 0){
-                //TODO: LOAD PORTRAIT
+                //TODO: We will probably need a full path...
+                portrait = Texture2D.FromFile(Incursio.getInstance().spriteBatch.GraphicsDevice,
+                    global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + portraitName);
+            }
+
+            if (iconName != null && iconName.Length > 0)
+            {
+                //TODO: We will probably need a full path...
+                icon = Texture2D.FromFile(Incursio.getInstance().spriteBatch.GraphicsDevice,
+                    global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + iconName);
             }
         }
 

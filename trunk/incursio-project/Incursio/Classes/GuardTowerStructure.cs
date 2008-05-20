@@ -39,11 +39,11 @@ namespace Incursio.Classes
           this.health = maxHealth;
           this.armor = 5;
           this.sightRange = 10;
-          this.setType(State.EntityName.GuardTower);
+          //this.setType(State.EntityName.GuardTower);
           this.map = MapManager.getInstance().currentMap;
           this.currentState = State.EntityState.Idle;
 
-          smartGuarding = false;
+          //smartGuarding = false;
           canAttack = true;
       }
 
@@ -177,7 +177,7 @@ namespace Incursio.Classes
       {
           return this.attackRange;
       }
-
+      /*
       public override void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
       {
           this.visible = true;
@@ -236,7 +236,7 @@ namespace Incursio.Classes
               }
           }
       }
-
+      */
       public virtual void playAttackSound()
       {
           SoundManager.getInstance().PlaySound(SoundManager.getInstance().AudioCollection.attack.ArrowAttack, false);

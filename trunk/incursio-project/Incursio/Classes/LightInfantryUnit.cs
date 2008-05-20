@@ -33,7 +33,7 @@ namespace Incursio.Classes
           this.sightRange = 10;
           this.attackSpeed = 2;
           this.attackRange = 1;
-          this.setType(State.EntityName.LightInfantry);
+          //this.setType(State.EntityName.LightInfantry);
       }
 
       public override void updateBounds()
@@ -47,7 +47,7 @@ namespace Incursio.Classes
               myRef.Height
           );
       }
-
+      /*
       public override void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
       {
 
@@ -302,6 +302,7 @@ namespace Incursio.Classes
 
       
       }
+      */
       /*
       public override void playOrderAttackSound()
       {

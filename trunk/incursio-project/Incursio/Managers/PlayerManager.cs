@@ -26,7 +26,7 @@ namespace Incursio.Managers
         }
 
         //TEMPRORARY
-        public Player humanPlayer{
+        public Player currentPlayer{
             get { return this.getPlayerById(currentPlayerId); }
         }
 
@@ -70,7 +70,7 @@ namespace Incursio.Managers
             this.addNewPlayer(true);
             this.addNewPlayer(false);
 
-            this.humanPlayer.MONETARY_UNIT = 1000;
+            this.currentPlayer.MONETARY_UNIT = 1000;
         }
 
         /// <summary>
@@ -79,8 +79,11 @@ namespace Incursio.Managers
         /// <returns></returns>
         public bool addNewPlayer(bool isComputer){
             if(players.Count < this.MAX_PLAYERS){
-                if(isComputer)
-                    this.insertPlayer(new AIPlayer(new SimpleAI()));
+                if(isComputer){
+                    //this.insertPlayer(new AIPlayer(new SimpleAI()));
+                    //TODO: ADD THE AI BACK IN - REMOVED TEMPORARILY FOR COMPONENT TESTING
+                    this.insertPlayer(new AIPlayer());
+                }
                 else{
                     this.insertPlayer(new Player());
                 }

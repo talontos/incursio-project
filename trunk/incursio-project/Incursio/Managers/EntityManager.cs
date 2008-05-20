@@ -143,7 +143,7 @@ namespace Incursio.Managers
             {
                 if( area.Contains(e.getLocation().toPoint()) ){
                     if(e.getPlayer() == PlayerManager.getInstance().currentPlayerId && !e.isDead()){
-                        if( !(e is Structure) )
+                        if( !(e.movementComponent == null) )
                             unitsInArea.Add(e);
                     }
                 }
@@ -232,6 +232,7 @@ namespace Incursio.Managers
                 return;
 
             //clicking entity
+            //e represents the entity that is possibly clicked on
             entityBank.ForEach(delegate(BaseGameEntity e)
             {
 
@@ -242,12 +243,12 @@ namespace Incursio.Managers
                     Rectangle unit = e.boundingBox;
                     if (unit.Contains(new Point(Convert.ToInt32(point.X), Convert.ToInt32(point.Y))))
                     {
-                        //if it's a control point, initialize a cap
-                        if(e.getPlayer() == PlayerManager.getInstance().computerPlayerId && e.getType() == State.EntityName.ControlPoint)
+                        //if it's capturable and doesn't belong to the current player, initialize a cap
+                        if(e.getPlayer() != selectedUnits[0].getPlayer() && e.capturableComponent != null)
                         {
-                            //if there is a HERO among the selected units, start the cap
+                            //if there is a unit that can capture among the selected units, start the cap
                             selectedUnits.ForEach(delegate (BaseGameEntity u){
-                                if (u is Hero)
+                                if (u.captureComponent != null)
                                 {
                                     EntityManager.getInstance().issueCommand_SingleEntity(State.Command.CAPTURE, false, u, e);
                                 }
@@ -257,10 +258,9 @@ namespace Incursio.Managers
                             });
                         }
                         //NOW, if unit is enemy, selected units attack!
-                        else if (e.getPlayer() == PlayerManager.getInstance().computerPlayerId)
+                        else if (e.getPlayer() != selectedUnits[0].getPlayer())
                         {
                             EntityManager.getInstance().issueCommand(State.Command.ATTACK, false, null, e);
-                            
                         }
                         else
                         {
@@ -322,48 +322,48 @@ namespace Incursio.Managers
             return playerUnits;
         }
 
-        public List<Hero> getLivePlayerHeros(int player){
-            List<Hero> playerHeros = new List<Hero>();
+        public List<BaseGameEntity> getLivePlayerHeros(int player){
+            List<BaseGameEntity> playerHeros = new List<BaseGameEntity>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.getPlayer() == player && !e.isDead() && e.getType() == State.EntityName.Hero)
-                    playerHeros.Add(e as Hero);
+                if (e.getPlayer() == player && !e.isDead() && e.experienceComponent != null)
+                    playerHeros.Add(e);
             });
 
             return playerHeros;
         }
 
-        public List<Structure> getLivePlayerStructures(int player)
+        public List<BaseGameEntity> getLivePlayerStructures(int player)
         {
-            List<Structure> playerStructs = new List<Structure>();
+            List<BaseGameEntity> playerStructs = new List<BaseGameEntity>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.getPlayer() == player && !e.isDead() && e is Structure)
-                    playerStructs.Add(e as Structure);
+                if (e.getPlayer() == player && !e.isDead() && e.movementComponent == null)//structures are denoted by non-movable entities
+                    playerStructs.Add(e);
             });
 
             return playerStructs;
         }
 
-        public List<CampStructure> getLivePlayerCamps(int player)
+        public List<BaseGameEntity> getLivePlayerCamps(int player)
         {
-            List<CampStructure> playerStructs = new List<CampStructure>();
+            List<BaseGameEntity> playerStructs = new List<BaseGameEntity>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.getPlayer() == player && !e.isDead() && e is CampStructure)
-                    playerStructs.Add(e as CampStructure);
+                if (e.getPlayer() == player && !e.isDead() && e.factoryComponent != null)
+                    playerStructs.Add(e);
             });
 
             return playerStructs;
         }
 
-        public List<ControlPoint> getPlayerControlPoints(int player)
+        public List<BaseGameEntity> getPlayerControlPoints(int player)
         {
-            List<ControlPoint> playerStructs = new List<ControlPoint>();
+            List<BaseGameEntity> playerStructs = new List<BaseGameEntity>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.getPlayer() == player && !e.isDead() && e is ControlPoint)
-                    playerStructs.Add(e as ControlPoint);
+                if (e.getPlayer() == player && !e.isDead() && e.capturableComponent != null)
+                    playerStructs.Add(e);
             });
 
             return playerStructs;
@@ -375,7 +375,7 @@ namespace Incursio.Managers
 
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.getType() == State.EntityName.ControlPoint && e.owner == id)
+                if (e.capturableComponent != null && e.owner == id)
                 {
                     numPoints++;
                 }
@@ -390,7 +390,7 @@ namespace Incursio.Managers
 
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.getType() == State.EntityName.ControlPoint)
+                if (e.capturableComponent != null)
                 {
                     numPoints++;
                 }
@@ -401,6 +401,9 @@ namespace Incursio.Managers
 
         public bool isPlayerCampDestroyed(int id)
         {
+            return false;
+            //TODO: REVISIT THIS
+            /*
             bool result = true;
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
@@ -419,13 +422,14 @@ namespace Incursio.Managers
             });
 
             return result;
+            */
         }
         
         public void tryToBuild(int toBuildId){
             if (selectedUnits.Count > 0 && selectedUnits[0].isConstructor && selectedUnits[0].owner == PlayerManager.getInstance().currentPlayerId)
             {
                 //TODO: IMPL
-                //this.issueCommand(State.Command.BUILD, true, null, toBuildId);
+                this.issueCommand(State.Command.BUILD, true, null, toBuildId);
             }
         }
 
@@ -441,6 +445,14 @@ namespace Incursio.Managers
             {
                 this.issueCommand(State.Command.BUILD, true, null, toBuild, new Coordinate((int)point.X, (int)point.Y));
             }
+        }
+
+        public BaseGameEntity createNewEntity(int entityClassId, int player){
+            BaseGameEntity product = ObjectFactory.getInstance().create(entityClassId, player);
+            product.keyId = nextKeyId;
+            this.entityBank.Insert(nextKeyId++, product);
+
+            return product;
         }
 
         public BaseGameEntity createNewEntity(String entityType, int player){
@@ -522,10 +534,10 @@ namespace Incursio.Managers
                         ////////////////////////
                         case State.Command.BUILD:
                             //TODO: TEMPORARY!!!!  we need to get rid of EntityName
-                            //if(args[0] is State.EntityName)
+                            if(args[0] is State.EntityName)
                                 command = new BuildCommand( (State.EntityName)args[0], (args.Length > 1 ? args[1] : null) as Coordinate);
-                            //else
-                            //    command = new BuildCommand((int)args[0], (args.Length > 1 ? args[1] : null) as Coordinate);
+                            else
+                                command = new BuildCommand((int)args[0], (args.Length > 1 ? args[1] : null) as Coordinate);
                             break;
 
                         ////////////////////////

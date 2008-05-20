@@ -44,18 +44,18 @@ namespace Incursio.Classes
 
         int newUnitPlacementX = 10;
         int newUnitPlacementY = 120;    //little bit of hard coding, but can't really help it here 
-        int income = 8;
+        //int income = 8;
 
-        private int healTimer = 0;
+        //private int healTimer = 0;
         public int healRange = 4;
         public int healthBoost = 10;
 
         Coordinate destination;
-        Coordinate newStructureCoords;
+        //Coordinate newStructureCoords;
         Coordinate spawnPoint;
 
-        String currentlyBuildingThis = "IDLE"; //this is for the HUD to display what it's building
-        String currentBuildForObjectFactory = "IDLE"; //and this is for the object factory
+        //String currentlyBuildingThis = "IDLE"; //this is for the HUD to display what it's building
+        //String currentBuildForObjectFactory = "IDLE"; //and this is for the object factory
 
         public CampStructure() : base(){
             this.pointValue = 1000;
@@ -64,7 +64,7 @@ namespace Incursio.Classes
             this.health = 350;
             this.armor = 10;
             this.sightRange = 6;
-            this.setType(State.EntityName.Camp);
+            //this.setType(State.EntityName.Camp);
             this.map = MapManager.getInstance().currentMap;
 
             setDefaultDestination();
@@ -107,7 +107,7 @@ namespace Incursio.Classes
             //handled by component
             this.factoryComponent.build(toBeBuilt);
             return;
-
+            /*
             if (buildProject != null)
             {
 
@@ -116,7 +116,7 @@ namespace Incursio.Classes
             {
                 Player owningPlayer;
                 if (this.owner == PlayerManager.getInstance().currentPlayerId)
-                    owningPlayer = PlayerManager.getInstance().humanPlayer;
+                    owningPlayer = PlayerManager.getInstance().currentPlayer;
                 else
                     owningPlayer = PlayerManager.getInstance().computerPlayer;
 
@@ -249,6 +249,7 @@ namespace Incursio.Classes
 
                 }
             }
+            */
         }
 
 
@@ -257,6 +258,7 @@ namespace Incursio.Classes
             //handled by component
             return;
 
+            /*
             //give the owner money
             if (timeForResource >= RESOURCE_TICK * 60)
             {
@@ -265,7 +267,7 @@ namespace Incursio.Classes
                 {
                     MessageManager.getInstance().addMessage(new GameEvent(State.EventType.GAIN_RESOURCE, this, "",  Convert.ToString(income), this.location));
 
-                    PlayerManager.getInstance().humanPlayer.MONETARY_UNIT = PlayerManager.getInstance().humanPlayer.MONETARY_UNIT + income;
+                    PlayerManager.getInstance().currentPlayer.MONETARY_UNIT = PlayerManager.getInstance().currentPlayer.MONETARY_UNIT + income;
                 }
                 else
                 {
@@ -276,6 +278,7 @@ namespace Incursio.Classes
             {
                 timeForResource++;
             }
+            */
         }
 
         public override void buildTick()
@@ -283,6 +286,7 @@ namespace Incursio.Classes
             //handled by component
             return;
 
+            /*
             //check for order cancellation
             if(this.buildProject.keyPoint != null && this.buildProject.keyPoint.owner != this.owner){
                 //can't build anymore
@@ -369,6 +373,7 @@ namespace Incursio.Classes
             {
                 this.timeBuilt++;
             }
+            */
         }
 
         protected override void processOrderList(GameTime gameTime, ref BaseGameEntity myRef)
@@ -494,7 +499,7 @@ namespace Incursio.Classes
             if (this.orders.Count > 0)
                 this.orders.RemoveAt(0);
         }
-
+        /*
         public override void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
             this.visible = true;
@@ -598,12 +603,13 @@ namespace Incursio.Classes
                 }
             }
         }
-
+        */
         public void drawBuildQueue(SpriteBatch spriteBatch){
             //HANDLED BY COMPONENT
             this.factoryComponent.drawBuildQueue(spriteBatch);
             return;
 
+            /*
             //debugging; draw my queue
             if (this.orders.Count > 0)
             {
@@ -621,6 +627,8 @@ namespace Incursio.Classes
 
                 spriteBatch.DrawString(Incursio.getInstance().getFont_Courier(), orderList, new Vector2(0, 0), Color.White);
             }
+             
+            */
         }
     }
 }
