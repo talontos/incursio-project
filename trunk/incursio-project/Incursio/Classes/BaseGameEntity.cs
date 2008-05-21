@@ -24,25 +24,15 @@ namespace Incursio.Classes
 {
     public class BaseGameEntity
     {
-        //public State.EntityName entityType;
         public string entityName;
         public int maxHealth = 100;
         public int health = 100;
         public int armor = 0;
-        public int  sightRange = 0;
+        public int sightRange = 0;
         public int owner;
         public Coordinate location = new Coordinate(0,0);
-        protected MapBase map;
         public int keyId = -1;
-        public bool visible = false;
-        public bool highlighted = false;
-        public bool justDrawn = false;
-        //public bool smartGuarding = true;
-        public int currentFrameX = 0;       //for animation
-        public int currentFrameY = 0;       //for animation
-        public int currentFrameXAttackDeath = 0;
-        public int currentFrameYAttackDeath = 0;
-        public int attackFramePause = 0;
+        public int pointValue = 0;
 
         public State.EntityState currentState = State.EntityState.Idle;
 
@@ -51,9 +41,11 @@ namespace Incursio.Classes
         public bool canMove = false;
         public bool isConstructor = false;
 
-        public Rectangle boundingBox;
-
-        public int pointValue = 0;
+        //BOOL VALUES for SPECIAL ENTITIES
+        public bool isHero = false;
+        public bool isMainBase = false;
+        public bool isControlPoint = false;
+        public bool isTurret = false;
 
         protected List<BaseCommand> orders;
 
@@ -89,13 +81,13 @@ namespace Incursio.Classes
 
             #region Update components
             //TODO: IS THERE AN EASIER WAY TO UPDATE ALL COMPONENTS?
-            if(renderComponent != null)
+            if (renderComponent != null)
                 renderComponent.Update(gameTime);
             
-            if(movementComponent != null)
+            if (movementComponent != null)
                 movementComponent.Update(gameTime);
             
-            if(factoryComponent != null)
+            if (factoryComponent != null)
                 factoryComponent.Update(gameTime);
 
             if (capturableComponent != null)
@@ -104,17 +96,17 @@ namespace Incursio.Classes
             if (captureComponent != null)
                 captureComponent.Update(gameTime);
             
-            if(combatComponent != null)
+            if (combatComponent != null)
                 combatComponent.Update(gameTime);
             
-            if(experienceComponent != null)
+            if (experienceComponent != null)
                 experienceComponent.Update(gameTime);
 
             if (resourceComponent != null)
                 resourceComponent.Update(gameTime);
 
             if (audioComponent != null)
-                resourceComponent.Update(gameTime);
+                audioComponent.Update(gameTime);
 
             if (healComponent != null)
                 healComponent.Update(gameTime);
@@ -423,10 +415,6 @@ namespace Incursio.Classes
             this.keyId = key;
         }
 
-        public virtual void setMap(MapBase map){
-            this.map = map;
-        }
-
         public virtual void playSelectionSound(){
             if(audioComponent != null)
                 this.audioComponent.playSelectionSound();
@@ -461,7 +449,8 @@ namespace Incursio.Classes
         #region SPECIAL GET-SET
         
         public virtual void setTarget(BaseGameEntity target){
-        
+            if(this.combatComponent != null)
+                combatComponent.target = target;
         }
         
         public virtual void setDestination(Coordinate dest){

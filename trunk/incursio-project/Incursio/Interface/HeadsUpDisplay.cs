@@ -276,7 +276,7 @@ namespace Incursio.Classes
                 if (selectedUnits[0].capturableComponent != null && selectedUnits[0].capturableComponent.isCapping())
                 {
                     
-                    double capRatio = (selectedUnits[0] as ControlPoint).getPercentageDone();
+                    double capRatio = selectedUnits[0].capturableComponent.getPercentageDone();
 
                     //lets the player know what we're capping, and the progress
                     spriteBatch.DrawString(font, "Capturing: ", new Vector2(572, height - 65), Color.White, 0, font.MeasureString("Capturing: ") / 2, 1.0f, SpriteEffects.None, 0.5f);

@@ -28,9 +28,6 @@ namespace Incursio.Interface
         private int eCost = 0;
         private string name = "";
 
-        private bool cursorHover = false;
-        private Vector2 cursorHoverPos;
-
 
         public BuildEntityButton(BaseGameEntityConfiguration c, Vector2 position, Texture2D image) :
             base(position, image, image)
@@ -39,7 +36,7 @@ namespace Incursio.Interface
             this.name = c.className;
             this.eCost = c.costToBuild;
 
-            stringpos = new Vector2(position.X + 5, position.Y + 23);
+            stringpos = new Vector2(position.X, position.Y + 23);
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
@@ -50,13 +47,6 @@ namespace Incursio.Interface
                 new Rectangle((int)stringpos.X, (int)stringpos.Y, TextureBank.InterfaceTextures.moneyIcon.Width, TextureBank.InterfaceTextures.moneyIcon.Height), Color.White);
 
             batch.DrawString(Incursio.getInstance().getFont_Arial(), "     " + this.eCost, this.stringpos, Color.Gold);
-
-            if(cursorHover){
-                //TODO: DRAW A BOX AROUND IT?
-
-                //draw what I build at the cursor
-                batch.DrawString(Incursio.getInstance().getFont_Arial(), this.name, this.cursorHoverPos, Color.White);
-            }
         }
 
         public override void Update(Cursor cursor)
@@ -73,14 +63,10 @@ namespace Incursio.Interface
             if ((new Rectangle((int)this.position.X, (int)this.position.Y, this.pressed.Width, this.pressed.Height).Contains(
                     new Point((int)cursor.getPos().X, (int)cursor.getPos().Y))))
             {
-                if(!cursorHover){
-                    cursorHoverPos = cursor.getPos();
-                }
-
-                cursorHover = true;
+                Cursor.getInstance().tooltip = this.name;
             }
-            else{
-                cursorHover = false;
+            else if(Cursor.getInstance().tooltip == name){
+                Cursor.getInstance().tooltip = null;
             }
         }
     }

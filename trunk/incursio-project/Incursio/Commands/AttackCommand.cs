@@ -38,6 +38,11 @@ namespace Incursio.Commands
                 return;
             }
 
+            if(target.isControlPoint){
+                this.finishedExecution = true;
+                subject.setIdle();
+            }
+
             if(this.target.isDead()){
                 this.finishedExecution = true;
                 subject.setIdle();

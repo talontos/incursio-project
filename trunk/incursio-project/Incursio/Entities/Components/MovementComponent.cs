@@ -15,7 +15,7 @@ namespace Incursio.Entities.Components
         public Coordinate destination;
 
         public MovableObject movable;
-        public State.Direction directionState;
+        public State.Direction directionState = State.Direction.South;
 
         //TEMP
         public MovementComponent(BaseGameEntity e):base(e){

@@ -32,7 +32,7 @@ namespace Incursio.Utils
 
         public int priority = -1;
 
-        public Structure structure;
+        public BaseGameEntity structure;
 
         private int preferredNumTowers = 1;
         private int preferredNumUnits = 2;
@@ -49,13 +49,15 @@ namespace Incursio.Utils
 
         }
 
-        public KeyPoint(Structure structure){
+        public KeyPoint(BaseGameEntity structure){
             this.structure = structure;
             this.prevOwner = this.owner;
 
-            if(this.structure is CampStructure){
+            /*
+            if(this.structure){
                 //this.setDefensePreferences(3, 5);
             }
+            */
         }
 
         public void setDefensePreferences(int numTowers, int numUnits){
@@ -84,9 +86,9 @@ namespace Incursio.Utils
 
             friendlies.ForEach(delegate(BaseGameEntity e)
             {
-                if (e is Unit)
+                if (e.movementComponent != null)
                     numUnits++;
-                else if (e is GuardTowerStructure)
+                else if (e.isTurret)
                     numGuardTowers++;
 
             });

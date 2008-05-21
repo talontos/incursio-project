@@ -22,10 +22,10 @@ namespace Incursio.Commands
 {
     public class CaptureCommand : BaseCommand
     {
-        public ControlPoint capTarget;
+        public BaseGameEntity capTarget;
         public MoveCommand moveCommand;
 
-        public CaptureCommand(ControlPoint target){
+        public CaptureCommand(BaseGameEntity target){
             this.type = State.Command.CAPTURE;
             this.capTarget = target;
             this.moveCommand = new MoveCommand(capTarget.getLocation());
@@ -33,7 +33,7 @@ namespace Incursio.Commands
 
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
-            if( !(subject is Hero) ){
+            if( !(subject.isHero) ){
                 this.finishedExecution = true;
                 return;
             }
@@ -48,9 +48,9 @@ namespace Incursio.Commands
                     moveCommand.execute(gameTime, ref subject);
                 }
                 else{
-                    if(!capTarget.isCapping()){
-                        (subject as Hero).setCurrentState(State.EntityState.Capturing);
-                        capTarget.startCap((subject as Hero));
+                    if(!capTarget.capturableComponent.isCapping()){
+                        subject.currentState = State.EntityState.Capturing;
+                        capTarget.capturableComponent.startCap(subject);
                     }
                 }
             }

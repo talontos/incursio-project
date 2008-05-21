@@ -31,29 +31,37 @@ namespace Incursio.Entities.Components
                 this.bgEntity.audioComponent = null;
         }
 
-        public void playSelectionSound()
-        {
-            SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(audioCollection.voices.selection), false);
+        private void playSoundFromSet(List<string> set){
+            SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(set), false);
         }
 
-        public void playOrderMoveSound()
+        public void playSelectionSound()
         {
-            SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(audioCollection.voices.issueMoveOrder), false);
+            if (audioCollection.voices != null)
+                playSoundFromSet(audioCollection.voices.selection);
+        }
+
+        public void playOrderMoveSound(){
+            if (audioCollection.voices != null)
+                playSoundFromSet(audioCollection.voices.issueMoveOrder);
         }
 
         public void playOrderAttackSound()
         {
-            SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(audioCollection.voices.issueAttackOrder), false);
+            if (audioCollection.voices != null)
+                playSoundFromSet(audioCollection.voices.issueAttackOrder);
         }
 
         public void playDeathSound()
         {
-            SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(audioCollection.voices.death), false);
+            if (audioCollection.voices != null)
+                playSoundFromSet(audioCollection.voices.death);
         }
 
         public void playEnterBattlefieldSound()
         {
-            SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(audioCollection.voices.enterBattlefield), false);
+            if (audioCollection.voices != null)
+                playSoundFromSet(audioCollection.voices.enterBattlefield);
         }
     }
 }

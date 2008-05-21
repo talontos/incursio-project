@@ -43,7 +43,7 @@ namespace Incursio.Utils
         /// <param name="classname">the FULLY QUALIFIED NAME of the class. 
         /// <param name="owningPlayer">Enumerated PlayerID to be assigned as the owner</param>
         /// <returns>The newly created instance</returns>
-        public BaseGameEntity create(String classname, int owningPlayer)
+        /*public BaseGameEntity create(String classname, int owningPlayer)
         {
             // parse classname
             Type classType = Type.GetType(classname, false, true);
@@ -56,11 +56,8 @@ namespace Incursio.Utils
 
             product.setPlayer(owningPlayer);
 
-            product.setMap(MapManager.getInstance().currentMap);
-
-            /*
             //check for hero stats to load
-            if(product is Hero && Incursio.getInstance().getHero() != null){
+            if(product.isHero && Incursio.getInstance().getHero() != null){
 
                 if(owningPlayer == PlayerManager.getInstance().currentPlayerId){
                     (product as Hero).copyHeroStats(Incursio.getInstance().getHero());
@@ -72,14 +69,13 @@ namespace Incursio.Utils
                     (product as Hero).setHero_Badass();
                 }
             }
-            */
 
             product.playEnterBattlefieldSound();
 
             return product;
 
         }
-
+        */
         /// <summary>
         /// Creates an instance of the desired BaseGameEntity, inserts it in to the 
         /// main program's entityBank, and returns it.
@@ -110,7 +106,7 @@ namespace Incursio.Utils
 
             //check for hero stats to load
             /*
-            if (product is Hero && Incursio.getInstance().getHero() != null)
+            if (product.isHero && Incursio.getInstance().getHero() != null)
             {
 
                 if (owningPlayer == PlayerManager.getInstance().currentPlayerId)
@@ -127,7 +123,7 @@ namespace Incursio.Utils
             }
             */
 
-            product.playEnterBattlefieldSound();
+            //product.playEnterBattlefieldSound();
 
             return product;
         }
