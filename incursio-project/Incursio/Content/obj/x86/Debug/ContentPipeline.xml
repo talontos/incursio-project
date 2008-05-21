@@ -119,15 +119,6 @@
       <Time>2008-05-13T13:36:29.03125-04:00</Time>
     </Item>
     <Item>
-      <Source>ArcherPortraint.png</Source>
-      <Name>archerPortrait</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\incursio\Incursio\bin\x86\Debug\Content\archerPortrait.xnb</Output>
-      <Time>2008-05-13T13:36:28.078125-04:00</Time>
-    </Item>
-    <Item>
       <Source>InfantryUnit.png</Source>
       <Name>infantryUnit</Name>
       <Importer>TextureImporter</Importer>
