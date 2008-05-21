@@ -67,6 +67,7 @@ namespace Incursio.Managers
 
             if(enterStringMode){
                 this.enteredString += this.getPressedCharacter();
+                Console.WriteLine(this.enteredString);
             }
 
             //interface
@@ -414,7 +415,9 @@ namespace Incursio.Managers
             Keys[] keys = keyStateCurrent.GetPressedKeys();
             for(int i = 0; i < keys.Length; i++){
                 if(this.keyPressed(keys[i])){
-                    return this.shifting() ? keys[i].ToString().ToUpper() : keys[i].ToString().ToLower();
+                    string charString = keys[i].ToString;
+                    if(charString.Length < 2)
+                        return this.shifting() ? keys[i].ToString().ToUpper() : keys[i].ToString().ToLower();
                 }
             }
             return "";
