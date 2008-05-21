@@ -20,12 +20,11 @@ namespace Incursio.Utils
         }
 
         public GameTexture(string textureName, int frameWidth, int frameHeight) : this(textureName){
-            this.frameWidth = frameWidth;
-            this.frameHeight = frameHeight;
+            this.frameWidth = (frameWidth == 0 ? texture.Width : frameWidth);
+            this.frameHeight = (frameHeight == 0 ? texture.Height : frameHeight);
         }
 
         private void loadTexture(string name){
-            //TODO: GET PATH FOR NAME
             this.texture = Texture2D.FromFile(Incursio.getInstance().spriteBatch.GraphicsDevice, 
             global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + name);
         }

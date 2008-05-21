@@ -346,17 +346,6 @@ namespace Incursio.Classes
         }
 
         #region Getters/Setters
-        /*
-        public virtual void setType(State.EntityName name)
-        {
-            this.entityType = name;
-        }
-
-        public virtual State.EntityName getType()
-        {
-            return this.entityType;
-        }
-        */
 
         public virtual long getHealth(){
             return this.health;
@@ -442,6 +431,11 @@ namespace Incursio.Classes
         {
             if (audioComponent != null)
                 this.audioComponent.playEnterBattlefieldSound();
+        }
+
+        public virtual void playAttackSound(){
+            if (audioComponent != null)
+                this.audioComponent.playAttackSound();
         }
 
         #endregion

@@ -63,5 +63,17 @@ namespace Incursio.Entities.Components
             if (audioCollection.voices != null)
                 playSoundFromSet(audioCollection.voices.enterBattlefield);
         }
+
+        //TODO: ADD FUNCTIONALITY FOR MULTIPLE SOUND TYPES?
+        public void playAttackSound(){
+            if(audioCollection.attack != null){
+                if (audioCollection.attack.swordAttack != null)
+                    playSoundFromSet(audioCollection.attack.swordAttack);
+                else if (audioCollection.attack.arrowAttack != null)
+                    playSoundFromSet(audioCollection.attack.arrowAttack);
+                else if (audioCollection.attack.explosion != null)
+                    playSoundFromSet(audioCollection.attack.explosion);
+            }
+        }
     }
 }

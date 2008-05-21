@@ -29,6 +29,8 @@ namespace Incursio.Entities
         public bool isControlPoint = false;
         public bool isTurret = false;
 
+        public bool isStructure = false;
+
         public List<ComponentConfiguration> components = new List<ComponentConfiguration>();
 
         public BaseGameEntityConfiguration(int id, string name, params string[] args){
@@ -48,6 +50,7 @@ namespace Incursio.Entities
                     case "isMainBase":      isMainBase      = bool.Parse(args[i + 1]); break;
                     case "isControlPoint":  isControlPoint  = bool.Parse(args[i + 1]); break;
                     case "isTurret":        isTurret        = bool.Parse(args[i + 1]); break;
+                    case "isStructure":     isStructure     = bool.Parse(args[i + 1]); break;
                     default: break;
                 }
             }
