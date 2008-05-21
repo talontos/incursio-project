@@ -55,6 +55,10 @@ namespace Incursio.Entities.Components
                     default: break;
                 }
             }
+
+            //remove me
+            if (textures == null)
+                this.bgEntity.renderComponent = null;
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)

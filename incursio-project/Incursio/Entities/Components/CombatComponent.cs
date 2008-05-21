@@ -85,7 +85,7 @@ namespace Incursio.Entities.Components
                         this.bgEntity.renderComponent.directionState = State.Direction.West;
                     }
 
-                    //this.bgEntity.playAttackSound();
+                    this.bgEntity.playAttackSound();
 
                     //TODO: DRAW ARROWS
                     if(this.attackRange > 1){
