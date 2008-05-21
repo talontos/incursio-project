@@ -28,7 +28,6 @@ namespace Incursio.Interface
         private int eCost = 0;
         private string name = "";
 
-
         public BuildEntityButton(BaseGameEntityConfiguration c, Vector2 position, Texture2D image) :
             base(position, image, image)
         {

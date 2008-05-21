@@ -5,6 +5,7 @@ using Incursio.Utils;
 using Incursio.Entities;
 using Microsoft.Xna.Framework;
 using Incursio.Managers;
+using Incursio.Classes;
 
 namespace Incursio.Interface
 {
@@ -27,8 +28,12 @@ namespace Incursio.Interface
             ObjectFactory.getInstance().entities.ForEach(delegate(BaseGameEntityConfiguration c)
             {
                 if(entities.Count < 9 && c.costToBuild > 0){
-                    //TODO: READ IMAGE FROM CONFIGURATION; NOT BANK
-                    entities.Add(new BuildEntityButton(c, new Vector2(x, y), TextureBank.InterfaceTextures.lightInfantryIcon));
+                    //easiest way to get icon...by using the object factory directly, these entities are
+                    //  NOT added to the entityBank.
+                    //TODO: Find a more efficient way?
+                    BaseGameEntity en = ObjectFactory.getInstance().create(c.classID, -1);
+
+                    entities.Add(new BuildEntityButton(c, new Vector2(x, y), en.renderComponent.textures.icon));
 
                     i += 1;
 

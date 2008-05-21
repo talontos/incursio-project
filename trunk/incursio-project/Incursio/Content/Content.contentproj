@@ -129,6 +129,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArcherPortrait.png">
+      <Name>archerPortrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="InfantryUnit.png">
       <Name>infantryUnit</Name>
       <Importer>TextureImporter</Importer>

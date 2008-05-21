@@ -87,9 +87,11 @@ namespace Incursio.Entities.Components
 
                     //this.bgEntity.playAttackSound();
 
+                    //TODO: DRAW ARROWS
                     if(this.attackRange > 1){
                         //shoot your projectile!
                         this.projectile.startProjectile(bgEntity.location.toVector2(), target.location.toVector2());
+                        target.takeDamage(this.damage, this.bgEntity);
                     }
                     else{
                         target.takeDamage(this.damage, this.bgEntity);
