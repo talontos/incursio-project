@@ -21,6 +21,7 @@ using System.Xml;
 using Incursio.Entities;
 using Incursio.Entities.TextureCollections;
 using Incursio.Entities.Components;
+using Incursio.Entities.AudioCollections;
 
 namespace Incursio.Managers
 {
@@ -192,6 +193,7 @@ namespace Incursio.Managers
             int textureIterator = -1;
 
             //Lists for object factory
+            List<AudioCollection> audioList = new List<AudioCollection>();
             List<BaseGameEntityConfiguration> entityList = new List<BaseGameEntityConfiguration>();
             List<TextureCollection> textureList = new List<TextureCollection>();
             
@@ -261,6 +263,44 @@ namespace Incursio.Managers
                          *      no GameAudio AudioCollection exists, SoundBank can create a new one with the defaults.
                          *************************************************************************************************************************/
 
+                        //Incrementing the interator to get an accurate id
+                        audioIterator++;
+
+                        //Getting specific attributes
+                        XmlAttribute name = node.Attributes["name"];
+                        string nameToSet = name.Value;
+                        node.Attributes.Remove(name);
+
+                        //Building the new blank collection
+                        AudioCollection newCollection = new AudioCollection(audioIterator, nameToSet);
+
+                        //Parsing the new sets in the collection from xml
+                        foreach (XmlNode audioChildNode in node.ChildNodes)
+                        {
+                            //Getting the type of collection to add
+                            string type = audioChildNode.Name;
+
+                            AudioSet newSet = newCollection.addSetOfType(type);
+
+                            if (newSet != null)
+                            {
+                                foreach (XmlNode typeNode in audioChildNode.ChildNodes)
+                                {
+                                    string nodeType = typeNode.Name;
+
+                                    foreach (XmlNode fileNode in typeNode.ChildNodes)
+                                    {
+                                        newSet.addSound(nodeType, fileNode.Attributes["name"]);
+                                    }
+                                }
+                            }
+                        }
+
+                        //Add the audio collection to the audio list
+                        audioList.Add(newCollection);
+
+                        //Set the flag back to false
+                        readingAudio = false;
                     }
                     else if (readingEntities)
                     {
@@ -314,6 +354,9 @@ namespace Incursio.Managers
 
                         //adding the entity to the list
                         entityList.Add(entity);
+
+                        //Setting the flag back to false
+                        readingEntities = false;
                         
                     }
                     else if (readingTextures)
@@ -394,6 +437,9 @@ namespace Incursio.Managers
 
                         //adding the texture to the list
                         textureList.Add(texture);
+
+                        //Setting the flag back to false
+                        readingTextures = false;
                     }
                     else
                     {
@@ -413,15 +459,17 @@ namespace Incursio.Managers
                     //perhaps when we load terrain textures from XML...but not entities
 
                 //Adding the entity list to the object factory
-                if(readingEntities)
+                if((entityList != null)&&(entityList.Count > 0)) 
                     ObjectFactory.getInstance().entities = entityList;
-                else if(readingAudio){
 
-                }
-                else if (readingTextures)
-                {
+                //Adding the audio list
+                if ((audioList != null) && (audioList.Count > 0))
+                    SoundCollection.getInstance().audioCollections = audioList;
+
+                //Adding the texture list to the texture bank
+                if ((textureList != null)&&(entityList.Count > 0))
                     TextureBank.getInstance().textureCollections = textureList;
-                }
+                
             }
             catch (FileLoadException e)
             {
