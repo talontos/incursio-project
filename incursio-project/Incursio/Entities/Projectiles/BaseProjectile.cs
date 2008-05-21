@@ -45,6 +45,10 @@ namespace Incursio.Entities.Projectiles
             }
         }
 
+        private void finishProjectile(){
+
+        }
+
         public void updatePosition()
         {
             double newPosX = (Math.Cos(angle * (Math.PI / 180)) * SPEED);

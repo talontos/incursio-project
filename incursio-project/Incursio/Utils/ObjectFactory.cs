@@ -76,13 +76,13 @@ namespace Incursio.Utils
 
         }
         */
+
         /// <summary>
-        /// Creates an instance of the desired BaseGameEntity, inserts it in to the 
-        /// main program's entityBank, and returns it.
+        /// Creates an instance a class using a BaseGameEntityConfiguration stored with ID 'classID'
         /// </summary>
-        /// <param name="classID">the index of the class configuration.
-        /// <param name="owningPlayerID">int PlayerID to be assigned as the owner</param>
-        /// <returns>The newly created instance</returns>
+        /// <param name="classID">ID of configuration instance</param>
+        /// <param name="owningPlayerID">ID of player who will be set as the owner</param>
+        /// <returns>The instantiated entity</returns>
         public BaseGameEntity create(int classID, int owningPlayerID)
         {
             BaseGameEntityConfiguration config;
