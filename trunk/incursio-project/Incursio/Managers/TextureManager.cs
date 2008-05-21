@@ -50,6 +50,7 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.healthRatioTexture = Content.Load<Texture2D>(@"healthBar");
             
             //Load Unit Textures
+            /*
             TextureBank.EntityTextures.lightInfantryEast = Content.Load<Texture2D>(@"infantry_right");
             TextureBank.EntityTextures.lightInfantryWest = Content.Load<Texture2D>(@"infantry_left");
             TextureBank.EntityTextures.lightInfantrySouth = Content.Load<Texture2D>(@"infantry_still");
@@ -122,6 +123,7 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.controlPointPlayer = Content.Load<Texture2D>(@"ControlPointFriendly");
             TextureBank.EntityTextures.controlPointComputer = Content.Load<Texture2D>(@"ControlPointEnemy");
 
+            */
             //Load Interface textures
             TextureBank.InterfaceTextures.headsUpDisplay = Content.Load<Texture2D>(@"utilityBarUnderlay");
             TextureBank.InterfaceTextures.resourceDisplay = Content.Load<Texture2D>(@"resourceBarUnderlay");

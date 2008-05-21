@@ -415,7 +415,7 @@ namespace Incursio.Managers
             Keys[] keys = keyStateCurrent.GetPressedKeys();
             for(int i = 0; i < keys.Length; i++){
                 if(this.keyPressed(keys[i])){
-                    string charString = keys[i].ToString;
+                    string charString = keys[i].ToString();
                     if(charString.Length < 2)
                         return this.shifting() ? keys[i].ToString().ToUpper() : keys[i].ToString().ToLower();
                 }
