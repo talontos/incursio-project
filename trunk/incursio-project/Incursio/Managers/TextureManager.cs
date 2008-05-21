@@ -130,7 +130,7 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.moneyIcon = Content.Load<Texture2D>(@"moneyIcon");
             TextureBank.InterfaceTextures.cursor = Content.Load<Texture2D>(@"cursor");
             TextureBank.InterfaceTextures.cursorPressed = Content.Load<Texture2D>(@"cursor_click");
-            TextureBank.InterfaceTextures.lightInfantryPortrait = Content.Load<Texture2D>(@"lightInfantryPortrait");
+            /*TextureBank.InterfaceTextures.lightInfantryPortrait = Content.Load<Texture2D>(@"lightInfantryPortrait");
             TextureBank.InterfaceTextures.lightInfantryIcon = Content.Load<Texture2D>(@"InfantryIcon");
             TextureBank.InterfaceTextures.archerPortrait = Content.Load<Texture2D>(@"archerPortrait");
             TextureBank.InterfaceTextures.archerIcon = Content.Load<Texture2D>(@"archerIcon");
@@ -143,8 +143,9 @@ namespace Incursio.Managers
             TextureBank.InterfaceTextures.heavyInfantryPortrait = Content.Load<Texture2D>(@"HeavyInfantryPortrait");
             TextureBank.InterfaceTextures.heroIcon = Content.Load<Texture2D>(@"HeroIcon");
             TextureBank.InterfaceTextures.heroPortrait = Content.Load<Texture2D>(@"HeroPortrait");
+            */
             TextureBank.InterfaceTextures.controlPointInterfaceIcon = Content.Load<Texture2D>(@"ControlPointInterfaceIcon");
-
+            
             // load paused game menu components
 
             TextureBank.InterfaceTextures.gameMenuButton = Content.Load<Texture2D>(@"gameMenuButton");
