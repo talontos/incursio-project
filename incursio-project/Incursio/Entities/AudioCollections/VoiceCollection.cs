@@ -13,6 +13,15 @@ namespace Incursio.Entities.AudioCollections
         public List<string> issueAttackOrder;
         public List<string> death;
 
+        public VoiceCollection() : base(){
+            enterBattlefield = new List<string>();
+            levelUp = new List<string>();
+            selection = new List<string>();
+            issueMoveOrder = new List<string>();
+            issueAttackOrder = new List<string>();
+            death = new List<string>();
+        }
+
         public override void addSound(string type, string fileName){
             switch(type){
                 case "enterBattlefield": enterBattlefield.Add(fileName); break;

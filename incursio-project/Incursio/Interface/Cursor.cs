@@ -22,24 +22,27 @@ namespace Incursio.Interface
 {
   public class Cursor
     {
+        private static Cursor instance;
         private Vector2 pos;                        // position of the cursor
+        private Vector2 tooltipPos;
         private MouseState mouseState;
         private MouseState previousState;
         private bool isLeftPressed;                     // tells us whether the mouse is pressed or not
         private bool isRightPressed;
 
-        /*public Cursor(Vector2 pos, Texture2D pass, Texture2D press)
-        {
-            this.pos = pos;
-            this.passive = pass;
-            this.pressed = press;
-            this.isLeftPressed = false;
-            this.isRightPressed = false;
-        }*/
+        public string tooltip;
 
-        public Cursor(Vector2 pos)
+        public static Cursor getInstance(){
+            if (instance == null)
+                instance = new Cursor(new Vector2(0, 0));
+
+            return instance;
+        }
+
+        private Cursor(Vector2 pos)
         {
             this.pos = pos;
+            this.tooltipPos = pos;
             this.isLeftPressed = false;
             this.isRightPressed = false;
         }
@@ -50,6 +53,8 @@ namespace Incursio.Interface
             mouseState = Mouse.GetState();
             this.pos.X = mouseState.X;
             this.pos.Y = mouseState.Y;
+            this.tooltipPos.Y = pos.Y - 30;
+            this.tooltipPos.X = pos.X;
 
             if (mouseState.LeftButton == ButtonState.Pressed && this.isLeftPressed == false)
             {
@@ -89,6 +94,13 @@ namespace Incursio.Interface
                 {
                     batch.Draw(TextureBank.InterfaceTextures.cursorPressed, this.pos, Color.White);
                 }
+            }
+
+            if(tooltip != null){
+                //TODO: DRAW A BOX AROUND IT?
+
+                //draw what I build at the cursor
+                batch.DrawString(Incursio.getInstance().getFont_Arial(), tooltip, this.tooltipPos, Color.White);
             }
 
         }

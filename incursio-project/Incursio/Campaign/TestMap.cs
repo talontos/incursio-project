@@ -61,6 +61,9 @@ namespace Incursio.Campaign
                 x += 50;
                 y += 50;
             }
+
+            BaseGameEntity w = EntityManager.getInstance().createNewEntity(1, PlayerManager.getInstance().computerPlayerId);
+            w.setLocation(new Coordinate(500, 500));
             
 
 

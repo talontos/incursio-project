@@ -28,7 +28,7 @@ namespace Incursio.Classes
 {
     public class MapBase
     {
-        public static bool DRAW_OCCUPANCY_GRID = false;
+        public static bool DRAW_OCCUPANCY_GRID = true;
         //member variables
 
         //width/height, in cells

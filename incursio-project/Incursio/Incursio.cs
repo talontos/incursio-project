@@ -154,7 +154,7 @@ namespace Incursio
             FontPos = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
             
             // create cursor
-            cursor = new Cursor(new Vector2(0, 0));
+            cursor = Cursor.getInstance();
             clickDestination = Content.Load<Texture2D>(@"destinationClick");
 
             // load the HUD
@@ -511,18 +511,9 @@ namespace Incursio
         /// </summary>
         public void drawEntity()
         {
-            //Coordinate onScreen;
-            //double healthRatio;
-            //double healthBarTypicalWidth = 0.59375;             //these horrible numbers are ratios for the healthbar of the
-            //double healthBarTypicalHeight = 0.03125;            //selecetedUnitOverlayTexture.  These account for changes in
-            //double healthBarTypicalStartWidth = 0.25;           //overlay size, so that the healthbar will still display where
-            //double healthBarTypicalStartHeight = 0.0625;        //it should.
-
             //draw all visible units
             EntityManager.getInstance().getAllEntities().ForEach(delegate(BaseGameEntity e)
             {
-                e.justDrawn = false;
-
                 if (e.currentState == State.EntityState.Buried)
                 {}
                 else if (currentMap.isOnScreen(e.getLocation()))
@@ -532,94 +523,11 @@ namespace Incursio
 
             });
 
-            //BIG TODO: GENERALIZE THIS FOREACH SO WE DON'T NEED A CASE FOR EVERY ENTITY
             //show selection overlay on all visible selected units
             EntityManager.getInstance().getSelectedUnits().ForEach(delegate(BaseGameEntity u)
             {
                 if(currentMap.isOnScreen(u.getLocation())){
                     u.renderComponent.drawSelectionOverlay(ref spriteBatch);
-
-                    /*
-                    onScreen = currentMap.positionOnScreen(u.getLocation());
-                    
-                    healthRatio = (float)u.getHealth() / u.getMaxHealth();
-
-                    int xOffSet = 0;
-                    int yOffSet = 0;
-                    int width = 0;
-                    int height = 0;
-
-                    //find out what the unit is, and configure the offset for each different type
-                    if (u.getType() == State.EntityName.LightInfantry)
-                    {
-                        xOffSet = (int)(TextureBank.EntityTextures.lightInfantrySouth.Width / 2) + 10;
-                        yOffSet = (int)(TextureBank.EntityTextures.lightInfantrySouth.Height * 0.80) + 7;
-                        width = TextureBank.EntityTextures.lightInfantrySouth.Width + 20;
-                        height = TextureBank.EntityTextures.lightInfantrySouth.Height + 15;
-                    }
-                    else if (u.getType() == State.EntityName.Archer)
-                    {
-                        xOffSet = (int)(TextureBank.EntityTextures.archerSouth.Width / 2) + 10;
-                        yOffSet = (int)(TextureBank.EntityTextures.archerSouth.Height * 0.80) + 7;
-                        width = TextureBank.EntityTextures.archerSouth.Width + 20;
-                        height = TextureBank.EntityTextures.archerSouth.Height + 15;
-                    }
-                    else if (u.getType() == State.EntityName.HeavyInfantry)
-                    {
-                        xOffSet = (int)(TextureBank.EntityTextures.archerSouth.Width / 2) + 13;
-                        yOffSet = (int)(TextureBank.EntityTextures.archerSouth.Height * 0.80) + 12;
-                        width = TextureBank.EntityTextures.archerSouth.Width + 25;
-                        height = TextureBank.EntityTextures.archerSouth.Height + 25;
-                    }
-                    else if (u.getType() == State.EntityName.Hero)
-                    {
-                        xOffSet = (int)(TextureBank.EntityTextures.heroSouth.Width / 2) + 13;
-                        yOffSet = (int)(TextureBank.EntityTextures.heroSouth.Height * 0.80) + 12;
-                        width = TextureBank.EntityTextures.heroSouth.Width + 25;
-                        height = TextureBank.EntityTextures.heroSouth.Height + 25;
-                    }
-                    else if (u.getType() == State.EntityName.Camp)
-                    {
-                        xOffSet = (int)(TextureBank.EntityTextures.campTextureComputer.Width / 2) + 32;
-                        yOffSet = (int)(TextureBank.EntityTextures.campTextureComputer.Height * 0.80) + 15;
-                        width = TextureBank.EntityTextures.campTextureComputer.Width + 50;
-                        height = TextureBank.EntityTextures.campTextureComputer.Height + 40;
-
-                        //draw build queue
-                        (u as CampStructure).drawBuildQueue(spriteBatch);
-                    }
-                    else if (u.getType() == State.EntityName.GuardTower)
-                    {
-                        xOffSet = (int)(TextureBank.EntityTextures.guardTowerTextureComputer.Width / 2) + 18;
-                        yOffSet = (int)(TextureBank.EntityTextures.guardTowerTextureComputer.Height * 0.80) + 20;
-                        width = TextureBank.EntityTextures.guardTowerTextureComputer.Width + 30;
-                        height = TextureBank.EntityTextures.guardTowerTextureComputer.Height + 40;
-                    }
-                    else if (u.getType() == State.EntityName.ControlPoint)
-                    {
-                        xOffSet = (int)(TextureBank.EntityTextures.controlPointComputer.Width / 2) + 18;
-                        yOffSet = (int)(TextureBank.EntityTextures.controlPointComputer.Height * 0.80) + 20;
-                        width = TextureBank.EntityTextures.controlPointComputer.Width + 30;
-                        height = TextureBank.EntityTextures.controlPointComputer.Height + 40;
-                    }
-
-                    spriteBatch.Draw(TextureBank.EntityTextures.selectedUnitOverlayTexture,
-                        new Rectangle(onScreen.x - xOffSet, onScreen.y - yOffSet, width, height),
-                        Color.White);
-
-                    if (u.getPlayer() == PlayerManager.getInstance().currentPlayerId)
-                    {
-                        spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture,
-                            new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
-                            Color.Lime);
-                    }
-                    else
-                    {
-                        spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture,
-                            new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
-                            Color.Red);
-                    }
-                   */
                 }
             });
         }
@@ -657,7 +565,7 @@ namespace Incursio
 
         }
 
-        public void setHero(Hero h){
+        public void setHero(BaseGameEntity h){
             this.hero = h;
         }
 

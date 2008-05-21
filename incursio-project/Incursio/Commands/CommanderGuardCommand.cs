@@ -41,7 +41,8 @@ namespace Incursio.Commands
                 //TODO: Select a random enemy (possibly weight them)
                 BaseGameEntity e = formidableEnemies[Incursio.rand.Next(0, formidableEnemies.Count)];
 
-                if( !(e is ControlPoint) )
+                //e is not a control point
+                if( e.capturableComponent == null )
                     subject.issueImmediateOrder(new AttackCommand(e));
             }
         }

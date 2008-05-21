@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Content>
-
 	<TextureCollection name="Light Infantry" portrait="lightInfantryPortrait.png" icon="InfantryIcon.png">
 		<Still>
 			<north file="infantry_back.png"/>
@@ -99,7 +98,8 @@
 			<building file="Fort_Friendly_Building.png" frameWidth="64" frameHeight="64"/>
 		</Still>
 		<Damaged>
-			<destroyed file="Fort_Friently_exploded_animation.png" frameWidth="64" frameHeight="64"/>
+			<destroyed file="Fort_Friendly_exploded_animation.png" frameWidth="64" frameHeight="64"/>
+			<exploded file="Fort_Friendly_exploded_animation.png" frameWidth="64" frameHeight="64"/>
 		</Damaged>
 	</TextureCollection>
 
@@ -118,7 +118,7 @@
 			<west file="Tower_friendly_attacking.png"/>
 		</Attacking>
 		<Damaged>
-			<destroyed file="Tower_exploded.png"/>
+			<exploded file="Tower_exploded.png"/>
 		</Damaged>
 	</TextureCollection>
 	

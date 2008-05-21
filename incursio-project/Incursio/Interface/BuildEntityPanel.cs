@@ -10,15 +10,15 @@ namespace Incursio.Interface
 {
     public class BuildEntityPanel
     {
-        private Vector2 panelOrigin = new Vector2(775, 605);
+        private Vector2 panelOrigin = new Vector2(775, 587);
         private int buttonWidth = 60;
         private int buttonHeight = 45;
-        private int buttonBuffer = 15;
+        private int buttonBuffer = 5;
 
         private List<BuildEntityButton> entities;
 
         public BuildEntityPanel(){
-            int i = 0;
+            int i = 0, j = 0;
             int x = (int)panelOrigin.X;
             int y = (int)panelOrigin.Y;
 
@@ -38,7 +38,8 @@ namespace Incursio.Interface
                     //Right now only 3 buttons can fit in each row of the panel
                     if (i % 3 == 0)
                     {
-                        y = (int)(panelOrigin.Y + ((buttonHeight + buttonBuffer) * i));
+                        y = (int)(panelOrigin.Y + ((buttonHeight + buttonBuffer) * ++j));
+                        x = (int)panelOrigin.X;
                         i = 0;
                     }
                 }

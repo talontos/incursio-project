@@ -32,7 +32,7 @@ namespace Incursio.Entities.Components
                 {
                     case "damage":          damage          = int.Parse(attributes[i].Value); break;
                     case "attackSpeed":     attackSpeed     = int.Parse(attributes[i].Value); break;
-                    case "attackRange":     attackRange     = int.Parse(attributes[i].Value); break;
+                    case "attackRange":     this.setAttackRange(int.Parse(attributes[i].Value)); break;
                     case "smartGuarding":   smartGuarding   = bool.Parse(attributes[i].Value); break;
                     default: break;
                 }
@@ -78,11 +78,11 @@ namespace Incursio.Entities.Components
                 {
                     if (target.getLocation().x > this.bgEntity.location.x)
                     {
-                        (this.bgEntity as Unit).setDirectionState(State.Direction.East);
+                        this.bgEntity.renderComponent.directionState = State.Direction.East;
                     }
                     else if (target.getLocation().x < this.bgEntity.location.x)
                     {
-                        (this.bgEntity as Unit).setDirectionState(State.Direction.West);
+                        this.bgEntity.renderComponent.directionState = State.Direction.West;
                     }
 
                     //this.bgEntity.playAttackSound();

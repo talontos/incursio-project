@@ -122,7 +122,7 @@ namespace Incursio.Classes
                         break;
                     case State.EventType.UNDER_ATTACK:
                         //we should help, depending on what it is
-                        if(e.entity is Hero){
+                        if(e.entity.isHero){
                             //send help to hero?
                             //hero retreat?
                             if(e.entity.health < e.entity.maxHealth * 0.4){
@@ -131,7 +131,7 @@ namespace Incursio.Classes
                                     EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().computerPlayerId)[0].location);
                             }
                         }
-                        else if(e.entity is CampStructure){
+                        else if(e.entity.isMainBase){
                             //send help to camp
                             this.allUnitsAssault(e.location);
                         }
@@ -139,8 +139,8 @@ namespace Incursio.Classes
                     case State.EventType.CREATION_COMPLETE:
                         //we just finished building something;
                         //build the next thing on our list
-                        if(e.entity is Unit && this.preparingAssault){
-                            this.assaultForce.Add(e.entity as BaseGameEntity);
+                        if(e.entity.movementComponent != null && this.preparingAssault){
+                            this.assaultForce.Add(e.entity);
                         }
 
                         this.buildNextEntity();
@@ -213,13 +213,13 @@ namespace Incursio.Classes
 
             //select num entities that are not busy
             for(int i = Incursio.rand.Next(0, myGuys.Count - 1); i < myGuys.Count; i++){
-                if( !(myGuys[i] is Unit))
+                if( (myGuys[i].movementComponent == null))
                     continue;
 
                 if(toSend.Count < num){
                         
-                    Unit u = myGuys[i] as Unit;
-                    switch(u.getCurrentState()){
+                    BaseGameEntity u = myGuys[i];
+                    switch(u.currentState){
                         case State.EntityState.Guarding:
                         case State.EntityState.Idle:
                         case State.EntityState.Wandering:
@@ -301,11 +301,11 @@ namespace Incursio.Classes
 
             //if target is a camp, the hero can sit back
             //   if it's a control point, we'll need him to capture it
-            if(target.structure is CampStructure){
+            if(target.structure.isMainBase){
                 //don't really need hero
                 assaultWithHero = false;
             }
-            else if(target.structure is ControlPoint){
+            else if(target.structure.isControlPoint){
                 //include hero in attack
                 assaultWithHero = true;
             }

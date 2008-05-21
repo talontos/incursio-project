@@ -40,7 +40,7 @@ namespace Incursio.Managers
             entityBank = new List<BaseGameEntity>();
             selectedUnits = new List<BaseGameEntity>();
             nextKeyId = 0;
-            Hero.reinitNames();
+            //Hero.reinitNames();
 
             groups = new List<List<BaseGameEntity>>(10);
             for (int i = 0; i < groups.Capacity; i++)
@@ -237,11 +237,11 @@ namespace Incursio.Managers
             entityBank.ForEach(delegate(BaseGameEntity e)
             {
 
-                if (e.visible && !e.isDead() )
+                if (e.renderComponent.visible && !e.isDead() )
                 { //only check visible ones so we don't waste time
 
                     //get selection rectangle for e
-                    Rectangle unit = e.boundingBox;
+                    Rectangle unit = e.renderComponent.boundingBox;
                     if (unit.Contains(new Point(Convert.ToInt32(point.X), Convert.ToInt32(point.Y))))
                     {
                         //if it's capturable and doesn't belong to the current player, initialize a cap
@@ -317,7 +317,7 @@ namespace Incursio.Managers
             List<BaseGameEntity> playerUnits = new List<BaseGameEntity>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.getPlayer() == player && !e.isDead() && e is Unit)
+                if (e.getPlayer() == player && !e.isDead() && e.movementComponent != null)
                     playerUnits.Add(e);
             });
             return playerUnits;
@@ -456,6 +456,7 @@ namespace Incursio.Managers
             return product;
         }
 
+        /*
         public BaseGameEntity createNewEntity(String entityType, int player){
             BaseGameEntity product = ObjectFactory.getInstance().create(entityType, player);
             product.keyId = nextKeyId;
@@ -463,7 +464,7 @@ namespace Incursio.Managers
 
             return product;
         }
-
+        */
         /// <summary>
         /// Issues a command to units in entitiesToCommand.
         /// If entitiesToCommand is null, selectedUnis will be used in its stead
@@ -502,15 +503,8 @@ namespace Incursio.Managers
 
                         ////////////////////////
                         case State.Command.ATTACK:
-                            if (args[0] is ControlPoint)
-                            {
-
-                            }
-                            else{
-                                command = new AttackCommand(args[0] as BaseGameEntity);
-                                e.setAttacking();
-                            }
-                             
+                            command = new AttackCommand(args[0] as BaseGameEntity);
+                            e.setAttacking(); 
                             break;
 
                         ////////////////////////
@@ -520,8 +514,8 @@ namespace Incursio.Managers
 
                         ////////////////////////
                         case State.Command.FOLLOW:
-                            if (args[0] is Unit)
-                                command = new FollowCommand(args[0] as Unit);
+                            if ((args[0] as BaseGameEntity).movementComponent != null)
+                                command = new FollowCommand(args[0] as BaseGameEntity);
                             else
                                 command = new MoveCommand((args[0] as BaseGameEntity).location);
 
@@ -544,10 +538,7 @@ namespace Incursio.Managers
                         ////////////////////////
                         case State.Command.CAPTURE:
                             //try in case args[0] is not a controlpoint
-                            try{
-                                command = new CaptureCommand(args[0] as ControlPoint);
-                            }
-                            finally{}
+                            command = new CaptureCommand(args[0] as BaseGameEntity);
                             break;
 
                         ////////////////////////
@@ -612,7 +603,7 @@ namespace Incursio.Managers
             ids.ForEach(delegate(int key)
             {
                 e = this.getEntity(key);
-                if (!e.isDead() && e.owner == hOwner && ( e is Hero || (healNonHeros && e is Unit) ) ){
+                if (!e.isDead() && e.owner == hOwner && ( e.isHero || (healNonHeros && e.movementComponent != null)) ){
                     //HEAL ME!
                     e.heal(healthBoost);
                 }
@@ -648,13 +639,13 @@ namespace Incursio.Managers
         {
             if (keyId >= 0 && keyId <= entityBank.Count)
             {
-                if (this.entityBank[keyId] is Unit)
+                if (this.entityBank[keyId].movementComponent != null)
                 {
-                    (this.entityBank[keyId] as Unit).setCurrentState(State.EntityState.Buried);
+                    this.entityBank[keyId].currentState = State.EntityState.Buried;
                 }
-                else if (this.entityBank[keyId] is Structure)
+                else
                 {
-                    (this.entityBank[keyId] as Structure).setCurrentState(State.EntityState.Destroyed);
+                    this.entityBank[keyId].currentState = State.EntityState.Destroyed;
                 }
 
             }
@@ -745,21 +736,22 @@ namespace Incursio.Managers
             else return State.ThreatLevel.None;
         }
 
+        //TODO: IMPLEMENT CANCELATION
         public void cancelCurrentBuildOrder(int id){
-            if(selectedUnits.Count > 0 && selectedUnits[0] is CampStructure && selectedUnits[0].owner == id){
-                (selectedUnits[0] as CampStructure).cancelCurrentOrder();
-            }
+            //if(selectedUnits.Count > 0 && selectedUnits[0].isMainBase && selectedUnits[0].owner == id){
+            //    selectedUnits[0].factoryComponent.cancelCurrentOrder();
+            //}
         }
 
         public void killSelectedUnits(){
             selectedUnits.ForEach(delegate(BaseGameEntity e)
             {
-                if( !(e is ControlPoint)){
+                if( !(e.isControlPoint)){
                     e.health = 0;
-                    if (e is Structure)
-                        (e as Structure).setCurrentState(State.EntityState.Destroyed);
-                    else if (e is Unit)
-                        (e as Unit).setCurrentState(State.EntityState.Dead);
+                    if (e.movementComponent == null)
+                        e.currentState = State.EntityState.Destroyed;
+                    else
+                        e.currentState = State.EntityState.Dead;
                 }
             });
         }

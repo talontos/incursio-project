@@ -54,6 +54,9 @@ namespace Incursio.Managers
                     currentMap = new CreditsMap();
                     break;
                 */
+
+                //TODO: ADD BACK IN
+                /*
                 case State.CampaignLevel.ONE:
                     currentMap = new TestMap();// new Port();  
                     break;
@@ -65,7 +68,11 @@ namespace Incursio.Managers
                 case State.CampaignLevel.THREE: 
                     currentMap = new Capital();  
                     break;
+                */
             }
+
+            //TEMPORARY
+            currentMap = new TestMap();
 
             this.pathFinder = new PathFinder(currentMap.occupancyGrid);
             MovableObject.Initalize(currentMap.width, currentMap.TILE_WIDTH);
@@ -83,8 +90,8 @@ namespace Incursio.Managers
             this.keyPoints = new List<KeyPoint>();
             all.ForEach(delegate(BaseGameEntity e)
             {
-                if(e is CampStructure || e is ControlPoint){
-                    this.keyPoints.Add(new KeyPoint((e as Structure)));
+                if(e.isMainBase || e.isControlPoint){
+                    this.keyPoints.Add(new KeyPoint(e));
                 }
             });
         }

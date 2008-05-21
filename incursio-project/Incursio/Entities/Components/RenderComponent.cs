@@ -32,7 +32,7 @@ namespace Incursio.Entities.Components
         public const int TIME_TILL_DESTROYED_FADE = 1;
 
         //public State.EntityState currentState;
-        public State.Direction directionState = State.Direction.Still;
+        public State.Direction directionState = State.Direction.South;
         public global::Incursio.Entities.TextureCollections.TextureCollection textures;
 
         public RenderComponent(BaseGameEntity entity) : base(entity){
@@ -85,6 +85,8 @@ namespace Incursio.Entities.Components
         {
             if (this.bgEntity.movementComponent != null)
                 this.directionState = bgEntity.movementComponent.directionState;
+
+            GameTexture tex = null;
 
             this.visible = true;
             this.justDrawn = false;
@@ -150,35 +152,21 @@ namespace Incursio.Entities.Components
             #region BUILDING
             else if (this.bgEntity.currentState == State.EntityState.Building)
             {
-                //draw something special for when the structure is building something (fires flickering or w/e)
-                spriteBatch.Draw(this.textures.still.Building.texture,
-                    new Rectangle(onScreen.x - (this.textures.still.Building.texture.Width / 2), onScreen.y - (int)(this.textures.still.Building.texture.Height * 0.80),
-                    this.textures.still.Building.texture.Width, this.textures.still.Building.texture.Height),
-                    new Rectangle(this.currentFrameX, this.currentFrameY, this.textures.still.Building.frameWidth, this.textures.still.Building.frameHeight), Color.White);
-
-                if (frameTimer >= FRAME_LENGTH)
-                {
-                    if (this.currentFrameX < this.textures.still.Building.texture.Width - this.textures.still.Building.frameWidth)
-                    {
-                        this.currentFrameX = this.currentFrameX + this.textures.still.Building.frameWidth;
-                    }
-                    else
-                    {
-                        this.currentFrameX = 0;
-                    }
-                }
+                this.drawAnimatedTexture(ref spriteBatch, ref this.textures.still.Building, ref onScreen, ref colorMask, ref frameTimer, ref FRAME_LENGTH);
             }
             #endregion
             #region DESTROYED
             else if (this.bgEntity.currentState == State.EntityState.Destroyed)
             {
+                //TODO: MODIFY GENERIC DRAW FUNCTION TO HANDLE ALPHA
+                //TODO: USE GENERIC DRAW FUNCTIONS
                 if (destroyedTimer < TIME_TILL_DESTROYED_FADE * 60)
                 {
                     if (this.textures.damaged.alphaChan >= 0)
                     {
                         spriteBatch.Draw(this.textures.damaged.exploded.texture,
-                            new Rectangle(onScreen.x - (TextureBank.EntityTextures.guardTowerExploded.Width / 2), onScreen.y - (int)(this.textures.damaged.exploded.texture.Height * 0.80),
-                            this.textures.damaged.exploded.texture.Width, this.textures.damaged.exploded.texture.Height), new Color(255, 255, 255, this.textures.damaged.alphaChan));
+                            new Rectangle(onScreen.x - (this.textures.damaged.exploded.frameWidth / 2), onScreen.y - (int)(this.textures.damaged.exploded.frameHeight * 0.80),
+                            this.textures.damaged.exploded.frameWidth, this.textures.damaged.exploded.frameHeight), new Color(255, 255, 255, this.textures.damaged.alphaChan));
                         this.textures.damaged.alphaChan -= 25;
                     }
 
@@ -195,49 +183,22 @@ namespace Incursio.Entities.Components
                 {
                     case State.Direction.West:
                     case State.Direction.North:
-                        spriteBatch.Draw(this.textures.attacking.West.texture,
-                            new Rectangle(onScreen.x - (this.textures.attacking.West.frameWidth / 2), onScreen.y - (int)(this.textures.attacking.West.texture.Height * 0.80),
-                            this.textures.attacking.West.texture.Width, this.textures.attacking.West.texture.Height),
-                            new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, this.textures.attacking.West.frameWidth, this.textures.attacking.West.frameHeight), colorMask);
-
-                        if (frameTimer >= FRAME_LENGTH)
-                        {
-                            if (this.currentFrameXAttackDeath < this.textures.attacking.West.texture.Width - this.textures.attacking.West.frameWidth)
-                            {
-                                this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + this.textures.attacking.West.frameWidth;
-                            }
-                            else
-                            {
-                                this.currentFrameXAttackDeath = 0;
-                            }
-                        }
+                        tex = this.textures.attacking.West;
                         break;
 
                     case State.Direction.East:
                     case State.Direction.South:
-                        spriteBatch.Draw(this.textures.attacking.East.texture,
-                            new Rectangle(onScreen.x - (this.textures.attacking.East.frameWidth / 2), onScreen.y - (int)(this.textures.attacking.East.texture.Height * 0.80),
-                            this.textures.attacking.East.texture.Width, this.textures.attacking.East.texture.Height),
-                            new Rectangle(this.currentFrameXAttackDeath, this.currentFrameYAttackDeath, this.textures.attacking.East.frameWidth, this.textures.attacking.East.frameHeight), colorMask);
-
-                        if (frameTimer >= FRAME_LENGTH)
-                        {
-                            if (this.currentFrameXAttackDeath < this.textures.attacking.East.texture.Width - this.textures.attacking.East.frameWidth)
-                            {
-                                this.currentFrameXAttackDeath = this.currentFrameXAttackDeath + this.textures.attacking.East.frameWidth;
-                            }
-                            else
-                            {
-                                this.currentFrameXAttackDeath = 0;
-                            }
-                        }
+                        tex = this.textures.attacking.East;
                         break;
                 }
+
+                this.drawAnimatedTexture(ref spriteBatch, ref tex, ref onScreen, ref colorMask, ref frameTimer, ref FRAME_LENGTH);
             }
             #endregion
             #region DEAD
             else if (this.bgEntity.currentState == State.EntityState.Dead)
             {
+                //TODO: USE GENERIC DRAW FUNCTIONS
                 switch (this.directionState)
                 {
                     case State.Direction.West:
@@ -321,94 +282,15 @@ namespace Incursio.Entities.Components
             #region MOVING
             else if (this.bgEntity.currentState == State.EntityState.Moving)
             {
-                switch (this.directionState)
-                {
-                    case State.Direction.West:
-                        spriteBatch.Draw(this.textures.movement.West.texture,
-                            new Rectangle(onScreen.x - (this.textures.still.West.texture.Width / 2), 
-                                onScreen.y - (int)(this.textures.still.West.texture.Height * 0.80),
-                                this.textures.still.West.texture.Width, this.textures.still.West.texture.Height),
-                            new Rectangle(this.currentFrameX, this.currentFrameY, this.textures.movement.West.frameWidth, 
-                                this.textures.movement.West.frameHeight), colorMask);
-
-                        if (frameTimer >= FRAME_LENGTH)
-                        {
-                            if (this.currentFrameX < this.textures.movement.West.texture.Width - this.textures.movement.West.frameWidth)
-                            {
-                                this.currentFrameX = this.currentFrameX + this.textures.movement.West.frameWidth;
-                            }
-                            else
-                            {
-                                this.currentFrameX = 0;
-                            }
-                        }
-                        break;
-
-                    case State.Direction.East:
-                        spriteBatch.Draw(this.textures.movement.East.texture,
-                            new Rectangle(onScreen.x - (this.textures.still.West.texture.Width / 2), 
-                                onScreen.y - (int)(this.textures.still.West.texture.Height * 0.80),
-                                this.textures.still.West.texture.Width, this.textures.still.West.texture.Height),
-                            new Rectangle(this.currentFrameX, this.currentFrameY, this.textures.movement.East.frameWidth, 
-                                this.textures.movement.East.frameHeight), colorMask);
-
-                        if (frameTimer >= FRAME_LENGTH)
-                        {
-                            if (this.currentFrameX < this.textures.movement.East.texture.Width - this.textures.movement.East.frameWidth)
-                            {
-                                this.currentFrameX = this.currentFrameX + this.textures.movement.East.frameWidth;
-                            }
-                            else
-                            {
-                                this.currentFrameX = 0;
-                            }
-                        }
-                        break;
-
-                    case State.Direction.South:
-                        spriteBatch.Draw(this.textures.movement.South.texture,
-                            new Rectangle(onScreen.x - (this.textures.still.South.texture.Width / 2), 
-                                onScreen.y - (int)(this.textures.still.South.texture.Height * 0.80),
-                                this.textures.still.South.texture.Width, this.textures.still.South.texture.Height),
-                            new Rectangle(this.currentFrameX, this.currentFrameY, this.textures.movement.South.frameWidth, this.textures.movement.South.frameHeight), colorMask);
-
-                        if (frameTimer >= FRAME_LENGTH)
-                        {
-                            if (this.currentFrameX < this.textures.movement.South.texture.Width - this.textures.movement.South.frameWidth)
-                            {
-                                this.currentFrameX = this.currentFrameX + this.textures.movement.South.frameWidth;
-                            }
-                            else
-                            {
-                                this.currentFrameX = 0;
-                            }
-                        }
-                        break;
-
-                    case State.Direction.North:
-                        spriteBatch.Draw(this.textures.movement.North.texture,
-                            new Rectangle(onScreen.x - (this.textures.still.North.texture.Width / 2), 
-                                onScreen.y - (int)(this.textures.still.North.texture.Height * 0.80),
-                                this.textures.still.North.texture.Width, this.textures.still.North.texture.Height),
-                            new Rectangle(this.currentFrameX, this.currentFrameY, 
-                                this.textures.movement.North.frameWidth, this.textures.movement.North.frameHeight), colorMask);
-
-                        if (frameTimer >= FRAME_LENGTH)
-                        {
-                            if (this.currentFrameX < this.textures.movement.North.texture.Width - this.textures.movement.North.frameWidth)
-                            {
-                                this.currentFrameX = this.currentFrameX + this.textures.movement.North.frameWidth;
-                            }
-                            else
-                            {
-                                this.currentFrameX = 0;
-                            }
-                        }
-                        break;
-
+                switch(this.directionState){
+                    case State.Direction.West: tex = this.textures.movement.West; break;
+                    case State.Direction.East: tex = this.textures.movement.East; break;
+                    case State.Direction.South: tex = this.textures.movement.South; break;
+                    case State.Direction.North: tex = this.textures.movement.North; break;
                 }
 
-
+                this.drawAnimatedTexture(ref spriteBatch, ref tex, ref onScreen, 
+                    ref colorMask, ref frameTimer, ref FRAME_LENGTH);
             }
             #endregion
             #region UNDER_ATTACK
@@ -421,9 +303,7 @@ namespace Incursio.Entities.Components
             #region ELSE
             else
             {
-                spriteBatch.Draw(this.textures.still.South.texture,
-                        new Rectangle(onScreen.x - (this.textures.still.South.texture.Width / 2), onScreen.y - (int)(this.textures.still.South.texture.Height * 0.80),
-                        this.textures.still.South.texture.Width, this.textures.still.South.texture.Height), colorMask);
+                this.drawStillTexture(ref spriteBatch, ref this.textures.still.South, ref onScreen, ref colorMask);
             }
             #endregion
         }
@@ -434,7 +314,7 @@ namespace Incursio.Entities.Components
             double healthRatio = (float)this.bgEntity.getHealth() / this.bgEntity.getMaxHealth();
 
             //determine health-bar color
-            Color healthColor = healthRatio > 66 ? Color.Lime : healthRatio > 33 ? Color.Yellow : Color.Red;
+            Color healthColor = healthRatio > 0.66 ? Color.Lime : healthRatio > 0.33 ? Color.Yellow : Color.Red;
 
             double healthBarTypicalWidth = 0.59375;             //these horrible numbers are ratios for the healthbar of the
             double healthBarTypicalHeight = 0.03125;            //selecetedUnitOverlayTexture.  These account for changes in
@@ -458,5 +338,31 @@ namespace Incursio.Entities.Components
                 new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
                 healthColor);
         }
+
+        private void drawStillTexture(ref SpriteBatch spriteBatch, ref GameTexture tex, ref Coordinate onScreen, ref Color colorMask){
+            spriteBatch.Draw(tex.texture, new Rectangle(onScreen.x - (tex.texture.Width / 2), 
+                onScreen.y - (int)(tex.texture.Height * 0.80), tex.texture.Width, tex.texture.Height), colorMask);
+        }
+
+        private void drawAnimatedTexture(ref SpriteBatch spriteBatch, ref GameTexture tex, ref Coordinate onScreen,
+            ref Color colorMask, ref int frameTimer, ref int FRAME_LENGTH){
+            spriteBatch.Draw(tex.texture, new Rectangle(onScreen.x - (tex.frameWidth / 2), 
+                onScreen.y - (int)(tex.texture.Height * 0.80), tex.frameWidth, tex.texture.Height),
+                new Rectangle(this.currentFrameX, this.currentFrameY, tex.frameWidth,
+                    tex.frameHeight), colorMask);
+
+            if (frameTimer >= FRAME_LENGTH)
+            {
+                if (this.currentFrameX < tex.texture.Width - tex.frameWidth)
+                {
+                    this.currentFrameX = this.currentFrameX + tex.frameWidth;
+                }
+                else
+                {
+                    this.currentFrameX = 0;
+                }
+            }
+        }
+
     }
 }

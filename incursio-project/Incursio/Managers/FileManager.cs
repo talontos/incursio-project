@@ -124,7 +124,11 @@ namespace Incursio.Managers
             this.ReadConfigurationFile("../../../Configuration/TextureConfiguration.xml");
             this.ReadConfigurationFile("../../../Configuration/AudioConfiguration.xml");
             this.ReadConfigurationFile("../../../Configuration/EntityConfiguration.xml");
-            
+
+            BaseGameEntity e1 = ObjectFactory.getInstance().create(0, 0);
+            BaseGameEntity e2 = ObjectFactory.getInstance().create(1, 0);
+            BaseGameEntity e3 = ObjectFactory.getInstance().create(2, 0);
+            BaseGameEntity e4 = ObjectFactory.getInstance().create(3, 0);
         }
 
         public void saveCurrentGame(String fileName)
@@ -160,6 +164,8 @@ namespace Incursio.Managers
         {
             try
             {
+                //TODO: REIMPLEMENT THIS
+                /*
                 //open up a reader
                 TextReader tr = new StreamReader(fileName);
                 Hero hero = new Hero();
@@ -177,6 +183,7 @@ namespace Incursio.Managers
                 Incursio.getInstance().setHero(hero);
                 //close the reader
                 tr.Close();
+                */
             }
             catch (FileLoadException e)
             {
@@ -271,6 +278,8 @@ namespace Incursio.Managers
                         string nameToSet = name.Value;
                         node.Attributes.Remove(name);
 
+                        XmlAttribute fileNodeNameAtt;
+
                         //Building the new blank collection
                         AudioCollection newCollection = new AudioCollection(audioIterator, nameToSet);
 
@@ -290,7 +299,10 @@ namespace Incursio.Managers
 
                                     foreach (XmlNode fileNode in typeNode.ChildNodes)
                                     {
-                                        newSet.addSound(nodeType, fileNode.Attributes["name"]);
+                                        fileNodeNameAtt = fileNode.Attributes["name"];
+
+                                        if(fileNodeNameAtt != null)
+                                            newSet.addSound(nodeType, fileNodeNameAtt.Value);
                                     }
                                 }
                             }
@@ -467,7 +479,7 @@ namespace Incursio.Managers
                     SoundCollection.getInstance().audioCollections = audioList;
 
                 //Adding the texture list to the texture bank
-                if ((textureList != null)&&(entityList.Count > 0))
+                if ((textureList != null)&&(textureList.Count > 0))
                     TextureBank.getInstance().textureCollections = textureList;
                 
             }

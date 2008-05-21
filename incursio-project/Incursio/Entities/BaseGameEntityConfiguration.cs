@@ -24,6 +24,11 @@ namespace Incursio.Entities
 
         public int costToBuild = 0;
 
+        public bool isHero = false;
+        public bool isMainBase = false;
+        public bool isControlPoint = false;
+        public bool isTurret = false;
+
         public List<ComponentConfiguration> components = new List<ComponentConfiguration>();
 
         public BaseGameEntityConfiguration(int id, string name, params string[] args){
@@ -33,12 +38,16 @@ namespace Incursio.Entities
             //set all other properties that are given
             for(int i = 0; (i + 1) < args.Length; i += 2){
                 switch(args[i]){
-                    case "maxHealth":   maxHealth   = int.Parse(args[i + 1]); break;
-                    case "health":      health      = int.Parse(args[i + 1]); break;
-                    case "armor":       armor       = int.Parse(args[i + 1]); break;
-                    case "sightRange":  sightRange  = int.Parse(args[i + 1]); break;
-                    case "pointValue":  pointValue  = int.Parse(args[i + 1]); break;
-                    case "costToBuild": costToBuild = int.Parse(args[i + 1]); break;
+                    case "maxHealth":       maxHealth       = int.Parse(args[i + 1]); break;
+                    case "health":          health          = int.Parse(args[i + 1]); break;
+                    case "armor":           armor           = int.Parse(args[i + 1]); break;
+                    case "sightRange":      sightRange      = int.Parse(args[i + 1]); break;
+                    case "pointValue":      pointValue      = int.Parse(args[i + 1]); break;
+                    case "costToBuild":     costToBuild     = int.Parse(args[i + 1]); break;
+                    case "isHero":          isHero          = bool.Parse(args[i + 1]); break;
+                    case "isMainBase":      isMainBase      = bool.Parse(args[i + 1]); break;
+                    case "isControlPoint":  isControlPoint  = bool.Parse(args[i + 1]); break;
+                    case "isTurret":        isTurret        = bool.Parse(args[i + 1]); break;
                     default: break;
                 }
             }
@@ -56,12 +65,18 @@ namespace Incursio.Entities
 
         public BaseGameEntity buildEntity(){
             BaseGameEntity e = new BaseGameEntity();
+
             e.entityName = this.className;
-            e.maxHealth = this.maxHealth;
-            e.health = this.health;
-            e.armor = this.armor;
+            e.maxHealth  = this.maxHealth;
+            e.health     = this.health;
+            e.armor      = this.armor;
             e.sightRange = this.sightRange;
             e.pointValue = this.pointValue;
+
+            e.isHero         = this.isHero;
+            e.isMainBase     = this.isMainBase;
+            e.isControlPoint = this.isControlPoint;
+            e.isTurret       = this.isTurret;
 
             this.components.ForEach(delegate(ComponentConfiguration cc)
             {

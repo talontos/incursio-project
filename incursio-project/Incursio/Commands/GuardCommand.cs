@@ -45,10 +45,10 @@ namespace Incursio.Commands
                 //TODO: add weights to them
                 BaseGameEntity e = formidableEnemies[Incursio.rand.Next(0, formidableEnemies.Count)];
 
-                if( !(e is ControlPoint) )
+                if( !(e.isControlPoint) )
                     subject.issueImmediateOrder(new AttackCommand(e));
-                else if( subject is Hero){
-                    subject.issueImmediateOrder(new CaptureCommand(e as ControlPoint));
+                else if( subject.isHero){
+                    subject.issueImmediateOrder(new CaptureCommand(e));
                 }
             }
         }
@@ -71,7 +71,7 @@ namespace Incursio.Commands
             //analyze enemies to determine who to attack
             enemies.ForEach(delegate(BaseGameEntity e)
             {
-                if(subject is Hero && e is ControlPoint && e.owner != subject.owner){
+                if(subject.isHero && e.isControlPoint && e.owner != subject.owner){
                     //capture the point!
                     formidableEnemies = new List<BaseGameEntity>();
                     formidableEnemies.Add(e);

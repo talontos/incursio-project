@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-	<Entity name="Hero" maxHealth="100" health="100" pointValue="1000" armor="10" sightRange="8">
+	
+	<Entity name="Hero" maxHealth="100" health="100" pointValue="1000" armor="10" sightRange="8" isHero="true">
 		<Component type="RenderComponent" collectionName="Hero"/>
 		<Component type="MovementComponent" moveSpeed="115.0"/>
 		<Component type="AudioComponent" collectionName="Hero"/>
@@ -8,7 +9,7 @@
 		<Component type="CombatComponent" damage="25" attackRange="1" attackSpeed="3"/>
 		<Component type="ExperienceComponent"/>
 	</Entity>
-
+	
 	<Entity name="Light Infantry" maxHealth="100" health="100" pointValue="50" armor="3" sightRange="10" costToBuild="60">
 		<Component type="RenderComponent" collectionName="Light Infantry"/>
 		<Component type="MovementComponent" moveSpeed="125.0"/>
@@ -36,14 +37,14 @@
 		<Component type="AudioComponent" collectionName="Guard Tower"/>
 	</Entity>
 
-	<Entity name="Camp" maxHealth="350" health="350" pointValue="1000" armor="10" sightRange="6">
+	<Entity name="Camp" maxHealth="350" health="350" pointValue="1000" armor="10" sightRange="6" isMainBase="true">
 		<Component type="RenderComponent" collectionName="Camp"/>
 		<Component type="ResourceComponent" amount="8"/>
 		<Component type="FactoryComponent" buildTimeFactor="9"/>
 		<Component type="AudioComponent" collectionName="Camp"/>
 	</Entity>
 
-	<Entity name="Control Point" pointValue="500" sightRange="10">
+	<Entity name="Control Point" pointValue="500" sightRange="10" isControlPoint="true">
 		<Component type="CapturableComponent"/>
 		<Component type="RenderComponent" collectionName="Control Point"/>
 		<Component type="ResourceComponent" amount="12"/>
