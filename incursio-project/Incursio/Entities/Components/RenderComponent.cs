@@ -41,6 +41,7 @@ namespace Incursio.Entities.Components
 
         public RenderComponent(BaseProjectile projectile){
             this.projectile = projectile;
+            this.isProjectile = true;
         }
 
         public override void setAttributes(List<KeyValuePair<string, string>> attributes)
@@ -69,19 +70,32 @@ namespace Incursio.Entities.Components
         }
 
         public void updateBounds(){
-            //TODO: CALCULATE BOUNDS FROM *FRAME* WIDTH/HEIGHT
-            Texture2D myRef = this.textures.still.South.texture;
+            GameTexture myRef = this.textures.still.South;
 
             this.boundingBox = new Rectangle(
-                this.bgEntity.location.x - myRef.Width / 2,
-                (int)(this.bgEntity.location.y - myRef.Height * 0.80),
-                myRef.Width,
-                myRef.Height
+                this.bgEntity.location.x - myRef.frameWidth / 2,
+                (int)(this.bgEntity.location.y - myRef.frameHeight * 0.80),
+                myRef.frameWidth,
+                myRef.frameHeight
             );
         }
         
         public void drawThyself(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
+            #region PROJECTILES
+            if(this.isProjectile){
+                //draw the projectile if needed
+                spriteBatch.Draw(TextureBank.EntityTextures.arrow,
+                    this.projectile.onScreen,
+                    null, Color.White, -1 * ((float)(this.projectile.angle * (Math.PI / 180))),
+                    new Vector2(this.projectile.texture.Width / 2, 
+                        this.projectile.texture.Height / 2), 
+                    1.0f, SpriteEffects.None, 0f);                
+
+                return;
+            }
+            #endregion
+
             if (this.bgEntity.movementComponent != null)
                 this.directionState = bgEntity.movementComponent.directionState;
 
@@ -92,21 +106,6 @@ namespace Incursio.Entities.Components
             Coordinate onScreen = MapManager.getInstance().currentMap.positionOnScreen(this.bgEntity.location);
             Rectangle unit = this.boundingBox;
             Color colorMask = EntityManager.getInstance().getColorMask(this.bgEntity.owner);
-
-            //draw the projectile if needed
-            #region PROJECTILES
-            if (isProjectile && this.projectile.draw)
-            {
-                spriteBatch.Draw(TextureBank.EntityTextures.arrow,
-                    this.projectile.onScreen,
-                    null, Color.White, -1 * ((float)(this.projectile.angle * (Math.PI / 180))),
-                    new Vector2(this.projectile.texture.Width / 2, 
-                        this.projectile.texture.Height / 2), 
-                    1.0f, SpriteEffects.None, 0f);
-            }
-            
-            #endregion
-
             //depending on the unit's state, draw its textures
             //idle
             #region IDLE
@@ -186,7 +185,6 @@ namespace Incursio.Entities.Components
             #region ATTACKING
             else if (this.bgEntity.currentState == State.EntityState.Attacking)
             {
-
                 switch (this.directionState)
                 {
                     case State.Direction.West:
@@ -201,6 +199,10 @@ namespace Incursio.Entities.Components
                 }
 
                 this.drawAnimatedTexture(ref spriteBatch, ref tex, ref onScreen, ref colorMask, ref frameTimer, ref FRAME_LENGTH);
+
+                if(bgEntity.combatComponent.projectile != null){
+                    bgEntity.combatComponent.projectile.renderComponent.drawThyself(ref spriteBatch, frameTimer, FRAME_LENGTH);
+                }
             }
             #endregion
             #region DEAD
