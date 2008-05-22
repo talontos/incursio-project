@@ -80,6 +80,7 @@ namespace Incursio.Entities
             e.isMainBase     = this.isMainBase;
             e.isControlPoint = this.isControlPoint;
             e.isTurret       = this.isTurret;
+            e.isStructure    = this.isStructure;
 
             this.components.ForEach(delegate(ComponentConfiguration cc)
             {

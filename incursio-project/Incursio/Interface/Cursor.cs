@@ -109,9 +109,13 @@ namespace Incursio.Interface
 
       public void beginPlaceStructure(BaseGameEntityConfiguration c){
           if(c.isStructure){
-              //we need to get either an image to show, or a bounding box/occupancy to show
+              //TODO: we need to get either an image to show, or a bounding box/occupancy to show
               this.placingStructure = true;
           }
+      }
+
+      public void finishPlaceStructure(){
+
       }
 
       public Vector2 getPos()

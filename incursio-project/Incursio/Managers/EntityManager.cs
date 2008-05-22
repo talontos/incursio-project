@@ -430,7 +430,12 @@ namespace Incursio.Managers
             if (selectedUnits.Count > 0 && selectedUnits[0].isConstructor && selectedUnits[0].owner == PlayerManager.getInstance().currentPlayerId)
             {
                 //TODO: IMPL
-                this.issueCommand(State.Command.BUILD, true, null, toBuildId);
+                if(ObjectFactory.getInstance().entities[toBuildId].isStructure){
+                    //we need to place it before we can build it
+                }
+                else{
+                    this.issueCommand(State.Command.BUILD, true, null, toBuildId);
+                }
             }
         }
 
@@ -456,15 +461,19 @@ namespace Incursio.Managers
             return product;
         }
 
-        /*
-        public BaseGameEntity createNewEntity(String entityType, int player){
-            BaseGameEntity product = ObjectFactory.getInstance().create(entityType, player);
-            product.keyId = nextKeyId;
-            this.entityBank.Insert(nextKeyId++, product);
-
-            return product;
+        /// <summary>
+        /// Takes an existing entity and adds it to the bank
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public BaseGameEntity addToBank(BaseGameEntity e){
+            if(e.keyId < 0){
+                e.keyId = nextKeyId;
+                this.entityBank.Insert(nextKeyId++, e);
+            }
+            return e;
         }
-        */
+        
         /// <summary>
         /// Issues a command to units in entitiesToCommand.
         /// If entitiesToCommand is null, selectedUnis will be used in its stead

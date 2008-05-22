@@ -37,47 +37,6 @@ namespace Incursio.Utils
         }
 
         /// <summary>
-        /// Creates an instance of the desired BaseGameEntity, inserts it in to the 
-        /// main program's entityBank, and returns it.
-        /// </summary>
-        /// <param name="classname">the FULLY QUALIFIED NAME of the class. 
-        /// <param name="owningPlayer">Enumerated PlayerID to be assigned as the owner</param>
-        /// <returns>The newly created instance</returns>
-        /*public BaseGameEntity create(String classname, int owningPlayer)
-        {
-            // parse classname
-            Type classType = Type.GetType(classname, false, true);
-
-            if (classType == null)
-                return null;
-
-            // build new <classname>
-            BaseGameEntity product = Activator.CreateInstance(classType) as BaseGameEntity;
-
-            product.setPlayer(owningPlayer);
-
-            //check for hero stats to load
-            if(product.isHero && Incursio.getInstance().getHero() != null){
-
-                if(owningPlayer == PlayerManager.getInstance().currentPlayerId){
-                    (product as Hero).copyHeroStats(Incursio.getInstance().getHero());
-
-                    Incursio.getInstance().setHero(product as Hero);
-                }
-                else{
-                    //computer hero, set stuff
-                    (product as Hero).setHero_Badass();
-                }
-            }
-
-            product.playEnterBattlefieldSound();
-
-            return product;
-
-        }
-        */
-
-        /// <summary>
         /// Creates an instance a class using a BaseGameEntityConfiguration stored with ID 'classID'
         /// </summary>
         /// <param name="classID">ID of configuration instance</param>
