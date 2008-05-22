@@ -6,6 +6,7 @@ using Incursio.Classes;
 using Microsoft.Xna.Framework;
 using Incursio.Commands;
 using Incursio.Utils;
+using Incursio.Managers;
 
 namespace Incursio.Entities.Components
 {
@@ -47,14 +48,14 @@ namespace Incursio.Entities.Components
 
         public virtual bool updateMovement(float ElapsedTime)
         {
-            this.bgEntity.updateOccupancy(false);
+            this.bgEntity.updateOccupancy((byte)1);
 
             //move
             bool retVal = this.movable.updateMoveableObjectMovement(ElapsedTime);
 
             this.bgEntity.location = new Coordinate( (int)movable.PositionCurrent.X, (int)movable.PositionCurrent.Y);
 
-            this.bgEntity.updateOccupancy(true);
+            this.bgEntity.updateOccupancy((byte)0);
 
             if (retVal) //movement finished
             {

@@ -49,84 +49,10 @@ namespace Incursio.Managers
 
         public static class EntityTextures
         {
-
             public static Texture2D selectedUnitOverlayTexture;
             public static Texture2D healthRatioTexture;
 
-            //Unit Textures//////////////
-            public static Texture2D lightInfantryEast;
-            public static Texture2D lightInfantryWest;
-            public static Texture2D lightInfantrySouth;
-            public static Texture2D lightInfantryNorth;
-            public static Texture2D lightInfantryDead;
-            public static Texture2D lightInfantryMovingEast;
-            public static Texture2D lightInfantryMovingWest;
-            public static Texture2D lightInfantryMovingSouth;
-            public static Texture2D lightInfantryMovingNorth;
-            public static Texture2D lightInfantryAttackingEast;
-            public static Texture2D lightInfantryAttackingWest;
-            public static Texture2D lightInfantryDeathEast;
-            public static Texture2D lightInfantryDeathWest;
-
-            public static Texture2D heavyInfantryEast;
-            public static Texture2D heavyInfantryWest;
-            public static Texture2D heavyInfantrySouth;
-            public static Texture2D heavyInfantryNorth;
-            public static Texture2D heavyInfantryMovingEast;
-            public static Texture2D heavyInfantryMovingWest;
-            public static Texture2D heavyInfantryMovingSouth;
-            public static Texture2D heavyInfantryMovingNorth;
-            public static Texture2D heavyInfantryAttackingEast;
-            public static Texture2D heavyInfantryAttackingWest;
-            public static Texture2D heavyInfantryDeath_East;
-            public static Texture2D heavyInfantryDeath_West;
-
-            public static Texture2D archerEast;
-            public static Texture2D archerWest;
-            public static Texture2D archerSouth;
-            public static Texture2D archerNorth;
-            public static Texture2D archerDead;
-            public static Texture2D archerMovingWest;
-            public static Texture2D archerMovingEast;
-            public static Texture2D archerMovingSouth;
-            public static Texture2D archerMovingNorth;
-            public static Texture2D archerAttackingEast;
-            public static Texture2D archerAttackingWest;
-            public static Texture2D archerDeathEast;
-            public static Texture2D archerDeathWest;
-
             public static Texture2D arrow;
-
-            public static Texture2D heroEast;
-            public static Texture2D heroWest;
-            public static Texture2D heroSouth;
-            public static Texture2D heroNorth;
-            public static Texture2D heroMovingEast;
-            public static Texture2D heroMovingWest;
-            public static Texture2D heroMovingSouth;
-            public static Texture2D heroMovingNorth;
-            public static Texture2D heroAttackingEast;
-            public static Texture2D heroAttackingWest;
-            public static Texture2D heroDeathEast;
-            public static Texture2D heroDeathWest;
-            /////////////////////////////
-
-            //Structure Textures/////////
-            public static Texture2D campTexturePlayer;
-            public static Texture2D campTexturePlayerBuilding;
-            public static Texture2D campTextureComputer;
-            public static Texture2D campTextureComputerDamaged;
-            public static Texture2D campTextureComputerDestroyed;
-            public static Texture2D campTextureComputerExploded;
-
-            public static Texture2D guardTowerTexturePlayer;
-            public static Texture2D guardTowerTextureComputer;
-            public static Texture2D guardTowerExploded;
-
-            public static Texture2D controlPointPlayer;
-            public static Texture2D controlPointComputer;
-            /////////////////////////////
-
         }
 
         public static class MapTiles{

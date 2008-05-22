@@ -9,7 +9,7 @@ namespace Incursio.Entities.AudioCollections
         public string campDestroyed = "CampDestroyed.wav";
         public string baseAttack = "BaseUnderAtt.wav";
         public string cantBuild = "CannotBuildThere.wav";
-        public string towerBuilt = "ConComplete.wav";
+        public string constructionComplete = "ConComplete.wav";
         public string heroFallen = "HeroFallen.wav";
         public string heroBattle = "HeroinBat.wav";
         public string heroLowHP = "HeroisAbouttoDie.wav";
@@ -26,7 +26,7 @@ namespace Incursio.Entities.AudioCollections
                 case "campDestroyed": campDestroyed = fileName; break;
                 case "baseAttack": baseAttack = fileName; break;
                 case "cantBuild": cantBuild = fileName; break;
-                case "towerBuilt": towerBuilt = fileName; break;
+                case "constructionComplete": constructionComplete = fileName; break;
                 case "heroFallen": heroFallen = fileName; break;
                 case "heroBattle": heroBattle = fileName; break;
                 case "heroLowHP": heroLowHP = fileName; break;

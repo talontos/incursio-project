@@ -65,6 +65,10 @@ namespace Incursio.Managers
             return instance;
         }
 
+        public void initializeSoundManager(){
+            this.AudioCollection = SoundCollection.getInstance().getCollectionByName("GameAudio");
+        }
+
         //update the sound engine
         //This class is pointless unless the game is using 3D sound
         //We may try 3D sounds later

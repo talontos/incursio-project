@@ -8,7 +8,7 @@ using Incursio.Managers;
 
 namespace Incursio.Classes.PathFinding
 {
-    public class MovableObject : BaseGameEntity
+    public class MovableObject
     {
         #region VARIABLE DECLARATIONS
         private Vector2 positionCurrent;
@@ -60,6 +60,8 @@ namespace Incursio.Classes.PathFinding
         private static int[] Directions;
         //Array for relative position(regarding to directions) lookup
         private static Point[] LinearMoves;
+
+        public Coordinate location;
         #endregion
 
         #region CONSTRUCTORS
@@ -68,7 +70,7 @@ namespace Incursio.Classes.PathFinding
             positionCurrent = StartPos;
 
             //added
-            base.setLocation(new Coordinate((int)StartPos.X, (int)StartPos.Y));
+            setLocation(new Coordinate((int)StartPos.X, (int)StartPos.Y));
 
             curveX = new Curve();
             curveY = new Curve();
@@ -93,11 +95,11 @@ namespace Incursio.Classes.PathFinding
 
         #region ENTITY_HELPER_FUNCTIONS
 
-        public override void setLocation(global::Incursio.Utils.Coordinate coords)
+        public void setLocation(global::Incursio.Utils.Coordinate coords)
         {
             positionCurrent = coords.toVector2();
 
-            base.setLocation(coords);
+            //base.setLocation(coords);
         }
         #endregion
 

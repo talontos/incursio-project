@@ -224,18 +224,18 @@ namespace Incursio.Entities.Components
                         this.buildProject.keyPoint.numGuardTowersOrdered--;
                     }
 
-                    this.buildProject = null;
-                    this.entityBeingBuilt = null;
-
                     PlayerManager.getInstance().notifyPlayer(
                         this.bgEntity.owner,
                         new GameEvent(State.EventType.CREATION_COMPLETE,
                             this.entityBeingBuilt,
-                            SoundManager.getInstance().AudioCollection.messages.towerBuilt,
+                            SoundManager.getInstance().AudioCollection.messages.constructionComplete,
                             "Construction Complete",
                             this.bgEntity.location
                         )
                     );
+
+                    this.buildProject = null;
+                    this.entityBeingBuilt = null;
                 }
                 
             }

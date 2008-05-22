@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 //TODO: remove this class and use Point or Vector2
 //  this is redundant
@@ -29,11 +30,16 @@ namespace Incursio.Utils
             this.y = y;
         }
 
-        public Microsoft.Xna.Framework.Point toPoint(){
+        public Coordinate(Vector2 v){
+            this.x = (int)v.X;
+            this.y = (int)v.Y;
+        }
+
+        public Point toPoint(){
             return new Microsoft.Xna.Framework.Point(x,y);
         }
 
-        public Microsoft.Xna.Framework.Vector2 toVector2(){
+        public Vector2 toVector2(){
             return new Microsoft.Xna.Framework.Vector2(x, y);
         }
     }

@@ -123,7 +123,6 @@
     <Compile Include="Entities\AudioCollections\AudioCollection.cs" />
     <Compile Include="Entities\AudioCollections\MessageCollection.cs" />
     <Compile Include="Entities\AudioCollections\VoiceCollection.cs" />
-    <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\BaseGameEntityConfiguration.cs" />
     <Compile Include="Entities\Projectiles\BaseProjectile.cs" />
     <Compile Include="Entities\ComponentConfiguration.cs" />
@@ -141,6 +140,8 @@
     <Compile Include="Entities\TextureCollections\AttackTextures.cs" />
     <Compile Include="Entities\TextureCollections\DamagedTextures.cs" />
     <Compile Include="Entities\TextureCollections\DeathTextures.cs" />
+    <Compile Include="Entities\TextureCollections\InterfaceTextures.cs" />
+    <Compile Include="Entities\TextureCollections\MapTextures.cs" />
     <Compile Include="Entities\TextureCollections\MovementTextures.cs" />
     <Compile Include="Entities\TextureCollections\StillTextures.cs" />
     <Compile Include="Entities\TextureCollections\TextureCollection.cs" />
@@ -148,10 +149,10 @@
     <Compile Include="Interface\BuildEntityButton.cs" />
     <Compile Include="Interface\BuildEntityPanel.cs" />
     <Compile Include="Interface\Button.cs" />
-    <Compile Include="Interface\Menus\BuildLightInfantryButton.cs" />
-    <Compile Include="Interface\Menus\BuildHeavyInfantryButton.cs" />
-    <Compile Include="Interface\Menus\BuildArcherButton.cs" />
-    <Compile Include="Interface\Menus\BuildTowerButton.cs" />
+    <None Include="Interface\Menus\LegacyButtons\BuildLightInfantryButton.cs" />
+    <None Include="Interface\Menus\LegacyButtons\BuildHeavyInfantryButton.cs" />
+    <None Include="Interface\Menus\LegacyButtons\BuildArcherButton.cs" />
+    <None Include="Interface\Menus\LegacyButtons\BuildTowerButton.cs" />
     <Compile Include="Interface\Menus\InstructionButton.cs" />
     <Compile Include="Interface\Menus\MainMenuButton.cs" />
     <Compile Include="Interface\Menus\SaveMenuButton.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Managers\SoundManager.cs" />
     <Compile Include="Managers\TextureBank.cs" />
     <Compile Include="Managers\TextureManager.cs" />
+    <Compile Include="Utils\DebugUtil.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="Utils\DefenseReport.cs" />
     <Compile Include="Utils\EntityBuildOrder.cs" />

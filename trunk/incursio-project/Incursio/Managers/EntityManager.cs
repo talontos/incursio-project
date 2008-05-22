@@ -429,27 +429,14 @@ namespace Incursio.Managers
         public void tryToBuild(int toBuildId){
             if (selectedUnits.Count > 0 && selectedUnits[0].isConstructor && selectedUnits[0].owner == PlayerManager.getInstance().currentPlayerId)
             {
-                //TODO: IMPL
-                if(ObjectFactory.getInstance().entities[toBuildId].isStructure){
-                    //we need to place it before we can build it
-                }
-                else{
-                    this.issueCommand(State.Command.BUILD, true, null, toBuildId);
-                }
+                this.issueCommand(State.Command.BUILD, true, null, toBuildId);
             }
         }
 
-        public void tryToBuild(State.EntityName toBuild){
-            if (selectedUnits.Count > 0 && selectedUnits[0].isConstructor && selectedUnits[0].owner == PlayerManager.getInstance().currentPlayerId)
-            {
-                this.issueCommand(State.Command.BUILD, true, null, toBuild);
-            }
-        }
-
-        public void tryToBuild(State.EntityName toBuild, Vector2 point){
+        public void tryToBuild(int toBuildId, Vector2 point){
             if (selectedUnits.Count > 0 && selectedUnits[0].isConstructor)
             {
-                this.issueCommand(State.Command.BUILD, true, null, toBuild, new Coordinate((int)point.X, (int)point.Y));
+                this.issueCommand(State.Command.BUILD, true, null, toBuildId, new Coordinate((int)point.X, (int)point.Y));
             }
         }
 

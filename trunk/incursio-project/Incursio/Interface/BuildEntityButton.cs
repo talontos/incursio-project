@@ -55,7 +55,14 @@ namespace Incursio.Interface
             if (!this.getPressed() && this.getFocus())
             {
                 this.setFocus(false);
-                EntityManager.getInstance().tryToBuild(this.eConfigId);
+
+                if(ObjectFactory.getInstance().entities[eConfigId].isStructure){
+                    //we need to place it before we start construction.
+                    cursor.beginPlaceStructure(ObjectFactory.getInstance().entities[eConfigId]);
+                }
+                else{
+                    EntityManager.getInstance().tryToBuild(this.eConfigId);
+                }
             }
 
             //cursor is over me

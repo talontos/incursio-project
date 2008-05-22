@@ -35,6 +35,8 @@ namespace Incursio.Managers
 
         public PathFinder pathFinder;
 
+        public bool DRAW_OCCUPANCY_GRID = true;
+
         private MapManager(){
             keyPoints = new List<KeyPoint>();
         }

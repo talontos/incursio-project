@@ -28,7 +28,6 @@ namespace Incursio.Classes
 {
     public class MapBase
     {
-        public static bool DRAW_OCCUPANCY_GRID = true;
         //member variables
 
         //width/height, in cells
@@ -177,7 +176,7 @@ namespace Incursio.Classes
                 screenX = 0;
                 for (int i = minViewableX; i < maxViewableX; i++)
                 {
-                    if (DRAW_OCCUPANCY_GRID)
+                    if (MapManager.getInstance().DRAW_OCCUPANCY_GRID)
                     {
                         if (this.occupancyGrid[i, j] == (byte)0)
                             mask = Color.CornflowerBlue;
@@ -351,11 +350,16 @@ namespace Incursio.Classes
             return this.occupancyGrid[x, y];
         }
 
-        public void setSingleCellOccupancy(int pixX, int pixY, byte occupied)
+        public void setSingleCellOccupancy_pix(int pixX, int pixY, byte occupied)
         {
             int x, y;
             this.translatePixelToMapCell(pixX, pixY, out x, out y);
             this.occupancyGrid[x, y] = occupied;
+        }
+        
+        public void setSingleCellOccupancy_cell(int cellX, int cellY, byte occupied)
+        {
+            this.occupancyGrid[cellX, cellY] = occupied;
         }
 
         public int getCellDistance(Coordinate c1, Coordinate c2)

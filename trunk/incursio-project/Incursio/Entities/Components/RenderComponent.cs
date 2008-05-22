@@ -69,6 +69,7 @@ namespace Incursio.Entities.Components
         }
 
         public void updateBounds(){
+            //TODO: CALCULATE BOUNDS FROM *FRAME* WIDTH/HEIGHT
             Texture2D myRef = this.textures.still.South.texture;
 
             this.boundingBox = new Rectangle(
@@ -78,13 +79,7 @@ namespace Incursio.Entities.Components
                 myRef.Height
             );
         }
-
-        public void updateOccupancy(){
-            //TODO: CALCULATE OCCUPANCY SIZE FROM TEXTURE
-
-            //TODO: UPDATE OCCUPANCY
-        }
-
+        
         public void drawThyself(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
             if (this.bgEntity.movementComponent != null)
@@ -150,13 +145,22 @@ namespace Incursio.Entities.Components
             #region BEING_BUILT
             else if (this.bgEntity.currentState == State.EntityState.BeingBuilt)
             {
-                //TODO: draw construction?
+                //TODO: animate!
+                this.drawAnimatedTexture(ref spriteBatch, ref this.textures.still.BeingBuilt, ref onScreen, ref colorMask, ref frameTimer, ref FRAME_LENGTH);
             }
             #endregion
             #region BUILDING
             else if (this.bgEntity.currentState == State.EntityState.Building)
             {
                 this.drawAnimatedTexture(ref spriteBatch, ref this.textures.still.Building, ref onScreen, ref colorMask, ref frameTimer, ref FRAME_LENGTH);
+
+                //draw the entity currently being built
+                if(this.bgEntity.factoryComponent != null){
+                    if (this.bgEntity.factoryComponent.entityBeingBuilt.isStructure)
+                    { 
+                        this.bgEntity.factoryComponent.entityBeingBuilt.renderComponent.drawThyself(ref spriteBatch, 0, 0);
+                    }
+                }
             }
             #endregion
             #region DESTROYED
@@ -310,6 +314,19 @@ namespace Incursio.Entities.Components
                 this.drawStillTexture(ref spriteBatch, ref this.textures.still.South, ref onScreen, ref colorMask);
             }
             #endregion
+
+            //draw building, if necessary
+            if (this.bgEntity.factoryComponent != null)
+            {
+                if (this.bgEntity.currentState == State.EntityState.Building)
+                {
+                    if (this.bgEntity.factoryComponent.entityBeingBuilt.isStructure)
+                    {
+                        this.bgEntity.factoryComponent.entityBeingBuilt.renderComponent.drawThyself(ref spriteBatch, 0, 0);
+                    }
+                }
+            }
+        
         }
 
         public void drawSelectionOverlay(ref Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
