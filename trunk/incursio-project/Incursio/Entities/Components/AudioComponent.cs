@@ -32,7 +32,8 @@ namespace Incursio.Entities.Components
         }
 
         private void playSoundFromSet(List<string> set){
-            SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(set), false);
+            if(set.Count > 0)
+                SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(set), false);
         }
 
         public void playSelectionSound()

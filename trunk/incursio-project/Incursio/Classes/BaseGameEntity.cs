@@ -40,6 +40,7 @@ namespace Incursio.Classes
         public bool canAttack = false;
         public bool canMove = false;
         public bool isConstructor = false;
+        public bool isStructure = false;
 
         //BOOL VALUES for SPECIAL ENTITIES
         public bool isHero = false;

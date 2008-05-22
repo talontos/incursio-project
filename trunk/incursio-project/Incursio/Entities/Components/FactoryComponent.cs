@@ -14,19 +14,6 @@ namespace Incursio.Entities.Components
     {
         public int buildCostToTimeFactor = 9;
 
-        //TEMPORARY HARD-CODE-----------------
-        /*
-        public const int LIGHT_INFANTRY_BUILD_TIME = 5;
-        public const int HEAVY_INFANTRY_BUILD_TIME = 10;
-        public const int ARCHER_BUILD_TIME = 7;
-        public const int GUARD_TOWER_BUILD_TIME = 15;
-
-        public int COST_LIGHT_INFANTRY = EntityConfiguration.EntityPrices.COST_LIGHT_INFANTRY;
-        public int COST_HEAVY_INFANTRY = EntityConfiguration.EntityPrices.COST_HEAVY_INFANTRY;
-        public int COST_ARCHER = EntityConfiguration.EntityPrices.COST_ARCHER;
-        public int COST_GUARD_TOWER = EntityConfiguration.EntityPrices.COST_GUARD_TOWER;
-        */
-
         int newUnitPlacementX = 10;
         int newUnitPlacementY = 120;    //little bit of hard coding, but can't really help it here 
         //-------------------------------------
@@ -39,6 +26,8 @@ namespace Incursio.Entities.Components
         public Coordinate destination;
         public Coordinate newStructureCoords;
         public Coordinate spawnPoint;
+
+        public BaseGameEntity entityBeingBuilt = null;
 
         public List<EntityBuildOrder> buildOrders;
 
@@ -95,36 +84,39 @@ namespace Incursio.Entities.Components
             else
             {
                 Player owningPlayer = PlayerManager.getInstance().getPlayerById(this.bgEntity.owner);
-
-                if (toBeBuilt.location != null)
-                {
-                    //TODO: FIX FOR STRUCTURES
-                    /*if (toBeBuilt.entity == State.EntityName.GuardTower)
-                    {
-                        this.setNewStructureCoords(toBeBuilt.location);
-                    }
-                    else
-                    {
-                        this.setDestination(toBeBuilt.location);
-                    }
-                    */
-                    this.setDestination(toBeBuilt.location);
-                }
-                else if (this.destination != null)
-                {
-                    toBeBuilt.location = this.destination;
-                }
-                else
-                {
-                    //can't do it... :-(
-                    Console.WriteLine("FACTORY COMPONENT CANNOT BUILD: location and destination are null");
-                    return;
-                }
-
+                this.entityBeingBuilt = ObjectFactory.getInstance().create(toBeBuilt.entityId, owningPlayer.id);
                 BaseGameEntityConfiguration config = ObjectFactory.getInstance().entities[toBeBuilt.entityId];
 
                 if (owningPlayer.MONETARY_UNIT >= config.costToBuild)
                 {
+
+                    if (toBeBuilt.location != null)
+                    {
+                        //TODO: FIX FOR STRUCTURES
+                        if (entityBeingBuilt.isStructure)
+                        {
+                            this.setNewStructureCoords(toBeBuilt.location);
+                            this.entityBeingBuilt.currentState = State.EntityState.BeingBuilt;
+                            this.entityBeingBuilt.location = this.newStructureCoords;
+                        }
+                        else
+                        {
+                            this.setDestination(toBeBuilt.location);
+                        }
+
+                        this.setDestination(toBeBuilt.location);
+                    }
+                    else if (this.destination != null)
+                    {
+                        toBeBuilt.location = this.destination;
+                    }
+                    else
+                    {
+                        //can't do it... :-(
+                        Console.WriteLine("FACTORY COMPONENT CANNOT BUILD: location and destination are null");
+                        return;
+                    }
+
                     this.currentlyBuildingThis = config.className;
                     this.currentBuildForObjectFactory = config.classID;
 
@@ -160,6 +152,8 @@ namespace Incursio.Entities.Components
             if (this.buildProject.keyPoint != null && this.buildProject.keyPoint.owner != this.bgEntity.owner)
             {
                 //can't build anymore
+                this.entityBeingBuilt = null;
+
                 timeBuilt = 0;
                 timeRequired = 0;
                 this.bgEntity.setIdle();
@@ -182,11 +176,12 @@ namespace Incursio.Entities.Components
 
             if (this.timeBuilt >= this.timeRequired)
             {
-                //if (buildProject.entity != State.EntityName.GuardTower)
-                //{
-                    BaseGameEntity temp = (EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.bgEntity.owner));
-                    temp.setLocation(this.spawnPoint);
-                    temp.issueSingleOrder(new MoveCommand(this.destination));
+                if (!this.entityBeingBuilt.isStructure)
+                {
+                    //BaseGameEntity temp = (EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.bgEntity.owner));
+                    EntityManager.getInstance().addToBank(this.entityBeingBuilt);
+                    this.entityBeingBuilt.setLocation(this.spawnPoint);
+                    this.entityBeingBuilt.issueSingleOrder(new MoveCommand(this.destination));
                     timeBuilt = 0;
                     timeRequired = 0;
                     this.bgEntity.setIdle();
@@ -203,25 +198,25 @@ namespace Incursio.Entities.Components
                     PlayerManager.getInstance().notifyPlayer(
                         this.bgEntity.owner,
                         new GameEvent(State.EventType.CREATION_COMPLETE,
-                            temp,
+                            this.entityBeingBuilt,
                             "",
                             "Unit Ready",
-                            temp.location
+                            this.entityBeingBuilt.location
                         )
                     );
 
-                    temp.playEnterBattlefieldSound();
-                //}
+                    this.entityBeingBuilt.playEnterBattlefieldSound();
+                }
                 //TODO: REWORK FOR STRUCTURES!
-                /*
                 else
                 {
-                    GuardTowerStructure temp = (EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.bgEntity.owner) as GuardTowerStructure);
-                    temp.setLocation(this.newStructureCoords);
+                    //GuardTowerStructure temp = (EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.bgEntity.owner) as GuardTowerStructure);
+                    //temp.setLocation(this.newStructureCoords);
+                    EntityManager.getInstance().addToBank(this.entityBeingBuilt);
                     timeBuilt = 0;
                     timeRequired = 0;
                     this.bgEntity.setIdle();
-                    this.currentBuildForObjectFactory = "IDLE";
+                    this.currentBuildForObjectFactory = -1;
                     this.currentlyBuildingThis = "IDLE";
 
                     if (this.buildProject.keyPoint != null)
@@ -230,18 +225,19 @@ namespace Incursio.Entities.Components
                     }
 
                     this.buildProject = null;
+                    this.entityBeingBuilt = null;
 
                     PlayerManager.getInstance().notifyPlayer(
                         this.bgEntity.owner,
                         new GameEvent(State.EventType.CREATION_COMPLETE,
-                            temp,
+                            this.entityBeingBuilt,
                             SoundManager.getInstance().AudioCollection.messages.towerBuilt,
                             "Construction Complete",
                             this.bgEntity.location
                         )
                     );
                 }
-                */
+                
             }
             else
             {
