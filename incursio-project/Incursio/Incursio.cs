@@ -151,6 +151,8 @@ namespace Incursio
 
             MessageManager.getInstance().setFont(Content.Load<SpriteFont>("Arial"));
 
+            SoundManager.getInstance().initializeSoundManager();
+
             FontPos = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
             
             // create cursor

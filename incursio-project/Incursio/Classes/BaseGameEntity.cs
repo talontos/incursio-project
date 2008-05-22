@@ -63,10 +63,10 @@ namespace Incursio.Classes
 
         public BaseGameEntity(){
             orders = new List<BaseCommand>();
-
+            /*
             //TODO: REMOVE
             //TEMPORARY!!!!!
-            renderComponent = new RenderComponent(this);
+            renderComponent = new RenderComponent(this);*/
         }
 
         /// <summary>
@@ -244,16 +244,36 @@ namespace Incursio.Classes
             }
         }
 
+        public void updateOccupancy(bool occupied){
+            this.updateOccupancy((byte)(occupied ? 0 : 1));
+        }
+
         /// <summary>
         /// Sets the location of this entity in the current map as occupied (true) or unocupied (false)
         /// </summary>
         /// <param name="occupied"></param>
-        public virtual void updateOccupancy(bool occupied){
-            MapManager.getInstance().currentMap.setSingleCellOccupancy(location.x, location.y,
-                (occupied ? (byte)0 : (byte)1));
+        public void updateOccupancy(byte open)
+        {
 
-            MapManager.getInstance().currentMap.setSingleCellEntity(location.x, location.y, 
-                (occupied ? this.keyId : -1));
+            //if my origin is my upper-left corner, loop over cells that my box covers
+            int x1, y1, x2, y2, y;
+            MapManager.getInstance().currentMap.translatePixelToMapCell(this.location.x, this.location.y, out x1, out y1);
+
+            x2 = x1 + this.renderComponent.boundingBox.Width / MapManager.TILE_WIDTH;
+            y2 = y1 + this.renderComponent.boundingBox.Height / MapManager.TILE_HEIGHT;
+
+            //TODO: THIS DOESN'T WORK OUT AS WELL WITH LARGE ENTITES
+
+            while (x1 <= x2)
+            {
+                y = y1;
+                while (y <= y2)
+                {
+                    MapManager.getInstance().currentMap.setSingleCellOccupancy_cell((x1), (y), open);
+                    y++;
+                }
+                x1++;
+            }
         }
 
         public virtual void setIdle(){

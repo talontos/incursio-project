@@ -18,6 +18,8 @@ using Microsoft.Xna.Framework.Input;
 
 using Incursio.Managers;
 using Incursio.Entities;
+using Incursio.Classes;
+using Incursio.Utils;
 
 namespace Incursio.Interface
 {
@@ -33,6 +35,8 @@ namespace Incursio.Interface
 
       public string tooltip;
       public bool placingStructure = false;
+      public int placingClassId = -1;
+      public BaseGameEntity structure = null;
 
       public static Cursor getInstance(){
           if (instance == null)
@@ -75,6 +79,16 @@ namespace Incursio.Interface
           {
               this.isRightPressed = false;
           }
+
+          if(this.placingStructure){
+
+              this.structure.location.x = (int)this.pos.X;
+              this.structure.location.y = (int)this.pos.Y;
+
+              if(this.isRightPressed){
+                this.finishPlaceStructure();
+              }
+          }
       }
 
       public void Draw(SpriteBatch batch)
@@ -90,7 +104,12 @@ namespace Incursio.Interface
           {
               if (this.isLeftPressed == false && this.isRightPressed == false)
               {
-                  batch.Draw(TextureBank.InterfaceTextures.cursor, this.pos, Color.White);
+                  if(this.placingStructure){
+                      this.structure.renderComponent.drawThyself(ref batch, 0, 0);
+                  }
+                  else{
+                    batch.Draw(TextureBank.InterfaceTextures.cursor, this.pos, Color.White);
+                  }
               }
               else if (this.isLeftPressed == true || this.isRightPressed == true)
               {
@@ -110,12 +129,17 @@ namespace Incursio.Interface
       public void beginPlaceStructure(BaseGameEntityConfiguration c){
           if(c.isStructure){
               //TODO: we need to get either an image to show, or a bounding box/occupancy to show
+              this.structure = ObjectFactory.getInstance().create(c.classID, PlayerManager.getInstance().currentPlayerId);
+              this.placingClassId = c.classID;
               this.placingStructure = true;
           }
       }
 
       public void finishPlaceStructure(){
-
+          EntityManager.getInstance().tryToBuild(this.placingClassId, this.pos);
+          this.placingStructure = false;
+          this.structure = null;
+          this.placingClassId = -1;
       }
 
       public Vector2 getPos()

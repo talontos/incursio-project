@@ -460,15 +460,6 @@ namespace Incursio.Managers
                     }
 
                 }
-                //TODO: Set the AudioCollection "GameAudio" to SoundManager's AudioCollection property.
-                //      if no GameAudio collection exists, pass a null to SoundManager.
-
-                //TODO: MAP ENTITIES TO THEIR TEXTURES & AUDIO
-                    //this could be done already if we store the list throughout the game..
-
-                //TODO: ADD TEXTURES TO BANK
-                    //do we really need to store these configurations if the entities have them already?
-                    //perhaps when we load terrain textures from XML...but not entities
 
                 //Adding the entity list to the object factory
                 if((entityList != null)&&(entityList.Count > 0)) 

@@ -28,12 +28,21 @@ namespace Incursio.Entities.TextureCollections
                 portrait = Texture2D.FromFile(Incursio.getInstance().spriteBatch.GraphicsDevice,
                     global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + portraitName);
             }
+            else
+            {
+                //TODO: GET A DEFAULT portrain
+                portrait = global::Incursio.Managers.TextureBank.InterfaceTextures.lightInfantryPortrait;
+            }
 
             if (iconName != null && iconName.Length > 0)
             {
                 //TODO: We will probably need a full path...
                 icon = Texture2D.FromFile(Incursio.getInstance().spriteBatch.GraphicsDevice,
                     global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + iconName);
+            }
+            else{
+                //TODO: GET A DEFAULT ICON
+                icon = global::Incursio.Managers.TextureBank.InterfaceTextures.lightInfantryIcon;
             }
         }
 

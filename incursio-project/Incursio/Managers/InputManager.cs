@@ -18,6 +18,7 @@ using Microsoft.Xna.Framework;
 
 using Incursio.Classes;
 using Incursio.Utils;
+using Incursio.Interface;
 
 namespace Incursio.Managers
 {
@@ -47,7 +48,7 @@ namespace Incursio.Managers
         //public int dragDetectCounter = 0;
         public bool dragging = false;
 
-        public bool positioningTower = false;
+        //public bool positioningTower = false;
 
         #endregion
 
@@ -82,9 +83,7 @@ namespace Incursio.Managers
             if(this.keyPressed(Keys.Enter)){
                 if(enterStringMode){
                     //perform action
-                    if(this.enteredString.Equals("YAR")){
-                        Incursio.getInstance().exitGame();
-                    }
+                    DebugUtil.matchCommand(this.enteredString);
                 }
 
                 this.enterStringMode = !this.enterStringMode;
@@ -126,6 +125,8 @@ namespace Incursio.Managers
             }
 
             //Entity construction
+            //TODO: BUILD HOTKEYS!!!!
+            /*
             if (this.keyPressed(Keys.L))
             {
                 EntityManager.getInstance().tryToBuild(State.EntityName.LightInfantry);
@@ -147,6 +148,7 @@ namespace Incursio.Managers
                 positioningTower = true;
                 TextureBank.InterfaceTextures.cursorEvent = TextureBank.EntityTextures.guardTowerTexturePlayer;
             }
+            */
 
             if (this.keyPressed(Keys.C))
             {
@@ -298,11 +300,9 @@ namespace Incursio.Managers
                 {
 
                 }
-                else if (this.positioningTower)
+                else if (Cursor.getInstance().placingStructure)
                 {
-                    EntityManager.getInstance().tryToBuild(State.EntityName.GuardTower, point);
-                    this.positioningTower = false;
-                    TextureBank.InterfaceTextures.cursorEvent = null;
+                    Cursor.getInstance().finishPlaceStructure();
                 }
                 else
                 {
@@ -411,6 +411,8 @@ namespace Incursio.Managers
             this.MOVE_UP = false;
         }
 
+        //TODO: rework to allow for punctuation
+        //perhaps a big-ass switch?
         private string getPressedCharacter(){
             Keys[] keys = keyStateCurrent.GetPressedKeys();
             for(int i = 0; i < keys.Length; i++){

@@ -96,6 +96,7 @@
 		<Still>
 			<south file="Fort_friendly.png"/>
 			<building file="Fort_Friendly_Building.png" frameWidth="64" frameHeight="64"/>
+			<beingBuilt file="Fort_Friendly.png"/>
 		</Still>
 		<Damaged>
 			<destroyed file="Fort_Friendly_exploded_animation.png" frameWidth="64" frameHeight="64"/>
@@ -109,9 +110,24 @@
 		</Still>
 	</TextureCollection>
 
+	<TextureCollection name="Mage Tower" portrait="TowerPortrait.png" icon="TowerIcon.png">
+		<Still>
+			<south file="MageTower.png"/>
+			<beingBuilt file="MageTower.png"/>
+		</Still>
+		<Attacking>
+			<east file="MageTower.png"/>
+			<west file="MageTower.png"/>
+		</Attacking>
+		<Damaged>
+			<exploded file="Tower_exploded.png"/>
+		</Damaged>
+	</TextureCollection>
+
 	<TextureCollection name="Guard Tower" portrait="TowerPortrait.png" icon="TowerIcon.png">
 		<Still>
 			<south file="Tower_friendly.png"/>
+			<beingBuilt file="Tower_friendly.png"/>
 		</Still>
 		<Attacking>
 			<east file="Tower_friendly_attacking.png"/>
