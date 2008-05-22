@@ -87,7 +87,7 @@ namespace Incursio.Entities.Components
 
                     this.bgEntity.playAttackSound();
 
-                    //TODO: DRAW ARROWS
+                    //TODO: MAKE PROJECTILES GIVE DAMAGE, NOT THIS
                     if(this.attackRange > 1){
                         //shoot your projectile!
                         this.projectile.startProjectile(bgEntity.location.toVector2(), target.location.toVector2());
@@ -98,8 +98,6 @@ namespace Incursio.Entities.Components
                     }
                     //if we just killed the thing
 
-                    //if (target is Unit && (target as Unit).getCurrentState() == State.UnitState.Dead ||
-                    //   target is Structure && (target as Structure).getCurrentState() == State.EntityState.Destroyed)
                     if (target.isDead())
                     {
                         //NOTE: killedTarget needs to be performed BEFORE

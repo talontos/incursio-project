@@ -15,7 +15,7 @@ namespace Incursio.Entities.Projectiles
 
         public Vector2 pos = new Vector2(-1, -1);
         public int LENGTH = 5;
-        public int SPEED = 5;
+        public int SPEED = 7;
         public bool draw = false;
         public Vector2 onScreen = new Vector2(-1, -1);
         public double angle = 0;
@@ -46,7 +46,7 @@ namespace Incursio.Entities.Projectiles
         }
 
         private void finishProjectile(){
-
+            //cell take damage?
         }
 
         public void updatePosition()

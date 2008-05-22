@@ -92,8 +92,6 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.archerAttackingWest = Content.Load<Texture2D>(@"Archer_Attacking_West");
             TextureBank.EntityTextures.archerDeathEast = Content.Load<Texture2D>(@"Archer_Death_Right");
             TextureBank.EntityTextures.archerDeathWest = Content.Load<Texture2D>(@"Archer_Death_Left");
-
-            TextureBank.EntityTextures.arrow = Content.Load<Texture2D>(@"Arrow");
             
             TextureBank.EntityTextures.heroEast = Content.Load<Texture2D>(@"HeroEast");
             TextureBank.EntityTextures.heroWest = Content.Load<Texture2D>(@"HeroWest");
@@ -124,6 +122,9 @@ namespace Incursio.Managers
             TextureBank.EntityTextures.controlPointComputer = Content.Load<Texture2D>(@"ControlPointEnemy");
 
             */
+
+            TextureBank.EntityTextures.arrow = Content.Load<Texture2D>(@"Arrow");
+
             //Load Interface textures
             TextureBank.InterfaceTextures.headsUpDisplay = Content.Load<Texture2D>(@"utilityBarUnderlay");
             TextureBank.InterfaceTextures.resourceDisplay = Content.Load<Texture2D>(@"resourceBarUnderlay");
