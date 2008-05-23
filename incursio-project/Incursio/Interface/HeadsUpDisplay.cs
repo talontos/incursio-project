@@ -203,44 +203,8 @@ namespace Incursio.Classes
             if (numUnitsSelected == 1)
             {
                 //for the unit's display name
-                spriteBatch.DrawString(font, selectedUnits[0].entityName, new Vector2(572, height - 118), Color.White, 0, font.MeasureString(selectedUnits[0].entityName) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                spriteBatch.DrawString(font, selectedUnits[0].entityName + selectedUnits[0].keyId, new Vector2(572, height - 118), Color.White, 0, font.MeasureString(selectedUnits[0].entityName) / 2, 1.0f, SpriteEffects.None, 0.5f);
                 
-                /*
-                if (selectedUnits[0].getType() == State.EntityName.LightInfantry)
-                {
-                    spriteBatch.DrawString(font, "Light Infantry", new Vector2(572, height - 118), Color.White, 0, font.MeasureString("Light Infantry") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.Archer)
-                {
-                    spriteBatch.DrawString(font, "Archer", new Vector2(572, height - 118), Color.White, 0, font.MeasureString("Archer") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.HeavyInfantry)
-                {
-                    spriteBatch.DrawString(font, "Heavy Infantry", new Vector2(572, height - 118), Color.White, 0, font.MeasureString("Heavy Infantry") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.Hero)
-                {
-                    string name = (selectedUnits[0] as Hero).name;
-                    spriteBatch.DrawString(font, name, new Vector2(572, height - 118), Color.White, 0, font.MeasureString(name) / 2, 1.0f, SpriteEffects.None, 0.5f);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.ControlPoint)
-                {
-                    spriteBatch.DrawString(font, "Control Point", new Vector2(572, height - 118), Color.White, 0, font.MeasureString("Control Point") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.Camp)
-                {
-                    spriteBatch.DrawString(font, "Camp", new Vector2(572, height - 118), Color.White, 0, font.MeasureString("Camp") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.GuardTower)
-                {
-                    spriteBatch.DrawString(font, "Guard Tower", new Vector2(572, height - 118), Color.White, 0, font.MeasureString("Guard Tower") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.ControlPoint)
-                {
-                    spriteBatch.DrawString(font, "Control Point", new Vector2(572, height - 118), Color.White, 0, font.MeasureString("Control Point") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                }
-                */
-
                 //stats!
                 spriteBatch.DrawString(font, "Health: " + selectedUnits[0].getHealth(), new Vector2(572, height - 90), Color.White, 0, font.MeasureString("Health: XXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
 

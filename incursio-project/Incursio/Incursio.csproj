@@ -78,7 +78,7 @@
   <ItemGroup>
     <None Include="Campaign\Capital.cs" />
     <None Include="Campaign\CreditsMap.cs" />
-    <None Include="Campaign\Inland.cs" />
+    <Compile Include="Campaign\Inland.cs" />
     <None Include="Campaign\Port.cs" />
     <None Include="Campaign\RandomMap.cs" />
     <Compile Include="Campaign\TestMap.cs" />

@@ -63,10 +63,6 @@ namespace Incursio.Classes
 
         public BaseGameEntity(){
             orders = new List<BaseCommand>();
-            /*
-            //TODO: REMOVE
-            //TEMPORARY!!!!!
-            renderComponent = new RenderComponent(this);*/
         }
 
         /// <summary>
@@ -244,15 +240,11 @@ namespace Incursio.Classes
             }
         }
 
-        public void updateOccupancy(bool occupied){
-            this.updateOccupancy((byte)(occupied ? 0 : 1));
-        }
-
         /// <summary>
         /// Sets the location of this entity in the current map as occupied (true) or unocupied (false)
         /// </summary>
         /// <param name="occupied"></param>
-        public void updateOccupancy(byte open)
+        public void updateOccupancy(bool open)
         {
 
             //if my origin is my upper-left corner, loop over cells that my box covers
@@ -269,7 +261,8 @@ namespace Incursio.Classes
                 y = y1;
                 while (y <= y2)
                 {
-                    MapManager.getInstance().currentMap.setSingleCellOccupancy_cell((x1), (y), open);
+                    MapManager.getInstance().currentMap.setSingleCellOccupancy_cell((x1), (y), (byte)(open ? 0 : 1));
+                    MapManager.getInstance().currentMap.setSingleCellEntity_cell(x1, y, (open ? this.keyId: -1));
                     y++;
                 }
                 x1++;
@@ -292,7 +285,6 @@ namespace Incursio.Classes
         /// <param name="FRAME_LENGTH"></param>
         public void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
-            //TODO: USE COMPONENT - ie REMOVE FROM SUBCLASSES
             if(this.renderComponent != null)
                 this.renderComponent.drawThyself(ref spriteBatch, frameTimer, FRAME_LENGTH);
         }

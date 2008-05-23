@@ -36,6 +36,16 @@ namespace Incursio.Utils
             
         }
 
+        public BaseGameEntity create(string entityName, int owningPlayerID){
+            for(int i = 0; i < this.entities.Count; i++){
+                if(entities[i].className.Equals(entityName)){
+                    return this.create(i, owningPlayerID);
+                }
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Creates an instance a class using a BaseGameEntityConfiguration stored with ID 'classID'
         /// </summary>

@@ -17,6 +17,7 @@ using Incursio.Classes;
 using Incursio.Managers;
 using Incursio.Utils;
 using Incursio.Classes.Terrain;
+using Incursio.Entities;
 
 namespace Incursio.Campaign
 {
@@ -36,51 +37,36 @@ namespace Incursio.Campaign
 
             EntityManager entityManager = EntityManager.getInstance();
 
-
             base.initializeMap();
 
+            //get hero, camp, & cp ids
+            int heroId = 0, campId = 0, cpId = 0;
+            foreach(BaseGameEntityConfiguration c in ObjectFactory.getInstance().entities){
+                if (c.isHero)
+                    heroId = c.classID;
+                else if (c.isMainBase)
+                    campId = c.classID;
+                else if (c.isControlPoint)
+                    cpId = c.classID;
+            }
+
+
+
             //testing unit creation/placement/moving///
-            Hero playerHero = (Hero)entityManager.createNewEntity("Incursio.Classes.Hero", PlayerManager.getInstance().currentPlayerId);
-            Hero compHero = (Hero)entityManager.createNewEntity("Incursio.Classes.Hero", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity playerHero = entityManager.createNewEntity(heroId, PlayerManager.getInstance().currentPlayerId);
+            BaseGameEntity compHero = entityManager.createNewEntity(heroId, PlayerManager.getInstance().computerPlayerId);
 
-            CampStructure playerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", PlayerManager.getInstance().currentPlayerId);
-            CampStructure computerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity playerCamp = entityManager.createNewEntity(campId, PlayerManager.getInstance().currentPlayerId);
+            BaseGameEntity computerCamp = entityManager.createNewEntity(campId, PlayerManager.getInstance().computerPlayerId);
 
-            //LightInfantryUnit infUnit = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", PlayerManager.getInstance().computerPlayerId);
-            HeavyInfantryUnit heavyUnit = (HeavyInfantryUnit)entityManager.createNewEntity("Incursio.Classes.HeavyInfantryUnit", PlayerManager.getInstance().currentPlayerId);
+            BaseGameEntity cp1 = entityManager.createNewEntity(cpId, PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity cp2 = entityManager.createNewEntity(cpId, PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity cp3 = entityManager.createNewEntity(cpId, PlayerManager.getInstance().currentPlayerId);
+            BaseGameEntity cp4 = entityManager.createNewEntity(cpId, PlayerManager.getInstance().currentPlayerId);
 
-            ControlPoint cp1 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
-            ControlPoint cp2 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
-            ControlPoint cp3 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().currentPlayerId);
-            ControlPoint cp4 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().currentPlayerId);
-
-            GuardTowerStructure gth1 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", PlayerManager.getInstance().currentPlayerId);
-            GuardTowerStructure gth2 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", PlayerManager.getInstance().currentPlayerId);
-            GuardTowerStructure gth3 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", PlayerManager.getInstance().currentPlayerId);
-
-            GuardTowerStructure gt1 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", PlayerManager.getInstance().computerPlayerId);
-            GuardTowerStructure gt2 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", PlayerManager.getInstance().computerPlayerId);
-            //GuardTowerStructure gt3 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", PlayerManager.getInstance().computerPlayerId);
-            GuardTowerStructure gt4 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", PlayerManager.getInstance().computerPlayerId);
-            GuardTowerStructure gt5 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", PlayerManager.getInstance().computerPlayerId);
-            GuardTowerStructure gt6 = (GuardTowerStructure)entityManager.createNewEntity("Incursio.Classes.GuardTowerStructure", PlayerManager.getInstance().computerPlayerId);
-
-            gth1.setLocation(new Coordinate(75, 700));
-            gth2.setLocation(new Coordinate(700, 100));
-            gth3.setLocation(new Coordinate(600, 500));
-
-            gt1.setLocation(new Coordinate(900, 900));
-            gt2.setLocation(new Coordinate(300, 1500));
-            //gt3.setLocation(new Coordinate(1400, 400));
-            gt4.setLocation(new Coordinate(1500, 1300));
-            gt5.setLocation(new Coordinate(1300, 1600));
-            gt6.setLocation(new Coordinate(1775, 1200));
-
-            //infUnit.setLocation(new Coordinate(700, 100));
-            heavyUnit.setLocation(new Coordinate(300, 100));
             playerHero.setLocation(new Coordinate(150, 500));
             compHero.setLocation(new Coordinate(1600, 1600));
-            compHero.setHero_Badass();
+            //compHero.setHero_Badass();
 
             playerCamp.setLocation(new Coordinate(100, 400));
             computerCamp.setLocation(new Coordinate(1700, 1700));
@@ -89,9 +75,6 @@ namespace Incursio.Campaign
             cp2.setLocation(new Coordinate(300, 1700));
             cp3.setLocation(new Coordinate(1700, 300));
             cp4.setLocation(new Coordinate(500, 400));
-
-            playerCamp.setHealth(350);
-            computerCamp.setHealth(350);
         }
 
         public override void loadTerrain()

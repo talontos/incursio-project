@@ -244,6 +244,9 @@ namespace Incursio
             //draw the cursor
             cursor.Draw(spriteBatch);
 
+            //draw text, if needed
+            InputManager.getInstance().Draw(spriteBatch);
+
             spriteBatch.End();
         }
 

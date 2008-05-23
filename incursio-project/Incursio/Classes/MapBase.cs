@@ -185,6 +185,13 @@ namespace Incursio.Classes
                     }
 
                     spriteBatch.Draw(tileGrid[i, j].texture, new Rectangle(screenX * TILE_WIDTH, screenY * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT), mask);
+
+                    if (MapManager.getInstance().DRAW_ENTITY_GRID)
+                    {
+                        if(entityGrid[i, j] > -1)
+                            spriteBatch.DrawString(Incursio.getInstance().getFont_Arial(), this.entityGrid[i, j].ToString(), new Vector2(screenX * TILE_WIDTH, screenY * TILE_HEIGHT), Color.Black);
+                    }
+                    
                     screenX++;
                 }
                 screenY++;
@@ -388,11 +395,11 @@ namespace Incursio.Classes
             return this.entityGrid[x, y];
         }
 
-        public void setSingleCellEntity(int pixX, int pixY, int occupant)
+        public void setSingleCellEntity_cell(int cellX, int cellY, int occupant)
         {
-            int x, y;
-            this.translatePixelToMapCell(pixX, pixY, out x, out y);
-            this.entityGrid[x, y] = occupant;
+            //int x, y;
+            //this.translatePixelToMapCell(pixX, pixY, out x, out y);
+            this.entityGrid[cellX, cellY] = occupant;
         }
 
         public void translateMapCellToPixel(int indexX, int indexY, out int pixX, out int pixY)

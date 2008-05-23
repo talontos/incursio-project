@@ -130,6 +130,7 @@ namespace Incursio.Interface
           if(c.isStructure){
               //TODO: we need to get either an image to show, or a bounding box/occupancy to show
               this.structure = ObjectFactory.getInstance().create(c.classID, PlayerManager.getInstance().currentPlayerId);
+              this.structure.location = new Coordinate(this.pos);
               this.placingClassId = c.classID;
               this.placingStructure = true;
           }
