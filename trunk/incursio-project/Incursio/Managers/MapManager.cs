@@ -35,7 +35,8 @@ namespace Incursio.Managers
 
         public PathFinder pathFinder;
 
-        public bool DRAW_OCCUPANCY_GRID = true;
+        public bool DRAW_OCCUPANCY_GRID = false;
+        public bool DRAW_ENTITY_GRID = false;
 
         private MapManager(){
             keyPoints = new List<KeyPoint>();
@@ -74,7 +75,7 @@ namespace Incursio.Managers
             }
 
             //TEMPORARY
-            currentMap = new TestMap();
+            currentMap = new Inland();
 
             this.pathFinder = new PathFinder(currentMap.occupancyGrid);
             MovableObject.Initalize(currentMap.width, currentMap.TILE_WIDTH);

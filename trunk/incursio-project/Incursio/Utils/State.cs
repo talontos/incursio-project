@@ -139,6 +139,7 @@ namespace Incursio
             LEVEL_UP,
             GAIN_RESOURCE,
             GAME_OVER_MAN,
+            CHAT_MESSAGE,
         }
 
         public enum ThreatLevel{

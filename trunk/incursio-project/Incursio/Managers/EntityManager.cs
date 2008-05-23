@@ -440,8 +440,23 @@ namespace Incursio.Managers
             }
         }
 
+        public BaseGameEntity createNewEntity(string entityName, int player){
+            BaseGameEntity product = ObjectFactory.getInstance().create(entityName, player);
+            if (product == null)
+                return null;
+
+            product.keyId = nextKeyId;
+            this.entityBank.Insert(nextKeyId++, product);
+
+            return product;
+
+        }
+
         public BaseGameEntity createNewEntity(int entityClassId, int player){
             BaseGameEntity product = ObjectFactory.getInstance().create(entityClassId, player);
+            if (product == null)
+                return null;
+
             product.keyId = nextKeyId;
             this.entityBank.Insert(nextKeyId++, product);
 

@@ -20,9 +20,11 @@ namespace Incursio.Entities.Projectiles
         public Vector2 onScreen = new Vector2(-1, -1);
         public double angle = 0;
         public Vector2 destination = new Vector2(-1, -1);
+        public int splashRange = 0;
 
         public RenderComponent renderComponent;
 
+        //TODO: LOAD PROJECTILES FROM XML
         public BaseProjectile(){
             texture = global::Incursio.Managers.TextureBank.EntityTextures.arrow;
             this.renderComponent = new RenderComponent(this);

@@ -19,6 +19,7 @@ using Microsoft.Xna.Framework;
 using Incursio.Classes;
 using Incursio.Utils;
 using Incursio.Interface;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Incursio.Managers
 {
@@ -67,7 +68,7 @@ namespace Incursio.Managers
             keyStateCurrent = Keyboard.GetState();
 
             if(enterStringMode){
-                this.enteredString += this.getPressedCharacter();
+                this.processTextInput();
                 Console.WriteLine(this.enteredString);
             }
 
@@ -98,6 +99,12 @@ namespace Incursio.Managers
             //save states for previous
             mouseStatePrev = mouseStateCurrent;
             keyStatePrev = keyStateCurrent;
+        }
+
+        public void Draw(SpriteBatch spriteBatch){
+            if(this.enterStringMode){
+                spriteBatch.DrawString(Incursio.getInstance().getFont_Arial(), (":" + this.enteredString + "_"), new Vector2(300, 500), Color.Black);
+            }
         }
 
         private void Update_PlayState(GameTime gameTime){
@@ -411,18 +418,139 @@ namespace Incursio.Managers
             this.MOVE_UP = false;
         }
 
-        //TODO: rework to allow for punctuation
-        //perhaps a big-ass switch?
-        private string getPressedCharacter(){
+        private void processTextInput(){
             Keys[] keys = keyStateCurrent.GetPressedKeys();
-            for(int i = 0; i < keys.Length; i++){
-                if(this.keyPressed(keys[i])){
-                    string charString = keys[i].ToString();
-                    if(charString.Length < 2)
-                        return this.shifting() ? keys[i].ToString().ToUpper() : keys[i].ToString().ToLower();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (keys[i] == Keys.Back || keys[i] == Keys.Delete)
+                {
+                    if (this.enteredString.Length > 0)
+                        this.enteredString = this.enteredString.Remove(enteredString.Length - 1); 
+                }
+                else{
+                    if(this.keyPressed(keys[i])){
+                        switch(keys[i])
+                        {
+                            #region PUNCTUATION KEYS
+                            case Keys.Space:
+                                this.enteredString += " ";
+                                break;
+
+                            case Keys.Multiply: 
+                                this.enteredString += "*";
+                                break;
+
+                            case Keys.Decimal: case Keys.OemPeriod:
+                                this.enteredString += ".";
+                                break;
+
+                            case Keys.OemComma:
+                                this.enteredString += ",";
+                                break;
+
+                            case Keys.Divide:
+                                this.enteredString += "/";
+                                break;
+
+                            case Keys.OemBackslash:
+                                this.enteredString += "\\";
+                                break;
+
+                            case Keys.OemMinus: case Keys.Subtract:
+                                this.enteredString += "-";
+                                break;
+                            
+                            case Keys.OemOpenBrackets:
+                                this.enteredString += "[";
+                                break;
+                        
+                            case Keys.OemCloseBrackets:
+                                this.enteredString += "]";
+                                break;
+
+                            case Keys.OemPipe:
+                                this.enteredString += "|";
+                                break;
+
+                            case Keys.OemQuestion:
+                                this.enteredString += "?";
+                                break;
+
+                            case Keys.OemQuotes:
+                                this.enteredString += "\"";
+                                break;
+
+                            case Keys.OemSemicolon:
+                                this.enteredString += ";";
+                                break;
+
+                            case Keys.OemTilde:
+                                this.enteredString += "~";
+                                break;
+                            #endregion
+
+                            #region NUMBER KEYS
+                            case Keys.D0: case Keys.NumPad0:
+                                this.enteredString += "0";
+                                break;
+
+                            case Keys.D1: case Keys.NumPad1:
+                                this.enteredString += "1";
+                                break;
+
+                            case Keys.D2: case Keys.NumPad2:
+                                this.enteredString += "2";
+                                break;
+
+                            case Keys.D3: case Keys.NumPad3:
+                                this.enteredString += "3";
+                                break;
+
+                            case Keys.D4: case Keys.NumPad4:
+                                this.enteredString += "4";
+                                break;
+
+                            case Keys.D5: case Keys.NumPad5:
+                                this.enteredString += "5";
+                                break;
+
+                            case Keys.D6: case Keys.NumPad6:
+                                this.enteredString += "6";
+                                break;
+
+                            case Keys.D7: case Keys.NumPad7:
+                                this.enteredString += "7";
+                                break;
+
+                            case Keys.D8: case Keys.NumPad8:
+                                this.enteredString += "8";
+                                break;
+
+                            case Keys.D9: case Keys.NumPad9:
+                                this.enteredString += "9";
+                                break;
+                            #endregion
+
+                            #region ALPHA KEYS
+                            case Keys.A: case Keys.B: case Keys.C: case Keys.D:
+                            case Keys.E: case Keys.F: case Keys.G: case Keys.H:
+                            case Keys.I: case Keys.J: case Keys.K: case Keys.L:
+                            case Keys.M: case Keys.N: case Keys.O: case Keys.P:
+                            case Keys.Q: case Keys.R: case Keys.S: case Keys.T:
+                            case Keys.U: case Keys.V: case Keys.W: case Keys.X:
+                            case Keys.Y: case Keys.Z:
+                                this.enteredString += (this.shifting() ? keys[i].ToString().ToUpper() : keys[i].ToString().ToLower());
+                                break;
+                            #endregion
+                        
+                            //DEBUGGING
+                            default:
+                                //this.enteredString += keys[i].ToString();
+                                break;
+                        }
+                    }
                 }
             }
-            return "";
         }
     }
 }
