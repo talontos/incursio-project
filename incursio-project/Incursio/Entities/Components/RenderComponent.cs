@@ -346,6 +346,7 @@ namespace Incursio.Entities.Components
 
             
             //TODO: THESE NUMBERS WILL HAVE TO BE MODIFIED TO CALCULATE DYNAMICALLY
+            //GET A REFERENCE TEXTURE TO REPLACE (SOMEHOW) 10, 7, 20, AND 15!
             int xOffSet = (int)(this.textures.still.South.texture.Width / 2) + 10;
             int yOffSet = (int)(this.textures.still.South.texture.Height * 0.80) + 7;
             int width = this.textures.still.South.texture.Width + 20;

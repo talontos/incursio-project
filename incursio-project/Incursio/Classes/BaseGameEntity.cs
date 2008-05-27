@@ -48,7 +48,11 @@ namespace Incursio.Classes
         public bool isControlPoint = false;
         public bool isTurret = false;
 
-        protected List<BaseCommand> orders;
+        private List<BaseCommand> orders;
+
+        private int TIME_DEAD_UNTIL_DESPAWN = 5;
+        private int deadTimer = 0;
+        private bool playedDeathSound = false;
 
         public RenderComponent renderComponent;
         public MovementComponent movementComponent;
@@ -72,7 +76,8 @@ namespace Incursio.Classes
         /// <param name="myRef">Mostly a hack, used for executing commands.  It is a reference of 'this'</param>
         public virtual void Update(GameTime gameTime, ref BaseGameEntity myRef){
             if (this.isDead()){
-                this.updateOccupancy(false);
+                //this.updateOccupancy(false);
+                this.die();
                 return;
             }
 
@@ -108,6 +113,8 @@ namespace Incursio.Classes
             if (healComponent != null)
                 healComponent.Update(gameTime);
             #endregion
+
+            this.updateOccupancy(true);
 
             this.processOrderList(gameTime, ref myRef);
 
@@ -196,6 +203,37 @@ namespace Incursio.Classes
             return health <= 0;
         }
 
+        public void die()
+        {
+            currentState = State.EntityState.Dead;
+
+            if (orders.Count != 0)
+                orders = new List<BaseCommand>();
+
+            if (!playedDeathSound)
+            {
+                this.playDeathSound();
+                playedDeathSound = true;
+            }
+
+            //TODO: How to handle death of entities?
+            //  It'd be a waste of memory to just leave them in the entityBank,
+            //    but then we'd have to reassign keyIds.
+            //  But do we need to remove them?
+            // HASHMAP!!!!
+            if (deadTimer == TIME_DEAD_UNTIL_DESPAWN * 60 || this.movementComponent == null)
+            {
+                //map.setSingleCellOccupancy(location.x, location.y, 1);
+                this.updateOccupancy(false);
+                EntityManager.getInstance().removeEntity(keyId);
+                deadTimer++;
+            }
+            else
+            {
+                deadTimer++;
+            }
+        }
+
         /// <summary>
         /// Updates the bounding box of the entity
         /// </summary>
@@ -246,7 +284,6 @@ namespace Incursio.Classes
         /// <param name="occupied"></param>
         public void updateOccupancy(bool open)
         {
-
             //if my origin is my upper-left corner, loop over cells that my box covers
             int x1, y1, x2, y2, y;
             MapManager.getInstance().currentMap.translatePixelToMapCell(this.location.x, this.location.y, out x1, out y1);
@@ -255,7 +292,7 @@ namespace Incursio.Classes
             y2 = y1 + this.renderComponent.boundingBox.Height / MapManager.TILE_HEIGHT;
 
             //TODO: THIS DOESN'T WORK OUT AS WELL WITH LARGE ENTITES
-
+            //  we need some buffer room...if one pixel is overflowing to another cell that whole cell becomes occupied.
             while (x1 <= x2)
             {
                 y = y1;

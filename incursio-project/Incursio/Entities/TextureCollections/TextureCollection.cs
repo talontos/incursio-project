@@ -30,7 +30,7 @@ namespace Incursio.Entities.TextureCollections
             }
             else
             {
-                //TODO: GET A DEFAULT portrain
+                //TODO: GET A DEFAULT portrait
                 portrait = global::Incursio.Managers.TextureBank.InterfaceTextures.lightInfantryPortrait;
             }
 
