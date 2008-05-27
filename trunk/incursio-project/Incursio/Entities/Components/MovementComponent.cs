@@ -55,11 +55,12 @@ namespace Incursio.Entities.Components
 
             this.bgEntity.location = new Coordinate( (int)movable.PositionCurrent.X, (int)movable.PositionCurrent.Y);
 
-            this.bgEntity.updateOccupancy(true);
+            //perhaps this line is best executed in BaseGameEntity...
+            //this.bgEntity.updateOccupancy(true);
 
             if (retVal) //movement finished
             {
-                this.bgEntity.setIdle();// currentState = State.UnitState.Idle;
+                this.bgEntity.setIdle();
             }
             else
             {

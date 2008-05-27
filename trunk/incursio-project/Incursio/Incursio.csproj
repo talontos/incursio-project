@@ -149,10 +149,6 @@
     <Compile Include="Interface\BuildEntityButton.cs" />
     <Compile Include="Interface\BuildEntityPanel.cs" />
     <Compile Include="Interface\Button.cs" />
-    <None Include="Interface\Menus\LegacyButtons\BuildLightInfantryButton.cs" />
-    <None Include="Interface\Menus\LegacyButtons\BuildHeavyInfantryButton.cs" />
-    <None Include="Interface\Menus\LegacyButtons\BuildArcherButton.cs" />
-    <None Include="Interface\Menus\LegacyButtons\BuildTowerButton.cs" />
     <Compile Include="Interface\Menus\InstructionButton.cs" />
     <Compile Include="Interface\Menus\MainMenuButton.cs" />
     <Compile Include="Interface\Menus\SaveMenuButton.cs" />
