@@ -17,6 +17,7 @@ namespace Incursio.Utils
 
         public GameTexture(string textureName){
             this.loadTexture(textureName);
+            //TODO: Throw error if texture is null; image specified DNE
         }
 
         public GameTexture(string textureName, int frameWidth, int frameHeight) : this(textureName){
@@ -26,7 +27,7 @@ namespace Incursio.Utils
 
         private void loadTexture(string name){
             this.texture = Texture2D.FromFile(Incursio.getInstance().spriteBatch.GraphicsDevice, 
-            global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + name);
+                global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + name);
         }
     }
 }

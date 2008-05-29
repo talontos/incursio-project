@@ -81,9 +81,10 @@ namespace Incursio.Interface
           }
 
           if(this.placingStructure){
-
-              this.structure.location.x = (int)this.pos.X;
-              this.structure.location.y = (int)this.pos.Y;
+              structure.location = new Coordinate(MapManager.getInstance().currentMap.translateClickToMapLocation(this.pos));
+              
+              //this.structure.location.x = (int)this.pos.X + MapManager.getInstance().currentMap.getMinimumX();
+              //this.structure.location.y = (int)this.pos.Y + MapManager.getInstance().currentMap.getMinimumY();
 
               if(this.isRightPressed){
                 this.finishPlaceStructure();
@@ -107,9 +108,9 @@ namespace Incursio.Interface
                   if(this.placingStructure){
                       this.structure.renderComponent.drawThyself(ref batch, 0, 0);
                   }
-                  else{
+                  //else{
                     batch.Draw(TextureBank.InterfaceTextures.cursor, this.pos, Color.White);
-                  }
+                  //}
               }
               else if (this.isLeftPressed == true || this.isRightPressed == true)
               {
@@ -137,7 +138,7 @@ namespace Incursio.Interface
       }
 
       public void finishPlaceStructure(){
-          EntityManager.getInstance().tryToBuild(this.placingClassId, this.pos);
+          EntityManager.getInstance().tryToBuild(this.placingClassId, this.structure.location);
           this.placingStructure = false;
           this.structure = null;
           this.placingClassId = -1;
