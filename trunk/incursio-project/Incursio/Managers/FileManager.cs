@@ -124,11 +124,6 @@ namespace Incursio.Managers
             this.ReadConfigurationFile("../../../Configuration/TextureConfiguration.xml");
             this.ReadConfigurationFile("../../../Configuration/AudioConfiguration.xml");
             this.ReadConfigurationFile("../../../Configuration/EntityConfiguration.xml");
-
-            BaseGameEntity e1 = ObjectFactory.getInstance().create(0, 0);
-            BaseGameEntity e2 = ObjectFactory.getInstance().create(1, 0);
-            BaseGameEntity e3 = ObjectFactory.getInstance().create(2, 0);
-            BaseGameEntity e4 = ObjectFactory.getInstance().create(3, 0);
         }
 
         public void saveCurrentGame(String fileName)

@@ -30,6 +30,7 @@ namespace Incursio.Utils.PathFinding
     {
         #region VARIABLE DECLARATIONS
         private byte[,] PathGrid;
+        private int[,] IdGrid;
         public byte[,] WalkedNodes;
 
         private PriorityQueue<uint, int> OpenList;
@@ -68,8 +69,12 @@ namespace Incursio.Utils.PathFinding
         #endregion
 
         #region CONSTRUCTOR
-        public PathFinder(byte[,] pathGrid)
+        public PathFinder(byte[,] pathGrid, int[,] idGrid)
         {
+            //TODO: CHECK FOR BOUND EQUALITY B/T PATH & ID GRIDS
+            //  THEY *MUST* BE THE SAME SIZE
+            IdGrid = idGrid;
+
             PathGrid = pathGrid;
             GridX = (ushort)(PathGrid.GetUpperBound(0) + 1);
             GridY = (ushort)(PathGrid.GetUpperBound(1) + 1);
@@ -105,7 +110,7 @@ namespace Incursio.Utils.PathFinding
         #endregion
 
         #region PATHFINDING IMPLEMENTATION
-        public List<PathReturnNode> FindPath(Point start, Point end, int length)
+        public List<PathReturnNode> FindPath(Point start, Point end, int length, int entityId)
         {
             nodeFound = false;
             isStop = false;
@@ -174,7 +179,7 @@ namespace Incursio.Utils.PathFinding
                     }
 
                     //Solid block
-                    if (PathGrid[newPosX, newPosY] == 0)
+                    if (PathGrid[newPosX, newPosY] == 0 && IdGrid[newPosX, newPosY] != entityId)
                     {
                         continue;
                     }

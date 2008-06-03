@@ -448,7 +448,7 @@ namespace Incursio.Classes
             translatePixelToMapCell(point.x, point.y, out cellDestination.x, out cellDestination.y);
 
             //find a path from the origin to the destination with length l & return the last node
-            List<PathReturnNode> path = MapManager.getInstance().pathFinder.FindPath(cellOrigin.toPoint(), cellDestination.toPoint(), 1);
+            List<PathReturnNode> path = MapManager.getInstance().pathFinder.FindPath(cellOrigin.toPoint(), cellDestination.toPoint(), 1, -1);
 
             //convert back to pixels
             //If path not found, return origin

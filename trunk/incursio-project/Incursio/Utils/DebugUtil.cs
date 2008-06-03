@@ -24,11 +24,23 @@ namespace Incursio.Utils
                         MapManager.getInstance().DRAW_OCCUPANCY_GRID = !MapManager.getInstance().DRAW_OCCUPANCY_GRID;
                         break;
 
+                    case "SHOWENTITIES":
+                    case "DRAWENTITIES":
+                    case "SHOWIDS":
+                    case "DRAWIDS":
                     case "DRAWENTITYGRID":
                     case "SHOWENTITYGRID":
                         MapManager.getInstance().DRAW_ENTITY_GRID = !MapManager.getInstance().DRAW_ENTITY_GRID;
                         break;
 
+                    case "TOGGLEGRIDS":
+                    case "SHOWGRIDS":
+                        MapManager.getInstance().DRAW_OCCUPANCY_GRID = !MapManager.getInstance().DRAW_OCCUPANCY_GRID;
+                        MapManager.getInstance().DRAW_ENTITY_GRID = !MapManager.getInstance().DRAW_ENTITY_GRID;
+                        break;
+
+                    //TODO: ADD FUNCTIONALITY TO MAKE BY NAME
+                    case "MAKEENTITY":
                     case "CREATEENTITY":
                         int player = PlayerManager.getInstance().currentPlayerId;
 

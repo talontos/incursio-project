@@ -50,9 +50,11 @@ namespace Incursio.Classes
 
         private List<BaseCommand> orders;
 
+        //Death stuff
         private int TIME_DEAD_UNTIL_DESPAWN = 5;
         private int deadTimer = 0;
         private bool playedDeathSound = false;
+        public bool hasDied = false;
 
         public RenderComponent renderComponent;
         public MovementComponent movementComponent;
@@ -75,7 +77,10 @@ namespace Incursio.Classes
         /// <param name="gameTime">Game time passed from main loop</param>
         /// <param name="myRef">Mostly a hack, used for executing commands.  It is a reference of 'this'</param>
         public virtual void Update(GameTime gameTime, ref BaseGameEntity myRef){
-            if (this.isDead()){
+            if(hasDied){
+                return;
+            }
+            else if (this.isDead()){
                 //this.updateOccupancy(false);
                 this.die();
                 return;
@@ -114,9 +119,11 @@ namespace Incursio.Classes
                 healComponent.Update(gameTime);
             #endregion
 
-            this.updateOccupancy(true);
+            this.updateOccupancy(false);
 
             this.processOrderList(gameTime, ref myRef);
+
+            this.updateOccupancy(true);
 
             if (this.health > this.maxHealth)
                 this.health = this.maxHealth;
@@ -226,19 +233,13 @@ namespace Incursio.Classes
                 //map.setSingleCellOccupancy(location.x, location.y, 1);
                 this.updateOccupancy(false);
                 EntityManager.getInstance().removeEntity(keyId);
-                deadTimer++;
+                //deadTimer++;
+                this.hasDied = true;
             }
             else
             {
                 deadTimer++;
             }
-        }
-
-        /// <summary>
-        /// Updates the bounding box of the entity
-        /// </summary>
-        public virtual void updateBounds(){
-
         }
 
         /// <summary>
@@ -271,6 +272,7 @@ namespace Incursio.Classes
         /// <returns>True when destination is reached.  By default returns true.</returns>
         public virtual bool updateMovement(float ElapsedTime){
             if(this.movementComponent != null){
+//                this.updateOccupancy(false);
                 return this.movementComponent.updateMovement(ElapsedTime);
             }
             else{
@@ -319,7 +321,7 @@ namespace Incursio.Classes
                 while (y <= y2)
                 {
                     MapManager.getInstance().currentMap.setSingleCellOccupancy_cell((x1), (y), (byte)(open ? 0 : 1));
-                    MapManager.getInstance().currentMap.setSingleCellEntity_cell(x1, y, (open ? this.keyId: -1));
+                    MapManager.getInstance().currentMap.setSingleCellEntity_cell(x1, y, (open ? this.keyId : -1));
                     y++;
                 }
                 x1++;
@@ -342,7 +344,7 @@ namespace Incursio.Classes
         /// <param name="FRAME_LENGTH"></param>
         public void drawThyself(ref SpriteBatch spriteBatch, int frameTimer, int FRAME_LENGTH)
         {
-            if(this.renderComponent != null)
+            if(this.renderComponent != null && !this.hasDied)
                 this.renderComponent.drawThyself(ref spriteBatch, frameTimer, FRAME_LENGTH);
         }
 

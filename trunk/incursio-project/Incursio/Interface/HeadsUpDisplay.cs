@@ -157,53 +157,21 @@ namespace Incursio.Classes
             //for the selected unit portrait
             if (numUnitsSelected != 0)
             {
-
-                spriteBatch.Draw(selectedUnits[0].renderComponent.textures.portrait, new Rectangle(241, height - 129, selectedUnits[0].renderComponent.textures.portrait.Width, selectedUnits[0].renderComponent.textures.portrait.Height), Color.White);
-                
-                /*
-                if (selectedUnits[0].getType() == State.EntityName.LightInfantry)
-                {
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.lightInfantryPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.lightInfantryPortrait.Width, TextureBank.InterfaceTextures.lightInfantryPortrait.Height), Color.White);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.Archer)
-                {
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.archerPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.archerPortrait.Width, TextureBank.InterfaceTextures.archerPortrait.Height), Color.White);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].owner == PlayerManager.getInstance().currentPlayerId)
-                {
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.basePortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.basePortrait.Width, TextureBank.InterfaceTextures.basePortrait.Height), Color.White);
-                }
-                else if(selectedUnits[0].getType() == State.EntityName.Camp && selectedUnits[0].owner == PlayerManager.getInstance().computerPlayerId)
-                {
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.baseEnemyPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.baseEnemyPortrait.Width, TextureBank.InterfaceTextures.baseEnemyPortrait.Height), Color.White);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.GuardTower)
-                {
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.guardTowerPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.guardTowerPortrait.Width, TextureBank.InterfaceTextures.guardTowerPortrait.Height), Color.White);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.HeavyInfantry)
-                {
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.heavyInfantryPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.heavyInfantryPortrait.Width, TextureBank.InterfaceTextures.heavyInfantryPortrait.Height), Color.White);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.ControlPoint)
-                {
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.controlPointPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.controlPointPortrait.Width, TextureBank.InterfaceTextures.controlPointPortrait.Height), Color.White);
-                }
-                else if (selectedUnits[0].getType() == State.EntityName.Hero)
-                {
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.heroPortrait, new Rectangle(241, height - 129, TextureBank.InterfaceTextures.heroPortrait.Width, TextureBank.InterfaceTextures.heroPortrait.Height), Color.White);
-                    //write level
-                    string levelString = "Lvl " + (selectedUnits[0] as Hero).level;
-                    spriteBatch.DrawString(font, levelString, new Vector2(270, height - 120), Color.White, 0, font.MeasureString(levelString) / 2, 1.0f, SpriteEffects.None, 0.5f);
-                }
-                */
+                spriteBatch.Draw(
+                    selectedUnits[0].renderComponent.textures.portrait, 
+                    new Rectangle(
+                        241, 
+                        height - 129, 
+                        selectedUnits[0].renderComponent.textures.portrait.Width, 
+                        selectedUnits[0].renderComponent.textures.portrait.Height), 
+                    Color.White);   
             }
 
             //unit attributes
             if (numUnitsSelected == 1)
             {
                 //for the unit's display name
-                spriteBatch.DrawString(font, selectedUnits[0].entityName + selectedUnits[0].keyId, new Vector2(572, height - 118), Color.White, 0, font.MeasureString(selectedUnits[0].entityName) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                spriteBatch.DrawString(font, selectedUnits[0].entityName, new Vector2(572, height - 118), Color.White, 0, font.MeasureString(selectedUnits[0].entityName) / 2, 1.0f, SpriteEffects.None, 0.5f);
                 
                 //stats!
                 spriteBatch.DrawString(font, "Health: " + selectedUnits[0].getHealth(), new Vector2(572, height - 90), Color.White, 0, font.MeasureString("Health: XXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
