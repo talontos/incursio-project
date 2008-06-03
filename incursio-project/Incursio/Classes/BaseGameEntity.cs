@@ -284,15 +284,35 @@ namespace Incursio.Classes
         /// <param name="occupied"></param>
         public void updateOccupancy(bool open)
         {
-            //if my origin is my upper-left corner, loop over cells that my box covers
-            int x1, y1, x2, y2, y;
-            MapManager.getInstance().currentMap.translatePixelToMapCell(this.location.x, this.location.y, out x1, out y1);
-
-            x2 = x1 + this.renderComponent.boundingBox.Width / MapManager.TILE_WIDTH;
-            y2 = y1 + this.renderComponent.boundingBox.Height / MapManager.TILE_HEIGHT;
-
             //TODO: THIS DOESN'T WORK OUT AS WELL WITH LARGE ENTITES
             //  we need some buffer room...if one pixel is overflowing to another cell that whole cell becomes occupied.
+            
+            //occupancy should extend/retract to the nearest cell
+
+            //NOTE: It seems that the upper-left corner of an entity is NOT its origin...
+            //  it's looking to be more like the center of the entity is its origin.
+
+            //Use the bounding-box to easily set the occupancy
+            int x1, y1, x2, y2, y;
+            
+            //translate location
+            MapManager.getInstance().currentMap.translatePixelToMapCell(
+                this.renderComponent.boundingBox.X, 
+                this.renderComponent.boundingBox.Y, 
+                out x1, out y1);
+
+            /*TODO: round? this doesn't seem to work any better; but is it rounding correctly?
+            //determine how many cells to occupy in x and y directions
+            x2 = x1 + (int)Math.Round((double)(this.renderComponent.boundingBox.Width) / MapManager.TILE_WIDTH);
+            y2 = y1 + (int)Math.Round((double)(this.renderComponent.boundingBox.Height) / MapManager.TILE_HEIGHT);
+            */
+            
+            //translate width/height
+            MapManager.getInstance().currentMap.translatePixelToMapCell(
+                this.renderComponent.boundingBox.X + this.renderComponent.boundingBox.Width, 
+                this.renderComponent.boundingBox.Y + this.renderComponent.boundingBox.Height, 
+                out x2, out y2);
+            
             while (x1 <= x2)
             {
                 y = y1;
