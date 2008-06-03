@@ -440,6 +440,14 @@ namespace Incursio.Managers
             }
         }
 
+        public void tryToBuild(int toBuildId, Coordinate point)
+        {
+            if (selectedUnits.Count > 0 && selectedUnits[0].isConstructor)
+            {
+                this.issueCommand(State.Command.BUILD, true, null, toBuildId, point);
+            }
+        }
+
         public BaseGameEntity createNewEntity(string entityName, int player){
             BaseGameEntity product = ObjectFactory.getInstance().create(entityName, player);
             if (product == null)
