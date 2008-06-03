@@ -96,7 +96,7 @@ namespace Incursio.Commands
                 }
                 else
                 {
-                    List<PathReturnNode> foundPath = MapManager.getInstance().pathFinder.FindPath(Start, End, -1);
+                    List<PathReturnNode> foundPath = MapManager.getInstance().pathFinder.FindPath(Start, End, -1, subject.keyId);
 
                     if (foundPath != null)
                         unit.PathMove(ref foundPath, unit.PositionCurrent, Click);

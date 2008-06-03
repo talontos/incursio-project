@@ -48,7 +48,7 @@ namespace Incursio.Entities.Components
 
         public virtual bool updateMovement(float ElapsedTime)
         {
-            this.bgEntity.updateOccupancy(false);
+            //this.bgEntity.updateOccupancy(false);
 
             //move
             bool retVal = this.movable.updateMoveableObjectMovement(ElapsedTime);
