@@ -31,8 +31,8 @@ namespace Incursio.Managers
         }
 
         //TEMPORARY
-        public int currentPlayerId = 0;
-        public int computerPlayerId = 1;
+        public int currentPlayerId = 1;
+        public int computerPlayerId = 0;
 
         public int MAX_PLAYERS = 2;
 
@@ -78,12 +78,13 @@ namespace Incursio.Managers
         /// </summary>
         /// <returns></returns>
         public bool addNewPlayer(bool isComputer){
+            //TODO: ADD SUPPORT FOR MORE THAN 2 PLAYERS
             if(players.Count < this.MAX_PLAYERS){
                 if(isComputer){
-                    this.insertPlayer(new AIPlayer(new SimpleAI()));
+                    computerPlayerId = this.insertPlayer(new AIPlayer(new SimpleAI()));
                 }
                 else{
-                    this.insertPlayer(new Player());
+                    currentPlayerId = this.insertPlayer(new Player());
                 }
 
                 return true;
@@ -92,9 +93,11 @@ namespace Incursio.Managers
             return false;
         }
 
-        private void insertPlayer(Player newPlayer){
+        private int insertPlayer(Player newPlayer){
             newPlayer.id = players.Count;
             players.Add(newPlayer);
+
+            return newPlayer.id;
         }
 
         public void notifyPlayer(int player, GameEvent e){

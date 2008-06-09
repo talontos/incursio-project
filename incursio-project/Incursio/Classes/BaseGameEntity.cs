@@ -86,6 +86,9 @@ namespace Incursio.Classes
                 return;
             }
 
+            if(!this.isStructure)
+                this.updateOccupancy(false);
+
             #region Update components
             //TODO: IS THERE AN EASIER WAY TO UPDATE ALL COMPONENTS?
             if (renderComponent != null)
@@ -118,15 +121,13 @@ namespace Incursio.Classes
             if (healComponent != null)
                 healComponent.Update(gameTime);
             #endregion
-
-            //this.updateOccupancy(false);
-
+            
             this.processOrderList(gameTime, ref myRef);
-
-            //this.updateOccupancy(true);
 
             if (this.health > this.maxHealth)
                 this.health = this.maxHealth;
+
+            this.updateOccupancy(true);
         }
 
         protected virtual void processOrderList(GameTime gameTime, ref BaseGameEntity myRef)
@@ -287,6 +288,8 @@ namespace Incursio.Classes
         public void updateOccupancy(bool open)
         {
             //TODO: THIS DOESN'T WORK OUT AS WELL WITH LARGE ENTITES
+            //  ***We could try increasing the resolution of the occupancy/id grids.
+
             //  we need some buffer room...if one pixel is overflowing to another cell that whole cell becomes occupied.
             
             //occupancy should extend/retract to the nearest cell
@@ -367,7 +370,7 @@ namespace Incursio.Classes
                 return combatComponent.damage;
             }
 
-            return -1;
+            return 0;
         }
 
         public virtual int getArmor(){

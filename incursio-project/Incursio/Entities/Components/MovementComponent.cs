@@ -48,15 +48,10 @@ namespace Incursio.Entities.Components
 
         public virtual bool updateMovement(float ElapsedTime)
         {
-            //this.bgEntity.updateOccupancy(false);
-
             //move
             bool retVal = this.movable.updateMoveableObjectMovement(ElapsedTime);
 
             this.bgEntity.location = new Coordinate( (int)movable.PositionCurrent.X, (int)movable.PositionCurrent.Y);
-
-            //perhaps this line is best executed in BaseGameEntity...
-            //this.bgEntity.updateOccupancy(true);
 
             if (retVal) //movement finished
             {

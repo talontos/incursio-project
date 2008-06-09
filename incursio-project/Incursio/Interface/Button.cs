@@ -29,9 +29,18 @@ namespace Incursio.Interface
         protected bool isPressed;
         protected bool isFocus;
 
+        protected string text = "";
+
         public Button()
         {
 
+        }
+
+        public Button(Vector2 position, string text){
+            this.position = position;
+            this.text = text;
+            isPressed = false;
+            isFocus = false;      
         }
 
         public Button(Vector2 position, Texture2D passive, Texture2D pressed)
@@ -45,6 +54,7 @@ namespace Incursio.Interface
 
         public virtual void Draw(SpriteBatch batch)
         {
+            //TODO: replace this with code to build the button using the 3 button pieces + the text
             if (isPressed == false || isFocus == false)
             {
                 batch.Draw(passive, position, Color.White);
