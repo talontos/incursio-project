@@ -30,27 +30,27 @@ namespace Incursio.Classes.Terrain
 
             if(type == 0)
             {
-                this.texture = TextureBank.MapTiles.building1;
+                this.texture = TextureBank.getInstance().terrain.terrain.building1.texture;
             }
             else if(type == 1)
             {
-                this.texture = TextureBank.MapTiles.building2;
+                this.texture = TextureBank.getInstance().terrain.terrain.building2.texture;
             }
             else if(type == 2)
             {
-                this.texture = TextureBank.MapTiles.building3;
+                this.texture = TextureBank.getInstance().terrain.terrain.building3.texture;
             }
             else if (type == 3)
             {
-                this.texture = TextureBank.MapTiles.buildingGroup;
+                this.texture = TextureBank.getInstance().terrain.terrain.buildingGroup.texture;
             }
             else if (type == 4)
             {
-                this.texture = TextureBank.MapTiles.buildingGroupEndRight;
+                this.texture = TextureBank.getInstance().terrain.terrain.buildingGroupEndRight.texture;
             }
             else if (type == 5)
             {
-                this.texture = TextureBank.MapTiles.buildingGroupEndLeft;
+                this.texture = TextureBank.getInstance().terrain.terrain.buildingGroupEndLeft.texture;
             }
         }
 

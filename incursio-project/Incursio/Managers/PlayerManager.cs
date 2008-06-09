@@ -80,9 +80,7 @@ namespace Incursio.Managers
         public bool addNewPlayer(bool isComputer){
             if(players.Count < this.MAX_PLAYERS){
                 if(isComputer){
-                    //this.insertPlayer(new AIPlayer(new SimpleAI()));
-                    //TODO: ADD THE AI BACK IN - REMOVED TEMPORARILY FOR COMPONENT TESTING
-                    this.insertPlayer(new AIPlayer());
+                    this.insertPlayer(new AIPlayer(new SimpleAI()));
                 }
                 else{
                     this.insertPlayer(new Player());

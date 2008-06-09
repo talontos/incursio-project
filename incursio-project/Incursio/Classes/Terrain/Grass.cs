@@ -34,7 +34,7 @@ namespace Incursio.Classes.Terrain
                     this.texture = TextureBank.MapTiles.grass3;
                 */
                 default:
-                    this.texture = TextureBank.MapTiles.grass1;
+                    this.texture = TextureBank.getInstance().terrain.terrain.grass1.texture;
                     break;
             }
         }

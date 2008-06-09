@@ -53,6 +53,7 @@ namespace Incursio.Utils
             this.structure = structure;
             this.prevOwner = this.owner;
 
+            //TODO:
             /*
             if(this.structure){
                 //this.setDefensePreferences(3, 5);

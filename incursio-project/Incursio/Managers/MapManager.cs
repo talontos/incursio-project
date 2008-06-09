@@ -58,10 +58,8 @@ namespace Incursio.Managers
                     break;
                 */
 
-                //TODO: ADD BACK IN
-                /*
                 case State.CampaignLevel.ONE:
-                    currentMap = new TestMap();// new Port();  
+                    currentMap = new Port();
                     break;
 
                 case State.CampaignLevel.TWO:   
@@ -71,11 +69,7 @@ namespace Incursio.Managers
                 case State.CampaignLevel.THREE: 
                     currentMap = new Capital();  
                     break;
-                */
             }
-
-            //TEMPORARY
-            currentMap = new Inland();
 
             this.pathFinder = new PathFinder(currentMap.occupancyGrid, currentMap.entityGrid);
             MovableObject.Initalize(currentMap.width, currentMap.TILE_WIDTH);

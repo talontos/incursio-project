@@ -27,9 +27,13 @@ namespace Incursio.Campaign
         private GameResult gameOverResult = null;
         private bool messageSent = false;
 
+        protected int heroId = 0, campId = 0, cpId = 0;
+
         public override void initializeMap()
         {   
             base.initializeMap();
+
+            ObjectFactory.getInstance().setSpecialEntityIds(out heroId, out campId, out cpId);  
         }
 
         /// <summary>

@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Text;
 using Incursio.Utils;
 using Incursio.Managers;
+using Incursio.Entities;
 
 namespace Incursio.Classes
 {
@@ -25,6 +26,7 @@ namespace Incursio.Classes
     /// </summary>
     public class SimpleAI : BaseAI
     {
+        private List<int> armyIds = new List<int>();
 
         private List<EntityBuildOrder> buildList = new List<EntityBuildOrder>();
         private int minPreferredArmySize = 15;
@@ -44,6 +46,15 @@ namespace Incursio.Classes
         public SimpleAI(){
             this.minPreferredArmySize = Incursio.rand.Next(10, 16);
             this.preferredAssaultForceSize = Incursio.rand.Next(3, 10);
+
+            //Collect entity ids for my units
+            //  essentially every non-structure that is not a hero
+            foreach(BaseGameEntityConfiguration c in ObjectFactory.getInstance().entities){
+                if (c.isStructure || c.isHero)
+                    continue;
+                else
+                    this.armyIds.Add(c.classID);
+            }
         }
 
         /// <summary>
@@ -156,11 +167,15 @@ namespace Incursio.Classes
         /// </summary>
         /// <param name="c"></param>
         private void buildGuardTowerNearLocation(Coordinate c, KeyPoint k){
+
+            //TODO: If there are no turret entities, this will throw a null!!!!!
+            
             this.buildList.Add(new EntityBuildOrder(
                MapManager.getInstance().currentMap.getClosestPassableLocation(EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().currentPlayerId)[0].location, c),
-               State.EntityName.GuardTower,
+               Util.selectRandomInt(ref ObjectFactory.getInstance().turretIds),
                k)
            );
+           
         }
 
         private void buildNextEntity(){
@@ -195,8 +210,10 @@ namespace Incursio.Classes
                                             Incursio.rand.Next(20, MapManager.getInstance().currentMap.height_pix));
                 }
 
+                this.buildList.Add(new EntityBuildOrder(dest, Util.selectRandomInt(ref this.armyIds), keyPoint));
+
                 //TODO: REDO THIS!!
-                if (randU > 60)
+                /*if (randU > 60)
                     this.buildList.Add(new EntityBuildOrder(dest, State.EntityName.LightInfantry, keyPoint));
 
                 else if (randU > 30)
@@ -204,6 +221,7 @@ namespace Incursio.Classes
 
                 else
                     this.buildList.Add(new EntityBuildOrder(dest, State.EntityName.HeavyInfantry, keyPoint));
+                */
             }
         }
 

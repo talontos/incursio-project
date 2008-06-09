@@ -137,5 +137,45 @@
 			<exploded file="Tower_exploded.png"/>
 		</Damaged>
 	</TextureCollection>
-	
+
+	<TextureCollection name="Terrain" portrait="" icon="">
+		<Terrain>
+			<grass1 file="GrassTile1.png"/>
+			<tree1 file="Tree1.png"/>
+			<groupOfTrees file="GroupTrees.png"/>
+
+			<openWater file="OpenWater.png"/>
+			<shoreDown file="RiverDown.png"/>
+			<shoreLeft file="RiverLeft.png"/>
+			<shoreRight file="RiverRight.png"/>
+			<shoreUp file="RiverUp.png"/>
+			<shoreLowerLeftCorner file="RiverLowerLeftCorner.png"/>
+			<shoreLowerRightCorner file="RiverLowerRightCorner.png"/>
+			<shoreOpenLowerLeftCorner file="RiverOpenLowerLeftCorner.png"/>
+			<shoreOpenLowerRightCorner file="RiverOpenLowerRightCorner.png"/>
+			<shoreUpperLeftCorner file="RiverUpperLeftCorner.png"/>
+			<shoreUpperRightCorner file="RiverUpperRightCorner.png"/>
+			<shoreOpenUpperLeftCorner file="RiverOpenUpperLeftCorner.png"/>
+			<shoreOpenUpperRightCorner file="RiverOpenUpperRightCorner.png"/>
+
+			<roadHorizontal file="RoadHorizontal.png"/>
+			<roadVertical file="RoadVertical.png"/>
+			<roadElbowDownLeft file="RoadHorizontalBendDown.png"/>
+			<roadElbowDownRight file="RoadVerticalBendRight2.png"/>
+			<roadElbowUpLeft file="RoadHorizontalBendUp.png"/>
+			<roadElbowUpRight file="RoadVerticalBendRight.png"/>
+
+			<building1 file="Building1.png"/>
+			<building2 file="Building2.png"/>
+			<building3 file="Building3.png"/>
+			<buildingGroup file="GroupBuildings.png"/>
+			<buildingGroupEndRight file="GroupBuildingsEndRight.png"/>
+			<buildingGroupEndLeft file="GroupBuildingsEndLeft.png"/>
+			<dock file="Dock.png"/>
+			<rockBig file="Rock3.png"/>
+			<rockMedium file="Rock2.png"/>
+			<rockSmall file="Rock1.png"/>
+		</Terrain>
+	</TextureCollection>
+
 </Content>

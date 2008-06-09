@@ -119,11 +119,11 @@ namespace Incursio.Classes
                 healComponent.Update(gameTime);
             #endregion
 
-            this.updateOccupancy(false);
+            //this.updateOccupancy(false);
 
             this.processOrderList(gameTime, ref myRef);
 
-            this.updateOccupancy(true);
+            //this.updateOccupancy(true);
 
             if (this.health > this.maxHealth)
                 this.health = this.maxHealth;

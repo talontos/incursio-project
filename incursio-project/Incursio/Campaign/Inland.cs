@@ -37,20 +37,7 @@ namespace Incursio.Campaign
 
             EntityManager entityManager = EntityManager.getInstance();
 
-            base.initializeMap();
-
-            //get hero, camp, & cp ids
-            int heroId = 0, campId = 0, cpId = 0;
-            foreach(BaseGameEntityConfiguration c in ObjectFactory.getInstance().entities){
-                if (c.isHero)
-                    heroId = c.classID;
-                else if (c.isMainBase)
-                    campId = c.classID;
-                else if (c.isControlPoint)
-                    cpId = c.classID;
-            }
-
-
+            base.initializeMap();    
 
             //testing unit creation/placement/moving///
             BaseGameEntity playerHero = entityManager.createNewEntity(heroId, PlayerManager.getInstance().currentPlayerId);
