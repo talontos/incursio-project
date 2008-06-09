@@ -18,6 +18,7 @@ namespace Incursio.Entities.TextureCollections
         public AttackTextures attacking;
         public DeathTextures death;
         public DamagedTextures damaged;
+        public TerrainTextures terrain;
 
         public TextureCollection(int id, string name, string portraitName, string iconName){
             this.id = id;
@@ -53,6 +54,7 @@ namespace Incursio.Entities.TextureCollections
                 case "Attacking":   attacking = new AttackTextures();   return attacking;
                 case "Death":       death = new DeathTextures();        return death;
                 case "Damaged":     damaged = new DamagedTextures();    return damaged;
+                case "Terrain":     terrain = new TerrainTextures();    return terrain;
                 default: return null;
             }
         }

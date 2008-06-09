@@ -24,7 +24,7 @@ namespace Incursio.Classes.Terrain
 
         public Tree(int x, int y)
         {
-            this.texture = TextureBank.MapTiles.tree1;
+            this.texture = TextureBank.getInstance().terrain.terrain.tree1.texture;
             this.passable = false;
             this.location = new Coordinate(x, y);
         }
@@ -33,11 +33,11 @@ namespace Incursio.Classes.Terrain
         {
             if(isGroup)
             {
-                this.texture = TextureBank.MapTiles.groupOfTrees;
+                this.texture = TextureBank.getInstance().terrain.terrain.groupOfTrees.texture;
             }
             else
             {
-                this.texture = TextureBank.MapTiles.tree1;
+                this.texture = TextureBank.getInstance().terrain.terrain.tree1.texture;
             }
             
             this.passable = false;

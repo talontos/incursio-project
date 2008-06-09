@@ -9,19 +9,19 @@ namespace Incursio.Entities.AudioCollections
     {
         public string SwordAttack{
             get{
-                return Util.selectRandomString(swordAttack);
+                return Util.selectRandomString(ref swordAttack);
             }
         }
 
         public string ArrowAttack{
             get{
-                return Util.selectRandomString(arrowAttack);
+                return Util.selectRandomString(ref arrowAttack);
             }
         }
 
         public string Explosion{
             get{
-                return Util.selectRandomString(explosion);
+                return Util.selectRandomString(ref explosion);
             }
         }
 

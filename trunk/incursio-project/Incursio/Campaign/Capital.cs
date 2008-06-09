@@ -38,46 +38,34 @@ namespace Incursio.Campaign
 
             base.initializeMap();
 
-            Hero playerHero = (Hero)entityManager.createNewEntity("Incursio.Classes.Hero", PlayerManager.getInstance().currentPlayerId);
+            BaseGameEntity playerHero = entityManager.createNewEntity("Incursio.Classes.Hero", PlayerManager.getInstance().currentPlayerId);
             playerHero.setLocation(new Coordinate(120, 1760));
 
-            Hero compHero = (Hero)entityManager.createNewEntity("Incursio.Classes.Hero", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity compHero = entityManager.createNewEntity("Incursio.Classes.Hero", PlayerManager.getInstance().computerPlayerId);
             compHero.setLocation(new Coordinate(1900, 160));
 
-            CampStructure playerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", PlayerManager.getInstance().currentPlayerId);
+            BaseGameEntity playerCamp = entityManager.createNewEntity("Incursio.Classes.CampStructure", PlayerManager.getInstance().currentPlayerId);
             playerCamp.setLocation(new Coordinate(40, 1600));
             playerCamp.setHealth(350);
 
-            CampStructure computerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity computerCamp = entityManager.createNewEntity("Incursio.Classes.CampStructure", PlayerManager.getInstance().computerPlayerId);
             computerCamp.setLocation(new Coordinate(1940, 95));
             computerCamp.setHealth(350);
 
-            ControlPoint cp1 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().currentPlayerId);
+            BaseGameEntity cp1 = entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().currentPlayerId);
             cp1.setLocation(new Coordinate(230, 1650));
 
-            ControlPoint cp2 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity cp2 = entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
             cp2.setLocation(new Coordinate(1810, 120));
 
-            ControlPoint cp3 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity cp3 = entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
             cp3.setLocation(new Coordinate(430, 289));
 
-            ControlPoint cp4 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity cp4 = entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
             cp4.setLocation(new Coordinate(1810, 1340));
 
-            ControlPoint cp5 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity cp5 = entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
             cp5.setLocation(new Coordinate(1400, 1000));
-
-            //COMPUTER ADDITIONAL UNITS/////
-            LightInfantryUnit light1 = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", PlayerManager.getInstance().computerPlayerId);
-            light1.setLocation(new Coordinate(430, 330));
-            light1.setHealth(light1.maxHealth);
-
-            LightInfantryUnit light2 = (LightInfantryUnit)entityManager.createNewEntity("Incursio.Classes.LightInfantryUnit", PlayerManager.getInstance().computerPlayerId);
-            light2.setLocation(new Coordinate(1750, 1330));
-            light2.setHealth(light1.maxHealth);
-
-            ////////////////////////////////
-
 
             //default camera position
             this.minViewableX = 0;

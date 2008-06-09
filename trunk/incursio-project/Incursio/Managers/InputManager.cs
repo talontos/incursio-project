@@ -326,6 +326,24 @@ namespace Incursio.Managers
                 }
             }
 
+            //Check for mouse-on-edge for movement//
+            //uses a buffer-zone to keep from scrolling if cursor is outside of window
+            //TODO: modify buffer-zone?
+            if (mouseStateCurrent.X >= 0 && mouseStateCurrent.X <= 5)
+                MOVE_LEFT = true;
+
+            else if (mouseStateCurrent.X >= Incursio.getInstance().graphics.PreferredBackBufferWidth - 5 &&
+                     mouseStateCurrent.X <= Incursio.getInstance().graphics.PreferredBackBufferWidth)
+                MOVE_RIGHT = true;
+
+            if (mouseStateCurrent.Y >= 0 && mouseStateCurrent.Y <= 5)
+                MOVE_UP = true;
+
+            else if (mouseStateCurrent.Y >= Incursio.getInstance().graphics.PreferredBackBufferHeight - 5 &&
+                     mouseStateCurrent.Y <= Incursio.getInstance().graphics.PreferredBackBufferHeight)
+                MOVE_DOWN = true;
+            ////////////////////////////////////////
+
             #endregion
         }
 

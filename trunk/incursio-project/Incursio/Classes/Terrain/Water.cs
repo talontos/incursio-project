@@ -26,46 +26,46 @@ namespace Incursio.Classes.Terrain
             switch (type)
             {
                 case State.WaterType.OpenWater:
-                    this.texture = TextureBank.MapTiles.openWater;
+                    this.texture = TextureBank.getInstance().terrain.terrain.openWater.texture;
                     break;
                 case State.WaterType.ShoreDown:
-                    this.texture = TextureBank.MapTiles.shoreDown;
+                    this.texture = TextureBank.getInstance().terrain.terrain.shoreDown.texture;
                     break;
                 case State.WaterType.ShoreUp:
-                    this.texture = TextureBank.MapTiles.shoreUp;
+                    this.texture = TextureBank.getInstance().terrain.terrain.shoreUp.texture;
                     break;
                 case State.WaterType.ShoreLeft:
-                    this.texture = TextureBank.MapTiles.shoreLeft;
+                    this.texture = TextureBank.getInstance().terrain.terrain.shoreLeft.texture;
                     break;
                 case State.WaterType.ShoreRight:
-                    this.texture = TextureBank.MapTiles.shoreRight;
+                    this.texture = TextureBank.getInstance().terrain.terrain.shoreRight.texture;
                     break;
                 case State.WaterType.ShoreLowerLeft:
-                    this.texture = TextureBank.MapTiles.shoreLowerLeftCorner;
+                    this.texture = TextureBank.getInstance().terrain.terrain.shoreLowerLeftCorner.texture;
                     break;
                 case State.WaterType.ShoreLowerRight:
-                    this.texture = TextureBank.MapTiles.shoreLowerRightCorner;
+                    this.texture = TextureBank.getInstance().terrain.terrain.shoreLowerRightCorner.texture;
                     break;
                 case State.WaterType.ShoreUpperLeft:
-                    this.texture = TextureBank.MapTiles.shoreUpperLeftCorner;
+                    this.texture = TextureBank.getInstance().terrain.terrain.shoreUpperLeftCorner.texture;
                     break;
                 case State.WaterType.ShoreUpperRight:
-                    this.texture = TextureBank.MapTiles.shoreUpperRightCorner;
+                    this.texture = TextureBank.getInstance().terrain.terrain.shoreUpperRightCorner.texture;
                     break;
                 case State.WaterType.ShoreOpenLowerLeft:
-                    this.texture = TextureBank.MapTiles.shoreOpenLowerLeftCorner;
+                    this.texture = TextureBank.getInstance().terrain.terrain.shoreOpenLowerLeftCorner.texture;
                     break;
                 case State.WaterType.ShoreOpenLowerRight:
-                    this.texture = TextureBank.MapTiles.shoreOpenLowerRightCorner;
+                    this.texture = TextureBank.getInstance().terrain.terrain.shoreOpenLowerRightCorner.texture;
                     break;
                 case State.WaterType.ShoreOpenUpperLeft:
-                    this.texture = TextureBank.MapTiles.shoreOpenUpperLeftCorner;
+                    this.texture = TextureBank.getInstance().terrain.terrain.shoreOpenUpperLeftCorner.texture;
                     break;
                 case State.WaterType.ShoreOpenUpperRight:
-                    this.texture = TextureBank.MapTiles.shoreOpenUpperRightCorner;
+                    this.texture = TextureBank.getInstance().terrain.terrain.shoreOpenUpperRightCorner.texture;
                     break;
                 default:
-                    this.texture = TextureBank.MapTiles.openWater;
+                    this.texture = TextureBank.getInstance().terrain.terrain.openWater.texture;
                     break;
             }
 

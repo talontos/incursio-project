@@ -25,7 +25,7 @@ namespace Incursio.Classes.Terrain
         public Rock(int x, int y)
         {
             this.type = 0;
-            this.texture = TextureBank.MapTiles.rockSmall;
+            this.texture = TextureBank.getInstance().terrain.terrain.rockSmall.texture;
             this.passable = false;
             this.location = new Coordinate(x, y);
         }
@@ -36,15 +36,15 @@ namespace Incursio.Classes.Terrain
 
             if(type == 0)
             {
-                this.texture = TextureBank.MapTiles.rockSmall;
+                this.texture = TextureBank.getInstance().terrain.terrain.rockSmall.texture;
             }
             else if(type == 1)
             {
-                this.texture = TextureBank.MapTiles.rockMedium;
+                this.texture = TextureBank.getInstance().terrain.terrain.rockMedium.texture;
             }
             else if(type == 2)
             {
-                this.texture = TextureBank.MapTiles.rockBig;
+                this.texture = TextureBank.getInstance().terrain.terrain.rockBig.texture;
             }
 
             this.passable = false;

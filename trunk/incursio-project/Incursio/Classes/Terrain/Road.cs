@@ -25,23 +25,23 @@ namespace Incursio.Classes.Terrain
 
             switch(type){
                 case State.RoadType.Horizontal:
-                    this.texture = TextureBank.MapTiles.roadHorizontal;
+                    this.texture = TextureBank.getInstance().terrain.terrain.roadHorizontal.texture;
                     break;
                 case State.RoadType.Vertical:
-                    this.texture = TextureBank.MapTiles.roadVertical;
+                    this.texture = TextureBank.getInstance().terrain.terrain.roadVertical.texture;
                     break;
 
                 case State.RoadType.ElbowDownLeft:
-                    this.texture = TextureBank.MapTiles.roadElbowDownLeft;
+                    this.texture = TextureBank.getInstance().terrain.terrain.roadElbowDownLeft.texture;
                     break;
                 case State.RoadType.ElbowDownRight:
-                    this.texture = TextureBank.MapTiles.roadElbowDownRight;
+                    this.texture = TextureBank.getInstance().terrain.terrain.roadElbowDownRight.texture;
                     break;
                 case State.RoadType.ElbowUpLeft:
-                    this.texture = TextureBank.MapTiles.roadElbowUpLeft;
+                    this.texture = TextureBank.getInstance().terrain.terrain.roadElbowUpLeft.texture;
                     break;
                 case State.RoadType.ElbowUpRight:
-                    this.texture = TextureBank.MapTiles.roadElbowUpRight;
+                    this.texture = TextureBank.getInstance().terrain.terrain.roadElbowUpRight.texture;
                     break;
                 default:
                     break;

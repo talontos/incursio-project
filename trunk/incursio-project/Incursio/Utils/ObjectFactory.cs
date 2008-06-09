@@ -21,9 +21,33 @@ namespace Incursio.Utils
 {
     public class ObjectFactory
     {
-        public List<BaseGameEntityConfiguration> entities = new List<BaseGameEntityConfiguration>();
-
         private static ObjectFactory instance;
+
+        public int heroId = -1;
+        public int mainBaseId = -1;
+        public int controlPointId = -1;
+        public List<int> turretIds = new List<int>(0);
+
+        private List<BaseGameEntityConfiguration> _entities = new List<BaseGameEntityConfiguration>();
+        
+        public List<BaseGameEntityConfiguration> entities{
+            get { return this._entities; }
+            set { 
+                this._entities = value;
+
+                foreach (BaseGameEntityConfiguration c in _entities)
+                {
+                    if (c.isHero)
+                        heroId = c.classID;
+                    else if (c.isMainBase)
+                        mainBaseId = c.classID;
+                    else if (c.isControlPoint)
+                        controlPointId = c.classID;
+                    else if (c.isTurret)
+                        turretIds.Add(c.classID);
+                }
+            }
+        }
 
         public static ObjectFactory getInstance(){
             if (instance == null)
@@ -34,6 +58,12 @@ namespace Incursio.Utils
 
         private ObjectFactory(){
             
+        }
+
+        public void setSpecialEntityIds(out int hId, out int bId, out int cpId){
+            hId = heroId;
+            bId = mainBaseId;
+            cpId = controlPointId;
         }
 
         public BaseGameEntity create(string entityName, int owningPlayerID){

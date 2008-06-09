@@ -43,87 +43,12 @@ namespace Incursio.Managers
 
         public void loadGameConfiguration()
         {
-            //This is temporary now.  We'll be switching to XML configurations.
-            //file is game.cfg.wtf
-            try
-            {
-                //open up a reader
-                TextReader tr = new StreamReader("game.cfg.wtf");
-
-                //read in whole file as string
-                string raw = tr.ReadToEnd();
-                string[] rawSplit = raw.Split('\n');
-                string[,] configuration = new string[rawSplit.Length, 2];
-                string[] item;
-
-                for(int i = 0; i < rawSplit.Length; i++){
-                    try{
-                        item = rawSplit[i].Split(':');
-                        configuration[i, 0] = item[0];
-                        configuration[i, 1] = item[1];
-                    }
-                    catch(Exception exx){}
-                }
-
-                //now, read in the settings
-                for(int i = 0; i < configuration.Length/2; i++){
-                    try{
-                        //SOUND////////
-                        if(configuration[i, 0].Equals("playBackgroundMusic")){
-                            SoundManager.getInstance().PLAY_BG_MUSIC = Boolean.Parse(configuration[i, 1]);
-                        }
-
-                        else if (configuration[i, 0].Equals("audioPath")){
-                            EntityConfiguration.FileConfig.audioPath = configuration[i, 1].Trim();
-                        }
-
-                        //ENTITY COST///
-                        else if(configuration[i, 0].Equals("archerCost")){
-                            EntityConfiguration.EntityPrices.COST_ARCHER = int.Parse(configuration[i, 1]);
-                        }
-                        else if (configuration[i, 0].Equals("lightInfantryCost"))
-                        {
-                            EntityConfiguration.EntityPrices.COST_LIGHT_INFANTRY = int.Parse(configuration[i, 1]);
-                        }
-                        else if (configuration[i, 0].Equals("heavyInfantryCost"))
-                        {
-                            EntityConfiguration.EntityPrices.COST_HEAVY_INFANTRY = int.Parse(configuration[i, 1]);
-                        }
-                        else if (configuration[i, 0].Equals("towerCost"))
-                        {
-                            EntityConfiguration.EntityPrices.COST_GUARD_TOWER = int.Parse(configuration[i, 1]);
-                        }
-
-                        //ENTITY STATS//
-
-                        //ARCHER//
-                        else if(configuration[i, 0].Equals("archerStats"))
-                        {
-                            //archerStats:<armor=1 damage=20 moveSpeed=150 attackSpeed=3 sightRange=12 attackRange=10 maxHealth=100 health=100>
-                        }
-
-                    }
-                    catch(Exception ex){
-
-                    }
-                }
-
-                //close the reader
-                tr.Close();
-            }
-            catch (FileLoadException e)
-            {
-                Console.WriteLine("File Load Exception Found");
-                Console.WriteLine(e);
-            }
-
-            //----------------------------------------//
-            
             //Load XML Configurations
             //TODO: Store config locations somewhere...
-            this.ReadConfigurationFile("../../../Configuration/TextureConfiguration.xml");
-            this.ReadConfigurationFile("../../../Configuration/AudioConfiguration.xml");
-            this.ReadConfigurationFile("../../../Configuration/EntityConfiguration.xml");
+            this.ReadConfigurationFile("GameConfiguration.xml");
+            this.ReadConfigurationFile(ConfigurationManager.getInstance().textureConfigurationFileName);
+            this.ReadConfigurationFile(ConfigurationManager.getInstance().audioConfigurationFileName);
+            this.ReadConfigurationFile(ConfigurationManager.getInstance().entityConfigurationFileName);
         }
 
         public void saveCurrentGame(String fileName)
@@ -209,31 +134,61 @@ namespace Incursio.Managers
                 bool readingAudio = false;
                 bool readingEntities = false;
                 bool readingTextures = false;
-                
+                bool readingGameConfig = false;
 
                 foreach (XmlNode node in doc.DocumentElement.ChildNodes)
                 {
+                    readingAudio = (node.Name == "AudioCollection");
+                    readingEntities = (node.Name == "Entity");
+                    readingTextures = (node.Name == "TextureCollection");
+                    readingGameConfig = (node.Name == "Setting");
+
+                    /*
                     if (node.Name == "AudioCollection")
                     {
                         readingAudio = true;
                         readingEntities = false;
                         readingTextures = false;
+                        readingGameConfig = false;
                     }
                     else if (node.Name == "Entity")
                     {
                         readingAudio = false;
                         readingEntities = true;
                         readingTextures = false;
+                        readingGameConfig = false;
                     }
                     else if (node.Name == "TextureCollection")
                     {
                         readingAudio = false;
                         readingEntities = false;
                         readingTextures = true;
+                        readingGameConfig = false;
                     }
-
-                    if (readingAudio)
+                    else if(node.Name == "GameConfiguration")
                     {
+                        readingAudio = false;
+                        readingEntities = false;
+                        readingTextures = false;
+                        readingGameConfig = true;
+                    }
+                    */
+
+                    if(readingGameConfig){
+                        #region GAME_CONFIG
+                        
+                        //Parsing the settings from xml
+                        foreach (XmlAttribute att in node.Attributes)
+                        {
+                            ConfigurationManager.getInstance().setConfigurationSetting(att.Name, att.Value);
+                        }
+
+                        readingGameConfig = false;
+                        #endregion
+                    }
+                    else if (readingAudio)
+                    {
+                        #region AUDIO
                         //Parsing audio code goes here
 
                         /******SOUND CONFIGURATION PARSING************************
@@ -308,9 +263,11 @@ namespace Incursio.Managers
 
                         //Set the flag back to false
                         readingAudio = false;
+                        #endregion
                     }
                     else if (readingEntities)
                     {
+                        #region ENTITIES
                         //Iterating the entityIterator for an accurate ID
                         entityIterator++;
 
@@ -364,10 +321,11 @@ namespace Incursio.Managers
 
                         //Setting the flag back to false
                         readingEntities = false;
-                        
+                        #endregion
                     }
                     else if (readingTextures)
                     {
+                        #region TEXTURES
                         /******TEXTURE CONFIGURATION PARSING**************************************************************************************
                          * each texture node will have the node name 'TextureCollection', and will have one attribute, 'name'
                          * 
@@ -447,6 +405,7 @@ namespace Incursio.Managers
 
                         //Setting the flag back to false
                         readingTextures = false;
+                        #endregion
                     }
                     else
                     {

@@ -37,36 +37,36 @@ namespace Incursio.Campaign
 
             base.initializeMap();
 
-            Hero playerHero = (Hero)entityManager.createNewEntity("Incursio.Classes.Hero", PlayerManager.getInstance().currentPlayerId);
+            BaseGameEntity playerHero = entityManager.createNewEntity(heroId, PlayerManager.getInstance().currentPlayerId);
             playerHero.setLocation(new Coordinate(1750, 3250));
 
-            Hero compHero = (Hero)entityManager.createNewEntity("Incursio.Classes.Hero", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity compHero = entityManager.createNewEntity(heroId, PlayerManager.getInstance().computerPlayerId);
             compHero.setLocation(new Coordinate(300, 100));
 
-            CampStructure playerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", PlayerManager.getInstance().currentPlayerId);
+            BaseGameEntity playerCamp = entityManager.createNewEntity(campId, PlayerManager.getInstance().currentPlayerId);
             playerCamp.setLocation(new Coordinate(1810, 3250));
             playerCamp.setHealth(350);
 
-            CampStructure computerCamp = (CampStructure)entityManager.createNewEntity("Incursio.Classes.CampStructure", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity computerCamp = entityManager.createNewEntity(campId, PlayerManager.getInstance().computerPlayerId);
             computerCamp.setLocation(new Coordinate(230, 120));
             computerCamp.setHealth(350);
 
-            ControlPoint cp1 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity cp1 = entityManager.createNewEntity(cpId, PlayerManager.getInstance().computerPlayerId);
             cp1.setLocation(new Coordinate(400, 200));
 
-            ControlPoint cp2 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().currentPlayerId);
+            BaseGameEntity cp2 = entityManager.createNewEntity(cpId, PlayerManager.getInstance().currentPlayerId);
             cp2.setLocation(new Coordinate(1600, 3350));
 
-            ControlPoint cp3 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity cp3 = entityManager.createNewEntity(cpId, PlayerManager.getInstance().computerPlayerId);
             cp3.setLocation(new Coordinate(1250, 2300));
 
-            ControlPoint cp4 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity cp4 = entityManager.createNewEntity(cpId, PlayerManager.getInstance().computerPlayerId);
             cp4.setLocation(new Coordinate(300, 3200));
 
-            ControlPoint cp5 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity cp5 = entityManager.createNewEntity(cpId, PlayerManager.getInstance().computerPlayerId);
             cp5.setLocation(new Coordinate(650, 1020));
 
-            ControlPoint cp6 = (ControlPoint)entityManager.createNewEntity("Incursio.Classes.ControlPoint", PlayerManager.getInstance().computerPlayerId);
+            BaseGameEntity cp6 = entityManager.createNewEntity(cpId, PlayerManager.getInstance().computerPlayerId);
             cp6.setLocation(new Coordinate(1400, 120));
             
             
@@ -280,8 +280,8 @@ namespace Incursio.Campaign
                 this.addMapEntity(roads[i], roads[i].location.x, roads[i].location.y);
             }
 
-            this.addObjectEntity(new BaseMapEntity(TextureBank.MapTiles.dock, false, 23, 109));
-            this.addObjectEntity(new BaseMapEntity(TextureBank.MapTiles.dock, false, 26, 109));
+            this.addObjectEntity(new BaseMapEntity(TextureBank.getInstance().terrain.terrain.dock.texture, false, 23, 109));
+            this.addObjectEntity(new BaseMapEntity(TextureBank.getInstance().terrain.terrain.dock.texture, false, 26, 109));
 
             this.addObjectEntity(new Building(22, 105, 0));
             this.addObjectEntity(new Building(25, 105, 1));

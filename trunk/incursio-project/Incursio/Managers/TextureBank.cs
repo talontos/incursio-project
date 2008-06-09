@@ -27,6 +27,13 @@ namespace Incursio.Managers
 
         public List<global::Incursio.Entities.TextureCollections.TextureCollection> textureCollections;
 
+        private global::Incursio.Entities.TextureCollections.TextureCollection _terrain;
+
+        public global::Incursio.Entities.TextureCollections.TextureCollection terrain{
+            get { if (_terrain == null) _terrain = this.getCollectionByName("Terrain"); return _terrain; }
+            set { _terrain = value; }
+        }
+
         private TextureBank(){
             this.textureCollections = new List<global::Incursio.Entities.TextureCollections.TextureCollection>();
         }
@@ -54,53 +61,7 @@ namespace Incursio.Managers
 
             public static Texture2D arrow;
         }
-
-        public static class MapTiles{
-            public static Texture2D grass1;
-            //...
-
-            public static Texture2D shore1;
-            //...
-
-            public static Texture2D openWater;
-            public static Texture2D shoreDown;
-            public static Texture2D shoreLeft;
-            public static Texture2D shoreRight;
-            public static Texture2D shoreUp;
-            public static Texture2D shoreLowerLeftCorner;
-            public static Texture2D shoreLowerRightCorner;
-            public static Texture2D shoreUpperLeftCorner;
-            public static Texture2D shoreUpperRightCorner;
-            public static Texture2D shoreOpenLowerLeftCorner;
-            public static Texture2D shoreOpenLowerRightCorner;
-            public static Texture2D shoreOpenUpperLeftCorner;
-            public static Texture2D shoreOpenUpperRightCorner;
-            //...
-
-            public static Texture2D tree1;
-            public static Texture2D groupOfTrees;
-            //...
-            public static Texture2D roadHorizontal;
-            public static Texture2D roadVertical;
-            public static Texture2D roadElbowUpRight;
-            public static Texture2D roadElbowUpLeft;
-            public static Texture2D roadElbowDownRight;
-            public static Texture2D roadElbowDownLeft;
-
-            //...
-            public static Texture2D rockSmall;
-            public static Texture2D rockMedium;
-            public static Texture2D rockBig;
-            public static Texture2D dock;
-            public static Texture2D building1;
-            public static Texture2D building2;
-            public static Texture2D building3;
-            public static Texture2D buildingGroup;
-            public static Texture2D buildingGroupEndRight;
-            public static Texture2D buildingGroupEndLeft;
-
-        }
-
+        
         public static class InterfaceTextures
         {
             //Interface Textures/////////

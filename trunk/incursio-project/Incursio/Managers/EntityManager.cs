@@ -317,7 +317,7 @@ namespace Incursio.Managers
             List<BaseGameEntity> playerUnits = new List<BaseGameEntity>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.getPlayer() == player && !e.isDead() && e.movementComponent != null)
+                if (e.getPlayer() == player && !e.isDead() && e.movementComponent != null) //units are denoted by movable entities
                     playerUnits.Add(e);
             });
             return playerUnits;
@@ -327,7 +327,7 @@ namespace Incursio.Managers
             List<BaseGameEntity> playerHeros = new List<BaseGameEntity>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.getPlayer() == player && !e.isDead() && e.experienceComponent != null)
+                if (e.getPlayer() == player && !e.isDead() && e.isHero)
                     playerHeros.Add(e);
             });
 
@@ -351,7 +351,7 @@ namespace Incursio.Managers
             List<BaseGameEntity> playerStructs = new List<BaseGameEntity>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.getPlayer() == player && !e.isDead() && e.factoryComponent != null)
+                if (e.getPlayer() == player && !e.isDead() && e.isMainBase)
                     playerStructs.Add(e);
             });
 
@@ -363,7 +363,7 @@ namespace Incursio.Managers
             List<BaseGameEntity> playerStructs = new List<BaseGameEntity>();
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.getPlayer() == player && !e.isDead() && e.capturableComponent != null)
+                if (e.getPlayer() == player && e.isControlPoint)
                     playerStructs.Add(e);
             });
 
@@ -376,7 +376,7 @@ namespace Incursio.Managers
 
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.capturableComponent != null && e.owner == id)
+                if (e.isControlPoint && e.owner == id)
                 {
                     numPoints++;
                 }
@@ -391,7 +391,7 @@ namespace Incursio.Managers
 
             this.entityBank.ForEach(delegate(BaseGameEntity e)
             {
-                if (e.capturableComponent != null)
+                if (e.isControlPoint)
                 {
                     numPoints++;
                 }
@@ -402,28 +402,15 @@ namespace Incursio.Managers
 
         public bool isPlayerCampDestroyed(int id)
         {
-            return false;
-            //TODO: REVISIT THIS
-            /*
-            bool result = true;
-            this.entityBank.ForEach(delegate(BaseGameEntity e)
-            {
-                if (e.getType() == State.EntityName.Camp && e.owner == id)
-                {
-                    if ((e as CampStructure).getCurrentState() == State.EntityState.Destroyed)
-                    {
-
-                    }
-                    else
-                    {
-                        result = false;
-                    }
-                   
+            foreach(BaseGameEntity e in this.getLivePlayerCamps(id)){
+                if(e.isMainBase && !e.isDead()){
+                    //found a live one; we're still ok...
+                    return false;
                 }
-            });
-
-            return result;
-            */
+            }
+            
+            //all camps are destroyed, we lose :-(
+            return true;
         }
         
         public void tryToBuild(int toBuildId){
