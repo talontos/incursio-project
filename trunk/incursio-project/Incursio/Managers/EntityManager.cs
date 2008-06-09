@@ -435,7 +435,7 @@ namespace Incursio.Managers
             }
         }
 
-        public BaseGameEntity createNewEntity(string entityName, int player){
+        /*public BaseGameEntity createNewEntity(string entityName, int player){
             BaseGameEntity product = ObjectFactory.getInstance().create(entityName, player);
             if (product == null)
                 return null;
@@ -445,7 +445,7 @@ namespace Incursio.Managers
 
             return product;
 
-        }
+        }*/
 
         public BaseGameEntity createNewEntity(int entityClassId, int player){
             BaseGameEntity product = ObjectFactory.getInstance().create(entityClassId, player);
@@ -704,15 +704,27 @@ namespace Incursio.Managers
 
             int eDamage, eArmor, eHealth, eRange, eAttackSpeed, myThreat, eThreat;
 
-            eDamage = e.getAttackDamage();
             eArmor = e.getArmor();
             eHealth = (int)e.health;
             eRange = e.getAttackRange();
+
+            //note - if damage or speed is 0, they should pose no threat
+            eDamage = e.getAttackDamage();
             eAttackSpeed = e.getAttackSpeed();
 
-            //eThreat is much lower if they are already in battle
-            eThreat = (((eHealth + eRange) / myDamage) / (e.isAttacking() ? 2 : 1)) / eAttackSpeed;
-            myThreat = ((myHealth + myRange) / eDamage) / myAttackSpeed;
+            if (eDamage == 0 || eAttackSpeed == 0)
+                eThreat = -1;
+            else{
+                //eThreat is much lower if they are already in battle
+                eThreat = (((eHealth + eRange) / myDamage) / (e.isAttacking() ? 2 : 1)) / eAttackSpeed;
+            }
+
+            if (myDamage == 0 || myAttackSpeed == 0)
+                myThreat = -1;
+            else
+            {
+                myThreat = ((myHealth + myRange) / eDamage) / myAttackSpeed;
+            }
 
             if (e.isCapturing())
             {

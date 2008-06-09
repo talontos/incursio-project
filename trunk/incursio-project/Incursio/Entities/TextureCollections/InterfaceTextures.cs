@@ -7,10 +7,9 @@ namespace Incursio.Entities.TextureCollections
 {
     class InterfaceTextures : TextureSet
     {
-        public GameTexture North;
-        public GameTexture South;
-        public GameTexture East;
-        public GameTexture West;
+        public GameTexture ButtonLeft;
+        public GameTexture ButtonRight;
+        public GameTexture ButtonBody;
 
         public override void addTexture(string type, string name, int frameWidth, int frameHeight)
         {
@@ -18,10 +17,9 @@ namespace Incursio.Entities.TextureCollections
 
             switch (type)
             {
-                case "north": North = this.makeGameTexture(name, frameWidth, frameHeight); break;
-                case "south": South = this.makeGameTexture(name, frameWidth, frameHeight); break;
-                case "east": East = this.makeGameTexture(name, frameWidth, frameHeight); break;
-                case "west": West = this.makeGameTexture(name, frameWidth, frameHeight); break;
+                case "ButtonLeft":  ButtonLeft = this.makeGameTexture(name, frameWidth, frameHeight); break;
+                case "ButtonRight": ButtonRight = this.makeGameTexture(name, frameWidth, frameHeight); break;
+                case "ButtonBody":  ButtonBody = this.makeGameTexture(name, frameWidth, frameHeight); break;
                 default: return;
             }
         }

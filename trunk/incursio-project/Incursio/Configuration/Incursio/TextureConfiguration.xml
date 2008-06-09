@@ -138,6 +138,14 @@
 		</Damaged>
 	</TextureCollection>
 
+	<TextureCollection name="Interface" portrait="" icon="">
+		<Button>
+			<Left file="ButtonLeft.png"/>
+			<Body file="ButtonBody.png"/>
+			<Right file="ButtonRight.png"/>
+		</Button>
+	</TextureCollection>
+
 	<TextureCollection name="Terrain" portrait="" icon="">
 		<Terrain>
 			<grass1 file="GrassTile1.png"/>
