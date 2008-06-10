@@ -153,7 +153,7 @@ namespace Incursio.Managers
             {
                 //try to build guard Tower
                 positioningTower = true;
-                TextureBank.InterfaceTextures.cursorEvent = TextureBank.EntityTextures.guardTowerTexturePlayer;
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.cursorEvent = TextureBank.getInstance().InterfaceTextures.interfaceTextures.guardTowerTexturePlayer.texture;
             }
             */
 
@@ -412,7 +412,7 @@ namespace Incursio.Managers
             if (mouseDragStart.X < 0 || mouseDragEnd.X < 0)
                 return;
 
-            spriteBatch.Draw(TextureBank.InterfaceTextures.selectionRectangle, 
+            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.selectionRectangle.texture, 
                     getVisibleSelectionRectangle(), 
                     Microsoft.Xna.Framework.Graphics.Color.Blue
             );

@@ -273,7 +273,6 @@ namespace Incursio.Classes
         /// <returns>True when destination is reached.  By default returns true.</returns>
         public virtual bool updateMovement(float ElapsedTime){
             if(this.movementComponent != null){
-//                this.updateOccupancy(false);
                 return this.movementComponent.updateMovement(ElapsedTime);
             }
             else{

@@ -13,39 +13,42 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Incursio.Classes;
+using Incursio.Entities;
 
 namespace Incursio.Utils
 {
     public class EntityBuildOrder
     {
-        public State.EntityName entity;
+        public string entity = "";
         public int entityId;
         public Coordinate location;
         public KeyPoint keyPoint;
 
-        public EntityBuildOrder(Coordinate l, State.EntityName e, KeyPoint k)
-        {
-            location = l;
-            entity = e;
-            keyPoint = k;
-        }
-
-        public EntityBuildOrder(Coordinate l, State.EntityName e)
-        {
-            location = l;
-            entity = e;
-        }
-
         public EntityBuildOrder(Coordinate l, int entityId){
+            //TODO: Lookup entityId & get name & set to 'entity'
             this.location = l;
             this.entityId = entityId;
+
+            this.entity = this.lookupEntityName(ref entityId);
         }
 
-        public EntityBuildOrder(Coordinate l, int entityId, KeyPoint k)
-        {
+        public EntityBuildOrder(Coordinate l, int entityId, KeyPoint k){
+            //TODO: Lookup entityId & get name & set to 'entity'
             this.location = l;
             this.entityId = entityId;
             keyPoint = k;
+
+            this.entity = this.lookupEntityName(ref entityId);
+        }
+
+        private string lookupEntityName(ref int id){
+            foreach(BaseGameEntityConfiguration c in ObjectFactory.getInstance().entities){
+                if (c.classID == id)
+                    return c.className;
+            }
+
+            //TODO: Throw ERROR?
+            return "";
         }
     }
 }

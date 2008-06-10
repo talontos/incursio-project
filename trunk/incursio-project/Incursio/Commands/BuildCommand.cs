@@ -25,9 +25,11 @@ namespace Incursio.Commands
         public String buildClass;
         public EntityBuildOrder buildOrder;
 
+        /*
         public BuildCommand(State.EntityName toBeBuilt, Coordinate location){
             this.buildOrder = new EntityBuildOrder(location, toBeBuilt);
         }
+        */
 
         public BuildCommand(int classToBeBuilt, Coordinate location){
             this.buildOrder = new EntityBuildOrder(location, classToBeBuilt);

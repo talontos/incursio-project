@@ -435,18 +435,6 @@ namespace Incursio.Managers
             }
         }
 
-        /*public BaseGameEntity createNewEntity(string entityName, int player){
-            BaseGameEntity product = ObjectFactory.getInstance().create(entityName, player);
-            if (product == null)
-                return null;
-
-            product.keyId = nextKeyId;
-            this.entityBank.Insert(nextKeyId++, product);
-
-            return product;
-
-        }*/
-
         public BaseGameEntity createNewEntity(int entityClassId, int player){
             BaseGameEntity product = ObjectFactory.getInstance().create(entityClassId, player);
             if (product == null)
@@ -534,10 +522,10 @@ namespace Incursio.Managers
 
                         ////////////////////////
                         case State.Command.BUILD:
-                            //TODO: TEMPORARY!!!!  we need to get rid of EntityName
-                            if(args[0] is State.EntityName)
-                                command = new BuildCommand( (State.EntityName)args[0], (args.Length > 1 ? args[1] : null) as Coordinate);
-                            else
+                            //TODO: Remove comments
+                            //if(args[0] is State.EntityName)
+                            //    command = new BuildCommand( (State.EntityName)args[0], (args.Length > 1 ? args[1] : null) as Coordinate);
+                            //else
                                 command = new BuildCommand((int)args[0], (args.Length > 1 ? args[1] : null) as Coordinate);
                             break;
 

@@ -21,8 +21,8 @@ namespace Incursio.Interface
     {
         public ExitGameToMenuButton() : 
             base(new Vector2(475, 384), 
-                 TextureBank.InterfaceTextures.exitGameToMenuButton, 
-                 TextureBank.InterfaceTextures.exitGameToMenuButtonPressed)
+                 TextureBank.getInstance().InterfaceTextures.interfaceTextures.exitGameToMenuButton.texture,
+                 TextureBank.getInstance().InterfaceTextures.interfaceTextures.exitGameToMenuButtonPressed.texture)
         {
 
 

@@ -163,7 +163,7 @@ namespace Incursio
             hud.loadHeadsUpDisplay();
 
             // load paused game menu components
-            this.gameMenuButton = new Button(new Vector2(465, 738), TextureBank.InterfaceTextures.gameMenuButton, TextureBank.InterfaceTextures.gameMenuButtonPressed);
+            this.gameMenuButton = new Button(new Vector2(465, 738), TextureBank.getInstance().InterfaceTextures.interfaceTextures.gameMenuButton.texture, TextureBank.getInstance().InterfaceTextures.interfaceTextures.gameMenuButtonPressed.texture);
             Button resumeGameButton = new ResumeGameButton();
             Button exitGameToMenuButton = new ExitGameToMenuButton();
 
@@ -391,7 +391,7 @@ namespace Incursio
                 case (State.GameState.Menu):
                     //spriteBatch.DrawString(font, "INCURSIO", FontPos, Color.White, 0, font.MeasureString("INCURSIO") / 2, 1.0f, SpriteEffects.None, 0.5f);
                     graphics.GraphicsDevice.Clear(Color.SteelBlue);
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground, 
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.mainMenuBackground.texture, 
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
 
                     mainMenu.Draw(spriteBatch);
@@ -401,7 +401,7 @@ namespace Incursio
                 case (State.GameState.LoadMenu):
                     //spriteBatch.DrawString(font, "INCURSIO", FontPos, Color.White, 0, font.MeasureString("INCURSIO") / 2, 1.0f, SpriteEffects.None, 0.5f);
                     graphics.GraphicsDevice.Clear(Color.SteelBlue);
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground,
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.mainMenuBackground.texture,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
 
                     loadMenu.Draw(spriteBatch);
@@ -411,7 +411,7 @@ namespace Incursio
                 case (State.GameState.SaveMenu):
                     //spriteBatch.DrawString(font, "INCURSIO", FontPos, Color.White, 0, font.MeasureString("INCURSIO") / 2, 1.0f, SpriteEffects.None, 0.5f);
                     graphics.GraphicsDevice.Clear(Color.SteelBlue);
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.pauseMenuBackground,
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.pauseMenuBackground.texture,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
 
                     saveMenu.Draw(spriteBatch);
@@ -419,7 +419,7 @@ namespace Incursio
                     break;
 
                 case State.GameState.MapSelection:
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.mainMenuBackground,
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.mainMenuBackground.texture,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
 
                     mapSelectionMenu.Draw(spriteBatch);
@@ -428,14 +428,14 @@ namespace Incursio
 
                 case (State.GameState.Credits):
                     //spriteBatch.DrawString(font, "Game State: CREDITS", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: CREDITS") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.creditsBackground, new Rectangle(0, 0, 1024, 768), Color.White);
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.creditsBackground.texture, new Rectangle(0, 0, 1024, 768), Color.White);
                     creditsMenu.Draw(spriteBatch);
                     break;
 
                 case (State.GameState.Defeat):
                     //spriteBatch.DrawString(font, "Game State: Massive Failure! " + stateString, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: Massive Failure! " + stateString) / 2, 1.0f, SpriteEffects.None, 0.5f);
 
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.defeatMenuBackground,
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.defeatMenuBackground.texture,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
 
                     mainMenu.Draw(spriteBatch);
@@ -445,7 +445,7 @@ namespace Incursio
                 case (State.GameState.Victory):
                     //spriteBatch.DrawString(font, "Game State: Epic Win!!! " + stateString, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: Epic Win!!! " + stateString) / 2, 1.0f, SpriteEffects.None, 0.5f);
 
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.victoryMenuBackground,
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.victoryMenuBackground.texture,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
 
                     mainMenu.Draw(spriteBatch);
@@ -456,14 +456,14 @@ namespace Incursio
 
                     //spriteBatch.DrawString(font, "Game Paused", new Vector2(520, 100), Color.White, 0, font.MeasureString("Game Paused") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.pauseMenuBackground,
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.pauseMenuBackground.texture,
                         new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
                     
                     pauseMenu.Draw(spriteBatch);
                     break;
 
                 case (State.GameState.Instructions):
-                    spriteBatch.Draw(TextureBank.InterfaceTextures.instructions,
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.instructions.texture,
                        new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
 
                     instructionsMenu.Draw(spriteBatch);

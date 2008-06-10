@@ -22,8 +22,8 @@ namespace Incursio.Interface
 
         public MapSelectButton() : 
             base(new Vector2(400, 638), 
-                TextureBank.InterfaceTextures.newGameButton, 
-                TextureBank.InterfaceTextures.newGameButtonPressed
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.newGameButton.texture,
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.newGameButtonPressed.texture
         ){
 
 

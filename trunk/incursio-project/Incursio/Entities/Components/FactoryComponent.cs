@@ -282,11 +282,11 @@ namespace Incursio.Entities.Components
             {
                 string orderList = "";
                 if (this.isBuilding())
-                    orderList += "0: " + this.buildProject.entity.ToString() + "\n";
+                    orderList += "0: " + this.buildProject.entity + "\n";
 
                 for (int i = 0; i < this.buildOrders.Count; i++)
                 {
-                    orderList += (i + 1) + ": " + this.buildOrders[i].entity.ToString() + "\n";
+                    orderList += (i + 1) + ": " + this.buildOrders[i].entity + "\n";
                 }
 
                 spriteBatch.DrawString(Incursio.getInstance().getFont_Courier(), orderList, new Vector2(0, 0), Color.White);

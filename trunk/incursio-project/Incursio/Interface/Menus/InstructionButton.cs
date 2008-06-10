@@ -22,8 +22,8 @@ namespace Incursio.Interface
 
         public InstructionButton() : 
             base(new Vector2(465, 738),
-                TextureBank.InterfaceTextures.instructionsButton_not_pressed,
-                TextureBank.InterfaceTextures.instructionsButton_pressed
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.instructionsButton_not_pressed.texture,
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.instructionsButton_pressed.texture
         ){
             
         }

@@ -94,11 +94,11 @@ namespace Incursio.Interface
 
       public void Draw(SpriteBatch batch)
       {
-          if (TextureBank.InterfaceTextures.cursorEvent != null)
+          if (TextureBank.getInstance().InterfaceTextures.interfaceTextures.cursorEvent != null)
           {
-              batch.Draw(TextureBank.InterfaceTextures.cursorEvent, 
-                  new Vector2 (this.pos.X - (int)(TextureBank.InterfaceTextures.cursorEvent.Width / 2),
-                               this.pos.Y - (int)(TextureBank.InterfaceTextures.cursorEvent.Height * 0.80)), 
+              batch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.cursorEvent.texture,
+                  new Vector2(this.pos.X - (int)(TextureBank.getInstance().InterfaceTextures.interfaceTextures.cursorEvent.texture.Width / 2),
+                               this.pos.Y - (int)(TextureBank.getInstance().InterfaceTextures.interfaceTextures.cursorEvent.texture.Height * 0.80)), 
                   new Color(255, 255, 255, 125));
           }
           else
@@ -109,12 +109,12 @@ namespace Incursio.Interface
                       this.structure.renderComponent.drawThyself(ref batch, 0, 0);
                   }
                   //else{
-                    batch.Draw(TextureBank.InterfaceTextures.cursor, this.pos, Color.White);
+                  batch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.cursor.texture, this.pos, Color.White);
                   //}
               }
               else if (this.isLeftPressed == true || this.isRightPressed == true)
               {
-                  batch.Draw(TextureBank.InterfaceTextures.cursorPressed, this.pos, Color.White);
+                  batch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.cursorPressed.texture, this.pos, Color.White);
               }
           }
 

@@ -21,8 +21,8 @@ namespace Incursio.Interface
     {
         public SaveMenuButton() : 
             base(new Vector2(0, 50), 
-                TextureBank.InterfaceTextures.saveGameButton, 
-                TextureBank.InterfaceTextures.saveGameButtonPressed)
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.saveGameButton.texture,
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.saveGameButtonPressed.texture)
         {
 
         }
