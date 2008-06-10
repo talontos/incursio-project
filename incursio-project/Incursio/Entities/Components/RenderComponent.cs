@@ -85,7 +85,7 @@ namespace Incursio.Entities.Components
             #region PROJECTILES
             if(this.isProjectile){
                 //draw the projectile if needed
-                spriteBatch.Draw(TextureBank.EntityTextures.arrow,
+                spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.arrow.texture,
                     this.projectile.onScreen,
                     null, Color.White, -1 * ((float)(this.projectile.angle * (Math.PI / 180))),
                     new Vector2(this.projectile.texture.Width / 2, 
@@ -353,12 +353,12 @@ namespace Incursio.Entities.Components
             int height = this.textures.still.South.texture.Height + 15;
 
             //draw health bar overlay
-            spriteBatch.Draw(TextureBank.EntityTextures.selectedUnitOverlayTexture,
+            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.selectedUnitOverlayTexture.texture,
                 new Rectangle(onScreen.x - xOffSet, onScreen.y - yOffSet, width, height),
                 Color.White);
 
             //draw health bar
-            spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture,
+            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture,
                 new Rectangle(onScreen.x - xOffSet + 1 + (int)(width * healthBarTypicalStartWidth), onScreen.y - yOffSet + 1 + (int)(height * healthBarTypicalStartHeight), (int)((width * healthBarTypicalWidth) * healthRatio), (int)(height * healthBarTypicalHeight)),
                 healthColor);
         }

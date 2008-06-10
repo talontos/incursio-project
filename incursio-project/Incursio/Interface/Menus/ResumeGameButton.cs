@@ -21,8 +21,8 @@ namespace Incursio.Interface
     {
         public ResumeGameButton() : 
             base(new Vector2(475, 349), 
-                TextureBank.InterfaceTextures.resumeGameButton, 
-                TextureBank.InterfaceTextures.resumeGameButtonPressed)
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.resumeGameButton.texture,
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.resumeGameButtonPressed.texture)
         {
 
         }

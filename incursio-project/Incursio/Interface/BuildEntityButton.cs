@@ -42,8 +42,8 @@ namespace Incursio.Interface
         {
             base.Draw(batch);
 
-            batch.Draw(TextureBank.InterfaceTextures.moneyIcon,
-                new Rectangle((int)stringpos.X, (int)stringpos.Y, TextureBank.InterfaceTextures.moneyIcon.Width, TextureBank.InterfaceTextures.moneyIcon.Height), Color.White);
+            batch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.moneyIcon.texture,
+                new Rectangle((int)stringpos.X, (int)stringpos.Y, TextureBank.getInstance().InterfaceTextures.interfaceTextures.moneyIcon.texture.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.moneyIcon.texture.Height), Color.White);
 
             batch.DrawString(Incursio.getInstance().getFont_Arial(), "     " + this.eCost, this.stringpos, Color.Gold);
         }

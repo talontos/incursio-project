@@ -72,6 +72,25 @@ namespace Incursio.Utils
                         break;
 
                     case "ENDGAME":
+                        if (list.Length > 1)
+                        {
+                            switch(list[1]){
+                                case "VICTORY":
+                                    Incursio.getInstance().currentState = State.GameState.Victory;
+                                    break;
+
+                                case "DEFEAT":
+                                    Incursio.getInstance().currentState = State.GameState.Defeat;
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+
+                    case "ENTITYSETTINGS":
+                        //TODO: print out entity names + IDs
                         break;
 
                     default:

@@ -78,7 +78,7 @@ namespace Incursio
             West,
             Northwest,
         }
-
+        /*
         public enum EntityName
         {
             NONE,
@@ -92,7 +92,8 @@ namespace Incursio
             //TODO: add more entity types
 
         }
-
+        */
+        //TODO: REMOVE
         public enum PlayerId{
             HUMAN,
             COMPUTER,

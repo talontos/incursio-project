@@ -23,24 +23,24 @@ namespace Incursio.Interface
 
         public LoadButton(string file, int num) : 
             base(new Vector2(0, 50), 
-                TextureBank.InterfaceTextures.loadGameButton, 
-                TextureBank.InterfaceTextures.loadGameButtonPressed)
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.loadGameButton.texture,
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.loadGameButtonPressed.texture)
         {
             this.filename = file;
 
             switch (num)
             {
                 case 1:
-                    this.pressed = TextureBank.InterfaceTextures.file1_pressed;
-                    this.passive = TextureBank.InterfaceTextures.file1_not_pressed;
+                    this.pressed = TextureBank.getInstance().InterfaceTextures.interfaceTextures.file1_pressed.texture;
+                    this.passive = TextureBank.getInstance().InterfaceTextures.interfaceTextures.file1_not_pressed.texture;
                     break;
                 case 2:
-                    this.pressed = TextureBank.InterfaceTextures.file2_pressed;
-                    this.passive = TextureBank.InterfaceTextures.file2_not_pressed;
+                    this.pressed = TextureBank.getInstance().InterfaceTextures.interfaceTextures.file2_pressed.texture;
+                    this.passive = TextureBank.getInstance().InterfaceTextures.interfaceTextures.file2_not_pressed.texture;
                     break;
                 case 3:
-                    this.pressed = TextureBank.InterfaceTextures.file3_pressed;
-                    this.passive = TextureBank.InterfaceTextures.file3_not_pressed;
+                    this.pressed = TextureBank.getInstance().InterfaceTextures.interfaceTextures.file3_pressed.texture;
+                    this.passive = TextureBank.getInstance().InterfaceTextures.interfaceTextures.file3_not_pressed.texture;
                     break;
             }
         }

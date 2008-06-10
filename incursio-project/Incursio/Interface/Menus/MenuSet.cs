@@ -47,7 +47,7 @@ namespace Incursio.Interface.Menus
 
         public void Draw(SpriteBatch batch){
             //draw background
-            batch.Draw(TextureBank.InterfaceTextures.selectionRectangle, boundingBox, Color.DarkBlue);
+            batch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.selectionRectangle.texture, boundingBox, Color.DarkBlue);
 
             //draw buttons
             this.buttons.ForEach(delegate(Button b)

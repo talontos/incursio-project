@@ -127,9 +127,9 @@ namespace Incursio.Classes
       public bool isCursorWithin(int x, int y)
       {
           //three rectangles since the texture is not quite rectangular
-          Rectangle boundingBox1 = new Rectangle(0, 768 - TextureBank.InterfaceTextures.headsUpDisplay.Height, (int)(TextureBank.InterfaceTextures.headsUpDisplay.Width * 0.236), TextureBank.InterfaceTextures.headsUpDisplay.Height);
-          Rectangle boundingBox2 = new Rectangle((int)(TextureBank.InterfaceTextures.headsUpDisplay.Width * 0.236), 768 - (int)(TextureBank.InterfaceTextures.headsUpDisplay.Height * 0.789), (int)(TextureBank.InterfaceTextures.headsUpDisplay.Width * 0.7412), (int)(TextureBank.InterfaceTextures.headsUpDisplay.Height * 0.789));
-          Rectangle boundingBox3 = new Rectangle((int)(TextureBank.InterfaceTextures.headsUpDisplay.Width * 0.7412), 768 - TextureBank.InterfaceTextures.headsUpDisplay.Height, (int)(TextureBank.InterfaceTextures.headsUpDisplay.Width * 0.258), TextureBank.InterfaceTextures.headsUpDisplay.Height);
+          Rectangle boundingBox1 = new Rectangle(0, 768 - TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Height, (int)(TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Width * 0.236), TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Height);
+          Rectangle boundingBox2 = new Rectangle((int)(TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Width * 0.236), 768 - (int)(TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Height * 0.789), (int)(TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Width * 0.7412), (int)(TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Height * 0.789));
+          Rectangle boundingBox3 = new Rectangle((int)(TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Width * 0.7412), 768 - TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Height, (int)(TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Width * 0.258), TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Height);
 
           if (boundingBox1.Contains(x, y) ||
               boundingBox2.Contains(x, y) ||
@@ -151,8 +151,8 @@ namespace Incursio.Classes
             int numUnitsSelected = selectedUnits.Count;
 
             // draw the bars
-            spriteBatch.Draw(TextureBank.InterfaceTextures.headsUpDisplay, new Rectangle(0, height - TextureBank.InterfaceTextures.headsUpDisplay.Height, TextureBank.InterfaceTextures.headsUpDisplay.Width, TextureBank.InterfaceTextures.headsUpDisplay.Height), Color.White);
-            spriteBatch.Draw(TextureBank.InterfaceTextures.resourceDisplay, new Rectangle(1024 - TextureBank.InterfaceTextures.resourceDisplay.Width, 0, TextureBank.InterfaceTextures.resourceDisplay.Width, TextureBank.InterfaceTextures.resourceDisplay.Height), Color.White);
+            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture, new Rectangle(0, height - TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Height, TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.headsUpDisplay.texture.Height), Color.White);
+            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.resourceDisplay.texture, new Rectangle(1024 - TextureBank.getInstance().InterfaceTextures.interfaceTextures.resourceDisplay.texture.Width, 0, TextureBank.getInstance().InterfaceTextures.interfaceTextures.resourceDisplay.texture.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.resourceDisplay.texture.Height), Color.White);
 
             //for the selected unit portrait
             if (numUnitsSelected != 0)
@@ -187,8 +187,8 @@ namespace Incursio.Classes
                     if (selectedUnits[0].factoryComponent.isBuilding())
                     {
                         spriteBatch.DrawString(font, "Building:  " + selectedUnits[0].factoryComponent.currentlyBuildingThis, new Vector2(572, height - 65), Color.White, 0, font.MeasureString("Building:  XXXXXXXXXXXXXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                        spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(462, height - 50, TextureBank.EntityTextures.healthRatioTexture.Width * 5, TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Black);
-                        spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(462, height - 50, (int) (TextureBank.EntityTextures.healthRatioTexture.Width * 5 * buildRatio) , TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Lime);
+                        spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture, new Rectangle(462, height - 50, TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture.Width * 5, TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture.Height * 3), Color.Black);
+                        spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture, new Rectangle(462, height - 50, (int)(TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture.Width * 5 * buildRatio), TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture.Height * 3), Color.Lime);
                     }
                     
                 }
@@ -200,8 +200,8 @@ namespace Incursio.Classes
 
                     //EXPERIENCE POINTS
                     spriteBatch.DrawString(font, pointString, new Vector2(440, height - 45), Color.White, 0, font.MeasureString(pointString) / 2, 1.0f, SpriteEffects.None, 0.5f);
-                    spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(510, height - 50, TextureBank.EntityTextures.healthRatioTexture.Width * 5, TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Black);
-                    spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(510, height - 50, (int)(TextureBank.EntityTextures.healthRatioTexture.Width * 5 * expRatio), TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Lime);
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture, new Rectangle(510, height - 50, TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture.Width * 5, TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture.Height * 3), Color.Black);
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture, new Rectangle(510, height - 50, (int)(TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture.Width * 5 * expRatio), TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture.Height * 3), Color.Lime);
                     
                 }
 
@@ -212,8 +212,8 @@ namespace Incursio.Classes
 
                     //lets the player know what we're capping, and the progress
                     spriteBatch.DrawString(font, "Capturing: ", new Vector2(572, height - 65), Color.White, 0, font.MeasureString("Capturing: ") / 2, 1.0f, SpriteEffects.None, 0.5f);
-                    spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(462, height - 50, TextureBank.EntityTextures.healthRatioTexture.Width * 5, TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Black);
-                    spriteBatch.Draw(TextureBank.EntityTextures.healthRatioTexture, new Rectangle(462, height - 50, (int)(TextureBank.EntityTextures.healthRatioTexture.Width * 5 * capRatio), TextureBank.EntityTextures.healthRatioTexture.Height * 3), Color.Lime);
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture, new Rectangle(462, height - 50, TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture.Width * 5, TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture.Height * 3), Color.Black);
+                    spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture, new Rectangle(462, height - 50, (int)(TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture.Width * 5 * capRatio), TextureBank.getInstance().InterfaceTextures.interfaceTextures.healthRatioTexture.texture.Height * 3), Color.Lime);
                 }
             }
             else if (numUnitsSelected > 1)
@@ -227,19 +227,19 @@ namespace Incursio.Classes
                         /*
                         if (selectedUnits[i].getType() == State.EntityName.LightInfantry)
                         {
-                            spriteBatch.Draw(TextureBank.InterfaceTextures.lightInfantryIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.InterfaceTextures.lightInfantryIcon.Width, TextureBank.InterfaceTextures.lightInfantryIcon.Height), Color.White);
+                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.lightInfantryIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.getInstance().InterfaceTextures.interfaceTextures.lightInfantryIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.lightInfantryIcon.Height), Color.White).texture;
                         }
                         else if (selectedUnits[i].getType() == State.EntityName.Archer)
                         {
-                            spriteBatch.Draw(TextureBank.InterfaceTextures.archerIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.InterfaceTextures.archerIcon.Width, TextureBank.InterfaceTextures.archerIcon.Height), Color.White);
+                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.archerIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.getInstance().InterfaceTextures.interfaceTextures.archerIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.archerIcon.Height), Color.White).texture;
                         }
                         else if (selectedUnits[i].getType() == State.EntityName.HeavyInfantry)
                         {
-                            spriteBatch.Draw(TextureBank.InterfaceTextures.heavyInfantryIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.InterfaceTextures.heavyInfantryIcon.Width, TextureBank.InterfaceTextures.heavyInfantryIcon.Height), Color.White);
+                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.heavyInfantryIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heavyInfantryIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heavyInfantryIcon.Height), Color.White).texture;
                         }
                         else if (selectedUnits[i].getType() == State.EntityName.Hero)
                         {
-                            spriteBatch.Draw(TextureBank.InterfaceTextures.heroIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.InterfaceTextures.heroIcon.Width, TextureBank.InterfaceTextures.heroIcon.Height), Color.White);
+                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.heroIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heroIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heroIcon.Height), Color.White).texture;
                         }
                         */
                     }
@@ -250,19 +250,19 @@ namespace Incursio.Classes
                         /*
                         if (selectedUnits[i].getType() == State.EntityName.LightInfantry)
                         {
-                            spriteBatch.Draw(TextureBank.InterfaceTextures.lightInfantryIcon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, TextureBank.InterfaceTextures.lightInfantryIcon.Width, TextureBank.InterfaceTextures.lightInfantryIcon.Height), Color.White);
+                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.lightInfantryIcon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, TextureBank.getInstance().InterfaceTextures.interfaceTextures.lightInfantryIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.lightInfantryIcon.Height), Color.White).texture;
                         }
                         else if (selectedUnits[i].getType() == State.EntityName.Archer)
                         {
-                            spriteBatch.Draw(TextureBank.InterfaceTextures.archerIcon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, TextureBank.InterfaceTextures.archerIcon.Width, TextureBank.InterfaceTextures.archerIcon.Height), Color.White);
+                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.archerIcon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, TextureBank.getInstance().InterfaceTextures.interfaceTextures.archerIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.archerIcon.Height), Color.White).texture;
                         }
                         else if (selectedUnits[i].getType() == State.EntityName.HeavyInfantry)
                         {
-                            spriteBatch.Draw(TextureBank.InterfaceTextures.heavyInfantryIcon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, TextureBank.InterfaceTextures.heavyInfantryIcon.Width, TextureBank.InterfaceTextures.heavyInfantryIcon.Height), Color.White);
+                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.heavyInfantryIcon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heavyInfantryIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heavyInfantryIcon.Height), Color.White).texture;
                         }
                         else if (selectedUnits[i].getType() == State.EntityName.Hero)
                         {
-                            spriteBatch.Draw(TextureBank.InterfaceTextures.heroIcon, new Rectangle(383 + i * 60, height - 84, TextureBank.InterfaceTextures.heroIcon.Width, TextureBank.InterfaceTextures.heroIcon.Height), Color.White);
+                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.heroIcon, new Rectangle(383 + i * 60, height - 84, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heroIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heroIcon.Height), Color.White).texture;
                         }
                         */
                     }
@@ -289,12 +289,12 @@ namespace Incursio.Classes
             }
 
             //RESOURCE BAR
-            spriteBatch.Draw(TextureBank.InterfaceTextures.moneyIcon,
-                new Rectangle(945, 10, TextureBank.InterfaceTextures.moneyIcon.Width, TextureBank.InterfaceTextures.moneyIcon.Height), Color.White);
+            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.moneyIcon.texture,
+                new Rectangle(945, 10, TextureBank.getInstance().InterfaceTextures.interfaceTextures.moneyIcon.texture.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.moneyIcon.texture.Height), Color.White);
             spriteBatch.DrawString(font, " " + PlayerManager.getInstance().currentPlayer.MONETARY_UNIT, new Vector2(975, 23), Color.White, 0, font.MeasureString("XXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
 
-            spriteBatch.Draw(TextureBank.InterfaceTextures.controlPointInterfaceIcon,
-                new Rectangle(860, 12, TextureBank.InterfaceTextures.controlPointInterfaceIcon.Width, TextureBank.InterfaceTextures.controlPointInterfaceIcon.Height), Color.White);
+            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.controlPointInterfaceIcon.texture,
+                new Rectangle(860, 12, TextureBank.getInstance().InterfaceTextures.interfaceTextures.controlPointInterfaceIcon.texture.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.controlPointInterfaceIcon.texture.Height), Color.White);
 
             spriteBatch.DrawString(font, " " + EntityManager.getInstance().getPlayerTotalOwnedControlPoints(PlayerManager.getInstance().currentPlayerId) + "/" + EntityManager.getInstance().getTotalControlPoints(), new Vector2(900, 23), Color.White, 0, font.MeasureString("XXXXX") / 2, 1.0f, SpriteEffects.None, 0.5f);
 

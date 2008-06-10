@@ -22,8 +22,8 @@ namespace Incursio.Interface
 
         public MainMenuButton() : 
             base(new Vector2(465, 738),
-                TextureBank.InterfaceTextures.gameMenuButton,
-                TextureBank.InterfaceTextures.gameMenuButtonPressed
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.gameMenuButton.texture,
+                TextureBank.getInstance().InterfaceTextures.interfaceTextures.gameMenuButtonPressed.texture
         ){
             
         }
