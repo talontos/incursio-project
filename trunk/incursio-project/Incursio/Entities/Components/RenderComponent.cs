@@ -85,11 +85,11 @@ namespace Incursio.Entities.Components
             #region PROJECTILES
             if(this.isProjectile){
                 //draw the projectile if needed
-                spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.arrow.texture,
+                spriteBatch.Draw(this.projectile.gameTexture.texture,
                     this.projectile.onScreen,
                     null, Color.White, -1 * ((float)(this.projectile.angle * (Math.PI / 180))),
-                    new Vector2(this.projectile.texture.Width / 2, 
-                        this.projectile.texture.Height / 2), 
+                    new Vector2(this.projectile.gameTexture.texture.Width / 2, 
+                        this.projectile.gameTexture.texture.Height / 2), 
                     1.0f, SpriteEffects.None, 0f);                
 
                 return;

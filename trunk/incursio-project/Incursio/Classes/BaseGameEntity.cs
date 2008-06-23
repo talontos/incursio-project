@@ -36,6 +36,9 @@ namespace Incursio.Classes
 
         public State.EntityState currentState = State.EntityState.Idle;
 
+        //Entity Size
+        public Vector2 size = new Vector2(1, 1);
+
         //BOOL VALUES for COMPONENTS
         public bool canAttack = false;
         public bool canMove = false;
@@ -284,10 +287,43 @@ namespace Incursio.Classes
         /// Sets the location of this entity in the current map as occupied (true) or unocupied (false)
         /// </summary>
         /// <param name="occupied"></param>
-        public void updateOccupancy(bool open)
+        public void updateOccupancy(bool open){
+            int x1, y1, x2, y2, y;
+
+            //translate location
+            MapManager.getInstance().currentMap.translatePixelToMapCell(
+                this.renderComponent.boundingBox.X,
+                this.renderComponent.boundingBox.Y,
+                out x1, out y1);
+
+            x2 = x1 + (int)this.size.X;
+            y2 = y1 + (int)this.size.Y;
+
+            while (x1 <= x2)
+            {
+                y = y1;
+                while (y <= y2)
+                {
+                    MapManager.getInstance().currentMap.setSingleCellOccupancy_cell((x1), (y), (byte)(open ? 0 : 1));
+                    MapManager.getInstance().currentMap.setSingleCellEntity_cell(x1, y, (open ? this.keyId : -1));
+                    y++;
+                }
+                x1++;
+            }
+        }
+
+        /// <summary>
+        /// Sets the location of this entity in the current map as occupied (true) or unocupied (false)
+        /// </summary>
+        /// <param name="occupied"></param>
+        public void updateOccupancy_OLD(bool open)
         {
             //TODO: THIS DOESN'T WORK OUT AS WELL WITH LARGE ENTITES
             //  ***We could try increasing the resolution of the occupancy/id grids.
+            //  ***We could try defining size classes instead of calculating size based on Texture!
+            //      - Either:
+            //          - set an entity width and height
+            //          - define a size class and map to entities
 
             //  we need some buffer room...if one pixel is overflowing to another cell that whole cell becomes occupied.
             
@@ -305,12 +341,6 @@ namespace Incursio.Classes
                 this.renderComponent.boundingBox.Y, 
                 out x1, out y1);
 
-            /*TODO: round? this doesn't seem to work any better; but is it rounding correctly?
-            //determine how many cells to occupy in x and y directions
-            x2 = x1 + (int)Math.Round((double)(this.renderComponent.boundingBox.Width) / MapManager.TILE_WIDTH);
-            y2 = y1 + (int)Math.Round((double)(this.renderComponent.boundingBox.Height) / MapManager.TILE_HEIGHT);
-            */
-            
             //translate width/height
             MapManager.getInstance().currentMap.translatePixelToMapCell(
                 this.renderComponent.boundingBox.X + this.renderComponent.boundingBox.Width, 

@@ -11,7 +11,7 @@ namespace Incursio.Entities.Projectiles
 {
     public class BaseProjectile
     {
-        public Texture2D texture;
+        public GameTexture gameTexture;
 
         public Vector2 pos = new Vector2(-1, -1);
         public int LENGTH = 5;
@@ -26,7 +26,7 @@ namespace Incursio.Entities.Projectiles
 
         //TODO: LOAD PROJECTILES FROM XML
         public BaseProjectile(){
-            //texture = global::Incursio.Managers.TextureBank.getInstance().InterfaceTextures.interfaceTextures.arrow.texture;
+            this.gameTexture = TextureBank.getInstance().InterfaceTextures.interfaceTextures.arrow;
             this.renderComponent = new RenderComponent(this);
         }
 

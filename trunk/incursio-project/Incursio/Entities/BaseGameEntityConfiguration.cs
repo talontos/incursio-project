@@ -5,6 +5,7 @@ using Incursio.Entities.Components;
 using Incursio.Entities.TextureCollections;
 using Incursio.Classes;
 using Incursio.Entities.AudioCollections;
+using Microsoft.Xna.Framework;
 
 namespace Incursio.Entities
 {
@@ -21,6 +22,8 @@ namespace Incursio.Entities
         public int armor = 0;
         public int sightRange = 0;
         public int pointValue = 0;
+
+        public Vector2 size = new Vector2(1, 1);
 
         public int costToBuild = 0;
 
@@ -51,6 +54,8 @@ namespace Incursio.Entities
                     case "isControlPoint":  isControlPoint  = bool.Parse(args[i + 1]); break;
                     case "isTurret":        isTurret        = bool.Parse(args[i + 1]); break;
                     case "isStructure":     isStructure     = bool.Parse(args[i + 1]); break;
+                    case "width":           size.X          = float.Parse(args[i + 1]); break;
+                    case "height":          size.Y          = float.Parse(args[i + 1]); break;
                     default: break;
                 }
             }
@@ -75,6 +80,8 @@ namespace Incursio.Entities
             e.armor      = this.armor;
             e.sightRange = this.sightRange;
             e.pointValue = this.pointValue;
+
+            e.size           = this.size;
 
             e.isHero         = this.isHero;
             e.isMainBase     = this.isMainBase;

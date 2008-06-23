@@ -33,7 +33,8 @@ namespace Incursio.Commands
 
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
-            if( !(subject.isHero) ){
+            //subject cannot capture
+            if( subject.capturableComponent == null ){
                 this.finishedExecution = true;
                 return;
             }
@@ -44,7 +45,7 @@ namespace Incursio.Commands
                 this.finishedExecution = true;
             }
             else{
-                if(MapManager.getInstance().currentMap.getCellDistance(subject.location, capTarget.location) >= 4){
+                if(MapManager.getInstance().currentMap.getCellDistance(subject.location, capTarget.location) >= subject.captureComponent.captureDistance){
                     moveCommand.execute(gameTime, ref subject);
                 }
                 else{
