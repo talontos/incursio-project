@@ -107,6 +107,7 @@ namespace Incursio.Entities.TextureCollections
 
                 case "selectionRectangle": selectionRectangle = this.makeGameTexture(name, frameWidth, frameHeight); break;
 
+                /*
                 case "gameMenuButton_pressed": gameMenuButton_pressed = this.makeGameTexture(name, frameWidth, frameHeight); break;
                 case "gameMenuButton_not_pressed": gameMenuButton_not_pressed = this.makeGameTexture(name, frameWidth, frameHeight); break;
                 case "resumeGameButton_pressed": resumeGameButton_pressed = this.makeGameTexture(name, frameWidth, frameHeight); break;
@@ -117,6 +118,7 @@ namespace Incursio.Entities.TextureCollections
                 case "newGameButton_not_pressed": newGameButton_not_pressed = this.makeGameTexture(name, frameWidth, frameHeight); break;
                 case "exitGameButton_pressed": exitGameButton_pressed = this.makeGameTexture(name, frameWidth, frameHeight); break;
                 case "exitGameButton_not_pressed": exitGameButton_not_pressed = this.makeGameTexture(name, frameWidth, frameHeight); break;
+                */
 
                 case "file1_pressed": file1_pressed = this.makeGameTexture(name, frameWidth, frameHeight); break;
                 case "file1_not_pressed": file1_not_pressed = this.makeGameTexture(name, frameWidth, frameHeight); break;

@@ -2,10 +2,10 @@
 <Content>
 	<TextureCollection name="Light Infantry" portrait="lightInfantryPortrait.png" icon="InfantryIcon.png">
 		<Still>
-			<north file="infantry_back.png"/>
-			<south file="infantry_still.png"/>
-			<east file="infantry_right.png"/>
-			<west file="infantry_left.png"/>
+			<north file="Infantry_back.png"/>
+			<south file="Infantry_still.png"/>
+			<east file="Infantry_right.png"/>
+			<west file="Infantry_left.png"/>
 		</Still>
 		<Movement>
 			<north file="Infantry_Moving_North.png" frameWidth="20" frameHeight="30"/>
@@ -71,10 +71,10 @@
 
 	<TextureCollection name="Archer" portrait="ArcherPortrait.png" icon="ArcherIcon.png">
 		<Still>
-			<north file="archer_Back.png"/>
-			<south file="archer_Still.png"/>
-			<east file="archer_right.png"/>
-			<west file="archer_left.png"/>
+			<north file="Archer_Back.png"/>
+			<south file="Archer_Still.png"/>
+			<east file="Archer_right.png"/>
+			<west file="Archer_left.png"/>
 		</Still>
 		<Movement>
 			<north file="Archer_Moving_Up.png" frameWidth="20" frameHeight="30"/>
@@ -138,14 +138,6 @@
 		</Damaged>
 	</TextureCollection>
 
-	<TextureCollection name="Interface" portrait="" icon="">
-		<Button>
-			<Left file="ButtonLeft.png"/>
-			<Body file="ButtonBody.png"/>
-			<Right file="ButtonRight.png"/>
-		</Button>
-	</TextureCollection>
-
 	<TextureCollection name="Terrain" portrait="" icon="">
 		<Terrain>
 			<grass1 file="GrassTile1.png"/>
@@ -188,62 +180,62 @@
 
 	<TextureCollection name="Interface" portrait="" icon="">
 		<Interface>
-			<selectedUnitOverlayTexture file="selectedUnitOverlay.png"/>
-			<healthRatioTexture file="healthBar.png"/>
+			<selectedUnitOverlayTexture file="SelectedUnitOverlay.png"/>
+			<healthRatioTexture file="HealthBar.png"/>
 
 			<arrow file="Arrow.png"/>
 
-			<headsUpDisplay file="utilityBarUnderlay.png"/>
-			<resourceDisplay file="resourceBarUnderlay.png"/>
-			<moneyIcon file="moneyIcon.png"/>
-			<cursor file="cursor.png"/>
-			<cursorPressed file="cursor_click.png"/>
+			<headsUpDisplay file="UtilityBarUnderlay.png"/>
+			<resourceDisplay file="ResourceBarUnderlay.png"/>
+			<moneyIcon file="MoneyIcon.png"/>
+			<cursor file="Cursor.png"/>
+			<cursorPressed file="Cursor_Click.png"/>
 			<controlPointInterfaceIcon file="ControlPointInterfaceIcon.png"/>
 
-			<gameMenuButton file="gameMenuButton.png"/>
-			<gameMenuButtonPressed file="gameMenuButtonPressed.png"/>
-			<resumeGameButton file="resumeButton.png"/>
-			<resumeGameButtonPressed file="resumeButtonPressed.png"/>
-			<exitGameToMenuButton file="exitGameButton.png"/>
-			<exitGameToMenuButtonPressed file="exitGameButtonPressed.png"/>
-			<newGameButton file="newGameButton.png"/>
-			<newGameButtonPressed file="newGamePressed.png"/>
-			<exitGameButton file="exitGameButton.png"/>
-			<exitGameButtonPressed file="exitGameButtonPressed.png"/>
-			<saveGameButton file="saveButton.png"/>
-			<saveGameButtonPressed file="saveButtonPressed.png"/>
-			<loadGameButton file="loadButton.png"/>
-			<loadGameButtonPressed file="loadButtonPressed.png"/>
+			<gameMenuButton file="GameMenuButton.png"/>
+			<gameMenuButtonPressed file="GameMenuButtonPressed.png"/>
+			<resumeGameButton file="ResumeButton.png"/>
+			<resumeGameButtonPressed file="ResumeButtonPressed.png"/>
+			<exitGameToMenuButton file="ExitGameButton.png"/>
+			<exitGameToMenuButtonPressed file="ExitGameButtonPressed.png"/>
+			<newGameButton file="NewGameButton.png"/>
+			<newGameButtonPressed file="NewGamePressed.png"/>
+			<exitGameButton file="ExitGameButton.png"/>
+			<exitGameButtonPressed file="ExitGameButtonPressed.png"/>
+			<saveGameButton file="SaveButton.png"/>
+			<saveGameButtonPressed file="SaveButtonPressed.png"/>
+			<loadGameButton file="LoadButton.png"/>
+			<loadGameButtonPressed file="LoadButtonPressed.png"/>
 			<creditsButton_not_pressed file="Credits_button.png"/>
 			<creditsButton_pressed file="Credit_button_pressed.png"/>
 
-			<instructionsButton_pressed file="instruction_button_pressed.png"/>
-			<instructionsButton_not_pressed file="instructionButton.png"/>
-			<instructions file="instruction.png"/>
+			<instructionsButton_pressed file="Instruction_button_pressed.png"/>
+			<instructionsButton_not_pressed file="InstructionButton.png"/>
+			<instructions file="Instruction.png"/>
 
-			<portMap_pressed file="port_map_button.png"/>
-			<portMap_not_pressed file="port_map_button_pressed.png"/>
-			<inlandMap_pressed file="inland_button.png"/>
-			<inlandMap_not_pressed file="inland_button_pressed.png"/>
-			<capitalMap_pressed file="capital_button.png"/>
-			<capitalMap_not_pressed file="capital_button_press.png"/>
+			<portMap_pressed file="Port_map_button.png"/>
+			<portMap_not_pressed file="Port_map_button_pressed.png"/>
+			<inlandMap_pressed file="Inland_button.png"/>
+			<inlandMap_not_pressed file="Inland_button_pressed.png"/>
+			<capitalMap_pressed file="Capital_button.png"/>
+			<capitalMap_not_pressed file="Capital_button_press.png"/>
 
-			<file1_not_pressed file="file1_button.png"/>
-			<file1_pressed file="file1_button_pressed.png"/>
-			<file2_not_pressed file="file2_button.png"/>
-			<file2_pressed file="file2_button_pressed.png"/>
-			<file3_not_pressed file="file3_button.png"/>
-			<file3_pressed file="file3_button_pressed.png"/>
+			<file1_not_pressed file="File1_button.png"/>
+			<file1_pressed file="File1_button_pressed.png"/>
+			<file2_not_pressed file="File2_button.png"/>
+			<file2_pressed file="File2_button_pressed.png"/>
+			<file3_not_pressed file="File3_button.png"/>
+			<file3_pressed file="File3_button_pressed.png"/>
 
 			<selectionRectangle file="DragSelection.png"/>
 
 			<mainMenuBackground file="Splash_Screen.png"/>
 			<pauseMenuBackground file="Pause_Screen.png"/>
-			<victoryMenuBackground file="win.png"/>
+			<victoryMenuBackground file="Win.png"/>
 			<defeatMenuBackground file="Defeat.png"/>
 			<creditsBackground file="Credits.png"/>
 
-			<defaultPortrait file="lightInfantryPortrait.png"/>
+			<defaultPortrait file="LightInfantryPortrait.png"/>
 		</Interface>
 	</TextureCollection>
 

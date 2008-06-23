@@ -711,7 +711,7 @@ namespace Incursio.Managers
                 myThreat = -1;
             else
             {
-                myThreat = ((myHealth + myRange) / eDamage) / myAttackSpeed;
+                myThreat = ((myHealth + myRange) / (eDamage == 0 ? 1 : eDamage)) / myAttackSpeed;
             }
 
             if (e.isCapturing())

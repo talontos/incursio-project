@@ -94,6 +94,9 @@ namespace Incursio
         MenuSet instructionsMenu;
         MenuSet creditsMenu;
 
+        private string loadStatus = "Initializing";
+        private string prevLoadStatus = "";
+
         //for game animation
         int frameTimer = 0;
         const int FRAME_LENGTH = 8;
@@ -102,6 +105,7 @@ namespace Incursio
 
             Incursio.instance = this;
 
+            loadStatus = "Initializing Incursio";
             graphics = new GraphicsDeviceManager(this);
             hud = new HeadsUpDisplay();
             kbState = new KeyboardState();
@@ -147,10 +151,13 @@ namespace Incursio
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("Courier New");
 
+            loadStatus = "Loading Game Configuration";
             FileManager.getInstance().loadGameConfiguration();
 
+            loadStatus = "Setting Game Font";
             MessageManager.getInstance().setFont(Content.Load<SpriteFont>("Arial"));
 
+            loadStatus = "Initializing Sound Manager";
             SoundManager.getInstance().initializeSoundManager();
 
             FontPos = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
@@ -160,9 +167,11 @@ namespace Incursio
             clickDestination = Content.Load<Texture2D>(@"destinationClick");
 
             // load the HUD
+            loadStatus = "Loading Heads Up Display";
             hud.loadHeadsUpDisplay();
 
             // load paused game menu components
+            loadStatus = "Building Menus";
             this.gameMenuButton = new Button(new Vector2(465, 738), TextureBank.getInstance().InterfaceTextures.interfaceTextures.gameMenuButton.texture, TextureBank.getInstance().InterfaceTextures.interfaceTextures.gameMenuButtonPressed.texture);
             Button resumeGameButton = new ResumeGameButton();
             Button exitGameToMenuButton = new ExitGameToMenuButton();
@@ -189,6 +198,8 @@ namespace Incursio
 
             //once everything is loaded up, go to the main menu
             currentState = State.GameState.Menu;
+
+            loadStatus = "Content Loaded";
         }
 
         /// <summary>
@@ -207,6 +218,9 @@ namespace Incursio
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if(loadStatus != prevLoadStatus)
+                Console.WriteLine(loadStatus);
+
             cursor.Update();    //update the cursor
 
             //TODO: Remove these 2 lines; this should be done in the InputManager
