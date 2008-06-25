@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Incursio.Classes;
+
 using Incursio.Entities.Components;
 
 namespace Incursio.Entities

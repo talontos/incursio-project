@@ -16,7 +16,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using Incursio.Interface;
-using Incursio.Classes;
+
 using Incursio.Utils;
 
 namespace Incursio.Interface

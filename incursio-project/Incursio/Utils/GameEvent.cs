@@ -14,7 +14,8 @@ using System.Collections.Generic;
 using System.Text;
 
 using Microsoft.Xna.Framework;
-using Incursio.Classes;
+using Incursio.Entities;
+
 
 namespace Incursio.Utils
 {

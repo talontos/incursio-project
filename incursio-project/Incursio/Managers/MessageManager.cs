@@ -16,7 +16,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using Incursio.Classes;
+
 using Incursio.Managers;
 using Incursio.Interface;
 using Incursio.Utils;

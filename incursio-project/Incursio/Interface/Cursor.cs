@@ -18,7 +18,7 @@ using Microsoft.Xna.Framework.Input;
 
 using Incursio.Managers;
 using Incursio.Entities;
-using Incursio.Classes;
+
 using Incursio.Utils;
 
 namespace Incursio.Interface

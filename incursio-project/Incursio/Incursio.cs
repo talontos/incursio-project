@@ -22,13 +22,15 @@ using Microsoft.Xna.Framework.Storage;
 
 using System.Xml;
 
-using Incursio.Classes;
+
 using Incursio.Utils;
 using Incursio.Interface;
 using Incursio.Managers;
 
 using IrrKlang;
 using Incursio.Interface.Menus;
+using Incursio.World;
+using Incursio.Entities;
 
 namespace Incursio
 {
@@ -96,6 +98,8 @@ namespace Incursio
 
         private string loadStatus = "Initializing";
         private string prevLoadStatus = "";
+        private int loadIterator = -1;
+        private bool game_loaded = false;
 
         //for game animation
         int frameTimer = 0;
@@ -142,6 +146,8 @@ namespace Incursio
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
+        /// 
+        /// Loads simple neccessary content
         /// </summary>
         protected override void LoadContent()
         {
@@ -150,56 +156,81 @@ namespace Incursio
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("Courier New");
-
-            loadStatus = "Loading Game Configuration";
-            FileManager.getInstance().loadGameConfiguration();
-
-            loadStatus = "Setting Game Font";
-            MessageManager.getInstance().setFont(Content.Load<SpriteFont>("Arial"));
-
-            loadStatus = "Initializing Sound Manager";
-            SoundManager.getInstance().initializeSoundManager();
-
             FontPos = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
-            
-            // create cursor
-            cursor = Cursor.getInstance();
-            clickDestination = Content.Load<Texture2D>(@"destinationClick");
+        }
 
-            // load the HUD
-            loadStatus = "Loading Heads Up Display";
-            hud.loadHeadsUpDisplay();
+        /// <summary>
+        /// Loads all configurable game content and menus
+        /// </summary>
+        protected void LoadIncursioContent(){
+            switch(this.loadIterator){
+                case -1:
+                    break;
+                case 0:
+                    loadStatus = "Loading Game Configuration";
+                    FileManager.getInstance().loadGameConfiguration();
+                break;
 
-            // load paused game menu components
-            loadStatus = "Building Menus";
-            this.gameMenuButton = new Button(new Vector2(465, 738), TextureBank.getInstance().InterfaceTextures.interfaceTextures.gameMenuButton.texture, TextureBank.getInstance().InterfaceTextures.interfaceTextures.gameMenuButtonPressed.texture);
-            Button resumeGameButton = new ResumeGameButton();
-            Button exitGameToMenuButton = new ExitGameToMenuButton();
+                case 1:
+                    loadStatus = "Setting Game Font";
+                    MessageManager.getInstance().setFont(Content.Load<SpriteFont>("Arial"));
+                    break;
 
-            Button saveButton = new SaveMenuButton();
-            Button loadButton = new LoadMenuButton();
+                case 2:
+                    loadStatus = "Initializing Sound Manager";
+                    SoundManager.getInstance().initializeSoundManager();
+                    break;
 
-            //load the menu components
-            Button mapSelectButton = new MapSelectButton();
-            Button newGameButton_level1 = new NewGameButton(State.CampaignLevel.ONE);
-            Button newGameButton_level2 = new NewGameButton(State.CampaignLevel.TWO);
-            Button newGameButton_level3 = new NewGameButton(State.CampaignLevel.THREE);
-            Button exitGameButton = new ExitGameButton();
-            Button creditsButton = new CreditsButton();
+                case 3:
+                    // create cursor
+                    loadStatus = "Initializing Cursor";
+                    cursor = Cursor.getInstance();
+                    clickDestination = Content.Load<Texture2D>(@"destinationClick");
+                    break;
 
-            //create menus
-            mainMenu = new MenuSet(600, 500, mapSelectButton, loadButton, new InstructionButton(), creditsButton, exitGameButton);
-            mapSelectionMenu = new MenuSet(600, 500, newGameButton_level1, newGameButton_level2, newGameButton_level3, new MainMenuButton());
-            pauseMenu = new MenuSet(600, 500, resumeGameButton, saveButton, exitGameToMenuButton);
-            loadMenu = new MenuSet(600, 500, new LoadButton("Hero1.wtf", 1), new LoadButton("Hero2.wtf", 2), new LoadButton("Hero3.wtf", 3), new MainMenuButton());
-            saveMenu = new MenuSet(600, 500, new SaveButton("Hero1.wtf", 1), new SaveButton("Hero2.wtf", 2), new SaveButton("Hero3.wtf", 3), new MainMenuButton());
-            instructionsMenu = new MenuSet(800, 400, new CreditsButton(), new MainMenuButton());
-            creditsMenu = new MenuSet(0, 0, new MainMenuButton());
+                case 4:
+                    // load the HUD
+                    loadStatus = "Loading Heads Up Display";
+                    hud.loadHeadsUpDisplay();
+                    break;
 
-            //once everything is loaded up, go to the main menu
-            currentState = State.GameState.Menu;
+                case 5:
+                    // load paused game menu components
+                    loadStatus = "Building Menus";
+                    this.gameMenuButton = new Button(new Vector2(465, 738), TextureBank.getInstance().InterfaceTextures.interfaceTextures.gameMenuButton.texture, TextureBank.getInstance().InterfaceTextures.interfaceTextures.gameMenuButtonPressed.texture);
+                    Button resumeGameButton = new ResumeGameButton();
+                    Button exitGameToMenuButton = new ExitGameToMenuButton();
 
-            loadStatus = "Content Loaded";
+                    Button saveButton = new SaveMenuButton();
+                    Button loadButton = new LoadMenuButton();
+
+                    //load the menu components
+                    Button mapSelectButton = new MapSelectButton();
+                    Button newGameButton_level1 = new NewGameButton(State.CampaignLevel.ONE);
+                    Button newGameButton_level2 = new NewGameButton(State.CampaignLevel.TWO);
+                    Button newGameButton_level3 = new NewGameButton(State.CampaignLevel.THREE);
+                    Button exitGameButton = new ExitGameButton();
+                    Button creditsButton = new CreditsButton();
+
+                    //create menus
+                    mainMenu = new MenuSet(600, 500, mapSelectButton, loadButton, new InstructionButton(), creditsButton, exitGameButton);
+                    mapSelectionMenu = new MenuSet(600, 500, newGameButton_level1, newGameButton_level2, newGameButton_level3, new MainMenuButton());
+                    pauseMenu = new MenuSet(600, 500, resumeGameButton, saveButton, exitGameToMenuButton);
+                    loadMenu = new MenuSet(600, 500, new LoadButton("Hero1.wtf", 1), new LoadButton("Hero2.wtf", 2), new LoadButton("Hero3.wtf", 3), new MainMenuButton());
+                    saveMenu = new MenuSet(600, 500, new SaveButton("Hero1.wtf", 1), new SaveButton("Hero2.wtf", 2), new SaveButton("Hero3.wtf", 3), new MainMenuButton());
+                    instructionsMenu = new MenuSet(800, 400, new CreditsButton(), new MainMenuButton());
+                    creditsMenu = new MenuSet(0, 0, new MainMenuButton());
+                    break;
+
+                default:
+                    //once everything is loaded up, go to the main menu
+                    currentState = State.GameState.Menu;
+                    loadStatus = "Content Loaded";
+                    this.game_loaded = true;
+                    break;
+            }
+
+            this.loadIterator++;
         }
 
         /// <summary>
@@ -218,14 +249,20 @@ namespace Incursio
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if(loadStatus != prevLoadStatus)
-                Console.WriteLine(loadStatus);
+            if(this.game_loaded){
+                cursor.Update();    //update the cursor
 
-            cursor.Update();    //update the cursor
+                //TODO: Remove these 2 lines; this should be done in the InputManager
+                kbState = Keyboard.GetState();  //get the present state of the keyboard
+                keysPressed = (Keys[])kbState.GetPressedKeys(); //get all the keys that are being pressed
 
-            //TODO: Remove these 2 lines; this should be done in the InputManager
-            kbState = Keyboard.GetState();  //get the present state of the keyboard
-            keysPressed = (Keys[])kbState.GetPressedKeys(); //get all the keys that are being pressed
+            }
+            else{
+                if (loadStatus != prevLoadStatus){
+                    Console.WriteLine(loadStatus);
+                    prevLoadStatus = loadStatus;
+                }
+            }
 
             //Check game state!
             this.checkState(gameTime);
@@ -256,7 +293,8 @@ namespace Incursio
             drawState();
 
             //draw the cursor
-            cursor.Draw(spriteBatch);
+            if(game_loaded)
+                cursor.Draw(spriteBatch);
 
             //draw text, if needed
             InputManager.getInstance().Draw(spriteBatch);
@@ -272,7 +310,9 @@ namespace Incursio
         private void checkState(GameTime gameTime){
 
             switch(this.currentState){
-                case (State.GameState.Initializing): 
+                case (State.GameState.Initializing):
+                    if (!this.game_loaded)
+                        this.LoadIncursioContent();
                     break;
 
                 case (State.GameState.InPlay):
@@ -370,7 +410,7 @@ namespace Incursio
             switch (this.currentState)
             {
                 case (State.GameState.Initializing):
-                    spriteBatch.DrawString(font, "Game State: INITIALIZING", FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: INITIALIZING") / 2, 1.0f, SpriteEffects.None, 0.5f);
+                    spriteBatch.DrawString(font, "Game State: INITIALIZING: " + this.loadStatus, FontPos, Color.DarkBlue, 0, font.MeasureString("Game State: INITIALIZING: " + this.loadStatus) / 2, 1.0f, SpriteEffects.None, 0.5f);
                     break;
 
                 case (State.GameState.InPlay):

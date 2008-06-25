@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-using Incursio.Classes;
+
 using Incursio.Managers;
 using Incursio.Utils;
 using System.Xml;
@@ -44,7 +44,6 @@ namespace Incursio.Managers
         public void loadGameConfiguration()
         {
             //Load XML Configurations
-            //TODO: Store config locations somewhere...
             this.ReadConfigurationFile("GameConfiguration.xml");
             this.ReadConfigurationFile(ConfigurationManager.getInstance().textureConfigurationFileName);
             this.ReadConfigurationFile(ConfigurationManager.getInstance().audioConfigurationFileName);
@@ -142,37 +141,6 @@ namespace Incursio.Managers
                     readingEntities = (node.Name == "Entity");
                     readingTextures = (node.Name == "TextureCollection");
                     readingGameConfig = (node.Name == "Setting");
-
-                    /*
-                    if (node.Name == "AudioCollection")
-                    {
-                        readingAudio = true;
-                        readingEntities = false;
-                        readingTextures = false;
-                        readingGameConfig = false;
-                    }
-                    else if (node.Name == "Entity")
-                    {
-                        readingAudio = false;
-                        readingEntities = true;
-                        readingTextures = false;
-                        readingGameConfig = false;
-                    }
-                    else if (node.Name == "TextureCollection")
-                    {
-                        readingAudio = false;
-                        readingEntities = false;
-                        readingTextures = true;
-                        readingGameConfig = false;
-                    }
-                    else if(node.Name == "GameConfiguration")
-                    {
-                        readingAudio = false;
-                        readingEntities = false;
-                        readingTextures = false;
-                        readingGameConfig = true;
-                    }
-                    */
 
                     if(readingGameConfig){
                         #region GAME_CONFIG

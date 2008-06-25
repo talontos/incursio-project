@@ -14,9 +14,10 @@ using System.Collections.Generic;
 using System.Text;
 
 using Incursio.Utils;
-using Incursio.Classes;
+
 using Microsoft.Xna.Framework;
 using Incursio.Managers;
+using Incursio.Entities;
 
 namespace Incursio.Commands
 {

@@ -5,6 +5,8 @@
 	<Setting entityConfigurationFileName="Configuration/Incursio/EntityConfiguration.xml"/>
 	<Setting audioConfigurationFileName="Configuration/Incursio/AudioConfiguration.xml"/>
 	<Setting textureConfigurationFileName="Configuration/Incursio/TextureConfiguration.xml"/>
+
+	<Setting entitiesAutoGuard="true"/>
 	
 	<Setting playBackgroundMusic="true"/>
 	<Setting drawOccupancyGrid="true"/>

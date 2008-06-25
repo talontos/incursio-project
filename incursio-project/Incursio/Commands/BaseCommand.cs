@@ -13,9 +13,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using Incursio.Classes;
+
 using Microsoft.Xna.Framework;
-using Incursio.Classes.PathFinding;
+using Incursio.Utils.PathFinding;
+using Incursio.Entities;
 
 namespace Incursio.Commands
 {

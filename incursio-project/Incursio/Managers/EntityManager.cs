@@ -15,7 +15,7 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 
-using Incursio.Classes;
+
 using Incursio.Managers;
 using Incursio.Interface;
 using Incursio.Utils;
@@ -33,6 +33,8 @@ namespace Incursio.Managers
         private List<BaseGameEntity> selectedUnits;
 
         public List<List<BaseGameEntity>> groups;
+
+        public bool ENTITIES_AUTO_GUARD = true;
 
         private int nextKeyId;
 
@@ -491,7 +493,6 @@ namespace Incursio.Managers
 
                         ////////////////////////
                         case State.Command.ATTACK_MOVE:
-                            //TODO: PATHING!!
                             command = new AttackMoveCommand(args[0] as Coordinate);
                             break;
 
@@ -522,16 +523,12 @@ namespace Incursio.Managers
 
                         ////////////////////////
                         case State.Command.BUILD:
-                            //TODO: Remove comments
-                            //if(args[0] is State.EntityName)
-                            //    command = new BuildCommand( (State.EntityName)args[0], (args.Length > 1 ? args[1] : null) as Coordinate);
-                            //else
                                 command = new BuildCommand((int)args[0], (args.Length > 1 ? args[1] : null) as Coordinate);
                             break;
 
                         ////////////////////////
                         case State.Command.CAPTURE:
-                            //try in case args[0] is not a controlpoint
+                            //TODO: try in case args[0] is not a controlpoint?
                             command = new CaptureCommand(args[0] as BaseGameEntity);
                             break;
 
