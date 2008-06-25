@@ -14,8 +14,9 @@ using System.Collections.Generic;
 using System.Text;
 using Incursio.Managers;
 using Incursio.Utils;
+using Incursio.Entities;
 
-namespace Incursio.Classes.Terrain
+namespace Incursio.World.Terrain
 {
     public class Tree : BaseMapEntity
     {

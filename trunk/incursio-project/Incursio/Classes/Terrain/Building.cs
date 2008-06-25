@@ -15,8 +15,9 @@ using System.Text;
 
 using Incursio.Managers;
 using Incursio.Utils;
+using Incursio.Entities;
 
-namespace Incursio.Classes.Terrain
+namespace Incursio.World.Terrain
 {
     class Building : BaseMapEntity
     {
