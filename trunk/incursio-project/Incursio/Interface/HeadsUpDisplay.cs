@@ -18,8 +18,9 @@ using Microsoft.Xna.Framework.Content;
 
 using Incursio.Interface;
 using Incursio.Managers;
+using Incursio.Entities;
 
-namespace Incursio.Classes
+namespace Incursio.Interface
 {
   public class HeadsUpDisplay
     {

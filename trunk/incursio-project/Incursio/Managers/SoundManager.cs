@@ -12,7 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Incursio.Classes;
+
 using Microsoft.Xna.Framework;
 using Incursio.Utils;
 using IrrKlang;

@@ -15,8 +15,9 @@ using System.Text;
 
 using Incursio.Commands;
 using Incursio.Managers;
-using Incursio.Classes;
+
 using Microsoft.Xna.Framework;
+using Incursio.Entities;
 
 namespace Incursio.Commands
 {

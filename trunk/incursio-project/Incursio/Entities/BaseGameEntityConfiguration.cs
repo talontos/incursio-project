@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Incursio.Entities.Components;
 using Incursio.Entities.TextureCollections;
-using Incursio.Classes;
+
 using Incursio.Entities.AudioCollections;
 using Microsoft.Xna.Framework;
 

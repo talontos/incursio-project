@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Incursio.Classes.PathFinding;
-using Incursio.Classes;
+using Incursio.Utils.PathFinding;
+
 using Microsoft.Xna.Framework;
 using Incursio.Commands;
 using Incursio.Utils;

@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Incursio.Classes;
+
 using Incursio.Utils;
 using Incursio.Managers;
 using Incursio.Commands;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Incursio.Players;
 
 namespace Incursio.Entities.Components
 {

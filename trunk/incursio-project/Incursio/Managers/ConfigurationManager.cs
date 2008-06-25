@@ -7,9 +7,9 @@ namespace Incursio.Managers
     public class ConfigurationManager
     {
         public string contentDirectory = "Content";
-        public string entityConfigurationFileName = "Configuration/EntityConfiguration.xml";
-        public string audioConfigurationFileName = "Configuration/AudioConfiguration.xml";
-        public string textureConfigurationFileName = "Configuration/TextureConfiguration.xml";
+        public string entityConfigurationFileName = "Configuration/Incursio/EntityConfiguration.xml";
+        public string audioConfigurationFileName = "Configuration/Incursio/AudioConfiguration.xml";
+        public string textureConfigurationFileName = "Configuration/Incursio/TextureConfiguration.xml";
 
         private static ConfigurationManager instance;
 
@@ -41,6 +41,10 @@ namespace Incursio.Managers
 
                 case "TEXTURECONFIGURATIONFILENAME":
                     this.textureConfigurationFileName = value;
+                    break;
+
+                case "ENTITIESAUTOGUARD":
+                    EntityManager.getInstance().ENTITIES_AUTO_GUARD = bool.Parse(value);
                     break;
 
                 case "PLAYBACKGROUNDMUSIC":

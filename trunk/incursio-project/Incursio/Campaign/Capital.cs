@@ -15,8 +15,9 @@ using System.Text;
 
 using Incursio.Managers;
 using Incursio.Utils;
-using Incursio.Classes.Terrain;
-using Incursio.Classes;
+using Incursio.World.Terrain;
+using Incursio.Entities;
+
 
 namespace Incursio.Campaign
 {

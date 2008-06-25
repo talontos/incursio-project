@@ -13,10 +13,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using Incursio.Classes;
+
 using Incursio.Commands;
 using Microsoft.Xna.Framework;
 using Incursio.Managers;
+using Incursio.Entities;
 
 namespace Incursio.Commands
 {
@@ -34,7 +35,7 @@ namespace Incursio.Commands
         public override void execute(GameTime gameTime, ref BaseGameEntity subject)
         {
             //subject cannot capture
-            if( subject.capturableComponent == null ){
+            if( subject.captureComponent == null ){
                 this.finishedExecution = true;
                 return;
             }
@@ -51,6 +52,7 @@ namespace Incursio.Commands
                 else{
                     if(!capTarget.capturableComponent.isCapping()){
                         subject.currentState = State.EntityState.Capturing;
+                        subject.captureComponent.isCapturing = true;
                         capTarget.capturableComponent.startCap(subject);
                     }
                 }

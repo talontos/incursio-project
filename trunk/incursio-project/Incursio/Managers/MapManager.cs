@@ -13,13 +13,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using Incursio.Classes;
+
 using Incursio.Managers;
 using Incursio.Campaign;
 using Microsoft.Xna.Framework;
 using Incursio.Utils.PathFinding;
-using Incursio.Classes.PathFinding;
 using Incursio.Utils;
+using Incursio.World;
+using Incursio.Entities;
 
 namespace Incursio.Managers
 {
