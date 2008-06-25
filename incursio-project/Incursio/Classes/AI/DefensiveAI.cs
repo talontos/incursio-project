@@ -14,8 +14,9 @@ using System.Collections.Generic;
 using System.Text;
 using Incursio.Utils;
 using Incursio.Managers;
+using Incursio.Players;
 
-namespace Incursio.Classes
+namespace Incursio.Entities.AI
 {
     /// <summary>
     /// DefensiveAI is a very basic, but functional, reactive artificial intelligence architecture.
