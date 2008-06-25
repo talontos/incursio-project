@@ -13,8 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Incursio.Managers;
+using Incursio.Entities;
 
-namespace Incursio.Classes.Terrain
+namespace Incursio.World.Terrain
 {
     class Water : BaseMapEntity
     {

@@ -15,8 +15,9 @@ using System.Text;
 
 using Incursio.Utils;
 using Incursio.Managers;
+using Incursio.Entities;
 
-namespace Incursio.Classes.Terrain
+namespace Incursio.World.Terrain
 {
     class Rock : BaseMapEntity
     {
