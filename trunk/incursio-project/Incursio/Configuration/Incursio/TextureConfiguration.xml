@@ -110,20 +110,6 @@
 		</Still>
 	</TextureCollection>
 
-	<TextureCollection name="Mage Tower" portrait="TowerPortrait.png" icon="TowerIcon.png">
-		<Still>
-			<south file="MageTower.png"/>
-			<beingBuilt file="MageTower.png"/>
-		</Still>
-		<Attacking>
-			<east file="MageTower.png"/>
-			<west file="MageTower.png"/>
-		</Attacking>
-		<Damaged>
-			<exploded file="Tower_exploded.png"/>
-		</Damaged>
-	</TextureCollection>
-
 	<TextureCollection name="Guard Tower" portrait="TowerPortrait.png" icon="TowerIcon.png">
 		<Still>
 			<south file="Tower_friendly.png"/>
