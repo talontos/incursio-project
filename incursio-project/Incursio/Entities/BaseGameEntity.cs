@@ -207,6 +207,10 @@ namespace Incursio.Entities
             {
                 this.health = 0;
             }
+            else{
+                //retaliate
+                this.issueImmediateOrder(new AttackCommand(attacker));
+            }
         }
 
         /// <summary>

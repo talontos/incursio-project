@@ -268,7 +268,7 @@ namespace Incursio.World
             }
             else
             {
-                return null;
+                return new Coordinate(0,0);
             }
         }
 
