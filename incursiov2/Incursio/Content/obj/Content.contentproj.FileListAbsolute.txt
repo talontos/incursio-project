@@ -1,0 +1,2 @@
+C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio\Incursio\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\Content\obj\x86\Debug\ResolveAssemblyReference.cache

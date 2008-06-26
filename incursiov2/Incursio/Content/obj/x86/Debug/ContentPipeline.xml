@@ -1,0 +1,1620 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>UtilityBarUnderlay.png</Source>
+      <Name>utilityBarUnderlay</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\utilityBarUnderlay.xnb</Output>
+      <Time>2008-05-14T09:16:44.421875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Cursor.png</Source>
+      <Name>cursor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\cursor.xnb</Output>
+      <Time>2008-05-14T09:16:47.09375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Cursor_Click.png</Source>
+      <Name>cursor_click</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\cursor_click.xnb</Output>
+      <Time>2008-05-14T09:16:47.84375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>GameMenuButton.png</Source>
+      <Name>gameMenuButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\gameMenuButton.xnb</Output>
+      <Time>2008-05-14T09:16:44.484375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>GameMenuButtonPressed.png</Source>
+      <Name>gameMenuButtonPressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\gameMenuButtonPressed.xnb</Output>
+      <Time>2008-05-14T09:16:47.421875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>PauseMenu.png</Source>
+      <Name>pauseMenu</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\pauseMenu.xnb</Output>
+      <Time>2008-05-14T09:16:44.59375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ResumeButton.png</Source>
+      <Name>resumeButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\resumeButton.xnb</Output>
+      <Time>2008-05-14T09:16:44.671875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ResumeButtonPressed.png</Source>
+      <Name>resumeButtonPressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\resumeButtonPressed.xnb</Output>
+      <Time>2008-05-14T09:16:47.859375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ExitGameButton.png</Source>
+      <Name>exitGameButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\exitGameButton.xnb</Output>
+      <Time>2008-05-14T09:16:47.046875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ExitGameButtonPressed.png</Source>
+      <Name>exitGameButtonPressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\exitGameButtonPressed.xnb</Output>
+      <Time>2008-05-14T09:16:47.203125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>NewGameButton.png</Source>
+      <Name>newGameButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\newGameButton.xnb</Output>
+      <Time>2008-05-14T09:16:44.53125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>NewGamePressed.png</Source>
+      <Name>newGamePressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\newGamePressed.xnb</Output>
+      <Time>2008-05-14T09:16:44.515625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>InfantryIcon.png</Source>
+      <Name>infantryIcon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\infantryIcon.xnb</Output>
+      <Time>2008-05-14T09:16:47.390625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>SelectedUnitOverlay.PNG</Source>
+      <Name>SelectedUnitOverlay</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\SelectedUnitOverlay.xnb</Output>
+      <Time>2008-05-14T09:16:46.21875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HealthBar.png</Source>
+      <Name>healthBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\healthBar.xnb</Output>
+      <Time>2008-05-14T09:16:46.296875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ResourceBarUnderlay.png</Source>
+      <Name>resourceBarUnderlay</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\resourceBarUnderlay.xnb</Output>
+      <Time>2008-05-14T09:16:46.046875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>DestinationClick.png</Source>
+      <Name>destinationClick</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\destinationClick.xnb</Output>
+      <Time>2008-05-14T09:16:44.65625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>MoneyIcon.png</Source>
+      <Name>MoneyIcon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\MoneyIcon.xnb</Output>
+      <Time>2008-05-14T09:16:47.234375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>DragSelection.png</Source>
+      <Name>DragSelection</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\DragSelection.xnb</Output>
+      <Time>2008-05-14T09:16:44.390625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Arrow.png</Source>
+      <Name>Arrow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Arrow.xnb</Output>
+      <Time>2008-05-14T09:16:46.203125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Pause_Screen.png</Source>
+      <Name>Pause_Screen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Pause_Screen.xnb</Output>
+      <Time>2008-05-14T09:16:44.453125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Splash_Screen.png</Source>
+      <Name>Splash_Screen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Splash_Screen.xnb</Output>
+      <Time>2008-05-14T09:16:44.65625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Win.png</Source>
+      <Name>Win</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Win.xnb</Output>
+      <Time>2008-05-14T09:16:44.6875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Defeat.png</Source>
+      <Name>Defeat</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Defeat.xnb</Output>
+      <Time>2008-05-14T09:16:47.3125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>LoadButton.png</Source>
+      <Name>LoadButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\LoadButton.xnb</Output>
+      <Time>2008-05-14T09:16:47.40625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>LoadButtonPressed.png</Source>
+      <Name>LoadButtonPressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\LoadButtonPressed.xnb</Output>
+      <Time>2008-05-14T09:16:44.6875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>SaveButton.png</Source>
+      <Name>SaveButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\SaveButton.xnb</Output>
+      <Time>2008-05-14T09:16:44.65625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>SaveButtonPressed.png</Source>
+      <Name>SaveButtonPressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\SaveButtonPressed.xnb</Output>
+      <Time>2008-05-14T09:16:44.46875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Capital_button.png</Source>
+      <Name>Capital_button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Capital_button.xnb</Output>
+      <Time>2008-05-14T09:16:47.09375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Capital_button_press.png</Source>
+      <Name>Capital_button_press</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Capital_button_press.xnb</Output>
+      <Time>2008-05-14T09:16:47.203125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Credits_button.png</Source>
+      <Name>Credits_button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Credits_button.xnb</Output>
+      <Time>2008-05-14T09:16:46.15625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Credit_button_pressed.png</Source>
+      <Name>Credit_button_pressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Credit_button_pressed.xnb</Output>
+      <Time>2008-05-14T09:16:47.328125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Inland_Button.png</Source>
+      <Name>Inland_Button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Inland_Button.xnb</Output>
+      <Time>2008-05-14T09:16:47.375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Inland_button_pressed.png</Source>
+      <Name>Inland_button_pressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Inland_button_pressed.xnb</Output>
+      <Time>2008-05-14T09:16:44.46875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>InstructionButton.png</Source>
+      <Name>InstructionButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\InstructionButton.xnb</Output>
+      <Time>2008-05-14T09:16:44.609375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Instruction_button_pressed.png</Source>
+      <Name>Instruction_button_pressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Instruction_button_pressed.xnb</Output>
+      <Time>2008-05-14T09:16:44.4375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Port_Map_Button.png</Source>
+      <Name>Port_Map_Button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Port_Map_Button.xnb</Output>
+      <Time>2008-05-14T09:16:45.953125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Port_Map_Button_Pressed.png</Source>
+      <Name>Port_Map_Button_Pressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Port_Map_Button_Pressed.xnb</Output>
+      <Time>2008-05-14T09:16:47.046875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Instruction.png</Source>
+      <Name>Instruction</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Instruction.xnb</Output>
+      <Time>2008-05-14T09:16:44.53125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>File1_button.png</Source>
+      <Name>File1_button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\File1_button.xnb</Output>
+      <Time>2008-05-14T09:16:44.5625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>File1_button_pressed.png</Source>
+      <Name>File1_button_pressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\File1_button_pressed.xnb</Output>
+      <Time>2008-05-14T09:16:46.046875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>File2_button.png</Source>
+      <Name>File2_button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\File2_button.xnb</Output>
+      <Time>2008-05-14T09:16:47.21875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>File2_button_pressed.png</Source>
+      <Name>File2_button_pressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\File2_button_pressed.xnb</Output>
+      <Time>2008-05-14T09:16:47.4375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>File3_button.png</Source>
+      <Name>File3_button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\File3_button.xnb</Output>
+      <Time>2008-05-14T09:16:44.4375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>File3_button_pressed.png</Source>
+      <Name>File3_button_pressed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\File3_button_pressed.xnb</Output>
+      <Time>2008-05-14T09:16:44.546875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ArcherIcon.png</Source>
+      <Name>ArcherIcon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\ArcherIcon.xnb</Output>
+      <Time>2008-05-14T09:16:44.46875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ArcherPortrait.png</Source>
+      <Name>ArcherPortrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\ArcherPortrait.xnb</Output>
+      <Time>2008-05-22T09:07:14.15625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_Attacking_East.png</Source>
+      <Name>Archer_Attacking_East</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_Attacking_East.xnb</Output>
+      <Time>2008-05-14T09:16:44.4375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_Attacking_West.png</Source>
+      <Name>Archer_Attacking_West</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_Attacking_West.xnb</Output>
+      <Time>2008-05-14T09:16:47.890625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_Back.png</Source>
+      <Name>Archer_Back</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_Back.xnb</Output>
+      <Time>2008-05-14T09:16:44.640625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_dead.png</Source>
+      <Name>Archer_dead</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_dead.xnb</Output>
+      <Time>2008-05-14T09:16:46.0625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_Death_left.png</Source>
+      <Name>Archer_Death_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_Death_left.xnb</Output>
+      <Time>2008-05-14T09:16:44.625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_Death_Right.png</Source>
+      <Name>Archer_Death_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_Death_Right.xnb</Output>
+      <Time>2008-05-14T09:16:44.375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_left.png</Source>
+      <Name>Archer_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_left.xnb</Output>
+      <Time>2008-05-14T09:16:47.265625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_Moving_Down.png</Source>
+      <Name>Archer_Moving_Down</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_Moving_Down.xnb</Output>
+      <Time>2008-05-14T09:16:44.390625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_Moving_Left.png</Source>
+      <Name>Archer_Moving_Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_Moving_Left.xnb</Output>
+      <Time>2008-05-14T09:16:47.34375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_Moving_Right.png</Source>
+      <Name>Archer_Moving_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_Moving_Right.xnb</Output>
+      <Time>2008-05-14T09:16:47.28125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_Moving_Up.png</Source>
+      <Name>Archer_Moving_Up</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_Moving_Up.xnb</Output>
+      <Time>2008-05-14T09:16:44.640625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_right.png</Source>
+      <Name>Archer_right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_right.xnb</Output>
+      <Time>2008-05-14T09:16:47.390625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Archer_Still.png</Source>
+      <Name>Archer_Still</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Archer_Still.xnb</Output>
+      <Time>2008-05-14T09:16:44.609375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>barrel.png</Source>
+      <Name>barrel</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\barrel.xnb</Output>
+      <Time>2008-05-14T09:16:45.765625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>BasePortrait.png</Source>
+      <Name>BasePortrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\BasePortrait.xnb</Output>
+      <Time>2008-05-14T09:16:44.5-04:00</Time>
+    </Item>
+    <Item>
+      <Source>BasePortrait_hostile.png</Source>
+      <Name>BasePortrait_hostile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\BasePortrait_hostile.xnb</Output>
+      <Time>2008-05-14T09:16:44.5625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Building1.png</Source>
+      <Name>Building1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Building1.xnb</Output>
+      <Time>2008-05-14T09:16:47.15625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Building2.png</Source>
+      <Name>Building2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Building2.xnb</Output>
+      <Time>2008-05-14T09:16:44.46875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Building3.png</Source>
+      <Name>Building3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Building3.xnb</Output>
+      <Time>2008-05-14T09:16:47.171875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>CampFiller.png</Source>
+      <Name>CampFiller</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\CampFiller.xnb</Output>
+      <Time>2008-05-14T09:16:47.40625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ControlPointEnemy.png</Source>
+      <Name>ControlPointEnemy</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\ControlPointEnemy.xnb</Output>
+      <Time>2008-05-14T09:16:44.40625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ControlPointFriendly.png</Source>
+      <Name>ControlPointFriendly</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\ControlPointFriendly.xnb</Output>
+      <Time>2008-05-14T09:16:47.859375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ControlPointIcon.png</Source>
+      <Name>ControlPointIcon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\ControlPointIcon.xnb</Output>
+      <Time>2008-05-14T09:16:44.4375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ControlPointInterfaceIcon.png</Source>
+      <Name>ControlPointInterfaceIcon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\ControlPointInterfaceIcon.xnb</Output>
+      <Time>2008-05-14T09:16:44.546875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Credits.png</Source>
+      <Name>Credits</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Credits.xnb</Output>
+      <Time>2008-05-14T09:16:44.671875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Dock.png</Source>
+      <Name>Dock</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Dock.xnb</Output>
+      <Time>2008-05-14T09:16:44.390625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_friendly.png</Source>
+      <Name>Fort_friendly</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Fort_friendly.xnb</Output>
+      <Time>2008-05-14T09:16:44.71875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_Friendly_Building.png</Source>
+      <Name>Fort_Friendly_Building</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Fort_Friendly_Building.xnb</Output>
+      <Time>2008-05-14T09:16:47.859375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_hostile.png</Source>
+      <Name>Fort_hostile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Fort_hostile.xnb</Output>
+      <Time>2008-05-14T09:16:47.375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_hostile_damaged.png</Source>
+      <Name>Fort_hostile_damaged</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Fort_hostile_damaged.xnb</Output>
+      <Time>2008-05-14T09:16:44.359375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_hostile_destroyed.png</Source>
+      <Name>Fort_hostile_destroyed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Fort_hostile_destroyed.xnb</Output>
+      <Time>2008-05-14T09:16:44.390625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_hostile_exploded.png</Source>
+      <Name>Fort_hostile_exploded</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Fort_hostile_exploded.xnb</Output>
+      <Time>2008-05-14T09:16:44.640625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_neutral.png</Source>
+      <Name>Fort_neutral</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Fort_neutral.xnb</Output>
+      <Time>2008-05-14T09:16:44.703125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>grass.png</Source>
+      <Name>grass</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\grass.xnb</Output>
+      <Time>2008-05-14T09:16:44.625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>GrassTile1.png</Source>
+      <Name>GrassTile1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\GrassTile1.xnb</Output>
+      <Time>2008-05-14T09:16:45.96875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>GroupBuildings.png</Source>
+      <Name>GroupBuildings</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\GroupBuildings.xnb</Output>
+      <Time>2008-05-14T09:16:47.234375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>GroupBuildingsEndLeft.png</Source>
+      <Name>GroupBuildingsEndLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\GroupBuildingsEndLeft.xnb</Output>
+      <Time>2008-05-14T09:16:47-04:00</Time>
+    </Item>
+    <Item>
+      <Source>GroupBuildingsEndRight.png</Source>
+      <Name>GroupBuildingsEndRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\GroupBuildingsEndRight.xnb</Output>
+      <Time>2008-05-14T09:16:47.296875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>GroupTrees.png</Source>
+      <Name>GroupTrees</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\GroupTrees.xnb</Output>
+      <Time>2008-05-14T09:16:47.359375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantryEast.png</Source>
+      <Name>HeavyInfantryEast</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantryEast.xnb</Output>
+      <Time>2008-05-14T09:16:44.5-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantryIcon.png</Source>
+      <Name>HeavyInfantryIcon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantryIcon.xnb</Output>
+      <Time>2008-05-14T09:16:47.25-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantryNorth.png</Source>
+      <Name>HeavyInfantryNorth</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantryNorth.xnb</Output>
+      <Time>2008-05-14T09:16:47.390625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantryPortrait.png</Source>
+      <Name>HeavyInfantryPortrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantryPortrait.xnb</Output>
+      <Time>2008-05-14T09:16:44.453125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantrySouth.png</Source>
+      <Name>HeavyInfantrySouth</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantrySouth.xnb</Output>
+      <Time>2008-05-14T09:16:44.453125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantryWest.png</Source>
+      <Name>HeavyInfantryWest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantryWest.xnb</Output>
+      <Time>2008-05-14T09:16:44.421875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Attacking_East.png</Source>
+      <Name>HeavyInfantry_Attacking_East</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantry_Attacking_East.xnb</Output>
+      <Time>2008-05-14T09:16:47.328125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Attacking_West.png</Source>
+      <Name>HeavyInfantry_Attacking_West</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantry_Attacking_West.xnb</Output>
+      <Time>2008-05-14T09:16:47.15625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Death.png</Source>
+      <Name>HeavyInfantry_Death</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantry_Death.xnb</Output>
+      <Time>2008-05-14T09:16:44.671875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Death_Left.png</Source>
+      <Name>HeavyInfantry_Death_Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantry_Death_Left.xnb</Output>
+      <Time>2008-05-14T09:16:44.71875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Moving_Down.png</Source>
+      <Name>HeavyInfantry_Moving_Down</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantry_Moving_Down.xnb</Output>
+      <Time>2008-05-14T09:16:46.953125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Moving_Left.png</Source>
+      <Name>HeavyInfantry_Moving_Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantry_Moving_Left.xnb</Output>
+      <Time>2008-05-14T09:16:44.625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Moving_Right.png</Source>
+      <Name>HeavyInfantry_Moving_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantry_Moving_Right.xnb</Output>
+      <Time>2008-05-14T09:16:47.25-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeavyInfantry_Moving_Up.png</Source>
+      <Name>HeavyInfantry_Moving_Up</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeavyInfantry_Moving_Up.xnb</Output>
+      <Time>2008-05-14T09:16:44.515625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeroEast.png</Source>
+      <Name>HeroEast</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeroEast.xnb</Output>
+      <Time>2008-05-14T09:16:44.390625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeroIcon.png</Source>
+      <Name>HeroIcon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeroIcon.xnb</Output>
+      <Time>2008-05-14T09:16:44.71875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeroPortrait.png</Source>
+      <Name>HeroPortrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeroPortrait.xnb</Output>
+      <Time>2008-05-14T09:16:47.484375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeroStill.png</Source>
+      <Name>HeroStill</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeroStill.xnb</Output>
+      <Time>2008-05-14T09:16:44.359375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeroWest.png</Source>
+      <Name>HeroWest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\HeroWest.xnb</Output>
+      <Time>2008-05-14T09:16:47.375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero_Attacking_Left.png</Source>
+      <Name>Hero_Attacking_Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Hero_Attacking_Left.xnb</Output>
+      <Time>2008-05-14T09:16:47.34375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero_Attacking_Right.png</Source>
+      <Name>Hero_Attacking_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Hero_Attacking_Right.xnb</Output>
+      <Time>2008-05-14T09:16:47.171875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero_Death_Left.png</Source>
+      <Name>Hero_Death_Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Hero_Death_Left.xnb</Output>
+      <Time>2008-05-14T09:16:45.953125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero_Death_Right.png</Source>
+      <Name>Hero_Death_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Hero_Death_Right.xnb</Output>
+      <Time>2008-05-14T09:16:44.578125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero_Moving_Left.png</Source>
+      <Name>Hero_Moving_Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Hero_Moving_Left.xnb</Output>
+      <Time>2008-05-14T09:16:44.484375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero_Moving_North.png</Source>
+      <Name>Hero_Moving_North</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Hero_Moving_North.xnb</Output>
+      <Time>2008-05-14T09:16:44.546875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero_Moving_Right.png</Source>
+      <Name>Hero_Moving_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Hero_Moving_Right.xnb</Output>
+      <Time>2008-05-14T09:16:44.515625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero_Moving_South.png</Source>
+      <Name>Hero_Moving_South</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Hero_Moving_South.xnb</Output>
+      <Time>2008-05-14T09:16:46.984375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero_North.png</Source>
+      <Name>Hero_North</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Hero_North.xnb</Output>
+      <Time>2008-05-14T09:16:44.609375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>InfantryUnit.png</Source>
+      <Name>InfantryUnit</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\InfantryUnit.xnb</Output>
+      <Time>2008-05-14T09:16:47.875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Infantry_Attacking_East.png</Source>
+      <Name>Infantry_Attacking_East</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Infantry_Attacking_East.xnb</Output>
+      <Time>2008-05-14T09:16:44.421875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Infantry_Attacking_West.png</Source>
+      <Name>Infantry_Attacking_West</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Infantry_Attacking_West.xnb</Output>
+      <Time>2008-05-14T09:16:47.421875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>infantry_back.png</Source>
+      <Name>infantry_back</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\infantry_back.xnb</Output>
+      <Time>2008-05-14T09:16:44.453125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>infantry_dead.png</Source>
+      <Name>infantry_dead</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\infantry_dead.xnb</Output>
+      <Time>2008-05-14T09:16:44.4375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>infantry_left.png</Source>
+      <Name>infantry_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\infantry_left.xnb</Output>
+      <Time>2008-05-14T09:16:44.59375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Infantry_Moving_Left.png</Source>
+      <Name>Infantry_Moving_Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Infantry_Moving_Left.xnb</Output>
+      <Time>2008-05-14T09:16:46.0625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Infantry_Moving_North.png</Source>
+      <Name>Infantry_Moving_North</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Infantry_Moving_North.xnb</Output>
+      <Time>2008-05-14T09:16:44.546875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Infantry_Moving_Right.png</Source>
+      <Name>Infantry_Moving_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Infantry_Moving_Right.xnb</Output>
+      <Time>2008-05-14T09:16:44.5-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Infantry_Moving_South.png</Source>
+      <Name>Infantry_Moving_South</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Infantry_Moving_South.xnb</Output>
+      <Time>2008-05-14T09:16:46.921875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>infantry_right.png</Source>
+      <Name>infantry_right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\infantry_right.xnb</Output>
+      <Time>2008-05-14T09:16:44.484375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>infantry_still.png</Source>
+      <Name>infantry_still</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\infantry_still.xnb</Output>
+      <Time>2008-05-14T09:16:47.375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>LightInfantryPortrait.png</Source>
+      <Name>LightInfantryPortrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\LightInfantryPortrait.xnb</Output>
+      <Time>2008-05-14T09:16:47.40625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>LightInfantry_Death_Left.png</Source>
+      <Name>LightInfantry_Death_Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\LightInfantry_Death_Left.xnb</Output>
+      <Time>2008-05-14T09:16:44.578125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>LightInfantry_Death_Right.png</Source>
+      <Name>LightInfantry_Death_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\LightInfantry_Death_Right.xnb</Output>
+      <Time>2008-05-14T09:16:47.296875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Map1.png</Source>
+      <Name>Map1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Map1.xnb</Output>
+      <Time>2008-05-14T09:16:44.5625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>OpenWater.png</Source>
+      <Name>OpenWater</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\OpenWater.xnb</Output>
+      <Time>2008-05-14T09:16:44.703125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RiverDown.png</Source>
+      <Name>RiverDown</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RiverDown.xnb</Output>
+      <Time>2008-05-14T09:16:47.15625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RiverLeft.png</Source>
+      <Name>RiverLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RiverLeft.xnb</Output>
+      <Time>2008-05-14T09:16:44.6875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RiverLowerLeftCorner.png</Source>
+      <Name>RiverLowerLeftCorner</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RiverLowerLeftCorner.xnb</Output>
+      <Time>2008-05-14T09:16:47.1875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RiverLowerRightCorner.png</Source>
+      <Name>RiverLowerRightCorner</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RiverLowerRightCorner.xnb</Output>
+      <Time>2008-05-14T09:16:47.078125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RiverOpenLowerLeftCorner.png</Source>
+      <Name>RiverOpenLowerLeftCorner</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RiverOpenLowerLeftCorner.xnb</Output>
+      <Time>2008-05-14T09:16:44.5-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RiverOpenLowerRightCorner.png</Source>
+      <Name>RiverOpenLowerRightCorner</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RiverOpenLowerRightCorner.xnb</Output>
+      <Time>2008-05-14T09:16:44.65625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RiverOpenUpperLeftCorner.png</Source>
+      <Name>RiverOpenUpperLeftCorner</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RiverOpenUpperLeftCorner.xnb</Output>
+      <Time>2008-05-14T09:16:47.09375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RiverOpenUpperRightCorner.png</Source>
+      <Name>RiverOpenUpperRightCorner</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RiverOpenUpperRightCorner.xnb</Output>
+      <Time>2008-05-14T09:16:44.5-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RiverRight.png</Source>
+      <Name>RiverRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RiverRight.xnb</Output>
+      <Time>2008-05-14T09:16:44.40625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RiverUp.png</Source>
+      <Name>RiverUp</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RiverUp.xnb</Output>
+      <Time>2008-05-14T09:16:47.34375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RiverUpperLeftCorner.png</Source>
+      <Name>RiverUpperLeftCorner</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RiverUpperLeftCorner.xnb</Output>
+      <Time>2008-05-14T09:16:44.40625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RiverUpperRightCorner.png</Source>
+      <Name>RiverUpperRightCorner</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RiverUpperRightCorner.xnb</Output>
+      <Time>2008-05-14T09:16:44.609375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RoadHorizontal.png</Source>
+      <Name>RoadHorizontal</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RoadHorizontal.xnb</Output>
+      <Time>2008-05-14T09:16:47.359375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RoadHorizontalBendDown.png</Source>
+      <Name>RoadHorizontalBendDown</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RoadHorizontalBendDown.xnb</Output>
+      <Time>2008-05-14T09:16:47.28125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RoadHorizontalBendUp.png</Source>
+      <Name>RoadHorizontalBendUp</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RoadHorizontalBendUp.xnb</Output>
+      <Time>2008-05-14T09:16:47.234375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RoadVertical.png</Source>
+      <Name>RoadVertical</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RoadVertical.xnb</Output>
+      <Time>2008-05-14T09:16:44.53125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RoadVerticalBendRight.png</Source>
+      <Name>RoadVerticalBendRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RoadVerticalBendRight.xnb</Output>
+      <Time>2008-05-14T09:16:47.265625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>RoadVerticalBendRight2.png</Source>
+      <Name>RoadVerticalBendRight2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\RoadVerticalBendRight2.xnb</Output>
+      <Time>2008-05-14T09:16:47.3125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Rock1.png</Source>
+      <Name>Rock1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Rock1.xnb</Output>
+      <Time>2008-05-14T09:16:47.421875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Rock2.png</Source>
+      <Name>Rock2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Rock2.xnb</Output>
+      <Time>2008-05-14T09:16:44.625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Rock3.png</Source>
+      <Name>Rock3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Rock3.xnb</Output>
+      <Time>2008-05-14T09:16:47.4375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>TowerIcon.png</Source>
+      <Name>TowerIcon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\TowerIcon.xnb</Output>
+      <Time>2008-05-14T09:16:45.9375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>TowerPortrait.png</Source>
+      <Name>TowerPortrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\TowerPortrait.xnb</Output>
+      <Time>2008-05-14T09:16:44.640625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Tower_exploded.png</Source>
+      <Name>Tower_exploded</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Tower_exploded.xnb</Output>
+      <Time>2008-05-14T09:16:44.625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Tower_friendly.png</Source>
+      <Name>Tower_friendly</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Tower_friendly.xnb</Output>
+      <Time>2008-05-14T09:16:44.671875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Tower_hostile.png</Source>
+      <Name>Tower_hostile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Tower_hostile.xnb</Output>
+      <Time>2008-05-14T09:16:44.40625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Tower_nuetral.png</Source>
+      <Name>Tower_nuetral</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Tower_nuetral.xnb</Output>
+      <Time>2008-05-14T09:16:47.21875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Tree1.png</Source>
+      <Name>Tree1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Tree1.xnb</Output>
+      <Time>2008-05-14T09:16:44.53125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ArcherPortraint.png</Source>
+      <Name>ArcherPortraint</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\ArcherPortraint.xnb</Output>
+      <Time>2008-05-27T14:54:10.609375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>BasePortrait_friendly.png</Source>
+      <Name>BasePortrait_friendly</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\BasePortrait_friendly.xnb</Output>
+      <Time>2008-05-14T09:16:46.9375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ButtonBody.png</Source>
+      <Name>ButtonBody</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\ButtonBody.xnb</Output>
+      <Time>2008-06-09T16:05:17.8125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ButtonLeft.png</Source>
+      <Name>ButtonLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\ButtonLeft.xnb</Output>
+      <Time>2008-06-09T16:03:41.953125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>ButtonRight.png</Source>
+      <Name>ButtonRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\ButtonRight.xnb</Output>
+      <Time>2008-06-09T16:04:11.921875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_Friendly_Damaged_animation.png</Source>
+      <Name>Fort_Friendly_Damaged_animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Fort_Friendly_Damaged_animation.xnb</Output>
+      <Time>2008-05-14T09:16:44.609375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_Friendly_exploded_animation.png</Source>
+      <Name>Fort_Friendly_exploded_animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Fort_Friendly_exploded_animation.xnb</Output>
+      <Time>2008-05-14T09:16:44.40625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_hostile_Building.png</Source>
+      <Name>Fort_hostile_Building</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Fort_hostile_Building.xnb</Output>
+      <Time>2008-05-14T09:16:47.265625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_Hostile_Damaged_animation.png</Source>
+      <Name>Fort_Hostile_Damaged_animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Fort_Hostile_Damaged_animation.xnb</Output>
+      <Time>2008-05-14T09:16:44.6875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fort_hostile_exploded_animation.png</Source>
+      <Name>Fort_hostile_exploded_animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Fort_hostile_exploded_animation.xnb</Output>
+      <Time>2008-05-14T09:16:47.1875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>grass_grid.png</Source>
+      <Name>grass_grid</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\grass_grid.xnb</Output>
+      <Time>2008-05-14T09:16:47.203125-04:00</Time>
+    </Item>
+    <Item>
+      <Source>MageTower.png</Source>
+      <Name>MageTower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\MageTower.xnb</Output>
+      <Time>2008-05-21T09:56:25.671875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Tower_friendly_attacking.png</Source>
+      <Name>Tower_friendly_attacking</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Tower_friendly_attacking.xnb</Output>
+      <Time>2008-05-14T09:16:47.421875-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Tower_hostile_attacking.png</Source>
+      <Name>Tower_hostile_attacking</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Tower_hostile_attacking.xnb</Output>
+      <Time>2008-05-14T09:16:44.515625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Win[1].png</Source>
+      <Name>Win[1]</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Win[1].xnb</Output>
+      <Time>2008-05-14T09:16:44.375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Courier New.spritefont</Source>
+      <Name>Courier New</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Courier New.xnb</Output>
+      <Time>2008-05-14T09:16:44.484375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Arial.spritefont</Source>
+      <Name>Arial</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\Arial.xnb</Output>
+      <Time>2008-05-14T09:16:44.6875-04:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <RootDirectory>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Documents and Settings\Mitch\My Documents\Visual Studio 2005\Projects\Incursio_v2\Incursio\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>c:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2007-11-28T13:08:00-05:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>c:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2007-11-28T13:08:42-05:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>c:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2007-11-28T13:08:30-05:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>c:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2007-11-28T13:07:44-05:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\2.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2008-02-07T23:38:47.015625-05:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
