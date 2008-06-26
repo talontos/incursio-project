@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Content>
+	<TextureCollection name="Light Infantry" portrait="lightInfantryPortrait.png" icon="InfantryIcon.png">
+		<Still>
+			<north file="Infantry_back.png"/>
+			<south file="Infantry_still.png"/>
+			<east file="Infantry_right.png"/>
+			<west file="Infantry_left.png"/>
+		</Still>
+		<Movement>
+			<north file="Infantry_Moving_North.png" frameWidth="20" frameHeight="30"/>
+			<south file="Infantry_Moving_South.png" frameWidth="20" frameHeight="30"/>
+			<east file="Infantry_Moving_Right.png" frameWidth="20" frameHeight="30"/>
+			<west file="Infantry_Moving_Left.png" frameWidth="20" frameHeight="30"/>
+		</Movement>
+		<Attacking>
+			<east file="Infantry_Attacking_East.png" frameWidth="25" frameHeight="30"/>
+			<west file="Infantry_Attacking_West.png" frameWidth="25" frameHeight="30"/>
+		</Attacking>
+		<Death>
+			<east file="LightInfantry_Death_Right.png" frameWidth="25" frameHeight="30"/>
+			<west file="LightInfantry_Death_Left.png" frameWidth="25" frameHeight="30"/>
+		</Death>
+	</TextureCollection>
+
+	<TextureCollection name="Hero" portrait="HeroPortrait.png" icon="HeroIcon.png">
+		<Still>
+			<north file="Hero_North.png"/>
+			<south file="HeroStill.png"/>
+			<east file="HeroEast.png"/>
+			<west file="HeroWest.png"/>
+		</Still>
+		<Movement>
+			<north file="Hero_Moving_North.png" frameWidth="36" frameHeight="40"/>
+			<south file="Hero_Moving_South.png" frameWidth="36" frameHeight="40"/>
+			<east file="Hero_Moving_Right.png" frameWidth="36" frameHeight="40"/>
+			<west file="Hero_Moving_Left.png" frameWidth="36" frameHeight="40"/>
+		</Movement>
+		<Attacking>
+			<east file="Hero_Attacking_Right.png" frameWidth="36" frameHeight="40"/>
+			<west file="Hero_Attacking_Left.png" frameWidth="36" frameHeight="40"/>
+		</Attacking>
+		<Death>
+			<east file="Hero_Death_Right.png" frameWidth="36" frameHeight="40"/>
+			<west file="Hero_Death_Left.png" frameWidth="36" frameHeight="40"/>
+		</Death>
+	</TextureCollection>
+
+	<TextureCollection name="Heavy Infantry" portrait="HeavyInfantryPortrait.png" icon="HeavyInfantryIcon.png">
+		<Still>
+			<north file="HeavyInfantryNorth.png"/>
+			<south file="HeavyInfantrySouth.png"/>
+			<east file="HeavyInfantryEast.png"/>
+			<west file="HeavyInfantryWest.png"/>
+		</Still>
+		<Movement>
+			<north file="HeavyInfantry_Moving_Up.png" frameWidth="25" frameHeight="38"/>
+			<south file="HeavyInfantry_Moving_Down.png" frameWidth="25" frameHeight="38"/>
+			<east file="HeavyInfantry_Moving_Right.png" frameWidth="25" frameHeight="38"/>
+			<west file="HeavyInfantry_Moving_Left.png" frameWidth="25" frameHeight="38"/>
+		</Movement>
+		<Attacking>
+			<east file="HeavyInfantry_Attacking_East.png" frameWidth="45" frameHeight="38"/>
+			<west file="HeavyInfantry_Attacking_West.png" frameWidth="45" frameHeight="38"/>
+		</Attacking>
+		<Death>
+			<east file="HeavyInfantry_Death.png" frameWidth="45" frameHeight="38"/>
+			<west file="HeavyInfantry_Death_Left.png" frameWidth="45" frameHeight="38"/>
+		</Death>
+	</TextureCollection>
+
+	<TextureCollection name="Archer" portrait="ArcherPortrait.png" icon="ArcherIcon.png">
+		<Still>
+			<north file="Archer_Back.png"/>
+			<south file="Archer_Still.png"/>
+			<east file="Archer_right.png"/>
+			<west file="Archer_left.png"/>
+		</Still>
+		<Movement>
+			<north file="Archer_Moving_Up.png" frameWidth="20" frameHeight="30"/>
+			<south file="Archer_Moving_Down.png" frameWidth="20" frameHeight="30"/>
+			<east file="Archer_Moving_Right.png" frameWidth="20" frameHeight="30"/>
+			<west file="Archer_Moving_Left.png" frameWidth="20" frameHeight="30"/>
+		</Movement>
+		<Attacking>
+			<east file="Archer_Attacking_East.png" frameWidth="25" frameHeight="30"/>
+			<west file="Archer_Attacking_West.png" frameWidth="25" frameHeight="30"/>
+		</Attacking>
+		<Death>
+			<east file="Archer_Death_Right.png" frameWidth="33" frameHeight="30"/>
+			<west file="Archer_Death_Left.png" frameWidth="33" frameHeight="30"/>
+		</Death>
+	</TextureCollection>
+
+	<TextureCollection name="Camp" portrait="BasePortrait.png" icon="InfantryIcon.png">
+		<Still>
+			<south file="Fort_friendly.png"/>
+			<building file="Fort_Friendly_Building.png" frameWidth="64" frameHeight="64"/>
+			<beingBuilt file="Fort_Friendly.png"/>
+		</Still>
+		<Damaged>
+			<destroyed file="Fort_Friendly_exploded_animation.png" frameWidth="64" frameHeight="64"/>
+			<exploded file="Fort_Friendly_exploded_animation.png" frameWidth="64" frameHeight="64"/>
+		</Damaged>
+	</TextureCollection>
+
+	<TextureCollection name="Control Point" portrait="ControlPointIcon.png" icon="InfantryIcon.png">
+		<Still>
+			<south file="ControlPointFriendly.png"/>
+		</Still>
+	</TextureCollection>
+
+	<TextureCollection name="Guard Tower" portrait="TowerPortrait.png" icon="TowerIcon.png">
+		<Still>
+			<south file="Tower_friendly.png"/>
+			<north file="Tower_friendly.png"/>
+			<east file="Tower_friendly.png"/>
+			<west file="Tower_friendly.png"/>
+			<beingBuilt file="Tower_friendly.png"/>
+		</Still>
+		<Attacking>
+			<east file="Tower_friendly_attacking.png"/>
+			<west file="Tower_friendly_attacking.png"/>
+		</Attacking>
+		<Damaged>
+			<exploded file="Tower_exploded.png"/>
+		</Damaged>
+	</TextureCollection>
+
+	<TextureCollection name="Terrain" portrait="" icon="">
+		<Terrain>
+			<grass1 file="GrassTile1.png"/>
+			<tree1 file="Tree1.png"/>
+			<groupOfTrees file="GroupTrees.png"/>
+
+			<openWater file="OpenWater.png"/>
+			<shoreDown file="RiverDown.png"/>
+			<shoreLeft file="RiverLeft.png"/>
+			<shoreRight file="RiverRight.png"/>
+			<shoreUp file="RiverUp.png"/>
+			<shoreLowerLeftCorner file="RiverLowerLeftCorner.png"/>
+			<shoreLowerRightCorner file="RiverLowerRightCorner.png"/>
+			<shoreOpenLowerLeftCorner file="RiverOpenLowerLeftCorner.png"/>
+			<shoreOpenLowerRightCorner file="RiverOpenLowerRightCorner.png"/>
+			<shoreUpperLeftCorner file="RiverUpperLeftCorner.png"/>
+			<shoreUpperRightCorner file="RiverUpperRightCorner.png"/>
+			<shoreOpenUpperLeftCorner file="RiverOpenUpperLeftCorner.png"/>
+			<shoreOpenUpperRightCorner file="RiverOpenUpperRightCorner.png"/>
+
+			<roadHorizontal file="RoadHorizontal.png"/>
+			<roadVertical file="RoadVertical.png"/>
+			<roadElbowDownLeft file="RoadHorizontalBendDown.png"/>
+			<roadElbowDownRight file="RoadVerticalBendRight2.png"/>
+			<roadElbowUpLeft file="RoadHorizontalBendUp.png"/>
+			<roadElbowUpRight file="RoadVerticalBendRight.png"/>
+
+			<building1 file="Building1.png"/>
+			<building2 file="Building2.png"/>
+			<building3 file="Building3.png"/>
+			<buildingGroup file="GroupBuildings.png"/>
+			<buildingGroupEndRight file="GroupBuildingsEndRight.png"/>
+			<buildingGroupEndLeft file="GroupBuildingsEndLeft.png"/>
+			<dock file="Dock.png"/>
+			<rockBig file="Rock3.png"/>
+			<rockMedium file="Rock2.png"/>
+			<rockSmall file="Rock1.png"/>
+		</Terrain>
+	</TextureCollection>
+
+	<TextureCollection name="Interface" portrait="" icon="">
+		<Interface>
+			<selectedUnitOverlayTexture file="SelectedUnitOverlay.png"/>
+			<healthRatioTexture file="HealthBar.png"/>
+
+			<arrow file="Arrow.png"/>
+
+			<headsUpDisplay file="UtilityBarUnderlay.png"/>
+			<resourceDisplay file="ResourceBarUnderlay.png"/>
+			<moneyIcon file="MoneyIcon.png"/>
+			<cursor file="Cursor.png"/>
+			<cursorPressed file="Cursor_Click.png"/>
+			<controlPointInterfaceIcon file="ControlPointInterfaceIcon.png"/>
+
+			<gameMenuButton file="GameMenuButton.png"/>
+			<gameMenuButtonPressed file="GameMenuButtonPressed.png"/>
+			<resumeGameButton file="ResumeButton.png"/>
+			<resumeGameButtonPressed file="ResumeButtonPressed.png"/>
+			<exitGameToMenuButton file="ExitGameButton.png"/>
+			<exitGameToMenuButtonPressed file="ExitGameButtonPressed.png"/>
+			<newGameButton file="NewGameButton.png"/>
+			<newGameButtonPressed file="NewGamePressed.png"/>
+			<exitGameButton file="ExitGameButton.png"/>
+			<exitGameButtonPressed file="ExitGameButtonPressed.png"/>
+			<saveGameButton file="SaveButton.png"/>
+			<saveGameButtonPressed file="SaveButtonPressed.png"/>
+			<loadGameButton file="LoadButton.png"/>
+			<loadGameButtonPressed file="LoadButtonPressed.png"/>
+			<creditsButton_not_pressed file="Credits_button.png"/>
+			<creditsButton_pressed file="Credit_button_pressed.png"/>
+
+			<instructionsButton_pressed file="Instruction_button_pressed.png"/>
+			<instructionsButton_not_pressed file="InstructionButton.png"/>
+			<instructions file="Instruction.png"/>
+
+			<portMap_pressed file="Port_map_button.png"/>
+			<portMap_not_pressed file="Port_map_button_pressed.png"/>
+			<inlandMap_pressed file="Inland_button.png"/>
+			<inlandMap_not_pressed file="Inland_button_pressed.png"/>
+			<capitalMap_pressed file="Capital_button.png"/>
+			<capitalMap_not_pressed file="Capital_button_press.png"/>
+
+			<file1_not_pressed file="File1_button.png"/>
+			<file1_pressed file="File1_button_pressed.png"/>
+			<file2_not_pressed file="File2_button.png"/>
+			<file2_pressed file="File2_button_pressed.png"/>
+			<file3_not_pressed file="File3_button.png"/>
+			<file3_pressed file="File3_button_pressed.png"/>
+
+			<selectionRectangle file="DragSelection.png"/>
+
+			<mainMenuBackground file="Splash_Screen.png"/>
+			<pauseMenuBackground file="Pause_Screen.png"/>
+			<victoryMenuBackground file="Win.png"/>
+			<defeatMenuBackground file="Defeat.png"/>
+			<creditsBackground file="Credits.png"/>
+
+			<defaultPortrait file="LightInfantryPortrait.png"/>
+		</Interface>
+	</TextureCollection>
+
+</Content>
