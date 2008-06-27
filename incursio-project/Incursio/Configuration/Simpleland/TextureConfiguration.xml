@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Content>
-	<TextureCollection name="MM" portrait="HeroPortrait.png" icon="HeroIcon.png">
+	<TextureCollection name="IU" portrait="HeroPortrait.png" icon="HeroIcon.png">
 		<Still>
 			<north file="InfantryUnit.png"/>
 			<south file="InfantryUnit.png"/>
@@ -16,6 +16,29 @@
 		<Attacking>
 			<east file="InfantryUnit.png"/>
 			<west file="InfantryUnit.png"/>
+		</Attacking>
+		<Death>
+			<east file="Hero_Death_Right.png" frameWidth="36" frameHeight="40"/>
+			<west file="Hero_Death_Left.png" frameWidth="36" frameHeight="40"/>
+		</Death>
+	</TextureCollection>
+
+	<TextureCollection name="MM" portrait="HeroPortrait.png" icon="HeroIcon.png">
+		<Still>
+			<north file="MightyMan.png"/>
+			<south file="MightyMan.png"/>
+			<east file="MightyMan.png"/>
+			<west file="MightyMan.png"/>
+		</Still>
+		<Movement>
+			<north file="MightyMan.png"/>
+			<south file="MightyMan.png"/>
+			<east file="MightyMan.png"/>
+			<west file="MightyMan.png"/>
+		</Movement>
+		<Attacking>
+			<east file="MightyMan.png"/>
+			<west file="MightyMan.png"/>
 		</Attacking>
 		<Death>
 			<east file="Hero_Death_Right.png" frameWidth="36" frameHeight="40"/>
