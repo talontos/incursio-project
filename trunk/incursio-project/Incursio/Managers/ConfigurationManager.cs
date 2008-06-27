@@ -17,7 +17,7 @@ namespace Incursio.Managers
 
         public string contentDirectory = "Content";
 
-        public string currentConfigurationSchemeDirectory = "Configuration/Incursio/";
+        public string currentConfigurationSchemeDirectory = "Incursio/";
 
         public string entityConfigurationFile;
         public string audioConfigurationFile;
@@ -33,9 +33,13 @@ namespace Incursio.Managers
         }
 
         private ConfigurationManager(){
-            entityConfigurationFile = currentConfigurationSchemeDirectory + ENTITY_CONFIGURATION_FILE_NAME;
-            audioConfigurationFile = currentConfigurationSchemeDirectory + AUDIO_CONFIGURATION_FILE_NAME;
-            textureConfigurationFile = currentConfigurationSchemeDirectory + TEXTURE_CONFIGURATION_FILE_NAME;
+            buildConfigurationTree();
+        }
+
+        private void buildConfigurationTree(){
+            entityConfigurationFile = "Configuration/" + currentConfigurationSchemeDirectory + ENTITY_CONFIGURATION_FILE_NAME;
+            audioConfigurationFile = "Configuration/" + currentConfigurationSchemeDirectory + AUDIO_CONFIGURATION_FILE_NAME;
+            textureConfigurationFile = "Configuration/" + currentConfigurationSchemeDirectory + TEXTURE_CONFIGURATION_FILE_NAME;
         }
 
         //TODO: string-checking for filenames?
@@ -46,7 +50,10 @@ namespace Incursio.Managers
                     break;
 
                 case "CONFIGURATIONSCHEME":
+                    if (!value.EndsWith("/"))
+                        value = value + "/";
                     this.currentConfigurationSchemeDirectory = value;
+                    this.buildConfigurationTree();
                     break;
 
                 case "ENTITYCONFIGURATIONFILENAME":

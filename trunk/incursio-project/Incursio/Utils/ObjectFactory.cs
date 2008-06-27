@@ -84,10 +84,14 @@ namespace Incursio.Utils
         /// <returns>The instantiated entity</returns>
         public BaseGameEntity create(int classID, int owningPlayerID)
         {
-            BaseGameEntityConfiguration config;
+            BaseGameEntityConfiguration config = null;
 
             try{
                 config = this.entities[classID];
+            }
+            catch (ArgumentOutOfRangeException aor)
+            {
+
             }
             catch(IndexOutOfRangeException ior){
                 //TODO: WRITE TO ERROR LOG?
