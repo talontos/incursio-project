@@ -170,12 +170,16 @@ namespace Incursio.Entities.AI
         private void buildGuardTowerNearLocation(Coordinate c, KeyPoint k){
 
             //TODO: If there are no turret entities, this will throw a null!!!!!
-            
-            this.buildList.Add(new EntityBuildOrder(
-               MapManager.getInstance().currentMap.getClosestPassableLocation(EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().currentPlayerId)[0].location, c),
-               Util.selectRandomInt(ref ObjectFactory.getInstance().turretIds),
-               k)
-           );
+            try{
+                this.buildList.Add(new EntityBuildOrder(
+                   MapManager.getInstance().currentMap.getClosestPassableLocation(EntityManager.getInstance().getLivePlayerCamps(PlayerManager.getInstance().currentPlayerId)[0].location, c),
+                   Util.selectRandomInt(ref ObjectFactory.getInstance().turretIds),
+                   k)
+               );
+            }
+            catch(Exception e){
+
+            }
            
         }
 
@@ -211,7 +215,11 @@ namespace Incursio.Entities.AI
                                             Incursio.rand.Next(20, MapManager.getInstance().currentMap.height_pix));
                 }
 
-                this.buildList.Add(new EntityBuildOrder(dest, Util.selectRandomInt(ref this.armyIds), keyPoint));
+                try{
+                    this.buildList.Add(new EntityBuildOrder(dest, Util.selectRandomInt(ref this.armyIds), keyPoint));
+                }
+                catch(Exception e){
+                }
 
                 //TODO: REDO THIS!!
                 /*if (randU > 60)
