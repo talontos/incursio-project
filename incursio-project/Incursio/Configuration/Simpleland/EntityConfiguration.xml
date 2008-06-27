@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	
+	<Entity name="MightyMan" maxHealth="100" health="100" pointValue="1000" armor="10" sightRange="8" isHero="true">
+		<Component type="RenderComponent" collectionName="MM"/>
+		<Component type="MovementComponent" moveSpeed="115.0"/>
+		<Component type="AudioComponent" collectionName="Hero"/>
+		<Component type="CaptureComponent"/>
+		<Component type="CombatComponent" damage="25" attackRange="1" attackSpeed="3"/>
+		<Component type="ExperienceComponent"/>
+	</Entity>
+
+	<Entity name="Insignificante" maxHealth="10" health="10" pointValue="0" costToBuild="1"  armor="10" sightRange="8">
+		<Component type="RenderComponent" collectionName="MM"/>
+		<Component type="MovementComponent" moveSpeed="90.0"/>
+		<Component type="CombatComponent" damage="2" attackRange="1" attackSpeed="3"/>
+	</Entity>
+	
+	<Entity name="Castle" maxHealth="350" health="350" pointValue="1000" armor="10" sightRange="6" isMainBase="true" isStructure="true" width="2" height="2">
+		<Component type="RenderComponent" collectionName="C"/>
+		<Component type="ResourceComponent" amount="8"/>
+		<Component type="FactoryComponent" buildTimeFactor="9"/>
+		<Component type="AudioComponent" collectionName="Camp"/>
+	</Entity>
+
+	<Entity name="Point of Interest" pointValue="500" sightRange="10" isControlPoint="true" isStructure="true" width="2" height="2">
+		<Component type="CapturableComponent"/>
+		<Component type="RenderComponent" collectionName="POI"/>
+		<Component type="ResourceComponent" amount="12"/>
+	</Entity>
+</configuration>
