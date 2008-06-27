@@ -2,14 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using Incursio.Utils;
+using Incursio.Entities;
+using Incursio.Entities.TextureCollections;
+using Incursio.Entities.AudioCollections;
+
 namespace Incursio.Managers
 {
     public class ConfigurationManager
     {
+        public static string ENTITY_CONFIGURATION_FILE_NAME = "EntityConfiguration.xml";
+        public static string AUDIO_CONFIGURATION_FILE_NAME = "AudioConfiguration.xml";
+        public static string TEXTURE_CONFIGURATION_FILE_NAME = "TextureConfiguration.xml";
+
         public string contentDirectory = "Content";
-        public string entityConfigurationFileName = "Configuration/Incursio/EntityConfiguration.xml";
-        public string audioConfigurationFileName = "Configuration/Incursio/AudioConfiguration.xml";
-        public string textureConfigurationFileName = "Configuration/Incursio/TextureConfiguration.xml";
+
+        public string currentConfigurationSchemeDirectory = "Configuration/Incursio/";
+
+        public string entityConfigurationFile;
+        public string audioConfigurationFile;
+        public string textureConfigurationFile;
 
         private static ConfigurationManager instance;
 
@@ -21,7 +33,9 @@ namespace Incursio.Managers
         }
 
         private ConfigurationManager(){
-
+            entityConfigurationFile = currentConfigurationSchemeDirectory + ENTITY_CONFIGURATION_FILE_NAME;
+            audioConfigurationFile = currentConfigurationSchemeDirectory + AUDIO_CONFIGURATION_FILE_NAME;
+            textureConfigurationFile = currentConfigurationSchemeDirectory + TEXTURE_CONFIGURATION_FILE_NAME;
         }
 
         //TODO: string-checking for filenames?
@@ -31,16 +45,20 @@ namespace Incursio.Managers
                     this.contentDirectory = value;
                     break;
 
+                case "CONFIGURATIONSCHEME":
+                    this.currentConfigurationSchemeDirectory = value;
+                    break;
+
                 case "ENTITYCONFIGURATIONFILENAME":
-                    this.entityConfigurationFileName = value;
+                    this.entityConfigurationFile = value;
                     break;
 
                 case "AUDIOCONFIGURATIONFILENAME":
-                    this.audioConfigurationFileName = value;
+                    this.audioConfigurationFile = value;
                     break;
 
                 case "TEXTURECONFIGURATIONFILENAME":
-                    this.textureConfigurationFileName = value;
+                    this.textureConfigurationFile = value;
                     break;
 
                 case "ENTITIESAUTOGUARD":

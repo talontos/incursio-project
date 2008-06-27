@@ -111,32 +111,37 @@ namespace Incursio.Entities.Components
             #region IDLE
             if (this.bgEntity.currentState == State.EntityState.Idle)
             {
-                switch (this.directionState)
-                {
-                    case State.Direction.South:
-                    case State.Direction.Still:
-                        spriteBatch.Draw(this.textures.still.South.texture,
-                            new Rectangle(onScreen.x - (this.textures.still.South.texture.Width / 2), onScreen.y - (int)(this.textures.still.South.texture.Height * 0.80),
-                            this.textures.still.South.texture.Width, this.textures.still.South.texture.Height), colorMask);
-                        break;
+                try{
+                    switch (this.directionState)
+                    {
+                        case State.Direction.South:
+                        case State.Direction.Still:
+                            spriteBatch.Draw(this.textures.still.South.texture,
+                                new Rectangle(onScreen.x - (this.textures.still.South.texture.Width / 2), onScreen.y - (int)(this.textures.still.South.texture.Height * 0.80),
+                                this.textures.still.South.texture.Width, this.textures.still.South.texture.Height), colorMask);
+                            break;
 
-                    case State.Direction.East:
-                        spriteBatch.Draw(this.textures.still.East.texture,
-                            new Rectangle(onScreen.x - (this.textures.still.East.texture.Width / 2), onScreen.y - (int)(this.textures.still.East.texture.Height * 0.80),
-                            this.textures.still.East.texture.Width, this.textures.still.East.texture.Height), colorMask);
-                        break;
+                        case State.Direction.East:
+                            spriteBatch.Draw(this.textures.still.East.texture,
+                                new Rectangle(onScreen.x - (this.textures.still.East.texture.Width / 2), onScreen.y - (int)(this.textures.still.East.texture.Height * 0.80),
+                                this.textures.still.East.texture.Width, this.textures.still.East.texture.Height), colorMask);
+                            break;
 
-                    case State.Direction.West:
-                        spriteBatch.Draw(this.textures.still.West.texture,
-                            new Rectangle(onScreen.x - (this.textures.still.West.texture.Width / 2), onScreen.y - (int)(this.textures.still.West.texture.Height * 0.80),
-                            this.textures.still.West.texture.Width, this.textures.still.West.texture.Height), colorMask);
-                        break;
+                        case State.Direction.West:
+                            spriteBatch.Draw(this.textures.still.West.texture,
+                                new Rectangle(onScreen.x - (this.textures.still.West.texture.Width / 2), onScreen.y - (int)(this.textures.still.West.texture.Height * 0.80),
+                                this.textures.still.West.texture.Width, this.textures.still.West.texture.Height), colorMask);
+                            break;
 
-                    case State.Direction.North:
-                        spriteBatch.Draw(this.textures.still.North.texture,
-                            new Rectangle(onScreen.x - (this.textures.still.North.texture.Width / 2), onScreen.y - (int)(this.textures.still.North.texture.Height * 0.80),
-                            this.textures.still.North.texture.Width, this.textures.still.North.texture.Height), colorMask);
-                        break;
+                        case State.Direction.North:
+                            spriteBatch.Draw(this.textures.still.North.texture,
+                                new Rectangle(onScreen.x - (this.textures.still.North.texture.Width / 2), onScreen.y - (int)(this.textures.still.North.texture.Height * 0.80),
+                                this.textures.still.North.texture.Width, this.textures.still.North.texture.Height), colorMask);
+                            break;
+                    }
+                }
+                catch(NullReferenceException nre){
+                    this.directionState = State.Direction.Still;
                 }
 
             }
