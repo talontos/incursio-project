@@ -113,6 +113,9 @@
 	<TextureCollection name="Guard Tower" portrait="TowerPortrait.png" icon="TowerIcon.png">
 		<Still>
 			<south file="Tower_friendly.png"/>
+			<north file="Tower_friendly.png"/>
+			<east file="Tower_friendly.png"/>
+			<west file="Tower_friendly.png"/>
 			<beingBuilt file="Tower_friendly.png"/>
 		</Still>
 		<Attacking>

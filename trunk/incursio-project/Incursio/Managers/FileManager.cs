@@ -45,9 +45,9 @@ namespace Incursio.Managers
         {
             //Load XML Configurations
             this.ReadConfigurationFile("GameConfiguration.xml");
-            this.ReadConfigurationFile(ConfigurationManager.getInstance().textureConfigurationFileName);
-            this.ReadConfigurationFile(ConfigurationManager.getInstance().audioConfigurationFileName);
-            this.ReadConfigurationFile(ConfigurationManager.getInstance().entityConfigurationFileName);
+            this.ReadConfigurationFile(ConfigurationManager.getInstance().textureConfigurationFile);
+            this.ReadConfigurationFile(ConfigurationManager.getInstance().audioConfigurationFile);
+            this.ReadConfigurationFile(ConfigurationManager.getInstance().entityConfigurationFile);
         }
 
         public void saveCurrentGame(String fileName)
