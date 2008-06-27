@@ -562,6 +562,9 @@ namespace Incursio.Entities
             if(this.movementComponent != null){
                 this.movementComponent.destination = dest;
             }
+            else if(this.factoryComponent != null){
+                this.factoryComponent.destination = dest;
+            }
         }
 
         #endregion

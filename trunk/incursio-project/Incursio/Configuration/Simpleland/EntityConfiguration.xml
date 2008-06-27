@@ -10,16 +10,23 @@
 		<Component type="ExperienceComponent"/>
 	</Entity>
 
-	<Entity name="Insignificante" maxHealth="10" health="10" pointValue="0" costToBuild="1"  armor="10" sightRange="8">
-		<Component type="RenderComponent" collectionName="MM"/>
+	<Entity name="Insignificante" maxHealth="10" health="10" pointValue="0" costToBuild="40"  armor="5" sightRange="8">
+		<Component type="RenderComponent" collectionName="IU"/>
 		<Component type="MovementComponent" moveSpeed="90.0"/>
-		<Component type="CombatComponent" damage="2" attackRange="1" attackSpeed="3"/>
+		<Component type="CombatComponent" damage="10" attackRange="1" attackSpeed="3"/>
+	</Entity>
+
+	<Entity name="Healer" maxHealth="10" health="10" pointValue="10" costToBuild="60"  armor="5" sightRange="8">
+		<Component type="RenderComponent" collectionName="IU"/>
+		<Component type="MovementComponent" moveSpeed="90.0"/>
+		<Component type="HealComponent"/>
 	</Entity>
 	
 	<Entity name="Castle" maxHealth="350" health="350" pointValue="1000" armor="10" sightRange="6" isMainBase="true" isStructure="true" width="2" height="2">
 		<Component type="RenderComponent" collectionName="C"/>
 		<Component type="ResourceComponent" amount="8"/>
 		<Component type="FactoryComponent" buildTimeFactor="9"/>
+		<Component type="HealComponent"/>
 		<Component type="AudioComponent" collectionName="Camp"/>
 	</Entity>
 
