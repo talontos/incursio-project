@@ -258,6 +258,15 @@ namespace Incursio.Managers
 
             #region MOUSE COMMANDS
 
+            //ignore mouse-commands if cursor is not within Incursio
+            if( mouseStateCurrent.X < 0 ||
+                mouseStateCurrent.Y < 0 ||
+                mouseStateCurrent.X > Incursio.getInstance().graphics.PreferredBackBufferWidth ||
+                mouseStateCurrent.Y > Incursio.getInstance().graphics.PreferredBackBufferHeight)
+            {
+                return;
+            }
+
             Vector2 point = MapManager.getInstance().currentMap.translateClickToMapLocation(mouseStateCurrent.X, mouseStateCurrent.Y);
             Vector2 prevPoint = MapManager.getInstance().currentMap.translateClickToMapLocation(mouseStatePrev.X, mouseStatePrev.Y);
 
