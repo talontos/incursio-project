@@ -47,6 +47,7 @@ namespace Incursio.Managers
             this.ReadConfigurationFile("GameConfiguration.xml");
             this.ReadConfigurationFile(ConfigurationManager.getInstance().textureConfigurationFile);
             this.ReadConfigurationFile(ConfigurationManager.getInstance().audioConfigurationFile);
+            this.ReadConfigurationFile(ConfigurationManager.getInstance().projectileConfigurationFile);
             this.ReadConfigurationFile(ConfigurationManager.getInstance().entityConfigurationFile);
         }
 
@@ -132,6 +133,7 @@ namespace Incursio.Managers
                 //Flags
                 bool readingAudio = false;
                 bool readingEntities = false;
+                bool readingProjectiles = false;
                 bool readingTextures = false;
                 bool readingGameConfig = false;
 
@@ -139,6 +141,7 @@ namespace Incursio.Managers
                 {
                     readingAudio = (node.Name == "AudioCollection");
                     readingEntities = (node.Name == "Entity");
+                    readingProjectiles = (node.Name == "Projectile");
                     readingTextures = (node.Name == "TextureCollection");
                     readingGameConfig = (node.Name == "Setting");
 
@@ -373,6 +376,12 @@ namespace Incursio.Managers
 
                         //Setting the flag back to false
                         readingTextures = false;
+                        #endregion
+                    }
+                    else if (readingProjectiles)
+                    {
+                        #region PROJECTILES
+                        //TODO: IMPLEMENT
                         #endregion
                     }
                     else

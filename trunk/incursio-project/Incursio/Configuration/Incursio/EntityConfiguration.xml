@@ -28,7 +28,7 @@
 		<Component type="RenderComponent" collectionName="Archer"/>
 		<Component type="MovementComponent" moveSpeed="150.0"/>
 		<Component type="AudioComponent" collectionName="Archer"/>
-		<Component type="CombatComponent" damage="20" attackRange="10" attackSpeed="3"/>
+		<Component type="CombatComponent" damage="20" attackRange="10" attackSpeed="3" projectile="Arrow"/>
 	</Entity>
 
 	<Entity name="Guard Tower" maxHealth="350" health="350" pointValue="1000" armor="5" sightRange="14" costToBuild="200" isStructure="true" isTurret="true" height="2">

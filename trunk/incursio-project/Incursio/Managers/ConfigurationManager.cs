@@ -12,6 +12,7 @@ namespace Incursio.Managers
     public class ConfigurationManager
     {
         public static string ENTITY_CONFIGURATION_FILE_NAME = "EntityConfiguration.xml";
+        public static string PROJECTILE_CONFIGURATION_FILE_NAME = "ProjectileConfiguration.xml";
         public static string AUDIO_CONFIGURATION_FILE_NAME = "AudioConfiguration.xml";
         public static string TEXTURE_CONFIGURATION_FILE_NAME = "TextureConfiguration.xml";
 
@@ -20,6 +21,7 @@ namespace Incursio.Managers
         public string currentConfigurationSchemeDirectory = "Incursio/";
 
         public string entityConfigurationFile;
+        public string projectileConfigurationFile;
         public string audioConfigurationFile;
         public string textureConfigurationFile;
 
@@ -38,6 +40,7 @@ namespace Incursio.Managers
 
         private void buildConfigurationTree(){
             entityConfigurationFile = "Configuration/" + currentConfigurationSchemeDirectory + ENTITY_CONFIGURATION_FILE_NAME;
+            projectileConfigurationFile = "Configuration/" + currentConfigurationSchemeDirectory + PROJECTILE_CONFIGURATION_FILE_NAME;
             audioConfigurationFile = "Configuration/" + currentConfigurationSchemeDirectory + AUDIO_CONFIGURATION_FILE_NAME;
             textureConfigurationFile = "Configuration/" + currentConfigurationSchemeDirectory + TEXTURE_CONFIGURATION_FILE_NAME;
         }
@@ -58,6 +61,10 @@ namespace Incursio.Managers
 
                 case "ENTITYCONFIGURATIONFILENAME":
                     this.entityConfigurationFile = value;
+                    break;
+
+                case "PROJECTILECONFIGURATIONFILENAME":
+                    this.projectileConfigurationFile = value;
                     break;
 
                 case "AUDIOCONFIGURATIONFILENAME":
