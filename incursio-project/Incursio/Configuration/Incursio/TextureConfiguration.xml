@@ -110,6 +110,12 @@
 		</Still>
 	</TextureCollection>
 
+	<TextureCollection name="ArrowProjectile" portrait="" icon="">
+		<Projectile>
+			<Texture file="Arrow.png"/>
+		</Projectile>
+	</TextureCollection>
+
 	<TextureCollection name="Guard Tower" portrait="TowerPortrait.png" icon="TowerIcon.png">
 		<Still>
 			<south file="Tower_friendly.png"/>
