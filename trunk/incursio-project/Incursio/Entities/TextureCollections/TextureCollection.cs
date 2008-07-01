@@ -20,6 +20,7 @@ namespace Incursio.Entities.TextureCollections
         public DamagedTextures damaged;
         public TerrainTextures terrain;
         public InterfaceTextures interfaceTextures;
+        public ProjectileTextures projectiles;
 
         public TextureCollection(int id, string name, string portraitName, string iconName){
             this.id = id;
@@ -57,6 +58,7 @@ namespace Incursio.Entities.TextureCollections
                 case "Damaged":     damaged = new DamagedTextures();             return damaged;
                 case "Terrain":     terrain = new TerrainTextures();             return terrain;
                 case "Interface":   interfaceTextures = new InterfaceTextures(); return interfaceTextures;
+                case "Projectile":  projectiles = new ProjectileTextures();      return projectiles;
                 default: return null;
             }
         }

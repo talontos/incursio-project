@@ -382,6 +382,11 @@ namespace Incursio.Managers
                     {
                         #region PROJECTILES
                         //TODO: IMPLEMENT
+
+                        foreach(XmlAttribute att in node.Attributes){
+                            
+                        }
+
                         #endregion
                     }
                     else

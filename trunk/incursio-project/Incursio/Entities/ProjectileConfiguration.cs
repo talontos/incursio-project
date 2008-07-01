@@ -14,9 +14,6 @@ namespace Incursio.Entities
 
         public ProjectileConfiguration(int id, string name, params string[] args)
         {
-            this.classID = id;
-            this.className = name;
-
             //set all other properties that are given
             for(int i = 0; (i + 1) < args.Length; i += 2){
                 switch(args[i]){

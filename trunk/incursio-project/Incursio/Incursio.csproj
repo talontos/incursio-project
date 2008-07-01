@@ -86,6 +86,8 @@
     <None Include="Campaign\RandomMap.cs" />
     <Compile Include="Campaign\TestMap.cs" />
     <Compile Include="Entities\AI\BaseAI.cs" />
+    <Compile Include="Entities\ProjectileConfiguration.cs" />
+    <Compile Include="Entities\TextureCollections\ProjectileTextures.cs" />
     <Compile Include="Players\AIPlayer.cs" />
     <Compile Include="Entities\AI\DefensiveAI.cs" />
     <Compile Include="Entities\AI\SimpleAI.cs" />
@@ -190,6 +192,7 @@
     <Compile Include="Utils\Coordinate.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Configuration\Incursio\ProjectileConfiguration.xml" />
     <Content Include="Configuration\Simpleland\AudioConfiguration.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
