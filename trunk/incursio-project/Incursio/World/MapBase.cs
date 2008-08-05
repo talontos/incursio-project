@@ -92,7 +92,7 @@ namespace Incursio.World
             {
                 for (int y = 0; y < this.width; y++)
                 {
-                    occupancyGrid[x, y] = 1;
+                    occupancyGrid[x, y] = Util.UNOCCUPIED;
                     entityGrid[x, y] = -1;
                 }
             }
@@ -120,7 +120,7 @@ namespace Incursio.World
             {
                 for (int i = 0; i < this.width; i++)
                 {
-                    occupancyGrid[i, j] = 1;
+                    occupancyGrid[i, j] = Util.UNOCCUPIED;
                     entityGrid[i, j] = -1;
                 }
             }
@@ -338,7 +338,7 @@ namespace Incursio.World
             }
             else
             {
-                return this.occupancyGrid[c, d] == 1;
+                return this.occupancyGrid[c, d] == Util.UNOCCUPIED;
             }
         }
 
@@ -355,7 +355,11 @@ namespace Incursio.World
         {
             int x, y;
             this.translatePixelToMapCell(pixX, pixY, out x, out y);
-            return this.occupancyGrid[x, y];
+
+            if (x < occupancyGrid.GetLength(0) && y < occupancyGrid.GetLength(1))
+                return this.occupancyGrid[x, y];
+
+            else return (byte)1;
         }
 
         public void setSingleCellOccupancy_pix(int pixX, int pixY, byte occupied)
@@ -367,7 +371,8 @@ namespace Incursio.World
         
         public void setSingleCellOccupancy_cell(int cellX, int cellY, byte occupied)
         {
-            this.occupancyGrid[cellX, cellY] = occupied;
+            if(cellX < occupancyGrid.GetLength(0) && cellY < occupancyGrid.GetLength(1))
+                this.occupancyGrid[cellX, cellY] = occupied;
         }
 
         public int getCellDistance(Coordinate c1, Coordinate c2)

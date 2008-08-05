@@ -11,6 +11,7 @@ namespace Incursio.Entities
         public string name;
         public int damage;
         public int speed;
+        public bool fastDecay;
         public ComponentConfiguration renderComponentConfiguration;
 
         public ProjectileConfiguration(int id, string name, params string[] args)
@@ -21,9 +22,9 @@ namespace Incursio.Entities
             //set all other properties that are given
             for(int i = 0; (i + 1) < args.Length; i += 2){
                 switch(args[i].ToUpper()){
-                    case "DAMAGE":      damage       = int.Parse(args[i + 1]); break;
-                    case "SPEED":       speed        = int.Parse(args[i + 1]); break;
-
+                    case "DAMAGE":      damage       = int.Parse(args[i + 1]);  break;
+                    case "SPEED":       speed        = int.Parse(args[i + 1]);  break;
+                    case "FASTDECAY":   fastDecay    = bool.Parse(args[i + 1]); break;
                     case "TEXTURESET": 
                         renderComponentConfiguration = new ComponentConfiguration("RenderComponent");
                         renderComponentConfiguration.addAttribute(new KeyValuePair<string,string>("collectionName",args[i + 1]));

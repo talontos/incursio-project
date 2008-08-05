@@ -109,10 +109,38 @@
 			<south file="ControlPointFriendly.png"/>
 		</Still>
 	</TextureCollection>
+	<TextureCollection name="Mage" portrait="lightInfantryPortrait.png" icon="InfantryIcon.png">
+		<Still>
+			<north file="InfantryUnit.png"/>
+			<south file="InfantryUnit.png"/>
+			<east file="InfantryUnit.png"/>
+			<west file="InfantryUnit.png"/>
+		</Still>
+		<Movement>
+			<north file="InfantryUnit.png"/>
+			<south file="InfantryUnit.png"/>
+			<east file="InfantryUnit.png"/>
+			<west file="InfantryUnit.png"/>
+		</Movement>
+		<Attacking>
+			<east file="InfantryUnit.png"/>
+			<west file="InfantryUnit.png"/>
+		</Attacking>
+		<Death>
+			<east file="InfantryUnit.png"/>
+			<west file="InfantryUnit.png"/>
+		</Death>
+	</TextureCollection>
 
 	<TextureCollection name="ArrowProjectile" portrait="" icon="">
 		<Projectile>
 			<Texture file="Arrow.png"/>
+		</Projectile>
+	</TextureCollection>
+
+	<TextureCollection name="LightningProjectile" portrait="" icon="">
+		<Projectile>
+			<Texture file="Lightning1.png"/>
 		</Projectile>
 	</TextureCollection>
 
@@ -127,6 +155,23 @@
 		<Attacking>
 			<east file="Tower_friendly_attacking.png" frameWidth="32"/>
 			<west file="Tower_friendly_attacking.png" frameWidth="32"/>
+		</Attacking>
+		<Damaged>
+			<exploded file="Tower_exploded.png"/>
+		</Damaged>
+	</TextureCollection>
+
+	<TextureCollection name="Mage Tower" portrait="TowerPortrait.png" icon="TowerIcon.png">
+		<Still>
+			<south file="MageTower.png"/>
+			<north file="MageTower.png"/>
+			<east file="MageTower.png"/>
+			<west file="MageTower.png"/>
+			<beingBuilt file="MageTower.png"/>
+		</Still>
+		<Attacking>
+			<east file="MageTower.png"/>
+			<west file="MageTower.png"/>
 		</Attacking>
 		<Damaged>
 			<exploded file="Tower_exploded.png"/>
