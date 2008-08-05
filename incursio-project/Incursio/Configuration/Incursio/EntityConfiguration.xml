@@ -37,6 +37,12 @@
 		<Component type="CombatComponent" damage="100" attackRange="10" attackSpeed="3" projectile="Lightning"/>
 	</Entity>
 
+	<Entity name="Lumberjack" maxHealth="100" health="100" pointValue="75" armor="25" sightRange="12" costToBuild="100">
+		<Component type="RenderComponent" collectionName="Demon"/>
+		<Component type="MovementComponent" moveSpeed="95.0"/>
+		<Component type="CombatComponent" damage="100" attackRange="10" attackSpeed="3" projectile="TreeChuck"/>
+	</Entity>
+
 	<Entity name="Guard Tower" maxHealth="350" health="350" pointValue="1000" armor="5" sightRange="14" costToBuild="200" isStructure="true" isTurret="true" height="2">
 		<Component type="RenderComponent" collectionName="Guard Tower"/>
 		<Component type="CombatComponent" damage="25" attackRange="14" attackSpeed="4" smartGuarding="false" projectile="Arrow"/>
@@ -45,7 +51,7 @@
 
 	<Entity name="Mage Tower" maxHealth="350" health="350" pointValue="1000" armor="5" sightRange="14" costToBuild="10" isStructure="true" isTurret="true" height="2">
 		<Component type="RenderComponent" collectionName="Mage Tower"/>
-		<Component type="CombatComponent" damage="100" attackRange="6" attackSpeed="4" smartGuarding="false" projectile="Lightning"/>
+		<Component type="CombatComponent" damage="100" attackRange="10" attackSpeed="4" smartGuarding="false" projectile="Lightning"/>
 	</Entity>
 
 	<Entity name="Camp" maxHealth="350" health="350" pointValue="1000" armor="10" sightRange="6" isMainBase="true" isStructure="true" costToBuild="10" width="2" height="2">
@@ -66,6 +72,7 @@
 			<Build entity="Heavy Infantry"/>
 			<Build entity="Archer"/>
 			<Build entity="Mage"/>
+			<Build entity="Lumberjack"/>
 		</Component>
 		<Component type="AudioComponent" collectionName="Camp"/>
 	</Entity>

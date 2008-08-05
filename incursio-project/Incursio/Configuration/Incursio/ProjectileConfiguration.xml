@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
 	<Projectile name="Arrow" damage="20" speed="10" textureSet="ArrowProjectile"/>
-	<Projectile name="Lightning" fastDecay="true"   damage="100" speed="50" textureSet="LightningProjectile"/>
+	<Projectile name="Lightning" fastDecay="true" damage="100" speed="50" textureSet="LightningProjectile"/>
+	<Projectile name="TreeChuck" damage="1000" speed="10" textureSet="TreeChuck"/>
 </configuration>
