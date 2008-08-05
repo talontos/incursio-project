@@ -109,6 +109,7 @@
 			<south file="ControlPointFriendly.png"/>
 		</Still>
 	</TextureCollection>
+	
 	<TextureCollection name="Mage" portrait="lightInfantryPortrait.png" icon="InfantryIcon.png">
 		<Still>
 			<north file="InfantryUnit.png"/>
@@ -131,6 +132,29 @@
 			<west file="InfantryUnit.png"/>
 		</Death>
 	</TextureCollection>
+	
+	<TextureCollection name="Demon" portrait="lightInfantryPortrait.png" icon="InfantryIcon.png">
+		<Still>
+			<north file="MightyMan.png"/>
+			<south file="MightyMan.png"/>
+			<east file="MightyMan.png"/>
+			<west file="MightyMan.png"/>
+		</Still>
+		<Movement>
+			<north file="MightyMan.png"/>
+			<south file="MightyMan.png"/>
+			<east file="MightyMan.png"/>
+			<west file="MightyMan.png"/>
+		</Movement>
+		<Attacking>
+			<east file="MightyMan.png"/>
+			<west file="MightyMan.png"/>
+		</Attacking>
+		<Death>
+			<east file="MightyMan.png"/>
+			<west file="MightyMan.png"/>
+		</Death>
+	</TextureCollection>
 
 	<TextureCollection name="ArrowProjectile" portrait="" icon="">
 		<Projectile>
@@ -141,6 +165,12 @@
 	<TextureCollection name="LightningProjectile" portrait="" icon="">
 		<Projectile>
 			<Texture file="Lightning1.png"/>
+		</Projectile>
+	</TextureCollection>
+
+	<TextureCollection name="TreeChuck" portrait="" icon="">
+		<Projectile>
+			<Texture file="Tree1.png"/>
 		</Projectile>
 	</TextureCollection>
 
