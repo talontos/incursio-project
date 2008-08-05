@@ -15,8 +15,11 @@ namespace Incursio.Entities.Components
         public int updateAttackTimer = 0;
         public int attackSpeed = 0;
         public int attackRange = 0;
+        public int projectileId = -1;
         public BaseProjectile projectile;
         public BaseGameEntity target;
+
+        public bool isProjectile = false;
 
         public CombatComponent(BaseGameEntity entity) : base(entity){
             entity.canAttack = true;
@@ -34,6 +37,7 @@ namespace Incursio.Entities.Components
                     case "attackSpeed":     attackSpeed     = int.Parse(attributes[i].Value); break;
                     case "attackRange":     this.setAttackRange(int.Parse(attributes[i].Value)); break;
                     case "smartGuarding":   smartGuarding   = bool.Parse(attributes[i].Value); break;
+                    case "projectile":      projectile      = ProjectileBank.getInstance().getProjectileByName(attributes[i].Value); break;
                     default: break;
                 }
             }
@@ -44,7 +48,8 @@ namespace Incursio.Entities.Components
 
             if(this.attackRange > 1){
                 //ranged, need projectile
-                this.projectile = new BaseProjectile();
+                this.isProjectile = true;
+                //this.projectile = new BaseProjectile();
             }
         }
 
@@ -91,7 +96,7 @@ namespace Incursio.Entities.Components
                     if(this.attackRange > 1){
                         //shoot your projectile!
                         this.projectile.startProjectile(bgEntity.location.toVector2(), target.location.toVector2());
-                        target.takeDamage(this.damage, this.bgEntity);
+                        //target.takeDamage(this.damage, this.bgEntity);
                     }
                     else{
                         target.takeDamage(this.damage, this.bgEntity);

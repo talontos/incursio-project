@@ -44,7 +44,7 @@
 		<Component type="AudioComponent" collectionName="Camp"/>
 	</Entity>
 
-	<Entity name="Control Point" pointValue="500" sightRange="10" isControlPoint="true" isStructure="true" width="2" height="2">
+	<Entity name="Control Point" pointValue="500" sightRange="10" isControlPoint="true" isStructure="true" width="2" height="2" invulnerable="true">
 		<Component type="CapturableComponent"/>
 		<Component type="RenderComponent" collectionName="Control Point"/>
 		<Component type="ResourceComponent" amount="12"/>

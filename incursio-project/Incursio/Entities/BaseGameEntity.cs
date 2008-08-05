@@ -51,6 +51,8 @@ namespace Incursio.Entities
         public bool isControlPoint = false;
         public bool isTurret = false;
 
+        public bool invulnerable = false;
+
         private List<BaseCommand> orders;
 
         //Death stuff
@@ -195,6 +197,8 @@ namespace Incursio.Entities
         }
 
         public virtual void takeDamage(int damage, BaseGameEntity attacker){
+            if (this.invulnerable) return;
+
             int damageTaken = (damage - armor) + (Incursio.rand.Next(0, 10) - 5);  //[-5,+5]
             if (damageTaken < 0)
                 damageTaken = 0;
@@ -208,8 +212,10 @@ namespace Incursio.Entities
                 this.health = 0;
             }
             else{
-                //retaliate
-                this.issueImmediateOrder(new AttackCommand(attacker));
+                //TODO: notify this of projectile's owner?????
+                //retaliate if attacker is not a projectile
+                if(attacker != null)
+                    this.issueImmediateOrder(new AttackCommand(attacker));
             }
         }
 

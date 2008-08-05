@@ -118,11 +118,13 @@ namespace Incursio.Managers
             int audioIterator = -1;
             int entityIterator = -1;
             int textureIterator = -1;
+            int projectileIterator = -1;
 
             //Lists for object factory
             List<AudioCollection> audioList = new List<AudioCollection>();
             List<BaseGameEntityConfiguration> entityList = new List<BaseGameEntityConfiguration>();
             List<TextureCollection> textureList = new List<TextureCollection>();
+            List<ProjectileConfiguration> projectileList = new List<ProjectileConfiguration>();
             
             try
             {
@@ -381,11 +383,36 @@ namespace Incursio.Managers
                     else if (readingProjectiles)
                     {
                         #region PROJECTILES
-                        //TODO: IMPLEMENT
 
-                        foreach(XmlAttribute att in node.Attributes){
-                            
+                        //Iterating the projectileIterator for an accurate ID
+                        projectileIterator++;
+
+                        //Getting specific attributes
+                        XmlAttribute name = node.Attributes["name"];
+                        string nameToSet = name.Value;
+                        node.Attributes.Remove(name);
+
+                        string[] projectileAttributes = new string[node.Attributes.Count * 2];
+
+                        //Getting the number of attributes for the entity
+                        int numOfAttributes = node.Attributes.Count;
+
+                        //Looping over these attributes and adding them to the string array
+                        for (int i = 0; i < numOfAttributes; i++)
+                        {
+                            XmlAttribute newAttribute = node.Attributes[i];
+                            projectileAttributes[i * 2] = newAttribute.Name;
+                            projectileAttributes[(i * 2) + 1] = newAttribute.Value;
                         }
+
+                        //Building a new ProjectileConfiguration
+                        ProjectileConfiguration projectile = new ProjectileConfiguration(projectileIterator, nameToSet, projectileAttributes);
+
+                        //adding the projectile to the list
+                        projectileList.Add(projectile);
+
+                        //Setting the flag back to false
+                        readingProjectiles= false;
 
                         #endregion
                     }
@@ -401,6 +428,10 @@ namespace Incursio.Managers
                 if((entityList != null)&&(entityList.Count > 0)) 
                     ObjectFactory.getInstance().entities = entityList;
 
+                //Adding the projectile list to the object factory
+                if ((projectileList != null) && (projectileList.Count > 0))
+                    ProjectileBank.getInstance().projectileConfigurations = projectileList;
+
                 //Adding the audio list
                 if ((audioList != null) && (audioList.Count > 0))
                     SoundCollection.getInstance().audioCollections = audioList;
@@ -408,6 +439,7 @@ namespace Incursio.Managers
                 //Adding the texture list to the texture bank
                 if ((textureList != null)&&(textureList.Count > 0))
                     TextureBank.getInstance().textureCollections = textureList;
+
                 
             }
             catch (FileLoadException e)

@@ -289,7 +289,7 @@ namespace Incursio.Managers
         }
 
         public BaseGameEntity getEntity(int keyId){
-            if(keyId <= this.entityBank.Count)
+            if(keyId >= 0 && keyId <= this.entityBank.Count)
                 return this.entityBank[keyId];
 
             return null;

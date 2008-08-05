@@ -49,6 +49,17 @@ namespace Incursio.Utils
             }
         }
 
+        private List<ProjectileConfiguration> _projectiles = new List<ProjectileConfiguration>();
+
+        public List<ProjectileConfiguration> projectiles
+        {
+            get { return this._projectiles; }
+            set
+            {
+                this._projectiles = value;
+            }
+        }
+
         public static ObjectFactory getInstance(){
             if (instance == null)
                 instance = new ObjectFactory();
