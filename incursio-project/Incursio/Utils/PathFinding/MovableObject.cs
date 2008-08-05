@@ -303,7 +303,7 @@ namespace Incursio.Utils.PathFinding
                             Point newCell = new Point( (int)newX, (int)newY);
 
                             //TODO: CHECK FOR NON-STATIC OBJECTS IN THE WAY
-                            if( MapManager.getInstance().currentMap.getCellOccupancy_pixels( (int)newCell.X, (int)newCell.Y) == (byte)0 
+                            if( MapManager.getInstance().currentMap.getCellOccupancy_pixels( (int)newCell.X, (int)newCell.Y) == Util.OCCUPIED 
                                 && curCell != newCell)
                             {
                                 //new space is occupied; wait for it to be free?

@@ -24,6 +24,7 @@ namespace Incursio.Entities.Projectiles
         public int damage = 0;
 
         public RenderComponent renderComponent;
+        public bool fastDecay = false;
 
         //TODO: remove this impl?
         public BaseProjectile(){
@@ -34,6 +35,7 @@ namespace Incursio.Entities.Projectiles
         public BaseProjectile(ProjectileConfiguration config){
             this.SPEED = config.speed;
             this.damage = config.damage;
+            this.fastDecay = config.fastDecay;
             this.renderComponent = new RenderComponent(this);
             this.renderComponent.setAttributes(config.renderComponentConfiguration.attributes);
             //this.splashRange
@@ -49,6 +51,8 @@ namespace Incursio.Entities.Projectiles
                 {
                     onScreen = MapManager.getInstance().currentMap.positionOnScreen(new Coordinate((int)pos.X, (int)pos.Y)).toVector2();
                 }
+                else
+                    onScreen = new Vector2(-1,-1);
 
             }
         }
