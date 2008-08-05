@@ -24,19 +24,12 @@ namespace Incursio.Interface
 {
   public class HeadsUpDisplay
     {
-        /*
-        Button lightInfantryButton;
-        Button archerButton;
-        Button towerButton;
-        Button heavyInfantryButton;
-        */
-
-        BuildEntityPanel buildPanel;
+        List<BuildEntityPanel> buildPanels = new List<BuildEntityPanel>(1); //TODO: change default?
 
         //helper variables for determining selection
         private int barX;
         private int numUnits;
-        
+        private int panelToUpdate = -1;
 
         /// <summary>
         /// loadHeadsUpDisplay loads the HUD content into the game.  from here it can be displayed on the screen.
@@ -48,7 +41,7 @@ namespace Incursio.Interface
             barX = 0;
             numUnits = 0;
 
-            buildPanel = new BuildEntityPanel();
+            //buildPanel = new BuildEntityPanel();
 
             /*
             lightInfantryButton = new BuildLightInfantryButton();
@@ -69,7 +62,17 @@ namespace Incursio.Interface
 
                 if (selectedUnits[0].factoryComponent != null && selectedUnits[0].getPlayer() == PlayerManager.getInstance().currentPlayerId)
                 {
-                    this.buildPanel.Update(cursor);
+                    this.panelToUpdate = selectedUnits[0].factoryComponent.buildPanelId;
+
+                    if(panelToUpdate == -1){
+                        //construct buildPanel && add to buildPanels
+                        BuildEntityPanel newPanel = new BuildEntityPanel(selectedUnits[0].factoryComponent.buildableEntityIds);
+                        this.panelToUpdate = this.buildPanels.Count;
+                        selectedUnits[0].factoryComponent.buildPanelId = this.panelToUpdate;
+                        this.buildPanels.Add(newPanel);
+                    }
+
+                    this.buildPanels[panelToUpdate].Update(cursor);
                     /*
                     lightInfantryButton.Update(cursor);
                     archerButton.Update(cursor);
@@ -225,47 +228,10 @@ namespace Incursio.Interface
                     if (i <= 5)
                     {
                         spriteBatch.Draw(selectedUnits[i].renderComponent.textures.icon, new Rectangle(383 + i * 60, height - 129, selectedUnits[i].renderComponent.textures.icon.Width, selectedUnits[i].renderComponent.textures.icon.Height), Color.White);
-                        /*
-                        if (selectedUnits[i].getType() == State.EntityName.LightInfantry)
-                        {
-                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.lightInfantryIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.getInstance().InterfaceTextures.interfaceTextures.lightInfantryIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.lightInfantryIcon.Height), Color.White).texture;
-                        }
-                        else if (selectedUnits[i].getType() == State.EntityName.Archer)
-                        {
-                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.archerIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.getInstance().InterfaceTextures.interfaceTextures.archerIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.archerIcon.Height), Color.White).texture;
-                        }
-                        else if (selectedUnits[i].getType() == State.EntityName.HeavyInfantry)
-                        {
-                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.heavyInfantryIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heavyInfantryIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heavyInfantryIcon.Height), Color.White).texture;
-                        }
-                        else if (selectedUnits[i].getType() == State.EntityName.Hero)
-                        {
-                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.heroIcon, new Rectangle(383 + i * 60, height - 129, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heroIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heroIcon.Height), Color.White).texture;
-                        }
-                        */
                     }
                     else
                     {
                         spriteBatch.Draw(selectedUnits[i].renderComponent.textures.icon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, selectedUnits[i].renderComponent.textures.icon.Width, selectedUnits[i].renderComponent.textures.icon.Height), Color.White);
-
-                        /*
-                        if (selectedUnits[i].getType() == State.EntityName.LightInfantry)
-                        {
-                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.lightInfantryIcon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, TextureBank.getInstance().InterfaceTextures.interfaceTextures.lightInfantryIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.lightInfantryIcon.Height), Color.White).texture;
-                        }
-                        else if (selectedUnits[i].getType() == State.EntityName.Archer)
-                        {
-                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.archerIcon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, TextureBank.getInstance().InterfaceTextures.interfaceTextures.archerIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.archerIcon.Height), Color.White).texture;
-                        }
-                        else if (selectedUnits[i].getType() == State.EntityName.HeavyInfantry)
-                        {
-                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.heavyInfantryIcon, new Rectangle(383 + i * 60 - 6 * 60, height - 84, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heavyInfantryIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heavyInfantryIcon.Height), Color.White).texture;
-                        }
-                        else if (selectedUnits[i].getType() == State.EntityName.Hero)
-                        {
-                            spriteBatch.Draw(TextureBank.getInstance().InterfaceTextures.interfaceTextures.heroIcon, new Rectangle(383 + i * 60, height - 84, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heroIcon.Width, TextureBank.getInstance().InterfaceTextures.interfaceTextures.heroIcon.Height), Color.White).texture;
-                        }
-                        */
                     }
 
                 }
@@ -275,17 +241,11 @@ namespace Incursio.Interface
             //UNIT / STRUCTURE COMMANDS
             if (numUnitsSelected > 0)
             {
-                if (selectedUnits[0].factoryComponent != null && selectedUnits[0].getPlayer() == PlayerManager.getInstance().currentPlayerId)
+                if (selectedUnits[0].factoryComponent != null && selectedUnits[0].getPlayer() == PlayerManager.getInstance().currentPlayerId && this.panelToUpdate >= 0)
                 {
                     //Go through the available commands for the camp
 
-                    buildPanel.Draw(spriteBatch);
-                    /*
-                    lightInfantryButton.Draw(spriteBatch);
-                    archerButton.Draw(spriteBatch);
-                    towerButton.Draw(spriteBatch);
-                    heavyInfantryButton.Draw(spriteBatch);
-                    */
+                    this.buildPanels[this.panelToUpdate].Draw(spriteBatch);
                 }
             }
 

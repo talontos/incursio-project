@@ -265,6 +265,7 @@ namespace Incursio.Managers
                         //Building a new BaseGameEntityConfiguration
                         BaseGameEntityConfiguration entity = new BaseGameEntityConfiguration(entityIterator, nameToSet, entityAttributes);
                         
+                        //get component data
                         foreach (XmlNode entityNode in node.ChildNodes)
                         {
                             //Getting specific attributes
@@ -272,7 +273,7 @@ namespace Incursio.Managers
                             string typeToSet = compType.Value;
                             entityNode.Attributes.Remove(compType);
 
-                            string[] componentAttributes = new string[entityNode.Attributes.Count * 2];
+                            List<string> componentAttributes = new List<string>(entityNode.Attributes.Count * 2);
 
                             //Getting the number of attributes for the entity
                             int numOfAtt = entityNode.Attributes.Count;
@@ -281,12 +282,33 @@ namespace Incursio.Managers
                             for (int j = 0; j < numOfAtt; j++)
                             {
                                 XmlAttribute newAttr = entityNode.Attributes[j];
-                                componentAttributes[j * 2] = newAttr.Name;
-                                componentAttributes[(j * 2) + 1] = newAttr.Value;
+                                componentAttributes.Add(newAttr.Name);
+                                componentAttributes.Add(newAttr.Value);
+                            }
+
+                            //TODO: expand to allow for more than one type of attribute for subnodes!
+                            if(entityNode.HasChildNodes){
+                                numOfAtt = entityNode.ChildNodes.Count;
+                                int numOfCompAtt = 0;
+                                XmlNode compNode;
+                                XmlAttribute compAtt;
+
+                                for (int j = 0; j < numOfAtt; j++){
+                                    compNode = entityNode.ChildNodes[j];
+                                    numOfCompAtt = compNode.Attributes.Count;
+
+                                    for (int c = 0; c < numOfCompAtt; c++){
+                                        compAtt = compNode.Attributes[c];
+
+                                        componentAttributes.Add(compNode.Name);
+                                        componentAttributes.Add(compAtt.Value);
+                                    }
+
+                                }
                             }
                             
                             //adding the component
-                            entity.addComponentConfiguration(typeToSet, componentAttributes);
+                            entity.addComponentConfiguration(typeToSet, componentAttributes.ToArray());
                         }
 
                         //adding the entity to the list

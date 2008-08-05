@@ -49,6 +49,15 @@ namespace Incursio.Utils
             }
         }
 
+        public int getEntityIdByName(string name){
+            foreach(BaseGameEntityConfiguration c in this._entities){
+                if (c.className == name)
+                    return c.classID;
+            }
+
+            return -1;
+        }
+
         private List<ProjectileConfiguration> _projectiles = new List<ProjectileConfiguration>();
 
         public List<ProjectileConfiguration> projectiles

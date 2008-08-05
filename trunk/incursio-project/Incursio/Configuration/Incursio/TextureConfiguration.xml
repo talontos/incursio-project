@@ -125,8 +125,8 @@
 			<beingBuilt file="Tower_friendly.png"/>
 		</Still>
 		<Attacking>
-			<east file="Tower_friendly_attacking.png"/>
-			<west file="Tower_friendly_attacking.png"/>
+			<east file="Tower_friendly_attacking.png" frameWidth="32"/>
+			<west file="Tower_friendly_attacking.png" frameWidth="32"/>
 		</Attacking>
 		<Damaged>
 			<exploded file="Tower_exploded.png"/>
