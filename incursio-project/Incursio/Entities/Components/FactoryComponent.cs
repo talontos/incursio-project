@@ -32,9 +32,9 @@ namespace Incursio.Entities.Components
 
         public List<EntityBuildOrder> buildOrders;
 
-        //TODO: should we be able to define a list of buildable entities?
-        //  so that certain buildings build certain entities
-        //public List<int> buildableEntityIds;
+        //list of buildable entities so that certain buildings build certain entities
+        public List<int> buildableEntityIds = new List<int>(9);
+        public int buildPanelId = -1;
 
         public FactoryComponent(BaseGameEntity entity) : base(entity){
             entity.isConstructor = true;
@@ -48,8 +48,12 @@ namespace Incursio.Entities.Components
             base.setAttributes(attributes);
 
             for(int i = 0; i < attributes.Count; i++){
-                switch(attributes[i].Key){
-                    case "builtTimeFactor": this.buildCostToTimeFactor = int.Parse(attributes[i].Value); break;
+                switch(attributes[i].Key.ToUpper()){
+                    case "BUILDTIMEFACTOR": this.buildCostToTimeFactor = int.Parse(attributes[i].Value); break;
+                    case "BUILD":           
+                        if(this.buildableEntityIds.Count < 9)
+                            this.buildableEntityIds.Add(ObjectFactory.getInstance().getEntityIdByName(attributes[i].Value)); 
+                        break;
                 }
             }
         }
@@ -212,7 +216,7 @@ namespace Incursio.Entities.Components
                 else
                 {
                     //GuardTowerStructure temp = (EntityManager.getInstance().createNewEntity(currentBuildForObjectFactory, this.bgEntity.owner) as GuardTowerStructure);
-                    //temp.setLocation(this.newStructureCoords);
+                    this.entityBeingBuilt.setLocation(this.newStructureCoords);
                     EntityManager.getInstance().addToBank(this.entityBeingBuilt);
                     timeBuilt = 0;
                     timeRequired = 0;

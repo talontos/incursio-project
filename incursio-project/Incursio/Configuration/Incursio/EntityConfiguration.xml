@@ -33,14 +33,26 @@
 
 	<Entity name="Guard Tower" maxHealth="350" health="350" pointValue="1000" armor="5" sightRange="14" costToBuild="200" isStructure="true" isTurret="true" height="2">
 		<Component type="RenderComponent" collectionName="Guard Tower"/>
-		<Component type="CombatComponent" damage="25" attackRange="14" attackSpeed="4" smartGuarding="false"/>
+		<Component type="CombatComponent" damage="25" attackRange="14" attackSpeed="4" smartGuarding="false" projectile="Arrow"/>
 		<Component type="AudioComponent" collectionName="Guard Tower"/>
 	</Entity>
 
 	<Entity name="Camp" maxHealth="350" health="350" pointValue="1000" armor="10" sightRange="6" isMainBase="true" isStructure="true" costToBuild="10" width="2" height="2">
 		<Component type="RenderComponent" collectionName="Camp"/>
 		<Component type="ResourceComponent" amount="8"/>
-		<Component type="FactoryComponent" buildTimeFactor="9"/>
+		<Component type="FactoryComponent" buildTimeFactor="9">
+			<Build entity="Barracks"/>
+		</Component>
+		<Component type="AudioComponent" collectionName="Camp"/>
+	</Entity>
+
+	<Entity name="Barracks" maxHealth="350" health="350" pointValue="1000" armor="10" sightRange="6" isStructure="true" costToBuild="10" width="2" height="2">
+		<Component type="RenderComponent" collectionName="Camp"/>
+		<Component type="FactoryComponent" buildTimeFactor="9">
+			<Build entity="Light Infantry"/>
+			<Build entity="Heavy Infantry"/>
+			<Build entity="Archer"/>
+		</Component>
 		<Component type="AudioComponent" collectionName="Camp"/>
 	</Entity>
 

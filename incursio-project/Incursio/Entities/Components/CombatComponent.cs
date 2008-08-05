@@ -41,6 +41,11 @@ namespace Incursio.Entities.Components
                     default: break;
                 }
             }
+
+            //Pretty much, if the config says I use a projectile and I don't have one, I shouldn't attack...
+            if(this.isProjectile && this.projectile == null){
+                this.bgEntity.combatComponent = null;
+            }
         }
 
         private void setAttackRange(int range){
@@ -49,7 +54,6 @@ namespace Incursio.Entities.Components
             if(this.attackRange > 1){
                 //ranged, need projectile
                 this.isProjectile = true;
-                //this.projectile = new BaseProjectile();
             }
         }
 
