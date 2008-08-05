@@ -6,7 +6,7 @@
 
 	<Setting entitiesAutoGuard="true"/>
 	
-	<Setting playBackgroundMusic="true"/>
-	<Setting drawOccupancyGrid="false"/>
+	<Setting playBackgroundMusic="true" drawOccupancyGrid="true"/>
+	
 	<Setting drawEntityGrid="false"/>
 </GameConfiguration>

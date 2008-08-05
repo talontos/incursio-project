@@ -84,12 +84,13 @@ namespace Incursio.Entities.Components
         {
             #region PROJECTILES
             if(this.isProjectile){
+                //NOTE: we may be able to remove this block...the projectile has its own renderer (this?) which should know what to draw.
                 //draw the projectile if needed
-                spriteBatch.Draw(this.projectile.gameTexture.texture,
+                spriteBatch.Draw( this.textures.projectiles.Texture.texture, //this.projectile.gameTexture.texture,
                     this.projectile.onScreen,
                     null, Color.White, -1 * ((float)(this.projectile.angle * (Math.PI / 180))),
-                    new Vector2(this.projectile.gameTexture.texture.Width / 2, 
-                        this.projectile.gameTexture.texture.Height / 2), 
+                    new Vector2(this.textures.projectiles.Texture.texture.Width / 2, 
+                        this.textures.projectiles.Texture.texture.Height / 2), 
                     1.0f, SpriteEffects.None, 0f);                
 
                 return;

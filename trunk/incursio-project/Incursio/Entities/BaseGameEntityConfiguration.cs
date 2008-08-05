@@ -33,6 +33,7 @@ namespace Incursio.Entities
         public bool isTurret = false;
 
         public bool isStructure = false;
+        public bool invulnerable = false;
 
         public List<ComponentConfiguration> components = new List<ComponentConfiguration>();
 
@@ -42,21 +43,23 @@ namespace Incursio.Entities
 
             //set all other properties that are given
             for(int i = 0; (i + 1) < args.Length; i += 2){
-                switch(args[i]){
-                    case "maxHealth":       maxHealth       = int.Parse(args[i + 1]); break;
-                    case "health":          health          = int.Parse(args[i + 1]); break;
-                    case "armor":           armor           = int.Parse(args[i + 1]); break;
-                    case "sightRange":      sightRange      = int.Parse(args[i + 1]); break;
-                    case "pointValue":      pointValue      = int.Parse(args[i + 1]); break;
-                    case "costToBuild":     costToBuild     = int.Parse(args[i + 1]); break;
-                    case "isHero":          isHero          = bool.Parse(args[i + 1]); break;
-                    case "isMainBase":      isMainBase      = bool.Parse(args[i + 1]); break;
-                    case "isControlPoint":  isControlPoint  = bool.Parse(args[i + 1]); break;
-                    case "isTurret":        isTurret        = bool.Parse(args[i + 1]); break;
-                    case "isStructure":     isStructure     = bool.Parse(args[i + 1]); break;
-                    case "width":           size.X          = float.Parse(args[i + 1]); break;
-                    case "height":          size.Y          = float.Parse(args[i + 1]); break;
-                    default: break;
+                switch(args[i].ToUpper()){
+                    case "MAXHEALTH":       maxHealth       = int.Parse(args[i + 1]); break;
+                    case "HEALTH":          health          = int.Parse(args[i + 1]); break;
+                    case "ARMOR":           armor           = int.Parse(args[i + 1]); break;
+                    case "SIGHTRANGE":      sightRange      = int.Parse(args[i + 1]); break;
+                    case "POINTVALUE":      pointValue      = int.Parse(args[i + 1]); break;
+                    case "COSTTOBUILD":     costToBuild     = int.Parse(args[i + 1]); break;
+                    case "ISHERO":          isHero          = bool.Parse(args[i + 1]); break;
+                    case "ISMAINBASE":      isMainBase      = bool.Parse(args[i + 1]); break;
+                    case "ISCONTROLPOINT":  isControlPoint  = bool.Parse(args[i + 1]); break;
+                    case "ISTURRET":        isTurret        = bool.Parse(args[i + 1]); break;
+                    case "ISSTRUCTURE":     isStructure     = bool.Parse(args[i + 1]); break;
+                    case "WIDTH":           size.X          = float.Parse(args[i + 1]); break;
+                    case "HEIGHT":          size.Y          = float.Parse(args[i + 1]); break;
+                    case "INVULNERABLE":
+                    case "INVINCIBLE":      invulnerable    = bool.Parse(args[i + 1]); break;
+                    default: break; //TODO: display some sort of parse error
                 }
             }
         }
@@ -74,12 +77,12 @@ namespace Incursio.Entities
         public BaseGameEntity buildEntity(){
             BaseGameEntity e = new BaseGameEntity();
 
-            e.entityName = this.className;
-            e.maxHealth  = this.maxHealth;
-            e.health     = this.health;
-            e.armor      = this.armor;
-            e.sightRange = this.sightRange;
-            e.pointValue = this.pointValue;
+            e.entityName     = this.className;
+            e.maxHealth      = this.maxHealth;
+            e.health         = this.health;
+            e.armor          = this.armor;
+            e.sightRange     = this.sightRange;
+            e.pointValue     = this.pointValue;
 
             e.size           = this.size;
 
@@ -88,6 +91,8 @@ namespace Incursio.Entities
             e.isControlPoint = this.isControlPoint;
             e.isTurret       = this.isTurret;
             e.isStructure    = this.isStructure;
+
+            e.invulnerable   = this.invulnerable;
 
             this.components.ForEach(delegate(ComponentConfiguration cc)
             {

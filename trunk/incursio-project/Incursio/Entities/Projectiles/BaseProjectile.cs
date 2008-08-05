@@ -11,7 +11,7 @@ namespace Incursio.Entities.Projectiles
 {
     public class BaseProjectile
     {
-        public GameTexture gameTexture;
+        //public GameTexture gameTexture;
 
         public Vector2 pos = new Vector2(-1, -1);
         public int LENGTH = 5;
@@ -21,17 +21,23 @@ namespace Incursio.Entities.Projectiles
         public double angle = 0;
         public Vector2 destination = new Vector2(-1, -1);
         public int splashRange = 0;
+        public int damage = 0;
 
         public RenderComponent renderComponent;
 
-        //TODO: LOAD PROJECTILES FROM XML
+        //TODO: remove this impl?
         public BaseProjectile(){
-            this.gameTexture = TextureBank.getInstance().InterfaceTextures.interfaceTextures.arrow;
+            //this.gameTexture = TextureBank.getInstance().InterfaceTextures.interfaceTextures.arrow;
             this.renderComponent = new RenderComponent(this);
         }
 
-        public BaseProjectile(Texture2D tex){
-
+        public BaseProjectile(ProjectileConfiguration config){
+            this.SPEED = config.speed;
+            this.damage = config.damage;
+            this.renderComponent = new RenderComponent(this);
+            this.renderComponent.setAttributes(config.renderComponentConfiguration.attributes);
+            //this.splashRange
+            //TODO: etc...
         }
 
         public void Update()
@@ -48,7 +54,15 @@ namespace Incursio.Entities.Projectiles
         }
 
         private void finishProjectile(){
-            //cell take damage?
+            //TODO: cell take damage by this.damage
+
+            //get entity at cell
+            BaseGameEntity e = EntityManager.getInstance().getEntity(
+                MapManager.getInstance().currentMap.getCellEntity_pixels((int)this.destination.X, (int)this.destination.Y));
+            
+            //deal damage
+            if (e != null)
+                e.takeDamage(this.damage, null);
         }
 
         public void updatePosition()
@@ -62,6 +76,7 @@ namespace Incursio.Entities.Projectiles
                 if (pos.X + newPosX < destination.X)
                 {
                     draw = false;
+                    this.finishProjectile();
                 }
             }
             else if (pos.X < destination.X)
@@ -69,6 +84,7 @@ namespace Incursio.Entities.Projectiles
                 if (pos.X + newPosX > destination.X)
                 {
                     draw = false;
+                    this.finishProjectile();
                 }
             }
 
