@@ -32,7 +32,7 @@ namespace Incursio.Entities.Components
         }
 
         private void playSoundFromSet(List<string> set){
-            if(set.Count > 0)
+            if(set.Count > 0 && this.bgEntity.owner == PlayerManager.getInstance().currentPlayerId)
                 SoundManager.getInstance().PlaySound(SoundCollection.selectRandomSound(set), false);
         }
 

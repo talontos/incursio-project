@@ -15,7 +15,7 @@ using System.Text;
 
 namespace Incursio.Utils
 {
-    public class EntityConfiguration
+    public class EntityConfigurationx
     {
         public static class FileConfig{
             public static string audioPath = "../../../Content/Audio/";

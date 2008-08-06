@@ -83,6 +83,7 @@ namespace Incursio.Managers
             //TODO: ADD SUPPORT FOR MORE THAN 2 PLAYERS
             if(players.Count < this.MAX_PLAYERS){
                 if(isComputer){
+                    //computerPlayerId = this.insertPlayer(new AIPlayer());
                     computerPlayerId = this.insertPlayer(new AIPlayer(new SimpleAI()));
                 }
                 else{

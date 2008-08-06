@@ -16,8 +16,9 @@ namespace Incursio.Managers
         public static string AUDIO_CONFIGURATION_FILE_NAME = "AudioConfiguration.xml";
         public static string TEXTURE_CONFIGURATION_FILE_NAME = "TextureConfiguration.xml";
 
-        public string contentDirectory = "Content";
-
+        public string contentDirectory = "C:/Documents and Settings/Mitch/My Documents/Visual Studio 2005/Projects/Incursio/Incursio/Content/";//"Content/";
+        public string audioDirectory = "C:/Documents and Settings/Mitch/My Documents/Visual Studio 2005/Projects/Incursio/Incursio/Content/Audio/";//"Content/Audio/";
+       
         public string currentConfigurationSchemeDirectory = "Incursio/";
 
         public string entityConfigurationFile;

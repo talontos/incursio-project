@@ -536,8 +536,6 @@ namespace Incursio
         /// </summary>
         public void playStateSounds(){
 
-            //TODO: TURN SOUNDS BACK ON
-            return;
             switch(currentState){
                 case State.GameState.Menu:
                 case State.GameState.LoadMenu:

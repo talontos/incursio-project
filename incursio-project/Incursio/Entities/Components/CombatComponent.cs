@@ -42,9 +42,12 @@ namespace Incursio.Entities.Components
                 }
             }
 
-            //Pretty much, if the config says I use a projectile and I don't have one, I shouldn't attack...
-            if(this.isProjectile && this.projectile == null){
-                this.bgEntity.combatComponent = null;
+            if(this.isProjectile){
+                //Pretty much, if the config says I use a projectile and I don't have one, I shouldn't attack...
+                if(this.projectile == null)
+                    this.bgEntity.combatComponent = null;
+                else
+                    this.projectile.damage = this.damage;
             }
         }
 
