@@ -20,6 +20,19 @@ namespace Incursio.Entities.Components
         public override void setAttributes(List<KeyValuePair<string, string>> attributes)
         {
             base.setAttributes(attributes);
+
+            for (int i = 0; i < attributes.Count; i++)
+            {
+                switch (attributes[i].Key.ToUpper())
+                {
+                    case "TICKSPEED":   HEAL_TICK   = int.Parse(attributes[i].Value); break;
+                    case "HEALRANGE":
+                    case "RANGE":       healRange   = int.Parse(attributes[i].Value); break;
+                    case "HEALTHBOOST": 
+                    case "BOOST":       healthBoost = int.Parse(attributes[i].Value); break;
+                    default: break;
+                }
+            }
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
@@ -28,12 +41,13 @@ namespace Incursio.Entities.Components
 
             if (this.healTimer == HEAL_TICK * 90)
             {
+                //heal all units in range
                 EntityManager.getInstance().healEntitiesInRange(this.bgEntity, this.healRange, this.healthBoost, true);
                 healTimer = 0;
             }
             else if (this.healTimer == HEAL_TICK * 60)
             {
-                //heal units in range
+                //heal heros in range
                 EntityManager.getInstance().healEntitiesInRange(this.bgEntity, this.healRange, this.healthBoost, false);
                 healTimer++;
             }

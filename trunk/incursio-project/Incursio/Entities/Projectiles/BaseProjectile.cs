@@ -21,10 +21,13 @@ namespace Incursio.Entities.Projectiles
         public double angle = 0;
         public Vector2 destination = new Vector2(-1, -1);
         public int splashRange = 0;
+        public double splashDamagePercent = 0;
         public int damage = 0;
 
         public RenderComponent renderComponent;
         public bool fastDecay = false;
+
+        public bool instant = false;
 
         //TODO: remove this impl?
         public BaseProjectile(){
@@ -34,11 +37,12 @@ namespace Incursio.Entities.Projectiles
 
         public BaseProjectile(ProjectileConfiguration config){
             this.SPEED = config.speed;
-            this.damage = config.damage;
             this.fastDecay = config.fastDecay;
+            this.instant = config.instant;
             this.renderComponent = new RenderComponent(this);
             this.renderComponent.setAttributes(config.renderComponentConfiguration.attributes);
-            //this.splashRange
+            this.splashRange = config.splashRange;
+            this.splashDamagePercent = config.splashDamagePercent / 100;
             //TODO: etc...
         }
 
@@ -58,15 +62,30 @@ namespace Incursio.Entities.Projectiles
         }
 
         private void finishProjectile(){
-            //TODO: cell take damage by this.damage
+            this.draw = false;
+            int x = (int)this.destination.X, 
+                y = (int)this.destination.Y;
 
             //get entity at cell
             BaseGameEntity e = EntityManager.getInstance().getEntity(
-                MapManager.getInstance().currentMap.getCellEntity_pixels((int)this.destination.X, (int)this.destination.Y));
+                MapManager.getInstance().currentMap.getCellEntity_pixels(x, y));
             
-            //deal damage
+            //deal impact damage
             if (e != null)
                 e.takeDamage(this.damage, null);
+
+            //splash damage (if applicable)
+            //TODO: DEGRADE SPLASH DAMAGE DEALT AS DISTANCE GETS LARGER
+            if(this.splashRange > 0){
+                List<int> ids = MapManager.getInstance().currentMap.getEntitiesInRange(new Coordinate(this.destination), this.splashRange);
+
+                if(ids.Count > 0){
+                    //deal splash damage
+                    foreach(int id in ids){
+                        EntityManager.getInstance().getEntity(id).takeDamage((int)(this.damage * (this.splashDamagePercent / 100)), null);
+                    }
+                }
+            }
         }
 
         public void updatePosition()
@@ -79,7 +98,6 @@ namespace Incursio.Entities.Projectiles
             {
                 if (pos.X + newPosX < destination.X)
                 {
-                    draw = false;
                     this.finishProjectile();
                 }
             }
@@ -87,13 +105,15 @@ namespace Incursio.Entities.Projectiles
             {
                 if (pos.X + newPosX > destination.X)
                 {
-                    draw = false;
                     this.finishProjectile();
                 }
             }
 
             pos.X = pos.X + (float)newPosX;
             pos.Y = pos.Y + (float)newPosY;
+
+            if (this.instant)
+                this.finishProjectile();
         }
 
         public void startProjectile(Vector2 startLoc, Vector2 destLoc)

@@ -174,6 +174,46 @@
 		</Projectile>
 	</TextureCollection>
 
+	<TextureCollection name="InstantDeath" portrait="" icon="">
+		<Projectile>
+			<Texture file="empty.png"/>
+		</Projectile>
+	</TextureCollection>
+
+	<TextureCollection name="Box" portrait="TowerPortrait.png" icon="TowerIcon.png">
+		<Still>
+			<south file="barrel.png"/>
+			<north file="barrel.png"/>
+			<east file="barrel.png"/>
+			<west file="barrel.png"/>
+			<beingBuilt file="barrel.png"/>
+		</Still>
+		<Attacking>
+			<east file="barrel.png"/>
+			<west file="barrel.png"/>
+		</Attacking>
+		<Damaged>
+			<exploded file="barrel.png"/>
+		</Damaged>
+	</TextureCollection>
+
+	<TextureCollection name="TreeTower" portrait="TowerPortrait.png" icon="TowerIcon.png">
+		<Still>
+			<south file="Tree1.png"/>
+			<north file="Tree1.png"/>
+			<east file="Tree1.png"/>
+			<west file="Tree1.png"/>
+			<beingBuilt file="Tree1.png"/>
+		</Still>
+		<Attacking>
+			<east file="Tree1.png" frameWidth="32"/>
+			<west file="Tree1.png" frameWidth="32"/>
+		</Attacking>
+		<Damaged>
+			<exploded file="Tower_exploded.png"/>
+		</Damaged>
+	</TextureCollection>
+
 	<TextureCollection name="Guard Tower" portrait="TowerPortrait.png" icon="TowerIcon.png">
 		<Still>
 			<south file="Tower_friendly.png"/>

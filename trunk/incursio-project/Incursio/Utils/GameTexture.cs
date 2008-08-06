@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Incursio.Managers;
 
 namespace Incursio.Utils
 {
@@ -26,8 +27,9 @@ namespace Incursio.Utils
         }
 
         private void loadTexture(string name){
-            this.texture = Texture2D.FromFile(Incursio.getInstance().spriteBatch.GraphicsDevice, 
-                global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + name);
+            this.texture = Texture2D.FromFile(Incursio.getInstance().spriteBatch.GraphicsDevice,
+                //global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + name);
+                ConfigurationManager.getInstance().contentDirectory + name);
         }
     }
 }

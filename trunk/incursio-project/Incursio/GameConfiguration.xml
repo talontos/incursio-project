@@ -2,6 +2,7 @@
 
 <GameConfiguration>
 	<Setting contentDirecoty="Content"/>
+	<Setting audioDirectory="Content/Audio"/>
 	<Setting configurationScheme="Incursio"/>
 
 	<Setting entitiesAutoGuard="true"/>

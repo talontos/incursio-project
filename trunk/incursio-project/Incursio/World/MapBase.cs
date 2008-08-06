@@ -359,7 +359,7 @@ namespace Incursio.World
             if (x < occupancyGrid.GetLength(0) && y < occupancyGrid.GetLength(1))
                 return this.occupancyGrid[x, y];
 
-            else return (byte)1;
+            else return Util.OCCUPIED;
         }
 
         public void setSingleCellOccupancy_pix(int pixX, int pixY, byte occupied)
@@ -398,7 +398,10 @@ namespace Incursio.World
         {
             int x, y;
             this.translatePixelToMapCell(pixX, pixY, out x, out y);
-            return this.entityGrid[x, y];
+
+            if (x >= 0 && x < this.entityGrid.GetUpperBound(0) && y >= 0 && y < this.entityGrid.GetUpperBound(1))
+                return this.entityGrid[x, y];
+            else return -1;
         }
 
         public void setSingleCellEntity_cell(int cellX, int cellY, int occupant)

@@ -87,12 +87,17 @@ namespace Incursio.Entities.Components
                 if (this.projectile.onScreen.X < 0 || (this.projectile.fastDecay && !this.projectile.draw))
                     return;
 
-                spriteBatch.Draw( this.textures.projectiles.Texture.texture,
-                    this.projectile.onScreen,
-                    null, Color.White, -1 * ((float)(this.projectile.angle * (Math.PI / 180))),
-                    new Vector2(this.textures.projectiles.Texture.texture.Width / 2, 
-                        this.textures.projectiles.Texture.texture.Height / 2), 
-                    1.0f, SpriteEffects.None, 0f);                
+                //if(this.projectile.instant){
+                    //TODO: STRETCH IMAGE FOR INSTANT PROJECTILES
+                //}
+                //else{
+                    spriteBatch.Draw( this.textures.projectiles.Texture.texture,
+                        this.projectile.onScreen,
+                        null, Color.White, -1 * ((float)(this.projectile.angle * (Math.PI / 180))),
+                        new Vector2(this.textures.projectiles.Texture.texture.Width / 2, 
+                            this.textures.projectiles.Texture.texture.Height / 2), 
+                        1.0f, SpriteEffects.None, 0f);
+                //}
 
                 return;
             }

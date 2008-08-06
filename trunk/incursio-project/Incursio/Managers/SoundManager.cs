@@ -92,7 +92,8 @@ namespace Incursio.Managers
         //loop will loop the sound if true.  Otherwise, sound will play once and stop
         public void PlaySound(String filename, bool loop) 
         {
-            filename = EntityConfiguration.FileConfig.audioPath + filename;
+            //filename = EntityConfiguration.FileConfig.audioPath + filename;
+            filename = ConfigurationManager.getInstance().audioDirectory + filename;
 
             try
             {
@@ -124,7 +125,8 @@ namespace Incursio.Managers
                 this.currentBGMusic = filename;
             }
 
-            filename = EntityConfiguration.FileConfig.audioPath + filename;
+            //filename = EntityConfiguration.FileConfig.audioPath + filename;
+            filename = ConfigurationManager.getInstance().audioDirectory + filename;
 
             try
             {

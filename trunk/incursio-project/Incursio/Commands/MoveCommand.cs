@@ -58,7 +58,7 @@ namespace Incursio.Commands
             else if (start == null){
 
                 //First, check passability:
-                if (MapManager.getInstance().currentMap.getCellOccupancy_pixels(destination.x, destination.y) == (byte)0)
+                if (MapManager.getInstance().currentMap.getCellOccupancy_pixels(destination.x, destination.y) == Util.OCCUPIED)
                 {
                     //cell is occupied; move somewhere else
                     this.destination =

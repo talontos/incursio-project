@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Incursio.Managers;
 
 namespace Incursio.Entities.TextureCollections
 {
@@ -29,7 +30,8 @@ namespace Incursio.Entities.TextureCollections
             if(portraitName != null && portraitName.Length > 0){
                 //TODO: We will probably need a full path...
                 portrait = Texture2D.FromFile(Incursio.getInstance().spriteBatch.GraphicsDevice,
-                    global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + portraitName);
+                    //global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + portraitName);
+                    ConfigurationManager.getInstance().contentDirectory + portraitName);
             }
             else
             {
@@ -41,7 +43,8 @@ namespace Incursio.Entities.TextureCollections
             {
                 //TODO: We will probably need a full path...
                 icon = Texture2D.FromFile(Incursio.getInstance().spriteBatch.GraphicsDevice,
-                    global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + iconName);
+                    //global::Incursio.Utils.EntityConfiguration.FileConfig.texturePath + iconName);
+                    ConfigurationManager.getInstance().contentDirectory + iconName);
             }
             else{
                 //TODO: GET A DEFAULT ICON
