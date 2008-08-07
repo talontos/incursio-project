@@ -22,8 +22,10 @@ namespace Incursio.Managers
 {
     class SoundManager
     {
-        ISoundEngine soundEngine = null;
         private static SoundManager instance = null;
+        public static bool AUDIO_ENABLED = true;
+
+        ISoundEngine soundEngine = null;
 
         private string currentBGMusic = "";
 
@@ -51,7 +53,8 @@ namespace Incursio.Managers
 
         private SoundManager()
         {
-            soundEngine = new ISoundEngine();
+            if(AUDIO_ENABLED)
+                soundEngine = new ISoundEngine();
         }
 
         //creates an instance of the sound manager
@@ -60,7 +63,6 @@ namespace Incursio.Managers
             if (instance == null)
             {
                 instance = new SoundManager();
-                //instance.InitializeEngine();
             }
             return instance;
         }
@@ -74,6 +76,8 @@ namespace Incursio.Managers
         //We may try 3D sounds later
         public void updateSounds()
         {
+            if (!AUDIO_ENABLED) return;
+
             try
             {
                 soundEngine.Update();
@@ -90,8 +94,10 @@ namespace Incursio.Managers
         //Files must be .mp3, .ogg, or .wav
         //file need to be in the form of "../../../Content/Audio/<File Name Here>". Make sure to include the extension
         //loop will loop the sound if true.  Otherwise, sound will play once and stop
-        public void PlaySound(String filename, bool loop) 
+        public void PlaySound(String filename, bool loop)
         {
+            if (!AUDIO_ENABLED) return;
+
             //filename = EntityConfiguration.FileConfig.audioPath + filename;
             filename = ConfigurationManager.getInstance().audioDirectory + filename;
 
@@ -113,7 +119,7 @@ namespace Incursio.Managers
 
         public void PlayBGMusic(String filename)
         {
-            if(!this.PLAY_BG_MUSIC){
+            if(!this.PLAY_BG_MUSIC || !AUDIO_ENABLED){
                 return;
             }
 
@@ -147,6 +153,8 @@ namespace Incursio.Managers
         //Works the same way as playSound, but does so in a 3D environment
         public void PlaySound3D(String filename, float xVal, float yVal, bool loop)
         {
+            if (!AUDIO_ENABLED) return;
+
             try
             {
                 soundEngine.Play3D(filename, xVal, yVal, 0, loop);
@@ -163,6 +171,8 @@ namespace Incursio.Managers
         //IrrKlangs only stop method.  Will cause all sounds currently being played by the engine to stop
         public void StopSound()
         {
+            if (!AUDIO_ENABLED) return;
+
             soundEngine.StopAllSounds();
         }
 
