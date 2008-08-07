@@ -22,6 +22,7 @@ using Incursio.Entities;
 using Incursio.Entities.TextureCollections;
 using Incursio.Entities.Components;
 using Incursio.Entities.AudioCollections;
+using Incursio.World;
 
 namespace Incursio.Managers
 {
@@ -76,6 +77,16 @@ namespace Incursio.Managers
             catch (IOException e)
             {
                 Console.WriteLine("IO exception found");
+                Console.WriteLine(e);
+            }
+        }
+
+        public void saveMap(){
+            try{
+                //TODO: DO IT
+            }
+            catch(IOException e){
+                Console.WriteLine("IO exception jo0 c4n7 do 7h47!");
                 Console.WriteLine(e);
             }
         }

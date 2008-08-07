@@ -36,6 +36,9 @@ namespace Incursio.Managers
         public int currentPlayerId = 1;
         public int computerPlayerId = 0;
 
+        //TODO: FIX 'binary' value to actual levels
+        public bool enableAI = true;
+
         public int MAX_PLAYERS = 2;
 
         private List<Player> players;
@@ -83,8 +86,10 @@ namespace Incursio.Managers
             //TODO: ADD SUPPORT FOR MORE THAN 2 PLAYERS
             if(players.Count < this.MAX_PLAYERS){
                 if(isComputer){
-                    //computerPlayerId = this.insertPlayer(new AIPlayer());
-                    computerPlayerId = this.insertPlayer(new AIPlayer(new SimpleAI()));
+                    computerPlayerId =
+                        this.enableAI ?
+                            this.insertPlayer(new AIPlayer(new SimpleAI())) :
+                            this.insertPlayer(new AIPlayer());
                 }
                 else{
                     currentPlayerId = this.insertPlayer(new Player());

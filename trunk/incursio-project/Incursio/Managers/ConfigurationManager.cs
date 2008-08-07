@@ -16,8 +16,8 @@ namespace Incursio.Managers
         public static string AUDIO_CONFIGURATION_FILE_NAME = "AudioConfiguration.xml";
         public static string TEXTURE_CONFIGURATION_FILE_NAME = "TextureConfiguration.xml";
 
-        public string contentDirectory = "../../../Content/";
-        public string audioDirectory = "../../../Content/Audio/";
+        public string contentDirectory  = "../../../Content/";
+        public string audioDirectory    = "../../../Content/Audio/";
        
         public string currentConfigurationSchemeDirectory = "Incursio/";
 
@@ -104,6 +104,10 @@ namespace Incursio.Managers
                 case "DRAWOCCUPANCYGRID":
                 case "SHOWOCCUPANCYGRID":
                     MapManager.getInstance().DRAW_OCCUPANCY_GRID = bool.Parse(value);
+                    break;
+
+                case "ENABLEAI":
+                    PlayerManager.getInstance().enableAI = bool.Parse(value);
                     break;
             }
         }
