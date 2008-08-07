@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <GameConfiguration>
-	<Setting contentDirecoty="Content"/>
-	<Setting audioDirectory="Content/Audio"/>
+	<Setting contentDirecoty="C:/Documents and Settings/Mitch/My Documents/Visual Studio 2005/Projects/Incursio/Incursio/Content/"/>
+	<Setting audioDirectory="C:/Documents and Settings/Mitch/My Documents/Visual Studio 2005/Projects/Incursio/Incursio/Content/Audio/"/>
+	
 	<Setting configurationScheme="Incursio"/>
 
 	<Setting entitiesAutoGuard="true"/>
+
+	<Setting audioEnabled="true"/>
 	
 	<Setting playBackgroundMusic="true" drawOccupancyGrid="false"/>
 	

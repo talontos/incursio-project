@@ -16,8 +16,8 @@ namespace Incursio.Managers
         public static string AUDIO_CONFIGURATION_FILE_NAME = "AudioConfiguration.xml";
         public static string TEXTURE_CONFIGURATION_FILE_NAME = "TextureConfiguration.xml";
 
-        public string contentDirectory = "C:/Documents and Settings/Mitch/My Documents/Visual Studio 2005/Projects/Incursio/Incursio/Content/";//"Content/";
-        public string audioDirectory = "C:/Documents and Settings/Mitch/My Documents/Visual Studio 2005/Projects/Incursio/Incursio/Content/Audio/";//"Content/Audio/";
+        public string contentDirectory = "../../../Content/";
+        public string audioDirectory = "../../../Content/Audio/";
        
         public string currentConfigurationSchemeDirectory = "Incursio/";
 
@@ -50,7 +50,19 @@ namespace Incursio.Managers
         public void setConfigurationSetting(string setting, string value){
             switch(setting.ToUpper()){
                 case "CONTENTDIRECTORY":
+                    if (!value.EndsWith("/"))
+                        value = value + "/";
                     this.contentDirectory = value;
+                    break;
+
+                case "AUDIODIRECTORY":
+                    if (!value.EndsWith("/"))
+                        value = value + "/";
+                    this.audioDirectory = value;
+                    break;
+
+                case "AUDIOENABLED":
+                    SoundManager.AUDIO_ENABLED = bool.Parse(value);
                     break;
 
                 case "CONFIGURATIONSCHEME":
