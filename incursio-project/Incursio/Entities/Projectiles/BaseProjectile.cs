@@ -22,6 +22,7 @@ namespace Incursio.Entities.Projectiles
         public Vector2 destination = new Vector2(-1, -1);
         public int splashRange = 0;
         public double splashDamagePercent = 0;
+        public double splashDegradeRate = 0;    //TODO: IMPLEMENT
         public int damage = 0;
 
         public RenderComponent renderComponent;
@@ -29,9 +30,7 @@ namespace Incursio.Entities.Projectiles
 
         public bool instant = false;
 
-        //TODO: remove this impl?
         public BaseProjectile(){
-            //this.gameTexture = TextureBank.getInstance().InterfaceTextures.interfaceTextures.arrow;
             this.renderComponent = new RenderComponent(this);
         }
 
@@ -43,7 +42,6 @@ namespace Incursio.Entities.Projectiles
             this.renderComponent.setAttributes(config.renderComponentConfiguration.attributes);
             this.splashRange = config.splashRange;
             this.splashDamagePercent = config.splashDamagePercent / 100;
-            //TODO: etc...
         }
 
         public void Update()
@@ -51,14 +49,15 @@ namespace Incursio.Entities.Projectiles
             if (draw)
             {
                 updatePosition();
-                if (MapManager.getInstance().currentMap.isOnScreen(new Coordinate((int)pos.X, (int)pos.Y)))
-                {
-                    onScreen = MapManager.getInstance().currentMap.positionOnScreen(new Coordinate((int)pos.X, (int)pos.Y)).toVector2();
-                }
-                else
-                    onScreen = new Vector2(-1,-1);
-
             }
+
+            //This will update the onscreen coordinates so that the projectile will not stay in the same place when the screen moves.
+            if (MapManager.getInstance().currentMap.isOnScreen(new Coordinate((int)pos.X, (int)pos.Y)))
+            {
+                onScreen = MapManager.getInstance().currentMap.positionOnScreen(new Coordinate((int)pos.X, (int)pos.Y)).toVector2();
+            }
+            else
+                onScreen = new Vector2(-1, -1);
         }
 
         private void finishProjectile(){

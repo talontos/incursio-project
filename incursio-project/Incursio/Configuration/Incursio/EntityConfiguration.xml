@@ -37,15 +37,10 @@
 		<Component type="CombatComponent" damage="75" attackRange="10" attackSpeed="4" projectile="Lightning"/>
 	</Entity>
 
-	<Entity name="Lumberjack" maxHealth="100" health="100" pointValue="100" armor="25" sightRange="12" costToBuild="200">
+	<Entity name="Lumberjack" maxHealth="100" health="100" pointValue="100" armor="10" sightRange="12" costToBuild="1">
 		<Component type="RenderComponent" collectionName="Demon"/>
 		<Component type="MovementComponent" moveSpeed="80.0"/>
 		<Component type="CombatComponent" damage="50" attackRange="10" attackSpeed="3" projectile="TreeChuck"/>
-	</Entity>
-
-	<Entity name="Heal-O-Matic" maxHealth="100" health="100" pointValue="75" costToBuild="300"  armor="0" sightRange="8" isStructure="true">
-		<Component type="RenderComponent" collectionName="Box"/>
-		<Component type="HealComponent"/>
 	</Entity>
 
 	<Entity name="Guard Tower" maxHealth="350" health="350" pointValue="1000" armor="5" sightRange="14" costToBuild="200" isStructure="true" isTurret="true" height="2">
@@ -69,15 +64,15 @@
 		<Component type="ResourceComponent" amount="8"/>
 		<Component type="FactoryComponent" buildTimeFactor="9">
 			<Build entity="Barracks"/>
-			<Build entity="Heal-O-Matic"/>
 			<Build entity="Guard Tower"/>
 			<Build entity="Mage Tower"/>
 			<Build entity="Death Tower"/>
 		</Component>
+		<Component type="HealComponent"/>
 		<Component type="AudioComponent" collectionName="Camp"/>
 	</Entity>
 
-	<Entity name="Barracks" maxHealth="350" health="350" pointValue="500" armor="10" sightRange="6" isStructure="true" costToBuild="250" width="2" height="2">
+	<Entity name="Barracks" maxHealth="350" health="350" pointValue="500" armor="10" sightRange="6" isStructure="true" costToBuild="1" width="2" height="2">
 		<Component type="RenderComponent" collectionName="Camp"/>
 		<Component type="FactoryComponent" buildTimeFactor="9">
 			<Build entity="Light Infantry"/>
