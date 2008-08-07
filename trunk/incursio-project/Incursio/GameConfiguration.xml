@@ -13,4 +13,5 @@
 	<Setting playBackgroundMusic="true" drawOccupancyGrid="false"/>
 	
 	<Setting drawEntityGrid="false"/>
+	
 </GameConfiguration>
